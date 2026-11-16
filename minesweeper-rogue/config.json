@@ -1,0 +1,1068 @@
+{
+  "start.hearts": {
+    "value": 3,
+    "title": "Сердец на старте",
+    "group": "Поля и забег",
+    "min": 1,
+    "max": 9,
+    "step": 1
+  },
+  "run.fields": {
+    "value": 7,
+    "title": "Полей в забеге",
+    "group": "Поля и забег",
+    "min": 7,
+    "max": 7,
+    "step": 1
+  },
+  "layer.fields": {
+    "value": 2,
+    "title": "Полей в слое",
+    "group": "Поля и забег",
+    "min": 2,
+    "max": 2,
+    "step": 1
+  },
+  "maxCols": {
+    "value": 9,
+    "title": "Столбцов максимум",
+    "group": "Поля и забег",
+    "min": 4,
+    "max": 9,
+    "step": 1
+  },
+  "field.0.w": {
+    "value": 7,
+    "title": "Поле 1: столбцов",
+    "group": "Поля и забег",
+    "min": 4,
+    "max": 9,
+    "step": 1
+  },
+  "field.0.h": {
+    "value": 9,
+    "title": "Поле 1: строк",
+    "group": "Поля и забег",
+    "min": 6,
+    "max": 24,
+    "step": 1
+  },
+  "field.0.mines": {
+    "value": 10,
+    "title": "Поле 1: мин",
+    "group": "Поля и забег",
+    "min": 1,
+    "max": 30,
+    "step": 1
+  },
+  "field.1.w": {
+    "value": 8,
+    "title": "Поле 2: столбцов",
+    "group": "Поля и забег",
+    "min": 4,
+    "max": 9,
+    "step": 1
+  },
+  "field.1.h": {
+    "value": 11,
+    "title": "Поле 2: строк",
+    "group": "Поля и забег",
+    "min": 6,
+    "max": 24,
+    "step": 1
+  },
+  "field.1.mines": {
+    "value": 14,
+    "title": "Поле 2: мин",
+    "group": "Поля и забег",
+    "min": 1,
+    "max": 42,
+    "step": 1
+  },
+  "field.2.w": {
+    "value": 8,
+    "title": "Поле 3: столбцов",
+    "group": "Поля и забег",
+    "min": 4,
+    "max": 9,
+    "step": 1
+  },
+  "field.2.h": {
+    "value": 12,
+    "title": "Поле 3: строк",
+    "group": "Поля и забег",
+    "min": 6,
+    "max": 24,
+    "step": 1
+  },
+  "field.2.mines": {
+    "value": 18,
+    "title": "Поле 3: мин",
+    "group": "Поля и забег",
+    "min": 1,
+    "max": 54,
+    "step": 1
+  },
+  "field.3.w": {
+    "value": 9,
+    "title": "Поле 4: столбцов",
+    "group": "Поля и забег",
+    "min": 4,
+    "max": 9,
+    "step": 1
+  },
+  "field.3.h": {
+    "value": 13,
+    "title": "Поле 4: строк",
+    "group": "Поля и забег",
+    "min": 6,
+    "max": 24,
+    "step": 1
+  },
+  "field.3.mines": {
+    "value": 22,
+    "title": "Поле 4: мин",
+    "group": "Поля и забег",
+    "min": 1,
+    "max": 66,
+    "step": 1
+  },
+  "field.4.w": {
+    "value": 9,
+    "title": "Поле 5: столбцов",
+    "group": "Поля и забег",
+    "min": 4,
+    "max": 9,
+    "step": 1
+  },
+  "field.4.h": {
+    "value": 14,
+    "title": "Поле 5: строк",
+    "group": "Поля и забег",
+    "min": 6,
+    "max": 24,
+    "step": 1
+  },
+  "field.4.mines": {
+    "value": 26,
+    "title": "Поле 5: мин",
+    "group": "Поля и забег",
+    "min": 1,
+    "max": 78,
+    "step": 1
+  },
+  "field.5.w": {
+    "value": 9,
+    "title": "Поле 6: столбцов",
+    "group": "Поля и забег",
+    "min": 4,
+    "max": 9,
+    "step": 1
+  },
+  "field.5.h": {
+    "value": 16,
+    "title": "Поле 6: строк",
+    "group": "Поля и забег",
+    "min": 6,
+    "max": 24,
+    "step": 1
+  },
+  "field.5.mines": {
+    "value": 30,
+    "title": "Поле 6: мин",
+    "group": "Поля и забег",
+    "min": 1,
+    "max": 90,
+    "step": 1
+  },
+  "field.6.w": {
+    "value": 9,
+    "title": "Поле 7: столбцов",
+    "group": "Поля и забег",
+    "min": 4,
+    "max": 9,
+    "step": 1
+  },
+  "field.6.h": {
+    "value": 16,
+    "title": "Поле 7: строк",
+    "group": "Поля и забег",
+    "min": 6,
+    "max": 24,
+    "step": 1
+  },
+  "field.6.mines": {
+    "value": 28,
+    "title": "Поле 7: мин",
+    "group": "Поля и забег",
+    "min": 1,
+    "max": 84,
+    "step": 1
+  },
+  "flagHoldMs": {
+    "value": 300,
+    "title": "Удержание для флага, мс",
+    "group": "Управление",
+    "min": 1,
+    "max": 900,
+    "step": 1
+  },
+  "scrollCancelPx": {
+    "value": 8,
+    "title": "Движение для отмены касания, px",
+    "group": "Управление",
+    "min": 1,
+    "max": 24,
+    "step": 1
+  },
+  "enumLimit": {
+    "value": 24,
+    "title": "Клеток в перебираемом участке",
+    "group": "Правила",
+    "min": 1,
+    "max": 24,
+    "step": 1
+  },
+  "repairTries": {
+    "value": 40,
+    "title": "Попыток починки поля",
+    "group": "Правила",
+    "min": 1,
+    "max": 120,
+    "step": 1
+  },
+  "genBudgetMs": {
+    "value": 80,
+    "title": "Бюджет подготовки поля, мс",
+    "group": "Правила",
+    "min": 1,
+    "max": 240,
+    "step": 1
+  },
+  "genNodeLimit": {
+    "value": 50000,
+    "title": "Ветвей перебора одного участка",
+    "group": "Правила",
+    "min": 1,
+    "max": 150000,
+    "step": 1
+  },
+  "genWorkBudget": {
+    "value": 2000000,
+    "title": "Бюджет работы генератора",
+    "group": "Правила",
+    "min": 1,
+    "max": 6000000,
+    "step": 1
+  },
+  "genRestartAfter": {
+    "value": 8,
+    "title": "Тупиков до новой раскладки",
+    "group": "Правила",
+    "min": 1,
+    "max": 24,
+    "step": 1
+  },
+  "pregen": {
+    "value": 2,
+    "title": "Полей в запасе",
+    "group": "Правила",
+    "min": 2,
+    "max": 2,
+    "step": 1
+  },
+  "roamEvery": {
+    "value": 5,
+    "title": "Открытий между шагами бродячей мины",
+    "group": "Правила",
+    "min": 1,
+    "max": 15,
+    "step": 1
+  },
+  "clockOpens": {
+    "value": 12,
+    "title": "Открытий до взрыва часовой мины",
+    "group": "Правила",
+    "min": 1,
+    "max": 36,
+    "step": 1
+  },
+  "double.share": {
+    "value": 0.2,
+    "title": "Доля двойных мин",
+    "group": "Правила",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "roam.count": {
+    "value": 2,
+    "title": "Бродячих мин на поле",
+    "group": "Правила",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "clock.count": {
+    "value": 2,
+    "title": "Часовых мин на поле",
+    "group": "Правила",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "deaf.count": {
+    "value": 3,
+    "title": "Глухих клеток",
+    "group": "Правила",
+    "min": 1,
+    "max": 9,
+    "step": 1
+  },
+  "hole.count": {
+    "value": 3,
+    "title": "Провалов",
+    "group": "Правила",
+    "min": 1,
+    "max": 9,
+    "step": 1
+  },
+  "cache.count": {
+    "value": 3,
+    "title": "Тайников на поле",
+    "group": "Правила",
+    "min": 1,
+    "max": 9,
+    "step": 1
+  },
+  "cache.gold": {
+    "value": 6,
+    "title": "Золота в тайнике",
+    "group": "Правила",
+    "min": 1,
+    "max": 18,
+    "step": 1
+  },
+  "cache.findShare": {
+    "value": 0.2,
+    "title": "Доля тайников с находкой",
+    "group": "Правила",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "cache.fakeCount": {
+    "value": 1,
+    "title": "Ложных тайников",
+    "group": "Правила",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "depth.max": {
+    "value": 12,
+    "title": "Последняя глубина",
+    "group": "Глубины и хозяева",
+    "min": 12,
+    "max": 12,
+    "step": 1
+  },
+  "depth.mineBonus": {
+    "value": 0.1,
+    "title": "Прибавка мин на ступени",
+    "group": "Глубины и хозяева",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "depth.cacheFactor": {
+    "value": 0.6,
+    "title": "Доля тайников на глубине",
+    "group": "Глубины и хозяева",
+    "min": 0.6,
+    "max": 2,
+    "step": 0.01
+  },
+  "depth.shopMult": {
+    "value": 1.25,
+    "title": "Множитель цен на глубине",
+    "group": "Глубины и хозяева",
+    "min": 1,
+    "max": 4,
+    "step": 0.01
+  },
+  "depth.clockPenalty": {
+    "value": 2,
+    "title": "Ускорение часов на глубине, открытий",
+    "group": "Глубины и хозяева",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "depth.choicePenalty": {
+    "value": 1,
+    "title": "Уменьшение выбора на глубине",
+    "group": "Глубины и хозяева",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "depth.roamPenalty": {
+    "value": 1,
+    "title": "Ускорение бродячих мин, открытий",
+    "group": "Глубины и хозяева",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "depth.deafMult": {
+    "value": 2,
+    "title": "Множитель глухих клеток",
+    "group": "Глубины и хозяева",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "depth.oreBonus": {
+    "value": 0.1,
+    "title": "Прибавка руды за глубину",
+    "group": "Глубины и хозяева",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "deep.densityStep": {
+    "value": 0.005,
+    "title": "Глубже: прирост плотности мин",
+    "group": "Правила",
+    "min": 0.005,
+    "max": 1,
+    "step": 0.01
+  },
+  "deep.maxDensity": {
+    "value": 0.8,
+    "title": "Глубже: предельная плотность мин",
+    "group": "Правила",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "pure.heightStep": {
+    "value": 1,
+    "title": "Чистый сапёр: прирост высоты",
+    "group": "Правила",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "pure.densityStep": {
+    "value": 0.005,
+    "title": "Чистый сапёр: прирост плотности мин",
+    "group": "Правила",
+    "min": 0.005,
+    "max": 1,
+    "step": 0.01
+  },
+  "pure.maxDensity": {
+    "value": 0.25,
+    "title": "Чистый сапёр: предельная плотность мин",
+    "group": "Правила",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "boss.swarmCount": {
+    "value": 5,
+    "title": "Рой: бродячих мин",
+    "group": "Глубины и хозяева",
+    "min": 1,
+    "max": 15,
+    "step": 1
+  },
+  "boss.swarmEvery": {
+    "value": 3,
+    "title": "Рой: открытий между шагами",
+    "group": "Глубины и хозяева",
+    "min": 1,
+    "max": 9,
+    "step": 1
+  },
+  "boss.doubleShare": {
+    "value": 0.5,
+    "title": "Двойное дно: доля двойных мин",
+    "group": "Глубины и хозяева",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "boss.fogRadius": {
+    "value": 2,
+    "title": "Туман: радиус видимых чисел",
+    "group": "Глубины и хозяева",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "choice.count": {
+    "value": 3,
+    "title": "Находок на выбор",
+    "group": "Правила",
+    "min": 1,
+    "max": 9,
+    "step": 1
+  },
+  "shop.count": {
+    "value": 3,
+    "title": "Предложений лавки",
+    "group": "Правила",
+    "min": 1,
+    "max": 9,
+    "step": 1
+  },
+  "shop.common": {
+    "value": 10,
+    "title": "Цена обычной находки",
+    "group": "Правила",
+    "min": 1,
+    "max": 30,
+    "step": 1
+  },
+  "shop.rare": {
+    "value": 20,
+    "title": "Цена редкой находки",
+    "group": "Правила",
+    "min": 1,
+    "max": 60,
+    "step": 1
+  },
+  "shop.legend": {
+    "value": 32,
+    "title": "Цена легендарной находки",
+    "group": "Правила",
+    "min": 1,
+    "max": 96,
+    "step": 1
+  },
+  "rarity.common": {
+    "value": 70,
+    "title": "Вес обычных находок",
+    "group": "Правила",
+    "min": 1,
+    "max": 210,
+    "step": 1
+  },
+  "rarity.rare": {
+    "value": 25,
+    "title": "Вес редких находок",
+    "group": "Правила",
+    "min": 1,
+    "max": 75,
+    "step": 1
+  },
+  "rarity.legend": {
+    "value": 5,
+    "title": "Вес легендарных находок",
+    "group": "Правила",
+    "min": 1,
+    "max": 15,
+    "step": 1
+  },
+  "tool.probe.charges": {
+    "value": 2,
+    "title": "Щуп: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "tool.xray.charges": {
+    "value": 1,
+    "title": "Рентген: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "tool.shovel.charges": {
+    "value": 1,
+    "title": "Лопата: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "tool.lantern.charges": {
+    "value": 2,
+    "title": "Фонарь: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "tool.compass.charges": {
+    "value": 2,
+    "title": "Компас: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "tool.flare.charges": {
+    "value": 1,
+    "title": "Сигнальная ракета: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "tool.patch.charges": {
+    "value": 1,
+    "title": "Заплатка: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "tool.sand.charges": {
+    "value": 1,
+    "title": "Песок: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "tool.brake.charges": {
+    "value": 1,
+    "title": "Стоп-кран: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "tool.seismo.charges": {
+    "value": 1,
+    "title": "Сейсмограф: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "tool.shovel.radius": {
+    "value": 1,
+    "title": "Лопата: радиус",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "tool.lantern.radius": {
+    "value": 2,
+    "title": "Фонарь: радиус",
+    "group": "Находки",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "tool.patch.hearts": {
+    "value": 1,
+    "title": "Заплатка: восстановление сердец",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "talisman.boots.hearts": {
+    "value": 1,
+    "title": "Толстые сапоги: сердец",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "talisman.neat.gold": {
+    "value": 1,
+    "title": "Аккуратист: золота",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "talisman.vein.mult": {
+    "value": 1.5,
+    "title": "Золотая жила: множитель",
+    "group": "Находки",
+    "min": 1,
+    "max": 5,
+    "step": 0.01
+  },
+  "talisman.stride.open": {
+    "value": 12,
+    "title": "Широкий шаг: первым ходом открыто клеток",
+    "group": "Находки",
+    "min": 1,
+    "max": 36,
+    "step": 1
+  },
+  "talisman.belt.charges": {
+    "value": 1,
+    "title": "Пояс с карманами: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "talisman.pendulum.mult": {
+    "value": 2,
+    "title": "Медленный маятник: множитель",
+    "group": "Находки",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "talisman.heavy.mult": {
+    "value": 2,
+    "title": "Тяжёлые шаги: множитель",
+    "group": "Находки",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "talisman.quiet-shop.discount": {
+    "value": 0.2,
+    "title": "Тихая лавка: скидка",
+    "group": "Находки",
+    "min": 0.2,
+    "max": 1,
+    "step": 0.01
+  },
+  "talisman.spare.hearts": {
+    "value": 2,
+    "title": "Запасное сердце: сердец",
+    "group": "Находки",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "talisman.greedy-pick.charges": {
+    "value": 1,
+    "title": "Жадная кирка: зарядов",
+    "group": "Находки",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "ore.field": {
+    "value": 4,
+    "title": "Руды за поле",
+    "group": "Правила",
+    "min": 1,
+    "max": 12,
+    "step": 1
+  },
+  "ore.goldDivisor": {
+    "value": 10,
+    "title": "Золота на единицу руды",
+    "group": "Правила",
+    "min": 1,
+    "max": 30,
+    "step": 1
+  },
+  "ore.boss": {
+    "value": 15,
+    "title": "Руды за хозяина",
+    "group": "Правила",
+    "min": 1,
+    "max": 45,
+    "step": 1
+  },
+  "ore.flawless": {
+    "value": 10,
+    "title": "Руды за поле без потерь",
+    "group": "Правила",
+    "min": 1,
+    "max": 30,
+    "step": 1
+  },
+  "workshop.growth": {
+    "value": 1.4,
+    "title": "Рост цен мастерской",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 5,
+    "step": 0.01
+  },
+  "workshop.heart.base": {
+    "value": 80,
+    "title": "Крепкое сердце: начальная цена",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 240,
+    "step": 1
+  },
+  "workshop.heart.max": {
+    "value": 2,
+    "title": "Крепкое сердце: максимум уровней",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "workshop.supplies.base": {
+    "value": 30,
+    "title": "Запасы: начальная цена",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 90,
+    "step": 1
+  },
+  "workshop.supplies.max": {
+    "value": 3,
+    "title": "Запасы: максимум уровней",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 9,
+    "step": 1
+  },
+  "workshop.pouch.base": {
+    "value": 10,
+    "title": "Мешочек: начальная цена",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 30,
+    "step": 1
+  },
+  "workshop.pouch.max": {
+    "value": -1,
+    "title": "Мешочек: максимум уровней (−1 — без предела)",
+    "group": "Мастерская",
+    "min": -1,
+    "max": 1000,
+    "step": 1
+  },
+  "workshop.choice.base": {
+    "value": 150,
+    "title": "Широкий выбор: начальная цена",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 450,
+    "step": 1
+  },
+  "workshop.choice.max": {
+    "value": 1,
+    "title": "Широкий выбор: максимум уровней",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "workshop.discount.base": {
+    "value": 25,
+    "title": "Скидка: начальная цена",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 75,
+    "step": 1
+  },
+  "workshop.discount.max": {
+    "value": 4,
+    "title": "Скидка: максимум уровней",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 12,
+    "step": 1
+  },
+  "workshop.luck.base": {
+    "value": 20,
+    "title": "Удача клада: начальная цена",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 60,
+    "step": 1
+  },
+  "workshop.luck.max": {
+    "value": 5,
+    "title": "Удача клада: максимум уровней",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 15,
+    "step": 1
+  },
+  "workshop.pouch.gold": {
+    "value": 15,
+    "title": "Мешочек: стартового золота за уровень",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 45,
+    "step": 1
+  },
+  "workshop.discount.amount": {
+    "value": 0.05,
+    "title": "Скидка за уровень",
+    "group": "Мастерская",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "workshop.luck.amount": {
+    "value": 0.1,
+    "title": "Прибавка тайников за уровень",
+    "group": "Мастерская",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "sapper.geolog.lantern": {
+    "value": 3,
+    "title": "Геолог: зарядов Фонаря",
+    "group": "Правила",
+    "min": 1,
+    "max": 9,
+    "step": 1
+  },
+  "sapper.geolog.penalty": {
+    "value": 1,
+    "title": "Геолог: на сколько меньше сердец",
+    "group": "Правила",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "sapper.blaster.gold": {
+    "value": 10,
+    "title": "Взрывник: золота за мину",
+    "group": "Правила",
+    "min": 1,
+    "max": 30,
+    "step": 1
+  },
+  "sapper.blaster.unlock": {
+    "value": 50,
+    "title": "Взрывник: взрывов для открытия",
+    "group": "Правила",
+    "min": 1,
+    "max": 150,
+    "step": 1
+  },
+  "sapper.tidy.hearts": {
+    "value": 2,
+    "title": "Чистюля: стартовых сердец",
+    "group": "Правила",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "sapper.tidy.mult": {
+    "value": 1.5,
+    "title": "Чистюля: множитель руды",
+    "group": "Правила",
+    "min": 1,
+    "max": 5,
+    "step": 0.01
+  },
+  "steps.probe.charges": {
+    "value": 2,
+    "title": "Шаги: зарядов Щупа",
+    "group": "Правила",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "achievement.cells": {
+    "value": 10000,
+    "title": "Клеток для достижения",
+    "group": "Правила",
+    "min": 1,
+    "max": 30000,
+    "step": 1
+  },
+  "stock.verifyFields": {
+    "value": 500,
+    "title": "Полей для проверки нового правила",
+    "group": "Новый контент",
+    "min": 500,
+    "max": 1000,
+    "step": 1
+  },
+  "stock.maxBricks": {
+    "value": 2,
+    "title": "Кирпичиков в новом правиле",
+    "group": "Новый контент",
+    "min": 1,
+    "max": 2,
+    "step": 1
+  },
+  "stock.maxTitle": {
+    "value": 60,
+    "title": "Символов в названии контента",
+    "group": "Новый контент",
+    "min": 1,
+    "max": 180,
+    "step": 1
+  },
+  "stock.maxText": {
+    "value": 240,
+    "title": "Символов в описании контента",
+    "group": "Новый контент",
+    "min": 1,
+    "max": 720,
+    "step": 1
+  },
+  "stock.maxHearts": {
+    "value": 1,
+    "title": "Прибавка сердец в новом правиле",
+    "group": "Новый контент",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "stock.maxMovement": {
+    "value": 2,
+    "title": "Изменение движения в новом правиле",
+    "group": "Новый контент",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "chest.ore": {
+    "value": 4,
+    "title": "Руды в находке Пассажира",
+    "group": "Правила",
+    "min": 1,
+    "max": 12,
+    "step": 1
+  },
+  "offline.efficiency": {
+    "value": 1
+  },
+  "screen.portrait": {
+    "value": true
+  },
+  "screen.keepOn": {
+    "value": true
+  },
+  "save.debounceMs": {
+    "value": 0
+  },
+  "steps.cost.probe-start": {
+    "value": 1
+  },
+  "ui.maxTools": {
+    "value": 5,
+    "title": "Кнопок инструментов в полоске",
+    "group": "Управление",
+    "min": 1,
+    "max": 5,
+    "step": 1
+  },
+  "tick.hz": {
+    "value": 1
+  },
+  "deep.safeCells": {
+    "value": 25,
+    "title": "Глубже: минимум безопасных клеток",
+    "group": "Правила",
+    "min": 9,
+    "max": 50,
+    "step": 1
+  }
+}

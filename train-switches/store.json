@@ -1,0 +1,8 @@
+{
+  "id": "train-switches",
+  "kind": "game",
+  "title": "Ветки поездов",
+  "target": "modules/games/train-switches",
+  "requires": [],
+  "shell": []
+}

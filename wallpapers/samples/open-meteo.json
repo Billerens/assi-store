@@ -1,0 +1,23 @@
+{
+ "latitude": 59.940144,
+ "longitude": 30.303894,
+ "generationtime_ms": 0.0654458999633789,
+ "utc_offset_seconds": 10800,
+ "timezone": "Europe/Moscow",
+ "timezone_abbreviation": "GMT+3",
+ "elevation": 0.0,
+ "current_units": {
+  "time": "iso8601",
+  "interval": "seconds",
+  "weather_code": "wmo code",
+  "temperature_2m": "°C",
+  "is_day": ""
+ },
+ "current": {
+  "time": "2026-11-14T04:45",
+  "interval": 900,
+  "weather_code": 3,
+  "temperature_2m": 2.2,
+  "is_day": 0
+ }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "focus",
+  "kind": "module",
+  "title": "Фокус",
+  "target": "modules/focus",
+  "requires": ["inbox"],
+  "shell": ["dnd", "notify.actions", "off", "job.once", "vibrate.pattern", "usage"]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "hat",
+  "kind": "module",
+  "title": "Шляпа",
+  "target": "modules/hat",
+  "requires": [],
+  "shell": ["speech.stream", "vibrate.pattern", "app.visible"]
+}

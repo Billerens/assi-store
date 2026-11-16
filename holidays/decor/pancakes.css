@@ -1,0 +1,9 @@
+/* Масленица: стопка блинов над текстом пустых мест (.empty). */
+.empty::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 8px;
+  background: svg(pancakes, accent) center / contain no-repeat;
+}

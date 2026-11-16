@@ -1,0 +1,1278 @@
+{
+  "offline.capHours": {
+    "value": 12,
+    "title": "Потолок офлайна, часов",
+    "group": "Офлайн и время"
+  },
+  "offline.efficiency": {
+    "value": 1,
+    "title": "Доля времени офлайна движка",
+    "group": "Офлайн и время"
+  },
+  "offline.stepSec": {
+    "value": 30,
+    "title": "Шаг офлайна движка, секунд",
+    "group": "Офлайн и время"
+  },
+  "offline.maxSteps": {
+    "value": 2160,
+    "title": "Предел шагов офлайна",
+    "group": "Офлайн и время"
+  },
+  "prestige.hintRatio": {
+    "value": 1,
+    "title": "Соотношение Искр для метки «выгодно»",
+    "group": "Наследие и вселенные"
+  },
+  "render.fps": {
+    "value": 20,
+    "title": "Частота отрисовки, кадров/с",
+    "group": "Офлайн и время"
+  },
+  "life.offlineBase": {
+    "value": 0.5,
+    "title": "Начальная доля офлайн-дохода",
+    "group": "Офлайн и время"
+  },
+  "life.offlineStep": {
+    "value": 0.1,
+    "title": "Прирост офлайн-дохода за уровень закона",
+    "group": "Офлайн и время"
+  },
+  "life.offlineMax": {
+    "value": 1,
+    "title": "Предельная доля офлайн-дохода",
+    "group": "Офлайн и время"
+  },
+  "life.coldCapBonus": {
+    "value": 6,
+    "title": "Добавка к потолку в холодной вселенной, часов",
+    "group": "Офлайн и время"
+  },
+  "life.stepSec": {
+    "value": 1,
+    "title": "Шаг симуляции жизни, секунд",
+    "group": "Офлайн и время"
+  },
+  "legacy.factor": {
+    "value": 0.1,
+    "title": "Сила наследия этапа",
+    "group": "Наследие и вселенные"
+  },
+  "prestige.divisor": {
+    "value": 10,
+    "title": "Делитель сложности для Искр",
+    "group": "Наследие и вселенные"
+  },
+  "prestige.power": {
+    "value": 2,
+    "title": "Степень формулы Искр",
+    "group": "Наследие и вселенные"
+  },
+  "prestige.firstStage": {
+    "value": 4,
+    "title": "Первый этап с новой вселенной",
+    "group": "Наследие и вселенные"
+  },
+  "stage1.initial": {
+    "value": "10",
+    "title": "Стартовый ресурс: Бульон",
+    "group": "Бульон",
+    "big": true
+  },
+  "stage2.initial": {
+    "value": "10",
+    "title": "Стартовый ресурс: Клетка",
+    "group": "Клетка",
+    "big": true
+  },
+  "stage3.initial": {
+    "value": "20",
+    "title": "Стартовый ресурс: Многоклеточные",
+    "group": "Многоклеточные",
+    "big": true
+  },
+  "stage4.initial": {
+    "value": "120",
+    "title": "Стартовый ресурс: Океан",
+    "group": "Океан",
+    "big": true
+  },
+  "stage5.initial": {
+    "value": "100",
+    "title": "Стартовый ресурс: Суша",
+    "group": "Суша",
+    "big": true
+  },
+  "stage6.initial": {
+    "value": "0",
+    "title": "Стартовый ресурс: Племя",
+    "group": "Племя",
+    "big": true
+  },
+  "stage7.initial": {
+    "value": "100",
+    "title": "Стартовый ресурс: Цивилизация",
+    "group": "Цивилизация",
+    "big": true
+  },
+  "stage8.initial": {
+    "value": "1",
+    "title": "Стартовый ресурс: Космос",
+    "group": "Космос",
+    "big": true
+  },
+  "stage1.goal": {
+    "value": "1e6",
+    "title": "Цель этапа: Бульон",
+    "group": "Бульон",
+    "big": true
+  },
+  "stage2.goal": {
+    "value": "1e9",
+    "title": "Цель этапа: Клетка",
+    "group": "Клетка",
+    "big": true
+  },
+  "stage3.goal": {
+    "value": "1e9",
+    "title": "Цель этапа: Многоклеточные",
+    "group": "Многоклеточные",
+    "big": true
+  },
+  "stage4.goal": {
+    "value": "1e8",
+    "title": "Цель этапа: Океан",
+    "group": "Океан",
+    "big": true
+  },
+  "stage6.goal": {
+    "value": "1e6",
+    "title": "Цель этапа: Племя",
+    "group": "Племя",
+    "big": true
+  },
+  "stage8.goal": {
+    "value": 50,
+    "title": "Цель этапа: Космос",
+    "group": "Космос"
+  },
+  "broth.growth": {
+    "value": 1.12,
+    "title": "Рост цены производителя Бульона",
+    "group": "Бульон"
+  },
+  "broth.milestone1": {
+    "value": 10,
+    "title": "Первая веха производителя Бульона",
+    "group": "Бульон"
+  },
+  "broth.milestone2": {
+    "value": 25,
+    "title": "Вторая веха производителя Бульона",
+    "group": "Бульон"
+  },
+  "broth.milestone3": {
+    "value": 50,
+    "title": "Третья веха производителя Бульона",
+    "group": "Бульон"
+  },
+  "producer.milestone1": {
+    "value": 25,
+    "title": "Первая веха производителя",
+    "group": "Вехи производителей"
+  },
+  "producer.milestone2": {
+    "value": 50,
+    "title": "Вторая веха производителя",
+    "group": "Вехи производителей"
+  },
+  "producer.milestone3": {
+    "value": 100,
+    "title": "Третья веха производителя",
+    "group": "Вехи производителей"
+  },
+  "producer.milestoneMult": {
+    "value": 2,
+    "title": "Множитель дохода за веху",
+    "group": "Вехи производителей"
+  },
+  "cell.rate": {
+    "value": 0.05,
+    "title": "Начальная скорость деления",
+    "group": "Клетка"
+  },
+  "cell.rateGrowth": {
+    "value": 1.15,
+    "title": "Рост скорости за уровень митоза",
+    "group": "Клетка"
+  },
+  "cell.mitosisBase": {
+    "value": "50",
+    "title": "Начальная цена митоза",
+    "group": "Клетка",
+    "big": true
+  },
+  "cell.mitosisGrowth": {
+    "value": 1.8,
+    "title": "Рост цены митоза",
+    "group": "Клетка"
+  },
+  "cell.capacityBase": {
+    "value": "1000",
+    "title": "Начальная ёмкость среды",
+    "group": "Клетка",
+    "big": true
+  },
+  "cell.capacityGrowth": {
+    "value": 2,
+    "title": "Рост ёмкости за расширение",
+    "group": "Клетка"
+  },
+  "cell.environmentBase": {
+    "value": "100",
+    "title": "Начальная цена среды",
+    "group": "Клетка",
+    "big": true
+  },
+  "cell.environmentGrowth": {
+    "value": 2.2,
+    "title": "Рост цены среды",
+    "group": "Клетка"
+  },
+  "cell.autoAt": {
+    "value": 0.6,
+    "title": "Заполнение среды для автопокупок",
+    "group": "Клетка"
+  },
+  "multi.growth": {
+    "value": 1.13,
+    "title": "Рост цены производителя организмов",
+    "group": "Многоклеточные"
+  },
+  "mutation.generationSec": {
+    "value": 60,
+    "title": "Длительность поколения, секунд",
+    "group": "Мутации"
+  },
+  "mutation.pendingMax": {
+    "value": 3,
+    "title": "Предел ожидающих выборов мутации",
+    "group": "Мутации"
+  },
+  "mutation.choices": {
+    "value": 3,
+    "title": "Число карт мутации",
+    "group": "Мутации"
+  },
+  "mutation.extendedChoices": {
+    "value": 4,
+    "title": "Расширенное число карт мутации",
+    "group": "Мутации"
+  },
+  "mutation.commonWeight": {
+    "value": 8,
+    "title": "Вес обычной мутации при выборе",
+    "group": "Мутации"
+  },
+  "mutation.rareWeight": {
+    "value": 0.75,
+    "title": "Вес редкой мутации при выборе",
+    "group": "Мутации"
+  },
+  "mutation.specialWeight": {
+    "value": 0.25,
+    "title": "Вес особой мутации при выборе",
+    "group": "Мутации"
+  },
+  "mutation.commonMult": {
+    "value": 1.2,
+    "title": "Множитель обычной мутации по умолчанию",
+    "group": "Мутации"
+  },
+  "mutation.flagellum.mult": {
+    "value": 1.3,
+    "title": "Жгутик: множитель",
+    "group": "Мутации"
+  },
+  "mutation.chloroplast.mult": {
+    "value": 1.2,
+    "title": "Хлоропласт: множитель",
+    "group": "Мутации"
+  },
+  "mutation.eyespot.mult": {
+    "value": 1.25,
+    "title": "Глаз-пятно: множитель",
+    "group": "Мутации"
+  },
+  "mutation.fin.mult": {
+    "value": 1.25,
+    "title": "Плавник: множитель",
+    "group": "Мутации"
+  },
+  "mutation.gills.mult": {
+    "value": 1.1,
+    "title": "Жабры: множитель",
+    "group": "Мутации"
+  },
+  "mutation.lungs.mult": {
+    "value": 1.2,
+    "title": "Лёгкие: множитель",
+    "group": "Мутации"
+  },
+  "mutation.scales.mult": {
+    "value": 1.3,
+    "title": "Чешуя: множитель",
+    "group": "Мутации"
+  },
+  "mutation.feather.mult": {
+    "value": 1.15,
+    "title": "Перо: множитель",
+    "group": "Мутации"
+  },
+  "mutation.warm-blood.mult": {
+    "value": 1.2,
+    "title": "Тёплая кровь: множитель",
+    "group": "Мутации"
+  },
+  "mutation.shelled-egg.mult": {
+    "value": 1.15,
+    "title": "Яйцо в скорлупе: множитель",
+    "group": "Мутации"
+  },
+  "mutation.schooling.mult": {
+    "value": 1.25,
+    "title": "Стайность: множитель",
+    "group": "Мутации"
+  },
+  "mutation.tail-rudder.mult": {
+    "value": 1.3,
+    "title": "Хвостовой руль: множитель",
+    "group": "Мутации"
+  },
+  "mutation.night-vision.mult": {
+    "value": 1.2,
+    "title": "Ночное зрение: множитель",
+    "group": "Мутации"
+  },
+  "mutation.echolocation.mult": {
+    "value": 1.15,
+    "title": "Эхолокация: множитель",
+    "group": "Мутации"
+  },
+  "mutation.venom.mult": {
+    "value": 1.15,
+    "title": "Яд: множитель",
+    "group": "Мутации"
+  },
+  "mutation.mimicry.mult": {
+    "value": 1.15,
+    "title": "Мимикрия: множитель",
+    "group": "Мутации"
+  },
+  "mutation.symbiosis.mult": {
+    "value": 1.25,
+    "title": "Симбиоз: множитель",
+    "group": "Мутации"
+  },
+  "mutation.hibernation.mult": {
+    "value": 1.3,
+    "title": "Спячка: множитель",
+    "group": "Мутации"
+  },
+  "mutation.grasping-hand.mult": {
+    "value": 1.25,
+    "title": "Хватательная кисть: множитель",
+    "group": "Мутации"
+  },
+  "mutation.cilia.mult": {
+    "value": 1.1,
+    "title": "Реснички: множитель",
+    "group": "Мутации"
+  },
+  "mutation.rareMult": {
+    "value": 2,
+    "title": "Множитель редкой мутации",
+    "group": "Мутации"
+  },
+  "mutation.doubleMult": {
+    "value": 2,
+    "title": "Число выборов с двойным поколением",
+    "group": "Мутации"
+  },
+  "ocean.growth": {
+    "value": 1.14,
+    "title": "Рост цены популяций Океана",
+    "group": "Океан"
+  },
+  "ocean.ratio": {
+    "value": 0.2,
+    "title": "Доля потребителей в пищевой пирамиде",
+    "group": "Океан"
+  },
+  "ocean.softRatio": {
+    "value": 0.3,
+    "title": "Доля потребителей без луны",
+    "group": "Океан"
+  },
+  "ocean.biomassFactor": {
+    "value": 0.5,
+    "title": "Биомасса на единицу разнообразия в секунду",
+    "group": "Океан"
+  },
+  "ocean.reproduction": {
+    "value": 0.00068,
+    "title": "Естественная скорость размножения",
+    "group": "Океан"
+  },
+  "ocean.breederBoost": {
+    "value": 0.025,
+    "title": "Ускорение размножения от покупки",
+    "group": "Океан"
+  },
+  "ocean.cohort": {
+    "value": 10,
+    "title": "Размер покупаемой группы",
+    "group": "Океан"
+  },
+  "ocean.initialA": {
+    "value": "100",
+    "title": "Начальная популяция водорослей",
+    "group": "Океан",
+    "big": true
+  },
+  "ocean.initialH": {
+    "value": "10",
+    "title": "Начальная популяция травоядных",
+    "group": "Океан",
+    "big": true
+  },
+  "ocean.initialC": {
+    "value": "1",
+    "title": "Начальная популяция хищников",
+    "group": "Океан",
+    "big": true
+  },
+  "land.radius": {
+    "value": 3,
+    "title": "Радиус гекс-карты",
+    "group": "Суша"
+  },
+  "land.compactCells": {
+    "value": 25,
+    "title": "Число гексов в тесной вселенной",
+    "group": "Суша"
+  },
+  "land.waterCells": {
+    "value": 12,
+    "title": "Число водных гексов мирового океана",
+    "group": "Суша"
+  },
+  "land.costBase": {
+    "value": "100",
+    "title": "Цена первой клетки Суши",
+    "group": "Суша",
+    "big": true
+  },
+  "land.costGrowth": {
+    "value": 3,
+    "title": "Рост цены заселения",
+    "group": "Суша"
+  },
+  "land.yieldGrowth": {
+    "value": 3,
+    "title": "Рост дохода каждой новой клетки",
+    "group": "Суша"
+  },
+  "land.neighborMult": {
+    "value": 1.5,
+    "title": "Множитель полезного соседства",
+    "group": "Суша"
+  },
+  "land.baseYield": {
+    "value": 0.405,
+    "title": "Базовый доход видов в секунду",
+    "group": "Суша"
+  },
+  "tribe.initialPeople": {
+    "value": 20,
+    "title": "Начальное число людей",
+    "group": "Племя"
+  },
+  "tribe.maxPeople": {
+    "value": 200,
+    "title": "Предел населения племени",
+    "group": "Племя"
+  },
+  "tribe.initialFood": {
+    "value": "100",
+    "title": "Начальный запас еды",
+    "group": "Племя",
+    "big": true
+  },
+  "tribe.gatherRate": {
+    "value": 0.35,
+    "title": "Еда от собирателя в секунду",
+    "group": "Племя"
+  },
+  "tribe.huntMult": {
+    "value": 2,
+    "title": "Множитель добычи охотника",
+    "group": "Племя"
+  },
+  "tribe.foodNeed": {
+    "value": 0.06,
+    "title": "Потребление еды человеком в секунду",
+    "group": "Племя"
+  },
+  "tribe.birthFood": {
+    "value": 10,
+    "title": "Запас еды для нового человека",
+    "group": "Племя"
+  },
+  "tribe.birthRate": {
+    "value": 0.03,
+    "title": "Скорость прироста населения",
+    "group": "Племя"
+  },
+  "tribe.toolRate": {
+    "value": 0.004,
+    "title": "Орудия от мастера в секунду",
+    "group": "Племя"
+  },
+  "tribe.toolBonus": {
+    "value": 0.002,
+    "title": "Бонус племени за орудие",
+    "group": "Племя"
+  },
+  "tribe.knowledgeRate": {
+    "value": 0.3,
+    "title": "Знания от хранителя в секунду",
+    "group": "Племя"
+  },
+  "tribe.role0": {
+    "value": 0.25,
+    "title": "Начальная доля собирателей",
+    "group": "Племя"
+  },
+  "tribe.role1": {
+    "value": 0.15,
+    "title": "Начальная доля охотников",
+    "group": "Племя"
+  },
+  "tribe.role2": {
+    "value": 0.2,
+    "title": "Начальная доля мастеров",
+    "group": "Племя"
+  },
+  "tribe.role3": {
+    "value": 0.4,
+    "title": "Начальная доля хранителей",
+    "group": "Племя"
+  },
+  "civ.epochs": {
+    "value": 7,
+    "title": "Число основных эпох",
+    "group": "Цивилизация"
+  },
+  "civ.extraEpochs": {
+    "value": 2,
+    "title": "Дополнительные эпохи древних звёзд",
+    "group": "Цивилизация"
+  },
+  "civ.discoveries": {
+    "value": 4,
+    "title": "Число открытий в эпохе",
+    "group": "Цивилизация"
+  },
+  "civ.epochGrowth": {
+    "value": 50,
+    "title": "Рост цен при смене эпохи",
+    "group": "Цивилизация"
+  },
+  "civ.discoveryBase": {
+    "value": "500",
+    "title": "Цена первого открытия",
+    "group": "Цивилизация",
+    "big": true
+  },
+  "civ.discoveryGrowth": {
+    "value": 2,
+    "title": "Рост цены открытий в эпохе",
+    "group": "Цивилизация"
+  },
+  "civ.discoveryBonus": {
+    "value": 1.7,
+    "title": "Множитель дохода за открытие",
+    "group": "Цивилизация"
+  },
+  "civ.cityGrowth": {
+    "value": 1.16,
+    "title": "Рост цены городских производителей",
+    "group": "Цивилизация"
+  },
+  "civ.epochBonus": {
+    "value": 20,
+    "title": "Множитель дохода за эпоху",
+    "group": "Цивилизация"
+  },
+  "space.slots": {
+    "value": 3,
+    "title": "Число одновременных экспедиций",
+    "group": "Космос"
+  },
+  "space.launchBase": {
+    "value": "1",
+    "title": "Начальная цена экспедиции",
+    "group": "Космос",
+    "big": true
+  },
+  "space.launchGrowth": {
+    "value": 1.06,
+    "title": "Рост цены экспедиций",
+    "group": "Космос"
+  },
+  "space.worldIncome": {
+    "value": 0.0002,
+    "title": "Доход с мира в секунду",
+    "group": "Космос"
+  },
+  "space.initialWorlds": {
+    "value": 0,
+    "title": "Начальное число заселённых миров",
+    "group": "Космос"
+  },
+  "space.ancientWorlds": {
+    "value": 5,
+    "title": "Готовые миры древних звёзд",
+    "group": "Космос"
+  },
+  "space.timeGrowth": {
+    "value": 1.085,
+    "title": "Рост времени следующих экспедиций",
+    "group": "Космос"
+  },
+  "space.maxTimerSec": {
+    "value": 28800,
+    "title": "Предельное время перелёта, секунд",
+    "group": "Космос"
+  },
+  "law.baseCost": {
+    "value": "2",
+    "title": "Начальная цена множителя этапа",
+    "group": "Законы природы",
+    "big": true
+  },
+  "law.growth": {
+    "value": 2,
+    "title": "Рост цены уровней закона",
+    "group": "Законы природы"
+  },
+  "law.stageMult": {
+    "value": 2,
+    "title": "Множитель этапа за уровень закона",
+    "group": "Законы природы"
+  },
+  "law.maxOffline": {
+    "value": 5,
+    "title": "Число уровней закона офлайна",
+    "group": "Законы природы"
+  },
+  "law.automationCost": {
+    "value": "6",
+    "title": "Цена автоматизации",
+    "group": "Законы природы",
+    "big": true
+  },
+  "law.memoryCost": {
+    "value": "10",
+    "title": "Цена Памяти генов",
+    "group": "Законы природы",
+    "big": true
+  },
+  "law.fourCardsCost": {
+    "value": "8",
+    "title": "Цена Четвёртой карты",
+    "group": "Законы природы",
+    "big": true
+  },
+  "law.fourUniversesCost": {
+    "value": "12",
+    "title": "Цена выбора четырёх вселенных",
+    "group": "Законы природы",
+    "big": true
+  },
+  "law.autoBrothSec": {
+    "value": 60,
+    "title": "Время автоматического Бульона, секунд",
+    "group": "Законы природы"
+  },
+  "universe.choices": {
+    "value": 3,
+    "title": "Число постоянных на выбор",
+    "group": "Наследие и вселенные"
+  },
+  "universe.extendedChoices": {
+    "value": 4,
+    "title": "Число постоянных с законом выбора",
+    "group": "Наследие и вселенные"
+  },
+  "constant.gravitySpace": {
+    "value": 2,
+    "title": "Сильная гравитация: множитель Космоса",
+    "group": "Физические постоянные"
+  },
+  "constant.gravityLand": {
+    "value": 0.7,
+    "title": "Сильная гравитация: множитель Суши",
+    "group": "Физические постоянные"
+  },
+  "constant.lightTime": {
+    "value": 0.5,
+    "title": "Быстрый свет: множитель времени перелёта",
+    "group": "Физические постоянные"
+  },
+  "constant.lightCiv": {
+    "value": 0.8,
+    "title": "Быстрый свет: множитель Цивилизации",
+    "group": "Физические постоянные"
+  },
+  "constant.oceanMult": {
+    "value": 3,
+    "title": "Мировой океан: множитель Океана",
+    "group": "Физические постоянные"
+  },
+  "constant.radiationCell": {
+    "value": 0.7,
+    "title": "Жёсткое излучение: множитель Клетки",
+    "group": "Физические постоянные"
+  },
+  "constant.coldOffline": {
+    "value": 1.5,
+    "title": "Холодная вселенная: множитель офлайна",
+    "group": "Физические постоянные"
+  },
+  "constant.coldCell": {
+    "value": 0.7,
+    "title": "Холодная вселенная: множитель деления",
+    "group": "Физические постоянные"
+  },
+  "constant.brothMult": {
+    "value": 5,
+    "title": "Густой бульон: множитель Бульона",
+    "group": "Физические постоянные"
+  },
+  "constant.brothMulti": {
+    "value": 0.8,
+    "title": "Густой бульон: множитель организмов",
+    "group": "Физические постоянные"
+  },
+  "constant.slowSparks": {
+    "value": 2,
+    "title": "Медленное время: множитель Искр",
+    "group": "Физические постоянные"
+  },
+  "constant.slowAll": {
+    "value": 0.5,
+    "title": "Медленное время: множитель всех этапов",
+    "group": "Физические постоянные"
+  },
+  "constant.chemistryRare": {
+    "value": 2,
+    "title": "Щедрая химия: частота редких мутаций",
+    "group": "Физические постоянные"
+  },
+  "constant.chemistryCost": {
+    "value": 2,
+    "title": "Щедрая химия: множитель цен Бульона",
+    "group": "Физические постоянные"
+  },
+  "constant.sunsLand": {
+    "value": 2,
+    "title": "Два солнца: множитель Суши",
+    "group": "Физические постоянные"
+  },
+  "constant.sunsFood": {
+    "value": 0.7,
+    "title": "Два солнца: множитель еды",
+    "group": "Физические постоянные"
+  },
+  "constant.compactLand": {
+    "value": 0.8,
+    "title": "Тесная вселенная: множитель видов",
+    "group": "Физические постоянные"
+  },
+  "event.minSec": {
+    "value": 120,
+    "title": "Минимальный интервал событий, секунд",
+    "group": "События"
+  },
+  "event.maxSec": {
+    "value": 180,
+    "title": "Максимальный интервал событий, секунд",
+    "group": "События"
+  },
+  "event.fossilChance": {
+    "value": 0.025,
+    "title": "Вероятность Окаменелости",
+    "group": "События"
+  },
+  "event.lightningMult": {
+    "value": 5,
+    "title": "Молния: множитель Бульона",
+    "group": "События"
+  },
+  "event.lightningSec": {
+    "value": 30,
+    "title": "Молния: длительность, секунд",
+    "group": "События"
+  },
+  "event.volcanoMult": {
+    "value": 3,
+    "title": "Вулканическое лето: множитель органики",
+    "group": "События"
+  },
+  "event.volcanoSec": {
+    "value": 60,
+    "title": "Вулканическое лето: длительность, секунд",
+    "group": "События"
+  },
+  "event.bloomMult": {
+    "value": 3,
+    "title": "Цветение: множитель водорослей",
+    "group": "События"
+  },
+  "event.bloomSec": {
+    "value": 60,
+    "title": "Цветение: длительность, секунд",
+    "group": "События"
+  },
+  "event.iceMult": {
+    "value": 0.5,
+    "title": "Ледниковый период: множитель Суши",
+    "group": "События"
+  },
+  "event.iceSec": {
+    "value": 60,
+    "title": "Ледниковый период: длительность, секунд",
+    "group": "События"
+  },
+  "event.meteorMult": {
+    "value": 2,
+    "title": "Метеорит: множитель этапа",
+    "group": "События"
+  },
+  "event.dodgeSec": {
+    "value": 300,
+    "title": "Увернуться: запас дохода, секунд",
+    "group": "События"
+  },
+  "event.droughtMult": {
+    "value": 3,
+    "title": "Засуха: множитель собирателей",
+    "group": "События"
+  },
+  "event.droughtSec": {
+    "value": 120,
+    "title": "Засуха: длительность, секунд",
+    "group": "События"
+  },
+  "event.wandererDiscount": {
+    "value": 0.5,
+    "title": "Странник: доля цены открытия",
+    "group": "События"
+  },
+  "event.wheelMult": {
+    "value": 2,
+    "title": "Колесо: множитель мастеров",
+    "group": "События"
+  },
+  "event.cometMult": {
+    "value": 3,
+    "title": "Комета: множитель хранителей",
+    "group": "События"
+  },
+  "event.cometSec": {
+    "value": 60,
+    "title": "Комета: длительность, секунд",
+    "group": "События"
+  },
+  "event.plagueLoss": {
+    "value": 0.2,
+    "title": "Карантин: доля потери людей",
+    "group": "События"
+  },
+  "event.plagueUnhandledLoss": {
+    "value": 0.35,
+    "title": "Чума без карантина: доля потери людей",
+    "group": "События"
+  },
+  "event.signalSec": {
+    "value": 1800,
+    "title": "Сигнал: сокращение перелёта, секунд",
+    "group": "События"
+  },
+  "event.tideMult": {
+    "value": 2,
+    "title": "Прилив: множитель Океана",
+    "group": "События"
+  },
+  "event.tideSec": {
+    "value": 60,
+    "title": "Прилив: длительность, секунд",
+    "group": "События"
+  },
+  "event.fossilSparks": {
+    "value": 1,
+    "title": "Окаменелость: награда Искрами",
+    "group": "События"
+  },
+  "link.chestSec": {
+    "value": 1200,
+    "title": "Капсула времени: запас дохода, секунд",
+    "group": "Связки с жизнью"
+  },
+  "link.leapSec": {
+    "value": 600,
+    "title": "Эволюционный скачок: доход, секунд",
+    "group": "Связки с жизнью"
+  },
+  "achievement.mutations": {
+    "value": 100,
+    "title": "Мутаций для достижения",
+    "group": "Достижения"
+  },
+  "achievement.universes": {
+    "value": 10,
+    "title": "Вселенных для достижения",
+    "group": "Достижения"
+  },
+  "bot.roiSec": {
+    "value": 180,
+    "title": "Бот: окупаемость Бульона, секунд",
+    "group": "Проверка темпа"
+  },
+  "bot.cellMitosisMax": {
+    "value": 5,
+    "title": "Бот: предел уровня митоза",
+    "group": "Проверка темпа"
+  },
+  "bot.cellAt": {
+    "value": 0.75,
+    "title": "Бот: заполнение среды для покупки",
+    "group": "Проверка темпа"
+  },
+  "bot.multiRoiSec": {
+    "value": 600,
+    "title": "Бот: окупаемость организмов, секунд",
+    "group": "Проверка темпа"
+  },
+  "bot.oceanRoiSec": {
+    "value": 300,
+    "title": "Бот: окупаемость Океана, секунд",
+    "group": "Проверка темпа"
+  },
+  "broth.base0": {
+    "value": "10",
+    "title": "Молния: начальная цена",
+    "group": "Бульон",
+    "big": true
+  },
+  "broth.base1": {
+    "value": "150",
+    "title": "Горячий источник: начальная цена",
+    "group": "Бульон",
+    "big": true
+  },
+  "broth.base2": {
+    "value": "2200",
+    "title": "Глиняная отмель: начальная цена",
+    "group": "Бульон",
+    "big": true
+  },
+  "broth.base3": {
+    "value": "33000",
+    "title": "Капля с оболочкой: начальная цена",
+    "group": "Бульон",
+    "big": true
+  },
+  "broth.output0": {
+    "value": 1,
+    "title": "Молния: доход в секунду",
+    "group": "Бульон"
+  },
+  "broth.output1": {
+    "value": 8,
+    "title": "Горячий источник: доход в секунду",
+    "group": "Бульон"
+  },
+  "broth.output2": {
+    "value": 60,
+    "title": "Глиняная отмель: доход в секунду",
+    "group": "Бульон"
+  },
+  "broth.output3": {
+    "value": 450,
+    "title": "Капля с оболочкой: доход в секунду",
+    "group": "Бульон"
+  },
+  "multi.base0": {
+    "value": "20",
+    "title": "Колония: начальная цена",
+    "group": "Многоклеточные",
+    "big": true
+  },
+  "multi.output0": {
+    "value": 1.5,
+    "title": "Колония: доход в секунду",
+    "group": "Многоклеточные"
+  },
+  "multi.base1": {
+    "value": "300",
+    "title": "Губка: начальная цена",
+    "group": "Многоклеточные",
+    "big": true
+  },
+  "multi.output1": {
+    "value": 12,
+    "title": "Губка: доход в секунду",
+    "group": "Многоклеточные"
+  },
+  "multi.base2": {
+    "value": "4500",
+    "title": "Медуза: начальная цена",
+    "group": "Многоклеточные",
+    "big": true
+  },
+  "multi.output2": {
+    "value": 96,
+    "title": "Медуза: доход в секунду",
+    "group": "Многоклеточные"
+  },
+  "multi.base3": {
+    "value": "67500",
+    "title": "Червь: начальная цена",
+    "group": "Многоклеточные",
+    "big": true
+  },
+  "multi.output3": {
+    "value": 768,
+    "title": "Червь: доход в секунду",
+    "group": "Многоклеточные"
+  },
+  "multi.base4": {
+    "value": "1012500",
+    "title": "Пловец: начальная цена",
+    "group": "Многоклеточные",
+    "big": true
+  },
+  "multi.output4": {
+    "value": 6144,
+    "title": "Пловец: доход в секунду",
+    "group": "Многоклеточные"
+  },
+  "ocean.base0": {
+    "value": "10",
+    "title": "Водоросли: начальная цена",
+    "group": "Океан",
+    "big": true
+  },
+  "ocean.base1": {
+    "value": "50",
+    "title": "Травоядные: начальная цена",
+    "group": "Океан",
+    "big": true
+  },
+  "ocean.base2": {
+    "value": "250",
+    "title": "Хищники: начальная цена",
+    "group": "Океан",
+    "big": true
+  },
+  "land.biome.forest": {
+    "value": 1,
+    "title": "Лес: множитель дохода",
+    "group": "Суша"
+  },
+  "land.biome.steppe": {
+    "value": 1.1,
+    "title": "Степь: множитель дохода",
+    "group": "Суша"
+  },
+  "land.biome.swamp": {
+    "value": 0.9,
+    "title": "Болото: множитель дохода",
+    "group": "Суша"
+  },
+  "land.biome.mountains": {
+    "value": 0.85,
+    "title": "Горы: множитель дохода",
+    "group": "Суша"
+  },
+  "land.biome.tundra": {
+    "value": 0.8,
+    "title": "Тундра: множитель дохода",
+    "group": "Суша"
+  },
+  "land.biome.desert": {
+    "value": 1.2,
+    "title": "Пустыня: множитель дохода",
+    "group": "Суша"
+  },
+  "civ.base0": {
+    "value": "100",
+    "title": "Поселение: начальная цена",
+    "group": "Цивилизация",
+    "big": true
+  },
+  "civ.base1": {
+    "value": "2000",
+    "title": "Город: начальная цена",
+    "group": "Цивилизация",
+    "big": true
+  },
+  "civ.base2": {
+    "value": "40000",
+    "title": "Академия: начальная цена",
+    "group": "Цивилизация",
+    "big": true
+  },
+  "civ.base3": {
+    "value": "800000",
+    "title": "Метрополия: начальная цена",
+    "group": "Цивилизация",
+    "big": true
+  },
+  "civ.output0": {
+    "value": 1,
+    "title": "Поселение: доход в секунду",
+    "group": "Цивилизация"
+  },
+  "civ.output1": {
+    "value": 12,
+    "title": "Город: доход в секунду",
+    "group": "Цивилизация"
+  },
+  "civ.output2": {
+    "value": 144,
+    "title": "Академия: доход в секунду",
+    "group": "Цивилизация"
+  },
+  "civ.output3": {
+    "value": 1728,
+    "title": "Метрополия: доход в секунду",
+    "group": "Цивилизация"
+  },
+  "space.timer0": {
+    "value": 600,
+    "title": "Ближний мир: перелёт, секунд",
+    "group": "Космос"
+  },
+  "space.timer1": {
+    "value": 1800,
+    "title": "Водный мир: перелёт, секунд",
+    "group": "Космос"
+  },
+  "space.timer2": {
+    "value": 7200,
+    "title": "Каменный мир: перелёт, секунд",
+    "group": "Космос"
+  },
+  "space.timer3": {
+    "value": 28800,
+    "title": "Мир садов: перелёт, секунд",
+    "group": "Космос"
+  },
+  "stage1.pace": {
+    "min": 0.01,
+    "step": 0.01,
+    "title": "Темп этапа: Бульон",
+    "value": 0.55,
+    "group": "Бульон",
+    "max": 10
+  },
+  "stage2.pace": {
+    "min": 0.01,
+    "step": 0.01,
+    "title": "Темп этапа: Клетка",
+    "value": 0.17,
+    "group": "Клетка",
+    "max": 10
+  },
+  "stage3.pace": {
+    "min": 0.01,
+    "step": 0.01,
+    "title": "Темп этапа: Многоклеточные",
+    "value": 0.0835,
+    "group": "Многоклеточные",
+    "max": 10
+  },
+  "stage4.pace": {
+    "min": 0.01,
+    "step": 0.01,
+    "title": "Темп этапа: Океан",
+    "value": 1,
+    "group": "Океан",
+    "max": 10
+  },
+  "stage5.pace": {
+    "min": 0.01,
+    "step": 0.01,
+    "title": "Темп этапа: Суша",
+    "value": 1,
+    "group": "Суша",
+    "max": 10
+  },
+  "stage6.pace": {
+    "min": 0.01,
+    "step": 0.01,
+    "title": "Темп этапа: Племя",
+    "value": 1,
+    "group": "Племя",
+    "max": 10
+  },
+  "stage7.pace": {
+    "min": 0.01,
+    "step": 0.01,
+    "title": "Темп этапа: Цивилизация",
+    "value": 1,
+    "group": "Цивилизация",
+    "max": 10
+  },
+  "stage8.pace": {
+    "min": 0.01,
+    "step": 0.01,
+    "title": "Темп этапа: Космос",
+    "value": 1,
+    "group": "Космос",
+    "max": 10
+  },
+  "space.timer4": {
+    "value": 14400,
+    "group": "Космос",
+    "title": "Дальний мир: перелёт, секунд"
+  },
+  "space.timer5": {
+    "value": 28800,
+    "group": "Космос",
+    "title": "Мир у горизонта: перелёт, секунд"
+  },
+  "land.waterCostMult": {
+    "value": 3,
+    "title": "Водная клетка: множитель цены",
+    "group": "Суша"
+  },
+  "land.waterYieldMult": {
+    "value": 0.5,
+    "title": "Водная клетка: множитель дохода",
+    "group": "Суша"
+  },
+  "tribe.huntRisk": {
+    "title": "Охотники: рост риска болезни",
+    "step": 0.5,
+    "value": 6,
+    "max": 20,
+    "group": "Племя",
+    "min": 0
+  }
+}

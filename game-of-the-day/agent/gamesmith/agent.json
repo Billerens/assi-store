@@ -1,0 +1,5 @@
+{
+  "title": "Мастер игр",
+  "description": "Каждое утро делает «Игру дня» — новую мини-игру на движке Игротеки — по заданию модуля и вкусу владельца",
+  "tools": ["fs_*", "js_eval", "ui_open", "ui_eval", "ui_screenshot", "module_check", "memory_search", "memory_save", "web_search", "web_read"]
+}

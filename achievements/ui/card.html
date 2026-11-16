@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ачивки</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<style>
+  /* The card fills its sector of the home grid; the home draws the plate behind it. */
+  :root {
+    --r-common: var(--ink-3);
+    --r-uncommon: var(--ok);
+    --r-rare: #5E9EE8;
+    --r-epic: var(--accent);
+    --r-legendary: #E8A84C;
+    --ring: 112px;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .ach {
+    height: 100%;
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-areas: "ring main";
+    column-gap: 14px;
+    row-gap: 10px;
+    align-items: center;
+  }
+
+  .ring {
+    grid-area: ring;
+    position: relative;
+    width: var(--ring);
+    height: var(--ring);
+    justify-self: center;
+  }
+
+  .ring svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ring .center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+  }
+
+  .ring .pct {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+  }
+
+  .ring .count {
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+
+  .main {
+    grid-area: main;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .head h3 {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .week {
+    font-size: 12px;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+
+  .week.fresh {
+    color: var(--accent);
+  }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    height: 40px;
+    overflow: hidden;
+  }
+
+  .badges .badge {
+    flex: none;
+    width: 40px;
+    height: 40px;
+  }
+
+  .first {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 40px;
+  }
+
+  .near-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .near-title {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .near-pct {
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bar {
+    height: 6px;
+    margin-top: 4px;
+    border-radius: 3px;
+    background: var(--line);
+    overflow: hidden;
+  }
+
+  .bar i {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    background: var(--accent);
+  }
+
+  .near-text {
+    margin-top: 3px;
+    font-size: 12px;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+
+  .caption {
+    grid-area: caption;
+    display: none;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  .caption h3 {
+    font-size: 14px;
+  }
+
+  .stats {
+    grid-area: stats;
+    display: none;
+    min-width: 0;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .label {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: 5px;
+    white-space: nowrap;
+  }
+
+  .label b {
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+
+  .stack {
+    display: flex;
+    gap: 2px;
+    height: 8px;
+  }
+
+  .stack span {
+    position: relative;
+    min-width: 3px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .stack span::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--c);
+    opacity: .22;
+  }
+
+  .stack span i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: var(--c);
+  }
+
+  .legend {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .legend > span::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 4px;
+    border-radius: 50%;
+    background: var(--c);
+    vertical-align: 1px;
+  }
+
+  .legend .name {
+    display: none;
+  }
+
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 34px;
+  }
+
+  .bars i {
+    flex: 1;
+    min-height: 3px;
+    border-radius: 2px;
+    background: var(--accent);
+    opacity: .75;
+  }
+
+  .bars i.zero {
+    background: var(--line);
+    opacity: 1;
+  }
+
+  .bars i.today {
+    opacity: 1;
+  }
+
+  /* 2×2 (narrow): the ring and a line under it. */
+  @media (max-width: 299px) {
+    :root {
+      --ring: 96px;
+    }
+
+    .ach {
+      padding: 10px;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      grid-template-areas: "ring" "caption";
+      align-content: center;
+      row-gap: 8px;
+    }
+
+    .main {
+      display: none;
+    }
+
+    .caption {
+      display: block;
+    }
+
+    .ring .pct {
+      font-size: 21px;
+    }
+  }
+
+  /* 4×3 and taller: the rarity breakdown and the chart under the ring. */
+  @media (min-width: 300px) and (min-height: 240px) {
+    .ach {
+      grid-template-rows: auto minmax(0, 1fr);
+      grid-template-areas: "ring main" "stats stats";
+      align-items: start;
+      row-gap: 12px;
+    }
+
+    .stats {
+      display: flex;
+      align-self: end;
+    }
+  }
+
+  /* Wide (unfolded Fold): ring, then what is new, then the numbers — side by side. */
+  @media (min-width: 560px) {
+    :root {
+      --ring: 120px;
+    }
+
+    .ach {
+      padding: 14px 18px;
+      grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr);
+      grid-template-areas: "ring main stats";
+      column-gap: 20px;
+      align-items: center;
+    }
+
+    .stats {
+      display: flex;
+      align-self: center;
+    }
+
+    .bars {
+      height: 30px;
+    }
+  }
+
+  @media (min-width: 560px) and (max-height: 199px) {
+    .legend {
+      display: none;
+    }
+  }
+
+  @media (min-width: 560px) and (min-height: 240px) {
+    :root {
+      --ring: 150px;
+    }
+
+    .ring .pct {
+      font-size: 30px;
+    }
+
+    .bars {
+      height: 56px;
+    }
+
+    .legend {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      column-gap: 12px;
+      row-gap: 4px;
+    }
+
+    .legend .name {
+      display: inline;
+    }
+  }
+</style>
+<body>
+<div class="ach" id="ach">
+  <div class="ring" id="ring"></div>
+  <div class="caption">
+    <h3>Ачивки</h3>
+    <div class="week" id="week-short"></div>
+  </div>
+  <div class="main">
+    <div class="head">
+      <h3>Ачивки</h3>
+      <span class="week" id="week"></span>
+    </div>
+    <div class="badges" id="badges"></div>
+    <div class="near" id="near"></div>
+  </div>
+  <div class="stats">
+    <div>
+      <div class="label"><span>По редкости</span></div>
+      <div class="stack" id="stack"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div>
+      <div class="label" id="chart-label"></div>
+      <div class="bars" id="bars"></div>
+    </div>
+  </div>
+</div>
+<script src="/ui/kit/kit.js"></script>
+<script src="badge.js"></script>
+<script>
+  (function () {
+    const SVG = 'http://www.w3.org/2000/svg';
+    const RADIUS = 42;
+    const LENGTH = 2 * Math.PI * RADIUS;
+
+    function el(tag, attrs, text) {
+      const node = document.createElement(tag);
+      Object.keys(attrs || {}).forEach(key => node.setAttribute(key, attrs[key]));
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+
+    function circle(attrs) {
+      const node = document.createElementNS(SVG, 'circle');
+      Object.keys(attrs).forEach(key => node.setAttribute(key, attrs[key]));
+      return node;
+    }
+
+    // The ring: received tiers as arcs in the colours of their rarity, the rest is the track.
+    function ring(card) {
+      const box = document.getElementById('ring');
+      box.textContent = '';
+      const svg = document.createElementNS(SVG, 'svg');
+      svg.setAttribute('viewBox', '0 0 100 100');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.appendChild(circle({ cx: 50, cy: 50, r: RADIUS, fill: 'none', stroke: 'var(--line)', 'stroke-width': 9 }));
+      let start = 0;
+      const parts = card.rarity.filter(r => r.got > 0);
+      parts.forEach(r => {
+        const share = card.total ? r.got / card.total : 0;
+        const gap = parts.length > 1 ? 1.2 : 0;
+        const len = Math.max(0.6, share * LENGTH - gap);
+        svg.appendChild(circle({
+          cx: 50, cy: 50, r: RADIUS, fill: 'none', stroke: 'var(--r-' + r.id + ')', 'stroke-width': 9,
+          'stroke-dasharray': len.toFixed(2) + ' ' + LENGTH.toFixed(2), 'stroke-dashoffset': (-start).toFixed(2),
+          transform: 'rotate(-90 50 50)'
+        }));
+        start += share * LENGTH;
+      });
+      box.appendChild(svg);
+      const center = el('div', { class: 'center' });
+      center.appendChild(el('div', { class: 'pct' }, card.percent + '%'));
+      center.appendChild(el('div', { class: 'count' }, card.got + ' / ' + card.total));
+      box.appendChild(center);
+    }
+
+    function badges(card) {
+      const box = document.getElementById('badges');
+      box.textContent = '';
+      if (!card.latest.length) {
+        box.appendChild(el('div', { class: 'first' }, ui.t('Первая ачивка ещё впереди')));
+        return;
+      }
+      box.innerHTML = card.latest.map(item => Badge.svg(item, { size: 40 })).join('');
+      Array.prototype.forEach.call(box.children, (node, i) => {
+        const title = document.createElementNS(SVG, 'title');
+        title.textContent = card.latest[i].title;
+        node.appendChild(title);
+      });
+    }
+
+    function near(card) {
+      const box = document.getElementById('near');
+      box.textContent = '';
+      const one = card.closest;
+      if (!one) {
+        box.appendChild(el('div', { class: 'near-text' }, card.got ? ui.t('Ближе всего пока нечего') : ui.t('Прогресс — после первой проверки')));
+        return;
+      }
+      const pct = Math.round((one.ratio || 0) * 100);
+      const line = el('div', { class: 'near-line' });
+      line.appendChild(el('span', { class: 'near-title' }, one.title));
+      line.appendChild(el('span', { class: 'near-pct' }, pct + '%'));
+      box.appendChild(line);
+      const bar = el('div', { class: 'bar' });
+      bar.appendChild(el('i', { style: 'width:' + pct + '%' }));
+      box.appendChild(bar);
+      box.appendChild(el('div', { class: 'near-text' }, ui.t('Ближе всего') + ' · ' + one.progressText));
+    }
+
+    function rarity(card) {
+      const stack = document.getElementById('stack');
+      const legend = document.getElementById('legend');
+      stack.textContent = '';
+      legend.textContent = '';
+      card.rarity.filter(r => r.total > 0).forEach(r => {
+        const part = el('span', { style: '--c: var(--r-' + r.id + '); flex: ' + r.total + ' 1 0', title: Badge.rarity(r.id) });
+        part.appendChild(el('i', { style: 'width:' + Math.round(100 * r.got / r.total) + '%' }));
+        stack.appendChild(part);
+        const item = el('span', { style: '--c: var(--r-' + r.id + ')', title: Badge.rarity(r.id) });
+        item.appendChild(el('span', { class: 'name' }, ui.t(Badge.rarity(r.id)) + ' '));
+        item.appendChild(document.createTextNode(r.got + '/' + r.total));
+        legend.appendChild(item);
+      });
+    }
+
+    function chart(card) {
+      const bars = document.getElementById('bars');
+      bars.textContent = '';
+      const most = Math.max(1, ...card.daily.map(d => d.count));
+      const sum = card.daily.reduce((total, d) => total + d.count, 0);
+      card.daily.forEach((d, i) => {
+        const today = i === card.daily.length - 1;
+        bars.appendChild(el('i', {
+          class: (d.count ? '' : 'zero') + (today ? ' today' : ''),
+          style: d.count ? 'height:' + Math.max(12, Math.round(100 * d.count / most)) + '%' : '',
+          title: d.date + ': ' + d.count
+        }));
+      });
+      const label = document.getElementById('chart-label');
+      label.textContent = '';
+      label.appendChild(el('span', {}, ui.t('Получено за {} дн.', card.daily.length)));
+      label.appendChild(el('b', {}, String(sum)));
+    }
+
+    function week(card) {
+      const text = card.week ? ui.t('+{} за неделю', card.week) : ui.t('за неделю — нет');
+      ['week', 'week-short'].forEach(id => {
+        const node = document.getElementById(id);
+        node.textContent = text;
+        node.classList.toggle('fresh', card.week > 0);
+      });
+    }
+
+    async function load() {
+      const card = await assi.call('modules/achievements/main.js', 'cardData');
+      ring(card);
+      week(card);
+      badges(card);
+      near(card);
+      rarity(card);
+      chart(card);
+    }
+
+    load().catch(() => {});
+    if (window.assi && typeof assi.on === 'function') assi.on('achievements.changed', () => load().catch(() => {}));
+  })();
+</script>
+</body>
+</html>

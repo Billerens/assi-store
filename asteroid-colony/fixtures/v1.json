@@ -1,0 +1,144 @@
+{
+  "format": 1,
+  "game": "asteroid-colony",
+  "ver": 1,
+  "seq": 1,
+  "created": 1794643200000,
+  "savedAt": 1794643200000,
+  "lastTick": 1794643200000,
+  "run": {
+    "ore": "0e0",
+    "mined": "0e0",
+    "ice": 0,
+    "alloy": 0,
+    "water": 0,
+    "fuel": 0,
+    "chip": 0,
+    "data": 0,
+    "drones": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "drones2": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breakers": [
+      0,
+      0,
+      0
+    ],
+    "hulls": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "up": 0,
+    "b": {
+      "smelter": 0,
+      "purifier": 0,
+      "electro": 0,
+      "factory": 0,
+      "lab": 0
+    },
+    "off": {},
+    "panels": 0,
+    "reactor": 0,
+    "dome": 0,
+    "colonists": 0,
+    "hangar": 0,
+    "research": {},
+    "queue": [],
+    "mirror": false,
+    "exps": [],
+    "containers": [],
+    "engine": false,
+    "buffs": {},
+    "vein": null,
+    "event": null,
+    "eventAt": 0,
+    "wear": 0,
+    "deficitSec": 0,
+    "calmSec": 0,
+    "work": {},
+    "flow": {},
+    "auto": {
+      "dispatch": true,
+      "smelt": true
+    },
+    "start": 1794643200000,
+    "bought": {
+      "drones": 0,
+      "levels": 0,
+      "research": []
+    }
+  },
+  "layers": {
+    "jump": {
+      "state": {
+        "star": 1,
+        "rule": null,
+        "total": 0,
+        "meta": {}
+      },
+      "currency": "0e0",
+      "count": 0,
+      "best": "0e0"
+    },
+    "cluster": {
+      "state": {
+        "stations": {}
+      },
+      "currency": "0e0",
+      "count": 0,
+      "best": "0e0"
+    }
+  },
+  "meta": {
+    "samples": {},
+    "atlas": {
+      "1": "yellow"
+    },
+    "tierBoost": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "jumps": 0,
+    "bestStar": 1,
+    "seed": 19,
+    "achievements": {},
+    "applied": [],
+    "stockUsed": [],
+    "taken": {},
+    "stats": {
+      "playMs": 0,
+      "sessions": 0,
+      "offlineMs": 0,
+      "trips": 0
+    }
+  },
+  "card": ""
+}

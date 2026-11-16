@@ -1,0 +1,17 @@
+[
+  {"id": "deck.cut", "kind": "host", "min": 2, "max": 6, "title": "Колода короче", "text": "Колода расклада короче на {n} карт"},
+  {"id": "see.blind", "kind": "host", "min": 0, "max": 0, "title": "Слепой стол", "text": "Открыта одна карта стола, остальные открываются по одной после хода"},
+  {"id": "move.alternate", "kind": "host", "min": 0, "max": 0, "title": "Очередь", "text": "Ходы чередуются: вверх, вниз, вверх"},
+  {"id": "cols.swap", "kind": "host", "min": 3, "max": 10, "title": "Сдвиг", "text": "Каждые {n} ходов два столбца меняются местами"},
+  {"id": "aces.guard", "kind": "host", "min": 1, "max": 3, "title": "Запертые тузы", "text": "Тузы не играются, пока в стопку не легли {n} короля"},
+  {"id": "candles.leftover", "kind": "host", "min": 2, "max": 3, "title": "Дорогой остаток", "text": "Каждая карта на столе в конце стоит {n} свечи"},
+  {"id": "gold.half", "kind": "host", "min": 0, "max": 0, "title": "Скудость", "text": "Золото за карты вдвое меньше"},
+  {"id": "match.wrap", "kind": "relic", "min": 0, "max": 0, "title": "Круг", "text": "Король и туз — соседи"},
+  {"id": "match.step2", "kind": "relic", "min": 0, "max": 0, "title": "Шаг через одну", "text": "Можно класть на два старше или младше; цепочка не растёт"},
+  {"id": "match.parity", "kind": "relic", "min": 0, "max": 0, "title": "Чёт и нечет", "text": "Чётные подходят к чётным, нечётные к нечётным"},
+  {"id": "match.suit", "kind": "relic", "min": 0, "max": 0, "title": "Своя масть", "text": "Карта той же масти подходит к верху стопки"},
+  {"id": "gold.perCard", "kind": "relic", "min": 1, "max": 2, "title": "Звонкая карта", "text": "+{n} золота за каждую сыгранную карту"},
+  {"id": "candles.clear", "kind": "relic", "min": 1, "max": 2, "title": "Тёплый стол", "text": "Пустой стол даёт ещё {n} свечи"},
+  {"id": "see.deck", "kind": "relic", "min": 1, "max": 3, "title": "Взгляд в колоду", "text": "Видны {n} следующие карты колоды"},
+  {"id": "candles.start", "kind": "relic", "min": 1, "max": 3, "title": "Огарок", "text": "+{n} свечи сразу"}
+]

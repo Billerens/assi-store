@@ -1,0 +1,219 @@
+{
+  "items": {
+    "iron-ore": {"title": "Железная руда", "price": 1, "shape": "ore", "color": "#8D99A6"},
+    "copper-ore": {"title": "Медная руда", "price": 1, "shape": "ore", "color": "#C87F4E"},
+    "stone": {"title": "Камень", "price": 1, "shape": "ore", "color": "#A39A8C"},
+    "coal": {"title": "Уголь", "price": 1, "shape": "ore", "color": "#77736E"},
+    "zinc": {"title": "Цинк", "price": 1, "shape": "ore", "color": "#A7C4C9"},
+    "iron-ingot": {"title": "Железный слиток", "price": 3, "shape": "ingot", "color": "#B7C0CA"},
+    "copper-ingot": {"title": "Медный слиток", "price": 3, "shape": "ingot", "color": "#E39A63"},
+    "brick": {"title": "Кирпич", "price": 3, "shape": "brick", "color": "#B8664A"},
+    "wire": {"title": "Провод", "price": 2, "shape": "wire", "color": "#F0B37E"},
+    "gear": {"title": "Шестерня", "price": 8, "shape": "gear", "color": "#C9D1D9"},
+    "circuit": {"title": "Схема", "price": 13, "shape": "chip", "color": "#5FBF7A"},
+    "motor": {"title": "Мотор", "price": 40, "shape": "motor", "color": "#7FA7D9"},
+    "frame": {"title": "Рама", "price": 26, "shape": "frame", "color": "#C4A484"},
+    "steel": {"title": "Сталь", "price": 10, "shape": "ingot", "color": "#7D8A99"},
+    "drone": {"title": "Дрон", "price": 135, "shape": "drone", "color": "#E8D46B"},
+    "brass": {"title": "Латунь", "price": 6, "shape": "ingot", "color": "#D9B95B"},
+
+    "ice": {"title": "Лёд", "price": 1, "shape": "ore", "color": "#BFE6F2", "melts": true},
+    "silicon": {"title": "Кремний", "price": 1, "shape": "ore", "color": "#8C8FB5"},
+    "lithium": {"title": "Литий", "price": 1, "shape": "ore", "color": "#D1A3D9"},
+    "wafer": {"title": "Кремниевая пластина", "price": 3, "shape": "plate", "color": "#A3A7E0"},
+    "salt": {"title": "Литиевая соль", "price": 3, "shape": "crystal", "color": "#E7C6EE"},
+    "zinc-ingot": {"title": "Цинковый слиток", "price": 3, "shape": "ingot", "color": "#C3DADF"},
+    "coolant": {"title": "Охладитель", "price": 8, "shape": "drop", "color": "#7FD3E8"},
+    "chip": {"title": "Чип", "price": 8, "shape": "chip", "color": "#8E9BF0"},
+    "battery": {"title": "Батарея", "price": 12, "shape": "cell", "color": "#9BE07F"},
+    "cryo": {"title": "Криоблок", "price": 38, "shape": "box", "color": "#6FC3DF"},
+    "probe": {"title": "Зонд", "price": 95, "shape": "drone", "color": "#E9F2F7"},
+
+    "sulfur": {"title": "Сера", "price": 1, "shape": "ore", "color": "#E3D25B"},
+    "obsidian": {"title": "Обсидиан", "price": 1, "shape": "ore", "color": "#7B6F96"},
+    "gold": {"title": "Золотая руда", "price": 1, "shape": "ore", "color": "#E6B84A"},
+    "lava": {"title": "Лава", "price": 1, "shape": "drop", "color": "#F06A3B", "fluid": true},
+    "gold-ingot": {"title": "Золотой слиток", "price": 4, "shape": "ingot", "color": "#F2C94C"},
+    "tile": {"title": "Обсидиановая плитка", "price": 4, "shape": "plate", "color": "#9A8DBA"},
+    "acid": {"title": "Кислота", "price": 4, "shape": "drop", "color": "#C8E05B"},
+    "thread": {"title": "Золотая нить", "price": 3, "shape": "wire", "color": "#F7DA7A"},
+    "board": {"title": "Плата", "price": 20, "shape": "chip", "color": "#B5A642"},
+    "thermo": {"title": "Термоэлемент", "price": 18, "shape": "cell", "color": "#E0864A"},
+    "core": {"title": "Ядро реактора", "price": 90, "shape": "drone", "color": "#FF9F6B"},
+
+    "sand": {"title": "Песок", "price": 1, "shape": "ore", "color": "#D9C08C"},
+    "titanium": {"title": "Титан", "price": 1, "shape": "ore", "color": "#A0AAB8"},
+    "quartz": {"title": "Кварц", "price": 1, "shape": "ore", "color": "#E8E8F0"},
+    "glass": {"title": "Стекло", "price": 3, "shape": "plate", "color": "#BFE3E0"},
+    "ti-ingot": {"title": "Титановый слиток", "price": 3, "shape": "ingot", "color": "#C5CFDB"},
+    "q-plate": {"title": "Кварцевая пластина", "price": 3, "shape": "crystal", "color": "#F4F4FF"},
+    "lens": {"title": "Линза", "price": 8, "shape": "ring", "color": "#A6E1F0"},
+    "hull": {"title": "Титановая обшивка", "price": 12, "shape": "frame", "color": "#9FB0C4"},
+    "osc": {"title": "Резонатор", "price": 8, "shape": "tri", "color": "#E6E0A0"},
+    "solar": {"title": "Солнечная панель", "price": 22, "shape": "box", "color": "#5E8FD6"},
+    "satellite": {"title": "Спутник", "price": 85, "shape": "drone", "color": "#DCE6F0"},
+
+    "scrap": {"title": "Металлолом", "price": 1, "shape": "ore", "color": "#8A8F96"},
+    "polymer": {"title": "Полимер", "price": 1, "shape": "ore", "color": "#6FCF97"},
+    "crystal": {"title": "Сырой кристалл", "price": 1, "shape": "crystal", "color": "#B39DDB"},
+    "mail": {"title": "Почта", "price": 4, "shape": "box", "color": "#F2994A"},
+    "sheet": {"title": "Стальной лист", "price": 3, "shape": "plate", "color": "#AEB6BF"},
+    "film": {"title": "Плёнка", "price": 2, "shape": "plate", "color": "#9BE3B9"},
+    "cut": {"title": "Огранённый кристалл", "price": 2, "shape": "crystal", "color": "#D1C4E9"},
+    "module": {"title": "Герметичный модуль", "price": 11, "shape": "box", "color": "#90A4AE"},
+    "nav": {"title": "Навигатор", "price": 8, "shape": "chip", "color": "#CE93D8"},
+    "dock-unit": {"title": "Стыковочный узел", "price": 45, "shape": "drone", "color": "#ECEFF1"}
+  },
+
+  "planets": [
+    {
+      "id": "rusty", "title": "Ржавая", "feature": "Обучение: железо, медь, камень и уголь",
+      "about": "Старый рыжий мир, где руда лежит прямо под ногами.",
+      "resources": ["iron-ore", "copper-ore", "stone", "coal"],
+      "patches": [["iron-ore", 2], ["copper-ore", 1], ["stone", 1], ["coal", 1]],
+      "grow": ["iron-ore", "copper-ore", "stone", "coal"],
+      "imports": [{"res": "zinc", "after": "icy"}],
+      "goal": "drone",
+      "research": {"advanced": "Сталь", "top": "Дроны"},
+      "recipes": [
+        {"id": "iron-ingot", "at": "furnace", "in": {"iron-ore": 1}, "out": "iron-ingot", "n": 1, "sec": 2},
+        {"id": "copper-ingot", "at": "furnace", "in": {"copper-ore": 1}, "out": "copper-ingot", "n": 1, "sec": 2},
+        {"id": "brick", "at": "furnace", "in": {"stone": 2}, "out": "brick", "n": 1, "sec": 3},
+        {"id": "wire", "at": "assembler", "in": {"copper-ingot": 1}, "out": "wire", "n": 2, "sec": 1},
+        {"id": "gear", "at": "assembler", "in": {"iron-ingot": 2}, "out": "gear", "n": 1, "sec": 2},
+        {"id": "circuit", "at": "assembler", "in": {"iron-ingot": 1, "wire": 3}, "out": "circuit", "n": 1, "sec": 3},
+        {"id": "motor", "at": "assembler", "in": {"gear": 2, "circuit": 1}, "out": "motor", "n": 1, "sec": 5},
+        {"id": "frame", "at": "assembler", "in": {"brick": 4, "iron-ingot": 2}, "out": "frame", "n": 1, "sec": 4},
+        {"id": "steel", "at": "furnace", "in": {"iron-ingot": 2, "coal": 1}, "out": "steel", "n": 1, "sec": 4, "lock": "advanced"},
+        {"id": "drone", "at": "assembler", "in": {"motor": 1, "frame": 1, "circuit": 2}, "out": "drone", "n": 1, "sec": 8, "lock": "top"},
+        {"id": "brass", "at": "assembler", "in": {"copper-ingot": 1, "zinc": 1}, "out": "brass", "n": 1, "sec": 2, "lock": "alloy"}
+      ]
+    },
+    {
+      "id": "icy", "title": "Ледяная", "feature": "Лёд тает на ленте за 30 с — короткие цепочки",
+      "about": "Белая равнина под низким солнцем; всё, что из льда, надо везти быстро.",
+      "resources": ["ice", "silicon", "lithium", "zinc"],
+      "patches": [["ice", 1], ["silicon", 1], ["lithium", 1], ["zinc", 1]],
+      "grow": ["ice", "silicon", "lithium", "zinc"],
+      "goal": "probe",
+      "research": {"advanced": "Охладитель", "top": "Зонды"},
+      "recipes": [
+        {"id": "wafer", "at": "furnace", "in": {"silicon": 1}, "out": "wafer", "n": 1, "sec": 2},
+        {"id": "salt", "at": "furnace", "in": {"lithium": 1}, "out": "salt", "n": 1, "sec": 2},
+        {"id": "zinc-ingot", "at": "furnace", "in": {"zinc": 1}, "out": "zinc-ingot", "n": 1, "sec": 2},
+        {"id": "coolant", "at": "assembler", "in": {"ice": 2, "salt": 1}, "out": "coolant", "n": 1, "sec": 3, "lock": "advanced"},
+        {"id": "chip", "at": "assembler", "in": {"wafer": 1, "zinc-ingot": 1}, "out": "chip", "n": 1, "sec": 2},
+        {"id": "battery", "at": "assembler", "in": {"salt": 2, "zinc-ingot": 1}, "out": "battery", "n": 1, "sec": 3},
+        {"id": "cryo", "at": "assembler", "in": {"coolant": 1, "chip": 1, "battery": 1}, "out": "cryo", "n": 1, "sec": 5},
+        {"id": "probe", "at": "assembler", "in": {"cryo": 1, "chip": 2, "battery": 1}, "out": "probe", "n": 1, "sec": 8, "lock": "top"}
+      ]
+    },
+    {
+      "id": "volcanic", "title": "Вулканическая", "feature": "Лава течёт по лентам вдвое быстрее и греет печи вместо угля",
+      "about": "Чёрный камень и огненные реки: печам здесь не нужен уголь.",
+      "resources": ["sulfur", "obsidian", "gold", "lava"],
+      "patches": [["sulfur", 1], ["obsidian", 1], ["gold", 1], ["lava", 2]],
+      "grow": ["lava", "gold", "obsidian", "sulfur"],
+      "goal": "core",
+      "research": {"advanced": "Кислота", "top": "Ядра реактора"},
+      "recipes": [
+        {"id": "gold-ingot", "at": "furnace", "in": {"gold": 1, "lava": 1}, "out": "gold-ingot", "n": 1, "sec": 2},
+        {"id": "tile", "at": "furnace", "in": {"obsidian": 2, "lava": 1}, "out": "tile", "n": 1, "sec": 3},
+        {"id": "acid", "at": "furnace", "in": {"sulfur": 2, "lava": 1}, "out": "acid", "n": 1, "sec": 3, "lock": "advanced"},
+        {"id": "thread", "at": "assembler", "in": {"gold-ingot": 1}, "out": "thread", "n": 2, "sec": 1},
+        {"id": "board", "at": "assembler", "in": {"tile": 1, "thread": 2, "acid": 1}, "out": "board", "n": 1, "sec": 3},
+        {"id": "thermo", "at": "assembler", "in": {"tile": 2, "gold-ingot": 1}, "out": "thermo", "n": 1, "sec": 3},
+        {"id": "core", "at": "assembler", "in": {"board": 2, "thermo": 1, "acid": 2}, "out": "core", "n": 1, "sec": 8, "lock": "top"}
+      ]
+    },
+    {
+      "id": "dusty", "title": "Пыльная", "feature": "Буря раз в 10 минут останавливает внешние ленты",
+      "about": "Песчаные дюны и титановые скалы; у края участка ветер сдувает всё.",
+      "resources": ["sand", "titanium", "quartz"],
+      "patches": [["sand", 2], ["titanium", 1], ["quartz", 1]],
+      "grow": ["sand", "titanium", "quartz"],
+      "storm": true,
+      "goal": "satellite",
+      "research": {"advanced": "Обшивка", "top": "Спутники"},
+      "recipes": [
+        {"id": "glass", "at": "furnace", "in": {"sand": 2}, "out": "glass", "n": 1, "sec": 2},
+        {"id": "ti-ingot", "at": "furnace", "in": {"titanium": 1}, "out": "ti-ingot", "n": 1, "sec": 2},
+        {"id": "q-plate", "at": "furnace", "in": {"quartz": 1}, "out": "q-plate", "n": 1, "sec": 2},
+        {"id": "lens", "at": "assembler", "in": {"glass": 2}, "out": "lens", "n": 1, "sec": 2},
+        {"id": "hull", "at": "assembler", "in": {"ti-ingot": 2, "glass": 1}, "out": "hull", "n": 1, "sec": 3, "lock": "advanced"},
+        {"id": "osc", "at": "assembler", "in": {"q-plate": 1, "ti-ingot": 1}, "out": "osc", "n": 1, "sec": 2},
+        {"id": "solar", "at": "assembler", "in": {"glass": 2, "osc": 1, "q-plate": 1}, "out": "solar", "n": 1, "sec": 3},
+        {"id": "satellite", "at": "assembler", "in": {"hull": 1, "solar": 2, "lens": 1}, "out": "satellite", "n": 1, "sec": 8, "lock": "top"}
+      ]
+    },
+    {
+      "id": "ring", "title": "Кольцевая станция", "feature": "Только привоз: грузы прилетают в доки по расписанию — всё решает сортировка",
+      "about": "Станция на орбите: руды нет, зато каждые несколько секунд в доки прилетают контейнеры.",
+      "resources": ["scrap", "polymer", "crystal", "mail"],
+      "patches": [],
+      "grow": [],
+      "docks": 3,
+      "cargo": [["scrap", 4], ["polymer", 3], ["crystal", 2], ["mail", 1]],
+      "goal": "dock-unit",
+      "research": {"advanced": "Модули", "top": "Стыковочные узлы"},
+      "recipes": [
+        {"id": "sheet", "at": "furnace", "in": {"scrap": 2}, "out": "sheet", "n": 1, "sec": 2},
+        {"id": "film", "at": "furnace", "in": {"polymer": 1}, "out": "film", "n": 1, "sec": 1},
+        {"id": "cut", "at": "furnace", "in": {"crystal": 1}, "out": "cut", "n": 1, "sec": 1},
+        {"id": "module", "at": "assembler", "in": {"sheet": 2, "film": 1}, "out": "module", "n": 1, "sec": 3, "lock": "advanced"},
+        {"id": "nav", "at": "assembler", "in": {"cut": 1, "film": 2}, "out": "nav", "n": 1, "sec": 2},
+        {"id": "dock-unit", "at": "assembler", "in": {"module": 2, "nav": 1, "sheet": 1}, "out": "dock-unit", "n": 1, "sec": 6, "lock": "top"}
+      ]
+    }
+  ],
+
+  "buildings": [
+    {"id": "drill", "title": "Бур", "text": "На пятне руды: добывает руду"},
+    {"id": "belt", "title": "Лента", "text": "Везёт предметы по стрелке"},
+    {"id": "tunnel", "title": "Проход", "text": "Подземный проход: вход и выход через 1–4 клетки"},
+    {"id": "furnace", "title": "Печь", "text": "Плавит руду в слитки, камень в кирпич"},
+    {"id": "assembler", "title": "Сборщик", "text": "Собирает изделие по рецепту"},
+    {"id": "splitter", "title": "Разделитель", "text": "Раздаёт по очереди вперёд, влево и вправо"},
+    {"id": "sorter", "title": "Сортировщик", "text": "Выбранный предмет — вперёд, остальное — вбок"},
+    {"id": "storage", "title": "Склад", "text": "Буфер на 100 предметов"},
+    {"id": "port", "title": "Порт", "text": "Продаёт всё, что в него входит"},
+    {"id": "dock", "title": "Док", "text": "Сюда прилетают грузы станции"}
+  ],
+
+  "research": [
+    {"id": "belts", "title": "Быстрые ленты", "text": "Скорость лент +15 %"},
+    {"id": "drills", "title": "Острые буры", "text": "Буры +12 %"},
+    {"id": "furnaces", "title": "Жаркие печи", "text": "Печи +12 %"},
+    {"id": "assembly", "title": "Точная сборка", "text": "Сборщики +12 %"},
+    {"id": "trade", "title": "Торговля", "text": "Цены порта +8 %"},
+    {"id": "land", "title": "Межевание", "text": "+1 полоса участка с новыми пятнами"},
+    {"id": "deep", "title": "Глубокое бурение", "text": "Пятна руды не беднеют"},
+    {"id": "double", "title": "Двойной выход", "text": "Шанс 5 % двух изделий в сборщике"},
+    {"id": "longTunnel", "title": "Длинный проход", "text": "Подземный проход до 8 клеток"},
+    {"id": "blueprints", "title": "Чертежи", "text": "Сохранять кусок фабрики и ставить одним тапом"},
+    {"id": "idle", "title": "Подсветка простоя", "text": "Здания без входа или с забитым выходом мигают"},
+    {"id": "counters", "title": "Счётчики", "text": "Над лентой видно предметов в минуту"},
+    {"id": "night", "title": "Ночная смена", "text": "Офлайн-доход 100 % вместо 50 %"},
+    {"id": "storage", "title": "Склады побольше", "text": "Склад +100"},
+    {"id": "advanced", "title": "", "text": "Открывает рецепт"},
+    {"id": "top", "title": "", "text": "Открывает главное изделие планеты"},
+    {"id": "logistics", "title": "Логистика", "text": "Заказы +1 карточка, время +20 %"},
+    {"id": "autobuild", "title": "Автостройка", "text": "Лента тянется вслед пальцу без отрыва"},
+    {"id": "sidePort", "title": "Резервный порт", "text": "Порт принимает и с лент, идущих вдоль"},
+    {"id": "alloy", "title": "Сплав", "text": "Рецепт латуни: медь + цинк (цинк — после Ледяной)"},
+    {"id": "courier", "title": "Курьерский дрон", "text": "Раз в 2 мин переносит 20 предметов со склада в порт"}
+  ],
+
+  "shop": [
+    {"id": "money", "title": "Стартовый капитал", "text": "+500 денег в начале каждой планеты"},
+    {"id": "research", "title": "Начальные исследования", "text": "+1 уровень лент, буров, печей и сборки с начала"},
+    {"id": "courier", "title": "Курьер с начала", "text": "Курьерский дрон работает с первой минуты"}
+  ],
+
+  "events": [
+    {"id": "meteor", "title": "Метеоритный дождь", "text": "Новое пятно руды на 10 минут"},
+    {"id": "fair", "title": "Ярмарка", "text": "Порт платит ×2 за один предмет"},
+    {"id": "outage", "title": "Сбой питания", "text": "Печи стоят 30 с — тап по щитку чинит сразу"},
+    {"id": "inspector", "title": "Инспектор", "text": "Почините простаивающее здание за минуту — будет награда"}
+  ]
+}

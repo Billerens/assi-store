@@ -1,0 +1,9 @@
+{
+  "id": "sparks-ring",
+  "kind": "game",
+  "title": "Искры в кольце",
+  "gameId": "daily/2026-11-15",
+  "target": "modules/games/daily/2026-11-15",
+  "requires": ["game-of-the-day"],
+  "shell": ["app.visible", "vibrate.pattern"]
+}

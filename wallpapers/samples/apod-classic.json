@@ -1,0 +1,39 @@
+[
+ {
+  "copyright": "\nPetr Horálek\n",
+  "date": "2023-10-23",
+  "explanation": "An annular solar eclipse photographed over a desert landscape.",
+  "hdurl": "https://apod.nasa.gov/apod/image/2310/AnnularEclipse_Horalek_4000.jpg",
+  "media_type": "image",
+  "service_version": "v1",
+  "title": "Annular Eclipse over the Desert",
+  "url": "https://apod.nasa.gov/apod/image/2310/AnnularEclipse_Horalek_1080.jpg"
+ },
+ {
+  "date": "2019-04-10",
+  "explanation": "The first image of a black hole, taken by the Event Horizon Telescope.",
+  "hdurl": "https://apod.nasa.gov/apod/image/1904/M87bh_EHT_4000.jpg",
+  "media_type": "image",
+  "service_version": "v1",
+  "title": "First Horizon-Scale Image of a Black Hole",
+  "url": "https://apod.nasa.gov/apod/image/1904/M87bh_EHT_960.jpg"
+ },
+ {
+  "date": "2021-02-19",
+  "explanation": "A video of the descent of the Perseverance rover.",
+  "media_type": "video",
+  "service_version": "v1",
+  "thumbnail_url": "https://img.youtube.com/vi/4czjS9h4Fpg/0.jpg",
+  "title": "Perseverance Descent",
+  "url": "https://www.youtube.com/embed/4czjS9h4Fpg?rel=0"
+ },
+ {
+  "date": "2016-01-03",
+  "explanation": "The Pillars of Creation in the Eagle Nebula, as seen by Hubble.",
+  "hdurl": "https://apod.nasa.gov/apod/image/1601/m16Pillar_hubble_3864.jpg",
+  "media_type": "image",
+  "service_version": "v1",
+  "title": "The Pillars of Creation",
+  "url": "https://apod.nasa.gov/apod/image/1601/m16Pillar_hubble_960.jpg"
+ }
+]

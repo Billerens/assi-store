@@ -1,0 +1,609 @@
+/* The screens of «Змейка-рогалик»; the frame (bar, sheets, buttons) is engine/game.css. */
+
+html[data-phase="play"] .g-app,
+html[data-phase="pick"] .g-app {
+  touch-action: none;
+}
+
+html[data-phase="play"] .g-field,
+html[data-phase="pick"] .g-field {
+  overflow: hidden;
+}
+
+/* ---- the start screen ---- */
+
+.s-hud {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.s-cur {
+  display: flex;
+  flex: none;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.s-cur svg.i {
+  width: 22px;
+  height: 22px;
+  align-self: center;
+  color: var(--accent);
+}
+
+.s-unit {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.s-side {
+  min-width: 0;
+  color: var(--ink-2);
+  font-size: 14px;
+  text-align: right;
+  line-height: 1.35;
+}
+
+.s-h {
+  margin: 14px 0 8px;
+  font-size: 17px;
+}
+
+.s-snakes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.s-art {
+  display: block;
+  flex: none;
+  width: 44px;
+  height: 44px;
+}
+
+.s-art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.s-choice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 72px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+}
+
+.s-choice.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.s-choice.locked {
+  border-style: dashed;
+}
+
+.s-choice.locked .s-art {
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+
+.s-choice-b {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.s-choice-t {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.s-choice-s {
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.s-molts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.s-molt {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+}
+
+.s-molt.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.s-rules {
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+.s-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+}
+
+.s-switch.on {
+  border-color: var(--accent);
+}
+
+.s-switch .grow {
+  flex: 1;
+}
+
+.s-switch-v {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.s-daily {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.s-daily-t {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.s-trip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* ---- the glade ---- */
+
+.s-play-hud {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.s-land {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.s-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.s-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.s-k {
+  color: var(--ink-2);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.s-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.s-box {
+  position: relative;
+  flex: none;
+}
+
+.s-canvas {
+  display: block;
+  border-radius: 6px;
+}
+
+.s-count {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--ink);
+  pointer-events: none;
+}
+
+.s-hint {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  padding: 6px 10px;
+  border-radius: var(--radius-s);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.s-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  overflow: auto;
+}
+
+.s-overlay.paused {
+  align-items: center;
+  text-align: center;
+}
+
+.s-pause-t {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.s-pick-t {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.s-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.s-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+}
+
+.s-card.rare {
+  border-color: #5a7fb8;
+  background: color-mix(in srgb, #5a7fb8 10%, var(--card));
+}
+
+.s-card.legend {
+  border-color: #c9a64a;
+  background: color-mix(in srgb, #c9a64a 12%, var(--card));
+}
+
+.s-card-b {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.s-card-h {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 8px;
+  width: 100%;
+}
+
+.s-card-t {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.s-card-x {
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.s-card-l {
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.s-tag {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.s-tag.rare {
+  color: #8fb0e0;
+}
+
+.s-tag.legend {
+  color: #e0c070;
+}
+
+.s-abs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* a phone keeps the field large: the abilities under it are one row that scrolls sideways */
+html[data-layout="narrow"] .s-stage .s-abs {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-self: stretch;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  touch-action: pan-x;
+}
+
+html[data-layout="narrow"] .s-stage .s-ab {
+  flex: none;
+}
+
+.s-abs-none {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.s-ab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 10px 0 7px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+}
+
+.s-ab-l {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.s-map {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.s-map-t {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.s-map-land {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.s-map-row {
+  display: flex;
+  gap: 6px;
+}
+
+.s-map-c {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.s-map-c.done {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.s-map-c.now {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.s-map-c svg.i {
+  width: 18px;
+  height: 18px;
+}
+
+.s-next {
+  width: 90px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+
+/* wide: the abilities and the map of the land beside the field, over the buttons */
+.s-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+html[data-layout="wide"] .s-abs {
+  justify-content: flex-start;
+}
+
+/* the play buttons: a narrow column takes two a row, the words are never broken */
+.s-btns {
+  flex-wrap: wrap;
+}
+
+.s-btns > .g-btn {
+  flex: 1 1 auto;
+  width: auto;
+  gap: 6px;
+  padding: 6px 8px;
+  white-space: nowrap;
+}
+
+/* ---- the burrow and the result ---- */
+
+.s-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.s-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.s-item.sold,
+.s-item.unseen {
+  opacity: 0.6;
+}
+
+.s-item.unseen {
+  border-style: dashed;
+}
+
+.s-item.full {
+  border-color: var(--accent);
+}
+
+.s-item-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.s-item-b {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.s-item-h {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 8px;
+}
+
+.s-item-t {
+  font-weight: 600;
+}
+
+.s-result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 12px;
+}
+
+.s-result svg.i {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+}
+
+.s-result h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.s-total .v {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.s-unlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-weight: 600;
+}

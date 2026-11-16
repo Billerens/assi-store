@@ -1,0 +1,149 @@
+{
+  "format": 1,
+  "game": "merge-forge",
+  "ver": 1,
+  "seq": 17,
+  "created": 1794812400000,
+  "savedAt": 1794812880000,
+  "lastTick": 1794812880000,
+  "run": {
+    "gold": "6.24810097462e1",
+    "earned": "1.54352e3",
+    "grid": [
+      7,
+      3,
+      6,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "pending": [],
+    "up": {
+      "sharp": 12,
+      "bellows": 5,
+      "purse": 5,
+      "eye": 1
+    },
+    "runes": [],
+    "forgeT": 4.112526540799997,
+    "appT": 0,
+    "tapBudget": 4,
+    "taps": 480,
+    "wave": 30,
+    "hp": "9.67383006886e4",
+    "hpMax": "9.67383006886e4",
+    "bossT": 30,
+    "farm": false,
+    "maxWave": 30,
+    "volleyT": 1,
+    "volleys": 285,
+    "crits": [],
+    "walkT": 0,
+    "lastHit": "5.35580219247e2",
+    "lastGold": "1.414e2",
+    "lastBoss": {
+      "wave": 20,
+      "left": 5
+    },
+    "farmRate": "5.43846153846e0",
+    "eventT": 131.80433781445026,
+    "event": null,
+    "stormLeft": 0,
+    "starfallUntil": 0,
+    "cryUntil": 0,
+    "cryReadyAt": 0,
+    "bellowsUntil": 0,
+    "orderPaid": null,
+    "stats": {
+      "forged": 97,
+      "merged": 97,
+      "sold": 0,
+      "kills": 36,
+      "bosses": 2,
+      "fails": 1,
+      "events": 1
+    },
+    "botFarm": 0,
+    "ownerExtension": {
+      "sentinel": "preserve arbitrary module extensions"
+    }
+  },
+  "layers": {
+    "forge": {
+      "currency": "0e0",
+      "count": 0,
+      "best": "0e0",
+      "state": {
+        "mf": {},
+        "paid": 0,
+        "total": 0,
+        "spent": 0,
+        "record": 0
+      }
+    },
+    "star": {
+      "currency": "0e0",
+      "count": 0,
+      "best": "0e0",
+      "state": {}
+    }
+  },
+  "meta": {
+    "album": {
+      "1": 1,
+      "2": 1794812400000,
+      "3": 1794812405000,
+      "4": 1794812427000,
+      "5": 1794812469000,
+      "6": 1794812552000,
+      "7": 1794812711000
+    },
+    "feats": {},
+    "names": {},
+    "bestLevel": 7,
+    "seed": 3143115286,
+    "achievements": {},
+    "applied": [],
+    "stockUsed": [],
+    "taken": {},
+    "stats": {
+      "playMs": 0,
+      "sessions": 0,
+      "offlineMs": 0,
+      "trips": 0
+    },
+    "extraHistory": {
+      "sentinel": 23
+    }
+  },
+  "card": ""
+}

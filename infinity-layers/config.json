@@ -1,0 +1,962 @@
+{
+  "tier.1.cost": {
+    "value": "10",
+    "title": "Точка: цена единицы",
+    "group": "Ступени"
+  },
+  "tier.1.growth": {
+    "value": "1e3",
+    "title": "Точка: рост цены за десяток",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.2.cost": {
+    "value": "100",
+    "title": "Отрезок: цена единицы",
+    "group": "Ступени"
+  },
+  "tier.2.growth": {
+    "value": "1e4",
+    "title": "Отрезок: рост цены за десяток",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.3.cost": {
+    "value": "1e4",
+    "title": "Плоскость: цена единицы",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.3.growth": {
+    "value": "1e5",
+    "title": "Плоскость: рост цены за десяток",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.4.cost": {
+    "value": "1e6",
+    "title": "Объём: цена единицы",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.4.growth": {
+    "value": "1e6",
+    "title": "Объём: рост цены за десяток",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.5.cost": {
+    "value": "1e9",
+    "title": "Поток: цена единицы",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.5.growth": {
+    "value": "1e8",
+    "title": "Поток: рост цены за десяток",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.6.cost": {
+    "value": "1e13",
+    "title": "Узел: цена единицы",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.6.growth": {
+    "value": "1e10",
+    "title": "Узел: рост цены за десяток",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.7.cost": {
+    "value": "1e18",
+    "title": "Сеть: цена единицы",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.7.growth": {
+    "value": "1e12",
+    "title": "Сеть: рост цены за десяток",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.8.cost": {
+    "value": "1e24",
+    "title": "Ткань: цена единицы",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.8.growth": {
+    "value": "1e15",
+    "title": "Ткань: рост цены за десяток",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.9.cost": {
+    "value": "1e32",
+    "title": "Полотно: цена единицы",
+    "group": "Ступени",
+    "big": true
+  },
+  "tier.9.growth": {
+    "value": "1e18",
+    "title": "Полотно: рост цены за десяток",
+    "group": "Ступени",
+    "big": true
+  },
+  "start.points": {
+    "value": "10",
+    "title": "Очки в начале забега",
+    "group": "Ступени"
+  },
+  "start.tiers": {
+    "value": 4,
+    "title": "Открытые ступени в начале",
+    "group": "Ступени",
+    "min": 1,
+    "max": 8,
+    "step": 1
+  },
+  "tier.batch": {
+    "value": 10,
+    "title": "Покупок в десятке",
+    "group": "Ступени",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "tier.mult": {
+    "value": 2,
+    "title": "Множитель производства за десяток",
+    "group": "Ступени",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "tier.echoMult": {
+    "value": 2.2,
+    "title": "Множитель десятка на первом уровне «Двойного эха»",
+    "group": "Ступени",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "tier.chainRate": {
+    "value": 0.2,
+    "title": "Производство нижней ступени в секунду",
+    "group": "Ступени",
+    "min": 0.001,
+    "max": 10,
+    "step": 0.001
+  },
+  "tier.pointRate": {
+    "value": 1,
+    "title": "Очки от одной Точки в секунду",
+    "group": "Ступени",
+    "min": 0.001,
+    "max": 10,
+    "step": 0.001
+  },
+  "tier.milestones": {
+    "value": "100,200,500",
+    "title": "Вехи купленных ступеней, через запятую",
+    "group": "Ступени"
+  },
+  "tier.milestoneMult": {
+    "value": 3,
+    "title": "Множитель каждой вехи",
+    "group": "Ступени",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "tier.rewardPointRate": {
+    "value": 0.01,
+    "title": "Очки от старших ступеней после испытания",
+    "group": "Ступени",
+    "min": 0.001,
+    "max": 10,
+    "step": 0.001
+  },
+  "resonance.cost": {
+    "value": "1e3",
+    "title": "Цена первого Резонанса",
+    "group": "Резонанс",
+    "big": true
+  },
+  "resonance.growth": {
+    "value": 10,
+    "title": "Рост цены Резонанса",
+    "group": "Резонанс",
+    "min": 1,
+    "max": 1000,
+    "step": 1
+  },
+  "resonance.mult": {
+    "value": 1.12,
+    "title": "Множитель за уровень Резонанса",
+    "group": "Резонанс",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "resonance.rewardMult": {
+    "value": 1.15,
+    "title": "Резонанс после испытания",
+    "group": "Резонанс",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "compression.threshold": {
+    "value": "1e15",
+    "title": "Порог Сжатия, Очки",
+    "group": "Сжатие",
+    "big": true
+  },
+  "compression.divisor": {
+    "value": 5,
+    "title": "Порядков Очков на удвоение Плотности",
+    "group": "Сжатие",
+    "min": 1,
+    "max": 500,
+    "step": 1
+  },
+  "compression.bonus": {
+    "value": 0.5,
+    "title": "Бонус производства за Плотность",
+    "group": "Сжатие",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "compression.rewardBonus": {
+    "value": 1,
+    "title": "Бонус Плотности после испытания",
+    "group": "Сжатие",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "fold.threshold": {
+    "value": "1e80",
+    "title": "Порог Свёртки, Очки",
+    "group": "Свёртка",
+    "big": true
+  },
+  "fold.divisor": {
+    "value": 20,
+    "title": "Порядков Очков на удвоение Складок",
+    "group": "Свёртка",
+    "min": 1,
+    "max": 2000,
+    "step": 1
+  },
+  "fold.densityBase": {
+    "value": 2,
+    "title": "Множитель Плотности за Складку",
+    "group": "Свёртка",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "collapse.threshold": {
+    "value": "1e300",
+    "title": "Порог Коллапса, Очки",
+    "group": "Коллапс",
+    "big": true
+  },
+  "collapse.divisor": {
+    "value": 100,
+    "title": "Порядков Очков на удвоение Сингулярностей",
+    "group": "Коллапс",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "collapse.foldBase": {
+    "value": 3,
+    "title": "Множитель Складок за Сингулярность",
+    "group": "Коллапс",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "prestige.gainBase": {
+    "value": 2,
+    "title": "Основание роста наград слоёв",
+    "group": "Экран и расчёт",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "transition.threshold": {
+    "value": "1000",
+    "title": "Порог Перехода, валюта нижнего слоя",
+    "group": "Переходы"
+  },
+  "transition.power": {
+    "value": 0.3333333333333333,
+    "title": "Степень награды Перехода",
+    "group": "Переходы",
+    "min": 0.01,
+    "max": 1,
+    "step": 0.001
+  },
+  "transition.gainBase": {
+    "value": 2,
+    "title": "Множитель награды нижнего слоя",
+    "group": "Переходы",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "transition.priceFactor": {
+    "value": 0.9,
+    "title": "Коэффициент роста цен после Перехода",
+    "group": "Переходы",
+    "min": 0.1,
+    "max": 1,
+    "step": 0.01
+  },
+  "transition.keepPoints": {
+    "value": 0.1,
+    "title": "Доля Очков, сохраняемых при Сжатии",
+    "group": "Переходы",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "transition.skipRate": {
+    "value": 0.01,
+    "title": "Производство через одну ступень",
+    "group": "Переходы",
+    "min": 0.001,
+    "max": 10,
+    "step": 0.001
+  },
+  "transition.rhythmMult": {
+    "value": 2,
+    "title": "Множитель длительности Ритма",
+    "group": "Переходы",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "challenge.pricePower": {
+    "value": 2,
+    "title": "Степень роста цен в испытании",
+    "group": "Испытания",
+    "min": 0.001,
+    "max": 10,
+    "step": 0.001
+  },
+  "challenge.priceReward": {
+    "value": 0.9,
+    "title": "Коэффициент роста цен за испытание",
+    "group": "Испытания",
+    "min": 0.1,
+    "max": 1,
+    "step": 0.01
+  },
+  "challenge.earlyMult": {
+    "value": 10,
+    "title": "Множитель ступеней 1–4 за испытание",
+    "group": "Испытания",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "challenge.decaySec": {
+    "value": 60,
+    "title": "Интервал потери Очков, секунды",
+    "group": "Испытания",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "challenge.decayFactor": {
+    "value": 10,
+    "title": "Делитель Очков при потере",
+    "group": "Испытания",
+    "min": 0.001,
+    "max": 10,
+    "step": 0.001
+  },
+  "challenge.buyLimit": {
+    "value": 100,
+    "title": "Лимит покупок в испытании",
+    "group": "Испытания",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "challenge.freeEvery": {
+    "value": 100,
+    "title": "Каждая бесплатная покупка",
+    "group": "Испытания",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "challenge.offlineMult": {
+    "value": 2,
+    "title": "Множитель офлайна за испытание",
+    "group": "Испытания",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "auto.intervalSec": {
+    "value": 10,
+    "title": "Интервал автопокупок, секунды",
+    "group": "Автоматизация",
+    "min": 0.1,
+    "max": 10,
+    "step": 0.1
+  },
+  "auto.compressionRatio": {
+    "value": 2,
+    "title": "Порог авто-Сжатия: прирост к Плотности",
+    "group": "Автоматизация",
+    "min": 1,
+    "max": 200,
+    "step": 1
+  },
+  "auto.foldRatio": {
+    "value": 2,
+    "title": "Порог авто-Свёртки: прирост к Складкам",
+    "group": "Автоматизация",
+    "min": 1,
+    "max": 200,
+    "step": 1
+  },
+  "auto.maxPasses": {
+    "value": 128,
+    "title": "Лимит покупок за одно нажатие",
+    "group": "Автоматизация",
+    "min": 1,
+    "max": 1000,
+    "step": 1
+  },
+  "memory.amount": {
+    "value": 10,
+    "title": "Ступеней после Сжатия с памятью",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 1000,
+    "step": 1
+  },
+  "denseStart.tiers": {
+    "value": 5,
+    "title": "Ступеней с «Плотным стартом»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 8,
+    "step": 1
+  },
+  "event.minSec": {
+    "value": 120,
+    "title": "Минимум между флуктуациями, секунды",
+    "group": "Флуктуации",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "event.maxSec": {
+    "value": 240,
+    "title": "Максимум между флуктуациями, секунды",
+    "group": "Флуктуации",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "event.windowSec": {
+    "value": 20,
+    "title": "Время на касание флуктуации, секунды",
+    "group": "Флуктуации",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "event.burstMult": {
+    "value": 3,
+    "title": "Множитель «Всплеска»",
+    "group": "Флуктуации",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "event.burstSec": {
+    "value": 30,
+    "title": "Длительность «Всплеска», секунды",
+    "group": "Флуктуации",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "event.echoSec": {
+    "value": 60,
+    "title": "Производство от «Эха», секунды",
+    "group": "Флуктуации",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "event.calmMult": {
+    "value": 2,
+    "title": "Усиление следующей флуктуации от «Штиля»",
+    "group": "Флуктуации",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "event.riftSec": {
+    "value": 600,
+    "title": "Производство от «Разлома», секунды",
+    "group": "Флуктуации",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "event.riftDensity": {
+    "value": 1.1,
+    "title": "Множитель Плотности от «Разлома»",
+    "group": "Флуктуации",
+    "min": 1,
+    "max": 110,
+    "step": 0.01
+  },
+  "event.mirrorSec": {
+    "value": 60,
+    "title": "Длительность «Зеркала», секунды",
+    "group": "Флуктуации",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "rhythm.periodMs": {
+    "value": 1000,
+    "title": "Период пульса Ритма, мс",
+    "group": "Ритм",
+    "min": 300,
+    "max": 5000,
+    "step": 50
+  },
+  "rhythm.windowMs": {
+    "value": 160,
+    "title": "Точность попадания в Ритм, мс",
+    "group": "Ритм",
+    "min": 20,
+    "max": 500,
+    "step": 10
+  },
+  "rhythm.durationSec": {
+    "value": 8,
+    "title": "Усиление за попадание, секунды",
+    "group": "Ритм",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "rhythm.mult": {
+    "value": 2,
+    "title": "Множитель производства в Ритме",
+    "group": "Ритм",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "rhythm.target": {
+    "value": 50,
+    "title": "Серия для дополнительной Складки",
+    "group": "Ритм",
+    "min": 1,
+    "max": 1000,
+    "step": 1
+  },
+  "rhythm.foldBonus": {
+    "value": 1,
+    "title": "Складок за полную серию Ритма",
+    "group": "Ритм",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "night.efficiency": {
+    "value": 1.25,
+    "title": "Производство офлайн на первом уровне «Длинной ночи»",
+    "group": "Офлайн",
+    "min": 0.1,
+    "max": 5,
+    "step": 0.05
+  },
+  "boost.mult": {
+    "value": 3,
+    "title": "Множитель «Всплеска» за энергию",
+    "group": "Связки с жизнью",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "boost.minutes": {
+    "value": 10,
+    "title": "«Всплеск» за энергию, минуты",
+    "group": "Связки с жизнью",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "chest.minutes": {
+    "value": 30,
+    "title": "Производство за поездку, минуты",
+    "group": "Связки с жизнью",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "collapse.powerMult": {
+    "value": 2,
+    "title": "Множитель за уровень «Силы сингулярности»",
+    "group": "Коллапс",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01
+  },
+  "collapse.memoryAmount": {
+    "value": 10,
+    "title": "Ступеней с «Памятью испытания»",
+    "group": "Коллапс",
+    "min": 1,
+    "max": 1000,
+    "step": 1
+  },
+  "collapse.foldStart": {
+    "value": 1,
+    "title": "Складок после Коллапса за уровень памяти",
+    "group": "Коллапс",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "fmt.mode": {
+    "value": "sci",
+    "title": "Формат больших чисел",
+    "group": "Экран и расчёт"
+  },
+  "fmt.sciFrom": {
+    "value": 1000000,
+    "title": "Порог научной записи чисел",
+    "group": "Экран и расчёт",
+    "min": 1000,
+    "max": 1000000000,
+    "step": 1000
+  },
+  "offline.efficiency": {
+    "value": 1,
+    "title": "Коэффициент офлайн-производства",
+    "group": "Офлайн",
+    "min": 0.1,
+    "max": 5,
+    "step": 0.05
+  },
+  "offline.stepSec": {
+    "value": 10,
+    "title": "Шаг офлайн-расчёта, секунды",
+    "group": "Офлайн",
+    "min": 0.5,
+    "max": 60,
+    "step": 0.5
+  },
+  "offline.maxSteps": {
+    "value": 172800,
+    "title": "Максимум шагов офлайн-расчёта",
+    "group": "Офлайн",
+    "min": 1000,
+    "max": 1000000,
+    "step": 1000
+  },
+  "offline.capHours": {
+    "value": 24,
+    "title": "Потолок офлайна, часы",
+    "group": "Офлайн",
+    "min": 1,
+    "max": 168,
+    "step": 1
+  },
+  "offline.minSec": {
+    "value": 30,
+    "title": "Минимальный разрыв для офлайна, секунды",
+    "group": "Офлайн",
+    "min": 0.1,
+    "max": 86400,
+    "step": 1
+  },
+  "tick.hz": {
+    "value": 10,
+    "title": "Частота расчёта игры, Гц",
+    "group": "Экран и расчёт",
+    "min": 1,
+    "max": 60,
+    "step": 1
+  },
+  "prestige.holdMs": {
+    "value": 650,
+    "title": "Удержание для сброса, мс",
+    "group": "Экран и расчёт",
+    "min": 300,
+    "max": 1500,
+    "step": 50
+  },
+  "achievement.googol": {
+    "value": "1e100",
+    "title": "Порог достижения «Гугол»",
+    "group": "Достижения",
+    "big": true
+  },
+  "achievement.edge": {
+    "value": "1e308",
+    "title": "Порог достижения «За краем»",
+    "group": "Достижения",
+    "big": true
+  },
+  "achievement.order": {
+    "value": "1e1000",
+    "title": "Порог достижения «Порядок порядка»",
+    "group": "Достижения",
+    "big": true
+  },
+  "engine.maxOrder": {
+    "value": 1000000000000000,
+    "title": "Предел порядка в учёте движка",
+    "group": "Экран и расчёт",
+    "min": 1000000,
+    "step": 1000000,
+    "max": 1000000000000000
+  },
+  "steps.cost.boost": {
+    "value": 1,
+    "title": "Энергия на «Всплеск»",
+    "group": "Связки с жизнью",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "steps.cost.double-offline": {
+    "value": 1,
+    "title": "Энергия на удвоение офлайна",
+    "group": "Связки с жизнью",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "upgrade.auto1.cost": {
+    "value": 1,
+    "title": "Цена «Рука на кнопке»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.auto2.cost": {
+    "value": 1,
+    "title": "Цена «Ещё рука: Отрезок»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.auto3.cost": {
+    "value": 1,
+    "title": "Цена «Ещё рука: Плоскость»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.auto4.cost": {
+    "value": 1,
+    "title": "Цена «Ещё рука: Объём»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.auto5.cost": {
+    "value": 1,
+    "title": "Цена «Ещё рука: Поток»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.auto6.cost": {
+    "value": 1,
+    "title": "Цена «Ещё рука: Узел»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.auto7.cost": {
+    "value": 1,
+    "title": "Цена «Ещё рука: Сеть»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.auto8.cost": {
+    "value": 1,
+    "title": "Цена «Ещё рука: Ткань»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.auto9.cost": {
+    "value": 1,
+    "title": "Цена «Ещё рука: Полотно»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.autoResonance.cost": {
+    "value": 2,
+    "title": "Цена «Камертон»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.memory.cost": {
+    "value": 2,
+    "title": "Цена «Память ступеней»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.autoCompression.cost": {
+    "value": 3,
+    "title": "Цена «Тихое сжатие»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.denseStart.cost": {
+    "value": 3,
+    "title": "Цена «Плотный старт»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.echo.cost": {
+    "value": 4,
+    "title": "Цена «Двойное эхо»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.echo.growth": {
+    "value": 5,
+    "title": "Рост цены уровня «Двойного эха»",
+    "group": "Дерево Свёртки",
+    "min": 1.1,
+    "max": 1000,
+    "step": 0.1
+  },
+  "upgrade.rhythm.cost": {
+    "value": 2,
+    "title": "Цена «Ритм»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.night.cost": {
+    "value": 3,
+    "title": "Цена «Длинная ночь»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.night.growth": {
+    "value": 3,
+    "title": "Рост цены уровня «Длинной ночи»",
+    "group": "Дерево Свёртки",
+    "min": 1.1,
+    "max": 1000,
+    "step": 0.1
+  },
+  "upgrade.extraFold.cost": {
+    "value": 5,
+    "title": "Цена «Складка к складке»",
+    "group": "Дерево Свёртки",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.extraFold.growth": {
+    "value": 3,
+    "title": "Рост цены уровня «Складки к складке»",
+    "group": "Дерево Свёртки",
+    "min": 1.1,
+    "max": 1000,
+    "step": 0.1
+  },
+  "collapseUpgrade.singularPower.cost": {
+    "value": 1,
+    "title": "Цена «Сила сингулярности»",
+    "group": "Дерево Коллапса",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "collapseUpgrade.singularPower.growth": {
+    "value": 3,
+    "title": "Рост цены уровня «Силы сингулярности»",
+    "group": "Дерево Коллапса",
+    "min": 1.1,
+    "max": 1000,
+    "step": 0.1
+  },
+  "collapseUpgrade.challengeMemory.cost": {
+    "value": 2,
+    "title": "Цена «Память испытания»",
+    "group": "Дерево Коллапса",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "collapseUpgrade.foldMemory.cost": {
+    "value": 3,
+    "title": "Цена «Сохранённая складка»",
+    "group": "Дерево Коллапса",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "collapseUpgrade.foldMemory.growth": {
+    "value": 3,
+    "title": "Рост цены уровня «Сохранённой складки»",
+    "group": "Дерево Коллапса",
+    "min": 1.1,
+    "max": 1000,
+    "step": 0.1
+  },
+  "event.count": {
+    "value": 8,
+    "title": "Количество видов флуктуаций",
+    "group": "Флуктуации",
+    "min": 1,
+    "max": 8,
+    "step": 1
+  }
+}

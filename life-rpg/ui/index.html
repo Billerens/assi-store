@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Жизнь-RPG</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<style>
+  .page.wide {
+    max-width: 1100px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+
+  .panel[hidden] {
+    display: none;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .hero .creature,
+  .hero .pet-svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .hero .stage {
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+
+  .traits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .level-line {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .level-line .big {
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  .bar {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+
+  .bar > i {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+
+  .bar.thin {
+    height: 5px;
+  }
+
+  .entries {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .entries > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  .entries .plus {
+    color: var(--ok);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .skill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+  }
+
+  button.skill {
+    width: 100%;
+    padding: 6px 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+  }
+
+  .list > button.skill {
+    padding: 12px 16px;
+  }
+
+  .hero-name {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .skill .i {
+    width: 22px;
+    height: 22px;
+    flex: none;
+    color: var(--ink-2);
+  }
+
+  .skill .lvl {
+    color: var(--ink-2);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .skill .bar {
+    margin-top: 6px;
+  }
+
+  .history svg {
+    display: block;
+    width: 100%;
+    height: 120px;
+  }
+
+  .history rect {
+    fill: var(--accent);
+  }
+
+  .history rect.zero {
+    fill: var(--surface-2);
+  }
+
+  .map-box {
+    position: relative;
+    height: 62vh;
+    min-height: 320px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    touch-action: none;
+  }
+
+  .map-box .holder {
+    position: absolute;
+    inset: 0;
+  }
+
+  .map-box .holder > svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .rpg-map .ground {
+    fill: #0B0B0B;
+  }
+
+  .rpg-map .grid-line {
+    stroke: var(--line);
+  }
+
+  .rpg-map .open rect {
+    fill: var(--accent);
+    fill-opacity: .3;
+    stroke: var(--accent);
+    stroke-opacity: .7;
+    stroke-width: 1px;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .rpg-map .fog {
+    fill: var(--surface-2);
+    opacity: .92;
+  }
+
+  .rpg-map .dot circle {
+    fill: var(--accent);
+  }
+
+  .rpg-map .dot circle.hit {
+    fill: transparent;
+  }
+
+  .rpg-map .dot text {
+    fill: var(--ink);
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: .25em;
+  }
+
+  .map-tools {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .map-tools .icon-btn {
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .map-box .leaf {
+    position: absolute;
+    inset: 0;
+  }
+
+  .map-box .leaflet-container {
+    background: var(--bg);
+  }
+
+  .map-box .leaflet-tile-pane {
+    filter: invert(1) hue-rotate(180deg) brightness(.85) contrast(.9) saturate(.4);
+  }
+
+  .counters {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .quest {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .quest .head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .quest .head .i {
+    width: 22px;
+    height: 22px;
+    flex: none;
+    margin-top: 2px;
+    color: var(--ink-2);
+  }
+
+  .quest .xp {
+    color: var(--ok);
+    white-space: nowrap;
+  }
+
+  .quest.done {
+    border: 1px solid var(--ok);
+  }
+
+  .quest .actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .quest .actions .btn {
+    flex: 1;
+    min-height: 44px;
+  }
+
+  .chron-day h3 {
+    font-size: 14px;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+
+  .chron-day p {
+    margin: 4px 0 0;
+  }
+
+  .week-text {
+    font-style: italic;
+  }
+
+  .settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    align-items: end;
+  }
+
+  .switch-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    padding: 4px 0;
+  }
+
+  .sheet h2 {
+    margin-top: 10px;
+  }
+
+  details > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .tabs .chip {
+    min-height: 44px;
+  }
+
+  @keyframes breathe {
+    0%,
+    100% {
+      transform: scaleY(1);
+    }
+    50% {
+      transform: scaleY(1.03);
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    94%,
+    100% {
+      transform: scaleY(1);
+    }
+    97% {
+      transform: scaleY(.1);
+    }
+  }
+
+  .creature .breath {
+    transform-origin: 100px 186px;
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  .creature .eyes {
+    transform-origin: 100px 118px;
+    animation: blink 5.3s infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .creature .breath {
+      animation: none;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .layout {
+      grid-template-columns: minmax(270px, 340px) minmax(0, 1fr);
+    }
+  }
+</style>
+<body>
+<main class="page wide">
+  <header class="topbar">
+    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <h1>Жизнь-RPG</h1>
+    <button class="icon-btn" id="open-settings" aria-label="Настройки" data-icon="settings"></button>
+  </header>
+  <nav class="tabs" id="tabs"></nav>
+  <p id="note" class="small muted" hidden></p>
+
+  <div class="layout">
+    <section class="panel left" id="panel-hero"></section>
+    <div class="panel right">
+      <section class="panel" id="panel-skills" hidden></section>
+      <section class="panel" id="panel-map" hidden>
+        <p class="small muted counters" id="counters"></p>
+        <div class="map-box">
+          <div class="holder" id="map"></div>
+          <div class="map-tools">
+            <button class="icon-btn" id="zoom-in" aria-label="Приблизить" data-icon="plus"></button>
+            <button class="icon-btn" id="zoom-out" aria-label="Отдалить"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+            <button class="icon-btn" id="zoom-fit" aria-label="Показать всё" data-icon="grid"></button>
+          </div>
+        </div>
+        <p class="small muted" id="map-note" hidden></p>
+      </section>
+      <section class="panel" id="panel-quests" hidden></section>
+      <section class="panel" id="panel-chronicle" hidden></section>
+    </div>
+  </div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script src="../geo.js"></script>
+<script src="creature.js"></script>
+<script src="map.js"></script>
+<script>
+  const h = ui.h;
+  const MAIN = 'modules/rpg/main.js';
+  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const wide = window.matchMedia('(min-width: 700px)');
+  const TABS = [['hero', 'Персонаж'], ['skills', 'Навыки'], ['map', 'Карта'], ['quests', 'Квесты'], ['chronicle', 'Хроника']];
+  const SKILL_TITLES = { endurance: 'Выносливость', regime: 'Режим', exploration: 'Исследование', will: 'Воля', household: 'Хозяйство', care: 'Забота', achievement: 'Ачивки', quest: 'Квесты', play: 'Игры' };
+  const SKILL_ICONS = { endurance: 'dumbbell', regime: 'moon', exploration: 'pin', will: 'lock', household: 'wallet', care: 'heart', achievement: 'star', quest: 'flag', play: 'play' };
+  let view = null;
+  let mapData = null;
+  let mapControl = null;
+  let mapDrawn = false;
+  let tab = null;
+  let skillOpen = null;
+
+  function num(n) {
+    return String(Math.round(n || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
+
+  function bar(ratio, thin) {
+    return h('div', { class: 'bar' + (thin ? ' thin' : '') }, h('i', { style: 'width: ' + Math.round(Math.max(0, Math.min(1, ratio || 0)) * 100) + '%' }));
+  }
+
+  function dateText(text) {
+    const [y, m, d] = text.split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString(window.__lang || 'ru', { day: 'numeric', month: 'long', weekday: 'short' });
+  }
+
+  // ---- tabs: on a wide screen «Персонаж» stays on the left and the right side shows one tab ----
+
+  function savedTab() {
+    try { return localStorage.getItem('rpg.tab.' + (wide.matches ? 'wide' : 'narrow')); } catch (error) { return null; }
+  }
+
+  function show(id) {
+    const list = wide.matches ? TABS.slice(1) : TABS;
+    if (!list.some(item => item[0] === id)) id = wide.matches ? 'map' : 'hero';
+    tab = id;
+    try { localStorage.setItem('rpg.tab.' + (wide.matches ? 'wide' : 'narrow'), id); } catch (error) { /* private mode */ }
+    const bar = document.getElementById('tabs');
+    bar.replaceChildren(...list.map(([key, title]) => h('button', { class: 'chip' + (key === id ? ' on' : ''), onclick: () => show(key) }, title)));
+    document.getElementById('panel-hero').hidden = !(wide.matches || id === 'hero');
+    // On a wide screen the right side may already list the skills: no second copy on the left.
+    const heroSkills = document.getElementById('hero-skills');
+    if (heroSkills) heroSkills.hidden = wide.matches && id === 'skills';
+    ['skills', 'map', 'quests', 'chronicle'].forEach(key => { document.getElementById('panel-' + key).hidden = key !== id; });
+    if (id === 'map') drawMap();
+  }
+
+  // ---- Персонаж -------------------------------------------------------------------------------
+
+  function skillRow(skill, onClick) {
+    const body = [
+      ui.icon(skill.icon || 'book'),
+      h('div', { class: 'grow' },
+        h('div', { class: 'row' }, h('span', { class: 'grow', 'data-raw': '' }, skill.title), h('span', { class: 'lvl' }, ui.t('ур. {}', skill.level))),
+        bar(skill.need > 0 ? skill.into / skill.need : 1, true))
+    ];
+    return onClick ? h('button', { class: 'skill', onclick: onClick }, body) : h('div', { class: 'skill' }, body);
+  }
+
+  function sourceNote() {
+    const names = { sleep: 'сон', steps: 'шаги', screen: 'экран', places: 'места', spend: 'траты' };
+    const missing = Object.keys(names).filter(key => view.sources && !view.sources[key]).map(key => names[key]);
+    const notes = [];
+    if (view.source === 'base') notes.push('Модуль «Здоровье» не установлен: опыт считается по записям общей базы.');
+    if (missing.length) notes.push(ui.t('За неделю нет данных: {}. За них опыт не начисляется.', missing.join(', ')));
+    if (!view.pet) notes.push('«Питомец» не установлен: существо рисуется здесь, без его настроения.');
+    return notes;
+  }
+
+  function renderHero() {
+    const look = view.look;
+    const holder = h('div');
+    // The pet's own picture when «Питомец» is installed; our drawing of the same creature otherwise.
+    holder.innerHTML = view.picture || Creature.svg(look, { size: 170, palette: view.drawing.palette, items: view.drawing.items });
+    const today = view.today;
+    const entries = today.entries.slice().sort((a, b) => b.amount - a.amount);
+    const toNext = view.to - view.total;
+    document.getElementById('panel-hero').replaceChildren(
+      h('div', { class: 'card hero' },
+        holder.firstChild,
+        h('div', { class: 'hero-name', 'data-raw': '' }, view.hero),
+        h('div', { class: 'stage' }, Creature.stageTitle(look.stageIndex)),
+        look.traits.length ? h('div', { class: 'traits' }, look.traits.map(id => h('span', { class: 'badge' }, Creature.traitTitle(id)))) : null),
+      h('div', { class: 'card section' },
+        h('div', { class: 'level-line' }, h('span', { class: 'big' }, ui.t('Уровень {}', view.level)), h('span', { class: 'small muted' }, ui.raw(num(view.total) + ' / ' + num(view.to)))),
+        bar(view.pct),
+        h('div', { class: 'small muted' }, ui.t('До {}-го уровня — {} опыта', view.level + 1, num(toNext)))),
+      h('div', { class: 'card section' },
+        h('div', { class: 'level-line' }, h('h3', {}, 'Сегодня'), h('span', { class: 'entries' }, h('span', { class: 'plus' }, ui.raw('+' + num(today.total))))),
+        today.bonus ? h('div', { class: 'small' }, 'С возвращением: опыт ×1,5 сегодня') : null,
+        today.paused ? h('div', { class: 'small muted' }, 'Пауза: цепочки и квесты заморожены, опыт за сделанное всё равно идёт.') : null,
+        entries.length ? h('div', { class: 'entries' }, entries.map(e => h('div', {}, h('span', { 'data-raw': '' }, e.reason), h('span', { class: 'plus' }, ui.raw('+' + num(e.amount))))))
+          : h('div', { class: 'small muted' }, 'Пока пусто — опыт появится по шагам, сну и отметкам.'),
+        h('div', { class: 'small muted' }, 'Предварительно: запишется, когда сутки закроются.')),
+      h('div', { class: 'card section', id: 'hero-skills', hidden: wide.matches && tab === 'skills' },
+        h('h3', {}, 'Навыки'),
+        view.skills.map(skill => skillRow(skill, () => { skillOpen = skill.id; show('skills'); renderSkills(); }))),
+      ...sourceNote().map(text => h('p', { class: 'small muted' }, text)));
+  }
+
+  // ---- Навыки ---------------------------------------------------------------------------------
+
+  async function history(skill) {
+    const box = h('div', { class: 'card section history' }, h('h3', { 'data-raw': '' }, skill.title), h('p', { class: 'small muted' }, 'Загружаю…'));
+    call('skillHistory', skill.id, view.settings.historyDays || 90).then(days => {
+      const max = Math.max(1, ...days.map(d => d.xp));
+      const sum = days.reduce((a, d) => a + d.xp, 0);
+      const w = 4;
+      const svg = '<svg viewBox="0 0 ' + days.length * w + ' 100" preserveAspectRatio="none" role="img" aria-label="Опыт по дням">' +
+        days.map((d, i) => {
+          const hgt = d.xp ? Math.max(3, d.xp / max * 100) : 2;
+          return '<rect class="' + (d.xp ? '' : 'zero') + '" x="' + (i * w + 0.5) + '" y="' + (100 - hgt) + '" width="' + (w - 1) + '" height="' + hgt + '"><title>' + d.date + ': ' + d.xp + '</title></rect>';
+        }).join('') + '</svg>';
+      const chart = h('div');
+      chart.innerHTML = svg;
+      box.replaceChildren(
+        h('div', { class: 'level-line' }, h('h3', { 'data-raw': '' }, skill.title), h('span', { class: 'small muted' }, ui.t('ур. {}', skill.level))),
+        chart.firstChild,
+        h('div', { class: 'small muted' }, ui.t('За {} дней: {} опыта, всего {}', days.length, num(sum), num(skill.xp))),
+        bar(skill.need > 0 ? skill.into / skill.need : 1, true),
+        h('div', { class: 'small muted' }, ui.t('До {}-го уровня — {} опыта', skill.level + 1, num(skill.need - skill.into))));
+    }).catch(error => box.replaceChildren(h('p', { class: 'small muted' }, error.message)));
+    return box;
+  }
+
+  async function renderSkills() {
+    const panel = document.getElementById('panel-skills');
+    const all = view.skills.concat(view.habits);
+    const chosen = all.find(skill => skill.id === skillOpen) || null;
+    const list = (title, skills, empty) => h('section', { class: 'section' },
+      h('h2', {}, title),
+      skills.length ? h('div', { class: 'list' }, skills.map(skill => skillRow(skill, () => { skillOpen = skill.id; renderSkills(); window.scrollTo(0, 0); })))
+        : h('div', { class: 'empty' }, empty));
+    panel.replaceChildren(
+      chosen ? await history(chosen) : h('p', { class: 'small muted' }, 'Нажмите на навык, чтобы увидеть его опыт по дням.'),
+      list('Основные', view.skills, ''),
+      list('Привычки', view.habits, 'Каждая привычка из «Здоровья» станет своим навыком после первой отметки.'));
+  }
+
+  // ---- Карта ----------------------------------------------------------------------------------
+
+  function locationSheet(location) {
+    const input = h('input', { class: 'input', value: location.name, maxLength: 60, placeholder: location.title || 'Название' });
+    const close = ui.sheet([
+      h('h3', { 'data-raw': '' }, location.name),
+      location.title && location.title !== location.name ? h('p', { class: 'small muted', 'data-raw': '' }, location.title) : null,
+      h('p', { class: 'small muted' }, ui.t('Визитов: {} · впервые {}', location.visits, dateText(location.first))),
+      h('label', { class: 'field' }, h('span', {}, 'Игровое имя'), input),
+      h('div', { class: 'actions' },
+        h('button', { class: 'btn', onclick: () => close() }, 'Отмена'),
+        h('button', { class: 'btn primary', onclick: async () => {
+          try {
+            await call('rename', location.id, input.value);
+            close();
+            mapDrawn = false;
+            mapData = null;
+            drawMap();
+          } catch (error) {
+            ui.toast(error.message);
+          }
+        } }, 'Сохранить'))
+    ]);
+  }
+
+  async function drawMap() {
+    if (mapDrawn) return;
+    mapDrawn = true;
+    const holder = document.getElementById('map');
+    const note = document.getElementById('map-note');
+    try {
+      mapData = mapData || await call('map');
+    } catch (error) {
+      mapDrawn = false;
+      holder.replaceChildren(h('div', { class: 'empty' }, error.message));
+      return;
+    }
+    const c = mapData.counts;
+    document.getElementById('counters').textContent = ui.t('клеток {} · локаций {} · дальше всего {} км', num(c.cells), num(c.locations), num(c.farthestKm));
+    if (!mapData.cells.length) {
+      holder.replaceChildren(h('div', { class: 'empty' }, 'Карта пока в тумане. Клетки открываются по визитам: включите сбор мест в «Здоровье».'));
+      return;
+    }
+    const handlers = { onLocation: locationSheet };
+    note.hidden = true;
+    if (mapData.osm) {
+      try {
+        mapControl = await RpgMap.osm(holder, mapData, handlers);
+        return;
+      } catch (error) {
+        note.hidden = false;
+        note.textContent = ui.t('Подложка OpenStreetMap не загрузилась ({}), показана сетка клеток.', error.message);
+      }
+    }
+    mapControl = RpgMap.svg(holder, mapData, handlers);
+  }
+
+  // ---- Квесты ---------------------------------------------------------------------------------
+
+  function questCard(q) {
+    const icon = q.skill && q.skill.indexOf('habit:') === 0 ? 'book' : (SKILL_ICONS[q.skill] || 'flag');
+    const goal = q.goal || q.target;
+    // A bar only where «more» is the goal: «отбой до 23:30» or «соцсети меньше 60 минут» has none.
+    const shown = q.agg === 'days' || ((q.op === '>=' || q.op === '>') && q.metric !== 'bedtimeMin') ? q : null;
+    return h('div', { class: 'card quest' + (q.done ? ' done' : '') },
+      h('div', { class: 'head' }, ui.icon(icon),
+        h('div', { class: 'grow' },
+          h('div', { 'data-raw': '' }, q.title),
+          h('div', { class: 'small muted' }, q.period === 'week' ? ui.t('до {}', dateText(q.end)) : 'сегодня', q.known === false ? ' · ' + ui.t('данных пока нет') : '')),
+        h('span', { class: 'xp' }, ui.raw('+' + q.xp))),
+      shown && !q.done ? bar(goal ? q.progress / goal : 0) : null,
+      shown && !q.done ? h('div', { class: 'small muted' }, ui.raw(num(q.progress) + ' / ' + num(goal))) : null,
+      q.done ? h('div', { class: 'small' }, 'Выполнен — опыт придёт при закрытии дня') : h('div', { class: 'actions' },
+        h('button', { class: 'btn soft', onclick: () => act('replace', q.id) }, 'Другой'),
+        h('button', { class: 'btn', onclick: () => act('later', q.id) }, 'Не сейчас')));
+  }
+
+  async function act(fn, id) {
+    try {
+      await call(fn, id);
+      await load();
+    } catch (error) {
+      ui.toast(error.message);
+    }
+  }
+
+  async function issue(period) {
+    try {
+      const got = await call('issue', null, period);
+      if (!got.length) ui.toast('Подходящих квестов нет: нужна хотя бы неделя данных');
+      await load();
+    } catch (error) {
+      ui.toast(error.message);
+    }
+  }
+
+  function renderQuests() {
+    const panel = document.getElementById('panel-quests');
+    const day = view.quests.filter(q => q.period !== 'week');
+    const week = view.quests.filter(q => q.period === 'week');
+    const off = !view.settings.quests.on;
+    panel.replaceChildren(
+      h('p', { class: 'muted', hidden: !off }, 'Квесты выключены в настройках.'),
+      h('section', { class: 'section' },
+        h('h2', {}, 'На сегодня'),
+        day.length ? day.map(questCard) : h('div', { class: 'empty' }, ui.t('Квесты дня приходят в {}.', view.settings.quests.at)),
+        !off && day.length < view.settings.quests.daily ? h('button', { class: 'btn soft wide', onclick: () => issue('day') }, 'Дать квесты на сегодня') : null),
+      h('section', { class: 'section' },
+        h('h2', {}, 'На неделю'),
+        week.length ? week.map(questCard) : h('div', { class: 'empty' }, 'Недельных квестов пока нет.'),
+        !off && week.length < view.settings.quests.weekly ? h('button', { class: 'btn soft wide', onclick: () => issue('week') }, 'Дать квест на неделю') : null),
+      h('p', { class: 'small muted' }, 'Цели считаются от ваших обычных дней за 4 недели. Невыполненный квест просто исчезает в конце срока.'));
+  }
+
+  // ---- Хроника --------------------------------------------------------------------------------
+
+  function renderChronicle() {
+    const panel = document.getElementById('panel-chronicle');
+    if (!view.chronicle.length && !view.weeks.length) {
+      panel.replaceChildren(h('div', { class: 'empty' }, 'Хроника начнётся, когда закроются первые сутки.'));
+      return;
+    }
+    const weeks = {};
+    view.weeks.forEach(w => { weeks[w.week] = w.text; });
+    const shownWeeks = {};
+    const out = [];
+    view.chronicle.forEach(entry => {
+      const [y, m, d] = entry.date.split('-').map(Number);
+      const day = new Date(y, m - 1, d);
+      const monday = new Date(day);
+      monday.setDate(day.getDate() - ((day.getDay() + 6) % 7));
+      const key = monday.getFullYear() + '-' + String(monday.getMonth() + 1).padStart(2, '0') + '-' + String(monday.getDate()).padStart(2, '0');
+      if (weeks[key] && !shownWeeks[key]) {
+        shownWeeks[key] = true;
+        out.push(h('div', { class: 'card' }, h('div', { class: 'small muted' }, ui.t('Неделя с {}', dateText(key))), h('p', { class: 'week-text', 'data-raw': '' }, weeks[key])));
+      }
+      out.push(h('div', { class: 'chron-day' }, h('h3', {}, dateText(entry.date)), entry.lines.map(line => h('p', { 'data-raw': '' }, line))));
+    });
+    panel.replaceChildren(h('div', { class: 'card section' }, out));
+  }
+
+  // ---- Настройки ------------------------------------------------------------------------------
+
+  const XP_FIELDS = [
+    ['stepsPer', 'Шагов на единицу опыта'], ['stepsXp', 'Опыта за единицу шагов'], ['stepsCap', 'Потолок за шаги в день'],
+    ['workoutPerMin', 'Тренировка: опыта за минуту'], ['workoutCap', 'Потолок за тренировки'],
+    ['sleepGoal', 'Сон не меньше цели'], ['bedtimeOk', 'Отбой вовремя'], ['bedtimeWindow', 'Окно отбоя, ± мин'], ['noLate', 'Ночью без экрана'],
+    ['newPlace', 'Новое место'], ['newCell', 'Новая клетка'], ['newCellCap', 'Потолок за клетки'], ['farTrip', 'Дальняя поездка'], ['farTripKm', 'Дальняя — от, км'],
+    ['socialUnder', 'Соцсети ниже лимита'], ['socialLimit', 'Лимит соцсетей, мин'], ['screenUnder', 'Экран ниже лимита'], ['screenLimit', 'Лимит экрана, мин'],
+    ['budgetOk', 'В пределах бюджета'], ['noSpend', 'День без трат'], ['subscription', 'Отменённая подписка'],
+    ['medOnTime', 'Лекарство вовремя'], ['waterGoal', 'Вода не меньше цели'],
+    ['habitBase', 'Отметка привычки'], ['habitChainBonus', 'Прибавка за цепочку (доля)'], ['habitChainCap', 'Цепочка до полной прибавки, дней'],
+    ['focusPerMin', 'Фокус: опыта за минуту'], ['focusCap', 'Потолок за фокус'],
+    ['playPerMin', 'Игры: опыта за минуту'], ['playCap', 'Потолок за игры в день']
+  ];
+
+  function numberInput(value, step) {
+    return h('input', { class: 'input', type: 'number', inputMode: 'decimal', step: step || 'any', min: 0, value });
+  }
+
+  function settings() {
+    const s = view.settings;
+    const row = (input, title, hint) => h('label', { class: 'switch-row' }, h('div', { class: 'grow' }, h('div', {}, title), hint ? h('div', { class: 'small muted' }, hint) : null), input);
+    const check = value => h('input', { type: 'checkbox', class: 'switch', checked: value });
+    const f = {
+      questsOn: check(s.quests.on), questsModel: check(s.quests.model), chronicleModel: check(s.chronicle.model),
+      notifyLevel: check(s.notify.level), notifyWeek: check(s.notify.weeklyQuest), osm: check(s.map.osm), achievements: check(s.achievements),
+      daily: numberInput(s.quests.daily, 1), weekly: numberInput(s.quests.weekly, 1), at: h('input', { class: 'input', type: 'time', value: s.quests.at }),
+      mult: numberInput(s.comeback.mult, 0.1), gap: numberInput(s.comeback.gap, 1), freezes: numberInput(s.freezesPerWeek, 1),
+      levelBase: numberInput(s.level.base), levelPower: numberInput(s.level.power, 0.1), skillBase: numberInput(s.skill.base), skillPower: numberInput(s.skill.power, 0.1),
+      traitLevel: numberInput(s.traitLevel, 1), precision: numberInput(s.cells.precision, 1),
+      gamesBonus: check(s.games.bonus), gamesPer: numberInput(s.games.perLevels, 1), gamesMax: numberInput(s.games.max, 1), hero: h('input', { class: 'input', value: s.hero, placeholder: view.hero, maxLength: 30 }),
+      rounding: h('select', { class: 'input' }, [['floor', 'Вниз'], ['round', 'По правилам'], ['ceil', 'Вверх']].map(([id, title]) => h('option', { value: id }, title)))
+    };
+    f.rounding.value = s.rounding;
+    const xp = {};
+    const field = (title, input) => h('label', { class: 'field' }, h('span', {}, title), input);
+    let close = null;
+    close = ui.sheet([
+      h('h3', {}, 'Настройки RPG'),
+      field('Имя героя в хронике', f.hero),
+      row(f.questsOn, 'Квесты'),
+      h('div', { class: 'settings-grid' }, field('В день', f.daily), field('В неделю', f.weekly), field('Когда выдавать', f.at)),
+      row(f.questsModel, 'Названия квестов от модели', 'Роль «RPG: квесты», около 400 токенов в день'),
+      row(f.chronicleModel, 'Недельный абзац хроники от модели', 'Роль «RPG: хроника», около 1 500 токенов в неделю'),
+      row(f.notifyLevel, 'Уведомлять о новом уровне'),
+      row(f.notifyWeek, 'Уведомлять о выполненном квесте недели'),
+      row(f.osm, 'Подложка OpenStreetMap', 'Тайлы грузятся из сети при открытии карты'),
+      row(f.achievements, 'Опыт за ачивки'),
+      row(f.gamesBonus, 'Стартовые сундуки новым играм Игротеки', 'Игра, в которую ещё не играли, получает сундуки по уровню героя'),
+      h('div', { class: 'settings-grid' }, field('Сундук за каждые, уровней', f.gamesPer), field('Сундуков не больше', f.gamesMax)),
+      h('h2', {}, 'Возвращение и цепочки'),
+      h('div', { class: 'settings-grid' }, field('Множитель возвращения', f.mult), field('После пустых дней', f.gap), field('Заморозок в неделю', f.freezes)),
+      h('details', {},
+        h('summary', {}, 'Формулы уровней'),
+        h('div', { class: 'settings-grid' },
+          field('Уровень: основание', f.levelBase), field('Уровень: степень', f.levelPower),
+          field('Навык: основание', f.skillBase), field('Навык: степень', f.skillPower),
+          field('Черта с уровня навыка', f.traitLevel), field('Дробный опыт', f.rounding), field('Точность клеток', f.precision)),
+        h('p', { class: 'small muted' }, 'Уровни не уменьшаются: новые формулы действуют с этого дня.')),
+      h('details', {},
+        h('summary', {}, 'Сколько опыта за что'),
+        h('div', { class: 'settings-grid' }, XP_FIELDS.map(([key, title]) => {
+          xp[key] = numberInput(s.xp[key]);
+          return field(title, xp[key]);
+        }))),
+      h('div', { class: 'actions' },
+        h('button', { class: 'btn', onclick: () => close() }, 'Отмена'),
+        h('button', { class: 'btn primary', onclick: async () => {
+          const n = (input, fallback) => { const v = parseFloat(String(input.value).replace(',', '.')); return isNaN(v) ? fallback : v; };
+          const xpValues = {};
+          Object.keys(xp).forEach(key => { xpValues[key] = Math.max(0, n(xp[key], s.xp[key])); });
+          try {
+            await call('saveSettings', {
+              hero: f.hero.value.trim(), rounding: f.rounding.value, achievements: f.achievements.checked, xp: xpValues,
+              quests: { on: f.questsOn.checked, model: f.questsModel.checked, daily: Math.round(n(f.daily, s.quests.daily)), weekly: Math.round(n(f.weekly, s.quests.weekly)), at: f.at.value || s.quests.at },
+              chronicle: { model: f.chronicleModel.checked },
+              notify: { level: f.notifyLevel.checked, weeklyQuest: f.notifyWeek.checked },
+              map: { osm: f.osm.checked },
+              games: { bonus: f.gamesBonus.checked, perLevels: Math.max(1, Math.round(n(f.gamesPer, s.games.perLevels))), max: Math.max(0, Math.round(n(f.gamesMax, s.games.max))) },
+              comeback: { mult: n(f.mult, s.comeback.mult), gap: Math.round(n(f.gap, s.comeback.gap)) },
+              freezesPerWeek: Math.round(n(f.freezes, s.freezesPerWeek)),
+              level: { base: n(f.levelBase, s.level.base), power: n(f.levelPower, s.level.power) },
+              skill: { base: n(f.skillBase, s.skill.base), power: n(f.skillPower, s.skill.power) },
+              traitLevel: Math.round(n(f.traitLevel, s.traitLevel)),
+              cells: { precision: Math.max(5, Math.min(8, Math.round(n(f.precision, s.cells.precision)))) }
+            });
+            close();
+            mapDrawn = false;
+            mapData = null;
+            await load();
+          } catch (error) {
+            ui.toast(error.message);
+          }
+        } }, 'Сохранить'))
+    ]);
+  }
+
+  // ---- load -----------------------------------------------------------------------------------
+
+  async function load() {
+    try {
+      view = await call('view');
+    } catch (error) {
+      document.getElementById('panel-hero').replaceChildren(h('div', { class: 'empty' }, ui.t('Не удалось прочитать RPG: {}', error.message)));
+      return;
+    }
+    renderHero();
+    renderSkills();
+    renderQuests();
+    renderChronicle();
+    if (tab === null) show(new URLSearchParams(location.search).get('tab') || savedTab());
+    else if (tab === 'map') drawMap();
+  }
+
+  document.getElementById('open-settings').onclick = () => view && settings();
+  document.getElementById('zoom-in').onclick = () => mapControl && mapControl.zoom(1 / 1.5);
+  document.getElementById('zoom-out').onclick = () => mapControl && mapControl.zoom(1.5);
+  document.getElementById('zoom-fit').onclick = () => mapControl && mapControl.fit();
+  wide.addEventListener('change', () => { tab = null; mapDrawn = false; load(); });
+  assi.on('rpg.changed', load);
+  load();
+</script>
+</body>
+</html>

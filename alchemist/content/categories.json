@@ -1,0 +1,152 @@
+[
+ {
+  "id": "стихия",
+  "frame": "M50 4a46 46 0 1 1 0 92 46 46 0 1 1 0-92z",
+  "glyphs": [
+   "flame",
+   "drop",
+   "mound",
+   "swirl",
+   "orb",
+   "spiral"
+  ]
+ },
+ {
+  "id": "вещество",
+  "frame": "M16 4h68a12 12 0 0 1 12 12v68a12 12 0 0 1-12 12H16A12 12 0 0 1 4 84V16A12 12 0 0 1 16 4z",
+  "glyphs": [
+   "steam",
+   "blob",
+   "drop",
+   "dunes",
+   "orb",
+   "flask",
+   "ingot"
+  ]
+ },
+ {
+  "id": "минерал",
+  "frame": "M50 3l42 24v46L50 97 8 73V27z",
+  "glyphs": [
+   "rock",
+   "crystal",
+   "ingot",
+   "dunes",
+   "moon"
+  ]
+ },
+ {
+  "id": "погода",
+  "frame": "M30 4h40l26 26v40L70 96H30L4 70V30z",
+  "glyphs": [
+   "cloud",
+   "wind",
+   "snow",
+   "wave",
+   "bolt"
+  ]
+ },
+ {
+  "id": "растение",
+  "frame": "M4 40C4 18 18 4 40 4h56v56c0 22-14 36-36 36H4z",
+  "glyphs": [
+   "sprout",
+   "leaf",
+   "tree",
+   "flower",
+   "seed"
+  ]
+ },
+ {
+  "id": "животное",
+  "frame": "M20 4h20l10 8 10-8h20a16 16 0 0 1 16 16v60a16 16 0 0 1-16 16H20A16 16 0 0 1 4 80V20A16 16 0 0 1 20 4z",
+  "glyphs": [
+   "fish",
+   "bug",
+   "bird",
+   "paw"
+  ]
+ },
+ {
+  "id": "человек",
+  "frame": "M4 50a46 46 0 0 1 92 0v46H4z",
+  "glyphs": [
+   "person",
+   "hammer",
+   "flask",
+   "book"
+  ]
+ },
+ {
+  "id": "предмет",
+  "frame": "M18 4h64l14 14v64L82 96H18L4 82V18z",
+  "glyphs": [
+   "hammer",
+   "blade",
+   "wheel",
+   "book",
+   "scroll",
+   "lamp",
+   "candle",
+   "mirror",
+   "hourglass",
+   "brick"
+  ]
+ },
+ {
+  "id": "строение",
+  "frame": "M50 3l46 36v57H4V39z",
+  "glyphs": [
+   "house",
+   "wall",
+   "arch",
+   "brick"
+  ]
+ },
+ {
+  "id": "явление",
+  "frame": "M50 2l48 48-48 48L2 50z",
+  "glyphs": [
+   "bolt",
+   "volcano",
+   "wave",
+   "mountain",
+   "steam",
+   "hourglass",
+   "sun"
+  ]
+ },
+ {
+  "id": "небо",
+  "frame": "M50 4a46 46 0 1 1 0 92 46 46 0 1 1 0-92zM50 14a36 36 0 1 0 0 72 36 36 0 1 0 0-72z",
+  "glyphs": [
+   "sun",
+   "moon",
+   "star",
+   "cloud",
+   "arc"
+  ]
+ },
+ {
+  "id": "еда",
+  "frame": "M30 4h40c18 0 26 8 26 26v40c0 18-8 26-26 26H30C12 96 4 88 4 70V30C4 12 12 4 30 4z",
+  "glyphs": [
+   "loaf",
+   "seed",
+   "blob",
+   "dunes"
+  ]
+ },
+ {
+  "id": "алхимия",
+  "frame": "M50 3l47 82a8 8 0 0 1-7 12H10a8 8 0 0 1-7-12z",
+  "glyphs": [
+   "flask",
+   "sprout",
+   "flame",
+   "spiral",
+   "scroll",
+   "orb"
+  ]
+ }
+]

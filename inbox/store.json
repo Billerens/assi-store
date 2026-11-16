@@ -1,0 +1,8 @@
+{
+  "id": "inbox",
+  "kind": "module",
+  "title": "Входящие",
+  "target": "modules/inbox",
+  "requires": [],
+  "shell": ["notice.full", "notice.removed", "notice.open", "notify.actions", "dnd"]
+}

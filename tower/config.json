@@ -1,0 +1,1463 @@
+{
+  "hero.hp": {
+    "value": 150,
+    "title": "Начальное здоровье",
+    "group": "Герой"
+  },
+  "hero.strength": {
+    "value": 9,
+    "title": "Начальная сила",
+    "group": "Герой"
+  },
+  "hero.defense": {
+    "value": 7,
+    "title": "Начальная защита",
+    "group": "Герой"
+  },
+  "hero.agility": {
+    "value": 0.05,
+    "title": "Начальная ловкость",
+    "group": "Герой"
+  },
+  "hero.will": {
+    "value": 3,
+    "title": "Начальная воля",
+    "group": "Герой"
+  },
+  "hero.gold": {
+    "value": 0,
+    "title": "Начальное золото",
+    "group": "Герой"
+  },
+  "floor.flightSize": {
+    "value": 10,
+    "title": "Этажей в пролёте",
+    "group": "Башня"
+  },
+  "floor.flights": {
+    "value": 3,
+    "title": "Основных пролётов",
+    "group": "Башня"
+  },
+  "floor.linear": {
+    "value": 0.09,
+    "title": "Линейный рост силы за этаж",
+    "group": "Башня"
+  },
+  "floor.quadratic": {
+    "value": 0.002,
+    "title": "Квадратичный рост силы за этаж",
+    "group": "Башня"
+  },
+  "floor.max": {
+    "value": 100000,
+    "title": "Предельный номер этажа",
+    "group": "Башня"
+  },
+  "doors.min": {
+    "value": 2,
+    "title": "Минимум дверей",
+    "group": "Двери"
+  },
+  "doors.max": {
+    "value": 3,
+    "title": "Обычный максимум дверей",
+    "group": "Двери"
+  },
+  "doors.eliteFrom": {
+    "value": 3,
+    "title": "Элиты доступны с этажа пролёта",
+    "group": "Двери"
+  },
+  "doors.serviceFloor": {
+    "value": 5,
+    "title": "Этаж выбора лавки или отдыха",
+    "group": "Двери"
+  },
+  "doors.restFloor": {
+    "value": 9,
+    "title": "Обязательный этаж отдыха",
+    "group": "Двери"
+  },
+  "doors.preview": {
+    "value": 2,
+    "title": "Этажей на карте вперёд",
+    "group": "Двери"
+  },
+  "doorWeight.combat": {
+    "value": 45,
+    "title": "Вес двери «Бой»",
+    "group": "Вероятности дверей"
+  },
+  "doorWeight.event": {
+    "value": 20,
+    "title": "Вес двери «Событие»",
+    "group": "Вероятности дверей"
+  },
+  "doorWeight.chest": {
+    "value": 10,
+    "title": "Вес двери «Сундук»",
+    "group": "Вероятности дверей"
+  },
+  "doorWeight.elite": {
+    "value": 10,
+    "title": "Вес двери «Элита»",
+    "group": "Вероятности дверей"
+  },
+  "doorWeight.shop": {
+    "value": 8,
+    "title": "Вес двери «Лавка»",
+    "group": "Вероятности дверей"
+  },
+  "doorWeight.rest": {
+    "value": 7,
+    "title": "Вес двери «Отдых»",
+    "group": "Вероятности дверей"
+  },
+  "combat.hand": {
+    "value": 3,
+    "title": "Приёмов в руке",
+    "group": "Бой"
+  },
+  "combat.upgradeMax": {
+    "value": 2,
+    "title": "Максимальное усиление приёма",
+    "group": "Бой"
+  },
+  "combat.upgradePower": {
+    "value": 0.35,
+    "title": "Сила усиления приёма",
+    "group": "Бой"
+  },
+  "combat.criticalMult": {
+    "value": 1.6,
+    "title": "Множитель критического удара",
+    "group": "Бой"
+  },
+  "combat.agilityCap": {
+    "value": 0.65,
+    "title": "Предел ловкости",
+    "group": "Бой"
+  },
+  "combat.maxTurns": {
+    "value": 80,
+    "title": "Предел осторожных ходов бота",
+    "group": "Бой"
+  },
+  "combat.xp": {
+    "value": 10,
+    "title": "Опыт за обычного врага",
+    "group": "Бой"
+  },
+  "combat.gold": {
+    "value": 12,
+    "title": "Золото за обычного врага",
+    "group": "Бой"
+  },
+  "combat.goldSpread": {
+    "value": 8,
+    "title": "Случайная прибавка золота",
+    "group": "Бой"
+  },
+  "combat.eliteGold": {
+    "value": 2,
+    "title": "Множитель золота элиты",
+    "group": "Бой"
+  },
+  "combat.eliteXp": {
+    "value": 2,
+    "title": "Множитель опыта элиты",
+    "group": "Бой"
+  },
+  "combat.bossGold": {
+    "value": 3,
+    "title": "Множитель золота босса",
+    "group": "Бой"
+  },
+  "combat.bossXp": {
+    "value": 3,
+    "title": "Множитель опыта босса",
+    "group": "Бой"
+  },
+  "combat.eliteHp": {
+    "value": 2.5,
+    "title": "Множитель здоровья элиты",
+    "group": "Бой"
+  },
+  "combat.eliteThorns": {
+    "value": 2,
+    "title": "Урон шипов элиты",
+    "group": "Бой"
+  },
+  "combat.eliteHeal": {
+    "value": 0.06,
+    "title": "Доля лечения элиты за ход",
+    "group": "Бой"
+  },
+  "combat.eliteDoubleTurn": {
+    "value": 3,
+    "title": "Ход двойного действия элиты",
+    "group": "Бой"
+  },
+  "combat.enemyHpScale": {
+    "value": 1,
+    "title": "Общий множитель здоровья врагов",
+    "group": "Бой"
+  },
+  "combat.enemyAttackScale": {
+    "value": 1,
+    "title": "Общий множитель урона врагов",
+    "group": "Бой"
+  },
+  "level.xpBase": {
+    "value": 18,
+    "title": "Опыт до первого уровня",
+    "group": "Уровни героя"
+  },
+  "level.xpGrowth": {
+    "value": 6,
+    "title": "Прирост цены уровня",
+    "group": "Уровни героя"
+  },
+  "level.health": {
+    "value": 7,
+    "title": "Здоровье за уровень",
+    "group": "Уровни героя"
+  },
+  "level.heal": {
+    "value": 7,
+    "title": "Лечение при новом уровне",
+    "group": "Уровни героя"
+  },
+  "level.strength": {
+    "value": 2,
+    "title": "Сила за уровень",
+    "group": "Уровни героя"
+  },
+  "level.defense": {
+    "value": 1,
+    "title": "Защита за уровень",
+    "group": "Уровни героя"
+  },
+  "move.lunge": {
+    "value": 1.5,
+    "title": "Выпад: множитель урона",
+    "group": "Приёмы"
+  },
+  "move.sweep": {
+    "value": 0.5,
+    "title": "Подсечка: доля урона",
+    "group": "Приёмы"
+  },
+  "move.weaken": {
+    "value": 0.5,
+    "title": "Подсечка: ослабление намерения",
+    "group": "Приёмы"
+  },
+  "move.flame": {
+    "value": 2,
+    "title": "Пламя: урон за ход",
+    "group": "Приёмы"
+  },
+  "move.breathe": {
+    "value": 0.15,
+    "title": "Передышка: доля лечения",
+    "group": "Приёмы"
+  },
+  "move.execute": {
+    "value": 0.25,
+    "title": "Казнь: порог здоровья врага",
+    "group": "Приёмы"
+  },
+  "move.specialCost": {
+    "value": 1,
+    "title": "Цена особого приёма в воле",
+    "group": "Приёмы"
+  },
+  "move.readCost": {
+    "value": 0,
+    "title": "Чтение: цена в воле",
+    "group": "Приёмы"
+  },
+  "move.dashCharge": {
+    "value": 3,
+    "title": "Рывок: урон против зарядки",
+    "group": "Приёмы"
+  },
+  "relic.buckle.hp": {
+    "value": 5,
+    "title": "Медная пряжка: здоровье",
+    "group": "Реликвии"
+  },
+  "relic.buckle.defense": {
+    "value": 1,
+    "title": "Медная пряжка: защита",
+    "group": "Реликвии"
+  },
+  "relic.whetstone.strength": {
+    "value": 2,
+    "title": "Точильный камень: прибавка силы",
+    "group": "Реликвии"
+  },
+  "relic.horseshoe.dodge": {
+    "value": 0.05,
+    "title": "Подкова: шанс уклонения",
+    "group": "Реликвии"
+  },
+  "relic.purse.gold": {
+    "value": 0.2,
+    "title": "Кошель с дыркой: золото",
+    "group": "Реликвии"
+  },
+  "relic.purse.loss": {
+    "value": 1,
+    "title": "Кошель с дыркой: потеря монет за этаж",
+    "group": "Реликвии"
+  },
+  "relic.rations.heal": {
+    "value": 0.1,
+    "title": "Сухари: восстановление здоровья",
+    "group": "Реликвии"
+  },
+  "relic.feather.gold": {
+    "value": 5,
+    "title": "Перо ворона: золото",
+    "group": "Реликвии"
+  },
+  "relic.abacus.discount": {
+    "value": 0.15,
+    "title": "Счёты: скидка в лавке",
+    "group": "Реликвии"
+  },
+  "relic.bell.damage": {
+    "value": 3,
+    "title": "Колокольчик: урон",
+    "group": "Реликвии"
+  },
+  "relic.bow.hits": {
+    "value": 2,
+    "title": "Двойная тетива: попаданий за удар",
+    "group": "Реликвии"
+  },
+  "relic.bow.power": {
+    "value": 0.6,
+    "title": "Двойная тетива: доля силы повторного действия",
+    "group": "Реликвии"
+  },
+  "relic.warmStone.turns": {
+    "value": 3,
+    "title": "Тёплый камень: период в ходах",
+    "group": "Реликвии"
+  },
+  "relic.warmStone.will": {
+    "value": 1,
+    "title": "Тёплый камень: заряды воли",
+    "group": "Реликвии"
+  },
+  "relic.mirror.mult": {
+    "value": 2,
+    "title": "Зеркальный щит: множитель эффекта",
+    "group": "Реликвии"
+  },
+  "relic.chain.carry": {
+    "value": 0.5,
+    "title": "Цепь: перенос излишнего урона",
+    "group": "Реликвии"
+  },
+  "relic.key.choices": {
+    "value": 2,
+    "title": "Ржавый ключ: вариантов выбора",
+    "group": "Реликвии"
+  },
+  "relic.bloodCoin.rate": {
+    "value": 3,
+    "title": "Кровавая монета: золота за единицу здоровья",
+    "group": "Реликвии"
+  },
+  "relic.deck.hand": {
+    "value": 4,
+    "title": "Колода судьбы: приёмов в руке",
+    "group": "Реликвии"
+  },
+  "relic.shadow.power": {
+    "value": 0.4,
+    "title": "Вторая тень: доля силы повторного действия",
+    "group": "Реликвии"
+  },
+  "relic.crown.health": {
+    "value": 0.9,
+    "title": "Корона без камня: множитель здоровья",
+    "group": "Реликвии"
+  },
+  "relic.crown.extra": {
+    "value": 1,
+    "title": "Корона без камня: дополнительных вариантов",
+    "group": "Реликвии"
+  },
+  "relic.heart.heal": {
+    "value": 0.3,
+    "title": "Сердце башни: восстановление здоровья",
+    "group": "Реликвии"
+  },
+  "relic.vow.strike": {
+    "value": 2,
+    "title": "Обет тишины: множитель удара",
+    "group": "Реликвии"
+  },
+  "relic.smallChange.gold": {
+    "value": 100,
+    "title": "Мешок мелочи: золото",
+    "group": "Реликвии"
+  },
+  "relic.smallChange.strength": {
+    "value": 1,
+    "title": "Мешок мелочи: прибавка силы",
+    "group": "Реликвии"
+  },
+  "relic.weight.common": {
+    "value": 70,
+    "title": "Вес редкости «Обычная»",
+    "group": "Реликвии"
+  },
+  "relic.weight.rare": {
+    "value": 25,
+    "title": "Вес редкости «Редкая»",
+    "group": "Реликвии"
+  },
+  "relic.weight.legendary": {
+    "value": 5,
+    "title": "Вес редкости «Легендарная»",
+    "group": "Реликвии"
+  },
+  "reward.choices": {
+    "value": 3,
+    "title": "Вариантов дара",
+    "group": "Дары"
+  },
+  "reward.relicChance": {
+    "value": 0.55,
+    "title": "Вероятность реликвии в дарах",
+    "group": "Дары"
+  },
+  "reward.fallbackGold": {
+    "value": 20,
+    "title": "Золото вместо повторной находки",
+    "group": "Дары"
+  },
+  "chest.gold": {
+    "value": 12,
+    "title": "Золото в сундуке",
+    "group": "Сундуки"
+  },
+  "chest.goldSpread": {
+    "value": 15,
+    "title": "Случайное золото в сундуке",
+    "group": "Сундуки"
+  },
+  "rest.heal": {
+    "value": 0.35,
+    "title": "Доля здоровья за отдых",
+    "group": "Отдых"
+  },
+  "shop.slots": {
+    "value": 3,
+    "title": "Товаров в лавке",
+    "group": "Лавка"
+  },
+  "shop.relicCost": {
+    "value": 45,
+    "title": "Базовая цена реликвии",
+    "group": "Лавка"
+  },
+  "shop.rareMult": {
+    "value": 1.6,
+    "title": "Множитель цены редкой реликвии",
+    "group": "Лавка"
+  },
+  "shop.legendaryMult": {
+    "value": 2.4,
+    "title": "Множитель цены легендарной реликвии",
+    "group": "Лавка"
+  },
+  "shop.upgradeCost": {
+    "value": 30,
+    "title": "Цена усиления приёма",
+    "group": "Лавка"
+  },
+  "shop.healCost": {
+    "value": 18,
+    "title": "Цена перевязки",
+    "group": "Лавка"
+  },
+  "shop.heal": {
+    "value": 0.3,
+    "title": "Доля лечения перевязкой",
+    "group": "Лавка"
+  },
+  "shards.floor": {
+    "value": 2,
+    "title": "Осколков за этаж",
+    "group": "Осколки"
+  },
+  "shards.boss": {
+    "value": 15,
+    "title": "Осколков за босса",
+    "group": "Осколки"
+  },
+  "shards.elite": {
+    "value": 5,
+    "title": "Осколков за элиту",
+    "group": "Осколки"
+  },
+  "shards.deathKeep": {
+    "value": 0.6,
+    "title": "Доля осколков при гибели",
+    "group": "Осколки"
+  },
+  "shards.heightBonus": {
+    "value": 0.1,
+    "title": "Бонус осколков за высоту",
+    "group": "Осколки"
+  },
+  "shards.passengerMult": {
+    "value": 2,
+    "title": "Множитель осколков в поездке",
+    "group": "Осколки"
+  },
+  "workshop.growth": {
+    "value": 1.4,
+    "title": "Рост цены уровня мастерской",
+    "group": "Мастерская"
+  },
+  "workshop.lateGrowth": {
+    "value": 1.7,
+    "title": "Рост цены уровня после порога мастерства",
+    "min": 1.1,
+    "max": 5,
+    "group": "Мастерская"
+  },
+  "workshop.health.base": {
+    "value": 10,
+    "title": "Закалка: цена первого уровня",
+    "group": "Мастерская"
+  },
+  "workshop.health.max": {
+    "value": 0,
+    "title": "Закалка: предел уровней (0 — без предела)",
+    "min": 0,
+    "max": 1000,
+    "group": "Мастерская"
+  },
+  "workshop.health.mastery": {
+    "value": 10,
+    "title": "Закалка: порог мастерства, после него цена растёт быстрее",
+    "min": 0,
+    "max": 1000,
+    "group": "Мастерская"
+  },
+  "workshop.health.effect": {
+    "value": 5,
+    "title": "Закалка: прибавка за уровень",
+    "group": "Мастерская"
+  },
+  "workshop.strength.base": {
+    "value": 25,
+    "title": "Хватка: цена первого уровня",
+    "group": "Мастерская"
+  },
+  "workshop.strength.max": {
+    "value": 0,
+    "title": "Хватка: предел уровней (0 — без предела)",
+    "min": 0,
+    "max": 1000,
+    "group": "Мастерская"
+  },
+  "workshop.strength.mastery": {
+    "value": 5,
+    "title": "Хватка: порог мастерства, после него цена растёт быстрее",
+    "min": 0,
+    "max": 1000,
+    "group": "Мастерская"
+  },
+  "workshop.strength.effect": {
+    "value": 1,
+    "title": "Хватка: прибавка за уровень",
+    "group": "Мастерская"
+  },
+  "workshop.defense.base": {
+    "value": 25,
+    "title": "Стойка: цена первого уровня",
+    "group": "Мастерская"
+  },
+  "workshop.defense.max": {
+    "value": 0,
+    "title": "Стойка: предел уровней (0 — без предела)",
+    "min": 0,
+    "max": 1000,
+    "group": "Мастерская"
+  },
+  "workshop.defense.mastery": {
+    "value": 5,
+    "title": "Стойка: порог мастерства, после него цена растёт быстрее",
+    "min": 0,
+    "max": 1000,
+    "group": "Мастерская"
+  },
+  "workshop.defense.effect": {
+    "value": 1,
+    "title": "Стойка: прибавка за уровень",
+    "group": "Мастерская"
+  },
+  "workshop.agility.base": {
+    "value": 30,
+    "title": "Чутьё: цена первого уровня",
+    "group": "Мастерская"
+  },
+  "workshop.agility.max": {
+    "value": 5,
+    "title": "Чутьё: максимум уровней",
+    "group": "Мастерская"
+  },
+  "workshop.agility.effect": {
+    "value": 0.03,
+    "title": "Чутьё: прибавка за уровень",
+    "group": "Мастерская"
+  },
+  "workshop.will.base": {
+    "value": 60,
+    "title": "Запас воли: цена первого уровня",
+    "group": "Мастерская"
+  },
+  "workshop.will.max": {
+    "value": 3,
+    "title": "Запас воли: максимум уровней",
+    "group": "Мастерская"
+  },
+  "workshop.will.effect": {
+    "value": 1,
+    "title": "Запас воли: прибавка за уровень",
+    "group": "Мастерская"
+  },
+  "workshop.gold.base": {
+    "value": 15,
+    "title": "Кошелёк: цена первого уровня",
+    "group": "Мастерская"
+  },
+  "workshop.gold.max": {
+    "value": 0,
+    "title": "Кошелёк: предел уровней (0 — без предела)",
+    "min": 0,
+    "max": 1000,
+    "group": "Мастерская"
+  },
+  "workshop.gold.mastery": {
+    "value": 5,
+    "title": "Кошелёк: порог мастерства, после него цена растёт быстрее",
+    "min": 0,
+    "max": 1000,
+    "group": "Мастерская"
+  },
+  "workshop.gold.effect": {
+    "value": 15,
+    "title": "Кошелёк: прибавка за уровень",
+    "group": "Мастерская"
+  },
+  "workshop.doors.base": {
+    "value": 80,
+    "title": "Знание дверей: цена первого уровня",
+    "group": "Мастерская"
+  },
+  "workshop.doors.max": {
+    "value": 2,
+    "title": "Знание дверей: максимум уровней",
+    "group": "Мастерская"
+  },
+  "workshop.doors.effect": {
+    "value": 1,
+    "title": "Знание дверей: прибавка за уровень",
+    "group": "Мастерская"
+  },
+  "workshop.memory.base": {
+    "value": 120,
+    "title": "Память: цена первого уровня",
+    "group": "Мастерская"
+  },
+  "workshop.memory.max": {
+    "value": 2,
+    "title": "Память: максимум уровней",
+    "group": "Мастерская"
+  },
+  "workshop.memory.effect": {
+    "value": 0.1,
+    "title": "Память: прибавка за уровень",
+    "group": "Мастерская"
+  },
+  "class.archer.hp": {
+    "value": 0.8,
+    "title": "Лучница: здоровье",
+    "group": "Классы"
+  },
+  "class.scholar.will": {
+    "value": 1,
+    "title": "Книжник: заряды воли",
+    "group": "Классы"
+  },
+  "class.firestarter.flame": {
+    "value": 2,
+    "title": "Поджигатель: сила пламени",
+    "group": "Классы"
+  },
+  "class.firestarter.kills": {
+    "value": 100,
+    "title": "Поджигатель: побед для открытия",
+    "group": "Классы"
+  },
+  "class.guardian.block": {
+    "value": 1,
+    "title": "Страж: усиление начального блока",
+    "group": "Классы"
+  },
+  "height.max": {
+    "value": 12,
+    "title": "Доступных высот",
+    "group": "Высоты"
+  },
+  "height.shieldAt": {
+    "value": 2,
+    "title": "Щит врага: начиная с высоты",
+    "group": "Высоты"
+  },
+  "height.shield": {
+    "value": 3,
+    "title": "Начальный щит врага",
+    "group": "Высоты"
+  },
+  "height.shopAt": {
+    "value": 3,
+    "title": "Дорогие лавки: начиная с высоты",
+    "group": "Высоты"
+  },
+  "height.shopMult": {
+    "value": 1.25,
+    "title": "Множитель цены лавки",
+    "group": "Высоты"
+  },
+  "height.restAt": {
+    "value": 4,
+    "title": "Слабый отдых: начиная с высоты",
+    "group": "Высоты"
+  },
+  "height.restMult": {
+    "value": 0.7,
+    "title": "Множитель лечения на отдыхе",
+    "group": "Высоты"
+  },
+  "height.phaseAt": {
+    "value": 5,
+    "title": "Вторая фаза босса: начиная с высоты",
+    "group": "Высоты"
+  },
+  "height.phaseHeal": {
+    "value": 0.3,
+    "title": "Доля восстановления босса во второй фазе",
+    "group": "Высоты"
+  },
+  "height.phaseAttack": {
+    "value": 0.5,
+    "title": "Множитель урона второй фазы",
+    "group": "Высоты"
+  },
+  "height.attackAt": {
+    "value": 6,
+    "title": "Сильные враги: начиная с высоты",
+    "group": "Высоты"
+  },
+  "height.attackMult": {
+    "value": 1.1,
+    "title": "Множитель урона врагов",
+    "group": "Высоты"
+  },
+  "height.hpAt": {
+    "value": 7,
+    "title": "Здоровье врагов: начиная с высоты",
+    "group": "Высоты"
+  },
+  "height.hpMult": {
+    "value": 1.1,
+    "title": "Множитель здоровья врагов",
+    "group": "Высоты"
+  },
+  "height.goldAt": {
+    "value": 8,
+    "title": "Меньше золота: начиная с высоты",
+    "group": "Высоты"
+  },
+  "height.goldMult": {
+    "value": 0.85,
+    "title": "Множитель награды золотом",
+    "group": "Высоты"
+  },
+  "height.eliteAt": {
+    "value": 9,
+    "title": "Здоровье элит: начиная с высоты",
+    "group": "Высоты"
+  },
+  "height.eliteHp": {
+    "value": 1.2,
+    "title": "Дополнительный множитель здоровья элиты",
+    "group": "Высоты"
+  },
+  "height.willAt": {
+    "value": 10,
+    "title": "Меньше воли: начиная с высоты",
+    "group": "Высоты"
+  },
+  "height.willLoss": {
+    "value": 1,
+    "title": "Потеря зарядов воли",
+    "group": "Высоты"
+  },
+  "height.curseAt": {
+    "value": 11,
+    "title": "Меньше здоровья героя: начиная с высоты",
+    "group": "Высоты"
+  },
+  "height.curseHp": {
+    "value": 0.95,
+    "title": "Множитель здоровья героя",
+    "group": "Высоты"
+  },
+  "height.pinnacleAt": {
+    "value": 12,
+    "title": "Последнее испытание: начиная с высоты",
+    "group": "Высоты"
+  },
+  "height.pinnacleHp": {
+    "value": 1.05,
+    "title": "Последняя высота: здоровье врагов",
+    "group": "Высоты"
+  },
+  "height.pinnacleAttack": {
+    "value": 1.05,
+    "title": "Последняя высота: урон врагов",
+    "group": "Высоты"
+  },
+  "height.bossAttack": {
+    "value": 1.1,
+    "title": "Последняя высота: урон босса",
+    "group": "Высоты"
+  },
+  "boss.plates": {
+    "value": 3,
+    "title": "Привратник: пластин щита",
+    "group": "Боссы"
+  },
+  "boss.mistress.period": {
+    "value": 2,
+    "title": "Хозяйка галерей: период в ходах",
+    "group": "Боссы"
+  },
+  "boss.mistress.heal": {
+    "value": 0.15,
+    "title": "Хозяйка галерей: восстановление здоровья",
+    "group": "Боссы"
+  },
+  "boss.keykeeper.threshold": {
+    "value": 0.5,
+    "title": "Ключник шпиля: порог доли здоровья",
+    "group": "Боссы"
+  },
+  "boss.keykeeper.locks": {
+    "value": 1,
+    "title": "Ключник шпиля: запертых приёмов",
+    "group": "Боссы"
+  },
+  "boss.keykeeper.locksLow": {
+    "value": 2,
+    "title": "Ключник шпиля: запертых приёмов при низком здоровье",
+    "group": "Боссы"
+  },
+  "enemy.thief.gold": {
+    "value": 10,
+    "title": "Вор: золото",
+    "group": "Враги"
+  },
+  "enemy.thief.fleeTurn": {
+    "value": 4,
+    "title": "Вор: ход побега",
+    "group": "Враги"
+  },
+  "enemy.knight.switchMult": {
+    "value": 0.5,
+    "title": "Флюгерный рыцарь: защита против блока героя",
+    "group": "Враги"
+  },
+  "enemy.maiden.period": {
+    "value": 2,
+    "title": "Ветряная дева: период в ходах",
+    "group": "Враги"
+  },
+  "enemy.clockmaker.midnightTurn": {
+    "value": 4,
+    "title": "Часовщик: ход полуночи",
+    "group": "Враги"
+  },
+  "enemy.clockmaker.midnight": {
+    "value": 40,
+    "title": "Часовщик: урон полуночи",
+    "group": "Враги"
+  },
+  "enemy.echo.copy": {
+    "value": 0.7,
+    "title": "Эхо героя: доля копирования героя",
+    "group": "Враги"
+  },
+  "enemy.mold.growth": {
+    "value": 2,
+    "title": "Плесневик: прирост урона за ход",
+    "group": "Враги"
+  },
+  "enemy.lantern.chargeMult": {
+    "value": 3,
+    "title": "Сторож с фонарём: множитель заряженного удара",
+    "group": "Враги"
+  },
+  "enemy.dog.hits": {
+    "value": 2,
+    "title": "Цепной пёс: попаданий за удар",
+    "group": "Враги"
+  },
+  "enemy.double.copy": {
+    "value": 0.85,
+    "title": "Двойник: доля копирования героя",
+    "group": "Враги"
+  },
+  "boss.ally.damage": {
+    "value": 0.2,
+    "title": "Помощь стража: доля здоровья босса",
+    "group": "Боссы"
+  },
+  "event.defaultAmount": {
+    "value": 1,
+    "title": "Обычная сила эффекта",
+    "group": "События"
+  },
+  "event.defaultHeal": {
+    "value": 10,
+    "title": "Обычное лечение события",
+    "group": "События"
+  },
+  "event.defaultDamage": {
+    "value": 5,
+    "title": "Обычный урон события",
+    "group": "События"
+  },
+  "event.defaultGold": {
+    "value": 15,
+    "title": "Обычное золото события",
+    "group": "События"
+  },
+  "event.curse.damage": {
+    "value": 1,
+    "title": "Урон бремени за этаж",
+    "group": "События"
+  },
+  "event.well.cost": {
+    "value": 20,
+    "title": "Колодец желаний: стоимость выбора",
+    "group": "События"
+  },
+  "event.well.chance": {
+    "value": 0.5,
+    "title": "Колодец желаний: вероятность успеха",
+    "group": "События"
+  },
+  "event.guard.cost": {
+    "value": 10,
+    "title": "Раненый страж: стоимость выбора",
+    "group": "События"
+  },
+  "event.guard.ally": {
+    "value": 1,
+    "title": "Раненый страж: помощников против босса",
+    "group": "События"
+  },
+  "event.stairs.cost": {
+    "value": 10,
+    "title": "Лестница без перил: стоимость выбора",
+    "group": "События"
+  },
+  "event.stairs.skip": {
+    "value": 1,
+    "title": "Лестница без перил: этажей для пропуска",
+    "group": "События"
+  },
+  "event.shelf.gold": {
+    "value": 30,
+    "title": "Книжная полка: золото",
+    "group": "События"
+  },
+  "event.shelf.upgrade": {
+    "value": 1,
+    "title": "Книжная полка: уровней усиления приёма",
+    "group": "События"
+  },
+  "event.pantry.heal": {
+    "value": 12,
+    "title": "Забытая кладовая: восстановление здоровья",
+    "group": "События"
+  },
+  "event.forge.cost": {
+    "value": 15,
+    "title": "Остывшая кузня: стоимость выбора",
+    "group": "События"
+  },
+  "event.forge.strength": {
+    "value": 1,
+    "title": "Остывшая кузня: прибавка силы",
+    "group": "События"
+  },
+  "event.mirror.cost": {
+    "value": 8,
+    "title": "Треснувшее зеркало: стоимость выбора",
+    "group": "События"
+  },
+  "event.mirror.agility": {
+    "value": 0.03,
+    "title": "Треснувшее зеркало: прибавка ловкости",
+    "group": "События"
+  },
+  "event.fountain.heal": {
+    "value": 18,
+    "title": "Серый источник: восстановление здоровья",
+    "group": "События"
+  },
+  "event.fountain.curse": {
+    "value": 1,
+    "title": "Серый источник: бремя башни",
+    "group": "События"
+  },
+  "event.toll.cost": {
+    "value": 12,
+    "title": "Тихий привратник: стоимость выбора",
+    "group": "События"
+  },
+  "event.toll.gold": {
+    "value": 24,
+    "title": "Тихий привратник: золото",
+    "group": "События"
+  },
+  "event.toll.damage": {
+    "value": 8,
+    "title": "Тихий привратник: урон",
+    "group": "События"
+  },
+  "event.toll.chance": {
+    "value": 0.5,
+    "title": "Тихий привратник: вероятность успеха",
+    "group": "События"
+  },
+  "event.nest.chance": {
+    "value": 0.65,
+    "title": "Гнездо под сводом: вероятность успеха",
+    "group": "События"
+  },
+  "event.nest.gold": {
+    "value": 20,
+    "title": "Гнездо под сводом: золото",
+    "group": "События"
+  },
+  "event.nest.damage": {
+    "value": 6,
+    "title": "Гнездо под сводом: урон",
+    "group": "События"
+  },
+  "event.cairn.cost": {
+    "value": 10,
+    "title": "Камни памяти: стоимость выбора",
+    "group": "События"
+  },
+  "event.cairn.defense": {
+    "value": 1,
+    "title": "Камни памяти: защита",
+    "group": "События"
+  },
+  "event.hour.will": {
+    "value": 1,
+    "title": "Неподвижный час: заряды воли",
+    "group": "События"
+  },
+  "event.trader.gold": {
+    "value": 35,
+    "title": "Пыльный свёрток: золото",
+    "group": "События"
+  },
+  "event.bell.cost": {
+    "value": 6,
+    "title": "Безъязыкий колокол: стоимость выбора",
+    "group": "События"
+  },
+  "event.bell.relic": {
+    "value": 1,
+    "title": "Безъязыкий колокол: реликвий за выбор",
+    "group": "События"
+  },
+  "daily.ironDoors.shield": {
+    "value": 3,
+    "title": "Железный день: начальный щит врага",
+    "group": "Башня дня"
+  },
+  "daily.costly.mult": {
+    "value": 1.25,
+    "title": "День торговцев: множитель эффекта",
+    "group": "Башня дня"
+  },
+  "daily.embers.flame": {
+    "value": 1,
+    "title": "День углей: сила пламени",
+    "group": "Башня дня"
+  },
+  "daily.generous.gold": {
+    "value": 1.3,
+    "title": "Щедрая башня: золото",
+    "group": "Башня дня"
+  },
+  "daily.frail.hp": {
+    "value": 0.85,
+    "title": "Стеклянные ступени: здоровье",
+    "group": "Башня дня"
+  },
+  "daily.quiet.rest": {
+    "value": 1.5,
+    "title": "Тихая башня: множитель отдыха",
+    "group": "Башня дня"
+  },
+  "stock.maxStored": {
+    "value": 20,
+    "title": "Запас элементов каждого вида",
+    "group": "Запас контента"
+  },
+  "stock.maxText": {
+    "value": 1000,
+    "title": "Длина текста события",
+    "group": "Запас контента"
+  },
+  "stock.maxTitle": {
+    "value": 80,
+    "title": "Длина названия события",
+    "group": "Запас контента"
+  },
+  "stock.maxChoices": {
+    "value": 3,
+    "title": "Выборов в событии",
+    "group": "Запас контента"
+  },
+  "log.max": {
+    "value": 40,
+    "title": "Строк в журнале боя",
+    "group": "Журнал"
+  },
+  "bot.attackTapSec": {
+    "value": 4,
+    "title": "Секунд на приём при проверке",
+    "group": "Проверка баланса"
+  },
+  "bot.otherTapSec": {
+    "value": 2,
+    "title": "Секунд на другое действие при проверке",
+    "group": "Проверка баланса"
+  },
+  "bot.restThreshold": {
+    "value": 0.4,
+    "title": "Порог здоровья для отдыха при проверке",
+    "group": "Проверка баланса"
+  },
+  "offline.capHours": {
+    "value": 0,
+    "title": "Потолок офлайна, часы",
+    "group": "Офлайн"
+  },
+  "offline.efficiency": {
+    "value": 0,
+    "title": "Доля офлайн-прогресса",
+    "group": "Офлайн"
+  },
+  "screen.portrait": {
+    "value": true,
+    "title": "Портретная ориентация",
+    "group": "Экран"
+  },
+  "screen.keepOn": {
+    "value": false,
+    "title": "Не гасить экран",
+    "group": "Экран"
+  },
+  "tick.activeSec": {
+    "value": 1,
+    "title": "Шаг обновления, секунды",
+    "group": "Обновление экрана"
+  },
+  "steps.cost.fresh-legs": {
+    "value": 1,
+    "title": "Свежие ноги: цена энергии",
+    "group": "Шаги"
+  },
+  "enemy.piper.hp": {
+    "value": 16.25,
+    "title": "Крысолов: здоровье",
+    "group": "Враги"
+  },
+  "enemy.piper.attack": {
+    "value": 5,
+    "title": "Крысолов: урон удара",
+    "group": "Враги"
+  },
+  "enemy.piper.defense": {
+    "value": 4,
+    "title": "Крысолов: защита",
+    "group": "Враги"
+  },
+  "enemy.mold.hp": {
+    "value": 12.5,
+    "title": "Плесневик: здоровье",
+    "group": "Враги"
+  },
+  "enemy.mold.attack": {
+    "value": 3,
+    "title": "Плесневик: урон удара",
+    "group": "Враги"
+  },
+  "enemy.mold.defense": {
+    "value": 0,
+    "title": "Плесневик: защита",
+    "group": "Враги"
+  },
+  "enemy.lantern.hp": {
+    "value": 18.75,
+    "title": "Сторож с фонарём: здоровье",
+    "group": "Враги"
+  },
+  "enemy.lantern.attack": {
+    "value": 4,
+    "title": "Сторож с фонарём: урон удара",
+    "group": "Враги"
+  },
+  "enemy.lantern.defense": {
+    "value": 0,
+    "title": "Сторож с фонарём: защита",
+    "group": "Враги"
+  },
+  "enemy.dog.hp": {
+    "value": 16.25,
+    "title": "Цепной пёс: здоровье",
+    "group": "Враги"
+  },
+  "enemy.dog.attack": {
+    "value": 3,
+    "title": "Цепной пёс: урон удара",
+    "group": "Враги"
+  },
+  "enemy.dog.defense": {
+    "value": 0,
+    "title": "Цепной пёс: защита",
+    "group": "Враги"
+  },
+  "enemy.weaver.hp": {
+    "value": 30.2,
+    "title": "Гобеленщик: здоровье",
+    "group": "Враги"
+  },
+  "enemy.weaver.attack": {
+    "value": 6,
+    "title": "Гобеленщик: урон удара",
+    "group": "Враги"
+  },
+  "enemy.weaver.defense": {
+    "value": 0,
+    "title": "Гобеленщик: защита",
+    "group": "Враги"
+  },
+  "enemy.double.hp": {
+    "value": 30.2,
+    "title": "Двойник: здоровье",
+    "group": "Враги"
+  },
+  "enemy.double.attack": {
+    "value": 5,
+    "title": "Двойник: урон удара",
+    "group": "Враги"
+  },
+  "enemy.double.defense": {
+    "value": 0,
+    "title": "Двойник: защита",
+    "group": "Враги"
+  },
+  "enemy.pupil.hp": {
+    "value": 32.2,
+    "title": "Каменный ученик: здоровье",
+    "group": "Враги"
+  },
+  "enemy.pupil.attack": {
+    "value": 9,
+    "title": "Каменный ученик: урон удара",
+    "group": "Враги"
+  },
+  "enemy.pupil.defense": {
+    "value": 10,
+    "title": "Каменный ученик: защита",
+    "group": "Враги"
+  },
+  "enemy.thief.hp": {
+    "value": 24.2,
+    "title": "Вор: здоровье",
+    "group": "Враги"
+  },
+  "enemy.thief.attack": {
+    "value": 5,
+    "title": "Вор: урон удара",
+    "group": "Враги"
+  },
+  "enemy.thief.defense": {
+    "value": 0,
+    "title": "Вор: защита",
+    "group": "Враги"
+  },
+  "enemy.knight.hp": {
+    "value": 25,
+    "title": "Флюгерный рыцарь: здоровье",
+    "group": "Враги"
+  },
+  "enemy.knight.attack": {
+    "value": 7,
+    "title": "Флюгерный рыцарь: урон удара",
+    "group": "Враги"
+  },
+  "enemy.knight.defense": {
+    "value": 5,
+    "title": "Флюгерный рыцарь: защита",
+    "group": "Враги"
+  },
+  "enemy.maiden.hp": {
+    "value": 18,
+    "title": "Ветряная дева: здоровье",
+    "group": "Враги"
+  },
+  "enemy.maiden.attack": {
+    "value": 6,
+    "title": "Ветряная дева: урон удара",
+    "group": "Враги"
+  },
+  "enemy.maiden.defense": {
+    "value": 0,
+    "title": "Ветряная дева: защита",
+    "group": "Враги"
+  },
+  "enemy.clockmaker.hp": {
+    "value": 24,
+    "title": "Часовщик: здоровье",
+    "group": "Враги"
+  },
+  "enemy.clockmaker.attack": {
+    "value": 5,
+    "title": "Часовщик: урон удара",
+    "group": "Враги"
+  },
+  "enemy.clockmaker.defense": {
+    "value": 0,
+    "title": "Часовщик: защита",
+    "group": "Враги"
+  },
+  "enemy.echo.hp": {
+    "value": 22,
+    "title": "Эхо героя: здоровье",
+    "group": "Враги"
+  },
+  "enemy.echo.attack": {
+    "value": 7,
+    "title": "Эхо героя: урон удара",
+    "group": "Враги"
+  },
+  "enemy.echo.defense": {
+    "value": 0,
+    "title": "Эхо героя: защита",
+    "group": "Враги"
+  },
+  "enemy.gatekeeper.hp": {
+    "value": 24,
+    "title": "Привратник подвалов: здоровье",
+    "group": "Враги"
+  },
+  "enemy.gatekeeper.attack": {
+    "value": 6,
+    "title": "Привратник подвалов: урон удара",
+    "group": "Враги"
+  },
+  "enemy.gatekeeper.defense": {
+    "value": 0,
+    "title": "Привратник подвалов: защита",
+    "group": "Враги"
+  },
+  "enemy.mistress.hp": {
+    "value": 27,
+    "title": "Хозяйка галерей: здоровье",
+    "group": "Враги"
+  },
+  "enemy.mistress.attack": {
+    "value": 7,
+    "title": "Хозяйка галерей: урон удара",
+    "group": "Враги"
+  },
+  "enemy.mistress.defense": {
+    "value": 0,
+    "title": "Хозяйка галерей: защита",
+    "group": "Враги"
+  },
+  "enemy.keykeeper.hp": {
+    "value": 31.5,
+    "title": "Ключник шпиля: здоровье",
+    "group": "Враги"
+  },
+  "enemy.keykeeper.attack": {
+    "value": 8,
+    "title": "Ключник шпиля: урон удара",
+    "group": "Враги"
+  },
+  "enemy.keykeeper.defense": {
+    "value": 0,
+    "title": "Ключник шпиля: защита",
+    "group": "Враги"
+  },
+  "ui.descriptionHoldMs": {
+    "value": 480,
+    "min": 200,
+    "max": 1500,
+    "step": 20,
+    "title": "Удерживание для описания, мс",
+    "group": "Интерфейс"
+  },
+  "combat.attackScale.cellar": {
+    "value": 2.5,
+    "title": "Множитель атак в Подвалах",
+    "group": "Бой"
+  },
+  "combat.attackScale.gallery": {
+    "value": 0.7,
+    "title": "Множитель атак в Галереях",
+    "group": "Бой"
+  },
+  "combat.attackScale.spire": {
+    "value": 0.5,
+    "title": "Множитель атак в Шпиле",
+    "group": "Бой"
+  },
+  "combat.cellarNormalAttack": {
+    "title": "Поправка обычных ударов врагов Подвалов",
+    "value": 1.4,
+    "group": "Бой"
+  },
+  "combat.cellarBossAttack": {
+    "title": "Поправка ударов Привратника подвалов",
+    "value": 0.9,
+    "group": "Бой"
+  }
+}

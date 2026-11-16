@@ -1,0 +1,769 @@
+.ev-app {
+  --accent: #b9ad91;
+  --accent-ink: #151816;
+  --accent-soft: #30322c;
+}
+
+.ev-app .g-top {
+  max-height: none;
+  padding-bottom: 12px;
+}
+
+.ev-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 2px 0 8px;
+}
+
+.ev-stage {
+  font-size: 17px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.ev-constant {
+  max-width: 46%;
+  color: var(--ink-2);
+  font-size: 15px;
+  text-align: right;
+  line-height: 1.2;
+}
+
+/* The eight stages as pictures: passed ones are lit, the current one is framed, the rest wait dimmed. */
+.ev-track {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 48px));
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.ev-track > i {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  opacity: .35;
+}
+
+.ev-track > i .ev-art {
+  width: 78%;
+  height: 78%;
+  max-width: 34px;
+  max-height: 34px;
+}
+
+.ev-track > .done {
+  opacity: .8;
+}
+
+.ev-track > .current {
+  border-color: var(--accent);
+  border-width: 2px;
+  background: var(--accent-soft);
+  opacity: 1;
+}
+
+/* The drawn pictures (ui/art.js). */
+.ev-pic {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+}
+
+.ev-art {
+  display: block;
+}
+
+.ev-track .ev-pic {
+  width: 100%;
+  height: 100%;
+}
+
+.ev-buy > .ev-pic,
+.ev-choice > .ev-pic,
+.ev-gene-head > .ev-pic,
+.ev-event > .ev-pic {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--bg);
+}
+
+.ev-choice > .ev-pic {
+  width: 56px;
+  height: 56px;
+}
+
+.ev-unknown .ev-pic {
+  opacity: .45;
+}
+
+.ev-resource-line {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  min-width: 0;
+}
+
+.ev-resource {
+  min-width: 0;
+  font-size: clamp(27px, 6vw, 38px);
+  letter-spacing: -.035em;
+}
+
+.ev-unit {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ev-goal-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin: 9px 0 6px;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ev-goal-line > .g-num {
+  flex: none;
+  color: var(--ink);
+}
+
+.ev-app .g-field {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
+.ev-scene {
+  position: relative;
+  flex: none;
+  aspect-ratio: 16 / 10;
+  max-height: 250px;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #0c1418;
+}
+
+.ev-scene-art {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* What grows with the stage fades in (ui/scenes.js marks it). */
+.ev-scene-art [data-lv],
+.ev-scene-art [data-flag] {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.ev-scene-art .on {
+  opacity: 1;
+}
+
+/* The motion of the scenes: a group picks one, --d is its period, --dl where it starts. */
+.ev-scene-art .sa {
+  animation-duration: var(--d, 6s);
+  animation-delay: var(--dl, 0s);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.ev-scene-art .sa-drift {
+  animation-name: ev-drift;
+  animation-direction: alternate;
+}
+
+.ev-scene-art .sa-pulse {
+  animation-name: ev-pulse;
+  animation-direction: alternate;
+}
+
+.ev-scene-art .sa-twinkle {
+  animation-name: ev-twinkle;
+  animation-direction: alternate;
+}
+
+.ev-scene-art .sa-sway {
+  animation-name: ev-sway;
+  animation-direction: alternate;
+  transform-origin: 50% 100%;
+}
+
+.ev-scene-art .sa-jelly {
+  animation-name: ev-jelly;
+  animation-direction: alternate;
+  transform-origin: 50% 100%;
+}
+
+.ev-scene-art .sa-flicker {
+  animation-name: ev-flicker;
+  animation-direction: alternate;
+  transform-origin: 50% 100%;
+}
+
+.ev-scene-art .sa-rise {
+  animation-name: ev-rise;
+  animation-timing-function: linear;
+}
+
+.ev-scene-art .sa-swim {
+  animation-name: ev-swim;
+  animation-timing-function: linear;
+}
+
+.ev-scene-art .sa-fly {
+  animation-name: ev-fly;
+  animation-timing-function: linear;
+}
+
+.ev-scene-art .sa-spin {
+  animation-name: ev-spin;
+  animation-timing-function: linear;
+  transform-box: view-box;
+  transform-origin: 0 0;
+}
+
+.ev-scene-art .sa-flash {
+  animation-name: ev-flash;
+  animation-timing-function: linear;
+}
+
+@keyframes ev-drift {
+  to {
+    transform: translate(var(--tx, 6px), var(--ty, -4px));
+  }
+}
+
+@keyframes ev-pulse {
+  to {
+    transform: scale(var(--s, 1.06));
+  }
+}
+
+@keyframes ev-twinkle {
+  to {
+    opacity: .3;
+  }
+}
+
+@keyframes ev-sway {
+  from {
+    transform: rotate(calc(var(--a, 4deg) * -1));
+  }
+  to {
+    transform: rotate(var(--a, 4deg));
+  }
+}
+
+@keyframes ev-jelly {
+  to {
+    transform: scale(.86, 1.12);
+  }
+}
+
+@keyframes ev-flicker {
+  to {
+    transform: scale(.9, 1.16);
+  }
+}
+
+@keyframes ev-rise {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 0px), var(--ty, -100px));
+  }
+}
+
+@keyframes ev-swim {
+  to {
+    transform: translateX(var(--tx, 400px));
+  }
+}
+
+@keyframes ev-fly {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 100px), var(--ty, -40px));
+  }
+}
+
+@keyframes ev-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ev-flash {
+  0% {
+    opacity: 0;
+  }
+  84% {
+    opacity: 0;
+  }
+  86% {
+    opacity: 1;
+  }
+  89% {
+    opacity: .15;
+  }
+  92% {
+    opacity: .9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ev-scene-art .sa {
+    animation: none;
+  }
+
+  .ev-scene-art [data-lv],
+  .ev-scene-art [data-flag] {
+    transition: none;
+  }
+}
+
+.ev-scene-caption {
+  padding: 10px 0 6px;
+  color: var(--ink-2);
+  font-size: 15px;
+  text-align: center;
+}
+
+.ev-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.ev-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 8px 12px;
+  border-left: 2px solid var(--line);
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ev-stat strong {
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.ev-note {
+  line-height: 1.45;
+}
+
+.ev-event {
+  flex: none;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 6px 12px 6px 6px;
+  margin-top: 14px;
+  min-height: 56px;
+  border-color: var(--accent);
+  text-align: left;
+  color: var(--accent);
+}
+
+.ev-chronicle {
+  margin: 12px 0 4px;
+  color: var(--ink-2);
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.ev-chronicle:empty {
+  display: none;
+}
+
+.ev-app .g-actions {
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.ev-mechanics,
+.ev-choices,
+.ev-discoveries,
+.ev-sheet-actions,
+.ev-law-list,
+.ev-gene-list,
+.ev-atlas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ev-panel-title {
+  padding: 4px 0;
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.ev-buy {
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 64px;
+  padding: 8px 12px 8px 8px;
+  border-radius: var(--radius-s);
+  text-align: left;
+}
+
+.ev-row-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.ev-row-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.ev-row-sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink-2);
+  line-height: 1.3;
+}
+
+.ev-row-end {
+  display: flex;
+  flex: none;
+  max-width: 40%;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.ev-row-count {
+  color: var(--ink-2);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.ev-row-price {
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ev-buy:disabled {
+  opacity: .6;
+}
+
+.ev-buy:disabled .ev-row-price {
+  color: var(--ink-2);
+}
+
+.ev-risk {
+  border-color: #bd9985;
+}
+
+.ev-risk .ev-row-title {
+  color: #d5b7a5;
+}
+
+.ev-choice {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px;
+  min-height: 100px;
+  padding: 12px 14px;
+  border-radius: var(--radius-s);
+  text-align: left;
+}
+
+.ev-choice-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ev-card-title {
+  display: block;
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.ev-card-text {
+  display: block;
+  color: var(--ink-2);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.ev-card-tag {
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.ev-tools > .g-btn {
+  min-height: 48px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.ev-land-scene {
+  display: grid;
+  place-items: center;
+  aspect-ratio: auto;
+  height: 290px;
+  max-height: none;
+}
+
+.ev-map {
+  position: relative;
+  width: 310px;
+  height: 286px;
+  flex: none;
+}
+
+.ev-ground {
+  position: absolute;
+  inset: 0;
+}
+
+.ev-island {
+  overflow: visible;
+}
+
+/* A cell of the map is a drawn hexagon (EvoScenes.hex): the biome, the settlement, the outline. */
+.ev-hex.g-btn {
+  position: absolute;
+  display: block;
+  width: 44px;
+  min-width: 44px;
+  height: 50px;
+  min-height: 50px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: none;
+}
+
+.ev-hex-art {
+  display: block;
+  width: 44px;
+  height: 50px;
+}
+
+.ev-hex.selected {
+  z-index: 1;
+}
+
+.ev-hex-key {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ev-hex-pic {
+  flex: none;
+  width: 44px;
+  height: 50px;
+}
+
+.ev-hex-key > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.ev-role {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+}
+
+.ev-role-name {
+  flex: 1;
+}
+
+.ev-gene-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ev-gene-head h3 {
+  margin: 0;
+}
+
+.ev-role-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.ev-role input {
+  display: block;
+  width: 100%;
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.ev-role-help {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ev-gene {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ev-gene > strong {
+  font-size: 17px;
+}
+
+.ev-gene .g-btns > .g-btn {
+  min-height: 48px;
+  padding: 8px;
+}
+
+.ev-app button:focus-visible,
+.g-sheet button:focus-visible,
+.ev-role input:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.ev-app[data-layout="wide"] {
+  grid-template-columns: minmax(326px, 1fr) minmax(280px, 40%);
+}
+
+.ev-app[data-layout="wide"] .g-top {
+  padding-top: 4px;
+  padding-bottom: 18px;
+}
+
+.ev-app[data-layout="wide"] .g-field {
+  padding-top: 14px;
+}
+
+.ev-app[data-layout="wide"] .g-actions {
+  justify-content: safe flex-end;
+  border-top: 0;
+}
+
+.ev-app[data-layout="wide"] .ev-scene {
+  max-height: 330px;
+}
+
+.ev-app[data-layout="wide"] .ev-land-scene {
+  max-height: none;
+}
+
+.ev-app[data-layout="wide"] .ev-land-scene {
+  min-height: 286px;
+  max-height: none;
+}
+
+.ev-app[data-layout="wide"] .ev-resource {
+  font-size: 38px;
+}
+
+@media (max-width: 359px) {
+  .ev-app .g-field,
+  .ev-app .g-top,
+  .ev-app .g-actions {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .ev-heading {
+    align-items: flex-start;
+  }
+
+  .ev-constant {
+    max-width: 42%;
+  }
+
+  .ev-buy {
+    gap: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .ev-land-scene {
+    align-items: center;
+  }
+
+  .ev-map {
+    width: 310px;
+  }
+
+  .ev-app[data-stage="5"] .g-field {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ev-app *,
+  .g-sheet * {
+    animation: none;
+    transition: none;
+  }
+}
+

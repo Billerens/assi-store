@@ -1,0 +1,825 @@
+/* «Кузница слияний»: the gate, the anvil, the forge bar, the upgrade rows. Kit tokens for the
+   surfaces and the text; the metals of the blades (bronze, steel, gold, ember) for the forge's
+   own things. No shadows, one declaration a line. */
+:root {
+  --mf-bronze: #8a7458;
+  --mf-steel: #9aa6c8;
+  --mf-gold: #e6c870;
+  --mf-ember: #e07b4f;
+  --mf-ice: #7fc8e6;
+  --mf-plate: #17181b;
+  --mf-pit: #121316;
+}
+.mf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 4px;
+}
+.mf-toprow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.mf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 15px;
+  color: var(--mf-ember);
+}
+.mf-chip[hidden] {
+  display: none;
+}
+
+/* a drawn picture (art.js): a tile with the SVG inside */
+.mf-ic {
+  position: relative;
+  flex: none;
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.mf-ic > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 3px;
+  box-sizing: border-box;
+}
+.mf-ic.mf-chip-ic,
+.mf-ic.mf-btn-ic,
+.mf-ic.mf-mark-ic,
+.mf-ic.mf-ic-lock,
+.mf-ic.mf-cell-lock {
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+.mf-ic.mf-chip-ic > svg,
+.mf-ic.mf-btn-ic > svg,
+.mf-ic.mf-mark-ic > svg,
+.mf-ic.mf-ic-lock > svg,
+.mf-ic.mf-cell-lock > svg {
+  padding: 0;
+}
+.mf-ic-lvl {
+  position: absolute;
+  right: -6px;
+  top: -7px;
+  min-width: 22px;
+  padding: 0 4px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  color: var(--mf-gold);
+}
+.mf-ic.mf-chip-ic {
+  width: 20px;
+  height: 20px;
+}
+.mf-ic.mf-ic-lock {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  width: 20px;
+  height: 20px;
+}
+
+/* the gate */
+.mf-gate {
+  --mf-line: var(--line);
+  --mf-accent: var(--accent);
+  position: relative;
+  flex: none;
+  height: 150px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.mf-gate.boss {
+  border-color: var(--danger);
+}
+.mf-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.mf-gate-head {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+}
+.mf-gate.tight .mf-gate-head {
+  right: var(--mf-mon, 96px);
+}
+.mf-gate-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 20px;
+}
+.mf-wave {
+  flex: none;
+  font-weight: 700;
+}
+.mf-mname {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+  color: var(--ink-2);
+}
+.mf-bars {
+  display: flex;
+  gap: 6px;
+}
+.mf-hp,
+.mf-timer {
+  position: relative;
+  height: 20px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  box-sizing: border-box;
+  background: var(--mf-pit);
+}
+.mf-hp {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.mf-timer {
+  flex: 0 0 30%;
+}
+.mf-timer[hidden] {
+  display: none;
+}
+.mf-hp > i,
+.mf-timer > i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, #d0605a, #a8403c);
+}
+.mf-timer > i {
+  background: linear-gradient(180deg, #f0b860, #c98a3a);
+}
+.mf-hptext {
+  position: relative;
+  display: block;
+  padding: 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  white-space: nowrap;
+  color: #ffffff;
+}
+
+/* the anvil */
+.mf-anvil-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  min-width: 0;
+  flex: none;
+}
+.mf-anvil-tools .mf-info {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: left;
+  justify-content: flex-start;
+}
+.mf-anvil-tools .g-btn {
+  width: auto;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 5px 8px;
+  font-size: 14px;
+}
+.mf-anvil-tools > .mf-sort {
+  flex: none;
+}
+.mf-blade-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  min-width: 0;
+}
+.mf-blade-actions > .g-btn {
+  flex: 1;
+  min-width: 0;
+}
+.mf-blade-actions .mf-selected-blade {
+  flex: 0 0 auto;
+  color: var(--mf-gold);
+  border-color: var(--mf-bronze);
+}
+.mf-blade-actions[hidden],
+.mf-anvil-tools .g-btn[hidden] {
+  display: none;
+}
+.mf-cell.selected {
+  outline: 2px solid var(--mf-gold);
+  outline-offset: -2px;
+}
+.mf-cell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.mf-info {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+  overflow-wrap: anywhere;
+  color: var(--ink-2);
+}
+.mf-info[hidden] {
+  display: none;
+}
+.mf-anvil-wrap {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 0;
+}
+.mf-anvil {
+  --cell: 64px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), var(--cell));
+  grid-auto-rows: var(--cell);
+  gap: 6px;
+  touch-action: none;
+}
+.mf-cell.fox-hint {
+  outline: 1px dashed var(--mf-gold);
+  outline-offset: -5px;
+}
+/* The plate of the anvil under the cells: it lies in the field's own margin, the cells keep their size. */
+.mf-anvil::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  z-index: 0;
+  border-radius: 14px;
+  border: 1px solid #34373e;
+  background: linear-gradient(180deg, #1f2125, var(--mf-plate));
+  pointer-events: none;
+}
+.mf-cell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-s);
+  border: 1px solid #2b2d33;
+  background: var(--mf-pit);
+}
+.mf-cell.full {
+  border-color: #454952;
+  background: linear-gradient(160deg, #30333a, #1f2125);
+}
+.mf-cell.full.tier-1 {
+  border-color: var(--mf-bronze);
+}
+.mf-cell.full.tier-2 {
+  border-color: var(--mf-steel);
+}
+.mf-cell.full.tier-3 {
+  border-color: var(--mf-gold);
+  background: linear-gradient(160deg, #3a3628, #1f2125);
+}
+.mf-cell.shut {
+  border-style: dashed;
+  border-color: #3a3d44;
+  background: transparent;
+}
+.mf-ic.mf-cell-lock {
+  width: 44%;
+  height: 44%;
+  opacity: 0.5;
+}
+.mf-cell.target {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.mf-cell.crit {
+  border-color: var(--mf-ember);
+  background: linear-gradient(160deg, #4a3028, #2a1f1c);
+}
+.mf-cell.lifted .mf-art {
+  opacity: 0.3;
+}
+.mf-art {
+  display: block;
+  width: 80%;
+  height: 80%;
+  pointer-events: none;
+}
+.mf-art svg,
+.mf-ghost svg,
+.mf-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.mf-img {
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+.mf-lvl {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  padding: 0 3px;
+  border-radius: 7px;
+  background: rgba(10, 10, 12, 0.6);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 17px;
+  text-align: center;
+  color: var(--ink);
+  pointer-events: none;
+}
+.mf-cell.tier-1 .mf-lvl {
+  color: #d8c0a0;
+}
+.mf-cell.tier-2 .mf-lvl {
+  color: #c4cdea;
+}
+.mf-cell.tier-3 .mf-lvl {
+  color: var(--mf-gold);
+}
+/* a rune socket: the stone of its rune in the corner, the frame in its colour */
+.mf-rune-mark {
+  position: absolute;
+  left: 1px;
+  bottom: 1px;
+  width: 34%;
+  height: 34%;
+  min-width: 16px;
+  min-height: 16px;
+  pointer-events: none;
+}
+.mf-rune-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.mf-cell.rune {
+  border-width: 2px;
+}
+.mf-cell.rune-fire {
+  border-color: var(--mf-ember);
+}
+.mf-cell.rune-ice {
+  border-color: var(--mf-ice);
+}
+.mf-cell.rune-greed {
+  border-color: var(--mf-gold);
+}
+.mf-cell.rune:not(.full) {
+  border-style: dashed;
+}
+.mf-ghost {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.92;
+}
+.mf-ghost.sell {
+  opacity: 0.5;
+}
+
+/* the actions */
+.mf-event {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--mf-bronze);
+  background: var(--surface);
+}
+.mf-event[hidden],
+.mf-context[hidden],
+.mf-panel[hidden] {
+  display: none;
+}
+.mf-event .grow {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.mf-ev-t,
+.mf-ev-d,
+.mf-ev-m {
+  overflow-wrap: anywhere;
+}
+.mf-ev-m {
+  font-size: 15px;
+}
+.mf-ev-pic {
+  align-self: flex-start;
+}
+.mf-ev-art,
+.mf-ev-art svg,
+.mf-ev-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.mf-ev-t {
+  font-size: 16px;
+  font-weight: 600;
+}
+.mf-ev-d {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.mf-ev-left {
+  color: var(--mf-gold);
+}
+.mf-event .g-btn.mf-ev-go {
+  order: 9;
+  flex: 1 1 100%;
+  gap: 8px;
+}
+.mf-event .g-sub,
+.mf-bottom .g-sub {
+  font-size: 15px;
+}
+.mf-context .g-btn {
+  min-height: 44px;
+}
+.mf-up-tabs {
+  display: flex;
+  gap: 6px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 6px 0;
+  background: var(--surface);
+}
+.mf-sheet-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.mf-sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--surface);
+}
+.mf-sheet-head h3 {
+  margin: 0;
+}
+.mf-sheet-head .g-btn {
+  width: auto;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 12px;
+}
+.mf-sheet-content .mf-up-tabs {
+  top: 56px;
+}
+.mf-up-tabs .g-btn {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 6px 8px;
+  font-size: 14px;
+}
+.mf-up-tabs .selected {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.mf-milestone {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 8px;
+  color: var(--ink-2);
+}
+.mf-milestone-copy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 7px;
+  font-size: 14px;
+  line-height: 18px;
+}
+.mf-milestone-copy strong {
+  font-weight: 550;
+  color: var(--mf-gold);
+}
+.mf-milestone-track {
+  height: 3px;
+  background: var(--line);
+  overflow: hidden;
+  border-radius: 3px;
+}
+.mf-milestone-track > i {
+  display: block;
+  height: 100%;
+  background: var(--mf-bronze);
+}
+.mf-milestone.near .mf-milestone-track > i {
+  background: var(--mf-gold);
+}
+@media (min-width: 800px) {
+  .sheet-back.mf-workshop-backdrop {
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .sheet.mf-workshop-dialog {
+    max-width: 860px;
+    max-height: 90%;
+    border-radius: 20px;
+  }
+}
+.mf-preparation {
+  display: flex;
+  gap: 6px;
+}
+.mf-preparation[hidden] {
+  display: none;
+}
+.mf-preparation .g-btn {
+  min-height: 44px;
+  flex: 1;
+  font-size: 12px;
+}
+.mf-ev-x {
+  flex: none;
+  width: 44px;
+  height: 44px;
+}
+.mf-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.mf-bottom .g-btn {
+  min-height: 60px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 8px;
+  font-size: 15px;
+}
+.mf-btn-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.mf-ic.mf-btn-ic {
+  width: 26px;
+  height: 26px;
+}
+.mf-forge .mf-ic.mf-btn-ic {
+  border-radius: 7px;
+  background: var(--accent-ink);
+}
+.mf-bottom .g-sub {
+  white-space: nowrap;
+}
+.mf-bottom .g-btn[hidden] {
+  display: none;
+}
+.mf-forge {
+  position: relative;
+  overflow: hidden;
+}
+.mf-forge.blow {
+  outline: 2px solid var(--ok);
+  outline-offset: -2px;
+}
+.mf-forge-fill {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 5px;
+  background: var(--accent-ink);
+  opacity: 0.6;
+}
+.mf-chest.proceeds .g-sub {
+  color: var(--mf-gold);
+  font-weight: 700;
+}
+.mf-btn-t {
+  font-weight: 600;
+}
+.mf-panel {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* the rows of the upgrades and of «Горн мастера» */
+.mf-uplist {
+  max-height: 52vh;
+  overflow-y: auto;
+  padding-top: 6px;
+  padding-right: 4px;
+}
+.mf-master {
+  padding-right: 4px;
+}
+.mf-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+.mf-row .grow {
+  flex: 1;
+  min-width: 0;
+}
+.mf-row.locked .grow,
+.mf-row.locked .mf-ic > svg,
+.mf-row.locked .mf-buy {
+  opacity: 0.5;
+}
+.mf-row.locked .mf-ic-lock > svg {
+  opacity: 1;
+}
+.mf-row-t {
+  font-size: 16px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.mf-row-d {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+  color: var(--ink-2);
+}
+.mf-now {
+  display: block;
+  color: var(--mf-gold);
+}
+.mf-row .g-btn.small {
+  flex: none;
+  width: auto;
+  min-width: 88px;
+  min-height: 48px;
+  padding: 4px 10px;
+}
+.mf-buy {
+  flex-direction: column;
+  gap: 0;
+}
+.mf-buy .g-sub {
+  font-size: 15px;
+}
+.mf-mark {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 88px;
+  min-height: 48px;
+  box-sizing: border-box;
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  border: 1px dashed var(--line);
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.mf-mark.done {
+  border-style: solid;
+  border-color: #3f6a48;
+  color: #9fdcaa;
+}
+.mf-ic.mf-mark-ic {
+  width: 18px;
+  height: 18px;
+}
+.mf-sell {
+  border-bottom: 0;
+}
+.mf-event .g-btn.small {
+  min-height: 44px;
+  padding: 4px 12px;
+}
+.mf-sec {
+  margin-top: 12px;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.mf-seg {
+  display: flex;
+  gap: 6px;
+}
+.mf-seg > button {
+  flex: 1;
+  min-height: 44px;
+  padding: 4px 10px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 15px;
+  white-space: nowrap;
+}
+.mf-seg > button.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.mf-pick {
+  flex: none;
+}
+.mf-rune-row {
+  flex-wrap: wrap;
+}
+.mf-rune-row .mf-row-t {
+  flex: 1 0 auto;
+}
+.mf-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  min-width: 0;
+  margin-bottom: 8px;
+}
+.mf-tabs > button {
+  min-width: 0;
+  white-space: normal;
+  padding: 6px;
+  font-size: 14px;
+}
+.mf-album {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 8px;
+}
+.mf-alb {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  text-align: center;
+}
+.mf-alb .mf-art {
+  width: 56px;
+  height: 56px;
+}
+.mf-alb-t {
+  font-size: 15px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.mf-alb.unseen {
+  border-style: dashed;
+  color: var(--ink-3);
+}
+.mf-alb.unseen .mf-art {
+  filter: brightness(0) invert(0.22);
+}

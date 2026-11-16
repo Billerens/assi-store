@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Запись</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<style>
+  .page {
+    max-width: 880px;
+  }
+
+  .chip,
+  .btn.small {
+    min-height: 44px;
+  }
+
+  .title-btn {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: none;
+    padding: 0;
+    text-align: left;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    min-height: 44px;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+
+  /* One column: the player on top (under the title), then the summary, then the transcript. */
+  .layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+
+  .col.right {
+    display: contents;
+  }
+
+  #player {
+    order: -1;
+  }
+
+  .player {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 12px;
+  }
+
+  .player .bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .player input[type="range"] {
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    accent-color: var(--accent);
+    background: none;
+  }
+
+  .player .time {
+    color: var(--ink-2);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .player .play {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .lines {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    line-height: 1.5;
+  }
+
+  .point {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    min-height: 44px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    background: none;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    width: 100%;
+    text-align: left;
+    line-height: 1.45;
+  }
+
+  .point:first-of-type {
+    border-top: 0;
+  }
+
+  .point .at {
+    flex: none;
+    color: var(--ink-3);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    padding-top: 3px;
+  }
+
+  .task {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .task:first-of-type {
+    border-top: 0;
+  }
+
+  .task .head {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .task input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    margin: 11px 0 0;
+    flex: none;
+    accent-color: var(--accent);
+  }
+
+  .task .body {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: none;
+    padding: 8px 0;
+    text-align: left;
+    min-height: 44px;
+  }
+
+  .task.done .text {
+    color: var(--ink-3);
+    text-decoration: line-through;
+  }
+
+  .task .who {
+    display: block;
+    color: var(--ink-3);
+    font-size: 13px;
+  }
+
+  .task .acts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-left: 32px;
+  }
+
+  .chips a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .state {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+
+  .transcript {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .para {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 6px;
+    padding: 6px 4px;
+    border-radius: var(--radius-s);
+    line-height: 1.55;
+    transition: background 0.3s;
+  }
+
+  .para.now {
+    background: var(--surface-2);
+  }
+
+  .para.lit {
+    background: var(--accent-soft);
+  }
+
+  .para .at {
+    border: 0;
+    background: none;
+    color: var(--accent);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    text-align: left;
+    padding: 0;
+    min-height: 44px;
+    align-self: start;
+    margin-top: -11px;
+  }
+
+  .para .at:disabled {
+    color: var(--ink-3);
+  }
+
+  .mark {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 4px;
+    border: 0;
+    background: none;
+    color: var(--ink-2);
+    font-size: 14px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .mark [data-icon] {
+    color: var(--accent);
+  }
+
+  .gap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0;
+    padding: 10px 12px;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius-s);
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+
+  .raw-part {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .raw-part:first-child {
+    border-top: 0;
+  }
+
+  .note-text p {
+    margin: 0 0 10px;
+    line-height: 1.55;
+  }
+
+  .sheet .field input,
+  .sheet .field textarea {
+    width: 100%;
+  }
+
+  .sheet .actions > .narrow {
+    flex: none;
+    width: 52px;
+    padding: 0;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    border: 0;
+    border-top: 1px solid var(--line);
+    background: none;
+    text-align: left;
+    padding: 0 4px;
+  }
+
+  .menu button:first-child {
+    border-top: 0;
+  }
+
+  .menu button.danger {
+    color: var(--danger);
+  }
+
+  /* Two columns (an open Fold): the summary on the left, the player and the transcript on the right. */
+  @media (min-width: 760px) {
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      align-items: start;
+    }
+
+    .col.right {
+      display: flex;
+      position: sticky;
+      top: 8px;
+      max-height: calc(100vh - 16px);
+      overflow: auto;
+    }
+
+    #player {
+      order: 0;
+    }
+  }
+</style>
+<body>
+<main class="page">
+  <header class="topbar">
+    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <button class="title-btn" id="title" data-raw></button>
+    <button class="icon-btn" id="more" aria-label="Ещё" data-icon="more"></button>
+  </header>
+  <div class="meta" id="meta"></div>
+  <div id="state"></div>
+  <div class="layout">
+    <div class="col left" id="left"></div>
+    <div class="col right" id="right">
+      <section class="card player" id="player" hidden></section>
+      <section class="section">
+        <div class="row">
+          <h2 class="grow">Расшифровка</h2>
+          <button class="btn small" id="rawBtn">Сырой текст</button>
+        </div>
+        <div class="card transcript" id="transcript" data-raw></div>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script src="common.js"></script>
+<script>
+  // A recording of the archive: the summary, tasks, the transcript with the player.
+  const h = ui.h;
+  const { call, KIND, STATE, clock, length, when, dueText, plural, fail } = window.rec;
+  const args = new URLSearchParams(location.search);
+  const id = Number(args.get('id'));
+  const startAt = args.get('t') !== null ? Number(args.get('t')) : null;
+  const MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+
+  let it = null;
+  let showRaw = false;
+  let audio = null;
+  let audioKey = '';
+  let nowMs = 0;
+  let firstDraw = true;
+
+  function at(ms) {
+    return clock(ms);
+  }
+
+  function remindText(time) {
+    const d = new Date(time);
+    const hm = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+    const today = new Date();
+    if (d.toDateString() === today.toDateString()) return 'сегодня в ' + hm;
+    const tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+    if (d.toDateString() === tomorrow.toDateString()) return 'завтра в ' + hm;
+    return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' в ' + hm;
+  }
+
+  function block(title, ...children) {
+    return h('section', { class: 'section' }, h('h2', {}, title), ...children);
+  }
+
+  // ---- the transcript ----------------------------------------------------------------------------
+
+  /** Lights up the place of the transcript nearest to ms and brings it into view. */
+  /** Two columns — an open Fold: the summary and the transcript side by side. */
+  const TWO_COLS = window.matchMedia('(min-width: 760px)');
+
+  function twoCols() {
+    return TWO_COLS.matches;
+  }
+
+  function highlight(ms) {
+    const list = [...document.querySelectorAll('.para[data-at]')];
+    if (!list.length) return;
+    let best = list[0];
+    list.forEach((node) => { if (Number(node.dataset.at) <= ms + 1500) best = node; });
+    document.querySelectorAll('.para.lit').forEach((node) => node.classList.remove('lit'));
+    best.classList.add('lit');
+    best.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    setTimeout(() => best.classList.remove('lit'), 2600);
+  }
+
+  function seek(ms) {
+    if (audio) audio.seek(ms, true).catch(fail);
+    else highlight(ms);
+  }
+
+  function markRow(m) {
+    return h('button', { class: 'mark', onclick: () => editMark(m) },
+      h('span', { 'data-icon': 'flag' }),
+      h('span', { class: 'grow', 'data-raw': '' }, (m.label || 'Отметка') + ' · ' + at(m.atMs)));
+  }
+
+  function gapRow(g) {
+    const range = at(g.offsetMs) + '–' + at(g.offsetMs + g.durationMs);
+    if (g.state === 'failed') {
+      return h('div', { class: 'gap' }, ui.icon('info'),
+        h('span', { class: 'grow' }, 'Отрезок ' + g.n + ' (' + range + ') не расшифровался' + (g.error ? ': ' : ''), g.error ? ui.raw(g.error) : null),
+        h('button', { class: 'btn small soft', onclick: () => call('retry', id).then(() => ui.toast('Отрезок снова в очереди')).then(load).catch(fail) }, 'Повторить'));
+    }
+    return h('div', { class: 'gap' }, h('span', { class: 'spinner' }), h('span', { class: 'grow' }, 'Отрезок ' + g.n + ' (' + range + ') ' + (g.state === 'busy' ? 'расшифровывается' : 'ждёт расшифровки')));
+  }
+
+  function drawTranscript() {
+    const box = document.getElementById('transcript');
+    document.getElementById('rawBtn').textContent = showRaw ? 'Чистый текст' : 'Сырой текст';
+    if (showRaw) {
+      const parts = it.segments.filter((g) => g.raw);
+      box.replaceChildren(...(parts.length ? parts.map((g) => h('div', { class: 'raw-part' },
+        h('button', { class: 'btn small', onclick: () => seek(g.offsetMs) }, 'Отрезок ' + g.n + ' · ' + at(g.offsetMs)),
+        h('div', { class: 'muted' }, g.raw))) : [h('div', { class: 'muted small' }, 'Сырого текста ещё нет')]));
+      return;
+    }
+    const items = [];
+    it.paragraphs.forEach((p) => items.push({ at: p.atMs, order: 1, node: () => h('div', { class: 'para', 'data-at': p.atMs },
+      h('button', { class: 'at', onclick: () => seek(p.atMs), disabled: !audio, 'aria-label': 'Слушать с ' + at(p.atMs) }, (p.exact === false ? '~' : '') + at(p.atMs)),
+      h('span', {}, p.text)) }));
+    it.marks.forEach((m) => items.push({ at: m.atMs, order: 0, node: () => markRow(m) }));
+    it.segments.filter((g) => g.state !== 'done').forEach((g) => items.push({ at: g.offsetMs, order: 2, node: () => gapRow(g) }));
+    items.sort((a, b) => a.at - b.at || a.order - b.order);
+    if (!items.length) {
+      box.replaceChildren(h('div', { class: 'muted small' }, it.state === 'recording' ? 'Текст появится, когда закончится первый отрезок' : 'Текста нет'));
+      return;
+    }
+    box.replaceChildren(...items.map((x) => x.node()));
+    ui.icons(box);
+    markNow(nowMs);
+  }
+
+  function markNow(ms) {
+    const list = [...document.querySelectorAll('.para[data-at]')];
+    let current = null;
+    list.forEach((node) => { if (Number(node.dataset.at) <= ms) current = node; });
+    list.forEach((node) => node.classList.toggle('now', node === current && Boolean(audio && audio.playing)));
+  }
+
+  // ---- the player --------------------------------------------------------------------------------
+
+  function drawPlayer() {
+    const box = document.getElementById('player');
+    const parts = it.segments.filter((g) => g.url && g.state !== 'recording').map((g) => ({ url: g.url, file: g.file, offsetMs: g.offsetMs, durationMs: g.durationMs }));
+    if (it.audioRemoved || !parts.length || it.state === 'recording') {
+      if (audio) { audio.stop(); audio = null; audioKey = ''; }
+      box.hidden = !it.audioRemoved;
+      box.replaceChildren(h('div', { class: 'muted small' }, 'Звук удалён, текст остался'));
+      return;
+    }
+    const key = parts.map((p) => p.url + ':' + p.durationMs).join('|');
+    if (audio && key === audioKey) return;
+    if (audio) audio.stop();
+    audioKey = key;
+    box.hidden = false;
+    const range = h('input', { type: 'range', min: 0, max: 1000, value: 0, 'aria-label': 'Место в записи' });
+    const time = h('span', { class: 'time' }, '0:00 / ' + at(0));
+    const play = h('button', { class: 'icon-btn play', 'aria-label': 'Слушать' }, ui.icon('play'));
+    let dragging = false;
+    window.__recorderPhonePlayer = (window.__settings || {}).player === 'phone';
+    audio = window.rec.player(parts, (ms) => {
+      nowMs = ms;
+      if (!dragging) range.value = String(Math.round(ms / Math.max(1, audio.total) * 1000));
+      time.textContent = at(ms) + ' / ' + at(audio.total);
+      markNow(ms);
+    }, (playing) => {
+      play.replaceChildren(ui.icon(playing ? 'pause' : 'play'));
+      play.setAttribute('aria-label', playing ? 'Пауза' : 'Слушать');
+      markNow(nowMs);
+    });
+    time.textContent = '0:00 / ' + at(audio.total);
+    play.onclick = () => audio.toggle(nowMs).catch(fail);
+    range.oninput = () => {
+      dragging = true;
+      time.textContent = at(Number(range.value) / 1000 * audio.total) + ' / ' + at(audio.total);
+    };
+    range.onchange = () => {
+      dragging = false;
+      nowMs = Number(range.value) / 1000 * audio.total;
+      audio.seek(nowMs, false).catch(fail);
+      markNow(nowMs);
+    };
+    const flag = h('button', { class: 'icon-btn', 'aria-label': 'Отметка здесь', onclick: () => {
+      call('addMark', id, nowMs, null).then(() => ui.toast('Отметка ' + at(nowMs))).then(load).catch(fail);
+    } }, ui.icon('flag'));
+    box.replaceChildren(h('div', { class: 'bar' }, play, range, flag), h('div', { class: 'row' }, time,
+      h('span', { class: 'grow' }), it.audioKept ? h('span', { class: 'badge' }, 'звук хранится всегда') : null));
+  }
+
+  // ---- the summary -------------------------------------------------------------------------------
+
+  function point(text, atMs) {
+    if (atMs === null || atMs === undefined) return h('div', { class: 'point' }, h('span', { 'data-raw': '' }, text));
+    return h('button', { class: 'point', onclick: () => highlight(atMs) },
+      h('span', { class: 'at' }, at(atMs)), h('span', { class: 'grow', 'data-raw': '' }, text));
+  }
+
+  function taskNode(t) {
+    const placed = t.atMs !== null && t.atMs !== undefined && it.paragraphs.length > 0;
+    const box = h('input', { type: 'checkbox', 'aria-label': 'Сделано' });
+    box.checked = t.done;
+    box.onchange = () => call('setTask', t.id, { done: box.checked }).then(load).catch(fail);
+    const acts = [];
+    if (!t.done) {
+      if (t.calendarEventId) {
+        acts.push(h('button', { class: 'btn small', onclick: () => call('removeFromCalendar', t.id).then(() => ui.toast('Убрано из календаря')).then(load).catch(fail) }, ui.icon('calendar'), ' В календаре · убрать'));
+      } else {
+        acts.push(h('button', { class: 'btn small', onclick: () => call('taskToCalendar', t.id).then((r) => ui.toast('В календаре: ' + remindText(r.start))).then(load).catch(fail) }, ui.icon('calendar'), ' В календарь'));
+      }
+      if (t.remindAt && !t.proposed) {
+        acts.push(h('button', { class: 'btn small', onclick: () => call('cancelReminder', t.id).then(() => ui.toast('Напоминание снято')).then(load).catch(fail) }, ui.icon('bell'), ' Напомню ' + remindText(t.remindAt) + ' · снять'));
+      } else {
+        acts.push(h('button', { class: 'btn small' + (t.proposed ? ' primary' : ''), onclick: () => call('remindTask', t.id).then((r) => ui.toast('Напомню ' + remindText(r.at))).then(load).catch(fail) }, ui.icon('bell'), t.proposed && t.remindAt ? ' Напомнить ' + remindText(t.remindAt) : ' Напомнить'));
+      }
+      if (placed && !twoCols()) acts.push(h('button', { class: 'btn small', 'aria-label': 'Где сказано', onclick: () => highlight(t.atMs) }, ui.icon('search'), ' ' + at(t.atMs)));
+    }
+    const info = [t.who, dueText(t.due)].filter(Boolean).join(', ');
+    // An open Fold (two columns): a tap on the task lights up its place in the transcript beside it,
+    // as a tap on a decision does; the pencil edits. One column: a tap edits, the time button shows the place.
+    const lights = placed && twoCols();
+    return h('div', { class: 'task' + (t.done ? ' done' : '') },
+      h('div', { class: 'head' }, box,
+        h('button', { class: 'body', onclick: () => (lights ? highlight(t.atMs) : editTask(t)) },
+          h('span', { class: 'text', 'data-raw': '' }, t.text),
+          info || lights ? h('span', { class: 'who', 'data-raw': '' }, [lights ? at(t.atMs) : '', info].filter(Boolean).join(' · ')) : null),
+        lights ? h('button', { class: 'icon-btn', 'aria-label': 'Изменить задачу', onclick: () => editTask(t) }, ui.icon('edit')) : null),
+      acts.length ? h('div', { class: 'acts' }, ...acts) : null);
+  }
+
+  function tasksBlock() {
+    const add = h('button', { class: 'btn small soft', onclick: () => editTask(null) }, ui.icon('plus'), ' Задача');
+    const open = it.tasks.filter((t) => !t.done).length;
+    return block('Задачи' + (it.tasks.length ? ' · ' + open + ' из ' + it.tasks.length : ''),
+      it.tasks.length ? h('div', { class: 'card' }, ...it.tasks.map(taskNode)) : h('div', { class: 'muted small' }, 'Задач не нашлось'),
+      h('div', { class: 'row' }, add));
+  }
+
+  function chipsOf(list) {
+    return h('div', { class: 'chips' }, ...list.map((word) => h('a', { class: 'chip', href: '#', 'data-raw': '', onclick: (event) => {
+      event.preventDefault();
+      assi.open('modules/recorder/ui/index.html?q=' + encodeURIComponent(word));
+    } }, word)));
+  }
+
+  function commandCard(cmd, state) {
+    let what = null;
+    let line = null;
+    const buttons = [];
+    if (cmd.kind === 'message') {
+      what = 'Написать ' + cmd.to + ': «' + cmd.text + '»';
+      line = { draft: 'Черновик ответа во Входящих — проверьте и отправьте', 'draft-no-reply': 'Черновик во Входящих, но ответить из ленты нельзя — отправьте вручную',
+        'not-found': 'Беседа не нашлась во Входящих', 'no-inbox': 'Модуля «Входящие» нет' }[state] || null;
+      buttons.push(h('button', { class: 'btn small', onclick: () => call('copy', cmd.text).then(() => ui.toast('Текст скопирован')).catch(fail) }, ui.icon('copy'), ' Скопировать текст'));
+      if (state === 'draft' || state === 'draft-no-reply') buttons.push(h('button', { class: 'btn small soft', onclick: () => assi.open('modules/inbox/ui/index.html') }, 'Входящие'));
+    } else if (cmd.kind === 'expense') {
+      what = 'Трата: ' + (cmd.what || 'без названия') + ', ' + cmd.amount + ' ₽';
+      line = { expense: 'Записана в «Тратах» с пометкой «голосом»', 'expense-base': 'Записана в общую базу' }[state] || null;
+      if (state === 'expense') buttons.push(h('button', { class: 'btn small soft', onclick: () => assi.open('modules/spending/ui/index.html') }, 'Траты'));
+    } else if (cmd.kind === 'reminder') {
+      what = 'Напомнить: ' + cmd.text + (cmd.at ? ', ' + remindText(cmd.at) : cmd.date ? ', ' + dueText(cmd.date) : '');
+      line = state === 'proposed' ? 'Предложено — кнопка «Напомнить» у задачи ниже' : null;
+    }
+    if (!what) return null;
+    if (state && /^error/.test(state)) line = 'Не вышло: ' + state.replace(/^error:\s*/, '');
+    return block('Поручение', h('div', { class: 'card section' },
+      h('div', { 'data-raw': '' }, what),
+      line ? h('div', { class: 'muted small' }, line) : null,
+      buttons.length ? h('div', { class: 'row' }, ...buttons) : null));
+  }
+
+  function drawLeft() {
+    const box = document.getElementById('left');
+    const s = it.summary || {};
+    const out = [];
+    if (!it.summary) {
+      out.push(h('div', { class: 'muted' }, it.state === 'recording' ? 'Идёт запись: конспект — после «Стоп»' : it.state === 'failed' ? 'Конспекта нет' : 'Конспект появится, когда текст будет готов'));
+    } else if (s.kind === 'note') {
+      out.push(block('Мысль', h('div', { class: 'card note-text', 'data-raw': '' }, ...String(s.text || '').split(/\n\n+/).map((p) => h('p', {}, p)))));
+      if (it.tags.length) out.push(block('Теги', chipsOf(it.tags)));
+      if (it.command) {
+        const c = commandCard(it.command, it.commandState);
+        if (c) out.push(c);
+      }
+      if (it.tasks.length) out.push(tasksBlock());
+    } else {
+      if (s.summary && s.summary.length) out.push(block('Кратко', h('div', { class: 'card' }, h('ul', { class: 'lines', 'data-raw': '' }, ...s.summary.map((x) => h('li', {}, x))))));
+      out.push(block('Решения', s.decisions && s.decisions.length
+        ? h('div', { class: 'card' }, ...s.decisions.map((d) => point(d.text, d.atMs)))
+        : h('div', { class: 'muted small' }, 'Решений не нашлось')));
+      out.push(tasksBlock());
+      if (s.questions && s.questions.length) out.push(block('Открытые вопросы', h('div', { class: 'card' }, ...s.questions.map((q) => point(q, null)))));
+      const people = it.people || [];
+      const topics = s.topics || it.tags || [];
+      if (people.length || topics.length) {
+        out.push(block('Люди и темы', people.length ? chipsOf(people) : null, topics.length ? chipsOf(topics.filter((x) => people.indexOf(x) < 0)) : null));
+      }
+    }
+    if (s.by === 'rules') out.push(h('div', { class: 'muted small' }, 'Собрано правилами, без модели' + (s.note ? ': ' : ''), s.note ? ui.raw(s.note.replace(/^[^:]*:\s*/, '')) : null));
+    else if (s.note) out.push(h('div', { class: 'muted small', 'data-raw': '' }, s.note));
+    if (s.gaps) out.push(h('div', { class: 'muted small' }, 'Не расшифровано отрезков: ' + s.gaps + ' — в расшифровке есть «Повторить»'));
+    box.replaceChildren(...out);
+    ui.icons(box);
+  }
+
+  function drawHead() {
+    document.getElementById('title').textContent = it.title;
+    document.title = it.title;
+    const meta = [when(it.startedAt), length(it.durationMs), KIND[it.kind] || (it.mode === 'import' ? 'Файл' : 'Запись')];
+    if (it.origin === 'file' && it.sourceName) meta.push(it.sourceName);
+    document.getElementById('meta').replaceChildren(...meta.map((x, i) => h('span', i === 3 ? { 'data-raw': '' } : {}, x)));
+    const box = document.getElementById('state');
+    if (it.state === 'recording') {
+      box.replaceChildren(h('div', { class: 'card state' }, h('span', { 'data-icon': 'mic' }), h('span', { class: 'grow' }, 'Идёт запись'),
+        h('button', { class: 'btn small primary', onclick: () => assi.open('modules/recorder/ui/index.html') }, 'К записи')));
+    } else if (it.state === 'transcribing' || it.state === 'summarizing' || it.state === 'importing') {
+      const waiting = it.segments.filter((g) => g.state === 'wait' || g.state === 'busy').length;
+      box.replaceChildren(h('div', { class: 'card state' }, h('span', { class: 'spinner' }),
+        h('span', { class: 'grow' }, it.progress || STATE[it.state], waiting ? ' · в очереди ' + waiting + ' ' + plural(waiting, 'отрезок', 'отрезка', 'отрезков') : '')));
+    } else if (it.state === 'failed') {
+      box.replaceChildren(h('div', { class: 'card danger state' }, h('span', { 'data-icon': 'info' }), h('span', { class: 'grow', 'data-raw': '' }, it.error || 'Ошибка'),
+        h('button', { class: 'btn small', onclick: () => call('retry', id).then(load).catch(fail) }, 'Повторить')));
+    } else if (it.error) {
+      box.replaceChildren(h('div', { class: 'muted small', 'data-raw': '' }, it.error));
+    } else {
+      box.replaceChildren();
+    }
+    ui.icons(box);
+  }
+
+  // ---- sheets ------------------------------------------------------------------------------------
+
+  function editTitle() {
+    const input = h('input', { class: 'input', value: it.title, 'data-raw': '' });
+    const close = ui.sheet([h('h3', {}, 'Заголовок'), input, h('div', { class: 'actions' },
+      h('button', { class: 'btn', onclick: () => close() }, 'Отмена'),
+      h('button', { class: 'btn primary', onclick: () => call('setTitle', id, input.value).then(() => { close(); load(); }).catch(fail) }, 'Сохранить'))]);
+    input.focus();
+  }
+
+  function editTask(t) {
+    const text = h('textarea', { class: 'input', rows: 3, 'data-raw': '' });
+    text.value = t ? t.text : '';
+    const who = h('input', { class: 'input', placeholder: 'Кто', 'data-raw': '' });
+    who.value = t && t.who ? t.who : '';
+    const due = h('input', { class: 'input', type: 'date' });
+    due.value = t && t.due ? t.due : '';
+    const fields = () => ({ text: text.value, who: who.value.trim() || null, due: due.value || null });
+    const buttons = [h('button', { class: 'btn', onclick: () => close() }, 'Отмена')];
+    if (t) buttons.unshift(h('button', { class: 'btn danger narrow', 'aria-label': 'Удалить задачу', onclick: () => call('removeTask', t.id).then(() => { close(); load(); }).catch(fail) }, ui.icon('trash')));
+    buttons.push(h('button', { class: 'btn primary', onclick: () => (t ? call('setTask', t.id, fields()) : call('addTask', id, fields())).then(() => { close(); load(); }).catch(fail) }, 'Сохранить'));
+    const close = ui.sheet([h('h3', {}, t ? 'Задача' : 'Новая задача'),
+      h('label', { class: 'field' }, h('span', {}, 'Что сделать'), text),
+      h('label', { class: 'field' }, h('span', {}, 'Кто'), who),
+      h('label', { class: 'field' }, h('span', {}, 'Срок'), due),
+      h('div', { class: 'actions' }, ...buttons)]);
+    if (!t) text.focus();
+  }
+
+  function editMark(m) {
+    const input = h('input', { class: 'input', placeholder: 'Подпись', 'data-raw': '' });
+    input.value = m.label || '';
+    // The spec: a mark is captioned by voice later. While the recording goes on the microphone is its own.
+    const mic = h('button', { class: 'btn wide', disabled: it.state === 'recording' }, ui.icon('mic'), ' Подписать голосом');
+    mic.onclick = async () => {
+      mic.disabled = true;
+      mic.replaceChildren(h('span', { class: 'spinner' }), ' Слушаю…');
+      try {
+        const said = String((await assi.native('speech.listen', (window.__settings || {}).markListenSec || 20)) || '').trim();
+        if (said) input.value = input.value.trim() ? input.value.trim() + ' ' + said : said;
+        else ui.toast('Ничего не расслышал');
+      } catch (error) {
+        fail(error);
+      } finally {
+        mic.disabled = false;
+        mic.replaceChildren(ui.icon('mic'), ' Подписать голосом');
+      }
+    };
+    const close = ui.sheet([h('h3', {}, 'Отметка ' + at(m.atMs)), input, mic,
+      h('button', { class: 'btn wide', onclick: () => { close(); seek(m.atMs); } }, ui.icon('play'), ' Слушать отсюда'),
+      h('div', { class: 'actions' },
+        h('button', { class: 'btn danger', onclick: () => call('removeMark', m.id).then(() => { close(); load(); }).catch(fail) }, 'Удалить'),
+        h('button', { class: 'btn primary', onclick: () => call('setMark', m.id, input.value).then(() => { close(); load(); }).catch(fail) }, 'Сохранить'))]);
+  }
+
+  function more() {
+    const busy = it.state === 'recording';
+    let close = null;
+    const item = (icon, title, fn, cls) => h('button', { class: cls || '', disabled: busy && cls !== 'keep', onclick: () => { close(); fn(); } }, ui.icon(icon), h('span', {}, title));
+    const kinds = [['meeting', 'Встреча'], ['note', 'Мысль'], ['lecture', 'Лекция']].filter(([k]) => k !== it.kind);
+    const rebuild = (options, toast) => call('rebuild', id, options).then(() => ui.toast(toast)).then(load).catch(fail);
+    close = ui.sheet([h('div', { class: 'menu' },
+      item('refresh', 'Пересобрать конспект', () => rebuild({}, 'Конспект собирается заново')),
+      item('refresh', 'Пересобрать с чисткой текста моделью', () => rebuild({ clean: true }, 'Текст и конспект — заново')),
+      ...kinds.map(([k, title]) => item('edit', 'Сделать: ' + title, () => rebuild({ kind: k }, 'Теперь это: ' + title))),
+      item('share', 'Поделиться конспектом', () => call('share', id).catch(fail), 'keep'),
+      item('copy', 'Скопировать конспект', () => call('copy', id).then(() => ui.toast('Конспект скопирован')).catch(fail), 'keep'),
+      it.audioRemoved ? null : item('lock', it.audioKept ? 'Не хранить звук всегда' : 'Хранить звук всегда', () => call('keepAudio', id, !it.audioKept).then(load).catch(fail)),
+      it.audioRemoved ? null : item('trash', 'Удалить звук, оставить текст', async () => {
+        if (await ui.confirm('Удалить звук этой записи? Текст и конспект останутся.', 'Удалить звук', true)) call('dropAudio', id).then(load).catch(fail);
+      }, 'danger'),
+      item('trash', 'Удалить запись', async () => {
+        if (await ui.confirm('Удалить запись целиком — звук, текст, задачи? Это не отменить.', 'Удалить', true)) call('remove', id).then(() => assi.back()).catch(fail);
+      }, 'danger'))]);
+  }
+
+  // ---- loading -----------------------------------------------------------------------------------
+
+  async function load() {
+    try {
+      it = await call('item', id);
+    } catch (error) {
+      document.getElementById('left').replaceChildren(h('div', { class: 'empty' }, 'Записи нет: возможно, её удалили'));
+      return;
+    }
+    drawHead();
+    drawPlayer();
+    drawLeft();
+    drawTranscript();
+    if (firstDraw) {
+      firstDraw = false;
+      if (startAt !== null && isFinite(startAt)) {
+        nowMs = startAt;
+        setTimeout(() => highlight(startAt), 100);
+        if (audio) audio.seek(startAt, false).catch(() => {});
+      }
+    }
+  }
+
+  document.getElementById('title').onclick = editTitle;
+  document.getElementById('more').onclick = more;
+  document.getElementById('rawBtn').onclick = () => { showRaw = !showRaw; drawTranscript(); };
+
+  let timer = null;
+  assi.on('recorder.changed', (e) => {
+    if (!e || (e.id !== null && Number(e.id) !== id)) return;
+    if (e.type === 'progress' && it) {
+      it.progress = e.progress;
+      drawHead();
+      return;
+    }
+    if (e.type === 'remove' && Number(e.id) === id) { assi.back(); return; }
+    if (document.querySelector('.sheet')) return;
+    clearTimeout(timer);
+    timer = setTimeout(load, 400);
+  });
+  window.addEventListener('pagehide', () => { if (audio) audio.stop(); });
+  // Folding or unfolding the phone changes what a tap on a task does: the summary is drawn again.
+  TWO_COLS.addEventListener('change', () => { if (it) drawLeft(); });
+
+  call('settings').then((s) => { window.__settings = s.values; }).catch(() => {}).then(load);
+</script>
+</body>
+</html>

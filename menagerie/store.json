@@ -1,0 +1,12 @@
+{
+  "id": "menagerie",
+  "kind": "game",
+  "title": "Зверинец",
+  "target": "modules/games/menagerie",
+  "requires": [],
+  "shell": [
+    "app.visible",
+    "job.once",
+    "vibrate.pattern"
+  ]
+}

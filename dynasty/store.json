@@ -1,0 +1,8 @@
+{
+  "id": "dynasty",
+  "kind": "game",
+  "title": "Династия",
+  "target": "modules/games/dynasty",
+  "requires": [],
+  "shell": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "bedtime-series",
+  "kind": "module",
+  "title": "Сериал на ночь",
+  "target": "modules/bedtime-series",
+  "requires": ["voice-adventure"],
+  "shell": ["speech.render", "notify.actions", "app.visible", "job.once"]
+}

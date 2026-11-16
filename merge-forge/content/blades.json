@@ -1,0 +1,246 @@
+{
+ "beyond": "Клинок звезды +{}",
+ "beyondColor": "#f4d27a",
+ "list": [
+  {
+   "level": 1,
+   "title": "Ржавый нож",
+   "color": "#9a5b3c",
+   "shape": "knife"
+  },
+  {
+   "level": 2,
+   "title": "Медный кинжал",
+   "color": "#c27a4a",
+   "shape": "knife"
+  },
+  {
+   "level": 3,
+   "title": "Бронзовый тесак",
+   "color": "#b08a4a",
+   "shape": "knife"
+  },
+  {
+   "level": 4,
+   "title": "Железный меч",
+   "color": "#8d949c",
+   "shape": "knife"
+  },
+  {
+   "level": 5,
+   "title": "Стальной меч",
+   "color": "#b7c0c8",
+   "shape": "sword"
+  },
+  {
+   "level": 6,
+   "title": "Короткий палаш",
+   "color": "#a9b6c2",
+   "shape": "sword"
+  },
+  {
+   "level": 7,
+   "title": "Шпага",
+   "color": "#c9d1d8",
+   "shape": "sword"
+  },
+  {
+   "level": 8,
+   "title": "Кривой нож степи",
+   "color": "#b79f78",
+   "shape": "sword"
+  },
+  {
+   "level": 9,
+   "title": "Длинный меч",
+   "color": "#aeb8c4",
+   "shape": "sword"
+  },
+  {
+   "level": 10,
+   "title": "Кованый бастард",
+   "color": "#9aa6b8",
+   "shape": "heavy"
+  },
+  {
+   "level": 11,
+   "title": "Сабля закалки",
+   "color": "#c0c9d4",
+   "shape": "heavy"
+  },
+  {
+   "level": 12,
+   "title": "Двуручник",
+   "color": "#8e98a6",
+   "shape": "heavy"
+  },
+  {
+   "level": 13,
+   "title": "Палаш с узором",
+   "color": "#b5bdc9",
+   "shape": "heavy"
+  },
+  {
+   "level": 14,
+   "title": "Ятаган ветра",
+   "color": "#9fc3c9",
+   "shape": "heavy"
+  },
+  {
+   "level": 15,
+   "title": "Серебряный меч",
+   "color": "#d9dde2",
+   "shape": "saber"
+  },
+  {
+   "level": 16,
+   "title": "Клеймор",
+   "color": "#a7b2bf",
+   "shape": "saber"
+  },
+  {
+   "level": 17,
+   "title": "Меч зари",
+   "color": "#e0b07a",
+   "shape": "saber"
+  },
+  {
+   "level": 18,
+   "title": "Чернёный клинок",
+   "color": "#6b737e",
+   "shape": "saber"
+  },
+  {
+   "level": 19,
+   "title": "Огненный палаш",
+   "color": "#e07b4f",
+   "shape": "saber"
+  },
+  {
+   "level": 20,
+   "title": "Клинок глубин",
+   "color": "#4f7fa8",
+   "shape": "rune"
+  },
+  {
+   "level": 21,
+   "title": "Обсидиановый клинок",
+   "color": "#5a5568",
+   "shape": "rune"
+  },
+  {
+   "level": 22,
+   "title": "Клинок пепла",
+   "color": "#8a8580",
+   "shape": "rune"
+  },
+  {
+   "level": 23,
+   "title": "Лунный серп",
+   "color": "#c9cfe6",
+   "shape": "rune"
+  },
+  {
+   "level": 24,
+   "title": "Рунный меч",
+   "color": "#7f9fd6",
+   "shape": "rune"
+  },
+  {
+   "level": 25,
+   "title": "Клинок прилива",
+   "color": "#4fa3a8",
+   "shape": "rune"
+  },
+  {
+   "level": 26,
+   "title": "Громовой меч",
+   "color": "#9f8fe0",
+   "shape": "rune"
+  },
+  {
+   "level": 27,
+   "title": "Хрустальный меч",
+   "color": "#a8e0e6",
+   "shape": "rune"
+  },
+  {
+   "level": 28,
+   "title": "Клинок северного сияния",
+   "color": "#7fd6a8",
+   "shape": "rune"
+  },
+  {
+   "level": 29,
+   "title": "Меч без тени",
+   "color": "#e6e6e6",
+   "shape": "rune"
+  },
+  {
+   "level": 30,
+   "title": "Звёздный клинок I",
+   "color": "#e6c870",
+   "shape": "star"
+  },
+  {
+   "level": 31,
+   "title": "Звёздный клинок II",
+   "color": "#ecc86a",
+   "shape": "star"
+  },
+  {
+   "level": 32,
+   "title": "Звёздный клинок III",
+   "color": "#f0c062",
+   "shape": "star"
+  },
+  {
+   "level": 33,
+   "title": "Звёздный клинок IV",
+   "color": "#f2b65c",
+   "shape": "star"
+  },
+  {
+   "level": 34,
+   "title": "Звёздный клинок V",
+   "color": "#f0aa60",
+   "shape": "star"
+  },
+  {
+   "level": 35,
+   "title": "Звёздный клинок VI",
+   "color": "#eca06a",
+   "shape": "star"
+  },
+  {
+   "level": 36,
+   "title": "Звёздный клинок VII",
+   "color": "#e6987a",
+   "shape": "star"
+  },
+  {
+   "level": 37,
+   "title": "Звёздный клинок VIII",
+   "color": "#dc948c",
+   "shape": "star"
+  },
+  {
+   "level": 38,
+   "title": "Звёздный клинок IX",
+   "color": "#d4929e",
+   "shape": "star"
+  },
+  {
+   "level": 39,
+   "title": "Звёздный клинок X",
+   "color": "#c896b2",
+   "shape": "star"
+  },
+  {
+   "level": 40,
+   "title": "Звёздный клинок XI",
+   "color": "#bc9cc6",
+   "shape": "star"
+  }
+ ]
+}

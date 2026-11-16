@@ -1,0 +1,8 @@
+{
+  "id": "voice-adventure",
+  "kind": "module",
+  "title": "Текстовое приключение для дороги",
+  "target": "modules/voice-adventure",
+  "requires": [],
+  "shell": ["speech.render", "notify.actions", "app.visible"]
+}

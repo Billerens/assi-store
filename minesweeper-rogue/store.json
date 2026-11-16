@@ -1,0 +1,8 @@
+{
+  "id": "minesweeper-rogue",
+  "kind": "game",
+  "title": "Сапёр-рогалик",
+  "target": "modules/games/minesweeper-rogue",
+  "requires": [],
+  "shell": []
+}

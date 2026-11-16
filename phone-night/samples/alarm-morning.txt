@@ -1,0 +1,40 @@
+Current Alarm Manager state:
+  Settings:
+    min_futurity=+5s0ms
+    min_interval=+1m0s0ms
+
+  nowRTC=1763093550000=2026-11-14 07:12:30.000 nowELAPSED=33150000
+  mLastTimeChangeClockTime=1763050000000=2026-11-13 19:06:40.000
+  Next wakeup alarm: +2m0s0ms = 2026-11-14 07:14:30.000
+
+  Pending alarm batches: 29
+
+  Top Alarms:
+    +4m20s100ms running, 431 wakeups, 431 alarms: u0a160:com.google.android.gms
+      *walarm*:com.google.android.gms.gcm.ACTION_CHECK_QUEUE
+    +1m5s3ms running, 239 wakeups, 239 alarms: u0a245:ru.marketplace.app
+      *walarm*:ru.marketplace.app.SYNC
+
+  Alarm Stats:
+  1000:android +1m59s0ms running, 2100 wakeups:
+    +33s0ms 1050 wakes 1050 alarms, last -1m0s0ms:
+      *walarm*:android.appwidget.action.APPWIDGET_UPDATE
+    +21s0ms 1050 wakes 1050 alarms, last -2m0s0ms:
+      *walarm*:com.android.server.action.NETWORK_STATS_POLL
+  u0a160:com.google.android.gms +4m20s100ms running, 431 wakeups:
+    +3m6s0ms 315 wakes 315 alarms, last -8m0s0ms:
+      *walarm*:com.google.android.gms.gcm.ACTION_CHECK_QUEUE
+    +1m14s100ms 116 wakes 156 alarms, last -40m0s0ms:
+      *alarm*:com.google.android.location.ALARM_WAKEUP_LOCATOR
+  u0a245:ru.marketplace.app +1m5s3ms running, 239 wakeups:
+    +1m5s3ms 239 wakes 239 alarms, last -7m0s0ms:
+      *walarm*:ru.marketplace.app.SYNC
+  u0a301:org.telegram.messenger +8s300ms running, 43 wakeups:
+    +8s300ms 43 wakes 56 alarms, last -20m0s0ms:
+      *walarm*:org.telegram.messenger.KEEP_ALIVE
+  u0a199:app.assi +2s500ms running, 12 wakeups:
+    +2s500ms 12 wakes 12 alarms, last -12m0s0ms:
+      *walarm*:app.assi.JOB
+  u0a280:com.whatsapp +1s0ms running, 4 wakeups:
+    +1s0ms 4 wakes 4 alarms, last -2h0m0s0ms:
+      *walarm*:com.whatsapp.messaging.MessageService.KEEPALIVE

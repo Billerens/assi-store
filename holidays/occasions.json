@@ -1,0 +1,196 @@
+[
+  {
+    "id": "new-year",
+    "title": "Новый год",
+    "rule": { "fixed": "12-31" },
+    "from": -11,
+    "to": 8,
+    "priority": 90,
+    "accent": "#7FB8FF",
+    "decor": "snow",
+    "egg": ["garland", "sparks"],
+    "eggFrom": 0,
+    "eggTo": 1,
+    "icon": "star",
+    "wallpaper": "snowy forest winter",
+    "about": "С 20 декабря по 8 января тихий снег; 31 декабря и 1 января — гирлянда в шапке и искры от кнопок."
+  },
+  {
+    "id": "christmas",
+    "title": "Рождество",
+    "rule": { "fixed": "01-07" },
+    "priority": 60,
+    "accent": "#E8C468",
+    "egg": "home-star",
+    "icon": "star",
+    "wallpaper": "christmas winter night candles",
+    "about": "Тёплый золотой цвет и звезда у заголовка главного экрана."
+  },
+  {
+    "id": "maslenitsa",
+    "title": "Масленица",
+    "rule": { "easter": -55 },
+    "to": 6,
+    "priority": 55,
+    "accent": "#F2C14E",
+    "egg": "pancakes",
+    "icon": "calendar",
+    "wallpaper": "winter festival bonfire",
+    "about": "Неделя за семь недель до Пасхи: блинный жёлтый цвет и стопки блинов в пустых местах."
+  },
+  {
+    "id": "defender-day",
+    "title": "День защитника Отечества",
+    "rule": { "fixed": "02-23" },
+    "priority": 50,
+    "accent": "#7FA77F",
+    "icon": "flag",
+    "wallpaper": "snowy pine forest",
+    "about": "Только цвет."
+  },
+  {
+    "id": "womens-day",
+    "title": "8 Марта",
+    "rule": { "fixed": "03-08" },
+    "priority": 50,
+    "accent": "#F28DB2",
+    "icon": "heart",
+    "wallpaper": "spring flowers tulips",
+    "about": "Только цвет."
+  },
+  {
+    "id": "april-fools",
+    "title": "День смеха",
+    "rule": { "fixed": "04-01" },
+    "priority": 50,
+    "egg": "joke",
+    "icon": "spark",
+    "wallpaper": "colorful hot air balloons",
+    "about": "Без украшений. Ассистент может позволить себе одну безобидную шутку в первом ответе дня (если вы разрешили)."
+  },
+  {
+    "id": "cosmonautics",
+    "title": "День космонавтики",
+    "rule": { "fixed": "04-12" },
+    "priority": 55,
+    "accent": "#9AA7FF",
+    "decor": "stars",
+    "egg": "rocket",
+    "icon": "spark",
+    "wallpaper": "night sky stars",
+    "about": "Звёзды в фоне экранов и ракета у кнопки чата."
+  },
+  {
+    "id": "easter",
+    "title": "Пасха",
+    "rule": { "easter": 0 },
+    "priority": 55,
+    "accent": "#E9B872",
+    "icon": "calendar",
+    "wallpaper": "spring blossom",
+    "about": "Православная Пасха. Только цвет."
+  },
+  {
+    "id": "victory-day",
+    "title": "День Победы",
+    "rule": { "fixed": "05-09" },
+    "priority": 70,
+    "solemn": true,
+    "accent": "#E8833A",
+    "icon": "flag",
+    "wallpaper": "spring lilac",
+    "about": "Только цвет, без игривых украшений и пасхалок."
+  },
+  {
+    "id": "russia-day",
+    "title": "День России",
+    "rule": { "fixed": "06-12" },
+    "priority": 50,
+    "accent": "#6FA8FF",
+    "icon": "flag",
+    "wallpaper": "summer meadow",
+    "about": "Только цвет."
+  },
+  {
+    "id": "knowledge-day",
+    "title": "День знаний",
+    "rule": { "fixed": "09-01" },
+    "priority": 40,
+    "icon": "book",
+    "wallpaper": "autumn park morning",
+    "about": "Просто отметка в календаре."
+  },
+  {
+    "id": "halloween",
+    "title": "Хэллоуин",
+    "rule": { "fixed": "10-31" },
+    "from": -2,
+    "priority": 55,
+    "accent": "#FF8A3D",
+    "decor": "pumpkins",
+    "egg": "flicker",
+    "icon": "moon",
+    "wallpaper": "misty autumn forest",
+    "about": "С 29 по 31 октября: оранжевый цвет, тыквы в углу, карточки мерцают при нажатии."
+  },
+  {
+    "id": "unity-day",
+    "title": "День народного единства",
+    "rule": { "fixed": "11-04" },
+    "priority": 50,
+    "accent": "#D9A55B",
+    "icon": "flag",
+    "wallpaper": "autumn river landscape",
+    "about": "Только цвет."
+  },
+  {
+    "id": "mothers-day",
+    "title": "День матери",
+    "rule": { "nth": { "month": 11, "weekday": 7, "n": -1 } },
+    "priority": 50,
+    "accent": "#F2A2B8",
+    "icon": "heart",
+    "wallpaper": "autumn flowers",
+    "about": "Последнее воскресенье ноября. Только цвет."
+  },
+  {
+    "id": "first-snow",
+    "title": "Первый снег",
+    "rule": { "weather": "snow" },
+    "ask": true,
+    "priority": 65,
+    "accent": "#A9D4FF",
+    "decor": "snow",
+    "icon": "moon",
+    "wallpaper": "first snow forest",
+    "about": "Когда погода впервые за сезон покажет снег, Assi спросит, включить ли зимнее оформление на несколько дней."
+  },
+  {
+    "id": "birthday-owner",
+    "title": "Ваш день рождения",
+    "rule": { "owner": "birthday" },
+    "priority": 100,
+    "accent": "#FFB86B",
+    "decor": "confetti",
+    "icon": "star",
+    "wallpaper": "festive lights bokeh",
+    "about": "Конфетти при первом открытии Assi за день и поздравление от ассистента."
+  },
+  {
+    "id": "birthday-contact",
+    "title": "Дни рождения близких",
+    "titlePrefix": "День рождения: ",
+    "rule": { "contact": "*" },
+    "priority": 40,
+    "icon": "heart",
+    "about": "Без украшений: напоминание заранее и черновик поздравления, отправляете вы сами."
+  },
+  {
+    "id": "assi-anniversary",
+    "title": "Годовщина Assi",
+    "rule": { "install": true },
+    "priority": 45,
+    "icon": "spark",
+    "about": "В день, когда Assi появился на телефоне, — итоги года в уведомлении."
+  }
+]

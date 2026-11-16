@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тайная жизнь телефона</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<style>
+  .page.wide {
+    max-width: 1000px;
+  }
+
+  .tabs .chip {
+    min-height: 44px;
+  }
+
+  .chip.tap {
+    min-height: 44px;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .head h2 {
+    font-size: 20px;
+    margin: 0;
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .head .chips {
+    margin-top: 10px;
+  }
+
+  .story h3 {
+    font-size: 18px;
+    margin: 0 0 10px;
+  }
+
+  .story p {
+    margin: 0 0 8px;
+    line-height: 1.5;
+  }
+
+  .story p:last-child {
+    margin-bottom: 0;
+  }
+
+  .story .from {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  .note {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+
+  .tip p {
+    margin: 0 0 12px;
+    line-height: 1.5;
+  }
+
+  .bundle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  .bundle > div {
+    flex: 1;
+    min-width: 0;
+    line-height: 1.4;
+  }
+
+  .bundle .thumb {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex: none;
+  }
+
+  .rank {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .rank .card h3, .card h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    margin: 0 0 10px;
+  }
+
+  .rank ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .rank li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .rank li .name {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .rank li .value {
+    flex: none;
+    color: var(--ink-2);
+  }
+
+  .rank li.system .name {
+    color: var(--ink-2);
+  }
+
+  .facts {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .facts li {
+    line-height: 1.45;
+  }
+
+  .facts .from {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  .checked summary {
+    cursor: pointer;
+    color: var(--ink-2);
+    font-size: 14px;
+    padding: 6px 0;
+  }
+
+  .checked .facts {
+    margin-top: 8px;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .legend i {
+    display: inline-block;
+    width: 14px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--ink-3);
+  }
+
+  .legend i.k-battery {
+    background: var(--ink-2);
+  }
+
+  .legend i.k-unlock {
+    background: var(--accent);
+  }
+
+  .legend i.k-notification {
+    background: var(--ink);
+  }
+
+  .legend i.k-alarm {
+    background: var(--danger);
+  }
+
+  .legend i.k-deep {
+    height: 10px;
+    background: var(--accent);
+    opacity: .4;
+  }
+
+  .legend i.k-charge {
+    background: var(--ok);
+  }
+
+  .tl-svg {
+    display: none;
+  }
+
+  .tl-svg svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    touch-action: manipulation;
+    cursor: pointer;
+  }
+
+  .tl-window {
+    fill: var(--surface-2);
+  }
+
+  .tl-grid {
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+
+  .tl-axis {
+    fill: var(--ink-3);
+    font-size: 10px;
+  }
+
+  .tl-battery {
+    fill: none;
+    stroke: var(--ink-2);
+    stroke-width: 2;
+    stroke-linejoin: round;
+  }
+
+  .tl-level {
+    fill: var(--ink-2);
+    font-size: 11px;
+  }
+
+  .tl-deep {
+    fill: var(--accent);
+    fill-opacity: .4;
+  }
+
+  .tl-light {
+    fill: var(--ink-3);
+    fill-opacity: .35;
+  }
+
+  .tl-charge {
+    fill: var(--ok);
+  }
+
+  .tl-lane {
+    fill: var(--ink-3);
+    font-size: 10px;
+  }
+
+  .tl-mark {
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .tl-mark.k-screen_on {
+    stroke: var(--ink-3);
+  }
+
+  .tl-mark.k-unlock {
+    stroke: var(--accent);
+  }
+
+  .tl-mark.k-notification {
+    stroke: var(--ink);
+  }
+
+  .tl-mark.k-alarm {
+    stroke: var(--danger);
+  }
+
+  .tl-mark.k-reboot {
+    stroke: var(--danger);
+    stroke-dasharray: 3 3;
+  }
+
+  .tl-cursor {
+    stroke: var(--ink);
+    stroke-width: 1;
+  }
+
+  .caption {
+    min-height: 44px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+
+  .tl-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tl-list > div {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .tl-list > div:first-child {
+    border-top: 0;
+  }
+
+  .tl-list .at {
+    flex: none;
+    width: 92px;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+  }
+
+  .missing {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .access {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .access > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 56px;
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+
+  .access > div:first-child {
+    border-top: 0;
+  }
+
+  .access .state {
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+
+  .access .on {
+    color: var(--ok);
+  }
+
+  .nights button {
+    min-height: 64px;
+  }
+
+  .nights .title {
+    font-weight: 600;
+  }
+
+  .bars svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+  }
+
+  .bar {
+    fill: var(--ink-2);
+  }
+
+  .bar.charging {
+    fill: none;
+    stroke: var(--ink-3);
+    stroke-width: 1;
+    stroke-dasharray: 3 2;
+  }
+
+  .bar.chosen {
+    fill: var(--accent);
+  }
+
+  .avg {
+    stroke: var(--accent);
+    stroke-width: 1;
+    stroke-dasharray: 4 3;
+  }
+
+  .numbers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .numbers b {
+    display: block;
+    font-size: 22px;
+  }
+
+  .group h3 {
+    font-size: 15px;
+    margin: 0 0 12px;
+  }
+
+  .group .fields {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .field .unit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .field .unit span {
+    flex: none;
+    color: var(--ink-2);
+  }
+
+  .field .hint {
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  .switch-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+  }
+
+  .switch-row > span {
+    flex: 1;
+  }
+
+  .actions-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .error {
+    white-space: pre-wrap;
+  }
+
+  @media (min-width: 600px) {
+    .split {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+    .tl-svg {
+      display: block;
+    }
+    .tl-list {
+      display: none;
+    }
+  }
+</style>
+<body>
+<main class="page wide">
+  <header class="topbar">
+    <button class="icon-btn" id="back" aria-label="Назад" data-icon="back"></button>
+    <h1>Тайная жизнь телефона</h1>
+    <button class="icon-btn" id="rebuild" aria-label="Собрать отчёт заново" data-icon="refresh"></button>
+  </header>
+  <nav class="tabs" id="tabs"></nav>
+  <div class="tab" data-tab="today" id="today"></div>
+  <div class="tab" data-tab="nights" id="nights"></div>
+  <div class="tab" data-tab="trends" id="trends"></div>
+  <div class="tab" data-tab="settings" id="settings"></div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script>
+(function () {
+  'use strict';
+  const MAIN = 'modules/phone-night/main.js';
+  const h = ui.h;
+  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const state = { viewing: null, report: null, tab: 'today', busy: false };
+
+  const pad = (n) => (n < 10 ? '0' : '') + n;
+  const hhmm = (ts) => { const d = new Date(ts); return pad(d.getHours()) + ':' + pad(d.getMinutes()); };
+  const quoteName = (name) => '«' + name + '»';
+  function plural(n, one, few, many) {
+    const a = Math.abs(Math.round(n)) % 100;
+    const b = a % 10;
+    if (a > 10 && a < 20) return many;
+    if (b === 1) return one;
+    if (b >= 2 && b <= 4) return few;
+    return many;
+  }
+  function minutesText(minutes) {
+    if (minutes < 1) return 'меньше минуты';
+    const hours = Math.floor(minutes / 60);
+    const rest = minutes % 60;
+    if (!hours) return rest + ' мин';
+    return rest ? hours + ' ч ' + rest + ' мин' : hours + ' ч';
+  }
+  function mb(value) {
+    if (value === null || value === undefined) return '—';
+    return (value < 10 ? String(Math.round(value * 10) / 10).replace('.', ',') : String(Math.round(value))) + ' МБ';
+  }
+  function fail(root, error) {
+    root.replaceChildren(h('div', { class: 'card danger error' }, 'Не получилось: ', ui.raw(error && error.message ? error.message : String(error))));
+  }
+  function card(title, icon, ...children) {
+    const head = h('h3', {}, icon ? ui.icon(icon) : null, title);
+    return h('section', { class: 'card flat' }, head, ...children);
+  }
+
+  // ---- «Сегодня» ----------------------------------------------------------------------------
+
+  async function loadToday(night) {
+    const root = document.getElementById('today');
+    if (!state.report) root.replaceChildren(h('div', { class: 'empty' }, h('div', { class: 'spinner' })));
+    try {
+      const report = await call('report', night || null);
+      state.report = report;
+      renderToday(report);
+    } catch (error) {
+      fail(root, error);
+    }
+  }
+
+  async function rebuild() {
+    if (state.busy) return;
+    state.busy = true;
+    const button = document.getElementById('rebuild');
+    button.disabled = true;
+    ui.toast('Собираю отчёт — снимки и рассказ займут до минуты');
+    try {
+      const report = await call('buildReport', state.viewing || null);
+      state.report = report;
+      renderToday(report);
+      ui.toast(report.partial ? 'Ночь ещё идёт — показано, что уже видно' : 'Отчёт собран');
+    } catch (error) {
+      ui.toast('Не получилось: ' + (error && error.message ? error.message : error));
+    } finally {
+      state.busy = false;
+      button.disabled = false;
+    }
+  }
+
+  function renderToday(report) {
+    const root = document.getElementById('today');
+    const parts = [];
+    if (report.empty) {
+      parts.push(h('section', { class: 'card flat' },
+        h('div', { class: 'empty' }, ui.icon('moon'), h('p', {}, 'Отчёта за эту ночь нет'),
+          h('p', { class: 'small' }, 'Модуль ведёт журнал с вечера и собирает отчёт утром, при первой разблокировке. ' +
+            'Чем больше доступов включено, тем подробнее рассказ.'))));
+      if (state.viewing) parts.push(latestChip());
+      parts.push(accessCard(report.status));
+      root.replaceChildren(...parts);
+      return;
+    }
+    const f = report.facts;
+    parts.push(headCard(report));
+    const left = h('div', { class: 'col' }, storyCard(report), tipCard(report), rankCards(f), ownerCard(report));
+    const right = h('div', { class: 'col' }, morningCard(report), timelineCard(report), moreCard(report));
+    parts.push(h('div', { class: 'split' }, left, right));
+    parts.push(whenceCard(report));
+    const access = accessCard(report.status, true);
+    if (access) parts.push(access);
+    root.replaceChildren(...parts.filter(Boolean));
+    ui.icons(root);
+  }
+
+  function latestChip() {
+    return h('div', { class: 'chips' }, h('button', { class: 'chip tap', onclick: () => { state.viewing = null; loadToday(null); } },
+      ui.icon('back'), 'К последней ночи'));
+  }
+
+  function headCard(report) {
+    const f = report.facts;
+    const w = f.window;
+    const how = w.how === 'screen' ? 'по выключенному экрану' : 'по настройке' + (w.note ? ': ' + w.note : '');
+    const chips = [];
+    if (report.partial) chips.push(h('span', { class: 'badge' }, 'Ночь ещё идёт'));
+    chips.push(h('span', { class: 'badge' }, report.story.by === 'model' ? 'Рассказ модели, числа проверены' : 'Шаблон по фактам'));
+    if (state.viewing) chips.push(h('button', { class: 'chip tap', onclick: () => { state.viewing = null; loadToday(null); } }, ui.icon('back'), 'К последней ночи'));
+    return h('section', { class: 'card flat head' },
+      h('h2', {}, ui.raw(f.title)),
+      h('div', { class: 'muted small' }, 'Окно ночи: ' + hhmm(w.from) + '–' + hhmm(w.to) + ', ' + minutesText(w.minutes) + ' (' + how + ')'),
+      h('div', { class: 'chips' }, ...chips));
+  }
+
+  function storyCard(report) {
+    const story = report.story;
+    // The source of each line is in «Откуда цифры» at the bottom, line by line.
+    const lines = story.lines.map((line) => h('p', {}, ui.raw(line)));
+    const note = story.note && story.by === 'template' && !/выключен/.test(story.note) ? h('div', { class: 'note' }, ui.raw(story.note)) : null;
+    const title = story.by === 'model' && story.headline ? ui.raw(story.headline) : 'Коротко о ночи';
+    return h('section', { class: 'card flat story', 'data-raw': '' }, h('h3', {}, title), ...lines, note);
+  }
+
+  function tipCard(report) {
+    const tip = report.facts.tip;
+    if (!tip) return null;
+    const text = report.story.by === 'model' && report.story.tip ? report.story.tip : report.template.tip;
+    return h('section', { class: 'card accent tip' },
+      h('h3', {}, ui.icon('bolt'), 'Совет'),
+      h('p', {}, ui.raw(text)),
+      h('button', { class: 'btn', onclick: () => call('openAppSettings', tip.pkg).catch((e) => ui.toast(String(e && e.message || e))) },
+        ui.icon('settings'), 'Открыть настройки приложения'),
+      h('p', { class: 'small muted' }, 'Модуль сам ничего не меняет: ограничить фон можно на странице приложения.'));
+  }
+
+  function rankList(rows) {
+    return h('ol', {}, ...rows.map((row) => h('li', { class: row.system ? 'system' : '' },
+      h('span', { class: 'name' }, ui.raw(row.name)), h('span', { class: 'value' }, ui.raw(row.value)))));
+  }
+
+  function missingText(part, fallback) {
+    return h('p', { class: 'small muted' }, 'нет данных — ', ui.raw(part && part.note ? part.note : fallback));
+  }
+
+  function rankCards(f) {
+    const cards = [];
+    const w = f.wakers;
+    if (w.ok && w.top.length) {
+      const apps = w.top.filter((row) => row.key !== 'system').map((row) => ({ name: row.app, value: row.wakeups + ' ' + plural(row.wakeups, 'раз', 'раза', 'раз') }));
+      const system = w.top.filter((row) => row.key === 'system').map((row) => ({ name: 'сама система', value: String(row.wakeups), system: true }));
+      cards.push(card('Будил чаще всех', 'bell', rankList(apps.concat(system)),
+        h('p', { class: 'small muted' }, 'Пробуждения будильниками, ' + (w.source === 'alarm' ? 'dumpsys alarm, вечер–утро' : 'по ленте батареи'))));
+    } else {
+      cards.push(card('Будил чаще всех', 'bell', missingText(w, 'нет данных о будильниках')));
+    }
+    const t = f.traffic;
+    cards.push(t.ok && t.top.length
+      ? card('Больше всего трафика', 'globe', rankList(t.top.map((row) => ({ name: row.app, value: '≈ ' + mb(row.mb) }))),
+        h('p', { class: 'small muted' }, 'Всего ≈ ' + mb(t.totalMb) + '; сколько раз ходили в сеть, Android не говорит'))
+      : card('Больше всего трафика', 'globe', missingText(t, 'нет данных о трафике')));
+    const c = f.cpu;
+    cards.push(c.ok
+      ? card('Дольше держал процессор', 'bolt', c.top.length ? rankList(c.top.map((row) => ({ name: row.app, value: minutesText(row.minutes) })))
+        : h('p', { class: 'small muted' }, 'Никто не держал процессор дольше минуты'),
+        h('p', { class: 'small muted' }, 'Wakelock по batterystats — оценка самого Android'))
+      : card('Дольше держал процессор', 'bolt', missingText(c, 'нет данных batterystats')));
+    if (c.ok && c.power && c.power.length) {
+      cards.push(card('Больше всего батареи', 'chart', rankList(c.power.map((row) => ({ name: row.app, value: '≈ ' + row.mah + ' мА·ч' }))),
+        h('p', { class: 'small muted' }, 'Оценка расхода самого Android (batterystats --checkin, вечер–утро) — приблизительная, не замер')));
+    }
+    const n = f.notifications;
+    cards.push(n.top.length
+      ? card('Больше всего уведомлений', 'message', rankList(n.top.map((row) => ({ name: row.app, value: row.count + ', ' + hhmm(row.first) + '–' + hhmm(row.last) }))),
+        h('p', { class: 'small muted' }, 'Всего за ночь: ' + n.total))
+      : card('Больше всего уведомлений', 'message', n.ok ? h('p', { class: 'small muted' }, 'Ночью уведомлений не было') : missingText(n, 'журнал уведомлений недоступен')));
+    return h('div', { class: 'rank' }, ...cards);
+  }
+
+  function ownerCard(report) {
+    const f = report.facts;
+    const sc = f.screen;
+    const head = h('p', { class: 'muted' }, 'Экран включался ' + sc.on + ' ' + plural(sc.on, 'раз', 'раза', 'раз') + ', разблокировок ' + sc.unlocks + '.');
+    // Beside the night: when the owner fell asleep (Сериал на ночь) and the day's focus (Фокус).
+    const near = report.whence.lines.filter((line) => line.key === 'asleep' || line.key === 'focusDay' || line.key === 'habit');
+    const extra = near.length ? h('ul', { class: 'facts', 'data-raw': '' }, ...near.map((line) => h('li', {}, ui.raw(line.text), h('span', { class: 'from' }, 'источник: ' + line.from)))) : null;
+    if (!f.owner.sessions.length) return card('Вы брали телефон', 'user', head, h('p', {}, 'Ни разу — тихая ночь.'), extra);
+    const rows = f.owner.sessions.map((session) => ({
+      name: hhmm(session.from) + '–' + hhmm(session.to) + (session.app ? ', ' + session.app : ''), value: minutesText(session.minutes)
+    }));
+    return card('Вы брали телефон', 'user', head, h('div', { class: 'rank' }, rankList(rows)), extra);
+  }
+
+  function morningCard(report) {
+    const m = report.morning;
+    if (!m) return null;
+    const items = [];
+    if (m.wallpaper) {
+      items.push(h('div', { class: 'bundle' },
+        m.wallpaper.thumb ? h('img', { src: m.wallpaper.thumb, alt: '', class: 'thumb' }) : null,
+        h('div', {}, h('b', {}, 'Обои дня: '), ui.raw(m.wallpaper.title), m.wallpaper.credit ? h('div', { class: 'small muted' }, ui.raw(m.wallpaper.credit)) : null),
+        h('button', { class: 'btn', onclick: () => assi.open(m.wallpaper.open) }, 'Открыть')));
+    }
+    if (m.horoscope) {
+      items.push(h('div', { class: 'bundle' },
+        h('div', {}, h('b', {}, 'Гороскоп: '), ui.raw(m.horoscope.text)),
+        h('button', { class: 'btn', onclick: () => assi.open(m.horoscope.open) }, 'Открыть')));
+    }
+    return card('Утро', 'image', ...items);
+  }
+
+  function moreCard(report) {
+    const keys = ['battery', 'reboot', 'doze', 'jobs', 'exempt', 'network', 'play', 'purchases', 'quiet'];
+    const lines = report.whence.lines.filter((line) => keys.indexOf(line.key) >= 0);
+    const fg = report.facts.foreground || [];
+    const items = lines.map((line) => h('li', {}, ui.raw(line.text), h('span', { class: 'from' }, 'источник: ' + line.from)));
+    if (fg.length) {
+      items.push(h('li', {}, ui.raw('Службы переднего плана ночью: ' + fg.map((row) => row.app + ' — ' + minutesText(row.minutes)).join(', ') + '.'),
+        h('span', { class: 'from' }, 'источник: UsageStatsManager')));
+    }
+    if (!items.length) return null;
+    return card('Ещё за ночь', 'list', h('ul', { class: 'facts', 'data-raw': '' }, ...items));
+  }
+
+  function whenceCard(report) {
+    const body = [];
+    const told = report.whence.story && report.whence.story.length ? report.whence.story
+      : report.story.lines.map((text) => ({ text, from: (report.whence.lines.find((line) => line.text === text) || {}).from || 'факты ночи' }));
+    body.push(h('p', { class: 'small muted' }, 'Каждая строка рассказа и её источник. Числа не придуманы: что не удалось узнать, названо ниже.'));
+    body.push(h('ul', { class: 'facts', 'data-raw': '' }, ...told.map((line) => h('li', {}, ui.raw(line.text), h('span', { class: 'from' }, 'источник: ' + line.from)))));
+    if (report.story.by === 'model') {
+      body.push(h('details', { class: 'checked' },
+        h('summary', {}, 'Факты, с которыми сверен рассказ'),
+        h('ul', { class: 'facts', 'data-raw': '' }, ...report.whence.lines.map((line) => h('li', {}, ui.raw(line.text), h('span', { class: 'from' }, 'источник: ' + line.from))))));
+    }
+    if (report.whence.missing.length) {
+      body.push(h('h3', {}, 'Чего не хватило'));
+      body.push(h('ul', { class: 'missing' }, ...report.whence.missing.map((row) => h('li', {}, h('b', {}, row.label + ': '), 'нет данных — ', ui.raw(row.note)))));
+    } else {
+      body.push(h('p', { class: 'small' }, 'Все источники ответили.'));
+    }
+    return card('Откуда цифры', 'info', ...body);
+  }
+
+  // ---- the time line ----------------------------------------------------------------------------
+
+  const W = 360;
+  const LANES = { screen_on: 132, unlock: 148, notification: 164, alarm: 180 };
+  const LANE_NAMES = { screen_on: 'экран', unlock: 'разблокировка', notification: 'уведомления', alarm: 'будильники' };
+
+  function timelineCard(report) {
+    const tl = report.timeline;
+    if (!tl || !(tl.to > tl.from)) return null;
+    const caption = h('div', { class: 'caption', 'aria-live': 'polite' }, 'Коснитесь шкалы — подпись покажет, что было в это время.');
+    const legend = h('div', { class: 'legend' },
+      h('span', {}, h('i', { class: 'k-battery' }), 'батарея'),
+      h('span', {}, h('i', { class: 'k-unlock' }), 'разблокировка'),
+      h('span', {}, h('i', { class: 'k-notification' }), 'уведомление'),
+      h('span', {}, h('i', { class: 'k-alarm' }), 'будильник приложения'),
+      h('span', {}, h('i', { class: 'k-deep' }), 'глубокий сон Doze'),
+      h('span', {}, h('i', { class: 'k-charge' }), 'зарядка'));
+    const holder = h('div', { class: 'tl-svg' });
+    holder.innerHTML = timelineSvg(tl);
+    const svg = holder.querySelector('svg');
+    svg.addEventListener('click', (event) => {
+      const box = svg.getBoundingClientRect();
+      const x = (event.clientX - box.left) / box.width * W;
+      const at = tl.from + (x / W) * (tl.to - tl.from);
+      caption.replaceChildren(ui.raw(describeAt(tl, at)));
+      const cursor = svg.querySelector('.tl-cursor');
+      cursor.setAttribute('x1', x.toFixed(1));
+      cursor.setAttribute('x2', x.toFixed(1));
+      cursor.removeAttribute('visibility');
+    });
+    return card('Шкала ночи', 'clock', legend, holder, caption, timelineList(tl));
+  }
+
+  function timelineSvg(tl) {
+    const span = tl.to - tl.from;
+    const x = (at) => ((Math.min(Math.max(at, tl.from), tl.to) - tl.from) / span * W).toFixed(1);
+    // The battery's own range, so that a night's 10% is visible; the levels are labelled.
+    const levels = (tl.battery || []).map((p) => p.level);
+    const low = levels.length ? Math.max(0, Math.min(...levels) - 5) : 0;
+    const high = levels.length ? Math.min(100, Math.max(...levels) + 5) : 100;
+    const y = (level) => (88 - (level - low) / Math.max(1, high - low) * 72).toFixed(1);
+    const out = [];
+    out.push('<svg viewBox="0 0 ' + W + ' 212" role="img" aria-label="Шкала ночи">');
+    out.push('<rect class="tl-window" x="' + x(tl.window.from) + '" y="0" width="' + (x(tl.window.to) - x(tl.window.from)).toFixed(1) + '" height="190"/>');
+    const first = new Date(tl.from);
+    first.setMinutes(0, 0, 0);
+    for (let hour = first.getTime() + 36e5; hour < tl.to; hour += 36e5) {
+      out.push('<line class="tl-grid" x1="' + x(hour) + '" x2="' + x(hour) + '" y1="0" y2="190"/>');
+      const label = new Date(hour).getHours();
+      if ((tl.to - tl.from) <= 12 * 36e5 || label % 2 === 0) {
+        out.push('<text class="tl-axis" x="' + x(hour) + '" y="206" text-anchor="middle">' + hhmm(hour) + '</text>');
+      }
+    }
+    (tl.doze || []).forEach((part) => {
+      out.push('<rect class="' + (part.mode === 'full' ? 'tl-deep' : 'tl-light') + '" x="' + x(part.from) + '" y="100" width="' +
+        Math.max(1, x(part.to) - x(part.from)).toFixed(1) + '" height="12"/>');
+    });
+    (tl.charging || []).forEach((part) => {
+      out.push('<rect class="tl-charge" x="' + x(part.from) + '" y="116" width="' + Math.max(1, x(part.to) - x(part.from)).toFixed(1) + '" height="4"/>');
+    });
+    if (tl.battery && tl.battery.length) {
+      out.push('<polyline class="tl-battery" points="' + tl.battery.map((p) => x(p.at) + ',' + y(p.level)).join(' ') + '"/>');
+      const a = tl.battery[0];
+      const b = tl.battery[tl.battery.length - 1];
+      out.push('<text class="tl-level" x="' + (Number(x(a.at)) + 4) + '" y="' + (Number(y(a.level)) - 6) + '">' + a.level + '%</text>');
+      out.push('<text class="tl-level" x="' + (Number(x(b.at)) - 4) + '" y="' + (Number(y(b.level)) - 6) + '" text-anchor="end">' + b.level + '%</text>');
+    }
+    Object.keys(LANES).forEach((kind) => {
+      out.push('<text class="tl-lane" x="2" y="' + (LANES[kind] + 3) + '">' + LANE_NAMES[kind] + '</text>');
+    });
+    (tl.marks || []).forEach((mark) => {
+      if (mark.kind === 'reboot') {
+        out.push('<line class="tl-mark k-reboot" x1="' + x(mark.at) + '" x2="' + x(mark.at) + '" y1="0" y2="190"/>');
+        return;
+      }
+      const lane = LANES[mark.kind];
+      if (!lane) return;
+      out.push('<line class="tl-mark k-' + mark.kind + '" x1="' + x(mark.at) + '" x2="' + x(mark.at) + '" y1="' + (lane - 5) + '" y2="' + (lane + 5) + '"/>');
+    });
+    out.push('<line class="tl-cursor" x1="0" x2="0" y1="0" y2="190" visibility="hidden"/>');
+    out.push('</svg>');
+    return out.join('');
+  }
+
+  function levelAt(tl, at) {
+    let level = null;
+    (tl.battery || []).forEach((p) => { if (p.at <= at) level = p.level; });
+    return level;
+  }
+
+  function describeAt(tl, at) {
+    const near = (tl.to - tl.from) / W * 14;
+    const marks = (tl.marks || []).filter((mark) => Math.abs(mark.at - at) <= near)
+      .sort((a, b) => Math.abs(a.at - at) - Math.abs(b.at - at)).slice(0, 4).sort((a, b) => a.at - b.at);
+    const parts = [hhmm(at)];
+    const level = levelAt(tl, at);
+    if (level !== null) parts.push('батарея ' + level + '%');
+    const doze = (tl.doze || []).filter((part) => at >= part.from && at <= part.to)[0];
+    if (doze) parts.push(doze.mode === 'full' ? 'глубокий сон Doze' : 'лёгкий сон Doze');
+    const text = parts.join(', ');
+    if (!marks.length) return text + '. Рядом событий нет.';
+    return text + '. ' + marks.map((mark) => hhmm(mark.at) + ' — ' + mark.label).join('; ') + '.';
+  }
+
+  function timelineList(tl) {
+    const rows = [];
+    (tl.marks || []).forEach((mark) => { if (mark.kind !== 'alarm') rows.push({ at: mark.at, at2: null, text: mark.label }); });
+    const hours = {};
+    (tl.marks || []).forEach((mark) => {
+      if (mark.kind !== 'alarm') return;
+      const hour = Math.floor(mark.at / 36e5) * 36e5;
+      const name = mark.label.replace(/^будильник\s*/, '');
+      hours[hour] = hours[hour] || {};
+      hours[hour][name] = (hours[hour][name] || 0) + 1;
+    });
+    Object.keys(hours).forEach((hour) => {
+      const names = hours[hour];
+      const text = 'будильники: ' + Object.keys(names).map((name) => name + (names[name] > 1 ? ' ×' + names[name] : '')).join(', ');
+      rows.push({ at: Number(hour), at2: Number(hour) + 36e5, text: text });
+    });
+    (tl.doze || []).forEach((part) => { if (part.mode === 'full' && part.to - part.from >= 60000) rows.push({ at: part.from, at2: part.to, text: 'глубокий сон Doze' }); });
+    (tl.charging || []).forEach((part) => rows.push({ at: part.from, at2: part.to, text: 'на зарядке' }));
+    rows.sort((a, b) => a.at - b.at);
+    if (!rows.length) return h('div', { class: 'tl-list' }, h('div', {}, h('span', { class: 'muted' }, 'Событий за ночь нет')));
+    return h('div', { class: 'tl-list', 'data-raw': '' }, ...rows.map((row) => h('div', {},
+      h('span', { class: 'at' }, hhmm(row.at) + (row.at2 ? '–' + hhmm(row.at2) : '')), h('span', {}, ui.raw(row.text)))));
+  }
+
+  // ---- access -------------------------------------------------------------------------------------
+
+  function accessCard(status, onlyMissing) {
+    if (!status) return null;
+    const rows = [];
+    const row = (title, ok, text, button) => {
+      if (onlyMissing && ok) return;
+      rows.push(h('div', {},
+        h('div', { class: 'grow' }, h('div', {}, title), h('div', { class: 'state' + (ok ? ' on' : '') }, text)),
+        button || null));
+    };
+    const sh = status.shizuku || {};
+    let shButton = null;
+    if (sh.running && !sh.granted) {
+      shButton = h('button', { class: 'btn', onclick: () => assi.native('shizuku.request').then(refreshAll).catch((e) => ui.toast(String(e && e.message || e))) }, 'Разрешить');
+    }
+    row('Shizuku', sh.ready, sh.ready ? 'работает: будильники, лента батареи, Doze и фоновые задания видны'
+      : (sh.note || 'не работает') + ' — без него нет будильников, ленты батареи и Doze. Запустите Shizuku и разрешите Assi в «Настройках» Assi.', shButton);
+    row('Доступ к статистике использования', status.usage, status.usage ? 'включён: экраны, ваши сессии, трафик'
+      : 'выключен — нет ваших сессий, трафика и экранов, если Assi был закрыт',
+    h('button', { class: 'btn', onclick: () => call('openUsageAccess') }, 'Открыть'));
+    row('Доступ к уведомлениям', status.notices !== false, status.notices === false ? 'выключен — ночные уведомления не видны'
+      : 'включён: ночные уведомления считаются (текст не хранится)',
+    h('button', { class: 'btn', onclick: () => call('openNotices') }, 'Открыть'));
+    const dozeButton = sh.ready
+      ? h('button', { class: 'btn', onclick: () => call('allowDoze').then((done) => { ui.toast(done.ok ? 'Assi в белом списке Doze' : 'Не вышло: ' + done.note); refreshAll(); }) }, 'Добавить')
+      : h('button', { class: 'btn', onclick: () => call('openBatterySettings') }, 'Открыть');
+    row('Белый список Doze', status.doze === true, status.doze === true ? 'Assi освобождён от сна: подписки живут всю ночь'
+      : 'Assi может уснуть ночью, и журнал прервётся (тогда события берутся из статистики Android)', dozeButton);
+    if (status.useModel) {
+      row('Модель рассказа', status.model, status.model ? 'назначена: роль «Рассказ о ночи» в настройках Assi'
+        : 'не назначена — будет шаблон. Роль «Рассказ о ночи» — в настройках Assi, «Кто на какой модели»');
+    }
+    if (onlyMissing && !rows.length) return null;
+    return card(onlyMissing ? 'Что включить для полного отчёта' : 'Доступы', 'lock', h('div', { class: 'access' }, ...rows));
+  }
+
+  // ---- «Прошлые ночи» -----------------------------------------------------------------------------
+
+  async function loadNights() {
+    const root = document.getElementById('nights');
+    try {
+      const list = await call('nights', 90);
+      if (!list.length) {
+        root.replaceChildren(h('div', { class: 'card flat empty' }, 'Прошлых отчётов пока нет. Первый появится утром.'));
+        return;
+      }
+      root.replaceChildren(h('div', { class: 'list nights' }, ...list.map((row) => {
+        const b = row.battery;
+        const bits = [];
+        if (b) bits.push('батарея ' + b.start + '% → ' + b.end + '%' + (b.charging && b.charging.any ? ', на зарядке' : ' (−' + b.drop + '%)'));
+        if (row.topWaker) bits.push('будил ' + quoteName(row.topWaker.app));
+        if (row.unlocks !== null) bits.push('разблокировок ' + row.unlocks);
+        if (row.reboots) bits.push('перезагрузка');
+        return h('button', { onclick: () => { state.viewing = row.night; state.report = null; showTab('today'); } },
+          h('div', { class: 'grow' }, h('div', { class: 'title' }, ui.raw(row.title)), h('div', { class: 'small muted' }, ui.raw(bits.join(' · ')))),
+          ui.icon('right'));
+      })));
+    } catch (error) {
+      fail(root, error);
+    }
+  }
+
+  // ---- «Тренды» -------------------------------------------------------------------------------------
+
+  async function loadTrends() {
+    const root = document.getElementById('trends');
+    try {
+      const t = await call('trends', null);
+      if (!t.nights.length) {
+        root.replaceChildren(h('div', { class: 'card flat empty' }, 'Трендам нужны отчёты хотя бы за несколько ночей.'));
+        return;
+      }
+      const numbers = h('div', { class: 'numbers' },
+        h('div', {}, h('b', {}, t.avgDrop === null ? '—' : '−' + String(t.avgDrop).replace('.', ',') + '%'), h('span', { class: 'small muted' }, 'в среднем за ночь без зарядки')),
+        h('div', {}, h('b', {}, String(t.nights.length)), h('span', { class: 'small muted' }, 'ночей за ' + t.days + ' дней')),
+        h('div', {}, h('b', {}, String(t.unlockNights)), h('span', { class: 'small muted' }, 'ночей вы брали телефон')),
+        h('div', {}, h('b', {}, String(t.quietNights)), h('span', { class: 'small muted' }, 'тихих ночей')));
+      const caption = h('div', { class: 'caption', 'aria-live': 'polite' }, 'Коснитесь столбика — подпись покажет ночь.');
+      const holder = h('div', { class: 'bars' });
+      holder.innerHTML = barsSvg(t);
+      const svg = holder.querySelector('svg');
+      svg.addEventListener('click', (event) => {
+        const box = svg.getBoundingClientRect();
+        const index = Math.min(t.nights.length - 1, Math.max(0, Math.floor((event.clientX - box.left) / box.width * t.nights.length)));
+        const row = t.nights[index];
+        svg.querySelectorAll('.bar').forEach((bar, i) => bar.classList.toggle('chosen', i === index && !row.charging));
+        const parts = [row.label + ': ' + (row.start === null ? 'батарея неизвестна' : row.start + '% → ' + row.end + '%')];
+        if (row.charging) parts.push('была зарядка');
+        else if (row.drop !== null) parts.push('−' + row.drop + '%');
+        if (row.unlocks !== null) parts.push('разблокировок ' + row.unlocks);
+        if (row.topWaker) parts.push('будил ' + quoteName(row.topWaker.app) + ' ' + row.topWaker.wakeups + ' ' + plural(row.topWaker.wakeups, 'раз', 'раза', 'раз'));
+        caption.replaceChildren(ui.raw(parts.join(', ')));
+      });
+      const offenders = t.offenders.length
+        ? h('div', { class: 'list' }, ...t.offenders.map((row) => h('div', {},
+          h('div', { class: 'grow' }, h('div', {}, ui.raw(row.app)),
+            h('div', { class: 'small muted' }, row.nights + ' ' + plural(row.nights, 'ночь', 'ночи', 'ночей') + ' не ниже порога, всего ' + row.total + ' ' +
+              plural(row.total, 'пробуждение', 'пробуждения', 'пробуждений') + ', больше всего за ночь — ' + row.max)),
+          row.pkg ? h('button', { class: 'btn', onclick: () => call('openAppSettings', row.pkg) }, 'Открыть') : null)))
+        : h('p', { class: 'muted' }, 'Никто не будил телефон чаще порога.');
+      root.replaceChildren(
+        card('Расход за ночь', 'chart', numbers, holder, caption,
+          h('p', { class: 'small muted' }, 'Пунктир — ночи на зарядке, их расход не считается; линия — среднее.')),
+        card('Частые нарушители', 'bell', h('p', { class: 'small muted' }, 'Пробуждений будильниками за ночь не меньше порога; сама система не считается.'), offenders));
+      ui.icons(root);
+    } catch (error) {
+      fail(root, error);
+    }
+  }
+
+  function barsSvg(t) {
+    const width = 640;
+    const height = 180;
+    const n = t.nights.length;
+    const max = Math.max(5, ...t.nights.map((row) => (row.drop === null || row.charging ? 0 : row.drop)));
+    const step = width / n;
+    const bar = Math.max(2, step * 0.7);
+    const out = ['<svg viewBox="0 0 ' + width + ' ' + (height + 22) + '" role="img" aria-label="Расход батареи по ночам">'];
+    t.nights.forEach((row, i) => {
+      const x = i * step + (step - bar) / 2;
+      const value = row.drop === null ? 0 : Math.max(0, row.drop);
+      const tall = row.charging ? height - 10 : Math.max(2, value / max * (height - 10));
+      out.push('<rect class="bar' + (row.charging ? ' charging' : '') + '" x="' + x.toFixed(1) + '" y="' + (height - tall).toFixed(1) + '" width="' + bar.toFixed(1) + '" height="' + tall.toFixed(1) + '" rx="2"/>');
+      const every = Math.ceil(n / 8);
+      if (i % every === 0) out.push('<text class="tl-axis" x="' + (x + bar / 2).toFixed(1) + '" y="' + (height + 16) + '" text-anchor="middle">' + row.label + '</text>');
+    });
+    if (t.avgDrop !== null) {
+      const y = (height - t.avgDrop / max * (height - 10)).toFixed(1);
+      out.push('<line class="avg" x1="0" x2="' + width + '" y1="' + y + '" y2="' + y + '"/>');
+    }
+    out.push('</svg>');
+    return out.join('');
+  }
+
+  // ---- «Настройки» ----------------------------------------------------------------------------------
+
+  async function loadSettings() {
+    const root = document.getElementById('settings');
+    try {
+      const [made, status] = await Promise.all([call('settings'), call('status')]);
+      const groups = [];
+      const inputs = {};
+      made.schema.forEach((item) => {
+        let group = groups.filter((g) => g.name === item.group)[0];
+        if (!group) { group = { name: item.group, items: [] }; groups.push(group); }
+        group.items.push(item);
+      });
+      const cards = groups.map((group) => h('section', { class: 'card flat group' }, h('h3', {}, group.name),
+        h('div', { class: 'fields' }, ...group.items.map((item) => field(item, made.values[item.key], inputs)))));
+      const save = h('button', { class: 'btn primary wide', onclick: async () => {
+        const values = {};
+        Object.keys(inputs).forEach((key) => { values[key] = inputs[key](); });
+        try {
+          await call('saveSettings', values);
+          ui.toast('Сохранено');
+          loadSettings();
+          state.report = null;
+          loadToday(state.viewing);
+        } catch (error) {
+          ui.toast('Не сохранилось: ' + (error && error.message ? error.message : error));
+        }
+      } }, ui.icon('check'), 'Сохранить');
+      root.replaceChildren(accessCard(status, false), ...cards, save);
+      ui.icons(root);
+    } catch (error) {
+      fail(root, error);
+    }
+  }
+
+  function field(item, value, inputs) {
+    const hint = item.hint ? h('span', { class: 'hint' }, item.hint) : null;
+    if (item.type === 'bool') {
+      const box = h('input', { type: 'checkbox', class: 'switch', checked: Boolean(value) });
+      inputs[item.key] = () => box.checked;
+      return h('label', { class: 'field' }, h('div', { class: 'switch-row' }, h('span', {}, item.label), box), hint);
+    }
+    let control;
+    if (item.type === 'select') {
+      control = h('select', { class: 'input' }, ...item.options.map((option) => h('option', { value: option[0], selected: option[0] === value }, option[1])));
+      inputs[item.key] = () => control.value;
+    } else if (item.type === 'list') {
+      control = h('textarea', { class: 'input', rows: 4, spellcheck: false }, (value || []).join('\n'));
+      inputs[item.key] = () => control.value.split('\n').map((line) => line.trim()).filter(Boolean);
+    } else if (item.type === 'time') {
+      control = h('input', { class: 'input', type: 'time', value: value });
+      inputs[item.key] = () => control.value;
+    } else if (item.type === 'number') {
+      control = h('input', { class: 'input', type: 'number', inputmode: 'decimal', min: item.min, max: item.max, step: item.step || 'any', value: value });
+      inputs[item.key] = () => control.value;
+    } else {
+      control = h('input', { class: 'input', type: 'text', value: value === null || value === undefined ? '' : value });
+      inputs[item.key] = () => control.value;
+    }
+    const box = item.unit ? h('div', { class: 'unit' }, control, h('span', {}, item.unit)) : control;
+    return h('label', { class: 'field' }, h('span', {}, item.label), box, hint);
+  }
+
+  // ---- tabs and events --------------------------------------------------------------------------------
+
+  let showTab = () => {};
+
+  function refreshAll() {
+    if (state.tab === 'today') loadToday(state.viewing);
+    else if (state.tab === 'nights') loadNights();
+    else if (state.tab === 'trends') loadTrends();
+    else if (state.tab === 'settings') loadSettings();
+  }
+
+  document.getElementById('back').addEventListener('click', () => assi.back());
+  document.getElementById('rebuild').addEventListener('click', rebuild);
+  showTab = ui.tabs(document.getElementById('tabs'),
+    [['today', 'Сегодня'], ['nights', 'Прошлые ночи'], ['trends', 'Тренды'], ['settings', 'Настройки']],
+    (id) => {
+      state.tab = id;
+      document.getElementById('rebuild').hidden = id !== 'today';
+      refreshAll();
+    });
+  assi.on('phone-night.changed', (data) => {
+    if (data && data.type === 'settings') return;
+    if (state.tab === 'today' && (!state.viewing || (data && data.night === state.viewing))) loadToday(state.viewing);
+    else if (state.tab === 'nights') loadNights();
+  });
+})();
+</script>
+</body>
+</html>

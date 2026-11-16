@@ -1,0 +1,8 @@
+{
+  "id": "draw-guess",
+  "kind": "module",
+  "title": "Рисуй — угадаю",
+  "target": "modules/draw-guess",
+  "requires": ["hat"],
+  "shell": ["speech.stream", "app.visible"]
+}

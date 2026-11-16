@@ -1,0 +1,8 @@
+/* One gentle colour response replaces abrupt full-card flickering. */
+.card:active {
+  animation: holiday-flicker .45s ease-out 1;
+}
+@keyframes holiday-flicker {
+  from { border-color: var(--accent); }
+  to { border-color: var(--line); }
+}

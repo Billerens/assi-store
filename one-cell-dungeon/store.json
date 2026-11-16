@@ -1,0 +1,8 @@
+{
+  "id": "one-cell-dungeon",
+  "kind": "game",
+  "title": "Подземелье в одну клетку",
+  "target": "modules/games/one-cell-dungeon",
+  "requires": [],
+  "shell": []
+}

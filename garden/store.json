@@ -1,0 +1,8 @@
+{
+  "id": "garden",
+  "kind": "game",
+  "title": "Сад",
+  "target": "modules/games/garden",
+  "requires": [],
+  "shell": ["app.visible", "job.once", "vibrate.pattern"]
+}

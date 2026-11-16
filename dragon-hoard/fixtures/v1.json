@@ -1,0 +1,196 @@
+{
+ "format": 1,
+ "game": "dragon-hoard",
+ "ver": 1,
+ "seq": 77,
+ "created": 1793606400000,
+ "savedAt": 1793609700000,
+ "lastTick": 1793609700000,
+ "run": {
+  "gold": "4.13431805212e5",
+  "earned": "1.62838373407e6",
+  "hmax": "1.0011835289e6",
+  "servants": [
+   29,
+   19,
+   15,
+   6,
+   1,
+   0,
+   0,
+   0
+  ],
+  "q": {
+   "claws": 6,
+   "scale": 5,
+   "flame": 5,
+   "wings": 6
+  },
+  "spentPower": "9.374e4",
+  "fear": 33.99166666666656,
+  "curled": false,
+  "raid": {
+   "n": 1,
+   "start": 1793609622117.647,
+   "end": 1793609899895.4248,
+   "loot": "2.40154136186e6"
+  },
+  "lastRaid": 1,
+  "woundedUntil": 0,
+  "knight": {
+   "type": "wanderer",
+   "at": 1793610276420,
+   "purse": 1,
+   "seen": false
+  },
+  "queue": [],
+  "knightCount": 2,
+  "fightCount": 1,
+  "raidCount": 2,
+  "wins": 1,
+  "losses": 0,
+  "lost": "0e0",
+  "raids": 1,
+  "raidWins": 1,
+  "trophies": [],
+  "glitterBonus": 0,
+  "breath": null,
+  "terror": false,
+  "fx": {
+   "echo": 0,
+   "tribute": 0,
+   "eclipse": 0,
+   "quiet": 0,
+   "molt": 0,
+   "rain": 0
+  },
+  "event": null,
+  "news": {
+   "id": "echo",
+   "at": 1793609538000,
+   "c": "",
+   "text": ""
+  },
+  "nextEventAt": 1793609705125.4448,
+  "autoAt": 1793609701000,
+  "log": [
+   {
+    "at": 1793609250000,
+    "k": "e",
+    "id": "merchant",
+    "c": "",
+    "t": "+668"
+   },
+   {
+    "at": 1793609374000,
+    "k": "e",
+    "id": "offering",
+    "c": "",
+    "t": "+16 534"
+   },
+   {
+    "at": 1793609538000,
+    "k": "e",
+    "id": "echo",
+    "c": "",
+    "t": ""
+   },
+   {
+    "at": 1793609622117.647,
+    "k": "r",
+    "n": 1,
+    "w": true,
+    "a": "3.07639189426e4",
+    "g": 0
+   },
+   {
+    "at": 1793609679000,
+    "k": "f",
+    "id": "bard",
+    "w": true,
+    "a": "7.19759606872e5",
+    "p": 53,
+    "g": 0
+   }
+  ],
+  "world": {
+   "id": "mages"
+  },
+  "seed": 127763248,
+  "away": null
+ },
+ "layers": {
+  "sleep": {
+   "state": {
+    "sleeps": 1,
+    "halls": {
+     "grotto": 0,
+     "bones": 0,
+     "nest": 0,
+     "mirror": 0,
+     "sanctum": 0,
+     "cache": 0
+    }
+   },
+   "currency": "1e0",
+   "count": 1,
+   "best": "1e0",
+   "lastAt": 1793609100000
+  },
+  "clutch": {
+   "state": {
+    "species": "cave",
+    "next": "cave",
+    "bloodTotal": 0
+   },
+   "currency": "0e0",
+   "count": 0,
+   "best": "0e0"
+  }
+ },
+ "meta": {
+  "gems": "1e0",
+  "trophies": {
+   "helm": 1
+  },
+  "chronicle": [
+   {
+    "n": 1,
+    "kind": "sleep",
+    "at": 1793609100000,
+    "age": "Молодой",
+    "world": "Век смуты",
+    "hmax": "1.48970811306e8",
+    "wins": 1,
+    "losses": 1,
+    "raids": 2,
+    "trophies": [
+     "helm"
+    ],
+    "gain": "1e0"
+   }
+  ],
+  "knightsWon": 2,
+  "knightsLost": 1,
+  "capital": 0,
+  "rainCoins": 0,
+  "extraKnights": [],
+  "auto": {
+   "buy": true,
+   "raid": true,
+   "gong": true
+  },
+  "seed": 3663131647,
+  "achievements": {},
+  "applied": [],
+  "stockUsed": [],
+  "taken": {},
+  "stats": {
+   "playMs": 0,
+   "sessions": 0,
+   "offlineMs": 0,
+   "trips": 0
+  }
+ },
+ "card": ""
+}

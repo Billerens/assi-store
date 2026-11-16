@@ -1,0 +1,8 @@
+{
+  "id": "recorder",
+  "kind": "module",
+  "title": "Диктофон",
+  "target": "modules/recorder",
+  "requires": ["inbox", "spending"],
+  "shell": ["notify.actions", "transcribe.segments", "job.once", "speech.render"]
+}

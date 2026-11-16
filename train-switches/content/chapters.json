@@ -1,0 +1,51 @@
+{
+  "about": "Главы и параметры генератора уровней (tools/gen-levels.js на ПК; daily и weekly — генератор на телефоне). share — порог доли решений (спецификация: 5 %); на сетке 5×8 с 2–4 стрелками и задержками в бюджете 5 % недостижимо, поэтому для глав 2–5 порог выше — см. README. band — коридор сложности d для отбора 15 уровней главы.",
+  "chapters": [
+    {"n": 1, "title": "Пригород", "new": "Ручные стрелки: положение задаёте вы до пуска", "tutorials": 5,
+     "gen": {"w": 5, "h": 8, "depots": [2, 3], "sw": [3, 5], "merges": [0, 0], "swMax": 5, "mgMax": 0, "pSwitch": 0.4, "pMerge": 0, "pStation": 0.55,
+             "kinds": {"m": 1}, "trains": [2, 3], "delay": [0, 0], "share": 0.05, "band": [4.5, 6.5]}},
+    {"n": 2, "title": "Узловая", "new": "Слияния путей и задержки отправления", "delayShare": 0.5,
+     "gen": {"w": 5, "h": 8, "depots": [2, 3], "sw": [2, 4], "merges": [1, 2], "swMax": 4, "mgMax": 2, "pSwitch": 0.45, "pMerge": 0.7, "pStation": 0.5,
+             "kinds": {"m": 1}, "trains": [3, 5], "delay": [1, 2], "pDelay": 0.7, "gap": [0, 2], "start": 1, "share": 0.15, "band": [5, 7]}},
+    {"n": 3, "title": "Маятник", "new": "Перекидные стрелки: после каждого поезда меняют положение",
+     "gen": {"w": 5, "h": 8, "depots": [1, 2], "sw": [2, 4], "merges": [0, 2], "swMax": 4, "mgMax": 2, "pSwitch": 0.4, "pMerge": 0.5, "pStation": 0.5,
+             "kinds": {"m": 1, "f": 1.2}, "need": "f", "trains": [3, 5], "delay": [0, 2], "gap": [0, 2], "share": 0.15, "band": [5.5, 7.5]}},
+    {"n": 4, "title": "Сортировочная", "new": "Цветные стрелки: поезд их цвета — налево, остальные — направо",
+     "gen": {"w": 5, "h": 8, "depots": [1, 2], "sw": [2, 4], "merges": [0, 2], "swMax": 4, "mgMax": 2, "pSwitch": 0.4, "pMerge": 0.5, "pStation": 0.5,
+             "kinds": {"m": 1, "f": 0.6, "c": 1.2}, "need": "c", "trains": [3, 5], "delay": [0, 2], "gap": [0, 2], "share": 0.15, "band": [6, 8]}},
+    {"n": 5, "title": "Счётчик", "new": "Счётные стрелки: первые n поездов — налево, дальше — направо",
+     "gen": {"w": 5, "h": 8, "depots": [1, 2], "sw": [2, 4], "merges": [0, 2], "swMax": 4, "mgMax": 2, "pSwitch": 0.4, "pMerge": 0.5, "pStation": 0.5,
+             "kinds": {"m": 1, "f": 0.5, "c": 0.5, "n": 1.2}, "need": "n", "trains": [4, 6], "delay": [0, 2], "gap": [0, 2], "share": 0.15, "band": [6.5, 8.5]}},
+    {"n": 6, "title": "Длинные составы", "new": "Поезд занимает две клетки: хвост тоже сталкивается",
+     "gen": {"w": 7, "h": 9, "depots": [2, 2], "sw": [3, 5], "merges": [1, 3], "swMax": 5, "mgMax": 3, "pSwitch": 0.5, "pMerge": 0.6, "pStation": 0.45,
+             "kinds": {"m": 1, "f": 0.6, "c": 0.6, "n": 0.6}, "trains": [3, 5], "delay": [1, 3], "gap": [0, 2], "len2": 1, "share": 0.08, "band": [7, 9.5]}},
+    {"n": 7, "title": "Встречные", "new": "Однопутный участок: встречные поезда разъезжаются только на разъезде",
+     "gen": {"shape": "corridor", "sw": [2, 2], "merges": [0, 2], "kinds": {"m": 1, "f": 0.7}, "trains": [4, 6], "delay": [2, 4], "gap": [1, 3], "start": 3,
+             "twoLoops": 0.4, "share": 0.05, "band": [7.5, 10.5]}},
+    {"n": 8, "title": "Кольцо", "new": "Кольцевая линия и мосты: поезд кружит, пока стрелка не выпустит",
+     "gen": {"shape": "ring", "sw": [2, 4], "merges": [1, 3], "kinds": {"m": 1, "f": 0.8, "n": 0.8}, "trains": [3, 5], "delay": [0, 2], "gap": [1, 3],
+             "cross": 0.75, "share": 0.05, "band": [8, 11]}},
+    {"n": 9, "title": "Час пик", "new": "Много поездов и плотное расписание",
+     "gen": {"w": 7, "h": 9, "depots": [2, 3], "sw": [3, 5], "merges": [1, 3], "swMax": 5, "mgMax": 3, "pSwitch": 0.5, "pMerge": 0.6, "pStation": 0.45,
+             "kinds": {"m": 1, "f": 0.8, "c": 0.6}, "trains": [7, 9], "delay": [1, 2], "gap": [0, 1], "start": 1, "share": 0.05, "band": [9, 12.5]}},
+    {"n": 10, "title": "Главный диспетчер", "new": "Всё вместе: все виды стрелок, длинные составы, мосты, кольцо и разъезд", "band": [9.5, 13.5],
+     "gen": [{"w": 7, "h": 9, "depots": [2, 3], "sw": [3, 6], "merges": [1, 4], "swMax": 6, "mgMax": 4, "pSwitch": 0.5, "pMerge": 0.6, "pStation": 0.45,
+              "kinds": {"m": 1, "f": 0.7, "c": 0.7, "n": 0.7}, "trains": [5, 7], "delay": [1, 2], "gap": [0, 2], "len2": 0.4, "bridges": true, "share": 0.05},
+             {"shape": "ring", "sw": [3, 4], "merges": [1, 3], "kinds": {"m": 1, "f": 0.8, "c": 0.8, "n": 0.8}, "trains": [4, 6], "delay": [1, 2], "gap": [1, 3],
+              "cross": 1, "len2": 0.3, "share": 0.05},
+             {"shape": "corridor", "sw": [2, 2], "merges": [1, 2], "kinds": {"m": 1, "f": 0.8, "n": 0.6}, "trains": [5, 7], "delay": [2, 4], "gap": [1, 3], "start": 3,
+              "twoLoops": 0.7, "share": 0.05}]}
+  ],
+  "daily": [
+    {"w": 5, "h": 8, "depots": [1, 2], "sw": [2, 4], "merges": [0, 2], "swMax": 4, "mgMax": 2, "pSwitch": 0.4, "pMerge": 0.5, "pStation": 0.5,
+     "kinds": {"m": 1, "f": 0.7, "c": 0.7, "n": 0.7}, "trains": [3, 5], "delay": [0, 2], "gap": [0, 2], "share": 0.15, "cap": 4096, "dMin": 5.5},
+    {"w": 5, "h": 8, "depots": [1, 2], "sw": [2, 3], "merges": [0, 1], "swMax": 3, "mgMax": 1, "pSwitch": 0.4, "pMerge": 0.4, "pStation": 0.5,
+     "kinds": {"m": 1, "f": 0.7}, "trains": [2, 4], "delay": [0, 1], "gap": [0, 2], "share": 0.25, "cap": 4096, "dMin": 4.5}
+  ],
+  "weekly": [
+    {"w": 7, "h": 9, "depots": [2, 3], "sw": [3, 5], "merges": [1, 3], "swMax": 5, "mgMax": 3, "pSwitch": 0.5, "pMerge": 0.6, "pStation": 0.45,
+     "kinds": {"m": 1, "f": 0.7, "c": 0.7, "n": 0.7}, "trains": [4, 7], "delay": [1, 2], "gap": [0, 2], "len2": 0.3, "bridges": true, "share": 0.08, "cap": 4096, "dMin": 8.5},
+    {"w": 7, "h": 9, "depots": [2, 2], "sw": [3, 4], "merges": [1, 2], "swMax": 4, "mgMax": 2, "pSwitch": 0.5, "pMerge": 0.6, "pStation": 0.45,
+     "kinds": {"m": 1, "f": 0.7, "n": 0.7}, "trains": [4, 6], "delay": [1, 2], "gap": [0, 2], "share": 0.15, "cap": 4096, "dMin": 7.5}
+  ]
+}

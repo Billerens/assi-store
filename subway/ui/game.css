@@ -1,0 +1,733 @@
+/* The screen of «Подземка»; the frame (bar, sheets, buttons) is engine/game.css. Dark base, gray
+   cards without shadows, colour only on the lines and the accents. One declaration per line. */
+
+.sw-top {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sw-top-main {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  column-gap: 12px;
+}
+
+.sw-moneyrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.sw-moneyrow .sw-art {
+  width: 28px;
+  height: 28px;
+}
+
+.sw-money {
+  font-family: var(--mono);
+  font-size: 27px;
+  overflow-wrap: anywhere;
+}
+
+/* The pictures of ui/art.js: 40 px in the rows, smaller in the chips and on the buttons. */
+.sw-art {
+  display: block;
+  flex: none;
+  width: 40px;
+  height: 40px;
+}
+
+.sw-art.small {
+  width: 28px;
+  height: 28px;
+}
+
+.sw-art.mid {
+  width: 36px;
+  height: 36px;
+}
+
+.sw-rate {
+  min-height: 44px;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 15px;
+  text-align: left;
+  text-decoration: underline dotted;
+  text-underline-offset: 4px;
+}
+
+.sw-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sw-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px 2px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sw-chip[hidden] {
+  display: none;
+}
+
+.sw-chip .sw-art {
+  width: 20px;
+  height: 20px;
+}
+
+.sw-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 100%;
+  padding-bottom: 8px;
+}
+
+.sw-linehead {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+}
+
+.sw-linehead[hidden] {
+  display: none;
+}
+
+.sw-lt {
+  min-width: 0;
+  font-size: 17px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.sw-arrow {
+  flex: none;
+  width: 48px;
+  height: 48px;
+}
+
+.sw-map {
+  position: relative;
+  flex: none;
+  padding: 6px 4px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background-color: #131518;
+  background-image: linear-gradient(#1B1E23 1px, transparent 1px), linear-gradient(90deg, #1B1E23 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: pan-y;
+}
+
+.sw-map svg {
+  display: block;
+  max-width: 100%;
+}
+
+.sw-strip .sw-name {
+  fill: var(--ink);
+  font-size: 15px;
+}
+
+.sw-strip .sw-name.two {
+  font-size: 13px;
+}
+
+.sw-strip .sw-name.crowd {
+  fill: var(--ink-2);
+}
+
+.sw-strip .sw-dist {
+  fill: var(--ink-2);
+  font-size: 12px;
+}
+
+.sw-sleepers {
+  stroke: #101010;
+  stroke-width: 4;
+  stroke-dasharray: 2 7;
+  opacity: .45;
+}
+
+.sw-stdot {
+  fill: var(--ink);
+}
+
+.sw-tbody {
+  stroke: #101010;
+  stroke-width: 2;
+}
+
+.sw-twin {
+  fill: #101010;
+  opacity: .7;
+}
+
+.sw-strip .sw-dist.rush {
+  fill: var(--accent);
+}
+
+.sw-strip .sw-gap {
+  fill: var(--ink-3);
+  font-size: 13px;
+  text-anchor: end;
+}
+
+.sw-strip .ground,
+.sw-mline.ground .sw-track {
+  stroke-dasharray: 18 10;
+}
+
+.sw-st {
+  fill: #101010;
+  stroke-width: 4;
+}
+
+.sw-st.crowd {
+  fill: var(--surface-2);
+}
+
+.sw-st.rush {
+  fill: var(--accent);
+}
+
+.sw-crowd {
+  fill: var(--danger);
+}
+
+.sw-train {
+  pointer-events: none;
+}
+
+.sw-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--lc, var(--line));
+  background: var(--surface);
+}
+
+.sw-ct {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sw-cs,
+.sw-ci,
+.sw-cm {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.sw-bar {
+  margin-top: 4px;
+}
+
+.sw-hint {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.sw-hint:empty {
+  display: none;
+}
+
+.sw-hint.warn {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+/* The city map of the unfolded screen. */
+.sw-city {
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 150px);
+}
+
+.sw-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 48;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  cursor: pointer;
+}
+
+.sw-track {
+  fill: none;
+  stroke-width: 14;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .8;
+}
+
+.sw-mline.sel .sw-track {
+  stroke-width: 20;
+  opacity: 1;
+}
+
+.sw-numt {
+  fill: #101010;
+  font-size: 26px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.sw-zone {
+  fill: #15181C;
+  stroke: #22262C;
+  stroke-width: 3;
+}
+
+.sw-river {
+  fill: none;
+  stroke: #1B2C40;
+  stroke-width: 46;
+  stroke-linecap: round;
+}
+
+.sw-ring {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 10;
+  stroke-dasharray: 4 14;
+  stroke-linecap: round;
+}
+
+.sw-bridge {
+  stroke: var(--ink);
+  stroke-width: 8;
+}
+
+.sw-tr {
+  fill: var(--ink);
+  stroke-width: 5;
+}
+
+/* The bottom: the event card, the buy buttons, the quantity, the turnstile, the tabs. */
+.sw-event {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+}
+
+.sw-event[hidden] {
+  display: none;
+}
+
+.sw-ev-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.sw-ev-head .sw-art {
+  width: 44px;
+  height: 44px;
+}
+
+.sw-ev-title {
+  font-weight: 600;
+}
+
+.sw-ev-text {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.sw-ev-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sw-ev-btns > * {
+  flex: 1 1 120px;
+  min-width: 0;
+}
+
+.sw-ev-btns.three {
+  flex-direction: column;
+}
+
+.sw-choice {
+  justify-content: flex-start;
+}
+
+.sw-buyrow .g-btn {
+  min-height: 56px;
+  padding: 4px 10px;
+  gap: 6px;
+}
+
+.sw-buy .sw-art {
+  width: 24px;
+  height: 24px;
+}
+
+.sw-turnstile .sw-art {
+  width: 26px;
+  height: 26px;
+}
+
+.sw-qty {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sw-q {
+  flex: 1 1 64px;
+  min-width: 0;
+  min-height: 44px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.sw-q.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.sw-turnstile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 10px;
+  min-height: 56px;
+  border-radius: var(--radius);
+  border: 1px dashed var(--ink-3);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 600;
+  touch-action: manipulation;
+}
+
+.sw-turnstile:active {
+  background: var(--surface-2);
+}
+
+.sw-turnstile .g-num {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+.sw-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.sw-tabs[hidden] {
+  display: none;
+}
+
+.sw-tab {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 52px;
+  padding: 4px 2px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.sw-tab svg.i {
+  width: 20px;
+  height: 20px;
+}
+
+.sw-tab span {
+  max-width: 100%;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.sw-tab.on {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* The panels of the tabs (a sheet on the cover screen, inline when unfolded). */
+.sw-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sw-head {
+  margin-top: 8px;
+  color: var(--ink-2);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sw-pnote {
+  margin: 0;
+}
+
+.sw-prow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 6px 8px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.sw-prow.tap {
+  cursor: pointer;
+}
+
+.sw-prow.sel {
+  border-color: var(--accent);
+}
+
+.sw-prow.done {
+  border-color: #2C5A40;
+  background: #151B17;
+}
+
+.sw-prow.locked {
+  border-style: dashed;
+}
+
+.sw-prow.done .sw-ptitle,
+.sw-prow.locked .sw-ptitle {
+  color: var(--ink-2);
+}
+
+.sw-picon {
+  flex: none;
+  display: inline-flex;
+  color: var(--ink-2);
+}
+
+.sw-picon[hidden] {
+  display: none;
+}
+
+.sw-ptitle {
+  font-size: 15px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.sw-psub {
+  color: var(--ink-2);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.sw-psub[hidden] {
+  display: none;
+}
+
+.sw-prow > .grow {
+  flex: 1 1 150px;
+  min-width: 0;
+}
+
+.sw-pbtn {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+  min-height: 48px;
+  padding: 4px 12px;
+}
+
+.sw-pbtn[hidden] {
+  display: none;
+}
+
+.sw-pbtn.on {
+  color: var(--ok);
+}
+
+.sw-inline {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: auto;
+}
+
+.sw-pre {
+  margin: 0;
+  padding: 10px;
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  font-family: var(--mono);
+  font-size: 13px;
+  white-space: pre-wrap;
+}
+
+.sw-text {
+  width: 100%;
+  min-height: 88px;
+  padding: 8px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+/* Unfolded: the map fills the left, the right column scrolls its panel. */
+.g-app[data-layout="wide"] .sw-field {
+  justify-content: center;
+}
+
+.g-app[data-layout="wide"] .g-actions {
+  justify-content: flex-start;
+}
+
+.g-app[data-layout="wide"] .sw-inline {
+  min-height: 160px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sw-turnstile:active {
+    background: var(--surface);
+  }
+}
+
+/* Progressive canvas world;
+ all existing economy panels remain below/beside it. */
+.world-scene {
+min-width:0;
+max-width:100%;
+margin:0 0 14px;
+overflow:hidden;
+border:1px solid var(--line,#3c514e);
+border-radius:12px;
+background:#14262d;
+color:#dbe9da;
+flex:0 0 auto
+}
+
+.world-scene-tabs {
+display:flex;
+gap:5px;
+padding:7px;
+background:#10232b
+}
+
+.world-scene-tabs button {
+flex:1;
+min-height:40px;
+min-width:0;
+padding:8px 12px;
+border:1px solid #567265;
+border-radius:7px;
+background:transparent;
+color:#cedcce;
+font:inherit;
+font-size:13px;
+cursor:pointer
+}
+
+.world-scene-tabs button[aria-pressed=true] {
+background:#c0d8ba;
+color:#183e34;
+border-color:#c0d8ba
+}
+
+.world-scene-tabs button:focus-visible {
+outline:3px solid #e9cc91;
+outline-offset:2px
+}
+
+.world-scene-stage {
+min-width:0;
+line-height:0
+}
+.world-scene .g-scene {
+border:0;
+border-radius:0;
+margin:0
+}
+.world-scene canvas {
+display:block;
+width:100%;
+height:auto
+}
+
+.world-scene-caption {
+margin:0;
+padding:10px 13px;
+background:#10232b;
+color:#b6d0be;
+font-size:12px;
+line-height:1.5;
+overflow-wrap:anywhere
+}
+
+@media(max-width:420px) {
+.world-scene-tabs button {
+min-height:42px;
+font-size:12px
+}
+.world-scene-caption {
+font-size:11px;
+padding:9px 11px
+}
+
+}
+
+.sw-world-map {
+padding:0;
+border:0;
+background:none
+}
+.sw-world-map .world-scene {
+margin:0
+}
+.g-app[data-layout="wide"] .sw-field:has(.sw-world-map) {
+justify-content:flex-start
+}

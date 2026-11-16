@@ -1,0 +1,26 @@
+Battery History (1% used, 2532 used of 4096KB, 107 strings using 9640):
+                    0 (14) RESET:TIME: 2026-11-13-18-02-11
+                    0 (2) 100 status=discharging health=good plug=none temp=270 volt=4380 charge=4500 modemRailChargemAh=0 wifiRailChargemAh=0 +running +wake_lock +screen phone_signal_strength=great brightness=dark +wifi_radio +wifi wifi_signal_strength=4 wifi_suppl=completed ble_scan=off
+                 +1s004ms (2) 100 -wake_lock
+          +4h55m49s000ms (2) 092 temp=265 volt=4180
+          +5h17m54s000ms (2) 092 +screen
+          +5h37m29s000ms (2) 092 -screen
+          +5h37m49s000ms (2) 091 charge=4095
+          +6h09m49s000ms (3) 091 +wake_lock=u0a245:"*walarm*:ru.marketplace.app.SYNC" wake_reason=0:"Alarm" wakeupap=u0a245:"*walarm*:ru.marketplace.app.SYNC"
+          +6h09m50s200ms (2) 091 -wake_lock
+          +6h27m49s000ms (2) 091 device_idle=light
+          +7h27m49s000ms (2) 089 charge=4005
+          +8h07m49s000ms (2) 089 device_idle=full
+          +8h37m49s000ms (2) 089 +screen device_idle=off
+          +8h44m09s000ms (2) 088 -screen
+          +8h47m49s000ms (2) 088 device_idle=light
+          +9h02m59s000ms (3) 088 +wake_lock=u0a245:"*walarm*:ru.marketplace.app.SYNC" wake_reason=0:"Alarm" wakeupap=u0a245:"*walarm*:ru.marketplace.app.SYNC"
+          +9h03m00s100ms (2) 088 -wake_lock
+          +9h17m49s000ms (2) 088 device_idle=full
+          +9h57m49s000ms (2) 087 +job=u0a160:"com.google.android.gms/.gcm.GcmTaskService" +wake_lock=u0a160:"*job*/com.google.android.gms/.gcm.GcmTaskService"
+          +9h57m55s000ms (2) 087 -job=u0a160:"com.google.android.gms/.gcm.GcmTaskService" -wake_lock
+          +11h27m49s000ms (2) 086 device_idle=off
+          +11h28m49s000ms (2) 086 device_idle=full
+          +11h57m49s000ms (2) 084 wake_reason=0:"Abort:Pending Wakeup Sources: qcom_rx_wakelock "
+          +13h02m49s000ms (2) 082 +screen device_idle=off
+          +13h10m19s000ms (2) 081 volt=4010

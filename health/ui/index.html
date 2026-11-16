@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Здоровье</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<link rel="stylesheet" href="style.css">
+<body>
+<main class="page wide">
+  <header class="topbar">
+    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <h1>Здоровье</h1>
+    <button class="icon-btn" id="collect" aria-label="Собрать данные сейчас" data-icon="refresh"></button>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <div id="pause"></div>
+
+  <div class="tab" data-tab="today">
+    <div class="grid">
+      <div class="col" id="today"></div>
+      <div class="col" id="charts"></div>
+    </div>
+  </div>
+
+  <div class="tab" data-tab="week">
+    <div class="grid">
+      <div class="col" id="week"></div>
+      <div class="col" id="week-side"></div>
+    </div>
+  </div>
+
+  <div class="tab" data-tab="habits">
+    <div class="grid">
+      <div class="col" id="habits"></div>
+      <div class="col" id="meds"></div>
+    </div>
+  </div>
+
+  <div class="tab" data-tab="settings">
+    <div class="grid">
+      <div class="col" id="access"></div>
+      <div class="col" id="prefs"></div>
+    </div>
+  </div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

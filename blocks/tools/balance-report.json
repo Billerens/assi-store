@@ -1,0 +1,178 @@
+{
+  "protocol": "Fixed seeds 1..10000; greedy maximum-lines bot; all twenty upgrades once, no prestige or stock; three seconds per placement/tool/purchase.",
+  "configuration": {
+    "deal.bigFrom": 5,
+    "deal.growScore": 3000,
+    "deal.growMax": 2,
+    "deal.fairTries": 20,
+    "event.fromDeal": 5,
+    "event.heavy": 0.12,
+    "event.gold": 0.025,
+    "event.gift": 0.002,
+    "event.heavyMult": 2,
+    "w.dot": 12,
+    "w.line2": 30,
+    "w.line3": 100,
+    "w.line4": 8,
+    "w.line5": 40,
+    "w.corner3": 15,
+    "w.corner4": 8,
+    "w.bigcorner": 4,
+    "w.sq2": 12,
+    "w.sq3": 25,
+    "w.t4": 6,
+    "w.zig4": 5,
+    "w.cross": 1,
+    "w.diag": 1,
+    "deal.openingDeals": 4,
+    "deal.openingBudget": 20000,
+    "deal.openingMaxCells": 3
+  },
+  "baseline": {
+    "games": 10000,
+    "mean": 1554.7147,
+    "median": 1271,
+    "min": 75,
+    "max": 9449,
+    "minimumDeal": 5,
+    "early": [],
+    "capped": 0
+  },
+  "upgraded": {
+    "games": 1000,
+    "baseMean": 1561.042,
+    "mean": 7582.101,
+    "median": 7054,
+    "ratio": 4.857076875574136,
+    "masterMean": 5416.6,
+    "masterRatio": 3.469861797440428
+  },
+  "pace": {
+    "actionSec": 3,
+    "firstBuy": {
+      "game": 1,
+      "actions": 144,
+      "seconds": 432
+    },
+    "firstPrestige": {
+      "game": 7,
+      "actions": 1016,
+      "seconds": 3048,
+      "mastery": 3
+    },
+    "trajectory": [
+      {
+        "game": 1,
+        "score": 3233,
+        "moves": 143,
+        "coins": 323
+      },
+      {
+        "game": 2,
+        "score": 2352,
+        "moves": 119,
+        "coins": 258
+      },
+      {
+        "game": 3,
+        "score": 534,
+        "moves": 47,
+        "coins": 63
+      },
+      {
+        "game": 4,
+        "score": 1221,
+        "moves": 84,
+        "coins": 254
+      },
+      {
+        "game": 5,
+        "score": 3302,
+        "moves": 165,
+        "coins": 396
+      },
+      {
+        "game": 6,
+        "score": 3182,
+        "moves": 182,
+        "coins": 413
+      },
+      {
+        "game": 7,
+        "score": 5055,
+        "moves": 255,
+        "coins": 877
+      }
+    ]
+  },
+  "shortSessions": {
+    "policy": "Bank the first game once earned coins cover the cheapest upgrade; later bank at natural end or prestige threshold.",
+    "actionSec": 3,
+    "firstBuy": {
+      "game": 1,
+      "actions": 29,
+      "seconds": 87
+    },
+    "firstPrestige": {
+      "game": 7,
+      "actions": 753,
+      "seconds": 2259,
+      "mastery": 3
+    },
+    "trajectory": [
+      {
+        "game": 1,
+        "score": 345,
+        "moves": 28,
+        "coins": 34
+      },
+      {
+        "game": 2,
+        "score": 1291,
+        "moves": 77,
+        "coins": 129
+      },
+      {
+        "game": 3,
+        "score": 114,
+        "moves": 18,
+        "coins": 12
+      },
+      {
+        "game": 4,
+        "score": 1117,
+        "moves": 75,
+        "coins": 221
+      },
+      {
+        "game": 5,
+        "score": 1160,
+        "moves": 78,
+        "coins": 127
+      },
+      {
+        "game": 6,
+        "score": 4756,
+        "moves": 221,
+        "coins": 666
+      },
+      {
+        "game": 7,
+        "score": 5000,
+        "moves": 237,
+        "coins": 871.0000000000001
+      }
+    ]
+  },
+  "tests": {
+    "passed": 4,
+    "failed": []
+  },
+  "sources": {
+    "board.js": "dc6521298be615cf47c0063f148390a6b406317f90a84278dd5e9b586965c416",
+    "sim.js": "e7e962b8aec72d0f8e8d25d2c32516acf3333aa3950ef5a83beb4f9fb3f7f75a",
+    "bot.js": "a031b5f384d68585135a50be390b25fb4522c0201cae24147dac78d3773d8cae",
+    "config.json": "a89a11d65870df790e79c34eae17fe2eaba98cdf23b73a470dfbc569ffb60a0f",
+    "tests/balance.test.js": "9293b53ddef08ba3c1caaa2e94350b8e6a824981d5d2501f4bbbb6f834ad7df5"
+  }
+}

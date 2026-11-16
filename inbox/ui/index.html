@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Входящие</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<link rel="stylesheet" href="inbox.css">
+<body>
+<main class="page inbox">
+  <header class="topbar">
+    <button class="icon-btn" id="back" aria-label="Назад" data-icon="back"></button>
+    <h1 id="heading">Входящие</h1>
+    <button class="icon-btn" id="sortNow" aria-label="Разобрать сейчас" data-icon="refresh"></button>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <div id="banner" class="section" hidden></div>
+
+  <div class="split" id="feedView">
+    <section class="pane list-pane" id="listPane">
+      <div class="list" id="list"></div>
+      <div class="list-foot">
+        <button class="btn small" id="readAll" hidden>Отметить всё прочитанным</button>
+      </div>
+    </section>
+    <section class="pane chat-pane" id="chatPane" aria-live="polite"></section>
+  </div>
+
+  <div class="tab" data-tab="settings" id="settingsView"></div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script src="inbox.js"></script>
+</body>
+</html>

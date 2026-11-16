@@ -1,0 +1,8 @@
+{
+  "id": "merge-forge",
+  "kind": "game",
+  "title": "Кузница слияний",
+  "target": "modules/games/merge-forge",
+  "requires": [],
+  "shell": ["vibrate.pattern", "app.visible"]
+}

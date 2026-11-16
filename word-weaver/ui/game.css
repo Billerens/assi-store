@@ -1,0 +1,639 @@
+/* The screen of «Словоплёт»: the city, the grid of empty places, the wheel. The frame (bar, sheets,
+   buttons) is engine/game.css; colours from the kit's tokens; no shadows; one declaration a line. */
+
+/* The wheel is the main control: the lower part may be taller than the engine's 40 %. */
+.g-app .g-actions.ww-actions {
+  max-height: 64vh;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.ww-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 8px;
+}
+
+.ww-last-word {
+  flex: none;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+}
+
+.ww-last-word[hidden] {
+  display: none;
+}
+
+.ww-last-title {
+  display: block;
+  margin-top: 4px;
+  font-size: 20px;
+}
+
+.ww-last-word .ww-def {
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+/* ---- the city ---- */
+.ww-city {
+  flex: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  padding: 2px 0;
+  cursor: pointer;
+}
+
+.ww-city::-webkit-scrollbar {
+  display: none;
+}
+
+.ww-city svg {
+  display: block;
+}
+
+.ww-city.big {
+  overflow: visible;
+}
+
+.ww-face-l {
+  fill: var(--surface-2);
+  stroke: var(--line);
+  stroke-width: 0.6;
+}
+
+.ww-face-r {
+  fill: var(--surface);
+  stroke: var(--line);
+  stroke-width: 0.6;
+}
+
+.ww-h-tenement.ww-face-l {
+  fill: var(--ink-3);
+}
+
+.ww-h-tenement.ww-face-r {
+  fill: var(--surface-2);
+}
+
+.ww-h-stone.ww-face-l {
+  fill: #3A3A3A;
+}
+
+.ww-roof-l {
+  fill: var(--accent-soft);
+  stroke: var(--line);
+  stroke-width: 0.6;
+}
+
+.ww-roof-r {
+  fill: #2E2A4A;
+  stroke: var(--line);
+  stroke-width: 0.6;
+}
+
+.ww-roof-flat {
+  fill: #4A4A4A;
+  stroke: var(--line);
+  stroke-width: 0.6;
+}
+
+.ww-roof-special {
+  fill: var(--accent);
+  stroke: var(--line);
+  stroke-width: 0.6;
+}
+
+.ww-win {
+  fill: var(--bg);
+}
+
+.ww-win.on {
+  fill: #E8C66A;
+}
+
+.ww-plot {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 0.8;
+  stroke-dasharray: 2 2;
+}
+
+.ww-q-locked .ww-plot {
+  stroke: var(--line);
+}
+
+.ww-qlabel {
+  fill: var(--ink-2);
+  font-size: 15px;
+}
+
+/* ---- the events ---- */
+.ww-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ww-chip {
+  min-height: 36px;
+  font-size: 15px;
+}
+
+button.ww-chip {
+  min-height: 44px;
+}
+
+.ww-prestige[hidden] {
+  display: none;
+}
+
+/* ---- the grid of empty places ---- */
+.ww-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ww-len {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.ww-len-n {
+  flex: none;
+  width: 30px;
+  padding-top: 3px;
+  color: var(--ink-3);
+  font-size: 15px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.ww-len-n.small {
+  width: auto;
+  min-width: 30px;
+  font-weight: 500;
+}
+
+.ww-cells {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ww-cell {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 15px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.ww-cell.blank {
+  color: var(--ink-3);
+  letter-spacing: .12em;
+  font-family: var(--mono);
+}
+
+.ww-cell.found {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+.ww-cell.hinted {
+  color: var(--ink-2);
+  border-style: dashed;
+}
+
+.ww-cell.rare {
+  border-color: transparent;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.ww-cell.form {
+  color: var(--ink-2);
+}
+
+.ww-counters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ww-counters-t {
+  margin: 0 0 4px;
+}
+
+.ww-counter {
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 10px;
+  border-radius: var(--radius-s);
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.ww-counter b {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+/* A word of n letters as a row of tiles. */
+.ww-tiles {
+  display: flex;
+  gap: 2px;
+}
+
+.ww-tiles > i {
+  width: 8px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--ink-3);
+}
+
+.ww-counter.done .ww-tiles > i {
+  background: var(--ok);
+}
+
+/* The drawn pictures (ui/art.js). */
+.ww-pic {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.ww-art {
+  display: block;
+}
+
+.ww-quarter:not(.open) .ww-pic {
+  opacity: .5;
+}
+
+.ww-counter.done {
+  background: var(--surface-2);
+  color: var(--ok);
+}
+
+.ww-counter.rare {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: transparent;
+}
+
+/* ---- the word over the wheel ---- */
+.ww-word {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.ww-word .ww-typed {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.ww-word.ok .ww-note-text {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+.ww-word.rare .ww-note-text {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ww-word.bad .ww-note-text {
+  color: var(--danger);
+}
+
+.ww-word.again .ww-note-text,
+.ww-word.hint .ww-note-text {
+  color: var(--ink-2);
+}
+
+/* ---- the wheel ---- */
+.ww-wheel-box {
+  flex: none;
+  display: flex;
+  justify-content: center;
+}
+
+.ww-wheel {
+  position: relative;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.ww-disc {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.ww-trail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.ww-trail-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .75;
+}
+
+.ww-key {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #D9D9D9;
+  color: #161616;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.ww-key.on {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.ww-centre {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--ink-3);
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.ww-wheel.typing .ww-centre {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ww-wheel.typing .ww-centre-text::before {
+  content: "Готово · ";
+}
+
+.ww-wheel.ok .ww-disc {
+  border-color: var(--ok);
+}
+
+.ww-wheel.bad .ww-disc {
+  border-color: var(--danger);
+  animation: ww-shake .35s;
+}
+
+@keyframes ww-shake {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+
+  30% {
+    transform: translate(calc(-50% - 6px), -50%);
+  }
+
+  60% {
+    transform: translate(calc(-50% + 6px), -50%);
+  }
+
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+.ww-corner {
+  position: absolute;
+  z-index: 2;
+}
+
+.ww-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+.ww-icon.off {
+  color: var(--ink-3);
+}
+
+.ww-tl {
+  left: 0;
+  top: 0;
+}
+
+.ww-tr {
+  right: 0;
+  top: 0;
+}
+
+.ww-bl {
+  left: 0;
+  bottom: 0;
+}
+
+.ww-br {
+  right: 0;
+  bottom: 0;
+}
+
+.ww-count {
+  position: absolute;
+  right: -2px;
+  top: -2px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 11px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.ww-count:empty {
+  display: none;
+}
+
+.ww-row {
+  flex: none;
+}
+
+.ww-row .g-btn {
+  min-width: 0;
+  padding: 4px 6px;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+/* On a narrow screen the icon goes above the word: «Стройка» does not fit beside it. */
+@media (max-width: 420px) {
+  .ww-row .g-btn {
+    flex-direction: column;
+    gap: 2px;
+    line-height: 20px;
+  }
+}
+
+/* ---- sheets ---- */
+.ww-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 78vh;
+  overflow-y: auto;
+}
+
+.ww-section {
+  margin-top: 6px;
+  color: var(--ink-3);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.ww-build,
+.ww-quarter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.ww-build.has,
+.ww-quarter.open {
+  background: var(--surface-2);
+}
+
+.ww-build-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-weight: 600;
+}
+
+.ww-build-btn {
+  flex: none;
+  width: 104px;
+}
+
+.ww-build-btn .g-btn {
+  min-height: 48px;
+  padding: 4px 8px;
+}
+
+.ww-entry {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ww-entry-top {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ww-entry-meta {
+  margin-left: auto;
+  color: var(--ink-3);
+  font-size: 15px;
+}
+
+.ww-def {
+  margin-top: 2px;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ww-license {
+  max-height: 40vh;
+  overflow: auto;
+  padding: 10px;
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  font-size: 15px;
+  white-space: pre-wrap;
+}
+
+.ww-album-peek {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ww-album-peek:empty {
+  display: none;
+}
+
+.ww-album-peek h3 {
+  margin-top: 6px;
+  font-size: 17px;
+}
+
+.ww-dict-error[hidden] {
+  display: none;
+}
+
+/* Wide (the inner screen): the city large on the left, the grid and the wheel on the right. */
+.g-app[data-layout="wide"] .g-actions.ww-actions {
+  max-height: none;
+  justify-content: flex-end;
+}
+
+.g-app[data-layout="wide"] .ww-actions .ww-grid {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  justify-content: flex-end;
+}

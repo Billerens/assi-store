@@ -1,0 +1,1691 @@
+{
+  "start.ore": {
+    "value": "10",
+    "title": "Руды в начале колонии",
+    "big": true,
+    "group": "Баланс"
+  },
+  "drone.cost": {
+    "value": "10",
+    "title": "Дрон 1-го тира: цена, руды",
+    "big": true,
+    "group": "Баланс"
+  },
+  "drone.costGrowth": {
+    "value": 12,
+    "title": "Цена: следующий тир дороже в",
+    "min": 2,
+    "max": 50,
+    "group": "Баланс"
+  },
+  "drone.growth": {
+    "value": 1.13,
+    "title": "Рост цены дрона",
+    "min": 1.01,
+    "max": 2,
+    "step": 0.01,
+    "group": "Баланс"
+  },
+  "drone.rate": {
+    "value": 0.4,
+    "title": "Скребок: руды/с",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01,
+    "group": "Баланс"
+  },
+  "drone.rateGrowth": {
+    "value": 7,
+    "title": "Добыча: следующий тир больше в",
+    "min": 2,
+    "max": 50,
+    "group": "Баланс"
+  },
+  "drone.milestones": {
+    "value": "10,25,50,100,150,200,250,300,400,500",
+    "title": "Вехи дронов (через запятую)",
+    "group": "Баланс"
+  },
+  "drone.milestoneEvery": {
+    "value": 100,
+    "title": "Вехи после списка: каждые столько дронов (0 — выкл.)",
+    "min": 0,
+    "max": 1000,
+    "step": 10,
+    "group": "Баланс"
+  },
+  "drone.milestoneMult": {
+    "value": 2,
+    "title": "Множитель за веху",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Баланс"
+  },
+  "hull.cost": {
+    "value": 50,
+    "title": "Корпус: цена, сплавов",
+    "min": 1,
+    "max": 1000000,
+    "group": "Баланс"
+  },
+  "hull.growth": {
+    "value": 8,
+    "title": "Корпус: рост цены за уровень",
+    "min": 1.1,
+    "max": 50,
+    "step": 0.1,
+    "group": "Баланс"
+  },
+  "hull.tierGrowth": {
+    "value": 10,
+    "title": "Корпус: следующий тир дороже в",
+    "min": 1,
+    "max": 100,
+    "group": "Баланс"
+  },
+  "hull.mult": {
+    "value": 2,
+    "title": "Корпус: добыча тира ×",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Баланс"
+  },
+  "breaker.cost": {
+    "value": "200",
+    "title": "Ледокол: цена, руды",
+    "big": true,
+    "group": "Баланс"
+  },
+  "breaker.costGrowth": {
+    "value": 15,
+    "title": "Ледоколы: следующий тир дороже в",
+    "min": 2,
+    "max": 100,
+    "group": "Баланс"
+  },
+  "breaker.growth": {
+    "value": 1.15,
+    "title": "Рост цены ледокола",
+    "min": 1.01,
+    "max": 2,
+    "step": 0.01,
+    "group": "Баланс"
+  },
+  "breaker.rate": {
+    "value": 0.1,
+    "title": "Ледокол: льда/с",
+    "min": 0.01,
+    "max": 100,
+    "step": 0.01,
+    "group": "Баланс"
+  },
+  "breaker.rateGrowth": {
+    "value": 6,
+    "title": "Лёд: следующий тир больше в",
+    "min": 2,
+    "max": 50,
+    "group": "Баланс"
+  },
+  "upgrade.cost": {
+    "value": "3e3",
+    "title": "Улучшение колонии: первое, руды",
+    "big": true,
+    "group": "Баланс"
+  },
+  "upgrade.growth": {
+    "value": 200,
+    "title": "Улучшение: каждое следующее дороже в",
+    "min": 2,
+    "max": 10000,
+    "group": "Баланс"
+  },
+  "upgrade.mult": {
+    "value": 2,
+    "title": "Улучшение: руда ×",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Баланс"
+  },
+  "b.smelter.cost": {
+    "value": "500",
+    "title": "Плавильня: цена 1-го уровня, руды",
+    "big": true,
+    "group": "Здания"
+  },
+  "b.smelter.t": {
+    "value": 2,
+    "title": "Плавильня ур. 1: вход в секунду",
+    "min": 0.01,
+    "max": 1000,
+    "step": 0.01,
+    "group": "Здания"
+  },
+  "b.smelter.e": {
+    "value": 5,
+    "title": "Плавильня ур. 1: энергии",
+    "min": 0.1,
+    "max": 1000,
+    "step": 0.1,
+    "group": "Здания"
+  },
+  "b.smelter.ratio": {
+    "value": 10,
+    "title": "Плавильня: входа на 1 выхода",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "group": "Здания"
+  },
+  "b.purifier.cost": {
+    "value": "1500",
+    "title": "Водоочистка: цена 1-го уровня, руды",
+    "big": true,
+    "group": "Здания"
+  },
+  "b.purifier.t": {
+    "value": 1,
+    "title": "Водоочистка ур. 1: вход в секунду",
+    "min": 0.01,
+    "max": 1000,
+    "step": 0.01,
+    "group": "Здания"
+  },
+  "b.purifier.e": {
+    "value": 4,
+    "title": "Водоочистка ур. 1: энергии",
+    "min": 0.1,
+    "max": 1000,
+    "step": 0.1,
+    "group": "Здания"
+  },
+  "b.purifier.ratio": {
+    "value": 2,
+    "title": "Водоочистка: входа на 1 выхода",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "group": "Здания"
+  },
+  "b.electro.cost": {
+    "value": "1e7",
+    "title": "Электролиз: цена 1-го уровня, руды",
+    "big": true,
+    "group": "Здания"
+  },
+  "b.electro.t": {
+    "value": 0.00065,
+    "title": "Электролиз ур. 1: вход в секунду",
+    "min": 0.00001,
+    "max": 1000,
+    "step": 0.00001,
+    "group": "Здания"
+  },
+  "b.electro.e": {
+    "value": 8,
+    "title": "Электролиз ур. 1: энергии",
+    "min": 0.1,
+    "max": 1000,
+    "step": 0.1,
+    "group": "Здания"
+  },
+  "b.electro.ratio": {
+    "value": 3,
+    "title": "Электролиз: входа на 1 выхода",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "group": "Здания"
+  },
+  "b.factory.cost": {
+    "value": "4000",
+    "title": "Фабрика: цена 1-го уровня, руды",
+    "big": true,
+    "group": "Здания"
+  },
+  "b.factory.t": {
+    "value": 0.8,
+    "title": "Фабрика ур. 1: вход в секунду",
+    "min": 0.01,
+    "max": 1000,
+    "step": 0.01,
+    "group": "Здания"
+  },
+  "b.factory.e": {
+    "value": 6,
+    "title": "Фабрика ур. 1: энергии",
+    "min": 0.1,
+    "max": 1000,
+    "step": 0.1,
+    "group": "Здания"
+  },
+  "b.factory.ratio": {
+    "value": 5,
+    "title": "Фабрика: входа на 1 выхода",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "group": "Здания"
+  },
+  "b.lab.cost": {
+    "value": "6000",
+    "title": "Лаборатория: цена 1-го уровня, руды",
+    "big": true,
+    "group": "Здания"
+  },
+  "b.lab.t": {
+    "value": 0.3,
+    "title": "Лаборатория ур. 1: вход в секунду",
+    "min": 0.01,
+    "max": 1000,
+    "step": 0.01,
+    "group": "Здания"
+  },
+  "b.lab.e": {
+    "value": 6,
+    "title": "Лаборатория ур. 1: энергии",
+    "min": 0.1,
+    "max": 1000,
+    "step": 0.1,
+    "group": "Здания"
+  },
+  "b.lab.ratio": {
+    "value": 4,
+    "title": "Лаборатория: данных за 1 электронику",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "group": "Здания"
+  },
+  "b.growth": {
+    "value": 3,
+    "title": "Здания: рост цены за уровень",
+    "min": 1.1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Здания"
+  },
+  "b.tGrowth": {
+    "value": 2,
+    "title": "Здания: пропускная способность за уровень ×",
+    "min": 1.1,
+    "max": 5,
+    "step": 0.1,
+    "group": "Здания"
+  },
+  "b.eGrowth": {
+    "value": 1.8,
+    "title": "Здания: потребление энергии за уровень ×",
+    "min": 1.1,
+    "max": 5,
+    "step": 0.1,
+    "group": "Здания"
+  },
+  "chips.mult": {
+    "value": 2,
+    "title": "Микросхемы: электроника ×",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Здания"
+  },
+  "panel.cost": {
+    "value": "30",
+    "title": "Панели: цена 1-го уровня, руды",
+    "big": true,
+    "group": "Энергия"
+  },
+  "panel.costGrowth": {
+    "value": 2.2,
+    "title": "Панели: рост цены за уровень",
+    "min": 1.1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Энергия"
+  },
+  "panel.power": {
+    "value": 10,
+    "title": "Панели ур. 1: энергии",
+    "min": 1,
+    "max": 1000,
+    "step": 1,
+    "group": "Энергия"
+  },
+  "panel.growth": {
+    "value": 1.6,
+    "title": "Панели: энергия за уровень ×",
+    "min": 1.1,
+    "max": 5,
+    "step": 0.1,
+    "group": "Энергия"
+  },
+  "reactor.cost": {
+    "value": "5e5",
+    "title": "Реактор: цена 1-го уровня, руды",
+    "big": true,
+    "group": "Энергия"
+  },
+  "reactor.costGrowth": {
+    "value": 3,
+    "title": "Реактор: рост цены за уровень",
+    "min": 1.1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Энергия"
+  },
+  "reactor.power": {
+    "value": 200,
+    "title": "Реактор ур. 1: энергии",
+    "min": 1,
+    "max": 100000,
+    "step": 1,
+    "group": "Энергия"
+  },
+  "reactor.growth": {
+    "value": 1.9,
+    "title": "Реактор: энергия за уровень ×",
+    "min": 1.1,
+    "max": 5,
+    "step": 0.1,
+    "group": "Энергия"
+  },
+  "colony.bonus": {
+    "value": 0.04,
+    "title": "Колонист: доход +",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Колония"
+  },
+  "colony.water": {
+    "value": 1,
+    "title": "Колонист пьёт воды в минуту",
+    "min": 0,
+    "max": 100,
+    "step": 0.1,
+    "group": "Колония"
+  },
+  "colony.settle": {
+    "value": 0.1,
+    "title": "Заселение: колонистов в секунду",
+    "min": 0.001,
+    "max": 10,
+    "step": 0.001,
+    "group": "Колония"
+  },
+  "colony.settleWater": {
+    "value": 1,
+    "title": "Заселение: воды на колониста",
+    "min": 0,
+    "max": 100,
+    "step": 0.1,
+    "group": "Колония"
+  },
+  "dome.cap": {
+    "value": 5,
+    "title": "Купол ур. 1: мест",
+    "min": 1,
+    "max": 1000,
+    "step": 1,
+    "group": "Колония"
+  },
+  "dome.capGrowth": {
+    "value": 2,
+    "title": "Купол: мест за уровень ×",
+    "min": 1.1,
+    "max": 5,
+    "step": 0.1,
+    "group": "Колония"
+  },
+  "dome.cost": {
+    "value": 200,
+    "title": "Купол: цена 1-го уровня, сплавов",
+    "min": 1,
+    "max": 1000000000,
+    "step": 1,
+    "group": "Колония"
+  },
+  "dome.growth": {
+    "value": 4,
+    "title": "Купол: рост цены за уровень",
+    "min": 1.1,
+    "max": 20,
+    "step": 0.1,
+    "group": "Колония"
+  },
+  "hangar.cost": {
+    "value": "2e4",
+    "title": "Ангар: цена уровня, руды",
+    "big": true,
+    "group": "Экспедиции"
+  },
+  "hangar.growth": {
+    "value": 20,
+    "title": "Ангар: рост цены за уровень",
+    "min": 1.1,
+    "max": 1000,
+    "step": 1,
+    "group": "Экспедиции"
+  },
+  "exp.short.min": {
+    "value": 5,
+    "title": "Экспедиция 5 мин: длительность, мин",
+    "min": 1,
+    "max": 1440,
+    "step": 1,
+    "group": "Экспедиции"
+  },
+  "exp.short.fuel": {
+    "value": 10,
+    "title": "Экспедиция 5 мин: топлива",
+    "min": 0,
+    "max": 1000000,
+    "step": 1,
+    "group": "Экспедиции"
+  },
+  "exp.short.sample": {
+    "value": 0.05,
+    "title": "Экспедиция 5 мин: шанс образца",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Экспедиции"
+  },
+  "exp.short.dm": {
+    "value": 0,
+    "title": "Экспедиция 5 мин: шанс ТМ",
+    "min": 0,
+    "max": 1,
+    "step": 0.001,
+    "group": "Экспедиции"
+  },
+  "exp.mid.min": {
+    "value": 20,
+    "title": "Экспедиция 20 мин: длительность, мин",
+    "min": 1,
+    "max": 1440,
+    "step": 1,
+    "group": "Экспедиции"
+  },
+  "exp.mid.fuel": {
+    "value": 30,
+    "title": "Экспедиция 20 мин: топлива",
+    "min": 0,
+    "max": 1000000,
+    "step": 1,
+    "group": "Экспедиции"
+  },
+  "exp.mid.sample": {
+    "value": 0.15,
+    "title": "Экспедиция 20 мин: шанс образца",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Экспедиции"
+  },
+  "exp.mid.dm": {
+    "value": 0.005,
+    "title": "Экспедиция 20 мин: шанс ТМ",
+    "min": 0,
+    "max": 1,
+    "step": 0.001,
+    "group": "Экспедиции"
+  },
+  "exp.long.min": {
+    "value": 60,
+    "title": "Экспедиция 60 мин: длительность, мин",
+    "min": 1,
+    "max": 1440,
+    "step": 1,
+    "group": "Экспедиции"
+  },
+  "exp.long.fuel": {
+    "value": 80,
+    "title": "Экспедиция 60 мин: топлива",
+    "min": 0,
+    "max": 1000000,
+    "step": 1,
+    "group": "Экспедиции"
+  },
+  "exp.long.sample": {
+    "value": 0.35,
+    "title": "Экспедиция 60 мин: шанс образца",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Экспедиции"
+  },
+  "exp.long.dm": {
+    "value": 0.02,
+    "title": "Экспедиция 60 мин: шанс ТМ",
+    "min": 0,
+    "max": 1,
+    "step": 0.001,
+    "group": "Экспедиции"
+  },
+  "exp.deep.min": {
+    "value": 240,
+    "title": "Экспедиция 240 мин: длительность, мин",
+    "min": 1,
+    "max": 1440,
+    "step": 1,
+    "group": "Экспедиции"
+  },
+  "exp.deep.fuel": {
+    "value": 250,
+    "title": "Экспедиция 240 мин: топлива",
+    "min": 0,
+    "max": 1000000,
+    "step": 1,
+    "group": "Экспедиции"
+  },
+  "exp.deep.sample": {
+    "value": 0.8,
+    "title": "Экспедиция 240 мин: шанс образца",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Экспедиции"
+  },
+  "exp.deep.dm": {
+    "value": 0.08,
+    "title": "Экспедиция 240 мин: шанс ТМ",
+    "min": 0,
+    "max": 1,
+    "step": 0.001,
+    "group": "Экспедиции"
+  },
+  "exp.oreShare": {
+    "value": 1,
+    "title": "Контейнер: руды за минуту экспедиции (минут дохода)",
+    "min": 0,
+    "max": 10,
+    "step": 0.1,
+    "group": "Экспедиции"
+  },
+  "exp.maxContainers": {
+    "value": 20,
+    "title": "Контейнеров ждёт не больше",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "group": "Экспедиции"
+  },
+  "r.grab": {
+    "value": 300,
+    "title": "Исследование «grab»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.smelt": {
+    "value": 600,
+    "title": "Исследование «smelt»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.ice": {
+    "value": 2000,
+    "title": "Исследование «ice»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.purify": {
+    "value": 50,
+    "title": "Исследование «purify»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.dome": {
+    "value": 120,
+    "title": "Исследование «dome»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.electro": {
+    "value": 300,
+    "title": "Исследование «electro»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.crush": {
+    "value": 800,
+    "title": "Исследование «crush»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.chips": {
+    "value": 2000,
+    "title": "Исследование «chips»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.reactor": {
+    "value": 5000,
+    "title": "Исследование «reactor»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.gravity": {
+    "value": 12000,
+    "title": "Исследование «gravity»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.dispatch": {
+    "value": 30000,
+    "title": "Исследование «dispatch»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.autosmelt": {
+    "value": 75000,
+    "title": "Исследование «autosmelt»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.far": {
+    "value": 200000,
+    "title": "Исследование «far»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "r.jump": {
+    "value": 500000,
+    "title": "Исследование «jump»: цена",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Наука"
+  },
+  "dispatch.share": {
+    "value": 0.5,
+    "title": "Диспетчер тратит долю руды",
+    "min": 0.01,
+    "max": 1,
+    "step": 0.01,
+    "group": "Наука"
+  },
+  "autosmelt.share": {
+    "value": 0.2,
+    "title": "Автоплавка тратит долю руды",
+    "min": 0.01,
+    "max": 1,
+    "step": 0.01,
+    "group": "Наука"
+  },
+  "engine.fuel": {
+    "value": 10000,
+    "title": "Прыжковый двигатель: топлива",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "engine.alloy": {
+    "value": 100000,
+    "title": "Прыжковый двигатель: сплавов",
+    "min": 1,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "dm.div": {
+    "value": 100000000000,
+    "title": "ТМ: делитель руды под корнем",
+    "min": 1,
+    "max": 100000000000000000000,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "dm.chain": {
+    "value": 2,
+    "title": "ТМ за работающую цепочку",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "dm.bonus": {
+    "value": 0,
+    "title": "ТМ: доход + за единицу (бонус слоя)",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Прыжок"
+  },
+  "meta.growth": {
+    "value": 1.6,
+    "title": "Мета: рост цены за уровень",
+    "min": 1.1,
+    "max": 5,
+    "step": 0.1,
+    "group": "Прыжок"
+  },
+  "meta.mine.c0": {
+    "value": 5,
+    "title": "Мета «Добыча»: цена первого уровня, ТМ",
+    "min": 1,
+    "max": 1000,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.mine.max": {
+    "value": 0,
+    "title": "Мета «Добыча»: уровней не больше (0 — без предела)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.research.c0": {
+    "value": 5,
+    "title": "Мета «Стартовые исследования»: цена первого уровня, ТМ",
+    "min": 1,
+    "max": 1000,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.research.max": {
+    "value": 3,
+    "title": "Мета «Стартовые исследования»: уровней не больше (0 — без предела)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.build.c0": {
+    "value": 5,
+    "title": "Мета «Дешёвые здания»: цена первого уровня, ТМ",
+    "min": 1,
+    "max": 1000,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.build.max": {
+    "value": 0,
+    "title": "Мета «Дешёвые здания»: уровней не больше (0 — без предела)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.exp.c0": {
+    "value": 2,
+    "title": "Мета «Быстрые экспедиции»: цена первого уровня, ТМ",
+    "min": 1,
+    "max": 1000,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.exp.max": {
+    "value": 5,
+    "title": "Мета «Быстрые экспедиции»: уровней не больше (0 — без предела)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.offline.c0": {
+    "value": 3,
+    "title": "Мета «Ночная смена»: цена первого уровня, ТМ",
+    "min": 1,
+    "max": 1000,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.offline.max": {
+    "value": 5,
+    "title": "Мета «Ночная смена»: уровней не больше (0 — без предела)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.colonists.c0": {
+    "value": 5,
+    "title": "Мета «Стартовые колонисты»: цена первого уровня, ТМ",
+    "min": 1,
+    "max": 1000,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.colonists.max": {
+    "value": 0,
+    "title": "Мета «Стартовые колонисты»: уровней не больше (0 — без предела)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.memory.c0": {
+    "value": 5,
+    "title": "Мета «Память дронов»: цена первого уровня, ТМ",
+    "min": 1,
+    "max": 1000,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.memory.max": {
+    "value": 5,
+    "title": "Мета «Память дронов»: уровней не больше (0 — без предела)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.mine.mult": {
+    "value": 1.5,
+    "title": "Мета «Добыча»: руда × за уровень",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Прыжок"
+  },
+  "meta.build.step": {
+    "value": 0.25,
+    "title": "Мета «Дешёвые здания»: скидка за уровень",
+    "min": 0,
+    "max": 0.9,
+    "step": 0.05,
+    "group": "Прыжок"
+  },
+  "meta.exp.step": {
+    "value": 0.15,
+    "title": "Мета «Быстрые экспедиции»: короче за уровень",
+    "min": 0,
+    "max": 0.9,
+    "step": 0.05,
+    "group": "Прыжок"
+  },
+  "meta.offline.step": {
+    "value": 0.1,
+    "title": "Мета «Ночная смена»: офлайн + за уровень",
+    "min": 0,
+    "max": 0.5,
+    "step": 0.05,
+    "group": "Прыжок"
+  },
+  "meta.colonists.n": {
+    "value": 5,
+    "title": "Мета «Стартовые колонисты»: колонистов за уровень",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "group": "Прыжок"
+  },
+  "meta.memory.share": {
+    "value": 0.1,
+    "title": "Память дронов: доля остаётся за уровень",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Прыжок"
+  },
+  "star.red.panels": {
+    "value": 0.4,
+    "title": "Красный карлик: панели ×",
+    "min": 0.05,
+    "max": 20,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "star.red.ice": {
+    "value": 3,
+    "title": "Красный карлик: лёд ×",
+    "min": 0.05,
+    "max": 20,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "star.blue.panels": {
+    "value": 3,
+    "title": "Голубой гигант: панели ×",
+    "min": 0.05,
+    "max": 20,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "star.white.ore": {
+    "value": 2,
+    "title": "Белый карлик: руда ×",
+    "min": 0.05,
+    "max": 20,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "star.white.ice": {
+    "value": 0.5,
+    "title": "Белый карлик: лёд ×",
+    "min": 0.05,
+    "max": 20,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "star.nebula.data": {
+    "value": 3,
+    "title": "Туманность: данные ×",
+    "min": 0.05,
+    "max": 20,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "star.nebula.droneCost": {
+    "value": 1.2,
+    "title": "Туманность: дроны дороже ×",
+    "min": 0.05,
+    "max": 20,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "star.neutron.drones": {
+    "value": 5,
+    "title": "Нейтронная звезда: дроны ×",
+    "min": 0.05,
+    "max": 20,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "star.hole.time": {
+    "value": 2,
+    "title": "Чёрная дыра: время ×",
+    "min": 0.05,
+    "max": 20,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "star.blue.every": {
+    "value": 180,
+    "title": "Голубой гигант: вспышка раз в, с",
+    "min": 30,
+    "max": 3600,
+    "step": 10,
+    "group": "Звёзды"
+  },
+  "star.blue.flare": {
+    "value": 20,
+    "title": "Голубой гигант: здания выключены, с",
+    "min": 1,
+    "max": 600,
+    "step": 1,
+    "group": "Звёзды"
+  },
+  "star.pulsar.period": {
+    "value": 20,
+    "title": "Пульсар: период волны, с",
+    "min": 2,
+    "max": 600,
+    "step": 1,
+    "group": "Звёзды"
+  },
+  "star.pulsar.amp": {
+    "value": 0.5,
+    "title": "Пульсар: размах волны",
+    "min": 0,
+    "max": 0.9,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "star.pulsar.peak": {
+    "value": 1.4,
+    "title": "Пульсар: пик для касания (доля энергии)",
+    "min": 1,
+    "max": 2,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "star.pulsar.tapMult": {
+    "value": 2,
+    "title": "Пульсар: касание в пик, энергия ×",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Звёзды"
+  },
+  "star.pulsar.tapSec": {
+    "value": 10,
+    "title": "Пульсар: касание действует, с",
+    "min": 1,
+    "max": 120,
+    "step": 1,
+    "group": "Звёзды"
+  },
+  "wear.sec": {
+    "value": 1800,
+    "title": "Нейтронная: полный износ за, с",
+    "min": 60,
+    "max": 86400,
+    "step": 60,
+    "group": "Звёзды"
+  },
+  "wear.penalty": {
+    "value": 0.8,
+    "title": "Нейтронная: потеря добычи при полном износе",
+    "min": 0,
+    "max": 1,
+    "step": 0.05,
+    "group": "Звёзды"
+  },
+  "wear.repairPer": {
+    "value": 2,
+    "title": "Нейтронная: ремонт, сплавов на дрона",
+    "min": 0,
+    "max": 1000,
+    "step": 0.1,
+    "group": "Звёзды"
+  },
+  "wear.repairMin": {
+    "value": 100,
+    "title": "Нейтронная: ремонт не дешевле, сплавов",
+    "min": 0,
+    "max": 1000000,
+    "step": 1,
+    "group": "Звёзды"
+  },
+  "cluster.star": {
+    "value": 10,
+    "title": "Карта скопления: с звезды №",
+    "min": 2,
+    "max": 100,
+    "step": 1,
+    "group": "Скопление"
+  },
+  "cluster.div": {
+    "value": 100,
+    "title": "Маяки: делитель ТМ под корнем",
+    "min": 1,
+    "max": 1000000,
+    "step": 1,
+    "group": "Скопление"
+  },
+  "cluster.bonus": {
+    "value": 0,
+    "title": "Маяк: доход + за единицу (бонус слоя)",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Скопление"
+  },
+  "station.c0": {
+    "value": 1,
+    "title": "Станция: цена первого уровня, маяков",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "group": "Скопление"
+  },
+  "station.growth": {
+    "value": 2,
+    "title": "Станция: рост цены за уровень",
+    "min": 1.1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Скопление"
+  },
+  "station.ore.mult": {
+    "value": 2,
+    "title": "Рудная станция: руда × за уровень",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Скопление"
+  },
+  "station.ice.mult": {
+    "value": 2,
+    "title": "Ледовая станция: лёд × за уровень",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Скопление"
+  },
+  "station.sun.add": {
+    "value": 0.5,
+    "title": "Солнечная станция: энергия + за уровень",
+    "min": 0,
+    "max": 5,
+    "step": 0.05,
+    "group": "Скопление"
+  },
+  "station.lab.mult": {
+    "value": 2,
+    "title": "Научная станция: данные × за уровень",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Скопление"
+  },
+  "station.dock.mult": {
+    "value": 2,
+    "title": "Док: контейнеры × за уровень",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Скопление"
+  },
+  "event.minSec": {
+    "value": 120,
+    "title": "События: не чаще, с",
+    "min": 10,
+    "max": 3600,
+    "step": 10,
+    "group": "События"
+  },
+  "event.maxSec": {
+    "value": 180,
+    "title": "События: не реже, с",
+    "min": 10,
+    "max": 3600,
+    "step": 10,
+    "group": "События"
+  },
+  "event.cardSec": {
+    "value": 30,
+    "title": "Карточка события, с",
+    "min": 5,
+    "max": 120,
+    "step": 1,
+    "group": "События"
+  },
+  "event.meteor.min": {
+    "value": 3,
+    "title": "Метеоритный дождь: минут руды",
+    "min": 0.5,
+    "max": 60,
+    "step": 0.5,
+    "group": "События"
+  },
+  "event.comet.mult": {
+    "value": 5,
+    "title": "Комета: лёд ×",
+    "min": 1,
+    "max": 50,
+    "step": 1,
+    "group": "События"
+  },
+  "event.comet.sec": {
+    "value": 60,
+    "title": "Комета: секунд",
+    "min": 5,
+    "max": 600,
+    "step": 5,
+    "group": "События"
+  },
+  "event.flare.mult": {
+    "value": 3,
+    "title": "Вспышка: панели ×",
+    "min": 1,
+    "max": 20,
+    "step": 0.5,
+    "group": "События"
+  },
+  "event.flare.sec": {
+    "value": 30,
+    "title": "Вспышка: секунд",
+    "min": 5,
+    "max": 600,
+    "step": 5,
+    "group": "События"
+  },
+  "event.wreck.alloy": {
+    "value": 200,
+    "title": "Обломок станции: сплавов × номер звезды",
+    "min": 1,
+    "max": 1000000,
+    "step": 1,
+    "group": "События"
+  },
+  "event.signal.chance": {
+    "value": 0.1,
+    "title": "Сигнал: шанс образца",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "События"
+  },
+  "event.signal.data": {
+    "value": 50,
+    "title": "Сигнал: данных не меньше",
+    "min": 0,
+    "max": 1000000,
+    "step": 1,
+    "group": "События"
+  },
+  "event.signal.min": {
+    "value": 2,
+    "title": "Сигнал: минут данных",
+    "min": 0,
+    "max": 60,
+    "step": 0.5,
+    "group": "События"
+  },
+  "event.fault.boost": {
+    "value": 0.1,
+    "title": "Сбой дрона: тиру + навсегда",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "События"
+  },
+  "event.fault.share": {
+    "value": 0.5,
+    "title": "Сбой дрона: ремонт — доля цены корпуса",
+    "min": 0,
+    "max": 10,
+    "step": 0.05,
+    "group": "События"
+  },
+  "event.fault.min": {
+    "value": 20,
+    "title": "Сбой дрона: ремонт не дешевле, сплавов",
+    "min": 0,
+    "max": 1000000,
+    "step": 1,
+    "group": "События"
+  },
+  "event.truck.share": {
+    "value": 0.5,
+    "title": "Грузовик: доля льда на продажу",
+    "min": 0,
+    "max": 1,
+    "step": 0.05,
+    "group": "События"
+  },
+  "event.truck.mult": {
+    "value": 2,
+    "title": "Грузовик: курс колонии (руда/с к льду/с) ×",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "События"
+  },
+  "event.truck.base": {
+    "value": 20,
+    "title": "Грузовик: руды за лёд без ледоколов",
+    "min": 1,
+    "max": 1000000,
+    "step": 1,
+    "group": "События"
+  },
+  "event.truck.capMin": {
+    "value": 10,
+    "title": "Грузовик: не больше минут руды",
+    "min": 1,
+    "max": 120,
+    "step": 1,
+    "group": "События"
+  },
+  "event.dust.buildings": {
+    "value": 0.5,
+    "title": "Пылевая буря: здания ×",
+    "min": 0,
+    "max": 1,
+    "step": 0.05,
+    "group": "События"
+  },
+  "event.dust.drones": {
+    "value": 3,
+    "title": "Пылевая буря: дроны ×",
+    "min": 1,
+    "max": 20,
+    "step": 0.5,
+    "group": "События"
+  },
+  "event.dust.sec": {
+    "value": 30,
+    "title": "Пылевая буря: секунд",
+    "min": 5,
+    "max": 600,
+    "step": 5,
+    "group": "События"
+  },
+  "event.settlers.n": {
+    "value": 5,
+    "title": "Новые колонисты: сколько",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "group": "События"
+  },
+  "event.vein.mult": {
+    "value": 4,
+    "title": "Рудная жила: тир ×",
+    "min": 1,
+    "max": 20,
+    "step": 0.5,
+    "group": "События"
+  },
+  "event.vein.sec": {
+    "value": 60,
+    "title": "Рудная жила: секунд",
+    "min": 5,
+    "max": 600,
+    "step": 5,
+    "group": "События"
+  },
+  "event.mirror.mult": {
+    "value": 0.5,
+    "title": "Зеркальный астероид: исследование ×",
+    "min": 0.05,
+    "max": 1,
+    "step": 0.05,
+    "group": "События"
+  },
+  "event.calm.sec": {
+    "value": 120,
+    "title": "Тихий час: секунд",
+    "min": 10,
+    "max": 1800,
+    "step": 10,
+    "group": "События"
+  },
+  "event.clot.w": {
+    "value": 1,
+    "title": "Тёмный сгусток: вес (из ~100)",
+    "min": 0,
+    "max": 100,
+    "step": 0.5,
+    "group": "События"
+  },
+  "bot.buildSec": {
+    "value": 1,
+    "title": "Бот: уровень здания, если стоит меньше N с руды",
+    "min": 1,
+    "max": 3600,
+    "step": 1,
+    "group": "Бот проверок"
+  },
+  "bot.buildFirst": {
+    "value": 1000000000,
+    "title": "Бот: первое здание любой ценой до",
+    "min": 0,
+    "max": 1000000000000,
+    "step": 1,
+    "group": "Бот проверок"
+  },
+  "bot.iceCover": {
+    "value": 1,
+    "title": "Бот: лёд — доля потребности зданий",
+    "min": 0.1,
+    "max": 3,
+    "step": 0.1,
+    "group": "Бот проверок"
+  },
+  "bot.iceShare": {
+    "value": 0.5,
+    "title": "Бот: на ледокол не больше доли руды",
+    "min": 0.01,
+    "max": 1,
+    "step": 0.01,
+    "group": "Бот проверок"
+  },
+  "bot.upgradeShare": {
+    "value": 1,
+    "title": "Бот: улучшение, если стоит меньше доли руды",
+    "min": 0.01,
+    "max": 1,
+    "step": 0.01,
+    "group": "Бот проверок"
+  },
+  "bot.fuelKeep": {
+    "value": 0,
+    "title": "Бот: топлива в запасе после двигателя",
+    "min": 0,
+    "max": 1000000,
+    "step": 1,
+    "group": "Бот проверок"
+  },
+  "chest.min": {
+    "value": 15,
+    "title": "Попутный груз: минут всех ресурсов",
+    "min": 1,
+    "max": 120,
+    "step": 1,
+    "group": "Связки"
+  },
+  "offline.rate": {
+    "value": 0.5,
+    "title": "Доля офлайна без меты",
+    "min": 0.05,
+    "max": 1,
+    "step": 0.05,
+    "group": "Офлайн"
+  },
+  "steps.cost.fuel": {
+    "value": 1,
+    "title": "Шаги: топливо на экспедицию, энергии",
+    "min": 0,
+    "max": 10,
+    "step": 1,
+    "group": "Связки"
+  },
+  "offline.stepSec": {
+    "value": 60
+  },
+  "simulation.stepSec": {
+    "value": 1,
+    "title": "Внутренний шаг цепочек, секунд",
+    "group": "Баланс"
+  },
+  "offline.efficiency": {
+    "value": 1,
+    "title": "Множитель движка (долю задаёт офлайн игры)",
+    "group": "Офлайн"
+  },
+  "star.hole.capBonusHours": {
+    "value": 12,
+    "title": "Чёрная дыра: добавочные часы офлайна",
+    "group": "Звёзды"
+  },
+  "event.clot.chance": {
+    "value": 0.01,
+    "title": "Тёмный сгусток: шанс события",
+    "group": "События"
+  },
+  "achievement.colonists": {
+    "value": 100,
+    "title": "Ачивка: колонистов",
+    "group": "Ачивки"
+  },
+  "achievement.calmSec": {
+    "value": 3600,
+    "title": "Ачивка: секунд без дефицита",
+    "group": "Ачивки"
+  },
+  "achievement.fiveStar": {
+    "value": 5,
+    "title": "Ачивка: звезда",
+    "group": "Ачивки"
+  },
+  "event.meteor.w": {
+    "value": 10,
+    "title": "Вес события «meteor»",
+    "group": "События"
+  },
+  "event.comet.w": {
+    "value": 8,
+    "title": "Вес события «comet»",
+    "group": "События"
+  },
+  "event.flare.w": {
+    "value": 8,
+    "title": "Вес события «flare»",
+    "group": "События"
+  },
+  "event.wreck.w": {
+    "value": 8,
+    "title": "Вес события «wreck»",
+    "group": "События"
+  },
+  "event.signal.w": {
+    "value": 8,
+    "title": "Вес события «signal»",
+    "group": "События"
+  },
+  "event.fault.w": {
+    "value": 8,
+    "title": "Вес события «fault»",
+    "group": "События"
+  },
+  "event.truck.w": {
+    "value": 6,
+    "title": "Вес события «truck»",
+    "group": "События"
+  },
+  "event.dust.w": {
+    "value": 8,
+    "title": "Вес события «dust»",
+    "group": "События"
+  },
+  "event.settlers.w": {
+    "value": 6,
+    "title": "Вес события «settlers»",
+    "group": "События"
+  },
+  "event.swarm.w": {
+    "value": 5,
+    "title": "Вес события «swarm»",
+    "group": "События"
+  },
+  "event.link.w": {
+    "value": 6,
+    "title": "Вес события «link»",
+    "group": "События"
+  },
+  "event.vein.w": {
+    "value": 8,
+    "title": "Вес события «vein»",
+    "group": "События"
+  },
+  "event.mirror.w": {
+    "value": 6,
+    "title": "Вес события «mirror»",
+    "group": "События"
+  },
+  "event.calm.w": {
+    "value": 6,
+    "title": "Вес события «calm»",
+    "group": "События"
+  },
+  "sample.chondrite.pct": {
+    "value": 5,
+    "title": "Образец «chondrite»: бонус %",
+    "group": "Образцы"
+  },
+  "sample.stoneice.pct": {
+    "value": 8,
+    "title": "Образец «stoneice»: бонус %",
+    "group": "Образцы"
+  },
+  "sample.glass.pct": {
+    "value": 5,
+    "title": "Образец «glass»: бонус %",
+    "group": "Образцы"
+  },
+  "sample.olivine.pct": {
+    "value": 6,
+    "title": "Образец «olivine»: бонус %",
+    "group": "Образцы"
+  },
+  "sample.darkdust.pct": {
+    "value": 4,
+    "title": "Образец «darkdust»: бонус %",
+    "group": "Образцы"
+  },
+  "sample.debris.pct": {
+    "value": 10,
+    "title": "Образец «debris»: бонус %",
+    "group": "Образцы"
+  },
+  "sample.seeds.pct": {
+    "value": 10,
+    "title": "Образец «seeds»: бонус %",
+    "group": "Образцы"
+  },
+  "sample.magnet.pct": {
+    "value": 3,
+    "title": "Образец «magnet»: бонус %",
+    "group": "Образцы"
+  },
+  "sample.ringdust.pct": {
+    "value": 4,
+    "title": "Образец «ringdust»: бонус %",
+    "group": "Образцы"
+  },
+  "sample.stardust.pct": {
+    "value": 6,
+    "title": "Образец «stardust»: бонус %",
+    "group": "Образцы"
+  },
+  "sample.signal.pct": {
+    "value": 10,
+    "title": "Образец «signal»: бонус %",
+    "group": "Образцы"
+  },
+  "sample.amber.pct": {
+    "value": 10,
+    "title": "Образец «amber»: бонус %",
+    "group": "Образцы"
+  },
+  "bot.newTierSec": {
+    "value": 60,
+    "title": "Бот: срок окупаемости открытия следующего тира, с",
+    "group": "Бот проверок"
+  },
+  "star.binary.double": {
+    "value": 2,
+    "title": "Повторная двойная звезда: добыча второй колонии ×",
+    "group": "Звёзды"
+  },
+  "sample.missingChance": {
+    "value": 0.7,
+    "title": "Шанс выбрать ещё не найденный образец",
+    "group": "Образцы"
+  },
+  "meta.research.nodes": {
+    "value": 3,
+    "title": "Стартовых исследований на уровень",
+    "group": "Прыжок"
+  },
+  "exp.minMinutes": {
+    "value": 1,
+    "title": "Экспедиция длится не меньше минут",
+    "group": "Экспедиции"
+  },
+  "star.pulsar.maxAmp": {
+    "value": 0.9,
+    "title": "Пульсар: максимальный размах",
+    "group": "Звёзды"
+  },
+  "chest.minOreMult": {
+    "value": 10,
+    "title": "Попутный груз: минимум стартовой руды ×",
+    "group": "Связки"
+  }
+}

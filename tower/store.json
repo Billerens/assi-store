@@ -1,0 +1,11 @@
+{
+  "id": "tower",
+  "kind": "game",
+  "title": "Башня",
+  "target": "modules/games/tower",
+  "requires": [],
+  "shell": [
+    "vibrate.pattern",
+    "app.visible"
+  ]
+}

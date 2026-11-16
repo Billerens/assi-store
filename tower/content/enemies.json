@@ -1,0 +1,86 @@
+[
+  {
+    "id": "stock-piper",
+    "title": "Крысолов",
+    "text": "Два удара, затем защита; порядок повторяется.",
+    "template": "piper",
+    "flight": 1
+  },
+  {
+    "id": "stock-mold",
+    "title": "Плесневик",
+    "text": "С каждым ходом удар становится сильнее. Здоровья мало.",
+    "template": "mold",
+    "flight": 1
+  },
+  {
+    "id": "stock-lantern",
+    "title": "Сторож с фонарём",
+    "text": "Заряжается перед тройным ударом. Блок вовремя гасит заряд.",
+    "template": "lantern",
+    "flight": 1
+  },
+  {
+    "id": "stock-dog",
+    "title": "Цепной пёс",
+    "text": "Наносит два коротких удара за ход.",
+    "template": "dog",
+    "flight": 1
+  },
+  {
+    "id": "stock-weaver",
+    "title": "Гобеленщик",
+    "text": "Заклятием скрывает своё следующее намерение.",
+    "template": "weaver",
+    "flight": 2
+  },
+  {
+    "id": "stock-double",
+    "title": "Двойник",
+    "text": "Повторяет предыдущий приём героя.",
+    "template": "double",
+    "flight": 2
+  },
+  {
+    "id": "stock-pupil",
+    "title": "Каменный ученик",
+    "text": "Чередует сильный удар и каменную защиту.",
+    "template": "pupil",
+    "flight": 2
+  },
+  {
+    "id": "stock-thief",
+    "title": "Вор",
+    "text": "Удар крадёт золото. На четвёртом ходу пытается убежать.",
+    "template": "thief",
+    "flight": 2
+  },
+  {
+    "id": "stock-knight",
+    "title": "Флюгерный рыцарь",
+    "text": "Меняет намерение, заметив блок героя.",
+    "template": "knight",
+    "flight": 3
+  },
+  {
+    "id": "stock-maiden",
+    "title": "Ветряная дева",
+    "text": "Уклоняется от каждого второго попадания.",
+    "template": "maiden",
+    "flight": 3
+  },
+  {
+    "id": "stock-clockmaker",
+    "title": "Часовщик",
+    "text": "После трёх ходов наступает полночь: сокрушительный удар.",
+    "template": "clockmaker",
+    "flight": 3
+  },
+  {
+    "id": "stock-echo",
+    "title": "Эхо героя",
+    "text": "Повторяет возможности героя с силой 70%.",
+    "template": "echo",
+    "flight": 3
+  }
+]

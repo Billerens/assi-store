@@ -1,0 +1,8 @@
+{
+  "id": "evolution",
+  "kind": "game",
+  "title": "Эволюция",
+  "target": "modules/games/evolution",
+  "requires": [],
+  "shell": []
+}

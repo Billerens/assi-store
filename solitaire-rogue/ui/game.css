@@ -1,0 +1,930 @@
+/* «Пасьянс-рогалик»: the table, the cards, the shop. The frame (bar, sheets, buttons) is
+   engine/game.css; the kit's tokens give the colours. Cards are neutral gray on a dark table,
+   suits black (spades, clubs) and red (hearts, diamonds), no shadows anywhere. One declaration per line. */
+:root {
+  --c-face: #c9c9c6;
+  --c-ink: #1b1b1b;
+  --c-back: #34363a;
+  --c-back-line: #4a4d52;
+  --c-suit-a: #1b1b1b;
+  --c-suit-b: #b3261e;
+  --c-stone: #5d5d5a;
+  --c-gold: #b8902a;
+  --c-wax: #d8c79c;
+  --c-glass: #7fb3c4;
+  --c-key: #8d7bd6;
+  --c-echo: #6aa58a;
+  --c-twin: #94503f;
+  --c-table: #141515;
+}
+
+.p-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+}
+
+.p-cur {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.p-cur svg.i {
+  align-self: center;
+  width: 24px;
+  height: 24px;
+  color: var(--c-wax);
+}
+
+.p-unit {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.p-side {
+  color: var(--ink-2);
+  font-size: 15px;
+  text-align: right;
+  line-height: 1.3;
+}
+
+.p-stats {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.p-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 20px;
+}
+
+.p-stat svg.i {
+  width: 22px;
+  height: 22px;
+  color: var(--ink-2);
+}
+
+.p-stat.candles svg.i {
+  color: var(--c-wax);
+}
+
+.p-stat.low b {
+  color: var(--danger);
+}
+
+.p-h {
+  margin: 14px 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+/* ---- the start screen ---- */
+
+.p-decks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.p-art {
+  display: block;
+  flex: none;
+  width: 44px;
+  height: 44px;
+}
+
+.p-art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.p-choice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  text-align: left;
+}
+
+.p-choice.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.p-choice.locked {
+  border-style: dashed;
+}
+
+.p-choice.locked .p-art {
+  filter: grayscale(1);
+  opacity: .45;
+}
+
+.p-choice-b {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.p-choice-t {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.p-choice-s {
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.p-nights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.p-night {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.p-night.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.p-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  text-align: left;
+  font-size: 15px;
+}
+
+.p-switch.on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.p-switch .grow {
+  flex: 1;
+}
+
+.p-switch-v {
+  font-weight: 600;
+}
+
+.p-daily {
+  margin: 12px 0 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.p-daily-t {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.p-daily-t svg.i {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---- the table ---- */
+
+.g-field {
+  background: var(--c-table);
+}
+
+[data-phase="play"] .g-field {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+[data-layout="wide"][data-phase="play"] .g-field {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.c-table {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.c-col {
+  position: relative;
+  flex: none;
+}
+
+.c-empty {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  border: 1px dashed var(--line);
+}
+
+.c-card {
+  position: absolute;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2px 0 0;
+  border-radius: 6px;
+  border: 1px solid #9e9e9a;
+  background: var(--c-face);
+  color: var(--c-ink);
+  overflow: hidden;
+  transition: transform 120ms ease-out;
+}
+
+.c-card .c-rank {
+  font-size: calc(var(--cw, 48px) * .46);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.c-card .c-suit {
+  width: 46%;
+  height: auto;
+  margin-top: 8%;
+  fill: currentColor;
+}
+
+.c-card.sa {
+  color: var(--c-suit-a);
+}
+
+.c-card.sb {
+  color: var(--c-suit-b);
+}
+
+.c-card.sa .c-rank,
+.c-card.sb .c-rank {
+  color: var(--c-ink);
+}
+
+/* the back: a lattice in two directions inside a thin frame, tinted by the deck of the run */
+.c-card.back {
+  border-color: var(--c-back-line);
+  background: var(--c-back);
+  background-image: repeating-linear-gradient(45deg, transparent 0 5px, rgba(255, 255, 255, .07) 5px 6px), repeating-linear-gradient(-45deg, transparent 0 5px, rgba(255, 255, 255, .07) 5px 6px);
+  outline: 1px solid var(--c-back-line);
+  outline-offset: -4px;
+}
+
+html[data-deck="short"] {
+  --c-back: #2f4a3a;
+  --c-back-line: #5f8f73;
+}
+
+html[data-deck="lunar"] {
+  --c-back: #2d3157;
+  --c-back-line: #6f72b0;
+}
+
+html[data-deck="twosuit"] {
+  --c-back: #4a2f2c;
+  --c-back-line: #9a6a5f;
+}
+
+html[data-deck="widow"] {
+  --c-back: #1f1b24;
+  --c-back-line: #6a5c7a;
+}
+
+.c-card.stone {
+  justify-content: center;
+  background: var(--c-stone);
+  border-color: #777773;
+  color: #2c2c2a;
+}
+
+.c-card.stone svg.i {
+  width: 60%;
+  height: 60%;
+}
+
+.c-card.shadow {
+  background: #6e6e6b;
+  color: #1d1d1d;
+}
+
+.c-card.shadowed {
+  background: #a9a9a6;
+}
+
+.c-card.joker {
+  color: var(--accent-ink);
+  background: #b7b0e0;
+}
+
+.c-card.joker svg.i {
+  width: 50%;
+  height: 40%;
+  margin-top: 8%;
+}
+
+.c-card.locked {
+  filter: grayscale(1) brightness(.75);
+}
+
+.c-curse {
+  position: absolute;
+  left: 2px;
+  bottom: 2px;
+  display: flex;
+}
+
+.c-curse svg.i {
+  width: 16px;
+  height: 16px;
+}
+
+.c-curse.thorn {
+  left: 0;
+  right: 0;
+  justify-content: center;
+  color: #8a2e22;
+}
+
+.c-curse.thorn svg.i {
+  width: 90%;
+}
+
+.c-curse.weed {
+  color: #3d6b3a;
+}
+
+.c-curse.lock {
+  left: 50%;
+  bottom: 18%;
+  transform: translateX(-50%);
+  color: #f0f0f0;
+}
+
+.c-curse.lock svg.i {
+  width: 22px;
+  height: 22px;
+}
+
+.c-seal {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  min-width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-gold);
+  font-size: 11px;
+  line-height: 10px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.c-seal.inline {
+  position: static;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.seal-gold {
+  background: var(--c-gold);
+}
+
+.seal-wax {
+  background: var(--c-wax);
+  border-radius: 50% 50% 50% 0;
+}
+
+.seal-twin {
+  min-width: 14px;
+  height: 14px;
+  padding: 0 2px;
+  border-radius: 3px;
+  background: var(--c-twin);
+  line-height: 14px;
+  text-align: center;
+}
+
+.seal-glass {
+  background: transparent;
+  border: 2px solid var(--c-glass);
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+
+.seal-key {
+  background: var(--c-key);
+  border-radius: 2px;
+}
+
+.seal-echo {
+  background: transparent;
+  border: 3px double var(--c-echo);
+}
+
+.c-card.fit {
+  transform: translateY(-6px);
+  border: 2px solid var(--accent);
+}
+
+.c-card.fit-o {
+  border: 2px solid var(--accent);
+}
+
+.c-card.target {
+  border: 2px dashed var(--accent);
+}
+
+.c-shake {
+  animation: c-shake 180ms ease-in-out;
+}
+
+@keyframes c-shake {
+  0% {
+    margin-left: 0;
+  }
+  30% {
+    margin-left: -4px;
+  }
+  60% {
+    margin-left: 4px;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+
+.c-in {
+  animation-name: c-in;
+  animation-timing-function: ease-out;
+}
+
+@keyframes c-in {
+  from {
+    transform: translateY(-18px) scale(.92);
+    opacity: .4;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.p-host {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: var(--radius-s);
+  background: var(--danger-soft);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.p-host.rule {
+  background: var(--accent-soft);
+}
+
+.p-relics {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.p-relics::-webkit-scrollbar {
+  display: none;
+}
+
+.p-host-b {
+  flex: 1;
+  min-width: 0;
+}
+
+.p-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  min-height: 36px;
+  padding: 0 10px 0 5px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.g-actions .p-relics {
+  margin-top: 0;
+}
+
+.p-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 4px 4px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.p-chain.hot {
+  color: var(--c-gold);
+  font-weight: 600;
+}
+
+.p-next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+}
+
+.c-card.mini {
+  position: relative;
+  width: 34px;
+  height: 46px;
+  --cw: 34px;
+}
+
+.c-card.mini .c-suit {
+  margin-top: 4%;
+}
+
+/* ---- under the thumb: pocket, pile, deck, undo ---- */
+
+.p-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+}
+
+.p-side-slots {
+  display: flex;
+  gap: 6px;
+}
+
+.p-slot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 56px;
+}
+
+.p-slot .c-card {
+  position: relative;
+  width: 64px;
+  height: 88px;
+  --cw: 64px;
+}
+
+.p-slot.side .c-card {
+  width: 52px;
+  height: 72px;
+  --cw: 52px;
+}
+
+.p-slot-l {
+  color: var(--ink-3);
+  font-size: 13px;
+}
+
+.c-card.deck {
+  justify-content: center;
+  color: var(--ink);
+}
+
+.c-card.deck.empty {
+  opacity: .5;
+}
+
+.c-count {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.c-card.hole {
+  justify-content: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px dashed var(--line);
+  color: var(--ink-2);
+  font-size: 22px;
+}
+
+.c-card.hole.on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.c-card.hole:disabled {
+  opacity: .4;
+}
+
+.c-card.hole svg.i {
+  width: 22px;
+  height: 22px;
+}
+
+.p-tricks .g-btn {
+  min-height: 48px;
+  padding: 4px 8px;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.p-trick.on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.p-mode {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.p-mode .grow {
+  flex: 1;
+}
+
+.p-mode .g-btn {
+  width: auto;
+}
+
+/* ---- the panel of the unfolded screen: relics and the log of chains ---- */
+
+.p-panel {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.p-relic-list,
+.p-log {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.p-log-t {
+  color: var(--ink-2);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.p-relic {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  text-align: left;
+  font-size: 15px;
+}
+
+.p-log-i {
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-layout="wide"] .g-actions {
+  justify-content: flex-start;
+}
+
+[data-layout="wide"] .p-row {
+  margin-top: auto;
+}
+
+/* ---- the shop, lists ---- */
+
+.p-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.p-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  text-align: left;
+}
+
+.p-item.sold,
+.p-item.unseen {
+  opacity: .55;
+}
+
+.p-item.unseen {
+  border-style: dashed;
+}
+
+.p-item.rare {
+  border-color: color-mix(in srgb, var(--c-glass) 55%, var(--line));
+}
+
+.p-item.legend {
+  border-color: color-mix(in srgb, var(--c-gold) 70%, var(--line));
+}
+
+.p-item.full {
+  border-color: var(--accent);
+}
+
+.p-item-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.p-item-b {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  text-align: left;
+}
+
+.p-legend {
+  margin-top: 8px;
+}
+
+.p-curses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.p-curse {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 4px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 15px;
+}
+
+.p-item-h {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 8px;
+}
+
+.p-item-t {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.p-tag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.p-tag.rare {
+  color: var(--c-glass);
+}
+
+.p-tag.legend {
+  color: var(--c-gold);
+}
+
+.p-services .g-btn {
+  flex-direction: column;
+  padding: 6px 4px;
+  gap: 4px;
+  text-align: center;
+}
+
+.p-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  gap: 6px;
+  max-height: 50vh;
+  overflow: auto;
+}
+
+.p-cards .c-card.mini {
+  width: 100%;
+  height: 56px;
+  min-height: 56px;
+}
+
+.p-cards .c-card.cursed {
+  border: 2px solid var(--danger);
+}
+
+.p-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 18px 0 8px;
+  text-align: center;
+}
+
+.p-result svg.i {
+  width: 40px;
+  height: 40px;
+  color: var(--c-wax);
+}
+
+.p-result h3 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.p-total .v {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.p-unlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.p-unlock svg.i {
+  width: 20px;
+  height: 20px;
+}
+
+.p-rules {
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
+
+.p-rules li {
+  margin: 2px 0;
+}

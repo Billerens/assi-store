@@ -1,0 +1,530 @@
+/* The field of «Шахта вглубь»: the cut on a canvas, the narrow column of three buttons, the
+   cards at the bottom edge and the panel of lists. The frame is engine/game.css. */
+
+.g-app {
+  --dm-amber: #e0a23a;
+  --dm-amber-soft: rgba(224, 162, 58, .14);
+  --dm-steel: rgba(176, 182, 190, .30);
+  --dm-plate: rgba(16, 14, 12, .86);
+  --dm-rock: linear-gradient(180deg, #2e2822 0%, #1d1a16 100%);
+}
+
+.dm-top-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dm-money {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.g-field.dm-field {
+  padding: 0;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.dm-cut {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+}
+
+.dm-col {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 76px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 4px 8px;
+}
+
+.dm-col-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 64px;
+  padding: 6px 2px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--dm-steel);
+  background: var(--dm-plate);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.dm-col-btn .dm-pic {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background: transparent;
+}
+
+.dm-col-btn.warn .dm-col-sub {
+  color: var(--danger);
+}
+
+.dm-col-btn:disabled {
+  opacity: .45;
+}
+
+.dm-col-btn.warn {
+  border-color: var(--danger);
+}
+
+.dm-col-sub {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.dm-back {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--dm-amber);
+  background: var(--dm-plate);
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.dm-back[hidden] {
+  display: none;
+}
+
+.dm-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dm-cards:empty {
+  display: none;
+}
+
+.dm-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 8px 8px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.dm-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--dm-steel);
+}
+
+.dm-card.dm-find::before {
+  background: var(--dm-amber);
+}
+
+.dm-card-btns {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 116px;
+}
+
+.dm-card-btns .g-btn {
+  min-height: 48px;
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+.dm-card.dm-find {
+  border-color: var(--dm-amber);
+}
+
+.dm-card-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.dm-card-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--dm-amber);
+}
+
+.dm-heat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dm-heat[hidden] {
+  display: none;
+}
+
+.dm-heat .g-btn {
+  width: auto;
+  flex: none;
+}
+
+.dm-heat-bar {
+  position: relative;
+  flex: 1;
+  height: 44px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.dm-heat-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, rgba(224, 162, 58, .35) 0%, rgba(224, 100, 58, .6) 100%);
+}
+
+.dm-heat-fill.over {
+  background: var(--danger);
+}
+
+.dm-heat-text {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dm-bottom > .g-btn {
+  min-height: 52px;
+}
+
+.dm-bottom > [hidden] {
+  display: none;
+}
+
+.dm-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.dm-panel.dm-wide {
+  flex: 1;
+  overflow: hidden;
+}
+
+.dm-tabs {
+  flex: none;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  justify-content: space-between;
+  gap: 2px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+
+.dm-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  min-height: 56px;
+  padding: 4px 6px;
+  border-radius: var(--radius-s);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.g-app[data-layout="wide"] .dm-tab {
+  padding: 4px 2px;
+}
+
+.dm-tab span {
+  white-space: nowrap;
+}
+
+.dm-tab .dm-art {
+  width: 26px;
+  height: 26px;
+}
+
+.dm-tab.on {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.dm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 6px;
+}
+
+.dm-list > * {
+  flex: none;
+}
+
+.dm-panel.dm-wide .dm-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.dm-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 60px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.dm-pic {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--dm-steel);
+  background: var(--dm-rock);
+}
+
+.dm-art {
+  display: block;
+  width: 86%;
+  height: 86%;
+}
+
+.dm-pic.have {
+  border-color: var(--dm-amber);
+  background: var(--dm-amber-soft);
+}
+
+.dm-pic.locked {
+  border-style: dashed;
+}
+
+.dm-pic.locked .dm-art {
+  filter: grayscale(1);
+  opacity: .4;
+}
+
+.dm-pic.unknown {
+  border-style: dashed;
+}
+
+.dm-pic.unknown .dm-art {
+  filter: brightness(0) invert(.32);
+  opacity: .7;
+}
+
+.dm-purse {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dm-purse .dm-art {
+  width: 20px;
+  height: 20px;
+}
+
+.dm-card > .dm-pic {
+  width: 40px;
+  height: 40px;
+}
+
+.dm-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 6px;
+  padding-top: 6px;
+}
+
+.dm-tile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px;
+  border-radius: var(--radius-s);
+  border: 1px dashed var(--line);
+}
+
+.dm-tile.on {
+  border-style: solid;
+  border-color: var(--dm-steel);
+  background: var(--surface);
+}
+
+.dm-tile .dm-pic {
+  width: 40px;
+  height: 40px;
+}
+
+.dm-tile-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dm-tile-title {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink-3);
+  overflow-wrap: break-word;
+}
+
+.dm-tile.on .dm-tile-title {
+  color: var(--ink);
+}
+
+.dm-tile-sub {
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--ink-2);
+}
+
+.g-btn.dm-edge .dm-pic {
+  width: 44px;
+  height: 44px;
+}
+
+.dm-edge-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dm-row-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.dm-row-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+
+.dm-row-sub {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.3;
+}
+
+.dm-row-sub:empty {
+  display: none;
+}
+
+.g-btn.dm-buy {
+  flex: none;
+  width: auto;
+  min-width: 96px;
+  max-width: 40%;
+  padding: 4px 10px;
+}
+
+.dm-price {
+  font-size: 14px;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+}
+
+.dm-how {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px 0;
+}
+
+.dm-chip {
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.dm-chip.on {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.dm-chip:disabled {
+  opacity: .45;
+}
+
+.dm-set {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.dm-set.done .dm-row-title {
+  color: var(--accent);
+}
+
+.g-btn.dm-edge {
+  justify-content: flex-start;
+  gap: 10px;
+  text-align: left;
+  margin-top: 8px;
+}
+
+.g-app[data-layout="wide"] .dm-col {
+  width: 84px;
+}
+
+.g-app[data-layout="wide"] .g-actions {
+  justify-content: flex-start;
+}

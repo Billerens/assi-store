@@ -1,0 +1,833 @@
+{
+  "packages": [
+    {
+      "archive": {
+        "fileCount": 17,
+        "sha256": "94d2ad17ac80c599262a24df85569ebfc7b7c658236021ae00098f26a6d5fd14",
+        "size": 63075,
+        "unpackedSize": 195101,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/achievements-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "achievements",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/achievements-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Достижения за реальную жизнь: сон, шаги, привычки, места, траты, экран и игры. Формат для агента — AGENT.md",
+      "title": "Ачивки за жизнь",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 24,
+        "sha256": "5b108cb88102fe661c9b663ae354501d90a376c7f65aa8e1133104c1bb2db00e",
+        "size": 103085,
+        "unpackedSize": 337249,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/alchemist-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "alchemist",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/alchemist-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Смешивайте стихии и открывайте вещества, от пара до метро; пока есть сеть, модель дописывает дерево рецептов вглубь, а в дороге игра берёт открытия из запаса",
+      "title": "Алхимик",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 25,
+        "sha256": "e8fcbb61e99511e140020a8f504ead37647d7d0e8412938f047a01e9a76f5349",
+        "size": 114612,
+        "unpackedSize": 384591,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/asteroid-colony-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "asteroid-colony",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/asteroid-colony-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Дроны грызут астероид, исследования открывают производственные цепочки, а когда колония готова, она прыгает к новой звезде",
+      "title": "Колония на астероиде",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 18,
+        "sha256": "d09a57f9d06d2f8545cb2952ac8a9490f08990e02ea496e29ec04da473ee84bd",
+        "size": 70088,
+        "unpackedSize": 205544,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/bedtime-series-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "bedtime-series",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/bedtime-series-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Каждый вечер новая серия интерактивной истории голосом: вы — герой, в сюжете — детали вашего дня, выбор на развилках — голосом, засыпать можно посреди серии",
+      "title": "Сериал на ночь",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 30,
+        "sha256": "6e60d8dcb9414d30dc48c1614f09b5c75c41aa3eb9fb6723d4557c37774538ac",
+        "size": 93174,
+        "unpackedSize": 328342,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/blocks-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "blocks",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/blocks-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Собирайте линии, берегите серии и спасайте поле инструментами",
+      "title": "Блоки",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 18,
+        "sha256": "0b3e0bbffe66c9390da707c18562ad26b5e943f4240a20dc08eb3a0b5f9c3fb5",
+        "size": 68769,
+        "unpackedSize": 229584,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/conveyors-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "conveyors",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/conveyors-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Буры, ленты, печи и сборщики на клетчатом участке чужой планеты",
+      "title": "Конвейеры",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 22,
+        "sha256": "56a53707133ee6c4901a595de0ba5b7765d839f2f2fb5102857d48f04904a996",
+        "size": 84119,
+        "unpackedSize": 274978,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/deep-mine-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "deep-mine",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/deep-mine-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Бур идёт вниз через слои пород: глубже — твёрже, но богаче, а каждая тысяча метров приносит новую напасть",
+      "title": "Шахта вглубь",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 19,
+        "sha256": "bc488f8a15ee70830e62d98b097fc555fbf5a01c33740b5e58f0f18208bb990d",
+        "size": 92680,
+        "unpackedSize": 293650,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/dragon-hoard-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "dragon-hoard",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/dragon-hoard-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Дракон копит золото, рыцари приходят за кучей, сон на век делает его древнее",
+      "title": "Сокровищница дракона",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 19,
+        "sha256": "d90ec13aea53f442cfaa18bba9453951499bc750c7b14d03f502f7630819bdc4",
+        "size": 82903,
+        "unpackedSize": 268458,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/draw-guess-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "draw-guess",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/draw-guess-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Игра в две стороны: вы рисуете — модель угадывает вслух по ходу; модель рисует штрих за штрихом — вы кричите догадки, телефон слышит верную",
+      "title": "Рисуй — угадаю",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 22,
+        "sha256": "7b99fcddfd603de21927244e51cbab928611a70257680c1350f238ec10e65270",
+        "size": 92000,
+        "unpackedSize": 291745,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/dynasty-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "dynasty",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/dynasty-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Правитель живёт, богатеет и стареет; его смерть — смена поколения, и на древе рода прибавляется имя",
+      "title": "Династия",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 24,
+        "sha256": "a013764c354b1bc5a6479e9e1d68858536bf56724a55c2f077a148f580d6b47c",
+        "size": 119552,
+        "unpackedSize": 396039,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/evolution-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "evolution",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/evolution-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "От капли бульона до звёздных колоний: восемь этапов жизни и новые вселенные с другими законами.",
+      "title": "Эволюция",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 23,
+        "sha256": "ebaedfadce22937e37bb6b89f30294ab22836bbf42b46f557c6b266cb8a009b2",
+        "size": 92330,
+        "unpackedSize": 309862,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/fishing-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "fishing",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/fishing-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Заброс, подсечка, вываживание — и аквариум, который приносит доход, пока телефон в кармане",
+      "title": "Рыбалка",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 21,
+        "sha256": "dc59db536b0069913ce815f318a04a42af55ab0f380f6a194ed3d24bed0a6d7f",
+        "size": 65095,
+        "unpackedSize": 197902,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/focus-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "focus",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/focus-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Таймер работы: телефон уходит в «не беспокоить», сообщения копятся во Входящих, отвлекающие приложения не открываются, в конце — сводка пропущенного",
+      "title": "Фокус",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 20,
+        "sha256": "53e3ebcd66538ce79ad9a6eaa23a543f35aa107a92c8a9a925efc9b7872d2cc2",
+        "size": 81019,
+        "unpackedSize": 241178,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/game-of-the-day-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "game-of-the-day",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/game-of-the-day-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Агент делает новую мини-игру для Игротеки — каждый день, через день, по выбранным дням или несколько раз в день; вы играете и оцениваете, удачные остаются, а агент учится вашему вкусу",
+      "title": "Игра дня",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 18,
+        "sha256": "aace37c837730698666b6294bec14946fd289bf597d0e0ba20f1d654b32ac5c7",
+        "size": 94750,
+        "unpackedSize": 438106,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/garden-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "garden",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/garden-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Растения растут по настоящим часам; скрещивая их по точным правилам наследования, выводите новые сорта и собирайте альбом из 258 записей",
+      "title": "Сад",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 18,
+        "sha256": "fe4a5e573e02f6f61db1277a90d9cbdb09c545772693d45ad74045f2a83b3f1c",
+        "size": 72038,
+        "unpackedSize": 234752,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/hat-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "hat",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/hat-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Игра для компании: объясняешь слово, не называя его, а телефон сам слышит, когда его угадали",
+      "title": "Шляпа",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 28,
+        "sha256": "5d91902051b855e17f83b8000207d28f372b78ef0c11f334d3031a693ad3310a",
+        "size": 87123,
+        "unpackedSize": 260379,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/health-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "health",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/health-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Сон, шаги, вода, лекарства по расписанию и привычки с цепочками; разбор сна за неделю и сводка дня для Питомца, Ачивок, Жизни-RPG и Гороскопа",
+      "title": "Здоровье и привычки",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 31,
+        "sha256": "66d0ad8fb781f5752c978353a08cb11d78947e773bfab633846a0379b451cc0a",
+        "size": 72340,
+        "unpackedSize": 211767,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/holidays-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "holidays",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/holidays-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Поводы года на экранах Assi: тихий снег под Новый год, звезда на Рождество, блины на Масленицу; напоминания о днях рождения близких с черновиком поздравления",
+      "title": "Праздничные пасхалки",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 17,
+        "sha256": "6dd46dc45bf4c53e23e2058d7fcea2f137fd5f5196993545c802fd55bb8f9d34",
+        "size": 49653,
+        "unpackedSize": 146286,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/horoscope-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "horoscope",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/horoscope-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Шуточный прогноз на день из ваших же привычек: доставка по четвергам, недосып, шаги, цепочки. Назавтра звёзды сами проверяют, что сбылось, и считают точность.",
+      "title": "Гороскоп по данным",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 22,
+        "sha256": "46f7502b2fd501532f04d40dc05a4f00ad9f73a6b708247f3ba0e895532fa71b",
+        "size": 72347,
+        "unpackedSize": 218274,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/inbox-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "inbox",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/inbox-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Одна лента сообщений из всех мессенджеров: важно, подождёт, шум; выжимки болтливых групп и ответы прямо из ленты",
+      "title": "Входящие",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 22,
+        "sha256": "1aaa14b20f7124d01edfa95af64f2f1b59571183faacf63be99accf74f92450f",
+        "size": 66115,
+        "unpackedSize": 215867,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/infinity-layers-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "infinity-layers",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/infinity-layers-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Ступени растят ступени. Сожмите предел в новый слой и измените правила роста.",
+      "title": "Слои бесконечности",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 22,
+        "sha256": "65c74e08954b79a0076e56463784e9624a24abc73a233d99b43624eee28cda1c",
+        "size": 94827,
+        "unpackedSize": 335560,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/library-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "library",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/library-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Собирайте книги, читайте их по таймеру и открывайте залы: знания растят ветви, редкие тома отпирают новые двери, к каждой книге — выдуманная аннотация на поездку",
+      "title": "Библиотека",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 23,
+        "sha256": "d92d7a99710d1a1701731f6f48fdc21e3a8fe956027aa71dd2d75495c0bc87f2",
+        "size": 81986,
+        "unpackedSize": 281013,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/menagerie-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "menagerie",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/menagerie-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Выводите удивительных зверей, растите породу и побеждайте на турнирах.",
+      "title": "Зверинец",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 34,
+        "sha256": "bbdf7031aef99840871a2e013bae5a6a6bff8734269a58af6c1d11f7c960d720",
+        "size": 217945,
+        "unpackedSize": 787502,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/merge-forge-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "merge-forge",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/merge-forge-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Горн куёт клинки, два одинаковых сливаются в один сильнее, клинки сами рубят чудищ у ворот",
+      "title": "Кузница слияний",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 24,
+        "sha256": "f9ed0a361e55c9fa63e3cb034bed1633f24cfce4c922c3502415971cfb342751",
+        "size": 81769,
+        "unpackedSize": 266911,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/minesweeper-rogue-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "minesweeper-rogue",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/minesweeper-rogue-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Семь полей без угадывания: ищите тайники, собирайте инструменты и открывайте новые глубины",
+      "title": "Сапёр-рогалик",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 24,
+        "sha256": "22a99868d68dff3984800b1a27a75f569a300ee8f42dd91fa107e85ae5bc44dd",
+        "size": 88624,
+        "unpackedSize": 305908,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/one-cell-dungeon-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "one-cell-dungeon",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/one-cell-dungeon-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Спуск по сетке 3×3: шаг съедает соседнюю карту, за спиной тут же ложится следующая",
+      "title": "Подземелье в одну клетку",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 22,
+        "sha256": "c4f41d17c0a4c384df496b07bb85661e9b31840557b957d458493c1e08cc4ace",
+        "size": 74737,
+        "unpackedSize": 218298,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/pet-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "pet",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/pet-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Маленькое нарисованное существо: настроение — из сна, шагов, экрана ночью и отметок за сегодня, рост — из Жизни-RPG, вещи — из Ачивок; карточка на главном экране и виджет",
+      "title": "Питомец",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 21,
+        "sha256": "84d889466335f3720dd0126731367edf7f37e949264328c687ccf1d14b4770e4",
+        "size": 87588,
+        "unpackedSize": 280030,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/phone-night-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "phone-night",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/phone-night-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Утренний отчёт о том, что телефон делал ночью: кто его будил, кто ходил в сеть, куда ушла батарея — с улыбкой, но каждая цифра настоящая",
+      "title": "Тайная жизнь телефона",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 19,
+        "sha256": "c6e5125cc2eb04b7d5553978175ac4905f34e24fb537a11bed66170fa00d1f41",
+        "size": 92768,
+        "unpackedSize": 282732,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/recorder-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "recorder",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/recorder-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Запись встреч, лекций и мыслей вслух: расшифровка на телефоне по ходу записи, конспект с решениями и задачами, поиск по словам и по смыслу",
+      "title": "Диктофон",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 18,
+        "sha256": "e477b5fafc1110d1aed814b99711de580fdf270c6cb048e641adbfa9448d989a",
+        "size": 58844,
+        "unpackedSize": 169451,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/rpg-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "rpg",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/rpg-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Ролевая игра поверх жизни: опыт и навыки за шаги, сон и привычки, карта открытых мест в тумане, квесты от ваших обычных дней и хроника. Персонаж — существо Питомца.",
+      "title": "Жизнь-RPG",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 23,
+        "sha256": "7673eebc409d6951b4e4ca06229c919d4863aa9621127c73b4319f70e3374e44",
+        "size": 85293,
+        "unpackedSize": 285015,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/snake-rogue-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "snake-rogue",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/snake-rogue-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Змейка на полянах: диковины дают способности, а длина змеи — её здоровье",
+      "title": "Змейка-рогалик",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 25,
+        "sha256": "b66db893a1ec0a0bdbd48575b6fe77f8224906f4a8c142b28308f74ebf7c5dd7",
+        "size": 83872,
+        "unpackedSize": 274767,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/solitaire-rogue-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "solitaire-rogue",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/solitaire-rogue-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Пасьянс-цепочка на полминуты за расклад: оставленные карты гасят свечи, реликвии переписывают правила",
+      "title": "Пасьянс-рогалик",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 23,
+        "sha256": "854f382b19de4785107f3783e68d93cf0e7edcf1adfc9a8ea179e35641496074",
+        "size": 102022,
+        "unpackedSize": 316062,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/spending-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "spending",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/spending-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Расходы, которые записываются сами из пушей и SMS банков: категории, бюджет месяца, «на день» и подписки до следующего списания",
+      "title": "Траты",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 24,
+        "sha256": "0cd51c4a2708d1d3f88ea2c5620c78f4928f8a7fe184a20b85bc6558f55a2640",
+        "size": 102392,
+        "unpackedSize": 325009,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/subway-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "subway",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/subway-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Стройте метро: станции дают спрос, поезда его вывозят, построенный город сдаётся ради следующего",
+      "title": "Подземка",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 21,
+        "sha256": "4cec49894518844823b707d5472604fef0b9486bee0ee51d62405a66871992dd",
+        "size": 99942,
+        "unpackedSize": 352605,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/tower-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "tower",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/tower-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Выбирайте двери, читайте намерения врагов и стройте сборку из приёмов и реликвий. Каждый подъём оставляет осколки для новой попытки.",
+      "title": "Башня",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 34,
+        "sha256": "56a9f2c3424906b4d3db32ba0fc0bd9590c6e72dd0c6ca71563c9c16447c9032",
+        "size": 110914,
+        "unpackedSize": 454536,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/train-switches-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "train-switches",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/train-switches-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Расставьте стрелки: каждый поезд — к станции своего цвета, без столкновений",
+      "title": "Ветки поездов",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 27,
+        "sha256": "445f4ce9d08b91a13708f00ae0ceb3748bed3101ffb7936a2faaf470832f7ecb",
+        "size": 82510,
+        "unpackedSize": 234969,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/voice-adventure-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "voice-adventure",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/voice-adventure-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Голосовой квест для дороги: играется голосом в наушниках, без сети и без экрана. Главы пишет модель заранее, пока есть сеть",
+      "title": "Текстовое приключение для дороги",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 27,
+        "sha256": "e49d8c5f7ca9ad9c3f511031d13e39872e6f120ca2a06eefd7c7b26b112e699c",
+        "size": 92045,
+        "unpackedSize": 287871,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/wallpapers-0.1.0.zip"
+      },
+      "compatibility": {
+        "minAssiApi": 1
+      },
+      "id": "wallpapers",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/wallpapers-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Каждое утро фотография из открытых источников под погоду, сезон и ваш вкус — на внешний и внутренний экраны Fold и на блокировку, с автором и лицензией",
+      "title": "Обои дня",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 22,
+        "sha256": "58cd238f5b4e3f8a4f59008d79def7317430e2a2cc4f5b9810702bd4fa222596",
+        "size": 135761,
+        "unpackedSize": 507768,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/wave-survival-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "wave-survival",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/wave-survival-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Герой стреляет сам, вы управляете им пальцем или клавиатурой и выбираете улучшения; пять минут хаоса",
+      "title": "Последний рубеж",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
+        "fileCount": 32,
+        "sha256": "7944697d268c21eb8e4cd4a86821fdb5d96625270a0ba146262337144d4fb652",
+        "size": 280881,
+        "unpackedSize": 998092,
+        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/word-weaver-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAssiApi": 1
+      },
+      "id": "word-weaver",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/word-weaver-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "Плетите русские слова из колеса букв: слова — кирпичи для своего города",
+      "title": "Словоплёт",
+      "version": "0.1.0"
+    }
+  ],
+  "repository": {
+    "homepage": "https://github.com/Billerens/assi-store",
+    "id": "billerens.assi-store",
+    "title": "Assi Store"
+  },
+  "schemaVersion": 1
+}

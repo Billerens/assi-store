@@ -1,0 +1,8 @@
+{
+  "id": "holidays",
+  "kind": "module",
+  "title": "Праздничные пасхалки",
+  "target": "modules/holidays",
+  "requires": [],
+  "shell": ["theme.decor", "notify.actions", "job.once", "app.visible"]
+}

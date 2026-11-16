@@ -1,0 +1,12 @@
+{
+  "id": "blocks",
+  "kind": "game",
+  "title": "Блоки",
+  "target": "modules/games/blocks",
+  "requires": [],
+  "shell": [
+    "app.visible",
+    "job.once",
+    "vibrate.pattern"
+  ]
+}

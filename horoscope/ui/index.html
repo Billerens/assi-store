@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Гороскоп</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<style>
+  .page.wide {
+    max-width: 1000px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+
+  .sign {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .emblem {
+    flex: none;
+    width: 112px;
+    height: 112px;
+  }
+
+  .emblem.small {
+    width: 40px;
+    height: 40px;
+  }
+
+  .emblem .disc {
+    fill: var(--bg);
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+
+  .emblem .line {
+    stroke: var(--ink-3);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+  }
+
+  .emblem .star {
+    fill: var(--ink);
+  }
+
+  .emblem .star.lead {
+    fill: var(--accent);
+  }
+
+  .sign h2 {
+    margin: 2px 0;
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--ink);
+  }
+
+  .forecast p {
+    margin: 0;
+    line-height: 1.55;
+    font-size: 16px;
+  }
+
+  .forecast .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .forecast .btn {
+    min-height: 44px;
+  }
+
+  .hits > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+  }
+
+  .hits .i {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+  }
+
+  .hits .yes {
+    color: var(--ok);
+  }
+
+  .hits .no {
+    color: var(--danger);
+  }
+
+  .hits .unknown {
+    color: var(--ink-3);
+  }
+
+  .basis .source {
+    color: var(--ink-2);
+    font-size: 13px;
+  }
+
+  .weeks {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 110px;
+  }
+
+  .weeks > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    height: 100%;
+    min-width: 0;
+  }
+
+  .weeks .col {
+    width: 100%;
+    max-width: 34px;
+    border-radius: 6px 6px 2px 2px;
+    background: var(--accent);
+  }
+
+  .weeks .col.none {
+    background: var(--surface-2);
+  }
+
+  .weeks .label {
+    color: var(--ink-3);
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .wallpaper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 44px;
+    border: 0;
+    box-shadow: none;
+    text-align: left;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .wallpaper img {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: var(--surface-2);
+  }
+
+  .archive .score {
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+    align-items: end;
+  }
+
+  .switch-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    padding: 4px 0;
+  }
+
+  .sheet h2 {
+    margin-top: 10px;
+  }
+
+  details > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  @media (max-width: 400px) {
+    .sign {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .sign .row {
+      justify-content: center;
+      text-align: left;
+    }
+
+    .emblem {
+      width: 96px;
+      height: 96px;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .layout {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    }
+  }
+</style>
+<body>
+<main class="page wide">
+  <header class="topbar">
+    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <h1>Гороскоп</h1>
+    <button class="icon-btn" id="open-settings" aria-label="Настройки" data-icon="settings"></button>
+  </header>
+  <p id="note" class="small muted" hidden></p>
+  <div class="layout">
+    <div class="column" id="left"><p class="muted">Звёзды совещаются…</p></div>
+    <div class="column" id="right"></div>
+  </div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script>
+  const h = ui.h;
+  const MAIN = 'modules/horoscope/main.js';
+  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const WEEKDAYS_ACC = ['воскресенье', 'понедельник', 'вторник', 'среду', 'четверг', 'пятницу', 'субботу'];
+  let view = null;
+
+  function parse(text) {
+    const [y, m, d] = text.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  function dateText(text, weekday) {
+    return parse(text).toLocaleDateString(window.__lang || 'ru', weekday ? { day: 'numeric', month: 'long', weekday: 'short' } : { day: 'numeric', month: 'long' });
+  }
+
+  /** An original constellation: points and lines of stars.json on a dark disc. */
+  function emblem(star, small) {
+    const holder = document.createElement('span');
+    if (!star) {
+      holder.innerHTML = '<svg class="emblem' + (small ? ' small' : '') + '" viewBox="0 0 100 100" aria-hidden="true"><circle class="disc" cx="50" cy="50" r="48"/></svg>';
+      return holder.firstChild;
+    }
+    const lines = star.lines.map(([a, b]) => '<line class="line" x1="' + star.points[a][0] + '" y1="' + star.points[a][1] + '" x2="' + star.points[b][0] + '" y2="' + star.points[b][1] + '"/>').join('');
+    const dots = star.points.map(([x, y], i) => '<circle class="star' + (i === 0 ? ' lead' : '') + '" cx="' + x + '" cy="' + y + '" r="' + (i === 0 ? 4.2 : 3) + '"/>').join('');
+    holder.innerHTML = '<svg class="emblem' + (small ? ' small' : '') + '" viewBox="0 0 100 100" role="img" aria-label="' + ui.esc(star.title) + '">' +
+      '<circle class="disc" cx="50" cy="50" r="48"/><g transform="translate(5 5) scale(.9)">' + lines + dots + '</g></svg>';
+    return holder.firstChild;
+  }
+
+  function hitIcon(hit) {
+    const node = ui.icon(hit === true ? 'check' : hit === false ? 'close' : 'more');
+    node.classList.add(hit === true ? 'yes' : hit === false ? 'no' : 'unknown');
+    return node;
+  }
+
+  function hitWord(hit) {
+    return hit === true ? 'сбылось' : hit === false ? 'не сбылось' : 'не проверить';
+  }
+
+  async function speak() {
+    try {
+      const said = await call('speech');
+      if (said.voice) await assi.native('speech.say', said.text, said.voice);
+      else await assi.native('speech.say', said.text);
+    } catch (error) {
+      ui.toast(error.message);
+    }
+  }
+
+  function signCard() {
+    const sign = view.sign;
+    return h('div', { class: 'card sign' },
+      emblem(sign.star),
+      h('div', { class: 'grow' },
+        h('div', { class: 'small muted' }, ui.t('Знак недели с {}', dateText(sign.week))),
+        sign.title ? h('h2', { 'data-raw': '' }, sign.title) : h('h2', {}, 'Звёзды ещё приглядываются'),
+        sign.star ? h('div', { class: 'small muted' }, ui.t('{}: {}', sign.star.title, sign.star.about)) : h('div', { class: 'small muted' }, 'Знак появится, когда наберётся неделя данных.'),
+        sign.house ? h('div', { class: 'row small muted' }, emblem(sign.house, true), ui.t('дом — {}: {}', sign.house.title, sign.house.about)) : null));
+  }
+
+  function forecastCard() {
+    const today = view.today;
+    return h('div', { class: 'card section forecast' },
+      h('h2', {}, ui.t('Звёзды на {}', WEEKDAYS_ACC[parse(today.date).getDay()])),
+      today.pet && today.pet.line ? h('p', { class: 'small muted', 'data-raw': '' }, today.pet.line) : null,
+      h('p', { 'data-raw': '' }, today.text),
+      h('div', { class: 'actions' },
+        h('button', { class: 'btn soft', onclick: speak, 'data-icon': 'speaker' }, 'Прочитать вслух'),
+        h('span', { class: 'small muted' }, today.from === 'model' ? 'Текст написала модель по фактам ниже.' : 'Текст собран из шаблонов.')));
+  }
+
+  /** Today's wallpaper of «Обои дня»: a link to its screen, only when the module is there. */
+  function wallpaperCard() {
+    const w = view.wallpaper;
+    if (!w) return null;
+    return h('button', { class: 'card wallpaper', onclick: () => assi.open(w.open), 'aria-label': ui.t('Обои дня: {}', w.title) },
+      h('img', { src: w.thumbUrl, alt: '' }),
+      h('div', { class: 'grow' },
+        h('div', { class: 'small muted' }, 'Обои дня'),
+        h('div', { 'data-raw': '' }, w.title),
+        w.credit ? h('div', { class: 'small muted truncate', 'data-raw': '' }, w.credit) : null),
+      ui.icon('right'));
+  }
+
+  function yesterdayCard() {
+    const y = view.yesterday;
+    if (!y) return h('div', { class: 'card' }, h('p', { class: 'small muted' }, 'Вчера прогноза не было — проверять нечего.'));
+    return h('div', { class: 'card section' },
+      h('h3', {}, y.checked ? ui.t('Вчера сбылось: {} из {}', y.hits, y.checked) : 'Вчерашнее пока не проверить'),
+      h('div', { class: 'hits' }, y.predictions.map(p => h('div', { title: hitWord(p.hit) }, hitIcon(p.hit), h('span', { 'data-raw': '' }, p.claim)))));
+  }
+
+  function basisCard() {
+    const list = view.today.predictions;
+    return h('section', { class: 'section' },
+      h('h2', {}, 'На чём основано'),
+      h('div', { class: 'list basis' }, list.map(p => h('div', {},
+        h('div', { class: 'grow' },
+          h('div', { 'data-raw': '' }, p.facts.join('; ')),
+          h('div', { class: 'source' }, ui.raw(p.source + (p.confidence ? ' · ' + Math.round(p.confidence * 100) + '%' : '')), p.check ? '' : ' · ' + ui.t('не проверяется')))))));
+  }
+
+  function accuracyCard() {
+    const acc = view.accuracy;
+    const weeks = view.weeks;
+    return h('section', { class: 'section' },
+      h('h2', {}, 'Точность звёзд'),
+      h('div', { class: 'card section' },
+        h('div', {}, acc.pct === null ? 'За 30 дней проверять пока было нечего.' : ui.t('За 30 дней: {}% ({} из {})', acc.pct, acc.hits, acc.hits + acc.misses)),
+        h('div', { class: 'weeks', role: 'img', 'aria-label': 'Точность по неделям' }, weeks.map(w => h('div', { title: w.pct === null ? '' : w.pct + '%' },
+          h('div', { class: 'col' + (w.pct === null ? ' none' : ''), style: 'height: ' + (w.pct === null ? 4 : Math.max(4, w.pct)) + '%' }),
+          h('span', { class: 'label' }, ui.raw(String(parse(w.week).getDate()) + '.' + String(parse(w.week).getMonth() + 1).padStart(2, '0')))))),
+        h('div', { class: 'small muted' }, 'Сбылось / (сбылось + не сбылось); дни без данных и паузы не считаются.')));
+  }
+
+  async function openDay(date) {
+    try {
+      const file = await call('day', date);
+      if (!file) return;
+      const close = ui.sheet([
+        h('h3', {}, dateText(date, true)),
+        file.sign ? h('div', { class: 'small muted', 'data-raw': '' }, file.sign.title) : null,
+        h('p', { 'data-raw': '' }, file.text),
+        h('div', { class: 'hits' }, file.predictions.map(p => h('div', {}, hitIcon(p.hit), h('span', { 'data-raw': '' }, p.claim)))),
+        h('button', { class: 'btn wide', onclick: () => close() }, 'Закрыть')
+      ]);
+    } catch (error) {
+      ui.toast(error.message);
+    }
+  }
+
+  function archiveCard() {
+    return h('section', { class: 'section' },
+      h('h2', {}, 'Архив'),
+      view.archive.length ? h('div', { class: 'list archive' }, view.archive.map(item => h('button', { onclick: () => openDay(item.date) },
+        h('div', { class: 'grow' },
+          h('div', {}, dateText(item.date, true)),
+          h('div', { class: 'small muted truncate', 'data-raw': '' }, item.first)),
+        h('span', { class: 'score' }, item.checked ? ui.raw(item.hits + '/' + item.checked) : '—'))))
+        : h('div', { class: 'empty' }, 'Архив начнётся завтра.'));
+  }
+
+  // ---- settings ------------------------------------------------------------------------------
+
+  const THRESHOLDS = [
+    ['deliveryHour', 'Доставка после, час'], ['cafeHour', 'Кафе до, час'], ['lateMin', 'Экран ночью от, мин'],
+    ['sleepDebt', 'Недосып от, мин'], ['sleepNights', 'Недосып за ночей'], ['trendPct', 'Разгон шагов от, %'],
+    ['chainSoon', 'Круглая цепочка за, дней'], ['achievementDays', 'Ачивка за, дней'], ['rpgDays', 'Уровень за, дней'],
+    ['holidayDays', 'Праздник за, дней'], ['focusMin', 'Фокус в день от, мин'], ['focusAttempts', 'Попыток отвлечься от'],
+    ['focusSplitHour', 'Фокус: до и после, час'], ['focusSessions', 'Фокус: сессий с каждой стороны'], ['focusRatio', 'Фокус: дольше во сколько раз', 0.1]
+  ];
+
+  function settings() {
+    const s = view.settings;
+    const check = value => h('input', { type: 'checkbox', class: 'switch', checked: value });
+    const num = (value, min, max) => h('input', { class: 'input', type: 'number', inputMode: 'numeric', min, max, value });
+    const sel = (value, options) => { const node = h('select', { class: 'input' }, options.map(([id, title]) => h('option', { value: id }, title))); node.value = value; return node; };
+    const row = (input, title, hint) => h('label', { class: 'switch-row' }, h('div', { class: 'grow' }, h('div', {}, title), hint ? h('div', { class: 'small muted' }, hint) : null), input);
+    const field = (title, input) => h('label', { class: 'field' }, h('span', {}, title), input);
+    const f = {
+      at: h('input', { class: 'input', type: 'time', value: s.at }), notify: check(s.notify), model: check(s.model),
+      count: num(s.count, 2, 4), n: num(s.n, 2, 8), k: num(s.k, 1, 8), noRepeat: num(s.noRepeat, 1, 7), window: num(s.window, 28, 120),
+      money: check(s.mentionMoney), places: check(s.mentionPlaces), calendar: check(s.calendar), outsmart: check(s.outsmart),
+      holidays: check(s.holidays), holidayPeople: check(s.holidayPeople), pet: check(s.pet), wallpaper: check(s.wallpaper),
+      petPhraseMax: num(s.petPhraseMax, 0, 1000),
+      tone: sel(s.tone, [['soft', 'Мягкий'], ['sharp', 'Ехидный']]), voice: sel(s.voice, [['tts', 'Роль «tts»'], ['local', 'На телефоне']]),
+      minScore: h('input', { class: 'input', type: 'number', inputMode: 'decimal', step: 0.05, min: 0, value: s.minScore })
+    };
+    const thresholds = {};
+    let close = null;
+    close = ui.sheet([
+      h('h3', {}, 'Настройки гороскопа'),
+      h('div', { class: 'settings-grid' }, field('Время прогноза', f.at), field('Предсказаний', f.count), field('Тон', f.tone), field('Голос чтения', f.voice)),
+      row(f.notify, 'Уведомление утром', 'Заголовок «Звёзды на сегодня» и первое предсказание'),
+      row(f.model, 'Текст от модели', 'Роль «Гороскоп: текст»; без модели — шаблоны'),
+      row(f.money, 'Упоминать суммы денег'),
+      row(f.places, 'Называть места по именам'),
+      row(f.calendar, 'Встречи из календаря', 'Только для красоты, не проверяются; нужно разрешение'),
+      row(f.outsmart, 'Скрытая ачивка за несбывшиеся', 'Нужен модуль «Ачивки»'),
+      h('h2', {}, 'Соседи'),
+      row(f.holidays, 'Праздники в прогнозе', 'Сегодняшний или ближайший праздник; нужен модуль «Праздники»'),
+      row(f.holidayPeople, 'Дни рождения близких', 'Имена из контактов попадут в прогноз и будут прочитаны вслух'),
+      row(f.pet, 'Прогноз читает Питомец', 'Его имя, настроение и фраза перед прогнозом; нужен модуль «Питомец»'),
+      h('div', { class: 'settings-grid' }, field('Фраза Питомца до, знаков', f.petPhraseMax)),
+      row(f.wallpaper, 'Ссылка на обои дня', 'Нужен модуль «Обои дня»'),
+      h('h2', {}, 'Закономерности'),
+      h('div', { class: 'settings-grid' }, field('Последних дней (n)', f.n), field('Из них совпадений (k)', f.k), field('Повтор не дольше, дней', f.noRepeat), field('Дней истории', f.window)),
+      h('details', {},
+        h('summary', {}, 'Пороги детекторов'),
+        h('div', { class: 'settings-grid' }, THRESHOLDS.map(([key, title, step]) => {
+          thresholds[key] = num((s.detectors || {})[key] !== undefined ? s.detectors[key] : view.defaults[key], 0, 100000);
+          if (step) { thresholds[key].step = step; thresholds[key].inputMode = 'decimal'; }
+          return field(title, thresholds[key]);
+        })),
+        h('div', { class: 'settings-grid' }, field('Знак: минимум очков', f.minScore))),
+      h('button', { class: 'btn soft wide', onclick: async () => {
+        try {
+          await call('make', null, true);
+          close();
+          load();
+        } catch (error) {
+          ui.toast(error.message);
+        }
+      } }, 'Составить прогноз заново'),
+      h('div', { class: 'actions' },
+        h('button', { class: 'btn', onclick: () => close() }, 'Отмена'),
+        h('button', { class: 'btn primary', onclick: async () => {
+          const int = (input, fallback) => { const v = parseInt(input.value, 10); return isNaN(v) ? fallback : v; };
+          const detectorValues = {};
+          Object.keys(thresholds).forEach(key => { detectorValues[key] = Math.max(0, parseFloat(String(thresholds[key].value).replace(',', '.')) || 0); });
+          try {
+            if (f.calendar.checked && !s.calendar) {
+              const granted = await call('askCalendar');
+              if (!granted) { ui.toast('Календарь не разрешён'); f.calendar.checked = false; }
+            }
+            await call('saveSettings', {
+              at: f.at.value || s.at, notify: f.notify.checked, model: f.model.checked, count: Math.max(2, Math.min(4, int(f.count, s.count))),
+              n: int(f.n, s.n), k: int(f.k, s.k), noRepeat: int(f.noRepeat, s.noRepeat), window: int(f.window, s.window),
+              mentionMoney: f.money.checked, mentionPlaces: f.places.checked, calendar: f.calendar.checked, outsmart: f.outsmart.checked,
+              holidays: f.holidays.checked, holidayPeople: f.holidayPeople.checked, pet: f.pet.checked, wallpaper: f.wallpaper.checked,
+              petPhraseMax: Math.max(0, int(f.petPhraseMax, s.petPhraseMax)),
+              tone: f.tone.value, voice: f.voice.value, minScore: Math.max(0, parseFloat(String(f.minScore.value).replace(',', '.')) || s.minScore),
+              detectors: detectorValues
+            });
+            close();
+            load();
+          } catch (error) {
+            ui.toast(error.message);
+          }
+        } }, 'Сохранить'))
+    ]);
+  }
+
+  async function load() {
+    try {
+      view = await call('view');
+    } catch (error) {
+      document.getElementById('left').replaceChildren(h('div', { class: 'empty' }, ui.t('Звёзды не ответили: {}', error.message)));
+      return;
+    }
+    const note = document.getElementById('note');
+    note.hidden = view.source !== 'base';
+    note.textContent = view.source === 'base' ? ui.t('Модуль «Здоровье» не установлен: прогноз строится по записям общей базы.') : '';
+    document.getElementById('left').replaceChildren(...[signCard(), forecastCard(), wallpaperCard(), yesterdayCard()].filter(Boolean));
+    document.getElementById('right').replaceChildren(basisCard(), accuracyCard(), archiveCard());
+  }
+
+  document.getElementById('open-settings').onclick = () => view && settings();
+  assi.on('horoscope.changed', load);
+  load();
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+/* Irregular, quiet stars: no repeating grid and no flashing. */
+.page { isolation: isolate; }
+.page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .7;
+  background: scatter(stars) center / cover no-repeat;
+  animation: holiday-stars var(--holiday-motion) ease-out 1 both;
+}
+@keyframes holiday-stars {
+  from { opacity: 0; transform: translate3d(0, 5px, 0); }
+  to { opacity: .7; transform: none; }
+}

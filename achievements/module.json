@@ -1,0 +1,13 @@
+{
+  "title": "Ачивки",
+  "description": "Достижения за реальную жизнь: сон, шаги, привычки, места, траты, экран и игры. Формат для агента — AGENT.md",
+  "icon": "star",
+  "autostart": true,
+  "home": "ui/card.html",
+  "homeSize": "4x2",
+  "homeSizes": ["2x2", "4x2", "4x3"],
+  "homeHeight": 170,
+  "models": [
+    { "id": "achievements.flavor", "title": "Ачивки: шутливые подписи раз в неделю" }
+  ]
+}

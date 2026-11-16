@@ -1,0 +1,8 @@
+[
+  {"id": "smith", "title": "Знакомый кузнец", "card": "weapon", "text": "Оружие {kind.smith.s}×{kind.smith.c} в колоде каждого этажа"},
+  {"id": "hearth", "title": "Тёплый очаг", "card": "potion", "text": "Зелье {kind.hearth.v} в колоде каждого этажа"},
+  {"id": "board", "title": "Дубовая доска", "card": "shield", "text": "Щит {kind.board.v} в колоде каждого этажа"},
+  {"id": "purse", "title": "Кошель путника", "card": "gold", "text": "Золото {kind.purse.v} в колоде каждого этажа"},
+  {"id": "key", "title": "Запасной ключ", "card": "key", "text": "Ключ в колоде каждого этажа"},
+  {"id": "stone", "title": "Точильный камень", "card": "whet", "text": "+{kind.stone.v} заряда оружию, в колоде каждого этажа"}
+]

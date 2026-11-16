@@ -1,0 +1,30 @@
+  Settings:
+    flex_time_short=+1m0s0ms
+    light_after_inactive_to=+3m0s0ms
+    light_idle_to=+5m0s0ms
+    inactive_to=+30m0s0ms
+  Idling allowed: true
+  Whitelist (except idle) system apps:
+    com.android.providers.downloads
+    com.android.vending
+  Whitelist system apps:
+    com.google.android.gms
+    com.android.phone
+  Whitelist user apps:
+    app.assi
+    org.telegram.messenger
+  Whitelist (except idle) all app ids:
+    1001
+    10160
+  Whitelist user app ids:
+    10199
+    10301
+  mLightEnabled=true  mDeepEnabled=true
+  mForceIdle=false
+  mMotionSensor={Significant Motion Detector, Samsung, 1}
+  mScreenOn=false
+  mScreenLocked=true
+  mNetworkConnected=true
+  mCharging=false
+  mState=IDLE mLightState=OVERRIDE
+  mInactiveTimeout=+30m0s0ms

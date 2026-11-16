@@ -1,0 +1,707 @@
+/* The field of «Библиотека»; the frame (bar, sheets, buttons) is engine/game.css. Dark base,
+   grey cards without shadows, muted spines (paper, leather, cloth), serif headings from the
+   system fonts. One declaration per line. */
+:root {
+  --l-serif: Georgia, "Noto Serif", "Droid Serif", "Times New Roman", serif;
+  --l-b0: #6f7d5c;
+  --l-b1: #8a6b50;
+  --l-b2: #7c5f70;
+  --l-b3: #5f6f85;
+  --l-b4: #8b7b58;
+  --l-b5: #565d6e;
+  --l-paper: #c9bda4;
+  --l-gold: #b9954a;
+  --l-wood: #6b5340;
+}
+
+.l-serif,
+.l-h,
+.g-sheet h3 {
+  font-family: var(--l-serif);
+  font-weight: 600;
+}
+
+.l-sub {
+  margin-top: 2px;
+  color: var(--ink-2);
+  font-size: 14px;
+  overflow-wrap: break-word;
+}
+
+.l-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 16px;
+}
+
+.l-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+}
+
+.l-h {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  color: var(--ink);
+  font-size: 19px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.l-head .g-btn.small {
+  width: auto;
+  min-height: 36px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.l-desks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.l-desk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 72px;
+  padding: 8px 12px 8px 8px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+}
+
+.l-desk.free {
+  border-style: dashed;
+  background: transparent;
+  color: var(--ink-2);
+}
+
+.l-desk.buy {
+  min-height: 56px;
+  border-style: dashed;
+  background: transparent;
+}
+
+.l-desk.done {
+  border-color: var(--accent);
+}
+
+.l-desk-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.l-desk-title {
+  font-family: var(--l-serif);
+  font-size: 16px;
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+
+.l-desk-sub {
+  color: var(--ink-2);
+  font-size: 13px;
+  overflow-wrap: break-word;
+}
+
+.l-desk-time {
+  flex: none;
+  min-width: 64px;
+  text-align: right;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+
+.l-bar {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.l-bar > i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--l-paper);
+}
+
+.l-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-top: 4px;
+}
+
+.l-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.l-tabs .chip {
+  flex: none;
+  min-height: 40px;
+}
+
+.l-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.l-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.l-card.off {
+  background: transparent;
+  border-style: dashed;
+  color: var(--ink-2);
+}
+
+.l-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.l-row .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.l-name {
+  font-family: var(--l-serif);
+  font-size: 16px;
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+
+.l-plain {
+  display: block;
+  min-height: 44px;
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+.l-row > .chip {
+  flex: none;
+}
+
+[data-tome] .l-name {
+  font-size: 15px;
+}
+
+.l-small {
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.l-card .g-btn.small,
+.l-row .g-btn.small {
+  width: auto;
+  flex: none;
+  min-height: 44px;
+  padding: 4px 12px;
+  font-size: 14px;
+}
+
+.l-card .g-btn .g-sub {
+  font-size: 12px;
+}
+
+.l-card .g-btn[data-buy] {
+  min-width: 112px;
+}
+
+.l-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.l-chips .chip {
+  min-height: 40px;
+}
+
+.l-modes {
+  display: flex;
+  gap: 6px;
+}
+
+.l-modes .chip {
+  flex: 1;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 6px;
+}
+
+.g-actions.l-none {
+  display: none;
+}
+
+.l-event {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+}
+
+.l-event-title {
+  font-family: var(--l-serif);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.l-event-fx {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.l-event .g-btns .g-btn {
+  min-height: 48px;
+}
+
+.l-puzzle {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 4px;
+  align-items: end;
+}
+
+.l-puzzle > button {
+  height: 64px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, .4);
+}
+
+.l-puzzle > button.found {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.l-puzzle > button.miss {
+  opacity: .35;
+}
+
+.l-annot {
+  font-family: var(--l-serif);
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.l-book-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.l-tome {
+  font-family: var(--l-serif);
+}
+
+.l-tome.unknown {
+  color: var(--ink-3);
+}
+
+.g-app[data-layout="wide"] {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 50%);
+}
+
+.g-app[data-layout="wide"] .g-actions {
+  justify-content: flex-start;
+}
+
+.g-app[data-layout="wide"] .l-modes {
+  position: sticky;
+  bottom: calc(-12px - env(safe-area-inset-bottom));
+  margin-bottom: calc(-12px - env(safe-area-inset-bottom));
+  padding: 8px 0 calc(12px + env(safe-area-inset-bottom));
+  background: var(--bg);
+}
+
+details > summary {
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+/* ---- pictures (art.js): a line drawing on a plate of the thing's colour ---- */
+.l-ic {
+  --tone: #5a5a5a;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--tone) 80%, transparent);
+  background: color-mix(in srgb, var(--tone) 42%, var(--surface));
+  color: var(--l-paper);
+}
+
+.l-ic svg {
+  display: block;
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.l-ic svg .f {
+  fill: currentColor;
+  fill-opacity: .2;
+}
+
+.l-ic svg .d {
+  fill: currentColor;
+  stroke: none;
+}
+
+.l-ic.small {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+.l-ic.small svg {
+  width: 20px;
+  height: 20px;
+}
+
+.l-ic.big {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+}
+
+.l-ic.big svg {
+  width: 40px;
+  height: 40px;
+}
+
+/* A unique tome: the plate is a cover with a spine on the left. */
+.l-ic.tome {
+  width: 36px;
+  height: 46px;
+  border-radius: 3px 7px 7px 3px;
+  border-left: 5px solid var(--tone);
+}
+
+.l-ic.tome svg {
+  width: 24px;
+  height: 24px;
+}
+
+.l-ic.tome.big {
+  width: 56px;
+  height: 72px;
+  border-left-width: 7px;
+}
+
+.l-ic.tome.big svg {
+  width: 38px;
+  height: 38px;
+}
+
+/* Closed, not found, not taken yet: no fill, a dashed edge, grey lines. */
+.l-ic.off {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--ink-3);
+  color: var(--ink-3);
+}
+
+.l-ic.tome.off {
+  border-left-style: solid;
+}
+
+.t-b0 {
+  --tone: var(--l-b0);
+}
+
+.t-b1 {
+  --tone: var(--l-b1);
+}
+
+.t-b2 {
+  --tone: var(--l-b2);
+}
+
+.t-b3 {
+  --tone: var(--l-b3);
+}
+
+.t-b4 {
+  --tone: var(--l-b4);
+}
+
+.t-b5 {
+  --tone: var(--l-b5);
+}
+
+.t-paper {
+  --tone: #7d7462;
+}
+
+.t-gold {
+  --tone: var(--l-gold);
+}
+
+/* The colours of the branches on spines and in the puzzle. */
+.b0 {
+  background: var(--l-b0);
+}
+
+.b1 {
+  background: var(--l-b1);
+}
+
+.b2 {
+  background: var(--l-b2);
+}
+
+.b3 {
+  background: var(--l-b3);
+}
+
+.b4 {
+  background: var(--l-b4);
+}
+
+.b5 {
+  background: var(--l-b5);
+}
+
+/* ---- a shelf of a kind: spines of four heights on a wooden board ---- */
+.l-shelf {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 40px;
+  padding: 0 4px;
+  border-bottom: 4px solid var(--l-wood);
+  border-radius: 0 0 2px 2px;
+  background: linear-gradient(to top, var(--surface-2), transparent 70%);
+  overflow: hidden;
+}
+
+.l-shelf.empty {
+  height: 14px;
+  border-bottom-style: dashed;
+  background: none;
+}
+
+.l-shelf > i {
+  flex: none;
+  position: relative;
+  display: block;
+  width: 5px;
+  height: 28px;
+  border-radius: 1px 1px 0 0;
+}
+
+.l-shelf > i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5px;
+  height: 2px;
+  background: rgba(230, 218, 190, .5);
+}
+
+.l-shelf > i.v1 {
+  height: 31px;
+}
+
+.l-shelf > i.v2 {
+  height: 25px;
+  width: 6px;
+}
+
+.l-shelf > i.v3 {
+  height: 33px;
+  width: 4px;
+}
+
+.l-shelf > i.rd {
+  opacity: .55;
+}
+
+.l-shelf > i.tall {
+  height: 35px;
+  width: 7px;
+}
+
+/* ---- the collection of unique tomes ---- */
+.l-coll {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 8px;
+}
+
+.l-coll-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 4px;
+  border: 0;
+  border-radius: var(--radius-s);
+  background: none;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.l-coll-item .l-tome {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.l-coll-item.unknown {
+  color: var(--ink-3);
+}
+
+.l-row.got .l-name {
+  color: var(--ink-2);
+}
+
+.l-book-head .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.l-book-head h3 {
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.l-card .g-btn[data-upgrade],
+.l-card .g-btn[data-council] {
+  min-width: 104px;
+}
+
+/* ---- the plan of the library (wide): the halls as rooms, the desks below ---- */
+.l-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 0 16px;
+}
+
+.l-plan-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.l-plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+.l-room {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  border-bottom: 3px solid var(--l-wood);
+  background: var(--surface);
+}
+
+.l-room.closed {
+  border-style: dashed;
+  border-bottom-width: 1px;
+  background: transparent;
+  color: var(--ink-3);
+}
+
+.l-room-name {
+  font-family: var(--l-serif);
+  font-size: 14px;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+}
+
+.l-plan-desks {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.l-tome-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.l-tome-main .chip {
+  min-height: 36px;
+}
+
+[data-council-row] .l-name,
+[data-upgrade-row] .l-name {
+  font-size: 15px;
+}
+
+/* State-driven scene; the original controls remain below or beside it. */
+.l-world {
+  width:100%;
+  min-width:0;
+  flex:none;
+  margin-bottom:12px;
+}
+
+.l-world .g-scene {
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid #ffffff12;
+  background:#263e3e;
+}
+
+.l-world-note {
+  padding:9px 4px 2px;
+  color:var(--muted,#b4b5ac);
+  font-size:12px;
+  line-height:1.45;
+}

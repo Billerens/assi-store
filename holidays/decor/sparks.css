@@ -1,0 +1,25 @@
+/* Искры: короткая вспышка точек вокруг кнопки в момент нажатия. */
+.btn {
+  position: relative;
+}
+
+.btn:active::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 8% 22%, var(--accent) 1.5px, transparent 2.4px), radial-gradient(circle at 86% 12%, var(--ok) 1.5px, transparent 2.4px), radial-gradient(circle at 94% 82%, var(--accent) 1.5px, transparent 2.4px), radial-gradient(circle at 14% 88%, var(--ink) 1.3px, transparent 2.2px), radial-gradient(circle at 50% 0%, var(--ink-2) 1.3px, transparent 2.2px), radial-gradient(circle at 52% 100%, var(--accent) 1.5px, transparent 2.4px);
+  animation: holiday-sparks .45s ease-out 1 both;
+}
+
+@keyframes holiday-sparks {
+  from {
+    transform: scale(.75);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}

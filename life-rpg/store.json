@@ -1,0 +1,8 @@
+{
+  "id": "rpg",
+  "kind": "module",
+  "title": "Жизнь-RPG",
+  "target": "modules/rpg",
+  "requires": ["health", "pet", "achievements", "spending"],
+  "shell": []
+}

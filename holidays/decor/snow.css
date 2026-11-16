@@ -1,0 +1,15 @@
+/* Finite, seeded snowfield. Only the whole layer moves; no tiled gradients or per-particle repaint. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -12px;
+  z-index: 40;
+  pointer-events: none;
+  opacity: .55;
+  background: scatter(snow) center / cover no-repeat;
+  animation: holiday-snow var(--holiday-motion) ease-out 1 both;
+}
+@keyframes holiday-snow {
+  from { transform: translate3d(-5px, -18px, 0); opacity: 0; }
+  to { transform: none; opacity: .55; }
+}

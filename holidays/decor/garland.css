@@ -1,0 +1,17 @@
+/* A single, irregular string of lights. It fades in once and stays steady. */
+.topbar, .hello { position: relative; }
+.topbar::after, .hello::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -16px;
+  height: 22px;
+  pointer-events: none;
+  background: scatter(garland) center / 100% 100% no-repeat;
+  animation: holiday-garland var(--holiday-motion) ease-out 1 both;
+}
+@keyframes holiday-garland {
+  from { opacity: .3; }
+  to { opacity: 1; }
+}

@@ -1,0 +1,676 @@
+/* Шляпа: подготовка (страница кита) и игра во весь экран (assi.stage).
+   Тёмная основа и цвета — из переменных кита, без теней. */
+
+.setup {
+  max-width: 1100px;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 700px) {
+  .cols {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.field-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.field-row .input {
+  flex: 1;
+  min-width: 0;
+}
+
+.mic-on {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.seat {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.teams {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.team {
+  min-height: 96px;
+  padding: 10px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.team.over {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.team h3 {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.pchip {
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  touch-action: none;
+  user-select: none;
+}
+
+.ghost {
+  position: fixed;
+  z-index: 80;
+  pointer-events: none;
+  opacity: .9;
+  border-color: var(--accent);
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stepper .value {
+  min-width: 64px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.stepper .btn {
+  min-width: 44px;
+  padding: 0;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+}
+
+.option > .grow > .small {
+  display: block;
+}
+
+.examples {
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink-2);
+}
+
+.big-btn {
+  min-height: 56px;
+  font-size: 18px;
+}
+
+.warn {
+  color: var(--danger);
+  font-size: 14px;
+}
+
+.ok-text {
+  color: var(--ok);
+}
+
+/* ---- игра во весь экран ------------------------------------------------------------------- */
+
+.stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  padding: 10px 14px calc(14px + env(safe-area-inset-bottom));
+  overflow: hidden;
+}
+
+.stage.scroll {
+  overflow-y: auto;
+}
+
+.stage-inner {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.stage-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+}
+
+.exit {
+  min-height: 44px;
+  padding: 0 14px 0 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  flex: none;
+}
+
+.round-label {
+  flex: 1;
+  min-width: 0;
+  color: var(--ink-2);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.hero {
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+.hero .accent {
+  color: var(--accent);
+}
+
+.pass {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.rule-line {
+  color: var(--ink-2);
+  font-size: 16px;
+}
+
+.score-table {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.score {
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score.lead {
+  border-color: var(--accent);
+}
+
+.score .points {
+  font-size: 26px;
+  font-weight: 800;
+  min-width: 40px;
+  text-align: right;
+}
+
+.score .who {
+  flex: 1;
+  min-width: 0;
+}
+
+.score .who .small {
+  color: var(--ink-2);
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.review-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 8px 12px;
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  width: 100%;
+  text-align: left;
+}
+
+.review-row .grow .small {
+  color: var(--ink-2);
+  display: block;
+}
+
+.mark {
+  flex: none;
+  min-width: 112px;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--surface-2);
+  color: var(--ink-2);
+}
+
+.mark.guessed {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.mark.skipped {
+  color: var(--ink-2);
+}
+
+.mark.undone {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.go {
+  min-height: 64px;
+  font-size: 20px;
+}
+
+/* ход */
+.timebar {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+  flex: none;
+}
+
+.timebar > i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+}
+
+.timebar.late > i {
+  background: var(--danger);
+}
+
+.clock {
+  font-size: 28px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  min-width: 56px;
+  text-align: right;
+}
+
+.clock.late {
+  color: var(--danger);
+}
+
+.mic {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-3);
+  flex: none;
+}
+
+.mic.on {
+  color: var(--accent);
+}
+
+.mic.busy {
+  color: var(--ink-2);
+}
+
+.mic .level {
+  width: 34px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.mic .level > i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: currentColor;
+  transition: width .12s;
+}
+
+.word-box {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  position: relative;
+}
+
+.word {
+  width: 100%;
+  font-weight: 800;
+  line-height: 1.1;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: manual;
+  white-space: normal;
+}
+
+.word.enter {
+  animation: word-in .22s ease-out;
+}
+
+.word.fly {
+  animation: word-up .26s ease-in forwards;
+}
+
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+@keyframes word-up {
+  to {
+    opacity: 0;
+    transform: translateY(-70px);
+  }
+}
+
+.hot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.ban {
+  color: var(--ink-3);
+  font-size: 15px;
+}
+
+.heard {
+  color: var(--ink-2);
+  font-size: 15px;
+  min-height: 22px;
+}
+
+.undo-slot {
+  height: 76px;
+  flex: none;
+  display: flex;
+  align-items: stretch;
+}
+
+.undo {
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: 22px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.undo-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.undo-heard {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: .8;
+  flex: none;
+  max-width: 40%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.undo .left {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--danger);
+}
+
+.turn-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  flex: none;
+  margin-top: 10px;
+}
+
+.turn-buttons .btn {
+  min-height: 64px;
+  font-size: 19px;
+  border-radius: var(--radius);
+  white-space: normal;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 24px;
+  text-align: center;
+}
+
+.count {
+  font-size: 120px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.own-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.own-field .input {
+  min-height: 52px;
+  font-size: 18px;
+}
+
+.places {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.place {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.place.first {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.place .n {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  font-weight: 800;
+  flex: none;
+}
+
+.place.first .n {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.place .points {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.fact {
+  padding: 14px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fact .label {
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.fact .value {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.end-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .end-buttons {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  border-top: 1px solid var(--line);
+  padding: 6px 0;
+}
+
+.setting-row:first-child {
+  border-top: 0;
+}
+
+.setting-row .grow .small {
+  color: var(--ink-2);
+  display: block;
+}
+
+.word-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.word-chips .chip.off {
+  text-decoration: line-through;
+  color: var(--ink-3);
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 10px;
+  align-items: center;
+  min-height: 44px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 380px) {
+  .hero {
+    font-size: 26px;
+  }
+
+  .count {
+    font-size: 96px;
+  }
+
+  .mark {
+    min-width: 96px;
+  }
+}

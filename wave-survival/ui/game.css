@@ -1,0 +1,729 @@
+/* «Последний рубеж»: the hub in the engine's frame, the run on a canvas over the whole screen.
+Dark base, neutral gray, no shadows; surfaces are told apart by colour and a one-pixel line. */
+
+:root {
+  --ws-r0: #8A8A8A;
+  --ws-r1: #6FA8FF;
+  --ws-r2: #B79CFF;
+  --ws-r3: #F0C04A;
+  --ws-hp: #FF7B72;
+  --ws-xp: #5FD08A;
+  --ws-veil: rgba(12, 12, 12, .78);
+}
+
+/* ---- the hub ---- */
+
+.ws-top {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ws-shards {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ws-shards svg {
+  width: 24px;
+  height: 24px;
+  color: var(--accent);
+}
+
+.ws-unit {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ws-controls {
+  text-align: center;
+  line-height: 1.4;
+}
+
+.ws-sub {
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.ws-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  gap: 6px;
+  padding: 8px 0;
+  background: var(--bg);
+}
+
+.ws-tab {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 6px 4px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.ws-tab.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.ws-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-bottom: 16px;
+}
+
+.ws-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ws-h {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+.ws-t {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.ws-s {
+  color: var(--ink-2);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.ws-good {
+  color: var(--ok);
+}
+
+.ws-locked {
+  border-style: dashed;
+}
+
+.ws-locked .ws-art {
+  filter: grayscale(1);
+  opacity: .45;
+}
+
+.ws-locked .ws-t {
+  color: var(--ink-2);
+}
+
+.g-pick > button svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+}
+
+.ws-art {
+  display: block;
+  flex: none;
+  width: 44px;
+  height: 44px;
+}
+
+.ws-art svg,
+.g-pick > button .ws-art svg,
+.ws-card > .ws-art svg,
+.ws-shop > .ws-art svg,
+.ws-li > .ws-art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ws-last-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ws-last {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.ws-last.won {
+  border-color: var(--ok);
+}
+
+.ws-unlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ws-storm {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ws-step {
+  flex: none;
+  width: 56px;
+  font-size: 24px;
+}
+
+.ws-storm-n {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ws-storm-t {
+  text-align: left;
+}
+
+.ws-rules {
+  margin: 0;
+  padding-left: 22px;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.ws-rules li {
+  padding: 2px 0;
+}
+
+.ws-rules li.new {
+  color: var(--ink);
+}
+
+.ws-shops {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ws-shop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 8px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.ws-shop > svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  color: var(--ink-2);
+}
+
+.ws-shop .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.ws-shop.full {
+  border-color: var(--accent);
+}
+
+/* the level of an upgrade as a thin bar under its text */
+.ws-pips {
+  height: 4px;
+  margin-top: 6px;
+  border-radius: 2px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.ws-pips i {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.ws-lvl {
+  color: var(--ink-3);
+  font-weight: 500;
+}
+
+.ws-buy {
+  flex: none;
+  width: auto;
+  min-width: 76px;
+  padding: 6px 12px;
+}
+
+.ws-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ws-li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+}
+
+.ws-li > svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--ink-2);
+}
+
+.ws-li .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.ws-dot {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.ws-face {
+  width: 44px;
+  height: 44px;
+}
+
+.ws-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ws-danger {
+  color: var(--danger);
+}
+
+/* ---- the stage of a run ---- */
+
+body.ws-running {
+  overflow: hidden;
+}
+
+.ws-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: #0d0d0d;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ws-stage[hidden] {
+  display: none;
+}
+
+.ws-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+.ws-hud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: calc(6px + env(safe-area-inset-top)) 12px 0;
+  pointer-events: none;
+}
+
+.ws-xp {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, .08);
+  overflow: hidden;
+}
+
+.ws-xp > i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--ws-xp);
+}
+
+.ws-hud-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.ws-clock {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.ws-level,
+.ws-kills {
+  min-width: 64px;
+  color: var(--ink-2);
+}
+
+.ws-kills {
+  text-align: right;
+}
+
+.ws-boss {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 4px auto 0;
+  width: min(100%, 420px);
+  text-align: center;
+}
+
+.ws-boss[hidden] {
+  display: none;
+}
+
+.ws-boss-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ws-boss-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, .08);
+  overflow: hidden;
+}
+
+.ws-boss-bar > i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--ws-hp);
+}
+
+.ws-fps {
+  align-self: flex-start;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, .5);
+  color: var(--ink-2);
+  font-size: 12px;
+}
+
+.ws-fps[hidden] {
+  display: none;
+}
+
+.ws-pause {
+  position: absolute;
+  right: calc(12px + env(safe-area-inset-right));
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(26, 26, 26, .8);
+  color: var(--ink);
+}
+
+.ws-pause svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* An achievement or a note during a run goes up, out of the thumb's way, and lets touches through. */
+body.ws-running .g-flash {
+  top: calc(72px + env(safe-area-inset-top));
+  bottom: auto;
+  pointer-events: none;
+  opacity: .94;
+}
+
+/* ---- overlays of a run: cards, pause, countdown, result ---- */
+
+.ws-over {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: calc(12px + env(safe-area-inset-top)) 16px calc(16px + env(safe-area-inset-bottom));
+  background: var(--ws-veil);
+  overflow: auto;
+}
+
+.ws-over[hidden] {
+  display: none;
+}
+
+.ws-over.count {
+  justify-content: center;
+  background: rgba(12, 12, 12, .35);
+  pointer-events: none;
+}
+
+.ws-count {
+  font-size: 88px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.ws-choice,
+.ws-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.ws-panel {
+  max-height: 100%;
+  overflow: auto;
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.ws-choice-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.ws-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ws-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 88px;
+  padding: 10px 14px 10px 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  touch-action: manipulation;
+}
+
+.ws-card:active {
+  background: var(--surface-2);
+}
+
+.ws-card > svg {
+  flex: none;
+  width: 28px;
+  height: 28px;
+}
+
+.ws-card .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.ws-rbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--ws-r0);
+}
+
+.ws-card.r1 .ws-rbar {
+  background: var(--ws-r1);
+}
+
+.ws-card.r2 .ws-rbar {
+  background: var(--ws-r2);
+}
+
+.ws-card.r3 .ws-rbar {
+  background: var(--ws-r3);
+}
+
+.ws-card.r1 {
+  border-color: rgba(111, 168, 255, .45);
+}
+
+.ws-card.r2 {
+  border-color: rgba(183, 156, 255, .5);
+}
+
+.ws-card.r3 {
+  border-color: rgba(240, 192, 74, .6);
+}
+
+.ws-card-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ws-card-name {
+  min-width: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.ws-card-r {
+  flex: none;
+  color: var(--ink-3);
+  font-size: 13px;
+}
+
+.ws-card.r1 .ws-card-r {
+  color: var(--ws-r1);
+}
+
+.ws-card.r2 .ws-card-r {
+  color: var(--ws-r2);
+}
+
+.ws-card.r3 .ws-card-r {
+  color: var(--ws-r3);
+}
+
+.ws-card-lvl {
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.ws-card-fx {
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.ws-choice-btns .g-btn {
+  padding: 4px;
+  gap: 6px;
+  font-size: 13px;
+}
+
+/* On the narrow outer screen the three buttons under the cards go without icons. */
+@media (max-width: 420px) {
+  .ws-choice-btns .g-btn svg {
+    display: none;
+  }
+}
+
+.ws-choice-btns .g-btn svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+.ws-choice-btns .g-btn.on {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.ws-hp {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ws-hp .g-progress > i {
+  background: var(--ws-hp);
+}
+
+.ws-build {
+  max-height: 34vh;
+  overflow: auto;
+}
+
+.ws-result {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.ws-result.won {
+  color: var(--ok);
+}
+
+.ws-result.lost {
+  color: var(--danger);
+}
+
+.ws-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Wide screens (the inner screen of the Fold): the cards in a row, the panel wider. */
+@media (min-width: 700px) {
+  .ws-choice {
+    max-width: 760px;
+  }
+
+  .ws-cards {
+    flex-direction: row;
+  }
+
+  .ws-card {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 150px;
+  }
+
+  .ws-panel {
+    max-width: 600px;
+  }
+}

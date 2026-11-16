@@ -1,0 +1,27 @@
+JOB SCHEDULER (dumpsys jobscheduler)
+  Settings:
+    min_ready_non_active_jobs_count=5
+    max_non_active_job_batch_delay_ms=1860000
+  Registered 212 jobs:
+    JOB #u0a160/1001: 2b7e1c com.google.android.gms/.gcm.GcmTaskService
+      u0a160 tag=*job*/com.google.android.gms/.gcm.GcmTaskService
+      Source: uid=u0a160 user=0 pkg=com.google.android.gms
+  Recently completed jobs:
+    -10m3s200ms
+      8f1c2a #u0a160/1001 com.google.android.gms/.gcm.GcmTaskService
+        Source: uid=u0a160 user=0 pkg=com.google.android.gms
+        Reason: successful_finish
+    -1h20m5s0ms
+      7a2b3c #u0a245/77 ru.marketplace.app/.SyncJobService
+        Source: uid=u0a245 user=0 pkg=ru.marketplace.app
+    -3h15m0s0ms
+      6b3c4d #u0a245/77 ru.marketplace.app/.SyncJobService
+        Source: uid=u0a245 user=0 pkg=ru.marketplace.app
+    -5h2m0s0ms
+      5c4d5e #u0a160/1002 com.google.android.gms/.chimera.GmsIntentOperationService
+        Source: uid=u0a160 user=0 pkg=com.google.android.gms
+    -9h0m0s0ms
+      4d5e6f #u0a301/5 org.telegram.messenger/.NotificationsService
+        Source: uid=u0a301 user=0 pkg=org.telegram.messenger
+  Pending queue:
+    1 jobs

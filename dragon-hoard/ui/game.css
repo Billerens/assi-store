@@ -1,0 +1,856 @@
+/* The field of «Сокровищница дракона»; the frame (bar, sheets, buttons) is engine/game.css.
+   Dark ground, grey cards without shadows; gold is the only warm accent. */
+html:root {
+  --accent: #E0B252;
+  --accent-ink: #1C1608;
+  --accent-soft: rgba(224, 178, 82, .16);
+  --dh-gold: #E0B252;
+  --dh-gold-2: #B98A35;
+  --dh-gold-3: #8E6826;
+}
+
+/* The field: the lair, the duel bar, the event card and the panel of the tab under them. */
+.dh-main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  min-height: 0;
+}
+
+.g-field {
+  overflow: hidden;
+}
+
+.dh-scene {
+  position: relative;
+  flex: none;
+  height: 150px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface-2), var(--surface) 55%);
+  overflow: hidden;
+}
+
+.dh-scene svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dh-cave {
+  fill: var(--bg);
+}
+
+.dh-ground {
+  fill: var(--surface-2);
+}
+
+.dh-road {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.dh-c1 {
+  fill: var(--dh-gold);
+}
+
+.dh-c2 {
+  fill: var(--dh-gold-2);
+}
+
+.dh-c3 {
+  fill: var(--dh-gold-3);
+}
+
+.dh-spark {
+  fill: #FFF3D1;
+}
+
+.dh-strata {
+  fill: none;
+  stroke: var(--surface);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.dh-rock {
+  fill: var(--surface-2);
+  stroke: var(--line);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+
+.dh-rim {
+  fill: none;
+  stroke: var(--dh-gold-3);
+  stroke-width: .8;
+}
+
+.dh-jewel {
+  fill: #7FD0D6;
+  stroke: #3F8C96;
+  stroke-width: .8;
+  stroke-linejoin: round;
+}
+
+/* The dragon: one tone for the body, a darker one for the wing and the tail; the kind gives the hue. */
+.dh-dragon {
+  --dh-skin: #8B93A1;
+  --dh-skin-2: #5E6572;
+  fill: var(--dh-skin);
+}
+
+.dh-dragon.sp-ice {
+  --dh-skin: #7FD0D6;
+  --dh-skin-2: #3F8C96;
+}
+
+.dh-dragon.sp-storm {
+  --dh-skin: #A58BE0;
+  --dh-skin-2: #6A54A6;
+}
+
+.dh-dragon.sp-sand {
+  --dh-skin: #D9B36A;
+  --dh-skin-2: #8E6826;
+}
+
+.dh-dragon.sp-sea {
+  --dh-skin: #4FA3AD;
+  --dh-skin-2: #2B5E66;
+}
+
+.dh-dragon.sp-shadow {
+  --dh-skin: #4A505A;
+  --dh-skin-2: #2B2F37;
+}
+
+.dh-dragon .dh-wing,
+.dh-dragon .dh-tail {
+  fill: var(--dh-skin-2);
+}
+
+.dh-dragon .dh-horn {
+  fill: #FFF3D1;
+}
+
+.dh-dragon.curled {
+  opacity: .92;
+}
+
+.dh-eye {
+  fill: var(--dh-gold);
+}
+
+.dh-knight .k-spear {
+  fill: none;
+  stroke: #A9744D;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.dh-knight .k-tip,
+.dh-knight .k-helm {
+  fill: #B4BAC4;
+}
+
+.dh-knight .k-body,
+.dh-knight .k-shield {
+  fill: #7A818D;
+}
+
+.dh-knight .k-leg {
+  fill: #4A505A;
+}
+
+.dh-knight .k-visor {
+  fill: #23272E;
+}
+
+.dh-knight .k-plume {
+  fill: var(--dh-gold);
+}
+
+.dh-knight.danger .k-plume,
+.dh-knight.danger .k-shield {
+  fill: var(--danger);
+}
+
+/* The age, the gems and the Antiquity under the pile: small pictures with their numbers. */
+.dh-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+
+.dh-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dh-chip-art {
+  flex: none;
+  display: flex;
+}
+
+.dh-chip-art svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.dh-over {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  right: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.dh-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dh-tag.warm {
+  background: var(--accent-soft);
+  color: var(--dh-gold);
+}
+
+.dh-tag.bad {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* The golden rain: coins fall over the scene, a tap catches one. */
+.dh-coin {
+  position: absolute;
+  top: -48px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--dh-gold);
+  animation: dh-fall 2.6s linear forwards;
+}
+
+.dh-coin svg.i {
+  width: 34px;
+  height: 34px;
+}
+
+@keyframes dh-fall {
+  to {
+    transform: translateY(240px);
+  }
+}
+
+/* «Сила дракона vs следующий рыцарь». */
+.dh-duel {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dh-duel-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dh-duel-row .p {
+  flex: none;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.dh-duel-row .p.bad {
+  color: var(--danger);
+}
+
+.dh-duel-row .p.good {
+  color: var(--dh-gold);
+}
+
+.dh-bar {
+  position: relative;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--danger-soft);
+  overflow: hidden;
+}
+
+.dh-bar > i {
+  display: block;
+  height: 100%;
+  width: 50%;
+  background: var(--dh-gold);
+}
+
+.dh-bar > b {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: var(--bg);
+}
+
+.dh-who-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dh-who-art {
+  flex: none;
+  display: flex;
+}
+
+.dh-who {
+  flex: 1;
+  min-width: 0;
+  color: var(--ink-2);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+/* A drawn picture in its frame: a servant, a hall, a trophy. Locked — dimmed, a lock in the corner;
+   got — a gold frame. */
+.dh-art {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.dh-art > svg {
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+
+.dh-art.sm {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+}
+
+.dh-art.sm > svg {
+  width: 28px;
+  height: 28px;
+}
+
+.dh-art.got {
+  border-color: var(--dh-gold-3);
+  background: var(--accent-soft);
+}
+
+.dh-art.locked > svg {
+  opacity: .38;
+  filter: grayscale(1);
+}
+
+.dh-art > i {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+}
+
+.dh-art > i > svg {
+  display: block;
+  width: 13px;
+  height: 13px;
+}
+
+/* A line of the panel with its picture: what a number means, what opens next. */
+.dh-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px 6px 6px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.dh-info > :last-child {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.dh-info.locked {
+  border-style: dashed;
+}
+
+/* An event that waits for an answer. */
+.dh-event {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--dh-gold-3);
+  background: var(--accent-soft);
+}
+
+.dh-event[hidden] {
+  display: none;
+}
+
+.dh-event-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dh-event-head .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.dh-event-art {
+  flex: none;
+  display: flex;
+}
+
+.dh-event .t {
+  font-weight: 700;
+}
+
+.dh-event .x {
+  font-size: 15px;
+}
+
+/* The panel of a tab: a list that scrolls by itself. */
+.dh-panel {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* A line keeps its own height: long texts wrap, the list scrolls. */
+.dh-panel > * {
+  flex: none;
+}
+
+.dh-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  color: var(--dh-gold);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.dh-h::after {
+  content: "";
+  flex: 1;
+  min-width: 12px;
+  height: 1px;
+  background: var(--line);
+}
+
+.dh-note {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.dh-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 62px;
+  padding: 7px 12px 7px 7px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  text-align: left;
+}
+
+/* Out of reach: the texts fade, the picture and the frame stay readable. */
+.dh-row:disabled .grow,
+.dh-row:disabled .r {
+  opacity: .55;
+}
+
+.dh-row.done {
+  border-color: var(--dh-gold-3);
+}
+
+.dh-row.done .r {
+  color: var(--dh-gold);
+}
+
+.dh-row:active:not(:disabled) {
+  background: var(--surface-2);
+}
+
+.dh-row.on {
+  border-color: var(--dh-gold-3);
+}
+
+.dh-row .grow {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.dh-row .t {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dh-row .s {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.dh-row .r {
+  flex: none;
+  max-width: 38%;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.dh-row:not(:disabled) .r:not(:empty) {
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--dh-gold);
+}
+
+.dh-row .r.warm {
+  color: var(--dh-gold);
+}
+
+.dh-row svg.i {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  color: var(--ink-2);
+}
+
+.dh-seg {
+  display: flex;
+  gap: 6px;
+}
+
+.dh-seg > button {
+  flex: 1;
+  min-height: 44px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.dh-seg > button.on {
+  border-color: transparent;
+  background: var(--accent-soft);
+  color: var(--dh-gold);
+}
+
+.dh-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 62px;
+  padding: 7px 12px 7px 7px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 15px;
+}
+
+.dh-toggle .t {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dh-toggle .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.dh-trophies {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.dh-trophy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 60px;
+  padding: 6px 8px 6px 6px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 15px;
+}
+
+.dh-trophy.got {
+  border-color: var(--dh-gold-3);
+}
+
+.dh-trophy.miss {
+  border-style: dashed;
+  background: var(--bg);
+  color: var(--ink-3);
+}
+
+.dh-trophy .grow {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.dh-trophy .dh-art {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+}
+
+.dh-trophy .dh-art > svg {
+  width: 30px;
+  height: 30px;
+}
+
+.dh-trophy .s {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.dh-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 15px;
+}
+
+.dh-entry .t {
+  font-weight: 600;
+}
+
+.dh-entry.row {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 12px 7px 7px;
+}
+
+.dh-entry.row > .grow {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-wrap: anywhere;
+}
+
+.dh-entry.on {
+  border-color: var(--dh-gold-3);
+}
+
+/* The targets in the sheet «В набег»: the picture on the left of every line. */
+.g-pick > button > .dh-art {
+  margin-left: -6px;
+}
+
+.dh-ballad {
+  color: var(--dh-gold);
+  font-style: italic;
+}
+
+.dh-log {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dh-log .bad {
+  color: var(--danger);
+}
+
+.dh-log .good {
+  color: var(--dh-gold);
+}
+
+/* The strip of the tabs under the panel, then the two big buttons. */
+.dh-tabs {
+  display: flex;
+  gap: 0;
+  margin: 0 -12px;
+}
+
+.dh-tabs > button {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 48px;
+  min-height: 46px;
+  padding: 0 2px;
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--ink-2);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+
+.dh-tabs > button.on {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+.dh-tabs > button.mark::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dh-gold);
+}
+
+.dh-go .g-btn {
+  min-height: 56px;
+}
+
+.dh-go .g-btn.curled {
+  border-color: var(--dh-gold-3);
+  background: var(--accent-soft);
+  color: var(--dh-gold);
+}
+
+/* Wide (the inner screen): the lair with the road on the left, the tabs on the right. */
+.g-app[data-layout="wide"] {
+  grid-template-columns: minmax(0, 1fr) minmax(330px, 45%);
+}
+
+[data-layout="wide"] .dh-main {
+  padding-bottom: 12px;
+}
+
+[data-layout="wide"] .dh-scene {
+  flex: 1;
+  height: auto;
+  min-height: 260px;
+}
+
+[data-layout="wide"] .g-actions {
+  overflow: hidden;
+}
+
+[data-layout="wide"] .dh-side {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+[data-layout="wide"] .dh-tabs {
+  margin: 0;
+}
+
+.dh-side {
+  display: contents;
+}
+
+/* State-driven scene; the original controls remain below or beside it. */
+.dh-scene.dh-world {
+  height:auto;
+  min-height:0;
+  flex:none;
+  aspect-ratio:auto;
+  overflow:hidden;
+  border-radius:20px;
+}
+
+.dh-world>svg {
+  display:none;
+}
+
+.dh-world .g-scene {
+  width:100%;
+  border-radius:inherit;
+  overflow:hidden;
+}
+
+.dh-world .dh-over {
+  z-index:2;
+  pointer-events:none;
+}
+
+
+.g-app:has(.dh-world) .g-field {
+  overflow:auto;
+}
+
+.dh-main:has(.dh-world) {
+  height:auto;
+  min-height:100%;
+}

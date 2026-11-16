@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сериал на ночь</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<style>
+  .page {
+    max-width: 800px;
+  }
+
+  .card,
+  .list {
+    box-shadow: none;
+  }
+
+  .chip {
+    min-height: 44px;
+  }
+
+  h2 {
+    font-size: 17px;
+    margin: 0;
+  }
+
+  .season-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .episode-line {
+    font-size: 18px;
+    color: var(--ink-2);
+    margin-top: 6px;
+    line-height: 1.35;
+  }
+
+  .sub-line {
+    font-size: 14px;
+    color: var(--ink-3);
+    margin-top: 6px;
+  }
+
+  .episode-art {
+    display: block;
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 1;
+    margin-top: 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+
+  .episode-art path {
+    fill: none;
+    stroke: var(--ink-2);
+    stroke-width: 9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .actions {
+    display: grid;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .actions .btn {
+    min-height: 52px;
+  }
+
+  .note {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .note svg.i {
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    flex: none;
+  }
+
+  .note .btn {
+    margin-top: 8px;
+  }
+
+  .writing {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--ink-2);
+    font-size: 14px;
+    margin-top: 12px;
+  }
+
+  .season-row .grow {
+    min-width: 0;
+  }
+
+  .form-label {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin: 14px 0 6px;
+  }
+
+  /* The night light: an almost black screen, one dim line, dim buttons. */
+  body.night {
+    background: #000;
+  }
+
+  body.night .topbar {
+    opacity: .35;
+  }
+
+  .night {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: calc(100vh - 120px);
+    padding: 8px 0 24px;
+  }
+
+  .night-line {
+    color: var(--ink-3);
+    opacity: .7;
+    font-size: 17px;
+    line-height: 1.45;
+    text-align: center;
+    margin-top: 18vh;
+    overflow-wrap: anywhere;
+  }
+
+  .night-phase {
+    color: var(--ink-3);
+    opacity: .55;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .level {
+    height: 3px;
+    margin: 14px auto 0;
+    width: 60%;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, .06);
+    overflow: hidden;
+  }
+
+  .level > div {
+    height: 100%;
+    width: 0;
+    background: var(--ink-3);
+    opacity: .6;
+    transition: width .08s linear;
+  }
+
+  .night-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    opacity: .5;
+  }
+
+  .night-buttons .btn {
+    min-height: 64px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-2);
+  }
+
+  .night-buttons .talk {
+    grid-column: 1 / -1;
+    min-height: 88px;
+    font-size: 18px;
+  }
+
+  .set-group {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-top: 14px;
+  }
+
+  .set-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+  }
+
+  .set-row .grow {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .set-row input.input,
+  .set-row select.input {
+    width: 120px;
+    flex: none;
+  }
+
+  .set-row input.wide-input {
+    width: 100%;
+    flex: 1;
+  }
+
+  .set-stack {
+    display: grid;
+    gap: 6px;
+    padding: 8px 0;
+  }
+
+  .set-stack > span {
+    font-size: 14px;
+  }
+
+  .check-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .sheet-scroll {
+    max-height: 74vh;
+    overflow-y: auto;
+  }
+
+  .recap {
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .recap-title {
+    font-weight: 600;
+  }
+
+  .recap-text {
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.45;
+    margin-top: 4px;
+    white-space: pre-line;
+  }
+
+  .detail-row {
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+  }
+
+  .log-row {
+    font-size: 13px;
+    color: var(--ink-2);
+    padding: 6px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 700px) {
+    .actions {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .actions .primary {
+      grid-column: 1 / -1;
+    }
+
+    .night-buttons {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .night-buttons .talk {
+      grid-column: auto;
+      min-height: 64px;
+      font-size: 16px;
+    }
+  }
+</style>
+<body>
+<main class="page">
+  <header class="topbar">
+    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <h1>Сериал на ночь</h1>
+    <button class="icon-btn" id="openSettings" aria-label="Настройки" data-icon="settings"></button>
+  </header>
+
+  <div id="day" class="section">
+    <div id="tonight"></div>
+    <div id="notes" class="section"></div>
+    <section class="section" id="newBox"></section>
+    <section class="section" id="seasonsBox" hidden>
+      <h2>Другие сезоны</h2>
+      <div class="list" id="seasons"></div>
+    </section>
+  </div>
+
+  <div id="night" class="night" hidden>
+    <div>
+      <div class="night-line" id="nightLine" data-raw></div>
+      <div class="night-phase" id="nightPhase"></div>
+      <div class="level"><div id="levelBar"></div></div>
+    </div>
+    <div class="night-buttons">
+      <button class="btn talk" id="talk" data-icon="mic"><span id="talkLabel">Ответить</span></button>
+      <button class="btn" id="repeat" data-icon="refresh">Повторить</button>
+      <button class="btn" id="pause" data-icon="pause"><span id="pauseLabel">Пауза</span></button>
+      <button class="btn" id="stop" data-icon="stop">Стоп</button>
+    </div>
+  </div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script>
+  // The episode plays in the engine (story-engine/voice.js); this screen shows its state and sends
+  // commands. During an episode it is a night light and may be turned off.
+  const h = ui.h;
+  const MAIN = 'modules/bedtime-series/main.js';
+  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const $ = id => document.getElementById(id);
+  const PHASES = {
+    starting: 'Начинаю',
+    speaking: 'Рассказчик говорит',
+    listening: 'Слушаю ваш выбор',
+    waiting: 'Нажмите «Ответить»',
+    thinking: 'Думаю',
+    paused: 'Пауза',
+    idle: 'Остановлено'
+  };
+
+  let status = null;
+  let voice = { running: false, phase: 'idle' };
+  let form = { genre: 'city', tone: 'warm', minutes: 10, custom: '' };
+  let waitingSeason = null;
+  let visible = true;
+
+  function note(icon, text, button) {
+    return h('div', { class: 'note' }, ui.icon(icon), h('div', {}, h('div', {}, text), button || null));
+  }
+
+  function permissionButton(name, title) {
+    return h('button', { class: 'btn small', onclick: async () => {
+      const ok = await call('askPermission', name);
+      ui.toast(ok ? 'Разрешено' : 'Не разрешено');
+      refresh();
+    } }, title);
+  }
+
+  // ---- the evening view ---------------------------------------------------------------------------------
+
+  /** The episode's picture in strokes by «Рисуй — угадаю» (field 1000×1000). */
+  function artOf(art) {
+    const NS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 1000 1000');
+    svg.setAttribute('class', 'episode-art');
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', 'Рисунок к серии');
+    art.strokes.forEach(d => {
+      const path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', d);
+      svg.appendChild(path);
+    });
+    return svg;
+  }
+
+  function renderTonight() {
+    const box = $('tonight');
+    const season = status.season;
+    if (!season) {
+      box.replaceChildren(h('div', { class: 'card' },
+        h('div', { class: 'season-title' }, 'Сериал на ночь'),
+        h('div', { class: 'episode-line' }, 'Каждый вечер — новая серия истории голосом. Вы — герой, в сюжете — детали вашего дня, на развилках вы выбираете голосом, а уснуть можно посреди серии.')));
+      return;
+    }
+    const next = status.next || {};
+    const children = [h('div', { class: 'season-title', 'data-raw': '' }, season.title)];
+    if (next.episode) {
+      children.push(h('div', { class: 'episode-line', 'data-raw': '' },
+        ui.t('Серия {} из {}', next.episode, season.episodes) + (next.title ? ': «' + next.title + '»' : '')));
+    } else {
+      children.push(h('div', { class: 'episode-line', 'data-raw': '' }, next.why || ''));
+    }
+    if (next.art) children.push(artOf(next.art));
+    if (next.moment) children.push(h('div', { class: 'sub-line', 'data-raw': '' }, ui.t('В прошлый раз вы уснули, {}', next.moment)));
+    if (next.texts) children.push(h('div', { class: 'sub-line' }, next.recorded ? ui.t('Записано облачным голосом: {} из {}', next.recorded, next.texts) : 'Голос телефона: облачная запись ещё не сделана'));
+    if (status.writing) {
+      children.push(h('div', { class: 'writing' }, h('span', { class: 'spinner' }),
+        h('span', {}, ui.t('Пишется серия {}, попытка {}', status.writing.episode, status.writing.attempt))));
+    } else if (season.lastError && !next.episode) {
+      children.push(h('div', { class: 'writing' }, ui.icon('info'), h('span', { 'data-raw': '' }, season.lastError)));
+    }
+    if (status.rendering) children.push(h('div', { class: 'writing' }, h('span', { class: 'spinner' }), h('span', {}, 'Записывается голос')));
+
+    const actions = [];
+    if (next.mode === 'ask') {
+      actions.push(h('button', { class: 'btn primary', onclick: () => play('continue') }, ui.icon('play'), 'Продолжить, где уснули'));
+      actions.push(h('button', { class: 'btn', onclick: () => play('new') }, ui.icon('star'), 'Новая серия'));
+    } else if (next.mode) {
+      actions.push(h('button', { class: 'btn primary', onclick: () => play() }, ui.icon('play'), next.mode === 'new' ? 'Слушать' : 'Продолжить'));
+    } else if (status.canWrite) {
+      actions.push(h('button', { class: 'btn primary', onclick: writeNow }, ui.icon('refresh'), 'Написать серию сейчас'));
+    }
+    if (season.listened || (next.episode && next.episode > 1)) {
+      actions.push(h('button', { class: 'btn', onclick: openRecaps }, ui.icon('book'), 'Пересказ прошлых серий'));
+    }
+    actions.push(h('button', { class: 'btn', onclick: openSettings }, ui.icon('settings'), 'Настройки'));
+    children.push(h('div', { class: 'actions' }, actions));
+    box.replaceChildren(h('div', { class: 'card' }, children));
+  }
+
+  function renderNotes() {
+    const list = [];
+    if (!status.speech.ready) list.push(note('mic', 'Распознавание речи на телефоне не скачано. Его ставят в настройках голоса Assi — без него рассказчик не услышит ваш выбор.'));
+    if (!status.permissions.microphone) list.push(note('mic', 'На развилках отвечают голосом — нужен микрофон.', permissionButton('RECORD_AUDIO', 'Разрешить микрофон')));
+    if (!status.write.ok) list.push(note('info', ui.t('Серии пишет модель «Сериал на ночь: серии». Сейчас она недоступна: {}.', status.write.why)));
+    if (status.season && !status.permissions.calendar) list.push(note('book', 'Чтобы в сюжет попадали события дня, нужен доступ к календарю. Без него — только остальные источники из настроек.', permissionButton('READ_CALENDAR', 'Разрешить календарь')));
+    if (status.season) {
+      list.push(note('info', ui.t('Серия готовится в {}, напоминание — в {}.', status.schedule.prepareAt, status.schedule.remindAt),
+        h('button', { class: 'btn small', onclick: openPreview }, 'Что сегодня попадёт в серию')));
+    }
+    if (status.liveMode) list.push(note('mic', 'Включён живой режим: серию ведёт агент-рассказчик, его можно перебить голосом. Записанного голоса и точной длины в нём нет.'));
+    $('notes').replaceChildren(...list);
+  }
+
+  function chips(list, value, pick) {
+    return h('div', { class: 'chips' }, list.map(item => h('button', {
+      class: 'chip' + (item.id === value ? ' on' : ''),
+      onclick: () => pick(item.id)
+    }, item.title)));
+  }
+
+  function renderNew() {
+    const box = $('newBox');
+    const season = status.season;
+    const open = !season || season.finishedAt || box.dataset.open === '1';
+    if (!open) {
+      box.replaceChildren(h('button', { class: 'btn wide', onclick: () => {
+        box.dataset.open = '1';
+        renderNew();
+      } }, ui.icon('plus'), 'Новый сезон'));
+      return;
+    }
+    const custom = h('input', { class: 'input', maxlength: 300, value: form.custom, placeholder: 'Например: ночной паром между островами, где у каждого острова свои часы' });
+    custom.oninput = () => { form.custom = custom.value; };
+    const repaint = () => renderNew();
+    box.replaceChildren(...[
+      h('h2', {}, season && season.finishedAt ? 'Сезон досмотрен. Новый сезон' : 'Новый сезон'),
+      h('div', { class: 'form-label' }, 'Жанр'),
+      chips(status.genres, form.genre, id => { form.genre = id; repaint(); }),
+      form.genre === 'custom' ? h('label', { class: 'field' }, h('span', {}, 'О чём сезон'), custom) : null,
+      h('div', { class: 'form-label' }, 'Тон'),
+      chips(status.tones, form.tone, id => { form.tone = id; repaint(); }),
+      h('div', { class: 'form-label' }, 'Длина серии'),
+      chips([{ id: 10, title: '10 минут' }, { id: 15, title: '15 минут' }], form.minutes, id => { form.minutes = id; repaint(); }),
+      h('div', { class: 'form-label' }, ui.t('Серий в сезоне: {}', status.episodesPerSeason)),
+      h('button', { class: 'btn primary wide', onclick: startSeason }, ui.icon('play'), 'Начать сезон'),
+      season && !season.finishedAt ? h('button', { class: 'btn wide', onclick: () => {
+        box.dataset.open = '';
+        renderNew();
+      } }, 'Отмена') : null
+    ].filter(child => child !== null && child !== undefined));
+  }
+
+  function renderSeasons() {
+    const others = status.seasons.filter(s => !status.season || s.id !== status.season.id);
+    $('seasonsBox').hidden = !others.length;
+    $('seasons').replaceChildren(...others.map(s => h('div', { class: 'row season-row' },
+      h('div', { class: 'grow' },
+        h('div', { class: 'truncate', style: 'font-weight: 600', 'data-raw': '' }, s.title),
+        h('div', { class: 'small muted truncate', 'data-raw': '' }, ui.t('{}: прослушано {} из {}', s.genreTitle || s.custom, s.listened, s.episodes))),
+      h('button', { class: 'icon-btn', 'aria-label': 'Сделать текущим', onclick: async () => {
+        await call('selectSeason', s.id);
+        refresh();
+      } }, ui.icon('play')),
+      h('button', { class: 'icon-btn', 'aria-label': 'Удалить сезон', onclick: async () => {
+        if (!(await ui.confirm(ui.t('Удалить сезон «{}» со всеми сериями и записями?', s.title), 'Удалить', true))) return;
+        await call('removeSeason', s.id);
+        refresh();
+      } }, ui.icon('trash')))));
+  }
+
+  // ---- the night light ----------------------------------------------------------------------------------
+
+  function renderNight() {
+    const info = voice.info || {};
+    const parts = [];
+    if (info.episode) parts.push(ui.t('Серия {}', info.episode) + (info.title ? ': «' + info.title + '»' : ''));
+    if (info.scene) parts.push(ui.t('сцена {}', info.scene));
+    $('nightLine').textContent = parts.join(' · ') || ui.t('Сериал на ночь');
+    const phase = voice.phase || 'idle';
+    $('nightPhase').textContent = ui.t(PHASES[phase] || phase) + (voice.error ? ' · ' + voice.error : '');
+    $('talkLabel').textContent = phase === 'listening' ? ui.t('Готово') : ui.t('Ответить');
+    $('pauseLabel').textContent = phase === 'paused' ? ui.t('Дальше') : ui.t('Пауза');
+    if (phase !== 'listening') $('levelBar').style.width = '0';
+  }
+
+  function show() {
+    const playing = !!voice.running;
+    document.body.classList.toggle('night', playing);
+    $('day').hidden = playing;
+    $('night').hidden = !playing;
+    if (playing) renderNight();
+    else if (status && status.engine) {
+      renderTonight();
+      renderNotes();
+      renderNew();
+      renderSeasons();
+    }
+  }
+
+  function renderMissing() {
+    $('night').hidden = true;
+    $('day').replaceChildren(h('div', { class: 'card' },
+      h('div', { class: 'season-title' }, 'Нужен голосовой движок'),
+      h('div', { class: 'episode-line', 'data-raw': '' }, status.why)));
+  }
+
+  async function refresh() {
+    status = await call('status');
+    if (!status.engine) return renderMissing();
+    voice = status.voice || { running: false };
+    show();
+  }
+
+  async function play(from) {
+    const out = await call('play', from ? { from } : {});
+    if (!out.ok) {
+      ui.toast(out.why);
+      return refresh();
+    }
+    if (out.live) {
+      ui.toast('Живой режим: скажите «начинай»');
+      return refresh();
+    }
+    voice = out.state;
+    show();
+  }
+
+  async function writeNow() {
+    ui.toast('Пишется серия — минута-две');
+    const out = await call('prepare', 'button', true);
+    if (out.skipped) ui.toast(out.skipped);
+    else if (out.busy) ui.toast('Серия уже пишется');
+    else if (out.error) ui.toast(out.error);
+    else ui.toast(ui.t('Серия {} готова', out.written));
+    refresh();
+  }
+
+  async function startSeason() {
+    if (form.genre === 'custom' && !form.custom.trim()) {
+      ui.toast('Опишите в двух словах, о чём сезон');
+      return;
+    }
+    try {
+      const out = await call('startSeason', { genre: form.genre, custom: form.custom, tone: form.tone, minutes: form.minutes });
+      $('newBox').dataset.open = '';
+      if (!out.ok) ui.toast(out.why);
+      else {
+        waitingSeason = out.season;
+        ui.toast('Пишется первая серия — это займёт минуту-две');
+      }
+      refresh();
+    } catch (error) {
+      ui.toast(error.message);
+    }
+  }
+
+  // ---- sheets ------------------------------------------------------------------------------------------
+
+  async function openRecaps() {
+    const got = await call('recaps');
+    const body = [h('h3', { 'data-raw': '' }, got.season || 'Пересказ')];
+    if (!got.items.length) body.push(h('p', { class: 'muted' }, 'Пересказывать пока нечего.'));
+    got.items.forEach(item => body.push(h('div', { class: 'recap' },
+      h('div', { class: 'recap-title', 'data-raw': '' }, ui.t('Серия {}', item.episode) + (item.title ? ': «' + item.title + '»' : '')),
+      h('div', { class: 'recap-text', 'data-raw': '' }, item.summary))));
+    if (got.items.length) {
+      body.push(h('button', { class: 'btn wide', onclick: async () => {
+        const out = await call('sayRecaps', 3);
+        ui.toast(out.ok ? 'Читаю вслух последние серии' : out.why);
+      } }, ui.icon('play'), 'Прочитать вслух'));
+    }
+    ui.sheet(h('div', { class: 'sheet-scroll' }, body));
+  }
+
+  async function openPreview() {
+    const got = await call('preview');
+    const body = [h('h3', {}, 'Что сегодня попадёт в серию')];
+    body.push(h('p', { class: 'small muted' }, 'Это уйдёт облачной модели вместе с заданием. Чужие имена, адреса, телефоны и почта уже вырезаны; люди — только из вашего списка.'));
+    if (!got.details.length) body.push(h('p', { class: 'muted' }, 'Сегодня деталей нет — серия обойдётся без них.'));
+    got.details.forEach(detail => body.push(h('div', { class: 'detail-row', 'data-raw': '' }, detail.text)));
+    if (got.removed) body.push(h('p', { class: 'small muted' }, ui.t('Скрыто имён: {}', got.removed)));
+    body.push(h('p', { class: 'small muted' }, got.people.length ? ui.t('Можно упоминать: {}', got.people.join(', ')) : 'Список людей пуст — имён в серии не будет. Его ведут в настройках.'));
+    ui.sheet(h('div', { class: 'sheet-scroll' }, body));
+  }
+
+  function settingInput(row, save) {
+    if (row.type === 'boolean') {
+      const box = h('input', { type: 'checkbox', class: 'switch', checked: !!row.value, 'aria-label': row.title });
+      box.onchange = () => save(box.checked);
+      return box;
+    }
+    if (row.type === 'time') {
+      const input = h('input', { class: 'input', type: 'time', value: row.value, 'aria-label': row.title });
+      input.onchange = () => save(input.value);
+      return input;
+    }
+    if (row.options) {
+      const select = h('select', { class: 'input', 'aria-label': row.title },
+        row.options.map(([id, title]) => h('option', { value: id, selected: id === row.value }, title)));
+      select.onchange = () => save(select.value);
+      return select;
+    }
+    if (row.type === 'string') {
+      const input = h('input', { class: 'input wide-input', value: row.value, 'aria-label': row.title });
+      input.onchange = () => save(input.value);
+      return input;
+    }
+    const input = h('input', { class: 'input', type: 'number', inputMode: 'decimal', value: row.value, min: row.min, max: row.max, step: row.step || 1, 'aria-label': row.title });
+    input.onchange = async () => {
+      await save(input.value);
+      const fresh = (await call('settingsView')).find(one => one.key === row.key);
+      if (fresh) input.value = fresh.value;
+    };
+    return input;
+  }
+
+  function settingRow(row) {
+    const save = async value => {
+      try {
+        await call('saveSettings', { [row.key]: value });
+        ui.toast('Сохранено');
+      } catch (error) {
+        ui.toast(error.message);
+      }
+    };
+    if (row.key === 'sources') {
+      const picked = new Set(row.value);
+      return h('div', { class: 'set-stack' }, h('span', {}, row.title), row.options.map(([id, title]) => {
+        const box = h('input', { type: 'checkbox', class: 'switch', checked: picked.has(id), 'aria-label': title });
+        box.onchange = () => {
+          if (box.checked) picked.add(id);
+          else picked.delete(id);
+          save([...picked]);
+        };
+        return h('label', { class: 'check-row' }, box, h('span', {}, title));
+      }));
+    }
+    if (row.key === 'people') {
+      const input = h('input', { class: 'input', value: row.value.join(', '), placeholder: 'Петя, мама, Оля', 'aria-label': row.title });
+      input.onchange = () => save(input.value);
+      return h('label', { class: 'set-stack' }, h('span', {}, row.title), input);
+    }
+    if (row.type === 'string') return h('label', { class: 'set-stack' }, h('span', {}, row.title), settingInput(row, save));
+    return h('label', { class: 'set-row' }, h('span', { class: 'grow' }, row.title), settingInput(row, save));
+  }
+
+  async function openSettings() {
+    const rows = await call('settingsView');
+    const body = [h('h3', {}, 'Настройки')];
+    let group = null;
+    rows.forEach(row => {
+      if (row.group !== group) {
+        group = row.group;
+        body.push(h('div', { class: 'set-group' }, group));
+      }
+      body.push(settingRow(row));
+    });
+    body.push(h('div', { class: 'set-group' }, 'Доступы'));
+    body.push(h('div', { class: 'set-stack' },
+      permissionButton('READ_CALENDAR', status.permissions.calendar ? 'Календарь: разрешён' : 'Разрешить календарь'),
+      permissionButton('READ_CONTACTS', status.permissions.contacts ? 'Контакты: разрешены' : 'Разрешить контакты — чтобы вырезать чужие имена'),
+      h('div', { class: 'small muted' }, 'Имена из контактов никуда не уходят: по ним только вырезаются люди, которых нет в вашем списке.')));
+    body.push(h('div', { class: 'set-group' }, 'Сейчас'));
+    body.push(h('div', { class: 'set-stack' },
+      h('div', { class: 'small muted' }, ui.t('Записи голоса занимают {} МБ', status.audioMb)),
+      h('button', { class: 'btn wide', onclick: async () => {
+        ui.toast('Записываю — это может занять несколько минут');
+        const out = await call('prerenderNow', true);
+        if (out.skipped) ui.toast(out.skipped);
+        else if (out.busy) ui.toast('Запись уже идёт');
+        else ui.toast(ui.t('Записано фраз: {}', out.done) + (out.error ? ' · ' + out.error : ''));
+        refresh();
+      } }, ui.icon('download'), 'Записать голос серии'),
+      h('button', { class: 'btn wide', onclick: writeNow }, ui.icon('refresh'), 'Написать серию сейчас'),
+      h('button', { class: 'btn wide', onclick: async () => {
+        const out = await call('remind', true);
+        ui.toast(out.send ? out.text : out.why);
+      } }, ui.icon('info'), 'Показать напоминание')));
+    const journal = await call('log', 30);
+    body.push(h('div', { class: 'set-group' }, 'Журнал'));
+    body.push(h('div', { 'data-raw': '' }, journal.length ? journal.map(entry => h('div', { class: 'log-row' }, ui.raw(ui.ago(entry.at) + ' — ' + entry.text))) : h('div', { class: 'small muted' }, ui.t('Пока пусто'))));
+    body.push(h('p', { class: 'small muted' }, 'Модель, которая пишет серии, выбирается в Настройках Assi, раздел «Кто на какой модели»: «Сериал на ночь: серии». Облачный голос — роль «tts».'));
+    ui.sheet(h('div', { class: 'sheet-scroll' }, body));
+  }
+
+  $('openSettings').onclick = openSettings;
+
+  // ---- the night light's buttons ---------------------------------------------------------------------------
+
+  $('talk').onclick = () => {
+    if (voice.phase === 'listening') call('command', 'release');
+    else call('command', voice.phase === 'paused' ? 'resume' : 'talk');
+  };
+  $('repeat').onclick = () => call('command', 'repeat');
+  $('pause').onclick = () => call('command', voice.phase === 'paused' ? 'resume' : 'pause');
+  $('stop').onclick = () => call('stopPlay');
+
+  // ---- events from the engine ------------------------------------------------------------------------
+
+  assi.on('story.state', state => {
+    if (!state || (state.id && state.id !== 'series')) return;
+    const was = voice.running;
+    voice = state;
+    if (was && !state.running) refresh();
+    else if (visible) show();
+  });
+
+  assi.on('series.state', event => {
+    if (event && event.phase === 'written' && waitingSeason && event.season === waitingSeason && event.episode === 1) {
+      waitingSeason = null;
+      ui.toast('Первая серия готова');
+    }
+    if (event && event.phase === 'failed' && waitingSeason) {
+      waitingSeason = null;
+      ui.toast(ui.t('Серия не написана: {}', event.error || ''));
+    }
+    if (event && event.phase === 'scene') return;
+    if (!voice.running && visible) refresh();
+  });
+
+  assi.on('speech', event => {
+    if (!event || voice.phase !== 'listening' || !visible) return;
+    $('levelBar').style.width = Math.min(100, Math.round((event.level || 0) * 400)) + '%';
+  });
+
+  assi.on('app.visible', event => {
+    visible = !!(event && event.on);
+    if (visible) refresh();
+  });
+
+  refresh().catch(error => ui.toast(error.message));
+</script>
+</body>
+</html>

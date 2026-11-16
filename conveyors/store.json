@@ -1,0 +1,8 @@
+{
+  "id": "conveyors",
+  "kind": "game",
+  "title": "Конвейеры",
+  "target": "modules/games/conveyors",
+  "requires": [],
+  "shell": []
+}

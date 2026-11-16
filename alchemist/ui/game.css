@@ -1,0 +1,583 @@
+/* The field of «Алхимик»: the cauldron, the shelf, the pages of the tabs. The frame is engine/game.css. */
+.a-stock {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.a-stock.none {
+  color: var(--accent);
+}
+
+/* ---- the cauldron ---- */
+.a-cauldron {
+  position: relative;
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.a-rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.a-slots {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.a-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 88px;
+  min-height: 84px;
+  padding: 6px;
+  border-radius: var(--radius-s);
+  border: 1px dashed var(--line);
+  background: transparent;
+  color: var(--ink);
+}
+
+.a-slot.full {
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.a-plus {
+  font-size: 22px;
+  color: var(--ink-3);
+}
+
+.a-result {
+  position: relative;
+  margin-top: 8px;
+  min-height: 24px;
+  text-align: center;
+}
+
+.a-result-t {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.a-result.new .a-result-t {
+  color: var(--accent);
+}
+
+.a-result.none .a-result-t,
+.a-result.short .a-result-t {
+  color: var(--ink-2);
+}
+
+.a-result.unknown .a-result-t {
+  color: var(--ink);
+}
+
+.a-tools {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.a-tools:empty {
+  display: none;
+}
+
+.a-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.a-tool.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.a-tool:disabled {
+  opacity: 0.45;
+}
+
+.a-tool svg.i {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---- the shelf ---- */
+.a-filter {
+  display: flex;
+  gap: 8px;
+  margin: 12px -16px 0;
+  padding: 0 16px 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.a-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.a-chip {
+  flex: none;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.a-chip.on {
+  border-color: var(--accent);
+  color: var(--ink);
+  background: var(--accent-soft);
+}
+
+.a-search {
+  flex: none;
+  width: 120px;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.a-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 6px;
+  padding: 10px 0 16px;
+}
+
+.a-grid.small {
+  padding-top: 4px;
+}
+
+.a-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: 108px;
+  padding: 6px 4px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.a-tile.empty {
+  opacity: 0.5;
+}
+
+.a-tile.sel {
+  border-color: var(--ink-3);
+}
+
+.a-tile.lit {
+  border-color: var(--accent);
+}
+
+.a-tile.hint {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.a-name {
+  max-width: 100%;
+  font-size: 15px;
+  line-height: 1.15;
+  text-align: center;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.a-name.muted {
+  color: var(--ink-3);
+}
+
+.a-count {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.a-pointer {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 15px;
+  color: var(--accent);
+}
+
+.a-glyph {
+  display: block;
+  flex: none;
+  width: 48px;
+  height: 48px;
+}
+
+.a-glyph.big {
+  width: 72px;
+  height: 72px;
+}
+
+.a-glyph.small {
+  width: 36px;
+  height: 36px;
+}
+
+.a-glyph svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.a-frame {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 3;
+}
+
+/* ---- pages ---- */
+.a-page {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0 16px;
+}
+
+.a-h {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.a-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.a-card h3 {
+  margin: 0;
+}
+
+.a-desc {
+  margin: 8px 0 0;
+  font-size: 15px;
+}
+
+.a-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.a-rec {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 4px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 15px;
+  text-align: left;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.a-rec.closed {
+  color: var(--ink-3);
+}
+
+.a-rec .grow,
+.a-cube .grow,
+.a-order .grow,
+/* The drawn pictures of the workshop (ui/art.js). */
+.a-pic {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.a-art {
+  display: block;
+}
+
+.a-up.has > .a-pic {
+  border-color: var(--accent);
+}
+
+.a-up .grow,
+.a-sellrow .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.a-cube,
+.a-order,
+.a-up,
+.a-sellrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 64px;
+  padding: 8px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+}
+
+.a-cube.fire {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.a-cube > svg.i {
+  width: 36px;
+  height: 36px;
+}
+
+.a-cube .g-progress,
+.a-order .g-progress {
+  margin-top: 6px;
+}
+
+.a-cube-t {
+  font-size: 15px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.a-order.empty {
+  min-height: 52px;
+  color: var(--ink-2);
+}
+
+.a-mini {
+  flex: none;
+  width: auto;
+  min-width: 88px;
+  max-width: 45%;
+  padding: 6px 12px;
+}
+
+.a-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 55vh;
+  overflow: auto;
+}
+
+/* ---- actions: the panel (wide), the row, the tabs ---- */
+.a-panel {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 8px;
+}
+
+.a-row:empty {
+  display: none;
+}
+
+.a-row > [hidden] {
+  display: none;
+}
+
+.a-row:not(:has(> :not([hidden]))) {
+  display: none;
+}
+
+.a-row .g-btn {
+  min-height: 48px;
+}
+
+.a-tabs {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 6px;
+}
+
+.a-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  min-height: 52px;
+  padding: 4px 0;
+  border-radius: var(--radius-s);
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+}
+
+.a-tab.on {
+  color: var(--ink);
+  background: var(--surface-2);
+}
+
+.a-tab svg.i {
+  width: 22px;
+  height: 22px;
+}
+
+.a-tab-t {
+  max-width: 100%;
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+/* Narrow tabs (the cover screen, the side column when wide): «Цех» instead of «Улучшения». */
+.g-app:not([data-layout="mid"]) .a-tab-t[data-short] {
+  font-size: 0;
+}
+
+.g-app:not([data-layout="mid"]) .a-tab-t[data-short]::after {
+  content: attr(data-short);
+  font-size: 15px;
+}
+
+/* Progressive canvas world;
+ all existing economy panels remain below/beside it. */
+.world-scene {
+min-width:0;
+max-width:100%;
+margin:0 0 14px;
+overflow:hidden;
+border:1px solid var(--line,#3c514e);
+border-radius:12px;
+background:#14262d;
+color:#dbe9da;
+flex:0 0 auto
+}
+
+.world-scene-tabs {
+display:flex;
+gap:5px;
+padding:7px;
+background:#10232b
+}
+
+.world-scene-tabs button {
+flex:1;
+min-height:40px;
+min-width:0;
+padding:8px 12px;
+border:1px solid #567265;
+border-radius:7px;
+background:transparent;
+color:#cedcce;
+font:inherit;
+font-size:13px;
+cursor:pointer
+}
+
+.world-scene-tabs button[aria-pressed=true] {
+background:#c0d8ba;
+color:#183e34;
+border-color:#c0d8ba
+}
+
+.world-scene-tabs button:focus-visible {
+outline:3px solid #e9cc91;
+outline-offset:2px
+}
+
+.world-scene-stage {
+min-width:0;
+line-height:0
+}
+.world-scene .g-scene {
+border:0;
+border-radius:0;
+margin:0
+}
+.world-scene canvas {
+display:block;
+width:100%;
+height:auto
+}
+
+.world-scene-caption {
+margin:0;
+padding:10px 13px;
+background:#10232b;
+color:#b6d0be;
+font-size:12px;
+line-height:1.5;
+overflow-wrap:anywhere
+}
+
+@media(max-width:420px) {
+.world-scene-tabs button {
+min-height:42px;
+font-size:12px
+}
+.world-scene-caption {
+font-size:11px;
+padding:9px 11px
+}
+
+}
+
+.a-rings[hidden] {
+display:none
+}
+.a-has-world .world-scene {
+margin-bottom:16px
+}
+.a-has-world {
+padding:8px
+}

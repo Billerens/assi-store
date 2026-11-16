@@ -1,0 +1,217 @@
+{
+  "format": 1,
+  "game": "merge-forge",
+  "ver": 2,
+  "seq": 29,
+  "created": 1794816000000,
+  "savedAt": 1794816000000,
+  "lastTick": 1794816000000,
+  "run": {
+    "gold": "1.9996778e7",
+    "earned": "0e0",
+    "grid": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "pending": [],
+    "up": {},
+    "runes": [],
+    "forgeT": 8,
+    "appT": 0,
+    "tapBudget": 4,
+    "taps": 0,
+    "wave": 49,
+    "hp": "8e0",
+    "hpMax": "8e0",
+    "bossT": 0,
+    "farm": false,
+    "maxWave": 65,
+    "volleyT": 1,
+    "volleys": 0,
+    "crits": [],
+    "walkT": 4,
+    "lastHit": "0e0",
+    "lastGold": "0e0",
+    "lastBoss": null,
+    "farmRate": "1.28007181329e0",
+    "eventT": 357.8380328323692,
+    "event": null,
+    "stormLeft": 0,
+    "starfallUntil": 0,
+    "cryUntil": 0,
+    "cryReadyAt": 0,
+    "bellowsUntil": 0,
+    "orderPaid": null,
+    "stats": {
+      "forged": 0,
+      "merged": 0,
+      "sold": 0,
+      "kills": 0,
+      "bosses": 0,
+      "fails": 0,
+      "events": 0
+    },
+    "outpost": {
+      "equipment": {
+        "bran": {
+          "level": 9,
+          "temper": "fire"
+        },
+        "veya": {
+          "level": 8,
+          "temper": ""
+        }
+      },
+      "rack": [],
+      "cooldowns": {
+        "bran": 18,
+        "veya": 0,
+        "dragon": 0
+      },
+      "pet": {
+        "heat": 0,
+        "merges": 0
+      },
+      "dragon": {
+        "anchorLevel": 1,
+        "queue": [
+          {
+            "level": 7,
+            "left": 20
+          }
+        ],
+        "charge": 72
+      }
+    },
+    "ownerExtension": {
+      "sentinel": "preserve v2 additions"
+    },
+    "encounterSerial": 1,
+    "encounter": {
+      "serial": 1,
+      "kind": "regenerator",
+      "walkTotal": 4,
+      "prepared": "",
+      "aim": false,
+      "pending": [
+        {
+          "ok": true,
+          "id": "bran",
+          "damage": "2.30206775343e3",
+          "temper": "fire",
+          "breakArmor": true,
+          "slowSec": 0,
+          "resonant": false
+        }
+      ],
+      "fireT": 0,
+      "iceT": 0,
+      "weakened": false,
+      "echo": "0e0",
+      "shield": "0e0",
+      "regenLeft": "6.4e-1",
+      "castT": 8
+    }
+  },
+  "layers": {
+    "forge": {
+      "currency": "0e0",
+      "count": 0,
+      "best": "0e0",
+      "state": {
+        "mf": {
+          "team": 1
+        },
+        "paid": 0,
+        "total": 0,
+        "spent": 0,
+        "record": 0
+      }
+    },
+    "star": {
+      "currency": "0e0",
+      "count": 0,
+      "best": "0e0",
+      "state": {}
+    }
+  },
+  "meta": {
+    "album": {
+      "1": 1
+    },
+    "feats": {},
+    "names": {},
+    "bestLevel": 1,
+    "outpost": {
+      "heroes": {
+        "bran": {
+          "unlocked": true,
+          "xp": 120
+        },
+        "veya": {
+          "unlocked": true,
+          "xp": 95
+        }
+      },
+      "selected": "bran",
+      "pet": "fox",
+      "petXp": {
+        "salamander": 0,
+        "fox": 0
+      },
+      "dragon": {
+        "absorbed": "1e5",
+        "fed": 24
+      },
+      "seenWave": 65
+    },
+    "seed": 1831567840,
+    "achievements": {},
+    "applied": [],
+    "stockUsed": [],
+    "taken": {},
+    "stats": {
+      "playMs": 0,
+      "sessions": 0,
+      "offlineMs": 0,
+      "trips": 0
+    },
+    "extraHistory": {
+      "sentinel": 43
+    }
+  },
+  "card": ""
+}

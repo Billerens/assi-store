@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Игра дня</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<style>
+  /* A widget of the home grid (shell home.cards): the frame is the sector (module.json homeSizes
+     2x2, 4x2, 4x3), the home draws the gray plate behind it. So: no own plate, no shadow, the root
+     fills the frame, the layout follows the frame's size. */
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .gc {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 6px;
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.3;
+    user-select: none;
+  }
+
+  /* ---- the head: what this is and which game ---- */
+  .gc-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  .gc-head svg.i {
+    width: 14px;
+    height: 14px;
+    color: var(--accent);
+  }
+
+  .gc-head .gc-when {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gc-stars {
+    display: none;
+    gap: 1px;
+    margin-left: auto;
+    flex: none;
+    color: var(--ink-3);
+  }
+
+  .gc-stars svg.i {
+    width: 14px;
+    height: 14px;
+  }
+
+  .gc-stars .on {
+    color: var(--accent);
+  }
+
+  .gc-stars .on svg.i {
+    fill: currentColor;
+  }
+
+  /* ---- the body: icon, title, pitch, the big action ---- */
+  .gc-main {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 6px;
+    align-items: start;
+    min-height: 0;
+  }
+
+  .gc-tile {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--surface-2);
+    display: grid;
+    place-items: center;
+    color: var(--accent);
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .gc-tile svg.i {
+    width: 22px;
+    height: 22px;
+  }
+
+  .gc-mask {
+    width: 24px;
+    height: 24px;
+    background: var(--accent);
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+  }
+
+  .gc-act {
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  .gc-text {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .gc-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .gc-sub {
+    display: none;
+    margin-top: 3px;
+    font-size: 13px;
+    color: var(--ink-2);
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .gc-error .gc-sub {
+    color: var(--danger);
+  }
+
+  /* The round action: «Играть» (accent), «Повторить» and «Сделать» (quiet). */
+  .gc-btn {
+    width: 48px;
+    height: 48px;
+    flex: none;
+    border: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--accent-ink);
+    display: grid;
+    place-items: center;
+    padding: 0;
+  }
+
+  .gc-btn svg.i {
+    width: 22px;
+    height: 22px;
+  }
+
+  .gc-btn.play svg.i {
+    fill: currentColor;
+    margin-left: 3px;
+  }
+
+  .gc-btn.quiet {
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+
+  .gc-btn:disabled {
+    opacity: .4;
+  }
+
+  .gc-btn-label {
+    display: none;
+  }
+
+  /* ---- the foot: the next game, the work in hand, the drawing of the day ---- */
+  .gc-foot {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .gc-line {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  .gc-line svg.i {
+    width: 14px;
+    height: 14px;
+    flex: none;
+  }
+
+  .gc-line span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gc-bar {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--surface-2);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .gc-bar > div {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--accent);
+    transition: width .6s ease;
+  }
+
+  .gc-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .14), transparent);
+    animation: gc-pass 2.4s ease-in-out infinite;
+  }
+
+  @keyframes gc-pass {
+    from {
+      transform: translateX(-100%);
+    }
+
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  .gc-draw {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 6px 0 10px;
+    border-radius: var(--radius-s);
+    background: var(--surface-2);
+    font-size: 13px;
+    min-width: 0;
+  }
+
+  .gc-draw svg.i {
+    width: 16px;
+    height: 16px;
+    color: var(--accent);
+  }
+
+  .gc-draw .grow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--ink-2);
+  }
+
+  .gc-draw .btn {
+    min-height: 32px;
+    padding: 0 12px;
+    font-size: 13px;
+    background: var(--surface);
+  }
+
+  /* ---- 4×2 and wider: a row — icon, text, action — and the next game below ---- */
+  @media (min-width: 300px) {
+    .gc {
+      padding: 14px 16px;
+      gap: 8px;
+    }
+
+    .gc-main {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-rows: minmax(0, 1fr);
+      column-gap: 12px;
+      align-items: center;
+    }
+
+    .gc-tile {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+    }
+
+    .gc-mask {
+      width: 28px;
+      height: 28px;
+    }
+
+    .gc-text {
+      grid-row: 1;
+      grid-column: 2;
+      align-self: center;
+    }
+
+    .gc-act {
+      grid-row: 1;
+      grid-column: 3;
+    }
+
+    .gc-title {
+      font-size: 17px;
+      -webkit-line-clamp: 1;
+    }
+
+    .gc-sub {
+      display: -webkit-box;
+    }
+
+    .gc-btn {
+      width: 56px;
+      height: 56px;
+    }
+
+    .gc-btn svg.i {
+      width: 24px;
+      height: 24px;
+    }
+
+    .gc-line {
+      display: flex;
+    }
+  }
+
+  /* ---- a wide frame (the unfolded Fold): the action gets its word ---- */
+  @media (min-width: 480px) {
+    .gc-btn.wide {
+      width: auto;
+      padding: 0 22px 0 18px;
+      border-radius: 999px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .gc-btn.wide .gc-btn-label {
+      display: inline;
+    }
+
+    .gc-btn.play.wide svg.i {
+      margin-left: 0;
+    }
+  }
+
+  /* ---- 4×3: the game on top, a full «Играть» under it, the rating and the drawing of the day ---- */
+  @media (min-width: 300px) and (min-height: 230px) {
+    .gc {
+      gap: 10px;
+    }
+
+    .gc-stars {
+      display: flex;
+    }
+
+    .gc-draw {
+      display: flex;
+    }
+
+    .gc-main {
+      grid-template-columns: auto minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      row-gap: 12px;
+      align-items: start;
+      align-content: start;
+    }
+
+    .gc-text {
+      align-self: start;
+    }
+
+    .gc-act {
+      grid-row: 2;
+      grid-column: 1 / -1;
+      justify-self: stretch;
+    }
+
+    .gc-title {
+      font-size: 18px;
+      -webkit-line-clamp: 2;
+    }
+
+    .gc-btn.wide {
+      width: 100%;
+      height: 48px;
+      border-radius: 999px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .gc-btn.wide .gc-btn-label {
+      display: inline;
+    }
+
+    .gc-btn.play.wide svg.i {
+      margin-left: 0;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* A small 2×2 frame: the head says only which game. */
+  @media (max-width: 299px) {
+    .gc-pre {
+      display: none;
+    }
+  }
+
+  /* A short 2×2 frame: the title only. */
+  @media (max-width: 299px) and (max-height: 150px) {
+    .gc-title {
+      -webkit-line-clamp: 1;
+    }
+  }
+</style>
+<body>
+<div class="gc" id="card" aria-live="polite"></div>
+<script src="/ui/kit/kit.js"></script>
+<script>
+  // The widget «Игра дня» on the home screen: the current game and a big «Играть», what the agent is
+  // doing, an error with «Повторить», the next game by the schedule, the drawing of the day.
+  // A tap elsewhere opens the module (the home does it).
+  const h = ui.h;
+  const MAIN = 'modules/game-of-the-day/main.js';
+  const SCREEN = 'modules/game-of-the-day/ui/index.html';
+  let timer = null;
+
+  function stars(n) {
+    const out = [];
+    for (let i = 1; i <= 5; i++) out.push(h('span', { class: i <= n ? 'on' : '' }, ui.icon('star')));
+    return h('span', { class: 'gc-stars', 'aria-label': ui.t('Оценка: {} из 5', n) }, out);
+  }
+
+  function button(kind, icon, label, onclick, disabled) {
+    return h('button', {
+      class: 'gc-btn ' + kind, 'aria-label': label, disabled: !!disabled,
+      onclick: event => {
+        event.stopPropagation();
+        onclick();
+      }
+    }, ui.icon(icon), h('span', { class: 'gc-btn-label' }, label));
+  }
+
+  function tile(card) {
+    if (card.icon) {
+      const mask = h('div', { class: 'gc-mask' });
+      mask.style.webkitMaskImage = 'url("' + card.icon + '")';
+      mask.style.maskImage = 'url("' + card.icon + '")';
+      return h('div', { class: 'gc-tile' }, mask);
+    }
+    const icon = { game: 'play', making: 'spark', error: 'info', waiting: 'clock', off: 'moon', nohub: 'grid' }[card.state] || 'calendar';
+    return h('div', { class: 'gc-tile' }, ui.icon(icon));
+  }
+
+  function line(icon, text) {
+    return h('div', { class: 'gc-line' }, ui.icon(icon), h('span', { 'data-raw': '' }, text));
+  }
+
+  function progress(p) {
+    return h('div', { class: 'gc-bar', role: 'progressbar', 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': Math.round(p.fraction * 100) },
+      h('div', { style: 'width: ' + Math.round(p.fraction * 100) + '%' }));
+  }
+
+  async function makeNow() {
+    try {
+      const out = await assi.call(MAIN, 'makeNow');
+      if (out && out.skipped && ui.toast) ui.toast(out.skipped);
+    } catch (error) {
+      if (ui.toast) ui.toast(error.message);
+    }
+    draw().catch(() => {});
+  }
+
+  function render(card) {
+    const box = document.getElementById('card');
+    const p = card.progress;
+    let title = card.title;
+    let sub = card.text || '';
+    let act = null;
+    const foot = [];
+    box.classList.toggle('gc-error', card.state === 'error');
+
+    if (card.state === 'game') {
+      act = button('play wide', 'play', 'Играть', () => assi.open(card.open));
+      if (card.making && p) {
+        foot.push(line('spark', ui.t('Делается следующая · {} мин', p.minutes)));
+        foot.push(progress(p));
+      } else if (card.error) {
+        foot.push(line('info', ui.t('Следующая не собралась: {}', card.error)));
+      } else if (card.nextText) {
+        foot.push(line('clock', card.nextText));
+      }
+    } else if (card.state === 'making') {
+      title = 'Агент делает игру';
+      sub = p ? ui.t('Работает {} мин из {} · уведомлю, когда будет готова', p.minutes, p.workMinutes) : 'Уведомлю, когда будет готова';
+      if (p) foot.push(progress(p));
+    } else if (card.state === 'error') {
+      title = 'Игра не собралась';
+      sub = card.error || card.text;
+      act = button('quiet wide', 'refresh', 'Повторить', makeNow, !card.canMake);
+      if (card.nextText) foot.push(line('clock', card.nextText));
+    } else if (card.state === 'waiting') {
+      title = 'Ждёт сети';
+      sub = 'Попробую снова, как появится сеть';
+      if (card.nextText) foot.push(line('clock', card.nextText));
+    } else {
+      title = card.state === 'idle' ? 'Игра дня' : card.title;
+      sub = card.text;
+      if (card.state === 'off') foot.push(line('settings', 'Расписание — в настройках модуля'));
+      if (card.state === 'idle') {
+        act = button('quiet wide', 'spark', 'Сделать сейчас', makeNow, !card.canMake);
+        if (card.schedule) foot.push(line('calendar', card.schedule));
+      }
+    }
+
+    const d = card.drawing;
+    if (d && (d.ready || d.text)) {
+      foot.push(h('div', { class: 'gc-draw' },
+        ui.icon('image'),
+        h('span', { class: 'grow', 'data-raw': '' }, d.ready ? (d.played ? 'Рисунок дня разгадан' : 'Рисунок дня ждёт отгадки') : ui.t('Рисунок дня: {}', d.text)),
+        d.ready && !d.played ? h('button', { class: 'btn', onclick: event => {
+          event.stopPropagation();
+          assi.open(d.open);
+        } }, 'Угадать') : null));
+    }
+
+    const head = h('div', { class: 'gc-head' },
+      ui.icon('star'),
+      card.state === 'game' && card.label
+        ? h('span', { class: 'gc-when' }, h('span', { class: 'gc-pre' }, 'Игра дня · '), card.label)
+        : h('span', { class: 'gc-when' }, 'Игра дня'),
+      card.state === 'game' && card.rated ? stars(card.rated) : null);
+    const main = h('div', { class: 'gc-main' },
+      tile(card),
+      h('div', { class: 'gc-text' },
+        h('div', { class: 'gc-title', 'data-raw': '' }, title),
+        sub ? h('div', { class: 'gc-sub', 'data-raw': '' }, sub) : null),
+      act ? h('div', { class: 'gc-act' }, act) : null);
+    box.replaceChildren(head, main, h('div', { class: 'gc-foot' }, foot));
+
+    clearInterval(timer);
+    timer = card.progress ? setInterval(() => draw().catch(() => {}), 30000) : null;
+  }
+
+  async function draw() {
+    render(await assi.call(MAIN, 'homeCard'));
+  }
+
+  assi.on('daily-game.state', () => draw().catch(() => {}));
+  draw().catch(() => {
+    render({ state: 'nohub', title: 'Игра дня', text: 'Не открылась — нажмите, чтобы открыть модуль', open: SCREEN });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+{
+  "count": 2000,
+  "reportOnly": false,
+  "result": {
+    "passed": 6,
+    "failed": []
+  },
+  "reports": {
+    "empty": {
+      "id": "empty",
+      "runs": 2000,
+      "height": 1,
+      "workshop": {},
+      "basement": 527,
+      "spire": 24,
+      "basementPct": 26.35,
+      "spirePct": 1.2,
+      "meanCombatTurns": 3.33575423051783,
+      "battles": 13769,
+      "turns": 45930,
+      "battleKinds": {
+        "normal": {
+          "battles": 12374,
+          "turns": 37318,
+          "meanTurns": 3.0158396638112173
+        },
+        "elite": {
+          "battles": 0,
+          "turns": 0,
+          "meanTurns": null
+        },
+        "boss": {
+          "battles": 1395,
+          "turns": 8612,
+          "meanTurns": 6.17347670250896
+        }
+      },
+      "flightMeanSec": [
+        168.415559772296,
+        176.88721804511277,
+        176.45833333333334
+      ],
+      "meanFullRunSec": 499.875,
+      "meanFloor": 10.2135,
+      "medianFloor": 10,
+      "meanShards": 16.6595,
+      "delaysSec": {
+        "play": 5,
+        "door": 3,
+        "reward": 4,
+        "event": 4,
+        "buy": 3,
+        "next": 2,
+        "continue": 3,
+        "descend": 3,
+        "start": 3,
+        "workshop": 3
+      }
+    },
+    "mid": {
+      "id": "mid",
+      "runs": 2000,
+      "height": 1,
+      "workshop": {
+        "health": 5,
+        "strength": 2,
+        "defense": 2,
+        "agility": 2,
+        "will": 1,
+        "gold": 2,
+        "doors": 1,
+        "memory": 1
+      },
+      "basement": 1552,
+      "spire": 426,
+      "basementPct": 77.60000000000001,
+      "spirePct": 21.3,
+      "meanCombatTurns": 3.4631134606280574,
+      "battles": 25348,
+      "turns": 87783,
+      "battleKinds": {
+        "normal": {
+          "battles": 22159,
+          "turns": 68402,
+          "meanTurns": 3.0868721512703643
+        },
+        "elite": {
+          "battles": 0,
+          "turns": 0,
+          "meanTurns": null
+        },
+        "boss": {
+          "battles": 3189,
+          "turns": 19381,
+          "meanTurns": 6.077453747256193
+        }
+      },
+      "flightMeanSec": [
+        150.87564432989691,
+        179.90145576707727,
+        178.37089201877933
+      ],
+      "meanFullRunSec": 500.3380281690141,
+      "meanFloor": 18.8105,
+      "medianFloor": 17,
+      "meanShards": 48.6675,
+      "delaysSec": {
+        "play": 5,
+        "door": 3,
+        "reward": 4,
+        "event": 4,
+        "buy": 3,
+        "next": 2,
+        "continue": 3,
+        "descend": 3,
+        "start": 3,
+        "workshop": 3
+      }
+    },
+    "max": {
+      "id": "max",
+      "runs": 2000,
+      "height": 1,
+      "workshop": {
+        "health": 10,
+        "strength": 5,
+        "defense": 5,
+        "agility": 5,
+        "will": 3,
+        "gold": 5,
+        "doors": 2,
+        "memory": 2
+      },
+      "basement": 1977,
+      "spire": 1518,
+      "basementPct": 98.85000000000001,
+      "spirePct": 75.9,
+      "meanCombatTurns": 3.249817442103067,
+      "battles": 38344,
+      "turns": 124611,
+      "battleKinds": {
+        "normal": {
+          "battles": 32992,
+          "turns": 94706,
+          "meanTurns": 2.870574684772066
+        },
+        "elite": {
+          "battles": 0,
+          "turns": 0,
+          "meanTurns": null
+        },
+        "boss": {
+          "battles": 5352,
+          "turns": 29905,
+          "meanTurns": 5.587630792227205
+        }
+      },
+      "flightMeanSec": [
+        139.92564491654022,
+        168.7865416436845,
+        175.05533596837944
+      ],
+      "meanFullRunSec": 480.5783926218709,
+      "meanFloor": 27.964,
+      "medianFloor": 30,
+      "meanShards": 92.559,
+      "delaysSec": {
+        "play": 5,
+        "door": 3,
+        "reward": 4,
+        "event": 4,
+        "buy": 3,
+        "next": 2,
+        "continue": 3,
+        "descend": 3,
+        "start": 3,
+        "workshop": 3
+      }
+    },
+    "height12": {
+      "id": "height12",
+      "runs": 2000,
+      "height": 12,
+      "workshop": {
+        "health": 10,
+        "strength": 5,
+        "defense": 5,
+        "agility": 5,
+        "will": 3,
+        "gold": 5,
+        "doors": 2,
+        "memory": 2
+      },
+      "basement": 1211,
+      "spire": 262,
+      "basementPct": 60.550000000000004,
+      "spirePct": 13.100000000000001,
+      "meanCombatTurns": 3.4683788265877817,
+      "battles": 22311,
+      "turns": 77383,
+      "battleKinds": {
+        "normal": {
+          "battles": 19529,
+          "turns": 58794,
+          "meanTurns": 3.010599621076348
+        },
+        "elite": {
+          "battles": 0,
+          "turns": 0,
+          "meanTurns": null
+        },
+        "boss": {
+          "battles": 2782,
+          "turns": 18589,
+          "meanTurns": 6.681883537023724
+        }
+      },
+      "flightMeanSec": [
+        156.97605284888522,
+        175.1818181818182,
+        177.38167938931298
+      ],
+      "meanFullRunSec": 501.62213740458014,
+      "meanFloor": 16.972,
+      "medianFloor": 14,
+      "meanShards": 91.559,
+      "delaysSec": {
+        "play": 5,
+        "door": 3,
+        "reward": 4,
+        "event": 4,
+        "buy": 3,
+        "next": 2,
+        "continue": 3,
+        "descend": 3,
+        "start": 3,
+        "workshop": 3
+      }
+    },
+    "firstRun": {
+      "seed": 1,
+      "sec": 117,
+      "floor": 7,
+      "earnedShards": 8,
+      "cost": 0,
+      "ok": false,
+      "passengerShards": 16
+    },
+    "progression": {
+      "runs": 11,
+      "purchases": 9,
+      "firstBuySec": 142,
+      "firstBasementSec": 1322,
+      "firstHeightSec": 1841,
+      "firstPrestigeSec": 1851.2,
+      "firstHeightTrip25Min": 2,
+      "workshop": {
+        "health": 5,
+        "strength": 2,
+        "defense": 1,
+        "agility": 0,
+        "will": 0,
+        "gold": 1,
+        "doors": 0,
+        "memory": 0
+      }
+    }
+  }
+}

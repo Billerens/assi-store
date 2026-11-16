@@ -1,0 +1,8 @@
+{
+  "id": "spending",
+  "kind": "module",
+  "title": "Траты",
+  "target": "modules/spending",
+  "requires": ["health"],
+  "shell": ["notify.actions", "notice.full", "usage"]
+}

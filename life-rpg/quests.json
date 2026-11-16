@@ -1,0 +1,20 @@
+[
+  {"id": "steps-more", "title": "Пройти {target} шагов — на тысячу больше обычного", "metric": "steps", "op": ">=", "target": "median+1000", "period": "day", "skill": "endurance", "xp": 40},
+  {"id": "steps-goal", "title": "Дойти до цели: {target} шагов", "metric": "steps", "op": ">=", "target": "goal", "period": "day", "skill": "endurance", "xp": 30},
+  {"id": "bed-early", "title": "Отбой до {target}", "metric": "bedtimeMin", "op": "<=", "target": "goal", "format": "time", "period": "day", "skill": "regime", "xp": 30},
+  {"id": "bed-earlier", "title": "Лечь до {target} — на полчаса раньше обычного", "metric": "bedtimeMin", "op": "<=", "target": "median-30", "format": "time", "round": 5, "period": "day", "skill": "regime", "xp": 35},
+  {"id": "night-quiet", "title": "Ни минуты экрана в ночном окне", "metric": "lateMin", "op": "<=", "target": 0, "period": "day", "skill": "regime", "xp": 25},
+  {"id": "water", "title": "Выпить {target} мл воды", "metric": "waterMl", "op": ">=", "target": "goal", "period": "day", "skill": "care", "xp": 20},
+  {"id": "social-less", "title": "Соцсети меньше {target} минут", "metric": "socialMin", "op": "<", "target": "median-15", "min": 15, "period": "day", "skill": "will", "xp": 30},
+  {"id": "workout", "title": "Тренировка от {target} минут", "metric": "workoutMin", "op": ">=", "target": 20, "needActive": 3, "period": "day", "skill": "endurance", "xp": 35},
+  {"id": "focus", "title": "Фокус от {target} минут", "metric": "focusMin", "op": ">=", "target": "median+15", "min": 25, "needActive": 3, "period": "day", "skill": "will", "xp": 30},
+  {"id": "no-spend", "title": "День без трат", "metric": "noSpend", "op": "==", "target": 1, "period": "day", "skill": "household", "xp": 25},
+  {"id": "habit", "title": "Отметить «{habit}»", "metric": "habit", "op": ">=", "target": 1, "period": "day", "skill": "habit", "xp": 20},
+
+  {"id": "new-places", "title": "Открыть {target} новых места за неделю", "metric": "newPlaces", "op": ">=", "target": 2, "period": "week", "agg": "sum", "skill": "exploration", "xp": 120},
+  {"id": "new-cells", "title": "Открыть {target} новых клеток карты за неделю", "metric": "newCells", "op": ">=", "target": "median*7+5", "min": 5, "needActive": 3, "period": "week", "agg": "sum", "skill": "exploration", "xp": 100},
+  {"id": "steps-week", "title": "Пройти {target} шагов за неделю", "metric": "steps", "op": ">=", "target": "median*7*1.1", "period": "week", "agg": "sum", "skill": "endurance", "xp": 120},
+  {"id": "sleep-week", "title": "{times} ночей со сном не меньше цели", "metric": "sleepMin", "op": ">=", "target": "goal", "times": 5, "period": "week", "agg": "days", "skill": "regime", "xp": 120},
+  {"id": "workouts-week", "title": "{times} тренировки за неделю", "metric": "workoutMin", "op": ">", "target": 0, "needActive": 3, "times": 3, "period": "week", "agg": "days", "skill": "endurance", "xp": 100},
+  {"id": "water-week", "title": "Вода не меньше цели {times} дней из семи", "metric": "waterMl", "op": ">=", "target": "goal", "times": 5, "period": "week", "agg": "days", "skill": "care", "xp": 100}
+]

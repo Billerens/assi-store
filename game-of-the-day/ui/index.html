@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Игра дня</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<style>
+  .page {
+    max-width: 1120px;
+  }
+
+  .layout > .col { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  .layout > .col > .section { margin: 0; }
+  .topbar { margin-bottom: 24px; }
+  .card { padding: 20px; }
+  .btn { cursor: pointer; white-space: normal; text-align: center; border: 1px solid var(--line); }
+  .btn.primary { border-color: transparent; }
+  .btn, .chip, .icon-btn, .rate-star { transition: background-color .16s ease, border-color .16s ease, color .16s ease; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .rate-block { display: grid; gap: 10px; margin-top: 20px; }
+  .rate-block > .input { width: 100%; min-width: 0; }
+  .rate-block textarea.input { min-height: 104px; resize: vertical; }
+  .rate-block label { font-size: 14px; font-weight: 600; }
+  .rate-block p { margin: 0; line-height: 1.5; }
+  @media (hover: hover) {
+    .btn:hover, .chip:hover, .icon-btn:hover, .rate-star:hover { background: var(--surface-2); border-color: var(--ink-3); }
+    .btn.primary:hover { background: var(--accent); opacity: .9; }
+  }
+  @media (prefers-reduced-motion: reduce) { .btn, .chip, .icon-btn, .rate-star { transition: none; } }
+
+  .card,
+  .list {
+    box-shadow: none;
+  }
+
+  .chip {
+    min-height: 44px;
+  }
+
+  h2 {
+    font-size: 17px;
+    margin: 0 0 10px;
+  }
+
+  .layout {
+    display: grid;
+    gap: 16px;
+  }
+
+  .day-date {
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+
+  .day-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-top: 4px;
+    overflow-wrap: anywhere;
+  }
+
+  .day-pitch {
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.4;
+    margin-top: 6px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .tag {
+    font-size: 12px;
+    color: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+
+  .state {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.35;
+    margin-top: 12px;
+  }
+
+  .state svg.i {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    margin-top: 1px;
+  }
+
+  .actions {
+    display: grid;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .actions .btn {
+    min-height: 46px;
+    padding: 12px 16px;
+  }
+
+  .stars-line {
+    display: flex;
+    gap: 2px;
+    color: var(--accent);
+    flex: none;
+  }
+
+  .stars-line svg.i {
+    width: 16px;
+    height: 16px;
+  }
+
+  .stars-line .off {
+    color: var(--ink-3);
+  }
+
+  .row-title {
+    font-size: 15px;
+    overflow-wrap: anywhere;
+  }
+
+  .row-sub {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-top: 2px;
+    overflow-wrap: anywhere;
+  }
+
+  .list > .day-row {
+    flex-wrap: wrap;
+  }
+  .day-row > .grow { flex: 1 1 180px; min-width: 0; }
+
+  .row-actions {
+    display: flex;
+    gap: 6px;
+    flex: none;
+    margin-left: auto;
+  }
+
+  .row-actions .icon-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .taste-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 10px;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+  }
+
+  .taste-row:first-child {
+    border-top: 0;
+  }
+
+  .taste-bar {
+    width: 80px;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+
+  .taste-bar > div {
+    height: 100%;
+    background: var(--accent);
+  }
+
+  .taste-score {
+    min-width: 54px;
+    text-align: right;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .taste-list {
+    display: block;
+  }
+
+  .gap-top {
+    margin-top: 12px;
+  }
+
+  .rate-label {
+    text-align: center;
+    min-height: 18px;
+  }
+
+  .week-line {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.4;
+    padding: 4px 0;
+  }
+
+  .rate-stars {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin: 8px 0 4px;
+  }
+
+  .rate-star {
+    width: 52px;
+    height: 52px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--ink-3);
+    display: grid;
+    place-items: center;
+  }
+
+  .rate-star svg.i {
+    width: 30px;
+    height: 30px;
+  }
+
+  .rate-star.on {
+    color: var(--accent);
+  }
+
+  .rate-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  .voice-line {
+    color: var(--ink-2);
+    font-size: 15px;
+    margin: 8px 0;
+    overflow-wrap: anywhere;
+  }
+
+  .set-group {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-top: 14px;
+  }
+
+  .set-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+  }
+
+  .set-row .grow {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .set-row input.input,
+  .set-row select.input {
+    width: 120px;
+    flex: none;
+  }
+
+  .set-row input.input[type="date"] {
+    width: 160px;
+  }
+
+  .set-stack {
+    display: grid;
+    gap: 8px;
+    padding: 8px 0;
+  }
+
+  .link-line {
+    cursor: pointer;
+  }
+
+  .sched-sum {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    margin: 8px 0 12px;
+    border-radius: var(--radius-s);
+    background: var(--surface-2);
+  }
+
+  .sched-sum svg.i {
+    color: var(--accent);
+  }
+
+  .sched-text {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .sched-freq .chip,
+  .sched-week .chip {
+    min-height: 44px;
+  }
+
+  .sched-week {
+    margin-top: 12px;
+  }
+
+  .sched-week .chip {
+    min-width: 48px;
+    justify-content: center;
+  }
+
+  .slots {
+    display: grid;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .slot-row {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) minmax(0, 1fr) 44px;
+    gap: 8px;
+    align-items: end;
+  }
+
+  .slot-row.off {
+    opacity: .45;
+  }
+
+  .slot-n {
+    height: 44px;
+    display: grid;
+    place-items: center;
+    color: var(--ink-3);
+    font-weight: 600;
+  }
+
+  .slot-time {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .slot-cap {
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  .slot-time .input {
+    width: 100%;
+  }
+
+  .slot-gap {
+    width: 44px;
+  }
+
+  .sheet-scroll {
+    max-height: 74vh;
+    overflow-y: auto;
+  }
+
+  .task-text {
+    white-space: pre-wrap;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    overflow-wrap: anywhere;
+  }
+
+  .log-row {
+    font-size: 13px;
+    color: var(--ink-2);
+    padding: 6px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 700px) {
+    .sheet-back { align-items: center; justify-content: center; padding: 24px; }
+    .sheet { max-width: 640px; border-radius: 22px; padding: 24px; }
+    .layout {
+      grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .actions {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .actions .primary {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (min-width: 1000px) {
+    .page { padding: 28px 32px 40px; }
+    .day-title { font-size: 30px; line-height: 1.15; }
+    .actions .btn { min-height: 46px; }
+  }
+</style>
+<body>
+<main class="page">
+  <header class="topbar">
+    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <h1>Игра дня</h1>
+    <button class="icon-btn" id="openSettings" aria-label="Настройки" data-icon="settings"></button>
+  </header>
+
+  <div class="layout">
+    <div class="col">
+      <section class="section" id="todayBox"></section>
+      <section class="section" id="drawingBox" hidden></section>
+      <section class="section" id="offersBox" hidden></section>
+      <section class="section" id="trialBox" hidden>
+        <h2>На пробу в Игротеке</h2>
+        <div class="list" id="trial"></div>
+      </section>
+    </div>
+    <div class="col">
+      <section class="section" id="daysBox" hidden>
+        <h2>Прошлые дни</h2>
+        <div class="list" id="days"></div>
+      </section>
+      <section class="section" id="tasteBox"></section>
+    </div>
+  </div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script>
+  // The engine side is main.js; the agent works there in the background and this screen follows
+  // its events. Rating here is the same as the sheet inside the game (ui/rate.js).
+  const h = ui.h;
+  const MAIN = 'modules/game-of-the-day/main.js';
+  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const $ = id => document.getElementById(id);
+  const MODES = {
+    free: 'свободный выбор',
+    explore: 'новое направление',
+    exploit: 'вариация на понравившееся'
+  };
+  const TAGS = ['genre', 'controls', 'session', 'visual', 'difficulty', 'theme'];
+
+  let status = null;
+  let visible = true;
+
+  function dateText(date) {
+    const [y, m, d] = date.split('-').map(Number);
+    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    return d + ' ' + months[m - 1] + (y !== new Date().getFullYear() ? ' ' + y : '');
+  }
+
+  function starsLine(n) {
+    const out = [];
+    for (let i = 1; i <= 5; i++) out.push(h('span', { class: i <= n ? '' : 'off' }, ui.icon('star')));
+    return h('span', { class: 'stars-line', 'aria-label': ui.t('{} из 5', n) }, out);
+  }
+
+  function state(icon, text) {
+    return h('div', { class: 'state' }, ui.icon(icon), h('span', { 'data-raw': '' }, text));
+  }
+
+  function tagsOf(entry) {
+    const tags = entry.tags || {};
+    return h('div', { class: 'tags', 'data-raw': '' }, TAGS.filter(tag => tags[tag]).map(tag => h('span', { class: 'tag' }, tags[tag])));
+  }
+
+  async function act(fn, ...args) {
+    try {
+      const out = await call(fn, ...args);
+      await refresh();
+      return out;
+    } catch (error) {
+      ui.toast(error.message);
+      return null;
+    }
+  }
+
+  // ---- today ----------------------------------------------------------------------------------------
+
+  function gameLabel(e) {
+    const many = status.schedule.slots.length > 1 || e.slot > 0;
+    const day = e.day === status.date ? ui.t('Сегодня, {}', dateText(e.day)) : dateText(e.day);
+    return many ? day + ' · ' + ui.t('игра {}', e.slot + 1) : day;
+  }
+
+  // The schedule line under the game: «Каждый день в 08:00 и 19:00 · следующая — завтра в 08:00».
+  function scheduleLine() {
+    const sc = status.schedule;
+    const bits = [sc.text];
+    if (sc.next) bits.push(ui.t('следующая — {}', sc.next.when));
+    const line = state('calendar', bits.join(' · '));
+    line.classList.add('link-line');
+    line.onclick = openSettings;
+    return line;
+  }
+
+  // Other games of today (with several a day): a compact row each.
+  function otherGames(shown) {
+    const list = (status.games || []).filter(g => !shown || g.date !== shown.date);
+    if (!list.length) return null;
+    return h('div', { class: 'list gap-top' }, list.map(dayRow));
+  }
+
+  function todayCard() {
+    const s = status;
+    const e = s.today && (s.today.made && !s.today.removedAt || !s.current) ? s.today : s.current || s.today;
+    const children = [h('div', { class: 'day-date' }, e ? gameLabel(e) : ui.t('Сегодня, {}', dateText(s.date)))];
+    const actions = [];
+    if (!s.hub) {
+      children.push(h('div', { class: 'day-title' }, 'Нужна Игротека'));
+      children.push(state('info', 'Игра дня делается на движке Игротеки (modules/games), она ставится вместе с Assi. Обновите Assi.'));
+      return h('div', { class: 'card' }, children);
+    }
+    if (s.making) {
+      children.push(h('div', { class: 'day-title' }, 'Агент делает игру'));
+      children.push(state('clock', ui.t('Работает {} мин', s.making.minutes) + (s.making.cost !== null && s.making.cost !== undefined ? ui.t(', потрачено ${}', Math.round(s.making.cost * 100) / 100) : '') + '. Уведомлю, когда будет готово.'));
+    } else if (e && e.made && !e.removedAt) {
+      children.push(h('div', { class: 'day-title', 'data-raw': '' }, e.title));
+      if (e.pitch) children.push(h('div', { class: 'day-pitch', 'data-raw': '' }, e.pitch));
+      children.push(tagsOf(e));
+      if (e.rating) children.push(h('div', { class: 'state' }, starsLine(e.rating), h('span', { 'data-raw': '' }, (e.reasons || []).join(', '))));
+      if (e.kept) children.push(state('check', 'Оставлена в Игротеке, раздел «На пробу»'));
+      else if (e.pending) children.push(state('clock', e.pending === 'keep' ? 'Переносится в Игротеку…' : 'Удаляется…'));
+      actions.push(h('button', { class: 'btn primary', onclick: () => assi.open(e.open) }, ui.icon('play'), 'Играть'));
+      if (!e.kept) {
+        actions.push(h('button', { class: 'btn', onclick: () => rateSheet(e) }, ui.icon('star'), e.rating ? 'Изменить оценку' : 'Оценить'));
+        actions.push(h('button', { class: 'btn', onclick: () => keep(e) }, ui.icon('check'), 'Оставить в Игротеке'));
+        actions.push(h('button', { class: 'btn', onclick: () => remove(e) }, ui.icon('trash'), 'Удалить'));
+      }
+    } else {
+      children.push(h('div', { class: 'day-title' }, e && e.final ? 'Сегодня игра не собралась' : 'Игры пока нет'));
+      if (e && e.error) children.push(state('info', e.error));
+      else if (e && e.waiting) children.push(state('info', ui.t('Ждёт сети: попробую снова до {}', s.schedule.giveUpAt)));
+      else if (s.schedule.frequency === 'off') children.push(state('info', 'Игра дня выключена в настройках'));
+      else if (s.schedule.next) children.push(state('clock', ui.t('Агент начнёт {}, игра будет к {}', whenStart(s.schedule.next), s.schedule.readyBy)));
+      if (s.next) children.push(state('spark', ui.t('Следующая по плану: {}', nextText(s.next))));
+      actions.push(h('button', { class: 'btn primary', onclick: makeNow }, ui.icon('refresh'), 'Сделать сейчас'));
+    }
+    children.push(scheduleLine());
+    if (s.schedule.blocked) children.push(state('info', 'Вторая игра за день заработает, когда Игротека начнёт её принимать (новая версия Assi). Пока делается только первая.'));
+    actions.push(h('button', { class: 'btn', onclick: () => showTask(s.upcoming && s.upcoming.key) }, ui.icon('note'), 'Задание агенту'));
+    children.push(h('div', { class: 'actions' }, actions));
+    const other = otherGames(e);
+    return h('div', { class: 'card' }, children, other);
+  }
+
+  // «сегодня в 06:00» from the next game's make time.
+  function whenStart(next) {
+    const d = new Date(next.make);
+    const clock = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+    const same = new Date(next.at).toDateString() === new Date().toDateString();
+    return same ? ui.t('сегодня в {}', clock) : next.when.replace(/\d{2}:\d{2}$/, clock);
+  }
+
+  function nextText(next) {
+    if (next.mode === 'explore') return MODES.explore + ' — ' + next.genre;
+    if (next.mode === 'exploit') return ui.t('вариация на «{}»', next.base.title);
+    return MODES.free;
+  }
+
+  async function makeNow() {
+    const out = await act('makeNow');
+    if (!out) return;
+    if (out.started) ui.toast('Агент начал делать игру — это займёт до получаса и больше');
+    else if (out.busy) ui.toast('Игра уже делается');
+    else if (out.skipped) ui.toast(out.skipped);
+  }
+
+  async function showTask(key) {
+    const text = await call('task', key || null);
+    ui.sheet(h('div', { class: 'sheet-scroll' },
+      h('h3', {}, 'Задание агенту на следующую игру'),
+      h('p', { class: 'small muted' }, 'Так оно уйдёт агенту «Мастер игр» (agents/gamesmith). Вкус, история и направление дня собраны из ваших оценок.'),
+      h('div', { class: 'task-text', 'data-raw': '' }, text)));
+  }
+
+  async function keep(e) {
+    if (!(await ui.confirm(ui.t('Оставить «{}» в Игротеке? Она появится в разделе «На пробу», сохранение останется.', e.title), 'Оставить'))) return;
+    const out = await act('keep', e.date);
+    if (out && out.ok) ui.toast(ui.t('«{}» — в Игротеке', e.title));
+  }
+
+  async function remove(e) {
+    if (!(await ui.confirm(ui.t('Удалить «{}»? Код останется в «Истории изменений».', e.title), 'Удалить', true))) return;
+    await act('remove', e.date);
+  }
+
+  // ---- rating ------------------------------------------------------------------------------------------
+
+  function rateSheet(e) {
+    let stars = e.rating || 0;
+    const picked = new Set(e.reasons || []);
+    let voiceText = e.voice || '';
+    const starButtons = [];
+    const label = h('div', { class: 'small muted rate-label' });
+    const voiceLine = h('div', { class: 'voice-line', 'data-raw': '' }, voiceText ? '«' + voiceText + '»' : '');
+    const comment = h('textarea', { class: 'input', id: 'daily-comment', rows: 3, maxlength: 1000,
+      placeholder: 'Что понравилось, что мешало и что стоит исправить?', 'aria-label': 'Комментарий к реализации игры' });
+    comment.value = e.comment || '';
+    const genre = h('select', { class: 'input', id: 'daily-genre', 'aria-label': 'Отношение к жанру' },
+      h('option', { value: 'unknown' }, 'Пока не хочу оценивать жанр'), h('option', { value: 'like' }, 'Жанр нравится'),
+      h('option', { value: 'neutral' }, 'Отношусь нейтрально'), h('option', { value: 'dislike' }, 'Сам жанр не нравится'));
+    genre.value = e.genrePreference || 'unknown';
+    const paint = () => {
+      starButtons.forEach((button, i) => { button.classList.toggle('on', i < stars); button.setAttribute('aria-pressed', i < stars ? 'true' : 'false'); });
+      label.textContent = stars ? ui.t('{} из 5', stars) : 'Сколько звёзд?';
+    };
+    for (let n = 1; n <= 5; n++) {
+      starButtons.push(h('button', { class: 'rate-star', 'aria-label': ui.t('{} из 5', n), onclick: () => { stars = n; paint(); } }, ui.icon('star')));
+    }
+    const chips = status.chips.map(reason => {
+      const chip = h('button', { class: 'chip' + (picked.has(reason) ? ' on' : ''), onclick: () => {
+        if (picked.has(reason)) picked.delete(reason);
+        else picked.add(reason);
+        chip.classList.toggle('on', picked.has(reason));
+        chip.setAttribute('aria-pressed', picked.has(reason) ? 'true' : 'false');
+      } }, reason);
+      return chip;
+    });
+    const voiceButton = h('button', { class: 'btn wide', onclick: async () => {
+      voiceButton.disabled = true;
+      voiceLine.textContent = 'Слушаю…';
+      try {
+        voiceText = String(await call('listen') || '').trim();
+        voiceLine.textContent = voiceText ? '«' + voiceText + '»' : 'Ничего не расслышал';
+      } catch (error) {
+        voiceLine.textContent = error.message;
+      }
+      voiceButton.disabled = false;
+    } }, ui.icon('mic'), 'Сказать голосом');
+    const save = async () => {
+      if (!stars) {
+        ui.toast('Поставьте от 1 до 5 звёзд');
+        return;
+      }
+      saveButton.disabled = true;
+      try {
+        await call('rate', e.date, { stars, reasons: [...picked], voice: voiceText, comment: comment.value, genrePreference: genre.value });
+        close();
+        await refresh();
+      } catch (error) { ui.toast(error.message); }
+      finally { saveButton.disabled = false; }
+    };
+    const saveButton = h('button', { class: 'btn primary', onclick: save }, ui.icon('check'), 'Сохранить оценку');
+    const close = ui.sheet(h('div', { class: 'sheet-scroll' },
+      h('h3', { 'data-raw': '' }, ui.t('Как вам «{}»?', e.title)),
+      h('p', { class: 'small muted' }, 'Звёзды — за эту реализацию: насколько приятно в неё играть.'),
+      h('div', { class: 'rate-stars', role: 'group', 'aria-label': 'Оценка реализации игры' }, starButtons),
+      label,
+      h('div', { class: 'rate-chips' }, chips),
+      h('div', { class: 'rate-block' }, h('label', { for: 'daily-comment' }, 'Что стоит улучшить?'), comment),
+      h('div', { class: 'rate-block' }, h('label', { for: 'daily-genre' }, 'А сам жанр' + (e.tags && e.tags.genre ? ' «' + e.tags.genre + '»' : '') + '?'), genre,
+        h('p', { class: 'small muted' }, 'Отдельный ответ. Плохая игра не понижает интерес к жанру.')),
+      voiceButton,
+      voiceLine,
+      h('div', { class: 'actions' }, saveButton)));
+    paint();
+  }
+
+  // ---- the drawing of the day («Рисуй — угадаю») ----------------------------------------------------------
+
+  function drawingCard() {
+    const box = $('drawingBox');
+    const d = status.drawing;
+    box.hidden = !d || !d.installed || !d.on;
+    if (box.hidden) return;
+    const actions = [];
+    if (d.ready && !d.played) actions.push(h('button', { class: 'btn primary', onclick: () => assi.open(d.open) }, ui.icon('play'), 'Угадать'));
+    if (!d.ready) actions.push(h('button', { class: 'btn', onclick: async () => {
+      const out = await act('drawingNow');
+      if (out && out.started) ui.toast('Модель рисует — это займёт до минуты');
+      else if (out && out.skipped) ui.toast(out.skipped);
+    } }, ui.icon('refresh'), 'Заказать рисунок'));
+    box.replaceChildren(h('div', { class: 'card' },
+      h('div', { class: 'day-title' }, 'Рисунок дня'),
+      state(d.ready ? (d.played ? 'check' : 'spark') : 'info', d.ready ? d.text : ui.t('Пока нет: {}', d.text || 'закажется утром')),
+      actions.length ? h('div', { class: 'actions' }, actions) : null));
+  }
+
+  // ---- offers, trial, days ------------------------------------------------------------------------------
+
+  function offers() {
+    const box = $('offersBox');
+    box.hidden = !status.offers.length;
+    box.replaceChildren(...status.offers.map(o => h('div', { class: 'card accent' },
+      h('div', { 'data-raw': '' }, o.text),
+      h('div', { class: 'actions' }, h('button', { class: 'btn', onclick: async () => {
+        const out = await act('discuss', { id: o.slug });
+        if (out) ui.toast('Агент ответит в чате');
+      } }, ui.icon('message'), 'Обсудить с агентом')))));
+  }
+
+  function trial() {
+    $('trialBox').hidden = !status.trial.length;
+    $('trial').replaceChildren(...status.trial.map(t => h('div', {},
+      h('div', { class: 'grow' },
+        h('div', { class: 'row-title', 'data-raw': '' }, t.title),
+        h('div', { class: 'row-sub' }, ui.t('Сыграна в {} из {} разных дней — потом во «Все игры»', t.days, t.need))),
+      h('div', { class: 'row-actions' }, h('button', { class: 'icon-btn', 'aria-label': 'Играть', onclick: () => assi.open(t.open) }, ui.icon('play'))))));
+  }
+
+  function dayRow(e) {
+    const sub = [];
+    if (!e.made) sub.push(e.error ? ui.t('не собралась: {}', e.error) : e.waiting ? 'ждала сети' : 'не сделана');
+    else if (e.kept) sub.push(e.promotedAt ? 'в Игротеке' : 'на пробу в Игротеке');
+    else if (e.removedAt) sub.push('удалена');
+    else if (!e.rating) sub.push(e.playedSec ? 'сыграна, ждёт оценки' : ui.t('ждёт игры и оценки, удалится через {} дн.', status.schedule.keepDays));
+    if (e.minutes !== null && e.made) sub.push(ui.t('{} мин работы', e.minutes) + (e.costUsd !== null ? ', $' + e.costUsd : ''));
+    if (e.mode) sub.push(MODES[e.mode] || e.mode);
+    const buttons = [];
+    if (e.open) buttons.push(h('button', { class: 'icon-btn', 'aria-label': 'Играть', onclick: () => assi.open(e.open) }, ui.icon('play')));
+    if (e.canRate && !e.kept) {
+      buttons.push(h('button', { class: 'icon-btn', 'aria-label': 'Оценить', onclick: () => rateSheet(e) }, ui.icon('star')));
+      buttons.push(h('button', { class: 'icon-btn', 'aria-label': 'Оставить в Игротеке', onclick: () => keep(e) }, ui.icon('check')));
+      buttons.push(h('button', { class: 'icon-btn', 'aria-label': 'Удалить', onclick: () => remove(e) }, ui.icon('trash')));
+    }
+    return h('div', { class: 'day-row' },
+      h('div', { class: 'grow' },
+        h('div', { class: 'row-title', 'data-raw': '' }, (e.title || 'Без игры') + ' · ' + dateText(e.day || e.date) + (e.slot ? ui.t(', игра {}', e.slot + 1) : '')),
+        h('div', { class: 'row-sub', 'data-raw': '' }, sub.join(' · '))),
+      e.rating ? starsLine(e.rating) : null,
+      buttons.length ? h('div', { class: 'row-actions' }, buttons) : null);
+  }
+
+  function pastDays() {
+    const list = status.recent.filter(e => (e.day || e.date) !== status.date);
+    $('daysBox').hidden = !list.length;
+    $('days').replaceChildren(...list.map(dayRow));
+  }
+
+  // ---- taste ----------------------------------------------------------------------------------------------
+
+  function tasteBox() {
+    const box = $('tasteBox');
+    const children = [h('h2', {}, 'Вкус и оценки игр'),
+      h('p', { class: 'small muted' }, 'Жанры — только ваши явные предпочтения. Остальные строки показывают оценки реализаций с такими метками.')];
+    if (!status.taste.length) {
+      children.push(h('div', { class: 'card' }, h('div', { class: 'muted' }, 'Оцените игру и, если хочется, отдельно её жанр. По отзывам агент улучшает следующие реализации.')));
+    } else {
+      children.push(h('div', { class: 'list taste-list' }, status.taste.slice(0, 16).map(row => h('div', { class: 'taste-row' },
+        h('span', { 'data-raw': '' }, row.title + ': ' + row.value),
+        h('span', { class: 'taste-bar' }, h('div', { style: 'width: ' + Math.round(row.score / 5 * 100) + '%' })),
+        h('span', { class: 'taste-score' }, String(row.score).replace('.', ',') + ' (' + row.n + ')')))));
+    }
+    const w = status.weekly;
+    if (w && w.taste && w.taste.length) {
+      children.push(h('div', { class: 'card gap-top' },
+        h('div', { class: 'small muted' }, ui.t('Сводка недели, {}', dateText(w.date))),
+        h('div', { class: 'week-line', 'data-raw': '' }, w.owner),
+        w.taste.map(line => h('div', { class: 'week-line', 'data-raw': '' }, '— ' + line))));
+    }
+    if (status.notes.length) {
+      children.push(h('div', { class: 'card gap-top' },
+        h('div', { class: 'small muted' }, 'Что вы говорили'),
+        status.notes.map(line => h('div', { class: 'week-line', 'data-raw': '' }, line))));
+    }
+    const c = status.counts;
+    children.push(h('p', { class: 'small muted' }, ui.t('Игр сделано: {}, оценено: {}, оставлено: {}', c.made, c.ratings, c.kept)));
+    box.replaceChildren(...children);
+  }
+
+  // ---- settings ---------------------------------------------------------------------------------------------
+
+  function settingInput(row, save) {
+    if (row.type === 'time') {
+      const input = h('input', { class: 'input', type: 'time', value: row.value, 'aria-label': row.title });
+      input.onchange = () => save(input.value);
+      return input;
+    }
+    if (row.options) {
+      const select = h('select', { class: 'input', 'aria-label': row.title },
+        row.options.map(([id, title]) => h('option', { value: id, selected: id === row.value }, title)));
+      select.onchange = () => save(select.value);
+      return select;
+    }
+    const input = h('input', { class: 'input', type: 'number', inputMode: 'decimal', value: row.value, min: row.min, max: row.max, step: row.step || 1, 'aria-label': row.title });
+    input.onchange = async () => {
+      await save(input.value);
+      const fresh = (await call('settingsView')).find(one => one.key === row.key);
+      if (fresh) input.value = fresh.value;
+    };
+    return input;
+  }
+
+  // ---- the schedule editor: how often, which days, the games of a day ------------------------------------------
+
+  const FREQ = [['daily', 'Каждый день'], ['every', 'Через N дней'], ['weekdays', 'По дням недели'], ['off', 'Не делать']];
+  const WEEK = [[1, 'Пн'], [2, 'Вт'], [3, 'Ср'], [4, 'Чт'], [5, 'Пт'], [6, 'Сб'], [0, 'Вс']];
+
+  function scheduleEditor() {
+    const box = h('div', { class: 'sched' });
+    let sc = null;
+
+    async function save(patch) {
+      try {
+        await call('saveSettings', patch);
+        await draw();
+        refresh().catch(() => {});
+      } catch (error) {
+        ui.toast(error.message);
+      }
+    }
+
+    function timeInput(value, label, onSave) {
+      const input = h('input', { class: 'input', type: 'time', value, 'aria-label': label });
+      input.onchange = () => {
+        if (input.value) onSave(input.value);
+      };
+      return h('label', { class: 'slot-time' }, h('span', { class: 'slot-cap' }, label), input);
+    }
+
+    function slotRow(slot, i) {
+      const put = (field, value) => {
+        const slots = sc.slots.map(one => ({ ...one }));
+        slots[i][field] = value;
+        if (field === 'make' && slots[i].ready < value) slots[i].ready = value;
+        save({ slots });
+      };
+      const drop = sc.slots.length > 1 ? h('button', { class: 'icon-btn', 'aria-label': ui.t('Убрать игру {}', i + 1), onclick: () => {
+        save({ slots: sc.slots.filter((one, k) => k !== i) });
+      } }, ui.icon('trash')) : h('span', { class: 'slot-gap' });
+      const off = sc.blocked && i > 0;
+      return h('div', { class: 'slot-row' + (off ? ' off' : '') },
+        h('div', { class: 'slot-n' }, String(i + 1)),
+        timeInput(slot.make, 'Начать', value => put('make', value)),
+        timeInput(slot.ready, 'Готова к', value => put('ready', value)),
+        drop);
+    }
+
+    // A new slot: three hours after the last one's ready time, within the day.
+    function addSlot() {
+      const last = sc.slots[sc.slots.length - 1];
+      const [hh, mm] = last.ready.split(':').map(Number);
+      const start = Math.min(hh * 60 + mm + 180, 22 * 60);
+      const fmt = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+      save({ slots: [...sc.slots, { make: fmt(start), ready: fmt(Math.min(start + 120, 23 * 60 + 30)) }] });
+    }
+
+    async function draw() {
+      sc = await call('scheduleView');
+      const parts = [h('div', { class: 'set-group' }, 'Расписание')];
+      parts.push(h('div', { class: 'sched-sum' },
+        ui.icon('calendar'),
+        h('div', { class: 'grow' },
+          h('div', { class: 'sched-text' }, sc.text),
+          h('div', { class: 'small muted' }, sc.next ? ui.t('Следующая игра — {}', sc.next.when) : 'Игр по расписанию нет'))));
+      parts.push(h('div', { class: 'chips sched-freq', role: 'radiogroup', 'aria-label': 'Как часто' },
+        FREQ.map(([id, title]) => h('button', {
+          class: 'chip' + (sc.frequency === id ? ' on' : ''), role: 'radio', 'aria-checked': sc.frequency === id ? 'true' : 'false',
+          onclick: () => { if (sc.frequency !== id) save({ frequency: id }); }
+        }, title))));
+      if (sc.frequency === 'every') {
+        const n = h('input', { class: 'input', type: 'number', inputMode: 'numeric', min: 2, max: 30, step: 1, value: sc.everyDays, 'aria-label': 'Через сколько дней' });
+        n.onchange = () => save({ everyDays: n.value });
+        const from = h('input', { class: 'input', type: 'date', value: sc.anchor, 'aria-label': 'Считать дни от' });
+        from.onchange = () => { if (from.value) save({ anchor: from.value }); };
+        parts.push(h('label', { class: 'set-row' }, h('span', { class: 'grow' }, 'Раз в сколько дней (2 — через день)'), n));
+        parts.push(h('label', { class: 'set-row' }, h('span', { class: 'grow' }, 'Первый день счёта'), from));
+      }
+      if (sc.frequency === 'weekdays') {
+        parts.push(h('div', { class: 'chips sched-week', 'aria-label': 'Дни недели' },
+          WEEK.map(([day, title]) => {
+            const on = sc.weekdays.includes(day);
+            return h('button', { class: 'chip' + (on ? ' on' : ''), 'aria-pressed': on ? 'true' : 'false', onclick: () => {
+              const next = on ? sc.weekdays.filter(d => d !== day) : [...sc.weekdays, day];
+              if (!next.length) {
+                ui.toast('Нужен хотя бы один день — или «Не делать»');
+                return;
+              }
+              save({ weekdays: next });
+            } }, title);
+          })));
+      }
+      if (sc.frequency !== 'off') {
+        parts.push(h('div', { class: 'set-group' }, sc.slots.length > 1 ? ui.t('Игр в такой день: {}', sc.slots.length) : 'Игра в такой день'));
+        parts.push(h('div', { class: 'slots' }, sc.slots.map(slotRow)));
+        if (sc.slots.length < sc.maxSlots) {
+          parts.push(h('button', { class: 'btn wide gap-top', onclick: addSlot }, ui.icon('plus'), 'Ещё игра в день'));
+        }
+        parts.push(h('p', { class: 'small muted gap-top' }, ui.t('Агент начинает в «Начать», уведомление — в «Готова к». Без сети пробует ещё {} мин после этого.', sc.giveUpMin)));
+        if (sc.blocked) parts.push(state('info', 'Игротека этой версии Assi принимает только одну игру дня — вторая и следующие заработают после обновления.'));
+      }
+      box.replaceChildren(...parts);
+    }
+
+    draw().catch(error => ui.toast(error.message));
+    return box;
+  }
+
+  async function openSettings() {
+    const rows = await call('settingsView');
+    const body = [h('h3', {}, 'Настройки'), scheduleEditor()];
+    let group = 'Расписание';
+    rows.filter(row => !row.custom).forEach(row => {
+      if (row.group !== group) {
+        group = row.group;
+        body.push(h('div', { class: 'set-group' }, group));
+      }
+      const save = async value => {
+        try {
+          await call('saveSettings', { [row.key]: value });
+          ui.toast('Сохранено');
+        } catch (error) {
+          ui.toast(error.message);
+        }
+      };
+      body.push(h('label', { class: 'set-row' }, h('span', { class: 'grow' }, row.title), settingInput(row, save)));
+    });
+    body.push(h('div', { class: 'set-group' }, 'Сейчас'));
+    body.push(h('div', { class: 'set-stack' },
+      h('button', { class: 'btn wide', onclick: async () => {
+        const out = await call('notifyReady', true);
+        ui.toast(out.send ? out.text : out.why);
+      } }, ui.icon('bell'), 'Показать уведомление дня'),
+      h('button', { class: 'btn wide', onclick: async () => {
+        ui.toast('Свожу вкус за неделю…');
+        const out = await act('weekly', true);
+        if (out && out.ok) ui.toast(out.owner);
+        else if (out && out.skipped) ui.toast(out.skipped);
+      } }, ui.icon('chart'), 'Сводка вкуса сейчас'),
+      h('button', { class: 'btn wide', onclick: async () => {
+        const out = await act('sweep');
+        if (out) ui.toast(ui.t('Убрано: {}, переведено во «Все игры»: {}', out.removed.length, out.promoted.length));
+      } }, ui.icon('refresh'), 'Убрать старые игры сейчас')));
+    const journal = await call('log', 30);
+    body.push(h('div', { class: 'set-group' }, 'Журнал'));
+    body.push(h('div', { 'data-raw': '' }, journal.length ? journal.map(entry => h('div', { class: 'log-row' }, ui.raw(ui.ago(entry.at) + ' — ' + entry.text))) : h('div', { class: 'small muted' }, ui.t('Пока пусто'))));
+    body.push(h('p', { class: 'small muted' }, 'Модель агента «Мастер игр» выбирается в настройках Assi, в списке агентов; модель недельной сводки — роль «Игра дня: сводка вкуса». Расход виден в «Расход»: цена известна, если её сообщает провайдер.'));
+    ui.sheet(h('div', { class: 'sheet-scroll' }, body));
+  }
+
+  $('openSettings').onclick = openSettings;
+
+  // ---- drawing and events -----------------------------------------------------------------------------------
+
+  async function refresh() {
+    status = await call('status');
+    $('todayBox').replaceChildren(todayCard());
+    drawingCard();
+    offers();
+    trial();
+    pastDays();
+    tasteBox();
+  }
+
+  assi.on('daily-game.state', () => {
+    if (visible) refresh().catch(() => {});
+  });
+
+  assi.on('app.visible', event => {
+    visible = !!(event && event.on);
+    if (visible) refresh().catch(() => {});
+  });
+
+  // Opened from a notification «Как вам …?»: ?rate=YYYY-MM-DD opens the sheet at once.
+  refresh().then(() => {
+    const asked = new URLSearchParams(location.search).get('rate');
+    const entry = asked && status.recent.find(e => e.date === asked && e.canRate);
+    if (entry) rateSheet(entry);
+  }).catch(error => ui.toast(error.message));
+</script>
+</body>
+</html>

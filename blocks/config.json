@@ -1,0 +1,1062 @@
+{
+  "up.rotate.cost": {
+    "value": "40",
+    "title": "Поворот: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.rotate.growth": {
+    "value": 2,
+    "title": "Поворот: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "supply.rotate.cost": {
+    "value": "40",
+    "title": "Поворот: разовый запас",
+    "group": "Разовые инструменты",
+    "big": true
+  },
+  "up.bomb.cost": {
+    "value": "80",
+    "title": "Бомба: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.bomb.growth": {
+    "value": 2.2,
+    "title": "Бомба: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "supply.bomb.cost": {
+    "value": "80",
+    "title": "Бомба: разовый запас",
+    "group": "Разовые инструменты",
+    "big": true
+  },
+  "up.slot.cost": {
+    "value": "300",
+    "title": "Запасной слот: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.slot.growth": {
+    "value": 1,
+    "title": "Запасной слот: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "up.reroll.cost": {
+    "value": "60",
+    "title": "Переброс: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.reroll.growth": {
+    "value": 2,
+    "title": "Переброс: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "supply.reroll.cost": {
+    "value": "60",
+    "title": "Переброс: разовый запас",
+    "group": "Разовые инструменты",
+    "big": true
+  },
+  "up.undo.cost": {
+    "value": "100",
+    "title": "Отмена: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.undo.growth": {
+    "value": 2.3,
+    "title": "Отмена: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "supply.undo.cost": {
+    "value": "100",
+    "title": "Отмена: разовый запас",
+    "group": "Разовые инструменты",
+    "big": true
+  },
+  "up.eraser.cost": {
+    "value": "30",
+    "title": "Ластик: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.eraser.growth": {
+    "value": 1.8,
+    "title": "Ластик: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "supply.eraser.cost": {
+    "value": "30",
+    "title": "Ластик: разовый запас",
+    "group": "Разовые инструменты",
+    "big": true
+  },
+  "up.hammer.cost": {
+    "value": "150",
+    "title": "Молот: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.hammer.growth": {
+    "value": 2.5,
+    "title": "Молот: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "supply.hammer.cost": {
+    "value": "150",
+    "title": "Молот: разовый запас",
+    "group": "Разовые инструменты",
+    "big": true
+  },
+  "up.ruler.cost": {
+    "value": "150",
+    "title": "Линейка: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.ruler.growth": {
+    "value": 2.5,
+    "title": "Линейка: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "supply.ruler.cost": {
+    "value": "150",
+    "title": "Линейка: разовый запас",
+    "group": "Разовые инструменты",
+    "big": true
+  },
+  "up.streak.cost": {
+    "value": "200",
+    "title": "Мастер серий: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.streak.growth": {
+    "value": 2,
+    "title": "Мастер серий: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "up.mint.cost": {
+    "value": "50",
+    "title": "Монетный двор: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.mint.growth": {
+    "value": 1.6,
+    "title": "Монетный двор: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "up.preview.cost": {
+    "value": "500",
+    "title": "Предпросмотр: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.preview.growth": {
+    "value": 1,
+    "title": "Предпросмотр: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "up.second.cost": {
+    "value": "800",
+    "title": "Второй шанс: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.second.growth": {
+    "value": 1,
+    "title": "Второй шанс: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "up.lucky.cost": {
+    "value": "120",
+    "title": "Удачная раздача: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.lucky.growth": {
+    "value": 2,
+    "title": "Удачная раздача: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "up.color.cost": {
+    "value": "400",
+    "title": "Цвет к цвету: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.color.growth": {
+    "value": 1,
+    "title": "Цвет к цвету: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "up.gold.cost": {
+    "value": "250",
+    "title": "Золотоискатель: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.gold.growth": {
+    "value": 2,
+    "title": "Золотоискатель: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "up.hint.cost": {
+    "value": "350",
+    "title": "Подсказка: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.hint.growth": {
+    "value": 1,
+    "title": "Подсказка: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "up.workshop.cost": {
+    "value": "600",
+    "title": "Мастерская: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.workshop.growth": {
+    "value": 2,
+    "title": "Мастерская: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "up.wide.cost": {
+    "value": "900",
+    "title": "Широкая серия: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.wide.growth": {
+    "value": 1,
+    "title": "Широкая серия: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "up.cutter.cost": {
+    "value": "700",
+    "title": "Резчик: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.cutter.growth": {
+    "value": 2.5,
+    "title": "Резчик: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "supply.cutter.cost": {
+    "value": "700",
+    "title": "Резчик: разовый запас",
+    "group": "Разовые инструменты",
+    "big": true
+  },
+  "up.clean.cost": {
+    "value": "1000",
+    "title": "Чистый старт: начальная цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.clean.growth": {
+    "value": 1,
+    "title": "Чистый старт: рост цены",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10,
+    "step": 0.1
+  },
+  "board.size": {
+    "value": 8,
+    "title": "Размер обычного поля",
+    "group": "Правила",
+    "min": 8,
+    "max": 8,
+    "step": 1
+  },
+  "big.size": {
+    "value": 9,
+    "title": "Размер большого поля",
+    "group": "Правила",
+    "min": 9,
+    "max": 9,
+    "step": 1
+  },
+  "twin.size": {
+    "value": 6,
+    "title": "Размер каждого из двух полей",
+    "group": "Правила",
+    "min": 6,
+    "max": 6,
+    "step": 1
+  },
+  "score.cell": {
+    "value": 1,
+    "title": "Очки за поставленную клетку",
+    "group": "Очки",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "score.l1": {
+    "value": 10,
+    "title": "За одну линию",
+    "group": "Очки",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "score.l2": {
+    "value": 30,
+    "title": "За две линии",
+    "group": "Очки",
+    "min": 1,
+    "max": 300,
+    "step": 1
+  },
+  "score.l3": {
+    "value": 60,
+    "title": "За три линии",
+    "group": "Очки",
+    "min": 1,
+    "max": 600,
+    "step": 1
+  },
+  "score.l4": {
+    "value": 100,
+    "title": "За четыре линии",
+    "group": "Очки",
+    "min": 1,
+    "max": 1000,
+    "step": 1
+  },
+  "score.lMore": {
+    "value": 50,
+    "title": "За линию сверх четырёх",
+    "group": "Очки",
+    "min": 1,
+    "max": 500,
+    "step": 1
+  },
+  "streak.step": {
+    "value": 0.5,
+    "title": "Шаг множителя серии",
+    "group": "Очки",
+    "min": 0.1,
+    "max": 1,
+    "step": 0.1
+  },
+  "streak.max": {
+    "value": 4,
+    "title": "Максимальный множитель серии",
+    "group": "Очки",
+    "min": 1,
+    "max": 10,
+    "step": 0.5
+  },
+  "coins.per": {
+    "value": 10,
+    "title": "Очков за монету",
+    "group": "Экономика",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "deal.bigFrom": {
+    "value": 5,
+    "title": "Крупная фигура: от клеток",
+    "group": "Раздача",
+    "min": 4,
+    "max": 9,
+    "step": 1
+  },
+  "deal.growScore": {
+    "value": 3000,
+    "title": "Очки для удвоения веса крупных фигур",
+    "group": "Раздача",
+    "min": 100,
+    "max": 10000,
+    "step": 100
+  },
+  "deal.growMax": {
+    "value": 2,
+    "title": "Предел роста веса крупных фигур",
+    "group": "Раздача",
+    "min": 1,
+    "max": 4,
+    "step": 0.1
+  },
+  "deal.fairTries": {
+    "value": 20,
+    "title": "Попыток честной раздачи",
+    "group": "Раздача",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "help.on": {
+    "value": true,
+    "title": "Помощь на заполненном поле",
+    "group": "Раздача"
+  },
+  "help.fill": {
+    "value": 0.7,
+    "title": "Доля заполнения для помощи",
+    "group": "Раздача",
+    "min": 0.1,
+    "max": 1,
+    "step": 0.05
+  },
+  "up.streak.step": {
+    "value": 0.1,
+    "title": "Мастер серий: дополнительный шаг",
+    "group": "Улучшения",
+    "min": 0,
+    "max": 0.5,
+    "step": 0.05
+  },
+  "up.mint.bonus": {
+    "value": 0.1,
+    "title": "Монетный двор: бонус за уровень",
+    "group": "Улучшения",
+    "min": 0,
+    "max": 1,
+    "step": 0.05
+  },
+  "up.lucky.dot": {
+    "value": 0.03,
+    "title": "Удачная раздача: шанс точки за уровень",
+    "group": "Улучшения",
+    "min": 0,
+    "max": 0.2,
+    "step": 0.01
+  },
+  "up.lucky.max": {
+    "value": 0.9,
+    "title": "Предел дополнительного шанса точки",
+    "group": "Улучшения",
+    "min": 0,
+    "max": 1,
+    "step": 0.05
+  },
+  "up.color.mult": {
+    "value": 2,
+    "title": "Цвет к цвету: множитель линии",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 5,
+    "step": 0.5
+  },
+  "up.gold.more": {
+    "value": 0.2,
+    "title": "Золотоискатель: прирост частоты",
+    "group": "Улучшения",
+    "min": 0,
+    "max": 1,
+    "step": 0.1
+  },
+  "up.workshop.hours": {
+    "value": 2,
+    "title": "Мастерская: часов на инструмент",
+    "group": "Мастерская",
+    "min": 0.25,
+    "max": 24,
+    "step": 0.25
+  },
+  "up.workshop.cap": {
+    "value": 5,
+    "title": "Мастерская: максимум запасов",
+    "group": "Мастерская",
+    "min": 1,
+    "max": 30,
+    "step": 1
+  },
+  "second.size": {
+    "value": 4,
+    "title": "Второй шанс: сторона очищаемого центра",
+    "group": "Улучшения",
+    "min": 2,
+    "max": 6,
+    "step": 1
+  },
+  "special.fromRank": {
+    "value": 3,
+    "title": "Особые клетки: с ранга",
+    "group": "Особые клетки",
+    "min": 3,
+    "max": 5,
+    "step": 1
+  },
+  "special.gold": {
+    "value": 0.03,
+    "title": "Вероятность золотой клетки",
+    "group": "Особые клетки",
+    "min": 0,
+    "max": 0.5,
+    "step": 0.01
+  },
+  "special.cracked": {
+    "value": 0.015,
+    "title": "Вероятность треснувшей клетки",
+    "group": "Особые клетки",
+    "min": 0,
+    "max": 0.3,
+    "step": 0.005
+  },
+  "special.lock": {
+    "value": 0.08,
+    "title": "Вероятность замка при раздаче",
+    "group": "Особые клетки",
+    "min": 0,
+    "max": 0.5,
+    "step": 0.01
+  },
+  "special.maxLocks": {
+    "value": 4,
+    "title": "Максимум замков на поле",
+    "group": "Особые клетки",
+    "min": 0,
+    "max": 12,
+    "step": 1
+  },
+  "special.goldCoins": {
+    "value": 5,
+    "title": "Монет за очищенную золотую клетку",
+    "group": "Особые клетки",
+    "min": 1,
+    "max": 50,
+    "step": 1
+  },
+  "event.fromDeal": {
+    "value": 5,
+    "title": "События: с раздачи",
+    "group": "События",
+    "min": 1,
+    "max": 20,
+    "step": 1
+  },
+  "event.heavy": {
+    "value": 0.12,
+    "title": "Вероятность тяжёлой раздачи",
+    "group": "События",
+    "min": 0,
+    "max": 0.2,
+    "step": 0.005
+  },
+  "event.gold": {
+    "value": 0.025,
+    "title": "Вероятность золотой раздачи",
+    "group": "События",
+    "min": 0,
+    "max": 0.2,
+    "step": 0.005
+  },
+  "event.gift": {
+    "value": 0.002,
+    "title": "Вероятность подарка",
+    "group": "События",
+    "min": 0,
+    "max": 0.2,
+    "step": 0.001
+  },
+  "event.heavyMult": {
+    "value": 2,
+    "title": "Тяжёлая раздача: множитель очков",
+    "group": "События",
+    "min": 1,
+    "max": 5,
+    "step": 0.5
+  },
+  "daily.deals": {
+    "value": 20,
+    "title": "Задача дня: число раздач",
+    "group": "Задача дня",
+    "min": 5,
+    "max": 100,
+    "step": 1
+  },
+  "daily.locks": {
+    "value": 4,
+    "title": "Задача дня: замков",
+    "group": "Задача дня",
+    "min": 0,
+    "max": 12,
+    "step": 2
+  },
+  "daily.gold": {
+    "value": 8,
+    "title": "Задача дня: золотых клеток",
+    "group": "Задача дня",
+    "min": 0,
+    "max": 24,
+    "step": 2
+  },
+  "daily.target": {
+    "value": 400,
+    "title": "Задача дня: базовая цель",
+    "group": "Задача дня",
+    "min": 50,
+    "max": 5000,
+    "step": 50
+  },
+  "daily.spread": {
+    "value": 200,
+    "title": "Задача дня: разброс цели",
+    "group": "Задача дня",
+    "min": 0,
+    "max": 2000,
+    "step": 50
+  },
+  "daily.reward": {
+    "value": 100,
+    "title": "Награда за первую победу дня",
+    "group": "Задача дня",
+    "min": 0,
+    "max": 1000,
+    "step": 10
+  },
+  "daily.history": {
+    "value": 60,
+    "title": "Дней истории задачи дня",
+    "group": "Задача дня",
+    "min": 7,
+    "max": 365,
+    "step": 1
+  },
+  "challenge.count": {
+    "value": 60,
+    "title": "Число испытаний",
+    "group": "Испытания",
+    "min": 60,
+    "max": 60,
+    "step": 1
+  },
+  "challenge.reward": {
+    "value": 20,
+    "title": "Испытание: базовая награда",
+    "group": "Испытания",
+    "min": 0,
+    "max": 200,
+    "step": 5
+  },
+  "challenge.step": {
+    "value": 2,
+    "title": "Испытание: добавка за номер",
+    "group": "Испытания",
+    "min": 0,
+    "max": 20,
+    "step": 1
+  },
+  "challenge.searchBudget": {
+    "value": 30000,
+    "title": "Лимит узлов поиска решения",
+    "group": "Испытания",
+    "min": 1000,
+    "max": 1000000,
+    "step": 1000
+  },
+  "challenge.solutionLimit": {
+    "value": 100000,
+    "title": "Предел подсчёта решений",
+    "group": "Испытания",
+    "min": 1,
+    "max": 1000000,
+    "step": 1
+  },
+  "challenge.reverseTries": {
+    "value": 24,
+    "title": "Попыток обратного построения",
+    "group": "Испытания",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "challenge.plainTries": {
+    "value": 12,
+    "title": "Попыток обычного обратного хода",
+    "group": "Испытания",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "challenge.clear": {
+    "value": 0.55,
+    "title": "Доля очищающих обратных ходов",
+    "group": "Испытания",
+    "min": 0,
+    "max": 1,
+    "step": 0.05
+  },
+  "challenge.two": {
+    "value": 0.25,
+    "title": "Шанс двух линий в обратном ходе",
+    "group": "Испытания",
+    "min": 0,
+    "max": 1,
+    "step": 0.05
+  },
+  "challenge.pieces": {
+    "value": 4,
+    "title": "Базовая длина очереди испытания",
+    "group": "Испытания",
+    "min": 1,
+    "max": 12,
+    "step": 1
+  },
+  "rank.minRecord": {
+    "value": 5000,
+    "title": "Рекорд для нового ранга",
+    "group": "Мастерство",
+    "min": 1000,
+    "max": 50000,
+    "step": 1000
+  },
+  "rank.div": {
+    "value": 1000,
+    "title": "Делитель рекорда для мастерства",
+    "group": "Мастерство",
+    "min": 100,
+    "max": 10000,
+    "step": 100
+  },
+  "rank.power": {
+    "value": 0.7,
+    "title": "Степень прироста мастерства",
+    "group": "Мастерство",
+    "min": 0.1,
+    "max": 1,
+    "step": 0.1
+  },
+  "rank.bonus": {
+    "value": 0.05,
+    "title": "Бонус монет за мастерство",
+    "group": "Мастерство",
+    "min": 0.01,
+    "max": 0.5,
+    "step": 0.01
+  },
+  "rank.pickEvery": {
+    "value": 5,
+    "title": "Мастерства на постоянный заряд",
+    "group": "Мастерство",
+    "min": 1,
+    "max": 20,
+    "step": 1
+  },
+  "rank.big": {
+    "value": 4,
+    "title": "Ранг для поля 9×9",
+    "group": "Мастерство",
+    "min": 1,
+    "max": 5,
+    "step": 1
+  },
+  "rank.twin": {
+    "value": 5,
+    "title": "Ранг для двух полей",
+    "group": "Мастерство",
+    "min": 1,
+    "max": 5,
+    "step": 1
+  },
+  "fresh.charges": {
+    "value": 1,
+    "title": "Чистый лист: зарядов каждого инструмента",
+    "group": "Связки",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "chest.tools": {
+    "value": 3,
+    "title": "Инструментов в сундуке Пассажира",
+    "group": "Связки",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "ach.lines": {
+    "value": 5,
+    "title": "Ачивка: линий за один ход",
+    "group": "Ачивки",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "ach.streak": {
+    "value": 10,
+    "title": "Ачивка: длина серии",
+    "group": "Ачивки",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "ach.record": {
+    "value": 10000,
+    "title": "Ачивка: рекорд",
+    "group": "Ачивки",
+    "min": 1000,
+    "max": 100000,
+    "step": 1000
+  },
+  "ach.noTools": {
+    "value": 3000,
+    "title": "Ачивка: очков без инструментов",
+    "group": "Ачивки",
+    "min": 100,
+    "max": 20000,
+    "step": 100
+  },
+  "ui.dragLift": {
+    "value": 64,
+    "title": "Подъём фигуры над пальцем, px",
+    "group": "Управление",
+    "min": 32,
+    "max": 120,
+    "step": 4
+  },
+  "ui.dragThreshold": {
+    "value": 6,
+    "title": "Порог начала перетаскивания, px",
+    "group": "Управление",
+    "min": 2,
+    "max": 20,
+    "step": 1
+  },
+  "ui.clearMs": {
+    "value": 260,
+    "title": "Длительность сгорания, мс",
+    "group": "Управление",
+    "min": 0,
+    "max": 1000,
+    "step": 20
+  },
+  "ui.hintMs": {
+    "value": 3000,
+    "title": "Длительность подсказки, мс",
+    "group": "Управление",
+    "min": 500,
+    "max": 10000,
+    "step": 500
+  },
+  "ui.toastMs": {
+    "value": 2200,
+    "title": "Длительность сообщений, мс",
+    "group": "Управление",
+    "min": 500,
+    "max": 10000,
+    "step": 100
+  },
+  "w.dot": {
+    "value": 12,
+    "title": "Точка: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.line2": {
+    "value": 30,
+    "title": "Двойка: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.line3": {
+    "value": 100,
+    "title": "Тройка: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.line4": {
+    "value": 8,
+    "title": "Четвёрка: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.line5": {
+    "value": 40,
+    "title": "Пятёрка: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.corner3": {
+    "value": 15,
+    "title": "Малый уголок: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.corner4": {
+    "value": 8,
+    "title": "Уголок из четырёх: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.bigcorner": {
+    "value": 4,
+    "title": "Большой уголок: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.sq2": {
+    "value": 12,
+    "title": "Квадрат 2×2: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.sq3": {
+    "value": 25,
+    "title": "Квадрат 3×3: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.t4": {
+    "value": 6,
+    "title": "Т-образная: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.zig4": {
+    "value": 5,
+    "title": "Зигзаг: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.cross": {
+    "value": 1,
+    "title": "Крест: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "w.diag": {
+    "value": 1,
+    "title": "Диагональ: вес",
+    "group": "Фигуры",
+    "min": 0,
+    "max": 100,
+    "step": 0.1
+  },
+  "offline.capHours": {
+    "value": 24
+  },
+  "offline.efficiency": {
+    "value": 1
+  },
+  "screen.portrait": {
+    "value": true
+  },
+  "screen.keepOn": {
+    "value": true
+  },
+  "steps.cost.fresh": {
+    "value": 2
+  },
+  "deal.openingDeals": {
+    "value": 4,
+    "title": "Первые раздачи: проверка всей тройки",
+    "group": "Раздача",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "deal.openingBudget": {
+    "value": 20000,
+    "title": "Лимит поиска для первых раздач",
+    "group": "Раздача",
+    "min": 1000,
+    "max": 100000,
+    "step": 1000
+  },
+  "deal.openingMaxCells": {
+    "value": 3,
+    "title": "Максимум клеток в первых фигурах",
+    "group": "Раздача",
+    "min": 3,
+    "max": 9,
+    "step": 1
+  }
+}

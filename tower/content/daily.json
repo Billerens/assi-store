@@ -1,0 +1,44 @@
+[
+  {
+    "id": "daily-ironDoors",
+    "title": "Железный день",
+    "text": "Все враги начинают со щитом.",
+    "rule": "ironDoors",
+    "seed": "tower-ironDoors"
+  },
+  {
+    "id": "daily-costly",
+    "title": "День торговцев",
+    "text": "Торговцы подняли цены на весь день.",
+    "rule": "costly",
+    "seed": "tower-costly"
+  },
+  {
+    "id": "daily-embers",
+    "title": "День углей",
+    "text": "Пламя накладывается сильнее.",
+    "rule": "embers",
+    "seed": "tower-embers"
+  },
+  {
+    "id": "daily-generous",
+    "title": "Щедрая башня",
+    "text": "Бои приносят больше золота.",
+    "rule": "generous",
+    "seed": "tower-generous"
+  },
+  {
+    "id": "daily-frail",
+    "title": "Стеклянные ступени",
+    "text": "Начального здоровья меньше.",
+    "rule": "frail",
+    "seed": "tower-frail"
+  },
+  {
+    "id": "daily-quiet",
+    "title": "Тихая башня",
+    "text": "Отдых восстанавливает больше здоровья.",
+    "rule": "quiet",
+    "seed": "tower-quiet"
+  }
+]

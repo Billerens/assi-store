@@ -1,0 +1,8 @@
+{
+  "id": "wallpapers",
+  "kind": "module",
+  "title": "Обои дня",
+  "target": "modules/wallpapers",
+  "requires": [],
+  "shell": ["notify.actions", "widget.image", "job.once"]
+}

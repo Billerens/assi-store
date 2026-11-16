@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Приключение</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<style>
+  .page {
+    max-width: 800px;
+  }
+
+  .card,
+  .list {
+    box-shadow: none;
+  }
+
+  .chip {
+    min-height: 44px;
+  }
+
+  #genres .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  h2 {
+    font-size: 17px;
+    margin: 0;
+  }
+
+  .plot-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .plot-line {
+    color: var(--ink-2);
+    margin-top: 4px;
+  }
+
+  .card .btn.wide {
+    margin-top: 14px;
+  }
+
+  .note {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .note svg.i {
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+  }
+
+  .writing {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--ink-2);
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .plot-row {
+    text-align: left;
+  }
+
+  .plot-row .grow {
+    min-width: 0;
+  }
+
+  /* The playing view: one big line, one big button. */
+  .play {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: calc(100vh - 140px);
+  }
+
+  .chapter-line {
+    color: var(--ink-3);
+    font-size: 13px;
+  }
+
+  .narrator {
+    flex: 1;
+    margin: 0;
+    font-size: clamp(20px, 5.4vw, 28px);
+    line-height: 1.4;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  .heard {
+    color: var(--ink-2);
+    font-size: 15px;
+    min-height: 20px;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+
+  .level {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+
+  .level > div {
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    transition: width .08s linear;
+  }
+
+  .talk {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 112px;
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: 22px;
+    font-weight: 600;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .talk svg.i {
+    width: 30px;
+    height: 30px;
+  }
+
+  .talk.listening {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .talk:disabled {
+    opacity: .5;
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .controls .btn {
+    min-height: 52px;
+    padding: 0 8px;
+  }
+
+  .typed .icon-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .info {
+    color: var(--ink-3);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .set-group {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-top: 12px;
+  }
+
+  .set-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+  }
+
+  .set-row .grow {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .set-row input.input,
+  .set-row select.input {
+    width: 112px;
+    flex: none;
+  }
+
+  .sheet-scroll {
+    max-height: 72vh;
+    overflow-y: auto;
+  }
+
+  .log-row {
+    font-size: 13px;
+    color: var(--ink-2);
+    padding: 6px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 700px) {
+    .controls .btn {
+      min-height: 56px;
+    }
+
+    .talk {
+      min-height: 128px;
+    }
+  }
+</style>
+<body>
+<main class="page">
+  <header class="topbar">
+    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <h1>Приключение</h1>
+    <button class="icon-btn" id="openSettings" aria-label="Настройки" data-icon="settings"></button>
+  </header>
+
+  <div id="start" class="section">
+    <div id="continue"></div>
+    <div id="notes" class="section"></div>
+
+    <section class="section">
+      <h2>Новое приключение</h2>
+      <div class="chips" id="genres"></div>
+      <label class="field" id="customField" hidden>
+        <span>О чём будет история</span>
+        <input class="input" id="custom" maxlength="300" placeholder="Например: ночной поезд, где каждый вагон — другая эпоха">
+      </label>
+      <button class="btn primary wide" id="startNew" data-icon="play">Начать</button>
+    </section>
+
+    <section class="section" id="plotsBox" hidden>
+      <h2>Другие сюжеты</h2>
+      <div class="list" id="plots"></div>
+    </section>
+  </div>
+
+  <div id="play" class="play" hidden>
+    <div class="chapter-line" id="chapterLine" data-raw></div>
+    <p class="narrator" id="narrator" data-raw></p>
+    <div class="heard" id="heard" data-raw></div>
+    <div class="status">
+      <span data-icon="mic"></span>
+      <div class="level"><div id="levelBar"></div></div>
+      <span id="phase">Начинаю</span>
+    </div>
+    <button class="talk" id="talk" data-icon="mic"><span id="talkLabel">Говорить</span></button>
+    <div class="controls">
+      <button class="btn" id="repeat" data-icon="refresh">Повторить</button>
+      <button class="btn" id="pause" data-icon="pause"><span id="pauseLabel">Пауза</span></button>
+      <button class="btn danger" id="stop" data-icon="stop">Стоп</button>
+    </div>
+    <form class="row typed" id="typed">
+      <input class="input grow" id="typedText" autocomplete="off" placeholder="Написать вместо голоса">
+      <button class="icon-btn" type="submit" aria-label="Отправить" data-icon="send"></button>
+    </form>
+    <div class="info" id="info" data-raw></div>
+  </div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script>
+  // The voice loop lives in the engine (story-engine/voice.js): this screen only shows its state
+  // (event story.state) and sends commands. It may be closed or dark while the story plays.
+  const h = ui.h;
+  const MAIN = 'modules/voice-adventure/main.js';
+  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const $ = id => document.getElementById(id);
+  const PHASES = {
+    starting: 'Начинаю',
+    speaking: 'Рассказчик говорит',
+    listening: 'Слушаю',
+    waiting: 'Нажмите «Говорить»',
+    thinking: 'Думаю',
+    paused: 'Пауза',
+    idle: 'Остановлено'
+  };
+  const HOLD_MS = 400;
+
+  let status = null;
+  let voice = { running: false, phase: 'idle' };
+  let genre = 'house';
+  let waitingFor = null;   // a new plot whose first chapter is being written
+  let visible = true;
+
+  function note(icon, text) {
+    return h('div', { class: 'note' }, ui.icon(icon), h('span', {}, text));
+  }
+
+  function renderContinue() {
+    const box = $('continue');
+    const cur = status.current;
+    if (!cur) {
+      box.replaceChildren(h('div', { class: 'card' },
+        h('div', { class: 'plot-title' }, 'Голосовой квест для дороги'),
+        h('div', { class: 'plot-line' }, 'Рассказчик описывает место, вы отвечаете голосом: «иди на север», «возьми лампу», «открой дверь ключом». Работает без сети и сохраняется после каждой реплики.')));
+      return;
+    }
+    const writing = status.writing && status.writing.plot === cur.id;
+    const children = [
+      h('div', { class: 'plot-title', 'data-raw': '' }, cur.title),
+      h('div', { class: 'plot-line', 'data-raw': '' }, cur.ready ? cur.line : ui.t('Глава {} ещё не написана', cur.playing))
+    ];
+    if (cur.ready) children.push(h('div', { class: 'plot-line small' }, ui.t('Готово глав впереди: {}', cur.ahead)));
+    if (writing) {
+      children.push(h('div', { class: 'writing' }, h('span', { class: 'spinner' }),
+        h('span', {}, ui.t('Пишется глава {}, попытка {}', status.writing.chapter, status.writing.attempt))));
+    } else if (cur.lastError) {
+      children.push(h('div', { class: 'writing' }, ui.icon('info'), h('span', { 'data-raw': '' }, cur.lastError)));
+    }
+    const go = h('button', { class: 'btn primary wide', disabled: !cur.ready, onclick: () => play() }, ui.icon('play'), cur.ready ? 'Продолжить' : 'Ждём главу');
+    children.push(go);
+    box.replaceChildren(h('div', { class: 'card' }, children));
+  }
+
+  function renderNotes() {
+    const list = [];
+    if (!status.speech.ready) list.push(note('mic', 'Распознавание речи на телефоне не скачано. Его ставят в настройках голоса Assi — без него игра не услышит ответы.'));
+    if (!status.write.ok) list.push(note('info', ui.t('Новые главы пишутся, когда модель доступна. Сейчас: {}.', status.write.why)));
+    if (status.trip) list.push(note('phone', 'Вы в поездке: говорите, удерживая кнопку «Говорить» или нажав кнопку гарнитуры, — объявления станций не примутся за ход.'));
+    if (!status.local.ok) list.push(note('info', 'Модель на телефоне не скачана — непонятные фразы игра переспросит, а не угадает.'));
+    $('notes').replaceChildren(...list);
+  }
+
+  const GENRE_ICONS = { house: 'home', expedition: 'pin', 'maze-city': 'grid', custom: 'edit', demo: 'star' };
+
+  function renderGenres() {
+    $('genres').replaceChildren(...status.genres.map(g => h('button', {
+      class: 'chip' + (g.id === genre ? ' on' : ''),
+      title: g.brief,
+      onclick: () => {
+        genre = g.id;
+        renderGenres();
+      }
+    }, ui.icon(GENRE_ICONS[g.id] || 'book'), g.title)));
+    $('customField').hidden = genre !== 'custom';
+  }
+
+  function renderPlots() {
+    const others = status.plots.filter(p => !status.current || p.id !== status.current.id);
+    $('plotsBox').hidden = !others.length;
+    $('plots').replaceChildren(...others.map(p => h('div', { class: 'plot-row' },
+      h('div', { class: 'grow' },
+        h('div', { class: 'truncate', style: 'font-weight: 600', 'data-raw': '' }, p.title),
+        h('div', { class: 'small muted truncate', 'data-raw': '' }, p.line + (p.lastPlayed ? ' · ' + ui.ago(p.lastPlayed) : ''))),
+      h('button', { class: 'icon-btn', 'aria-label': 'Продолжить этот сюжет', onclick: async () => {
+        await call('selectPlot', p.id);
+        await refresh();
+      } }, ui.icon('play')),
+      h('button', { class: 'icon-btn', 'aria-label': 'Удалить сюжет', onclick: async () => {
+        if (!(await ui.confirm(ui.t('Удалить сюжет «{}» со всеми главами?', p.title), 'Удалить', true))) return;
+        await call('removePlot', p.id);
+        await refresh();
+      } }, ui.icon('trash')))));
+  }
+
+  function renderPlay() {
+    const info = voice.info || {};
+    $('chapterLine').textContent = [info.plotTitle, info.chapter ? ui.t('глава {}', info.chapter) : '', info.room].filter(Boolean).join(' · ');
+    $('narrator').textContent = voice.text || '';
+    $('heard').textContent = voice.heard ? ui.t('Вы: {}', voice.heard) : '';
+    const phase = voice.phase || 'idle';
+    $('phase').textContent = ui.t(PHASES[phase] || phase) + (voice.ptt && phase !== 'listening' ? ' · ' + ui.t('нажми и говори') : '');
+    const talk = $('talk');
+    talk.classList.toggle('listening', phase === 'listening');
+    talk.disabled = phase === 'thinking';
+    $('talkLabel').textContent = phase === 'listening' ? ui.t('Готово') : ui.t('Говорить');
+    $('pauseLabel').textContent = phase === 'paused' ? ui.t('Дальше') : ui.t('Пауза');
+    const bits = [];
+    if (info.inventory) bits.push(info.inventory.length ? ui.t('С собой: {}', info.inventory.join(', ')) : ui.t('Руки пусты'));
+    if (info.hints) bits.push(ui.t('Подсказок: {}', info.hints));
+    if (info.recorded) bits.push(ui.t('Записанный голос: {} фраз', info.recorded));
+    if (voice.error) bits.push(ui.t('Ошибка: {}', voice.error));
+    $('info').textContent = bits.join(' · ');
+    if (phase !== 'listening') $('levelBar').style.width = '0';
+  }
+
+  function show() {
+    const playing = !!voice.running;
+    $('start').hidden = playing;
+    $('play').hidden = !playing;
+    if (playing) renderPlay();
+    else if (status) {
+      renderContinue();
+      renderNotes();
+      renderGenres();
+      renderPlots();
+    }
+  }
+
+  async function refresh() {
+    status = await call('status');
+    voice = status.voice || { running: false };
+    show();
+  }
+
+  async function play() {
+    const out = await call('play');
+    if (!out.ok) {
+      ui.toast(out.why);
+      return refresh();
+    }
+    voice = out.state;
+    show();
+  }
+
+  $('startNew').onclick = async () => {
+    const custom = $('custom').value.trim();
+    if (genre === 'custom' && !custom) {
+      $('custom').focus();
+      ui.toast('Опишите в двух словах, о чём история');
+      return;
+    }
+    try {
+      const out = await call('newAdventure', { genre, custom });
+      if (out.ready) return play();
+      if (!out.ok) {
+        ui.toast(out.why);
+        return refresh();
+      }
+      waitingFor = out.plot;
+      ui.toast('Пишется первая глава — это займёт минуту-две');
+      refresh();
+    } catch (error) {
+      ui.toast(error.message);
+    }
+  };
+
+  // «Говорить»: a tap listens until a pause in speech; holding it listens until it is let go.
+  let pressedAt = 0;
+  $('talk').addEventListener('pointerdown', event => {
+    event.preventDefault();
+    pressedAt = Date.now();
+    if (voice.phase === 'listening') {
+      call('command', 'release');
+      pressedAt = 0;
+      return;
+    }
+    call('command', voice.phase === 'paused' ? 'resume' : 'talk');
+  });
+  const letGo = () => {
+    if (pressedAt && Date.now() - pressedAt >= HOLD_MS) call('command', 'release');
+    pressedAt = 0;
+  };
+  $('talk').addEventListener('pointerup', letGo);
+  $('talk').addEventListener('pointercancel', letGo);
+  $('talk').addEventListener('pointerleave', letGo);
+
+  $('repeat').onclick = () => call('command', 'repeat');
+  $('pause').onclick = () => call('command', voice.phase === 'paused' ? 'resume' : 'pause');
+  $('stop').onclick = () => call('stopPlay');
+  $('typed').onsubmit = event => {
+    event.preventDefault();
+    const text = $('typedText').value.trim();
+    if (!text) return;
+    $('typedText').value = '';
+    call('command', 'say', text);
+  };
+
+  // ---- settings -----------------------------------------------------------------------------------
+
+  function settingInput(row) {
+    const save = async value => {
+      try {
+        await call('saveSettings', { [row.key]: value });
+        ui.toast('Сохранено');
+      } catch (error) {
+        ui.toast(error.message);
+      }
+    };
+    if (row.type === 'boolean') {
+      const box = h('input', { type: 'checkbox', class: 'switch', checked: !!row.value, 'aria-label': row.title });
+      box.onchange = () => save(box.checked);
+      return box;
+    }
+    if (row.options) {
+      const select = h('select', { class: 'input', 'aria-label': row.title },
+        row.options.map(([id, title]) => h('option', { value: id, selected: id === row.value }, title)));
+      select.onchange = () => save(select.value);
+      return select;
+    }
+    const input = h('input', { class: 'input', type: 'number', inputMode: 'decimal', value: row.value, min: row.min, max: row.max, step: row.step || (row.integer ? 1 : 'any'), 'aria-label': row.title });
+    input.onchange = async () => {
+      await save(input.value);
+      const fresh = (await call('settingsView')).find(one => one.key === row.key);
+      if (fresh) input.value = fresh.value;
+    };
+    return input;
+  }
+
+  async function openSettings() {
+    const rows = await call('settingsView');
+    const body = [h('h3', {}, 'Настройки')];
+    let group = null;
+    rows.forEach(row => {
+      if (row.group !== group) {
+        group = row.group;
+        body.push(h('div', { class: 'set-group' }, group));
+      }
+      body.push(h('label', { class: 'set-row' }, h('span', { class: 'grow' }, row.title), settingInput(row)));
+    });
+    const audioLine = h('div', { class: 'small muted' }, ui.t('Записи голоса занимают {} МБ', status ? status.audioMb : 0));
+    body.push(h('div', { class: 'set-group' }, 'Запись голоса сейчас'));
+    body.push(audioLine);
+    body.push(h('button', { class: 'btn wide', onclick: async () => {
+      ui.toast('Записываю — это может занять несколько минут');
+      const out = await call('prerenderNow', true);
+      if (out.skipped) ui.toast(out.skipped);
+      else if (out.busy) ui.toast('Запись уже идёт');
+      else ui.toast(ui.t('Записано фраз: {}', out.done) + (out.error ? ' · ' + out.error : ''));
+    } }, ui.icon('download'), 'Записать голос для следующих глав'));
+    body.push(h('button', { class: 'btn wide', onclick: async () => {
+      const out = await call('refill', 'button');
+      if (out.skipped) ui.toast(out.skipped);
+      else if (out.busy) ui.toast('Глава уже пишется');
+      else ui.toast(out.error ? out.error : ui.t('Написано глав: {}', out.written.length));
+      refresh();
+    } }, ui.icon('refresh'), 'Пополнить запас глав'));
+    const journal = await call('log', 30);
+    body.push(h('div', { class: 'set-group' }, 'Журнал'));
+    body.push(h('div', { 'data-raw': '' }, journal.length ? journal.map(entry => h('div', { class: 'log-row' }, ui.raw(ui.ago(entry.at) + ' — ' + entry.text))) : h('div', { class: 'small muted' }, ui.t('Пока пусто'))));
+    body.push(h('p', { class: 'small muted' }, 'Какая модель пишет главы и какая понимает фразы без сети — в Настройках Assi, раздел «Кто на какой модели»: «Приключение: главы» и «Приключение: модель на телефоне».'));
+    ui.sheet(h('div', { class: 'sheet-scroll' }, body));
+  }
+
+  $('openSettings').onclick = openSettings;
+
+  // ---- events from the engine ------------------------------------------------------------------------
+
+  assi.on('story.state', state => {
+    if (!state || (state.id && state.id !== 'quest')) return;
+    const was = voice.running;
+    voice = state;
+    if (was && !state.running) refresh();
+    else show();
+  });
+
+  assi.on('stories.quest', event => {
+    if (event && event.phase === 'written' && waitingFor && event.plot === waitingFor && event.chapter === 1) {
+      waitingFor = null;
+      if (visible) {
+        play();
+        return;
+      }
+    }
+    if (event && event.phase === 'failed' && waitingFor && event.plot === waitingFor) {
+      waitingFor = null;
+      ui.toast(ui.t('Глава не написана: {}', event.error || ''));
+    }
+    if (!voice.running) refresh();
+  });
+
+  assi.on('speech', event => {
+    if (!event || voice.phase !== 'listening') return;
+    $('levelBar').style.width = Math.min(100, Math.round((event.level || 0) * 400)) + '%';
+  });
+
+  assi.on('app.visible', event => {
+    visible = !!(event && event.on);
+    if (visible) refresh();
+  });
+
+  refresh().catch(error => ui.toast(error.message));
+</script>
+</body>
+</html>

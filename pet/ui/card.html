@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Питомец</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: transparent;
+  }
+
+  .pet-card {
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px 10px 8px;
+    color: var(--ink);
+    overflow: hidden;
+  }
+
+  .pet-pic {
+    flex: none;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 112px;
+  }
+
+  .pet-pic svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pet-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .pet-title {
+    font-size: 16px;
+    font-weight: 650;
+    overflow-wrap: anywhere;
+  }
+
+  .pet-energy {
+    font-size: 13px;
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+
+  .pet-phrase {
+    font-size: 14px;
+    line-height: 1.35;
+    color: var(--ink-2);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* The card is a sector of the home grid (the home draws the plate). 2×2: the creature and its name. */
+  @media (max-width: 299px) {
+    .pet-card {
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      padding: 8px;
+    }
+
+    .pet-pic {
+      height: auto;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .pet-text {
+      flex: none;
+      width: 100%;
+      align-items: center;
+    }
+
+    .pet-title {
+      max-width: 100%;
+      font-size: 14px;
+    }
+
+    .pet-energy,
+    .pet-phrase {
+      display: none;
+    }
+  }
+
+  /* 4×3 and taller: a bigger creature and room for the whole phrase. */
+  @media (min-height: 240px) {
+    .pet-pic {
+      max-height: 220px;
+    }
+
+    .pet-phrase {
+      -webkit-line-clamp: 5;
+    }
+  }
+</style>
+<body>
+<div class="pet-card">
+  <div class="pet-pic" id="pic" aria-hidden="true"></div>
+  <div class="pet-text">
+    <div class="pet-title"><span id="title" data-raw></span> <span class="pet-energy" id="energy"></span></div>
+    <div class="pet-phrase" id="phrase" data-raw></div>
+  </div>
+</div>
+<script>
+  // The home card: the creature, the state and the phrase. A tap opens the pet's room (the shell does it).
+  (function () {
+    var api = window.assi || (window.parent && window.parent.assi);
+    var MAIN = 'modules/pet/main.js';
+    var pending = null;
+
+    function draw(c) {
+      document.getElementById('pic').innerHTML = c.svg;
+      document.getElementById('title').textContent = c.name + ' · ' + String(c.title).toLowerCase();
+      document.getElementById('energy').textContent = typeof c.energy === 'number' ? c.energy : '';
+      document.getElementById('phrase').textContent = c.phrase || '';
+      var lids = document.querySelectorAll('#pic .pt-blink');
+      var again = function () {
+        var seconds = (3 + Math.random() * 4).toFixed(1) + 's';
+        lids.forEach(function (lid) { lid.style.animationDuration = seconds; });
+      };
+      again();
+      if (lids[0]) lids[0].addEventListener('animationiteration', again);
+    }
+
+    function load() {
+      if (!api) return;
+      api.call(MAIN, 'card').then(draw).catch(function (error) {
+        document.getElementById('phrase').textContent = String(error && error.message || error);
+      });
+    }
+
+    function later() {
+      clearTimeout(pending);
+      pending = setTimeout(load, 400);
+    }
+
+    load();
+    if (api) {
+      api.on('pet.changed', later);
+      api.on('pet.react', later);
+      api.on('app.visible', function (state) { if (state && state.on) later(); });
+    }
+  })();
+</script>
+</body>
+</html>

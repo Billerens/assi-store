@@ -1,0 +1,116 @@
+{
+  "about": "Как читать уведомления мессенджеров. Это заводской список: правки и новые мессенджеры кладите в data/inbox/parsers.json (тот же вид, запись с тем же id заменяет заводскую). Регулярные выражения — строки JavaScript без флагов, сравнение без учёта регистра. title — правила для заголовка (группа видна по нему), text — для текста («Петя: текст»), when: group — только если беседа уже известна как группа, always — всегда. hidden — текст, которым мессенджер прячет содержимое; skip — заголовки служебных уведомлений; self — как мессенджер называет владельца.",
+  "parsers": [
+    {
+      "id": "telegram",
+      "name": "Telegram",
+      "packages": ["org.telegram.messenger", "org.telegram.messenger.web", "org.telegram.plus", "org.thunderdog.challegram", "nekox.messenger", "tw.nekomimi.nekogram"],
+      "titleClean": ["\\s*\\(\\d+[^)]*\\)\\s*$"],
+      "title": [{ "re": "^(.+?) @ (.+)$", "sender": 1, "chat": 2, "group": true }],
+      "text": [{ "re": "^([^:\\n]{1,40}): ([\\s\\S]+)$", "sender": 1, "text": 2, "when": "group" }],
+      "hidden": ["^(у вас )?(\\d+ )?(новое|новых|новые) сообщени\\S*( в \\d+ чат\\S*)?\\.?$", "^(you have )?(a |\\d+ )?new messages?( from \\d+ chats?)?\\.?$"],
+      "skip": ["^telegram$"],
+      "skipText": ["^(обновление|updating|подключение|connecting)\\S*"],
+      "self": ["^(вы|you)$"]
+    },
+    {
+      "id": "whatsapp",
+      "name": "WhatsApp",
+      "packages": ["com.whatsapp", "com.whatsapp.w4b"],
+      "titleClean": ["\\s*\\(\\d+ [^)]*\\)"],
+      "title": [
+        { "re": "^(.+?) @ (.+)$", "sender": 1, "chat": 2, "group": true },
+        { "re": "^(.+?): (.+)$", "chat": 1, "sender": 2, "group": true }
+      ],
+      "text": [],
+      "hidden": ["^(\\d+ )?(новое|новых|новые) сообщени\\S*( из \\d+ чат\\S*)?\\.?$", "^(\\d+ )?new messages?( from \\d+ chats?)?\\.?$"],
+      "skip": ["^whatsapp( business)?$"],
+      "skipText": ["^(проверка новых сообщений|checking for new messages|whatsapp web)"],
+      "self": ["^(вы|you)$"]
+    },
+    {
+      "id": "viber",
+      "name": "Viber",
+      "packages": ["com.viber.voip"],
+      "titleClean": ["\\s*\\(\\d+[^)]*\\)\\s*$"],
+      "title": [],
+      "text": [{ "re": "^([^:\\n]{1,40}): ([\\s\\S]+)$", "sender": 1, "text": 2, "when": "group" }],
+      "hidden": ["^(новое сообщение|new message)\\.?$"],
+      "skip": ["^viber$"],
+      "skipText": [],
+      "self": ["^(вы|you)$"]
+    },
+    {
+      "id": "vk",
+      "name": "VK",
+      "packages": ["com.vkontakte.android", "com.vk.im"],
+      "titleClean": ["\\s*\\(\\d+[^)]*\\)\\s*$"],
+      "title": [],
+      "text": [{ "re": "^([^:\\n]{1,40}): ([\\s\\S]+)$", "sender": 1, "text": 2, "when": "group" }],
+      "hidden": ["^(новое сообщение|у вас новое сообщение|new message)\\.?$"],
+      "skip": ["^(вконтакте|vk)$"],
+      "skipText": [],
+      "self": ["^(вы|you)$"]
+    },
+    {
+      "id": "max",
+      "name": "MAX",
+      "packages": ["ru.oneme.app"],
+      "titleClean": ["\\s*\\(\\d+[^)]*\\)\\s*$"],
+      "title": [],
+      "text": [{ "re": "^([^:\\n]{1,40}): ([\\s\\S]+)$", "sender": 1, "text": 2, "when": "group" }],
+      "hidden": ["^(новое сообщение|new message)\\.?$"],
+      "skip": ["^max$"],
+      "skipText": [],
+      "self": ["^(вы|you)$"]
+    },
+    {
+      "id": "samsung-messages",
+      "name": "Сообщения Samsung",
+      "packages": ["com.samsung.android.messaging"],
+      "titleClean": [],
+      "title": [],
+      "text": [{ "re": "^([^:\\n]{1,40}): ([\\s\\S]+)$", "sender": 1, "text": 2, "when": "group" }],
+      "hidden": ["^(новое сообщение|new message)\\.?$"],
+      "skip": [],
+      "skipText": [],
+      "self": ["^(вы|you|я|me)$"]
+    },
+    {
+      "id": "google-messages",
+      "name": "Google Сообщения",
+      "packages": ["com.google.android.apps.messaging"],
+      "titleClean": [],
+      "title": [],
+      "text": [{ "re": "^([^:\\n]{1,40}): ([\\s\\S]+)$", "sender": 1, "text": 2, "when": "group" }],
+      "hidden": ["^(новое сообщение|new message)\\.?$"],
+      "skip": [],
+      "skipText": [],
+      "self": ["^(вы|you|я|me)$"]
+    },
+    {
+      "id": "signal",
+      "name": "Signal",
+      "packages": ["org.thoughtcrime.securesms"],
+      "titleClean": [],
+      "title": [],
+      "text": [{ "re": "^([^:\\n]{1,40}): ([\\s\\S]+)$", "sender": 1, "text": 2, "when": "group" }],
+      "hidden": ["^(новое сообщение|new message)\\.?$"],
+      "skip": ["^signal$"],
+      "skipText": [],
+      "self": ["^(вы|you)$"]
+    }
+  ],
+  "generic": {
+    "id": "generic",
+    "name": "",
+    "packages": [],
+    "titleClean": ["\\s*\\(\\d+[^)]*\\)\\s*$"],
+    "title": [],
+    "text": [{ "re": "^([^:\\n]{1,40}): ([\\s\\S]+)$", "sender": 1, "text": 2, "when": "group" }],
+    "hidden": ["^(новое сообщение|new message|сообщение|message|содержимое скрыто|contents hidden|hidden content)\\.?$"],
+    "skip": [],
+    "skipText": [],
+    "self": ["^(вы|you)$"]
+  }
+}

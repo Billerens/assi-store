@@ -1,0 +1,232 @@
+[
+  {
+    "id": "flagellum",
+    "title": "Жгутик",
+    "text": "Колонии находят пищу прежде, чем течение унесёт её.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 0
+  },
+  {
+    "id": "chloroplast",
+    "title": "Хлоропласт",
+    "text": "Губки получают помощь от соседей, умеющих ловить свет.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 1
+  },
+  {
+    "id": "eyespot",
+    "title": "Глаз-пятно",
+    "text": "Медузы различают свет и тень и выбирают удачную глубину.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 2
+  },
+  {
+    "id": "fin",
+    "title": "Плавник",
+    "text": "Пловцы удерживают направление и тратят меньше сил.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 4
+  },
+  {
+    "id": "gills",
+    "title": "Жабры",
+    "text": "Пловцы извлекают больше кислорода из воды.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 4
+  },
+  {
+    "id": "lungs",
+    "title": "Лёгкие",
+    "text": "Черви сохраняют запас воздуха между приливами.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 3
+  },
+  {
+    "id": "scales",
+    "title": "Чешуя",
+    "text": "Пловцов защищает лёгкий покров из перекрывающихся пластин.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 4
+  },
+  {
+    "id": "feather",
+    "title": "Перо",
+    "text": "Тонкие покровы помогают червям сохранять тепло и чувствовать поток.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 3
+  },
+  {
+    "id": "warm-blood",
+    "title": "Тёплая кровь",
+    "text": "Пловцы сохраняют активность в прохладных течениях.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 4
+  },
+  {
+    "id": "shelled-egg",
+    "title": "Яйцо в скорлупе",
+    "text": "Колонии лучше защищают следующее поколение.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 0
+  },
+  {
+    "id": "schooling",
+    "title": "Стайность",
+    "text": "Медузы движутся группой и реже теряются в течениях.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 2
+  },
+  {
+    "id": "tail-rudder",
+    "title": "Хвостовой руль",
+    "text": "Черви быстро меняют направление и находят новые укрытия.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 3
+  },
+  {
+    "id": "night-vision",
+    "title": "Ночное зрение",
+    "text": "Медузы находят пищу в сумерках и на большой глубине.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 2
+  },
+  {
+    "id": "echolocation",
+    "title": "Эхолокация",
+    "text": "Пловцы узнают форму пространства по вернувшемуся звуку.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 4
+  },
+  {
+    "id": "venom",
+    "title": "Яд",
+    "text": "Медузы отпугивают угрозы и лучше удерживают добычу.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 2
+  },
+  {
+    "id": "mimicry",
+    "title": "Мимикрия",
+    "text": "Губки сливаются с окружением и спокойно растут.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 1
+  },
+  {
+    "id": "symbiosis",
+    "title": "Симбиоз",
+    "text": "Колонии обмениваются веществами с полезными соседями.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 0
+  },
+  {
+    "id": "hibernation",
+    "title": "Спячка",
+    "text": "Губки пережидают недостаток пищи и сохраняют силы.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 1
+  },
+  {
+    "id": "grasping-hand",
+    "title": "Хватательная кисть",
+    "text": "Черви удерживают пищу гибкими выростами.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 3
+  },
+  {
+    "id": "cilia",
+    "title": "Реснички",
+    "text": "Колонии создают вокруг себя направленный поток воды.",
+    "rarity": "common",
+    "effect": "producer",
+    "producer": 0
+  },
+  {
+    "id": "nerve-net",
+    "title": "Нервная сеть",
+    "text": "Части тела обмениваются сигналами и действуют согласованно.",
+    "rarity": "rare",
+    "effect": "stage"
+  },
+  {
+    "id": "skeleton",
+    "title": "Внутренний скелет",
+    "text": "Опора тела позволяет жизни расти и двигаться увереннее.",
+    "rarity": "rare",
+    "effect": "stage"
+  },
+  {
+    "id": "oxygen-blood",
+    "title": "Перенос кислорода",
+    "text": "Питание достигает каждой части сложного организма.",
+    "rarity": "rare",
+    "effect": "stage"
+  },
+  {
+    "id": "bilateral",
+    "title": "Двусторонняя симметрия",
+    "text": "У тела появляется передняя сторона и ясное направление движения.",
+    "rarity": "rare",
+    "effect": "stage"
+  },
+  {
+    "id": "regeneration",
+    "title": "Регенерация",
+    "text": "Повреждённые ткани восстанавливаются, сохраняя удачные формы.",
+    "rarity": "rare",
+    "effect": "stage"
+  },
+  {
+    "id": "sexual-reproduction",
+    "title": "Обмен наследственностью",
+    "text": "Признаки смешиваются, и новые сочетания осваивают новые ниши.",
+    "rarity": "rare",
+    "effect": "stage"
+  },
+  {
+    "id": "homeostasis",
+    "title": "Внутреннее равновесие",
+    "text": "Организм поддерживает подходящие условия внутри себя.",
+    "rarity": "rare",
+    "effect": "stage"
+  },
+  {
+    "id": "photosynthesis",
+    "title": "Световая фабрика",
+    "text": "Сложные сообщества превращают солнечный свет в доступную пищу.",
+    "rarity": "rare",
+    "effect": "stage"
+  },
+  {
+    "id": "shell",
+    "title": "Панцирь",
+    "text": "Защищённая пищевая пирамида сохраняет лишних хищников; без пищи они не увеличивают разнообразие.",
+    "rarity": "special",
+    "effect": "shell"
+  },
+  {
+    "id": "double-generation",
+    "title": "Двойное поколение",
+    "text": "Каждое завершённое поколение даёт дополнительный выбор мутации.",
+    "rarity": "special",
+    "effect": "double-generation"
+  }
+]

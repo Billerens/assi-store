@@ -1,0 +1,184 @@
+/* Экран «Искр в кольце»: тёмная основа кита, серые панели, без теней.
+   Кольцо растёт под ширину экрана, полоса-ловушка — часть кольца. */
+
+.i-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  min-height: 0;
+}
+
+.i-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-height: 44px;
+}
+
+.i-score {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.i-combo {
+  flex: 1;
+  min-width: 0;
+  color: var(--ink-2);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.i-lives {
+  display: flex;
+  gap: 6px;
+  flex: none;
+}
+
+.i-life {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink-3);
+  background: transparent;
+}
+
+.i-life.on {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.i-clock {
+  flex: none;
+  color: var(--ink-3);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.i-board {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin-left: 8px;
+  margin-right: 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+  touch-action: none;
+}
+
+.i-board canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.i-board:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.i-over {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px;
+  background: var(--surface-2);
+  text-align: center;
+}
+
+.i-over .t {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.i-over[hidden] {
+  display: none;
+}
+
+.i-over .s {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.i-hint {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ink-2);
+  font-size: 15px;
+  text-align: center;
+}
+
+.i-hint b {
+  color: var(--ink);
+}
+
+.i-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  justify-content: center;
+  color: var(--ink-3);
+  font-size: 13px;
+  padding: 0 4px;
+}
+
+.i-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.i-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink-3);
+}
+
+.i-dot.in {
+  border-color: #ffe3a5;
+  background: #ffe3a5;
+}
+
+.i-dot:not(.in) {
+  border-color: #9db9c3;
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+
+.i-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.i-actions > * {
+  flex: 1;
+}
+
+@media (max-height: 620px) {
+  .i-legend {
+    display: none;
+  }
+
+  .i-score {
+    font-size: 26px;
+  }
+}
+
+@media (min-height: 820px) {
+  .i-board {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+}

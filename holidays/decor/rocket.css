@@ -1,0 +1,26 @@
+/* День космонавтики: контур ракеты рядом с круглой кнопкой чата (сама кнопка — часть оболочки,
+стили до неё не достают, поэтому ракета стоит левее неё). Взлетает на место при открытии. */
+html::after {
+  content: "";
+  position: fixed;
+  right: 86px;
+  bottom: 30px;
+  width: 30px;
+  height: 30px;
+  z-index: 40;
+  pointer-events: none;
+  background: svg(rocket, accent) center / contain no-repeat;
+  transform: rotate(35deg);
+  animation: holiday-rocket var(--holiday-motion) ease-out 1 both;
+}
+
+@keyframes holiday-rocket {
+  from {
+    transform: translate(-48px, 64px) rotate(35deg);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0) rotate(35deg);
+    opacity: 1;
+  }
+}

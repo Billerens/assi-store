@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Обои дня</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<link rel="stylesheet" href="wallpapers.css">
+<body>
+<main class="page wide">
+  <header class="topbar">
+    <button class="icon-btn" id="back" aria-label="Назад" data-icon="back"></button>
+    <h1 class="grow">Обои дня</h1>
+    <button class="icon-btn" id="now" aria-label="Подобрать сейчас" data-icon="refresh"></button>
+  </header>
+
+  <p class="progress small muted" id="progress" aria-live="polite" hidden></p>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <div class="tab" data-tab="today">
+    <div id="today"></div>
+  </div>
+
+  <div class="tab" data-tab="history">
+    <div class="grid" id="historyGrid"></div>
+    <div class="more" id="historyMore"></div>
+  </div>
+
+  <div class="tab" data-tab="favorites">
+    <p class="muted small">По дням «из избранного» (настройка) ставится картинка отсюда — та, что дольше всех не показывалась.</p>
+    <div class="grid" id="favoritesGrid"></div>
+  </div>
+
+  <div class="tab" data-tab="settings">
+    <div class="groups" id="settingsView"></div>
+  </div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script src="wallpapers.js"></script>
+</body>
+</html>

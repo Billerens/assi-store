@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Диктофон</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<style>
+  .page {
+    max-width: 880px;
+  }
+
+  .chip,
+  .btn.small {
+    min-height: 44px;
+  }
+
+  .chip:disabled:not(.on) {
+    opacity: 0.45;
+  }
+
+  .rec-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .rec-grid > * {
+    min-width: 0;
+  }
+
+  .rec {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 16px;
+  }
+
+  .rec-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .modes {
+    justify-content: center;
+  }
+
+  .modes .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .timer {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .level {
+    width: 100%;
+    max-width: 360px;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+
+  .level > div {
+    height: 100%;
+    width: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 0.15s linear;
+  }
+
+  .level.paused > div {
+    background: var(--ink-3);
+  }
+
+  .rec-note {
+    min-height: 18px;
+    text-align: center;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    width: 100%;
+  }
+
+  .round {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font-size: 13px;
+    padding: 0;
+  }
+
+  .round .disc {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--surface-2);
+    color: var(--ink);
+    font-size: 26px;
+  }
+
+  .round.main .disc {
+    width: 96px;
+    height: 96px;
+    font-size: 38px;
+    background: var(--danger);
+    color: var(--bg);
+  }
+
+  .round .disc svg.i {
+    width: 1em;
+    height: 1em;
+  }
+
+  .round.start .disc {
+    width: 112px;
+    height: 112px;
+    font-size: 44px;
+  }
+
+  .round:active .disc {
+    opacity: 0.8;
+  }
+
+  .round:disabled {
+    opacity: 0.5;
+  }
+
+  .live-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+
+  .para {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 8px;
+  }
+
+  .para .at {
+    color: var(--ink-3);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    padding-top: 2px;
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-s);
+    padding: 0 12px;
+  }
+
+  .search input {
+    border: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background: none;
+  }
+
+  .scroll-chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .scroll-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-chips .chip {
+    flex: none;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .item .head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .item .kind {
+    color: var(--ink-2);
+    font-size: 18px;
+    flex: none;
+  }
+
+  .item .title {
+    flex: 1;
+    min-width: 0;
+    font-weight: 600;
+  }
+
+  .item .meta {
+    color: var(--ink-3);
+    font-size: 12px;
+  }
+
+  .item .first {
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+
+  .item .hit {
+    color: var(--ink-2);
+    font-size: 13px;
+    border-left: 2px solid var(--accent);
+    padding-left: 8px;
+  }
+
+  .tasks-in {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 4px;
+  }
+
+  .task {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    min-height: 44px;
+    padding: 6px 0;
+  }
+
+  .task input {
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+    flex: none;
+    accent-color: var(--accent);
+  }
+
+  .task .who {
+    color: var(--ink-3);
+    font-size: 12px;
+  }
+
+  .state-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-2);
+    font-size: 13px;
+  }
+
+  .warn {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+
+  .warn [data-icon] {
+    flex: none;
+    font-size: 18px;
+    color: var(--ink-3);
+  }
+
+  .set-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .set-group h3 {
+    margin: 8px 0 4px;
+    font-size: 15px;
+  }
+
+  .set {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 6px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .set:first-of-type {
+    border-top: 0;
+  }
+
+  .set .label {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .set .hint {
+    display: block;
+    color: var(--ink-3);
+    font-size: 12px;
+  }
+
+  .set .input {
+    flex: none;
+    width: 168px;
+    max-width: 46%;
+  }
+
+  .set.block {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .set.block .input {
+    max-width: none;
+    width: 100%;
+  }
+
+  .stat {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 32px;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .stat span:last-child {
+    color: var(--ink-2);
+    text-align: right;
+  }
+
+  .upload-progress {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+
+  .upload-progress > div {
+    height: 100%;
+    background: var(--accent);
+    width: 0;
+  }
+
+  @media (min-width: 700px) {
+    .rec-grid {
+      grid-template-columns: minmax(300px, 2fr) minmax(0, 3fr);
+    }
+
+    .rec {
+      position: sticky;
+      top: 12px;
+    }
+  }
+
+  /* A half-open Fold on the table (Flex): the timer and the level above the fold, the buttons below. */
+  @media (vertical-viewport-segments: 2) {
+    .tab[data-tab="record"] .rec {
+      display: grid;
+      grid-template-rows: env(viewport-segment-height 0 0, 50vh) env(viewport-segment-height 0 1, 50vh);
+      padding: 0;
+      gap: 0;
+    }
+
+    .tab[data-tab="record"] .rec-top,
+    .tab[data-tab="record"] .controls {
+      align-self: center;
+    }
+  }
+
+  body.folded .tab[data-tab="record"] .rec {
+    display: grid;
+    grid-template-rows: 46vh 46vh;
+    padding: 0;
+    gap: 0;
+  }
+
+  body.folded .tab[data-tab="record"] .rec-top,
+  body.folded .tab[data-tab="record"] .controls {
+    align-self: center;
+  }
+
+  /* A narrow screen: a list of choices goes under its title, at full width. */
+  @media (max-width: 440px) {
+    .set.choice {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+    }
+
+    .set.choice .input {
+      width: 100%;
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .timer {
+      font-size: 36px;
+    }
+
+    .controls {
+      gap: 14px;
+    }
+  }
+</style>
+<body>
+<main class="page">
+  <header class="topbar">
+    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <h1>Диктофон</h1>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <div class="tab" data-tab="record">
+    <div class="rec-grid">
+      <section class="card rec" id="rec">
+        <div class="rec-top">
+          <div class="chips modes" id="modes"></div>
+          <div class="timer" id="timer">0:00</div>
+          <div class="level" id="level"><div></div></div>
+          <div class="rec-note muted small" id="recNote"></div>
+        </div>
+        <div class="controls" id="controls"></div>
+      </section>
+      <div class="section">
+        <section class="section" id="liveBox" hidden>
+          <h2>Расшифровка по ходу</h2>
+          <div class="card live-text" id="live" data-raw></div>
+        </section>
+        <section class="section" id="warnings"></section>
+        <section class="section" id="recentBox">
+          <h2>Последние записи</h2>
+          <div class="list" id="recent"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab" data-tab="archive">
+    <div class="row">
+      <label class="search">
+        <span data-icon="search"></span>
+        <input class="input" id="q" type="search" placeholder="Поиск по словам и по смыслу" autocomplete="off">
+      </label>
+    </div>
+    <div class="scroll-chips" id="kinds"></div>
+    <section class="section" id="uploads"></section>
+    <section class="section" id="archive"></section>
+  </div>
+
+  <div class="tab" data-tab="settings" id="settings"></div>
+</main>
+<input type="file" id="file" accept="audio/*,.m4a,.ogg,.opus,.mp3,.wav,.amr,.3gp,.webm,.flac" hidden>
+<script src="/ui/kit/kit.js"></script>
+<script src="common.js"></script>
+<script>
+  // Диктофон: the screen of modules/recorder — the recording, the archive, the settings.
+  const h = ui.h;
+  const { call, KIND, KIND_ICON, STATE, clock, length, when, dueText, plural, fail } = window.rec;
+  const ITEM = 'modules/recorder/ui/item.html';
+  const MODE_ICONS = { auto: 'spark', meeting: 'user', note: 'note', lecture: 'book' };
+  const MODES = [['auto', 'Авто'], ['meeting', 'Встреча'], ['note', 'Мысль'], ['lecture', 'Лекция']];
+  const KINDS = [[null, 'Все'], ['meeting', 'Встречи'], ['note', 'Мысли'], ['lecture', 'Лекции'], ['tasks', 'С задачами']];
+  const CHUNK = 384 * 1024;
+
+  let state = { tab: 'record', mode: null, status: null, at: 0, kind: null, query: '', settings: null };
+
+  function open(id, t) {
+    assi.open(ITEM + '?id=' + id + (t !== null && t !== undefined ? '&t=' + Math.round(t) : ''));
+  }
+
+  // ---- the recording -------------------------------------------------------------------------
+
+  function activeMs() {
+    const r = state.status && state.status.recording;
+    if (!r) return 0;
+    return r.paused ? r.activeMs : r.activeMs + (Date.now() - state.at);
+  }
+
+  function round(icon, label, cls, onclick) {
+    return h('button', { class: 'round ' + (cls || ''), onclick, 'aria-label': label },
+      h('span', { class: 'disc' }, ui.icon(icon)), h('span', {}, label));
+  }
+
+  function drawControls() {
+    const st = state.status;
+    const r = st && st.recording;
+    const box = document.getElementById('controls');
+    const modes = document.getElementById('modes');
+    const level = document.getElementById('level');
+    const note = document.getElementById('recNote');
+    modes.replaceChildren(...MODES.map(([id, title]) => h('button', {
+      class: 'chip' + ((r ? r.mode : state.mode) === id ? ' on' : ''),
+      disabled: Boolean(r),
+      onclick: () => { state.mode = id; drawControls(); }
+    }, ui.icon(MODE_ICONS[id] || 'note'), title)));
+    level.classList.toggle('paused', Boolean(r && r.paused));
+    if (!r) {
+      level.firstChild.style.transform = 'scaleX(0)';
+      document.getElementById('timer').textContent = '0:00';
+      box.replaceChildren(round('mic', 'Записать', 'main start', start));
+      note.textContent = state.mode === 'auto' ? 'До ' + (state.settings ? state.settings.noteMaxMinutes : 3) + ' мин — мысль, дольше — встреча' : '';
+      return;
+    }
+    box.replaceChildren(
+      round(r.paused ? 'play' : 'pause', r.paused ? 'Дальше' : 'Пауза', '', () => act(r.paused ? 'resumeRecording' : 'pauseRecording')),
+      round('stop', 'Стоп', 'main', stop),
+      round('flag', 'Отметка', '', markNow)
+    );
+    note.textContent = r.paused ? (r.pausedBy === 'call' ? 'Пауза на время звонка' : 'Пауза') : 'Отрезок ' + r.part + ' · расшифровка по ходу, раз в ' + r.partMinutes + ' мин';
+    ui.icons(box);
+  }
+
+  function tick() {
+    if (state.status && state.status.recording) document.getElementById('timer').textContent = clock(activeMs());
+  }
+
+  async function start() {
+    try {
+      state.status = await call('startRecording', { mode: state.mode });
+      state.at = Date.now();
+      drawControls();
+      drawLive();
+    } catch (error) {
+      fail(error);
+    }
+  }
+
+  async function stop() {
+    try {
+      const done = await call('stopRecording');
+      await refresh();
+      if (done) ui.toast('Записано ' + length(done.durationMs) + ': расшифровка и конспект — по готовности');
+    } catch (error) {
+      fail(error);
+    }
+  }
+
+  async function act(fn) {
+    try {
+      state.status = await call(fn);
+      state.at = Date.now();
+      drawControls();
+    } catch (error) {
+      fail(error);
+    }
+  }
+
+  async function markNow() {
+    try {
+      const m = await call('mark', null);
+      ui.toast('Отметка ' + clock(m.atMs));
+    } catch (error) {
+      fail(error);
+    }
+  }
+
+  async function drawLive() {
+    const r = state.status && state.status.recording;
+    const box = document.getElementById('liveBox');
+    box.hidden = !r;
+    if (!r) return;
+    const live = await call('live', r.id);
+    const list = document.getElementById('live');
+    if (!live || !live.paragraphs.length) {
+      list.replaceChildren(h('div', { class: 'muted small' }, state.status.transcribeWhen === 'charging' && !state.status.charging
+        ? 'Расшифровка — на зарядке (так в настройках)' : 'Текст появится, когда закончится первый отрезок'));
+      return;
+    }
+    list.replaceChildren(...live.paragraphs.map((p) => h('div', { class: 'para' }, h('span', { class: 'at' }, clock(p.atMs)), h('span', {}, p.text))));
+  }
+
+  function warning(icon, text, button) {
+    return h('div', { class: 'card warn' }, h('span', { 'data-icon': icon }), h('div', { class: 'grow' }, h('div', {}, text), button || null));
+  }
+
+  function drawWarnings() {
+    const st = state.status;
+    const box = document.getElementById('warnings');
+    const items = [];
+    if (!st.speech.ready) items.push(warning('info', 'Модель распознавания речи не скачана: записи подождут. Скачайте её в настройках Assi.'));
+    if (!st.permission) items.push(warning('mic', 'Assi спросит доступ к микрофону при первой записи.'));
+    if (st.speech.live) items.push(warning('mic', 'Идёт живой разговор с ассистентом — микрофон занят.'));
+    if (st.queue.waiting && !(st.recording)) {
+      items.push(warning('clock', 'В очереди на расшифровку ' + st.queue.waiting + ' ' + plural(st.queue.waiting, 'отрезок', 'отрезка', 'отрезков') +
+        (st.transcribeWhen === 'charging' && !st.charging ? ' — ждут зарядки' : '')));
+    }
+    if (st.uploads) {
+      items.push(warning('file', 'Есть ' + st.uploads + ' ' + plural(st.uploads, 'аудиофайл', 'аудиофайла', 'аудиофайлов') + ' из «Поделиться»',
+        h('button', { class: 'btn small soft', onclick: () => showTab('archive') }, 'Расшифровать')));
+    }
+    if (st.wake && st.wake.on && !st.recording) items.push(h('div', { class: 'muted small' }, 'На время записи Assi перестанет откликаться на имя «' + (st.wake.name || '') + '» — микрофон один.'));
+    box.replaceChildren(...items);
+    ui.icons(box);
+  }
+
+  function stateLine(c) {
+    if (c.state === 'ready') return null;
+    if (c.state === 'failed') return h('div', { class: 'state-line' }, ui.icon('info'), h('span', {}, c.error || 'Ошибка'));
+    return h('div', { class: 'state-line' }, h('span', { class: 'spinner' }), h('span', {}, c.progress || STATE[c.state] || c.state));
+  }
+
+  function card(c) {
+    const meta = [when(c.startedAt), length(c.durationMs)];
+    if (c.origin === 'file') meta.push('файл');
+    // The spec: the card shows the number of tasks; how many of them are still open — when not all.
+    if (c.tasks) meta.push(c.tasks + ' ' + plural(c.tasks, 'задача', 'задачи', 'задач') + (c.openTasks !== c.tasks ? ', открыто ' + (c.openTasks || 0) : ''));
+    const hit = c.hit && c.hit.snippet && c.hit.by !== 'title'
+      ? h('div', { class: 'hit', 'data-raw': '' }, (c.hit.offsetMs !== null ? clock(c.hit.offsetMs) + ' · ' : '') + c.hit.snippet + (c.hit.by === 'meaning' ? ' (по смыслу)' : ''))
+      : null;
+    const tasks = c.open && c.open.length ? h('div', { class: 'tasks-in' }, ...c.open.map(taskRow)) : null;
+    return h('div', { class: 'item', onclick: (event) => { if (!event.target.closest('.task')) open(c.id, c.hit && c.hit.offsetMs); } },
+      h('div', { class: 'head' },
+        h('span', { class: 'kind', 'data-icon': c.state === 'recording' ? 'mic' : KIND_ICON[c.kind] || 'file' }),
+        h('span', { class: 'title truncate', 'data-raw': '' }, c.title)),
+      h('div', { class: 'meta' }, meta.join(' · ')),
+      c.firstLine && !hit ? h('div', { class: 'first', 'data-raw': '' }, c.firstLine) : null,
+      hit, stateLine(c), tasks);
+  }
+
+  function taskRow(t) {
+    const box = h('input', { type: 'checkbox', 'aria-label': 'Сделано' });
+    box.checked = Boolean(t.done);
+    box.onchange = () => call('setTask', t.id, { done: box.checked }).then(() => { if (box.checked) ui.toast('Сделано'); }).catch(fail);
+    return h('label', { class: 'task' }, box, h('span', { class: 'grow' }, h('span', { 'data-raw': '' }, t.text),
+      t.who || t.due ? h('span', { class: 'who' }, ' · ' + [t.who, dueText(t.due)].filter(Boolean).join(', ')) : null));
+  }
+
+  async function drawRecent() {
+    const list = await call('recent', 5);
+    const box = document.getElementById('recent');
+    document.getElementById('recentBox').hidden = !list.length;
+    box.replaceChildren(...list.map(card));
+    ui.icons(box);
+  }
+
+  async function refresh() {
+    state.status = await call('status');
+    state.at = Date.now();
+    drawControls();
+    drawWarnings();
+    await Promise.all([drawLive(), drawRecent()]);
+  }
+
+  // ---- the archive -----------------------------------------------------------------------------
+
+  function drawKinds() {
+    document.getElementById('kinds').replaceChildren(...KINDS.map(([id, title]) => h('button', {
+      class: 'chip' + (state.kind === id ? ' on' : ''),
+      onclick: () => { state.kind = id; drawKinds(); drawArchive().catch(fail); }
+    }, title)));
+  }
+
+  async function drawUploads() {
+    const list = (await call('uploads')).filter((u) => !u.recordingId);
+    const box = document.getElementById('uploads');
+    const pick = h('button', { class: 'btn soft', onclick: () => document.getElementById('file').click() }, ui.icon('file'), ' Выбрать аудиофайл');
+    if (!list.length) {
+      box.replaceChildren(h('div', { class: 'row' }, pick, h('span', { class: 'muted small grow' }, 'или «Поделиться» → Assi из другого приложения')));
+      return;
+    }
+    box.replaceChildren(
+      h('h2', {}, 'Файлы из «Поделиться»'),
+      h('div', { class: 'list' }, ...list.map((u) => h('div', {},
+        h('span', { 'data-icon': 'file' }),
+        h('div', { class: 'grow' }, h('div', { class: 'truncate', 'data-raw': '' }, u.name), h('div', { class: 'muted small' }, when(u.time) + ' · ' + Math.max(1, Math.round(u.size / 1024)) + ' КБ')),
+        h('button', { class: 'btn small primary', onclick: () => importUpload(u) }, 'Расшифровать')))),
+      h('div', { class: 'row' }, pick));
+    ui.icons(box);
+  }
+
+  async function importUpload(u) {
+    try {
+      const id = await call('importFile', u.path, { mode: 'auto' });
+      ui.toast('Файл в очереди на расшифровку');
+      open(id);
+    } catch (error) {
+      fail(error);
+    }
+  }
+
+  function base64(bytes) {
+    let s = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    return btoa(s);
+  }
+
+  async function uploadFile(file) {
+    const bar = h('div', { class: 'upload-progress' }, h('div', {}));
+    const close = ui.sheet([h('h3', {}, 'Загружаю файл'), h('p', { class: 'muted small', 'data-raw': '' }, file.name), bar]);
+    try {
+      const token = await call('importBegin', file.name);
+      for (let at = 0; at < file.size; at += CHUNK) {
+        const piece = new Uint8Array(await file.slice(at, at + CHUNK).arrayBuffer());
+        await call('importChunk', token, base64(piece));
+        bar.firstChild.style.width = Math.round(Math.min(1, (at + CHUNK) / file.size) * 100) + '%';
+      }
+      const id = await call('importEnd', token, { mode: 'auto' });
+      close();
+      open(id);
+    } catch (error) {
+      close();
+      fail(error);
+    }
+  }
+
+  async function drawArchive() {
+    const box = document.getElementById('archive');
+    const list = await call('list', { kind: state.kind, query: state.query });
+    if (!list.length) {
+      box.replaceChildren(h('div', { class: 'empty' }, state.query ? 'Ничего не нашлось' : state.kind === 'tasks' ? 'Открытых задач нет' : 'Записей пока нет'));
+      return;
+    }
+    box.replaceChildren(h('div', { class: 'list' }, ...list.map(card)));
+    ui.icons(box);
+  }
+
+  // ---- settings -------------------------------------------------------------------------------
+
+  const SCHEMA = [
+    ['Запись', [
+      { key: 'defaultMode', title: 'Режим по умолчанию', type: 'select', options: MODES },
+      { key: 'noteMaxMinutes', title: 'Порог «мысль / встреча», мин', type: 'number', step: 0.5 },
+      { key: 'partMinutes', title: 'Длина отрезка для расшифровки, мин', type: 'number' },
+      { key: 'source', title: 'Источник звука', type: 'select', options: [['MIC', 'Микрофон (MIC)'], ['VOICE_RECOGNITION', 'Для распознавания'], ['UNPROCESSED', 'Без обработки'], ['CAMCORDER', 'Как у камеры'], ['VOICE_COMMUNICATION', 'Как у звонка']], hint: 'Что лучше на Fold5 — проверяется записью' },
+      { key: 'sampleRate', title: 'Частота, Гц', type: 'select', options: [[8000, '8 000'], [16000, '16 000'], [22050, '22 050'], [32000, '32 000'], [44100, '44 100'], [48000, '48 000']] },
+      { key: 'bitrate', title: 'Битрейт AAC', type: 'select', options: [[16000, '16 кбит/с'], [24000, '24 кбит/с'], [32000, '32 кбит/с'], [48000, '48 кбит/с'], [64000, '64 кбит/с'], [96000, '96 кбит/с'], [128000, '128 кбит/с']] },
+      { key: 'channels', title: 'Каналы', type: 'select', options: [[1, 'Моно'], [2, 'Стерео']] },
+      { key: 'splitMode', title: 'Нарезка на отрезки', type: 'select', options: [['next', 'Без разрыва'], ['restart', 'Стоп и старт (~0,2 с)']] },
+      { key: 'maxHours', title: 'Остановить запись через, ч', type: 'number', step: 0.5 },
+      { key: 'minFreeMb', title: 'Остановить, если свободно меньше, МБ', type: 'number' },
+      { key: 'pauseOnCall', title: 'Пауза на время звонка', type: 'switch' },
+      { key: 'announce', title: 'Говорить при старте, что идёт запись', type: 'switch' },
+      { key: 'announceText', title: 'Что говорить', type: 'text', block: true }
+    ]],
+    ['Расшифровка', [
+      { key: 'transcribeWhen', title: 'Расшифровывать', type: 'select', options: [['now', 'Сразу'], ['charging', 'Только на зарядке']] },
+      { key: 'transcribeTries', title: 'Попыток на отрезок', type: 'number' },
+      { key: 'paragraphGapMs', title: 'Пауза для нового абзаца, мс', type: 'number', step: 100, hint: 'Когда текст не чистит модель' }
+    ]],
+    ['Модели', [
+      { key: 'cleanModel', title: 'Знаки препинания и абзацы', type: 'select', options: [['any', 'Моделью роли'], ['local', 'Только на телефоне'], ['off', 'Без модели']], hint: 'Роль «recorder.clean»' },
+      { key: 'noteModel', title: 'Заголовок и поручение мысли', type: 'select', options: [['cloud', 'Моделью роли'], ['local', 'Только на телефоне'], ['off', 'Без модели']], hint: 'Роль «recorder.note»' },
+      { key: 'summaryModel', title: 'Конспект встречи', type: 'select', options: [['cloud', 'Облачной моделью'], ['local', 'Моделью на телефоне'], ['off', 'Не делать моделью']], hint: 'Роль «recorder.summary»; без модели — решения и задачи по правилам' },
+      { key: 'oneAskWords', title: 'Одной просьбой — до слов', type: 'number', step: 500 },
+      { key: 'stepWords', title: 'По шагам — кусками по слов', type: 'number', step: 100 },
+      { key: 'commands', title: 'Короткие записи-команды разбирать как поручения', type: 'switch', hint: '«Напиши Пете…» — черновик во Входящих, «потратил…» — в Тратах' },
+      { key: 'words', title: 'Словарь: имена и термины', type: 'words', block: true, hint: 'Через запятую — модель будет писать их правильно' }
+    ]],
+    ['Архив', [
+      { key: 'markListenSec', title: 'Подпись отметки голосом — слушать до, с', type: 'number' },
+      { key: 'keepAudioDays', title: 'Хранить звук, дней', type: 'number', hint: '0 — всегда; текст остаётся' },
+      { key: 'embed', title: 'Поиск по смыслу (роль «embed»)', type: 'switch' },
+      { key: 'memory', title: 'Конспект — в долгую память ассистента', type: 'switch' },
+      { key: 'base', title: 'Запись в общей базе', type: 'switch' },
+      { key: 'notifyReady', title: 'Уведомлять, когда конспект готов', type: 'switch' }
+    ]],
+    ['Задачи', [
+      { key: 'reminderAt', title: '«Напомнить» в день задачи в', type: 'time' },
+      { key: 'reminderLaterMin', title: 'Без даты — напомнить через, мин', type: 'number' },
+      { key: 'eventAt', title: '«В календарь» — событие в', type: 'time' },
+      { key: 'eventMinutes', title: 'Длина события, мин', type: 'number' },
+      { key: 'keptTasksDays', title: 'Ачивка «Ни одной задачи не потерял»: задачи со сроком за последние, дней', type: 'number' },
+      { key: 'keptTasksMin', title: '…и таких задач хотя бы', type: 'number', hint: 'Все они должны быть выполнены' }
+    ]],
+    ['Файлы', [
+      { key: 'importWholeMaxMin', title: 'Файл целиком — до, мин', type: 'number', hint: 'Длиннее — режется на отрезки' },
+      { key: 'uploadsDays', title: 'Показывать файлы «Поделиться» за, дней', type: 'number' },
+      { key: 'player', title: 'Плеер', type: 'select', options: [['auto', 'На экране'], ['phone', 'Плеер телефона']] }
+    ]],
+    ['Тонкая настройка', [
+      { key: 'partLateFactor', title: 'Нет нового файла через столько отрезков — стоп и старт', type: 'number', step: 0.1 },
+      { key: 'partOverheadPct', title: 'Запас размера отрезка на контейнер, %', type: 'number' },
+      { key: 'levelEveryMs', title: 'Уровень звука на экран раз в, мс', type: 'number', step: 50 },
+      { key: 'stateEveryS', title: 'Сохранять состояние записи раз в, с', type: 'number' },
+      { key: 'cleanMinRatio', title: 'Чистка короче доли сырого — не брать', type: 'number', step: 0.05 },
+      { key: 'cleanMaxRatio', title: 'Чистка длиннее доли сырого — не брать', type: 'number', step: 0.05 },
+      { key: 'summaryLines', title: 'Строк в «Кратко»', type: 'number' },
+      { key: 'maxTasks', title: 'Задач из одной записи, не больше', type: 'number' },
+      { key: 'chunkWords', title: 'Кусок для поиска, слов', type: 'number', step: 50 },
+      { key: 'embedBatch', title: 'Кусков в одной просьбе embed', type: 'number' },
+      { key: 'meaningMin', title: 'Порог похожести по смыслу', type: 'number', step: 0.05 },
+      { key: 'searchLimit', title: 'Результатов поиска', type: 'number' },
+      { key: 'cleanAt', title: 'Ночная уборка звука в', type: 'time' }
+    ]]
+  ];
+
+  async function save(key, value, input) {
+    try {
+      const next = await call('saveSettings', { [key]: value });
+      state.settings = next;
+      if (input && input.type !== 'checkbox') input.value = Array.isArray(next[key]) ? next[key].join(', ') : String(next[key]);
+      ui.toast('Сохранено');
+    } catch (error) {
+      fail(error);
+    }
+  }
+
+  function control(item, values, numbers) {
+    const v = values[item.key];
+    if (item.type === 'switch') {
+      const input = h('input', { type: 'checkbox', class: 'switch', 'aria-label': item.title });
+      input.checked = Boolean(v);
+      input.onchange = () => save(item.key, input.checked);
+      return input;
+    }
+    if (item.type === 'select') {
+      const select = h('select', { class: 'input' }, ...item.options.map(([value, title]) => h('option', { value: String(value) }, title)));
+      select.value = String(v);
+      select.onchange = () => save(item.key, typeof item.options[0][0] === 'number' ? Number(select.value) : select.value);
+      return select;
+    }
+    if (item.type === 'number') {
+      const b = numbers[item.key] || [0, 1e9];
+      const input = h('input', { class: 'input', type: 'number', inputmode: 'decimal', min: b[0], max: b[1], step: item.step || 1 });
+      input.value = v;
+      input.onchange = () => save(item.key, Number(input.value), input);
+      return input;
+    }
+    if (item.type === 'time') {
+      const input = h('input', { class: 'input', type: 'time' });
+      input.value = v;
+      input.onchange = () => save(item.key, input.value, input);
+      return input;
+    }
+    if (item.type === 'words') {
+      const area = h('textarea', { class: 'input', rows: 3, placeholder: 'Олег, Битрикс24, Подольск', 'data-raw': '' });
+      area.value = (v || []).join(', ');
+      area.onchange = () => save(item.key, area.value, area);
+      return area;
+    }
+    const input = h('input', { class: 'input', type: 'text', 'data-raw': '' });
+    input.value = v || '';
+    input.onchange = () => save(item.key, input.value, input);
+    return input;
+  }
+
+  function stat(label, value) {
+    return h('div', { class: 'stat' }, h('span', {}, label), h('span', { 'data-raw': '' }, value));
+  }
+
+  function roleText(r) {
+    if (!r) return 'не назначена';
+    return r.model + (r.local ? ' · на телефоне' : '');
+  }
+
+  async function drawSettings() {
+    const [s, st] = await Promise.all([call('settings'), call('status')]);
+    state.settings = s.values;
+    const groups = SCHEMA.map(([title, items]) => h('section', { class: 'card set-group' }, h('h3', {}, title), ...items.map((item) =>
+      h('div', { class: 'set' + (item.block ? ' block' : '') + (item.type === 'select' ? ' choice' : '') },
+        h('span', { class: 'label' }, item.title, item.hint ? h('span', { class: 'hint' }, item.hint) : null),
+        control(item, s.values, s.numbers)))));
+    const status = h('section', { class: 'card set-group' }, h('h3', {}, 'Состояние'),
+      stat('Распознавание речи', st.speech.ready ? 'готово' + (st.speech.engine ? ' (' + st.speech.engine + ')' : '') : 'модель не скачана'),
+      stat('Микрофон', st.permission ? 'разрешён' : 'спросит при записи'),
+      stat('Календарь', st.calendar ? 'разрешён' : 'спросит при «В календарь»'),
+      stat('Чистка (recorder.clean)', roleText(st.models.clean)),
+      stat('Мысли (recorder.note)', roleText(st.models.note)),
+      stat('Конспект (recorder.summary)', roleText(st.models.summary)),
+      stat('Смысл (embed)', roleText(st.models.embed)),
+      stat('Кнопки в уведомлении', st.features.actions ? 'оболочки' : 'свои'),
+      stat('Время фраз', st.features.segments ? 'есть' : 'по отрезкам'),
+      stat('Слушание имени', st.wake ? (st.wake.on ? 'включено — на время записи выключается' : 'выключено') : '—'));
+    const actions = h('section', { class: 'section' },
+      h('button', { class: 'btn soft wide', onclick: () => assi.native('shortcut.pin', 'Диктофон', 'modules/recorder/ui/index.html').then(() => ui.toast('Ярлык отправлен на рабочий стол')).catch(fail) }, ui.icon('pin'), ' Ярлык на рабочий стол'),
+      h('button', { class: 'btn soft wide', onclick: () => call('clean').then((r) => ui.toast('Звук удалён у записей: ' + r.audioRemoved)).catch(fail) }, ui.icon('trash'), ' Удалить старый звук сейчас'),
+      h('button', { class: 'btn soft wide', onclick: () => call('runQueue').then(() => ui.toast('Очередь пройдена')).catch(fail) }, ui.icon('refresh'), ' Пройти очередь расшифровки'));
+    document.getElementById('settings').replaceChildren(...groups, status, actions);
+    ui.icons(document.getElementById('settings'));
+  }
+
+  // ---- tabs and events -------------------------------------------------------------------------
+
+  const RENDER = {
+    record: refresh,
+    archive: () => Promise.all([drawUploads(), drawArchive()]),
+    settings: drawSettings
+  };
+
+  function render() {
+    const fn = RENDER[state.tab];
+    if (fn) fn().catch(fail);
+  }
+
+  const showTab = ui.tabs(document.getElementById('tabs'), [['record', 'Запись'], ['archive', 'Архив'], ['settings', 'Настройки']], (id) => {
+    state.tab = id;
+    render();
+  });
+
+  let searchTimer = null;
+  document.getElementById('q').addEventListener('input', (event) => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { state.query = event.target.value.trim(); drawArchive().catch(fail); }, 300);
+  });
+  document.getElementById('file').addEventListener('change', (event) => {
+    const f = event.target.files && event.target.files[0];
+    event.target.value = '';
+    if (f) uploadFile(f);
+  });
+
+  assi.on('recorder.level', (e) => {
+    if (!e || !state.status || !state.status.recording || state.status.recording.id !== e.id) return;
+    document.querySelector('#level > div').style.transform = 'scaleX(' + Math.max(0.02, e.level).toFixed(3) + ')';
+    state.status.recording.activeMs = e.ms;
+    state.at = Date.now();
+  });
+  assi.on('recorder.state', (r) => {
+    if (state.status) {
+      state.status.recording = r;
+      state.at = Date.now();
+      drawControls();
+    }
+    if (!r) refresh().catch(fail);
+  });
+  let changedTimer = null;
+  assi.on('recorder.changed', () => {
+    if (document.querySelector('.sheet')) return;
+    clearTimeout(changedTimer);
+    changedTimer = setTimeout(() => {
+      if (state.tab === 'record') Promise.all([drawLive(), drawRecent()]).catch(fail);
+      else if (state.tab === 'archive') render();
+    }, 500);
+  });
+
+  // The Device Posture API: a half-open Fold on the table splits the screen like the media query.
+  try {
+    const posture = navigator.devicePosture;
+    // Folded and wider than tall: the hinge lies across (Flex); folded like a book keeps the columns.
+    const apply = () => document.body.classList.toggle('folded', Boolean(posture && posture.type === 'folded' && window.innerWidth > window.innerHeight));
+    if (posture) {
+      posture.addEventListener('change', apply);
+      window.addEventListener('resize', apply);
+      apply();
+    }
+  } catch (error) { /* no posture in this WebView */ }
+
+  // index.html?q=… (a chip of a person or a topic) and ?kind=tasks open the archive at once.
+  const asked = new URLSearchParams(location.search);
+  if (asked.get('q') || asked.get('kind')) {
+    state.query = (asked.get('q') || '').trim();
+    state.kind = KINDS.some(([id]) => id === asked.get('kind')) ? asked.get('kind') : null;
+    document.getElementById('q').value = state.query;
+    showTab('archive');
+  }
+
+  setInterval(tick, 500);
+  drawKinds();
+  ui.icons(document.body);
+  call('status').then((st) => {
+    if (st.recording && state.tab !== 'record' && !asked.get('q') && !asked.get('kind')) showTab('record');
+  }).catch(() => {});
+  call('settings').then((s) => {
+    state.settings = s.values;
+    if (!state.mode) state.mode = s.values.defaultMode;
+    drawControls();
+  }).catch(fail);
+</script>
+</body>
+</html>

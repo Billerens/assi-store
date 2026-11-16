@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Фокус</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<link rel="stylesheet" href="focus.css">
+<body>
+<main class="page focus" id="page">
+  <header class="topbar">
+    <button class="icon-btn" id="back" aria-label="Назад" data-icon="back"></button>
+    <h1>Фокус</h1>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <div class="tab" data-tab="now" id="nowView" aria-live="polite"></div>
+  <div class="tab" data-tab="history" id="historyView"></div>
+  <div class="tab" data-tab="settings" id="settingsView"></div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script src="focus.js"></script>
+</body>
+</html>

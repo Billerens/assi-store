@@ -1,0 +1,11 @@
+{
+  "id": "wave-survival",
+  "kind": "game",
+  "title": "Последний рубеж",
+  "target": "modules/games/wave-survival",
+  "requires": [],
+  "shell": [
+    "app.visible",
+    "vibrate.pattern"
+  ]
+}

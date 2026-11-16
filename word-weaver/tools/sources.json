@@ -1,0 +1,58 @@
+{
+  "about": "Sources of the dictionary of «Словоплёт». tools/build-dict.js downloads them into a cache folder (never into the game) and builds _data/assets/dict.txt. Each source lists its official address first and then copies of the same file to try when the official one is down.",
+  "opencorpora": {
+    "title": "Словарь OpenCorpora",
+    "license": "CC BY-SA 3.0",
+    "site": "https://opencorpora.org/?page=downloads",
+    "file": "dict.opcorpora.zip",
+    "urls": [
+      "https://opencorpora.org/files/export/dict/dict.opcorpora.xml.zip",
+      "https://opencorpora.org/files/export/dict/dict.opcorpora.txt.zip",
+      "https://web.archive.org/web/20250506110804id_/https://opencorpora.org/files/export/dict/dict.opcorpora.xml.zip",
+      "https://web.archive.org/web/20240423122608id_/https://www.opencorpora.org/files/export/dict/dict.opcorpora.txt.zip"
+    ]
+  },
+  "opencorporaPymorphy": {
+    "title": "Тот же словарь OpenCorpora, собранный проектом pymorphy (pymorphy3-dicts-ru 2.4.417150.4580142: OpenCorpora 0.92, ревизия 417150) — когда opencorpora.org недоступен",
+    "license": "CC BY-SA 3.0 (данные OpenCorpora); пакет — MIT",
+    "site": "https://pypi.org/project/pymorphy3-dicts-ru/",
+    "file": "pymorphy3_dicts_ru-2.4.417150.4580142-py2.py3-none-any.whl",
+    "fallbackFor": "opencorpora",
+    "urls": [
+      "https://files.pythonhosted.org/packages/b0/67/469e9e52d046863f5959928794d3067d455a77f580bf4a662630a43eb426/pymorphy3_dicts_ru-2.4.417150.4580142-py2.py3-none-any.whl"
+    ]
+  },
+  "hunspellDic": {
+    "title": "Орфографический словарь hunspell ru_RU (А. И. Лебедев), из словарей LibreOffice",
+    "license": "BSD-style (Copyright (c) 1997-2008, Alexander I. Lebedev)",
+    "site": "https://github.com/LibreOffice/dictionaries/tree/master/ru_RU",
+    "file": "ru_RU.dic",
+    "urls": [
+      "https://raw.githubusercontent.com/LibreOffice/dictionaries/master/ru_RU/ru_RU.dic"
+    ]
+  },
+  "hunspellAff": {
+    "title": "Правила hunspell ru_RU",
+    "license": "BSD-style (Copyright (c) 1997-2008, Alexander I. Lebedev)",
+    "file": "ru_RU.aff",
+    "urls": [
+      "https://raw.githubusercontent.com/LibreOffice/dictionaries/master/ru_RU/ru_RU.aff"
+    ]
+  },
+  "hunspellReadme": {
+    "title": "Лицензия hunspell ru_RU",
+    "file": "README_ru_RU.txt",
+    "urls": [
+      "https://raw.githubusercontent.com/LibreOffice/dictionaries/master/ru_RU/README_ru_RU.txt"
+    ]
+  },
+  "frequency": {
+    "title": "FrequencyWords (Hermit Dave), частоты слов по субтитрам OpenSubtitles 2018",
+    "license": "CC BY-SA 4.0",
+    "site": "https://github.com/hermitdave/FrequencyWords",
+    "file": "ru_full.txt",
+    "urls": [
+      "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ru/ru_full.txt"
+    ]
+  }
+}

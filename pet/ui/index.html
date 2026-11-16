@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Питомец</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<link rel="stylesheet" href="style.css">
+<body>
+<main class="page wide">
+  <header class="topbar">
+    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <h1 id="name" data-raw>Питомец</h1>
+    <button class="icon-btn" id="talk" aria-label="Что он скажет" data-icon="message"></button>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <div class="tab" data-tab="now">
+    <div class="pet-layout">
+      <div class="col stage-col">
+        <section class="card pc room-card">
+          <div id="room" class="room" role="button" tabindex="0" aria-label="Питомец: коснитесь, долгое касание — фраза"></div>
+          <div class="state-line">
+            <span id="state" class="state-title"></span>
+            <span id="energy" class="energy"></span>
+          </div>
+          <p id="phrase" class="phrase" data-raw></p>
+          <div id="holding"></div>
+          <div id="quick" class="quick"></div>
+        </section>
+      </div>
+      <div class="col side-col">
+        <div id="why"></div>
+        <div id="strip"></div>
+        <div id="growth"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab" data-tab="items">
+    <div class="grid">
+      <div class="col" id="items"></div>
+      <div class="col" id="items-side"></div>
+    </div>
+  </div>
+
+  <div class="tab" data-tab="settings">
+    <div class="grid">
+      <div class="col" id="access"></div>
+      <div class="col" id="prefs"></div>
+    </div>
+  </div>
+
+  <div class="tab" data-tab="debug">
+    <div class="grid">
+      <div class="col" id="debug"></div>
+      <div class="col" id="debug-preview"></div>
+    </div>
+    <div id="debug-all"></div>
+  </div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

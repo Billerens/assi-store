@@ -1,0 +1,14 @@
+build/
+dist/
+node_modules/
+__pycache__/
+*.pyc
+tests/artifacts/
+**/tests/artifacts/
+.env
+.env.*
+*.key
+*.pem
+*.keystore
+*.jks
+.DS_Store

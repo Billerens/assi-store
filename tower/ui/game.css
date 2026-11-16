@@ -1,0 +1,816 @@
+/* Башня: the field stays quiet; choices remain within the thumb area. */
+.g-app,
+.g-sheet {
+  --tower-tint: #8da69c;
+  --tower-wash: #19211e;
+  --tower-stone: #232d29;
+  --tower-gold: #d9b25f;
+  --tower-ember: #d9785c;
+  --tower-sky: #8fb0d6;
+  --tower-violet: #a892d6;
+  --accent: #b8c9bf;
+  --accent-ink: #142019;
+  --accent-soft: #26372e;
+}
+.g-app[data-flight="2"] {
+  --tower-tint: #c9ad7f;
+  --tower-wash: #25221c;
+  --tower-stone: #322d24;
+}
+.g-app[data-flight="3"],
+.g-app[data-flight="4"] {
+  --tower-tint: #92a7bf;
+  --tower-wash: #1c232c;
+  --tower-stone: #27303b;
+}
+.g-top {
+  max-height: none;
+  padding: 6px 16px 10px;
+}
+.tw-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+.tw-floor {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+.tw-floor strong {
+  white-space: nowrap;
+  font-size: 34px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+.tw-eyebrow,
+.tw-muted {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+.tw-currency {
+  display: flex;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.tw-currency span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 30px;
+  padding: 2px 9px 2px 6px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--surface);
+  font-size: 15px;
+}
+
+/* Pictures: one frame for every drawn thing; the tone of the frame tells rarity and danger. */
+.tw-pic {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  padding: 5px;
+  border: 1px solid #33403a;
+  border-radius: 11px;
+  background: #151c19;
+}
+.tw-pic > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.tw-pic.tw-small {
+  width: 34px;
+  height: 34px;
+  padding: 4px;
+  border-radius: 9px;
+}
+.tw-pic.tw-big {
+  width: clamp(68px, 12vh, 108px);
+  height: clamp(68px, 12vh, 108px);
+  padding: 10px;
+  border-width: 2px;
+  border-radius: 20px;
+  background: var(--tower-stone);
+  border-color: var(--tower-tint);
+}
+.tw-pic.tw-tone-rare {
+  border-color: #5f7fa8;
+  background: #171f2a;
+}
+.tw-pic.tw-tone-legendary {
+  border-color: #b08d3f;
+  background: #262015;
+}
+.tw-pic.tw-tone-elite {
+  border-color: #8a74b8;
+  background: #1f1b2a;
+}
+.tw-pic.tw-tone-boss {
+  border-color: #b3614b;
+  background: #2a1a16;
+}
+.tw-pic.tw-is-locked > svg {
+  filter: grayscale(1) brightness(.5);
+  opacity: .75;
+}
+.tw-pic.tw-is-locked {
+  border-style: dashed;
+  background: #171717;
+}
+.tw-pic.tw-is-done {
+  border-color: var(--tower-tint);
+}
+.tw-badge {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  border-radius: 50%;
+  background: var(--surface);
+}
+.tw-badge svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.tw-ico {
+  display: inline-flex;
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+.tw-ico svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Progress: ten floors of the flight in a climb, three flights of the best climb at the foot. */
+.tw-progress {
+  margin: 8px 0;
+}
+.tw-steps {
+  display: grid;
+  grid-template-columns: repeat(var(--steps, 10), minmax(0, 1fr));
+  align-items: end;
+  gap: 4px;
+}
+.tw-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+}
+.tw-step i {
+  display: block;
+  width: 100%;
+  height: 8px;
+  border: 1px solid #3a4742;
+  border-radius: 4px;
+  background: var(--surface);
+}
+.tw-step.passed i {
+  border-color: var(--tower-tint);
+  background: var(--tower-tint);
+}
+.tw-step.current i {
+  height: 12px;
+  border-color: var(--ink);
+  border-radius: 6px;
+  background: var(--ink);
+}
+.tw-step-boss i {
+  border-color: #b3614b;
+}
+.tw-step-boss.current i {
+  border-color: var(--tower-ember);
+  background: var(--tower-ember);
+}
+.tw-mark {
+  display: block;
+  width: 18px;
+  height: 18px;
+  opacity: .6;
+}
+.tw-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.tw-step.current .tw-mark,
+.tw-step-boss .tw-mark {
+  opacity: 1;
+}
+.tw-step.passed .tw-mark {
+  opacity: .35;
+}
+.tw-caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px 12px;
+  margin-top: 6px;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.3;
+}
+.tw-caption span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.tw-caption .tw-ico {
+  width: 15px;
+  height: 15px;
+}
+.tw-flights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.tw-flight {
+  display: grid;
+  gap: 4px;
+  padding: 7px 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  font-size: 14px;
+  line-height: 1.25;
+}
+.tw-flight-name {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.tw-flight-num {
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.tw-flight .tw-track {
+  margin-top: 0;
+  height: 6px;
+  border-radius: 3px;
+}
+.tw-flight:nth-child(2) .tw-fill {
+  background: #c9ad7f;
+}
+.tw-flight:nth-child(3) .tw-fill {
+  background: #92a7bf;
+}
+.tw-flight.cleared {
+  border-color: #3f4d47;
+}
+.tw-flight.cleared .tw-flight-num {
+  color: var(--tower-tint);
+}
+
+.tw-vitals {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+.tw-hp {
+  flex: 1 1 150px;
+  min-width: 0;
+}
+.tw-hp-line {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.tw-track {
+  height: 6px;
+  overflow: hidden;
+  margin-top: 5px;
+  border-radius: 3px;
+  background: var(--line);
+}
+.tw-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 3px;
+  background: var(--tower-tint);
+}
+.tw-hp .tw-fill {
+  background: #c8705a;
+}
+.tw-hp .tw-fill.low {
+  background: #e0503e;
+}
+.tw-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+.tw-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* The scene: a wall of the current flight, the picture of what is here, the words under it. */
+.tw-field {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 4px;
+}
+.tw-scene {
+  position: relative;
+  flex: 1 0 auto;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: safe center;
+  text-align: center;
+  border: 1px solid var(--tower-stone);
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--tower-wash) 0%, var(--tower-wash) 55%, #121614 100%);
+  padding: 14px 14px 16px;
+  overflow: hidden;
+}
+.tw-scene > * {
+  position: relative;
+}
+.tw-backdrop {
+  position: absolute;
+  inset: 0;
+  color: var(--tower-tint);
+  opacity: .1;
+  pointer-events: none;
+}
+.tw-backdrop svg {
+  display: block;
+}
+.tw-scene h1 {
+  margin: 8px 0 6px;
+  font-size: 25px;
+  line-height: 1.15;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.tw-scene p {
+  margin: 6px 0;
+  max-width: 35ch;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.tw-art {
+  width: 100%;
+  height: clamp(84px, 20vh, 190px);
+  flex-shrink: 1;
+}
+.tw-art svg {
+  display: block;
+  height: 100%;
+  max-width: 100%;
+  margin: auto;
+}
+.tw-intent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 44px;
+  margin-bottom: 8px;
+  font-size: 22px;
+  font-weight: 600;
+}
+.tw-enemy-hp {
+  width: min(100%, 240px);
+  margin: 6px auto;
+  font-size: 15px;
+}
+.tw-enemy-hp .tw-hp-line {
+  justify-content: center;
+}
+.tw-turn {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+.tw-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  margin: 4px 0;
+}
+.tw-chip {
+  padding: 3px 9px;
+  border: 1px solid var(--tower-stone);
+  border-radius: 12px;
+  background: #141a18;
+  font-size: 14px;
+  color: var(--ink);
+}
+.tw-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 9px 0 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* Cards: a picture, a title and its lines, a price on the right. */
+.tw-actions {
+  gap: 8px;
+}
+.tw-action-title {
+  margin: 0;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.tw-choices {
+  display: grid;
+  gap: 7px;
+}
+.tw-card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  min-height: 58px;
+  padding: 8px 11px 8px 8px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+  background: var(--surface-2);
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.25;
+}
+button.tw-card {
+  cursor: pointer;
+}
+.tw-card-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.tw-card strong {
+  display: block;
+  font-weight: 600;
+}
+.tw-card small,
+.g-btn .g-sub {
+  display: block;
+  margin-top: 3px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+.tw-card:disabled,
+.tw-card.tw-off {
+  border-style: dashed;
+  background: transparent;
+  color: var(--ink-2);
+  cursor: default;
+}
+.tw-card:disabled small,
+.tw-card.tw-off small {
+  color: var(--ink-3);
+}
+button.tw-card:active:not(:disabled),
+button.tw-card:hover:not(:disabled) {
+  border-color: var(--tower-tint);
+  background: var(--surface);
+}
+.tw-card.tw-picked {
+  border-color: var(--tower-tint);
+  background: var(--accent-soft);
+}
+.tw-card.tw-ready {
+  border-color: #46564f;
+}
+.tw-card.tw-wait:disabled {
+  border-style: solid;
+  background: var(--surface-2);
+  color: var(--ink);
+}
+.tw-card.tw-wait:disabled small {
+  color: var(--ink-2);
+}
+.tw-card.tw-wait .tw-price {
+  border-color: var(--line);
+  color: var(--ink-3);
+}
+.tw-card.tw-done:disabled {
+  border-style: solid;
+  border-color: #3f4d47;
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+.tw-card.tw-done:disabled small {
+  color: var(--ink-2);
+}
+.tw-price {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  max-width: 34%;
+  padding: 4px 8px 4px 6px;
+  border: 1px solid #46564f;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.tw-price.tw-full {
+  padding: 4px 8px;
+  border-color: transparent;
+  color: var(--tower-tint);
+  font-weight: 400;
+}
+.tw-level {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+.tw-card small.tw-level {
+  display: flex;
+  color: var(--tower-tint);
+}
+.tw-pips {
+  display: inline-flex;
+  gap: 3px;
+}
+.tw-pips i {
+  width: 9px;
+  height: 9px;
+  border: 1px solid #56665f;
+  border-radius: 50%;
+}
+.tw-pips i.on {
+  border-color: var(--tower-tint);
+  background: var(--tower-tint);
+}
+.tw-wallet {
+  display: inline-flex;
+  align-items: center;
+  align-self: start;
+  justify-self: start;
+  gap: 6px;
+  padding: 5px 12px 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface-2);
+  font-variant-numeric: tabular-nums;
+}
+button:focus-visible {
+  outline: 2px solid var(--tower-tint, var(--ink));
+  outline-offset: 2px;
+}
+.tw-hand {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.tw-hand .tw-card {
+  min-height: 66px;
+  padding: 7px;
+  gap: 7px;
+}
+.tw-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.tw-nav button {
+  min-height: 44px;
+  padding: 5px 2px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--surface);
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.tw-nav button:hover {
+  color: var(--ink);
+}
+.tw-side {
+  display: none;
+}
+.tw-side h2,
+.tw-sheet h2 {
+  margin: 18px 0 10px;
+  font-size: 18px;
+}
+.tw-side h2:first-child,
+.tw-sheet h2:first-child {
+  margin-top: 0;
+}
+.tw-log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.tw-log li {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 0;
+}
+.tw-relic-list {
+  display: grid;
+  gap: 7px;
+}
+.tw-relic {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 46px;
+  padding: 5px 9px 5px 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.25;
+  text-align: left;
+}
+.tw-relic > span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.tw-sheet {
+  display: grid;
+  gap: 9px;
+  font-size: 16px;
+}
+.tw-sheet p {
+  margin: 4px 0 10px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.tw-selects {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+}
+.tw-selection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 7px 8px;
+  background: var(--surface-2);
+  font-size: 15px;
+  line-height: 1.25;
+  text-align: left;
+  color: var(--ink);
+}
+.tw-selection > span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.tw-subtitle {
+  display: block;
+  font-size: 14px;
+  color: var(--ink-2);
+  margin-bottom: 2px;
+}
+.tw-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 8px;
+}
+.tw-sheet .g-btn {
+  flex-shrink: 0;
+}
+@media (min-width: 640px) {
+  .g-app[data-layout="wide"] {
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 35%);
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    grid-template-areas: "bar bar" "top top" "field side" "actions side";
+  }
+  .g-app[data-layout="wide"] .g-actions {
+    max-height: 42vh;
+    justify-content: flex-start;
+    border-left: 0;
+  }
+  .g-app[data-layout="wide"] .tw-side {
+    display: block;
+    grid-area: side;
+    overflow: auto;
+    padding: 12px 16px 20px;
+    border-left: 1px solid var(--line);
+  }
+  .tw-doors {
+    grid-template-columns: repeat(var(--door-count, 3), minmax(0, 1fr));
+  }
+  .tw-doors .tw-card {
+    min-height: 110px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .tw-doors .tw-card-text {
+    flex: none;
+  }
+  .tw-hand {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .tw-hand:has(.tw-card:nth-child(4)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tw-scene h1 {
+    font-size: 30px;
+  }
+  .tw-steps {
+    gap: 6px;
+  }
+  .tw-step i {
+    height: 10px;
+    border-radius: 5px;
+  }
+  .tw-step.current i {
+    height: 14px;
+    border-radius: 7px;
+  }
+  .tw-mark {
+    width: 22px;
+    height: 22px;
+  }
+}
+@media (max-height: 660px) {
+  .tw-scene {
+    padding: 8px;
+  }
+  .tw-scene h1 {
+    font-size: 21px;
+    margin: 4px 0;
+  }
+  .tw-art {
+    height: 70px;
+  }
+  .tw-pic.tw-big {
+    width: 64px;
+    height: 64px;
+    padding: 7px;
+  }
+  .tw-intent {
+    min-height: 36px;
+    margin-bottom: 4px;
+    font-size: 19px;
+  }
+  .tw-actions {
+    max-height: 48vh;
+  }
+  .tw-progress {
+    margin: 5px 0;
+  }
+  .tw-caption {
+    margin-top: 3px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .g-app * {
+    scroll-behavior: auto;
+    transition: none;
+    animation: none;
+  }
+}
+/* The room illustration is persistent; intentions, health and all choices remain real DOM. */
+.tw-world {
+  flex: none;
+  width: 100%;
+  border: 1px solid #5a6e77;
+  border-radius: 16px;
+  background: #192c3b;
+}
+
+.tw-has-world .tw-scene {
+  min-height: 0;
+  flex: none;
+  padding-top: 12px;
+}
+
+.tw-has-world .tw-scene > .tw-art,
+.tw-has-world .tw-scene > .tw-big {
+  display: none;
+}

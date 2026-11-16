@@ -1,0 +1,318 @@
+{
+ "format": 1,
+ "game": "fishing",
+ "ver": 1,
+ "seq": 1,
+ "created": 1794290404150,
+ "savedAt": 1794291904150,
+ "lastTick": 1794291904150,
+ "run": {
+  "coins": "5.19143333333e0",
+  "earned": "5.40191433333e2",
+  "up": {
+   "rod": 2,
+   "reel": 2,
+   "line": 2,
+   "hook": 2,
+   "float": 2,
+   "aquarium": 1,
+   "filter": 0,
+   "light": 0,
+   "cat": 0,
+   "landing": 0,
+   "sonar": 0,
+   "spoon": 0,
+   "jig": 0,
+   "keepnet": 0,
+   "absorber": 0,
+   "boat": 0,
+   "rod2": 0,
+   "journal": 0
+  },
+  "bait": {
+   "bloodworm": 0,
+   "livebait": 0,
+   "gold": 0
+  },
+  "ground": 0,
+  "use": "worm",
+  "groundUntil": 0,
+  "dawnUntil": 0,
+  "zhorUntil": 0,
+  "fisherUntil": 1794291373000,
+  "shoal": null,
+  "lantern": false,
+  "waters": [
+   "pond"
+  ],
+  "water": "pond",
+  "aq": [
+   {
+    "sp": "karas",
+    "w": 0.258,
+    "s": 3,
+    "p": 9,
+    "r": "c"
+   },
+   {
+    "sp": "plotva",
+    "w": 0.249,
+    "s": 3,
+    "p": 9,
+    "r": "c"
+   },
+   {
+    "sp": "plotva",
+    "w": 0.26,
+    "s": 3,
+    "p": 9,
+    "r": "c"
+   },
+   {
+    "sp": "plotva",
+    "w": 0.06,
+    "s": 1,
+    "p": 2,
+    "r": "c"
+   },
+   {
+    "sp": "plotva",
+    "w": 0.267,
+    "s": 3,
+    "p": 9,
+    "r": "c"
+   },
+   {
+    "sp": "zkaras",
+    "w": 0.509,
+    "s": 3,
+    "p": 31,
+    "r": "r"
+   },
+   {
+    "sp": "rotan",
+    "w": 0.178,
+    "s": 3,
+    "p": 6,
+    "r": "c"
+   },
+   {
+    "sp": "plotva",
+    "w": 0.06,
+    "s": 1,
+    "p": 2,
+    "r": "c"
+   },
+   {
+    "sp": "zkaras",
+    "w": 0.305,
+    "s": 1,
+    "p": 14,
+    "r": "r"
+   },
+   {
+    "sp": "plotva",
+    "w": 0.216,
+    "s": 2,
+    "p": 7,
+    "r": "c"
+   },
+   {
+    "sp": "plotva",
+    "w": 0.279,
+    "s": 3,
+    "p": 10,
+    "r": "c"
+   },
+   {
+    "sp": "rotan",
+    "w": 0.057,
+    "s": 1,
+    "p": 2,
+    "r": "c"
+   },
+   {
+    "sp": "zkaras",
+    "w": 0.363,
+    "s": 1,
+    "p": 16,
+    "r": "r"
+   },
+   {
+    "sp": "plotva",
+    "w": 0.305,
+    "s": 3,
+    "p": 10,
+    "r": "c"
+   },
+   {
+    "sp": "zkaras",
+    "w": 0.299,
+    "s": 1,
+    "p": 14,
+    "r": "r"
+   },
+   {
+    "sp": "zkaras",
+    "w": 0.551,
+    "s": 3,
+    "p": 34,
+    "r": "r"
+   },
+   {
+    "sp": "zkaras",
+    "w": 0.295,
+    "s": 1,
+    "p": 14,
+    "r": "r"
+   },
+   {
+    "sp": "zkaras",
+    "w": 0.445,
+    "s": 2,
+    "p": 24,
+    "r": "r"
+   },
+   {
+    "sp": "lin",
+    "w": 1.062,
+    "s": 3,
+    "p": 55,
+    "r": "r"
+   },
+   {
+    "sp": "karas",
+    "w": 0.226,
+    "s": 1,
+    "p": 5,
+    "r": "c"
+   }
+  ],
+  "sack": [],
+  "cast": {
+   "phase": "fight",
+   "sp": "karas",
+   "snag": null,
+   "w": 0.34,
+   "d": 12.5,
+   "d0": 12.5,
+   "T": 20,
+   "hold": true,
+   "ft": 0,
+   "over": 0,
+   "slack": 0,
+   "used": false,
+   "shore": false,
+   "jerks": 0,
+   "jt": 0,
+   "auto": true,
+   "want": true,
+   "rt": 0,
+   "charged": true
+  },
+  "pending": null,
+  "released": 0,
+  "rod2T": 0,
+  "catAcc": 0,
+  "casts": 121,
+  "caught": 100,
+  "lastSp": "karas",
+  "news": [
+   {
+    "n": 1,
+    "kind": "fisher",
+    "text": "Пришёл старый рыбак"
+   },
+   {
+    "n": 2,
+    "kind": "snag",
+    "text": "Зацеп: Эмалированная кружка",
+    "snag": "mug",
+    "isNew": true
+   },
+   {
+    "n": 3,
+    "kind": "snag",
+    "text": "Зацеп: Пузырёк аптекаря",
+    "snag": "bottle",
+    "isNew": true
+   },
+   {
+    "n": 4,
+    "kind": "snag",
+    "text": "Зацеп: Обручальное кольцо",
+    "snag": "ring",
+    "isNew": true
+   }
+  ],
+  "away": null
+ },
+ "layers": {
+  "season": {
+   "currency": "0e0",
+   "count": 0,
+   "best": "0e0",
+   "state": {}
+  }
+ },
+ "meta": {
+  "journal": {
+   "karas": {
+    "n": 64,
+    "best": 0.488,
+    "first": 1794290418000
+   },
+   "plotva": {
+    "n": 21,
+    "best": 0.305,
+    "first": 1794290474000
+   },
+   "zkaras": {
+    "n": 7,
+    "best": 0.551,
+    "first": 1794290666000
+   },
+   "rotan": {
+    "n": 7,
+    "best": 0.266,
+    "first": 1794290682000
+   },
+   "lin": {
+    "n": 1,
+    "best": 1.062,
+    "first": 1794291887000
+   }
+  },
+  "trophies": {
+   "mug": 1794291270000,
+   "bottle": 1794291342000,
+   "ring": 1794291872000
+  },
+  "hints": [],
+  "tourney": null,
+  "seasonal": null,
+  "names": {},
+  "flags": {},
+  "notes": {},
+  "streak": 2,
+  "bestStreak": 26,
+  "legends": 0,
+  "snaps": 17,
+  "releasedAll": 0,
+  "caughtAll": 100,
+  "heaviest": 1.062,
+  "newsId": 4,
+  "seed": 5,
+  "achievements": {},
+  "applied": [],
+  "stockUsed": [],
+  "taken": {},
+  "stats": {
+   "playMs": 0,
+   "sessions": 0,
+   "offlineMs": 0,
+   "trips": 0
+  }
+ },
+ "card": ""
+}

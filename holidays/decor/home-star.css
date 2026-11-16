@@ -1,0 +1,10 @@
+/* Рождество: контур звезды у заголовка главного экрана. */
+.hello > h1::after {
+  content: "";
+  display: inline-block;
+  width: .8em;
+  height: .8em;
+  margin-left: .3em;
+  vertical-align: .02em;
+  background: svg(star, accent) center / contain no-repeat;
+}

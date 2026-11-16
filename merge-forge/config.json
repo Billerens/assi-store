@@ -1,0 +1,2359 @@
+{
+  "tick.hz": {
+    "value": 10
+  },
+  "render.fps": {
+    "value": 30
+  },
+  "grid.start": {
+    "value": 20,
+    "title": "Клеток наковальни в начале",
+    "min": 4,
+    "max": 35,
+    "group": "Наковальня"
+  },
+  "grid.startBlades": {
+    "value": 3,
+    "title": "Клинков на наковальне в начале забега",
+    "min": 0,
+    "max": 20,
+    "group": "Наковальня"
+  },
+  "start.gold": {
+    "value": "15",
+    "title": "Золота в начале забега",
+    "big": true,
+    "group": "Наковальня"
+  },
+  "forge.interval": {
+    "value": 8,
+    "title": "Горн: секунд на клинок",
+    "min": 0.5,
+    "max": 120,
+    "step": 0.5,
+    "group": "Горн"
+  },
+  "forge.minInterval": {
+    "value": 1.5,
+    "title": "Горн: секунд на клинок, не меньше",
+    "min": 0.1,
+    "max": 30,
+    "step": 0.1,
+    "group": "Горн"
+  },
+  "forge.tapSec": {
+    "value": 0.5,
+    "title": "Тап по горну сокращает цикл на, секунд",
+    "min": 0,
+    "max": 5,
+    "step": 0.1,
+    "group": "Горн"
+  },
+  "forge.tapsPerSec": {
+    "value": 4,
+    "title": "Тапов по горну в секунду засчитывается",
+    "min": 1,
+    "max": 20,
+    "group": "Горн"
+  },
+  "forge.maxLevel": {
+    "value": 500,
+    "title": "Уровень клинка из горна, максимум",
+    "min": 1,
+    "max": 700,
+    "group": "Горн"
+  },
+  "blade.dmg": {
+    "value": 1,
+    "title": "Урон клинка 1-го уровня",
+    "min": 0.01,
+    "max": 1000,
+    "step": 0.01,
+    "group": "Клинки"
+  },
+  "blade.dmgGrowth": {
+    "value": 2.35,
+    "title": "Урон: множитель за уровень",
+    "min": 2.01,
+    "max": 5,
+    "step": 0.01,
+    "group": "Клинки"
+  },
+  "blade.price": {
+    "value": "10",
+    "title": "Цена клинка 1-го уровня",
+    "big": true,
+    "group": "Клинки"
+  },
+  "blade.priceGrowth": {
+    "value": 2.35,
+    "title": "Цена клинка: множитель за уровень",
+    "min": 1.1,
+    "max": 5,
+    "step": 0.01,
+    "group": "Клинки"
+  },
+  "sell.share": {
+    "value": 0.4,
+    "title": "Продажа: доля цены",
+    "min": 0,
+    "max": 1,
+    "step": 0.05,
+    "group": "Клинки"
+  },
+  "sell.confirmAbove": {
+    "value": 2,
+    "title": "Спрашивать перед продажей клинка выше горна на, уровней",
+    "min": 0,
+    "max": 40,
+    "group": "Клинки"
+  },
+  "combat.hitSec": {
+    "value": 1,
+    "title": "Клинок бьёт раз в, секунд",
+    "min": 0.1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Бой"
+  },
+  "wave.walkSec": {
+    "value": 5,
+    "title": "Чудище идёт к воротам, секунд",
+    "min": 0,
+    "max": 120,
+    "step": 0.5,
+    "group": "Бой"
+  },
+  "wave.hp": {
+    "value": 8,
+    "title": "Здоровье чудища 1-й волны",
+    "min": 1,
+    "max": 1000,
+    "group": "Бой"
+  },
+  "wave.hpGrowth": {
+    "value": 1.3,
+    "title": "Здоровье: множитель за волну",
+    "min": 1.01,
+    "max": 2,
+    "step": 0.005,
+    "group": "Бой"
+  },
+  "wave.gold": {
+    "value": 2,
+    "title": "Золото за чудище 1-й волны",
+    "min": 0.1,
+    "max": 1000,
+    "step": 0.1,
+    "group": "Бой"
+  },
+  "wave.goldGrowth": {
+    "value": 1.15,
+    "title": "Золото: множитель за волну",
+    "min": 1.01,
+    "max": 2,
+    "step": 0.005,
+    "group": "Бой"
+  },
+  "boss.every": {
+    "value": 10,
+    "title": "Босс каждые, волн",
+    "min": 2,
+    "max": 100,
+    "group": "Бой"
+  },
+  "boss.hpMult": {
+    "value": 6,
+    "title": "Здоровье босса, раз больше",
+    "min": 1,
+    "max": 100,
+    "step": 0.5,
+    "group": "Бой"
+  },
+  "boss.timer": {
+    "value": 30,
+    "title": "Таймер босса, секунд",
+    "min": 5,
+    "max": 600,
+    "group": "Бой"
+  },
+  "boss.goldMult": {
+    "value": 8,
+    "title": "Золото с босса, раз больше",
+    "min": 1,
+    "max": 100,
+    "group": "Бой"
+  },
+  "boss.rollback": {
+    "value": true,
+    "title": "Проигрыш боссу: откат на волну назад и фарм",
+    "group": "Бой"
+  },
+  "crit.chance": {
+    "value": 0.05,
+    "title": "Шанс крита",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Бой"
+  },
+  "crit.mult": {
+    "value": 3,
+    "title": "Множитель крита",
+    "min": 1,
+    "max": 50,
+    "step": 0.25,
+    "group": "Бой"
+  },
+  "crit.maxChance": {
+    "value": 0.4,
+    "title": "Шанс крита, максимум",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Бой"
+  },
+  "rune.fromWave": {
+    "value": 25,
+    "title": "Руны открываются с волны",
+    "min": 1,
+    "max": 500,
+    "group": "Руны"
+  },
+  "rune.base": {
+    "value": 1,
+    "title": "Гнёзд руны без улучшений",
+    "min": 0,
+    "max": 7,
+    "group": "Руны"
+  },
+  "rune.fire": {
+    "value": 0.25,
+    "title": "Руна огня: плюс к урону клинка",
+    "min": 0,
+    "max": 10,
+    "step": 0.05,
+    "group": "Руны"
+  },
+  "rune.ice": {
+    "value": 0.25,
+    "title": "Руна льда: замедление таймера босса",
+    "min": 0,
+    "max": 10,
+    "step": 0.05,
+    "group": "Руны"
+  },
+  "rune.greed": {
+    "value": 0.2,
+    "title": "Руна жадности: плюс к золоту",
+    "min": 0,
+    "max": 10,
+    "step": 0.05,
+    "group": "Руны"
+  },
+  "up.bellows.base": {
+    "value": "25",
+    "title": "Мехи: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.bellows.growth": {
+    "value": 1.55,
+    "title": "Мехи: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.01,
+    "group": "Улучшения"
+  },
+  "up.bellows.step": {
+    "value": 0.04,
+    "title": "Мехи: интервал горна меньше на долю",
+    "min": 0,
+    "max": 0.5,
+    "step": 0.01,
+    "group": "Улучшения"
+  },
+  "up.bellows.max": {
+    "value": 10000,
+    "title": "Мехи: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.steel.base": {
+    "value": "500",
+    "title": "Качество стали: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.steel.growth": {
+    "value": 9,
+    "title": "Качество стали: рост цены",
+    "min": 1.01,
+    "max": 50,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.steel.step": {
+    "value": 1,
+    "title": "Качество стали: плюс к уровню из горна",
+    "min": 0,
+    "max": 5,
+    "group": "Улучшения"
+  },
+  "up.steel.max": {
+    "value": 10000,
+    "title": "Качество стали: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.sharp.base": {
+    "value": "15",
+    "title": "Острота: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.sharp.growth": {
+    "value": 1.22,
+    "title": "Острота: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.01,
+    "group": "Улучшения"
+  },
+  "up.sharp.step": {
+    "value": 0.1,
+    "title": "Острота: плюс ко всему урону за уровень",
+    "min": 0,
+    "max": 5,
+    "step": 0.01,
+    "group": "Улучшения"
+  },
+  "up.sharp.max": {
+    "value": 10000,
+    "title": "Острота: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.purse.base": {
+    "value": "40",
+    "title": "Кошель: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.purse.growth": {
+    "value": 1.3,
+    "title": "Кошель: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.01,
+    "group": "Улучшения"
+  },
+  "up.purse.step": {
+    "value": 0.08,
+    "title": "Кошель: плюс к золоту за уровень",
+    "min": 0,
+    "max": 5,
+    "step": 0.01,
+    "group": "Улучшения"
+  },
+  "up.purse.max": {
+    "value": 10000,
+    "title": "Кошель: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.eye.base": {
+    "value": "100",
+    "title": "Глаз мастера: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.eye.growth": {
+    "value": 1.6,
+    "title": "Глаз мастера: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.01,
+    "group": "Улучшения"
+  },
+  "up.eye.step": {
+    "value": 0.01,
+    "title": "Глаз мастера: плюс к шансу крита",
+    "min": 0,
+    "max": 0.5,
+    "step": 0.005,
+    "group": "Улучшения"
+  },
+  "up.eye.max": {
+    "value": 10000,
+    "title": "Глаз мастера: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.hand.base": {
+    "value": "150",
+    "title": "Тяжёлая рука: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.hand.growth": {
+    "value": 1.7,
+    "title": "Тяжёлая рука: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.01,
+    "group": "Улучшения"
+  },
+  "up.hand.step": {
+    "value": 0.25,
+    "title": "Тяжёлая рука: плюс к множителю крита",
+    "min": 0,
+    "max": 10,
+    "step": 0.05,
+    "group": "Улучшения"
+  },
+  "up.hand.max": {
+    "value": 10000,
+    "title": "Тяжёлая рука: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.wide.base": {
+    "value": "300",
+    "title": "Шире наковальня: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.wide.growth": {
+    "value": 3.2,
+    "title": "Шире наковальня: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.wide.step": {
+    "value": 1,
+    "title": "Шире наковальня: клеток за уровень",
+    "min": 1,
+    "max": 5,
+    "group": "Улучшения"
+  },
+  "up.wide.max": {
+    "value": 10000,
+    "title": "Шире наковальня: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.twin.base": {
+    "value": "800",
+    "title": "Двойная поковка: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.twin.growth": {
+    "value": 2.1,
+    "title": "Двойная поковка: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.twin.step": {
+    "value": 0.03,
+    "title": "Двойная поковка: шанс двух клинков за уровень",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Улучшения"
+  },
+  "up.twin.max": {
+    "value": 10000,
+    "title": "Двойная поковка: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.melt.base": {
+    "value": "1200",
+    "title": "Удачная плавка: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.melt.growth": {
+    "value": 2.3,
+    "title": "Удачная плавка: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.melt.step": {
+    "value": 0.02,
+    "title": "Удачная плавка: шанс клинка выше за уровень",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Улучшения"
+  },
+  "up.melt.max": {
+    "value": 10000,
+    "title": "Удачная плавка: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.apprentice.base": {
+    "value": "2000",
+    "title": "Подмастерье: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.apprentice.growth": {
+    "value": 2.5,
+    "title": "Подмастерье: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.apprentice.step": {
+    "value": 0.5,
+    "title": "Подмастерье: быстрее на, секунд за уровень",
+    "min": 0,
+    "max": 5,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.apprentice.max": {
+    "value": 10000,
+    "title": "Подмастерье: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "apprentice.interval": {
+    "value": 10,
+    "title": "Подмастерье: сливает раз в, секунд",
+    "min": 0.5,
+    "max": 600,
+    "step": 0.5,
+    "group": "Улучшения"
+  },
+  "apprentice.minInterval": {
+    "value": 1,
+    "title": "Подмастерье: не чаще раза в, секунд",
+    "min": 0.1,
+    "max": 60,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.hourglass.base": {
+    "value": "1000",
+    "title": "Песочные часы: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.hourglass.growth": {
+    "value": 2,
+    "title": "Песочные часы: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.hourglass.step": {
+    "value": 2,
+    "title": "Песочные часы: плюс к таймеру босса, секунд",
+    "min": 0,
+    "max": 60,
+    "group": "Улучшения"
+  },
+  "up.hourglass.max": {
+    "value": 10000,
+    "title": "Песочные часы: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.hunter.base": {
+    "value": "900",
+    "title": "Охотник за головами: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.hunter.growth": {
+    "value": 1.9,
+    "title": "Охотник за головами: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.hunter.step": {
+    "value": 0.3,
+    "title": "Охотник за головами: плюс к золоту с босса",
+    "min": 0,
+    "max": 10,
+    "step": 0.05,
+    "group": "Улучшения"
+  },
+  "up.hunter.max": {
+    "value": 10000,
+    "title": "Охотник за головами: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.temper.base": {
+    "value": "5000",
+    "title": "Закалка: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.temper.growth": {
+    "value": 2.2,
+    "title": "Закалка: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.temper.step": {
+    "value": 0.15,
+    "title": "Закалка: плюс к урону старших клинков за уровень",
+    "min": 0,
+    "max": 10,
+    "step": 0.05,
+    "group": "Улучшения"
+  },
+  "up.temper.max": {
+    "value": 10000,
+    "title": "Закалка: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "temper.fromLevel": {
+    "value": 10,
+    "title": "Закалка действует на клинки от уровня",
+    "min": 1,
+    "max": 40,
+    "group": "Улучшения"
+  },
+  "up.runeMason.base": {
+    "value": "20000",
+    "title": "Рунная кладка: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.runeMason.growth": {
+    "value": 6,
+    "title": "Рунная кладка: рост цены",
+    "min": 1.01,
+    "max": 50,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.runeMason.step": {
+    "value": 1,
+    "title": "Рунная кладка: гнёзд за уровень",
+    "min": 1,
+    "max": 3,
+    "group": "Улучшения"
+  },
+  "up.runeMason.max": {
+    "value": 10000,
+    "title": "Рунная кладка: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.runePower.base": {
+    "value": "8000",
+    "title": "Сила руны: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.runePower.growth": {
+    "value": 2,
+    "title": "Сила руны: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.runePower.step": {
+    "value": 0.1,
+    "title": "Сила руны: эффекты рун больше за уровень",
+    "min": 0,
+    "max": 5,
+    "step": 0.05,
+    "group": "Улучшения"
+  },
+  "up.runePower.max": {
+    "value": 10000,
+    "title": "Сила руны: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.caravan.base": {
+    "value": "3000",
+    "title": "Караванщик: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.caravan.growth": {
+    "value": 2.4,
+    "title": "Караванщик: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.caravan.step": {
+    "value": 0.1,
+    "title": "Караванщик: события чаще за уровень",
+    "min": 0,
+    "max": 2,
+    "step": 0.05,
+    "group": "Улучшения"
+  },
+  "up.caravan.soft": {
+    "value": 20,
+    "title": "Караванщик: после этого уровня каждый следующий даёт меньше",
+    "min": 1,
+    "max": 10000,
+    "group": "Улучшения"
+  },
+  "up.caravan.max": {
+    "value": 10000,
+    "title": "Караванщик: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.night.base": {
+    "value": "4000",
+    "title": "Ночная смена: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.night.growth": {
+    "value": 2.6,
+    "title": "Ночная смена: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.night.step": {
+    "value": 0.1,
+    "title": "Ночная смена: плюс к доле офлайна",
+    "min": 0,
+    "max": 1,
+    "step": 0.05,
+    "group": "Улучшения"
+  },
+  "up.night.max": {
+    "value": 10000,
+    "title": "Ночная смена: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.cry.base": {
+    "value": "6000",
+    "title": "Боевой клич: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.cry.growth": {
+    "value": 2.5,
+    "title": "Боевой клич: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.cry.step": {
+    "value": 1,
+    "title": "Боевой клич: плюс к урону за уровень",
+    "min": 0,
+    "max": 10,
+    "step": 0.25,
+    "group": "Улучшения"
+  },
+  "up.cry.max": {
+    "value": 10000,
+    "title": "Боевой клич: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "cry.sec": {
+    "value": 15,
+    "title": "Боевой клич: действует, секунд",
+    "min": 1,
+    "max": 300,
+    "group": "Улучшения"
+  },
+  "cry.cooldownSec": {
+    "value": 300,
+    "title": "Боевой клич: раз в, секунд",
+    "min": 10,
+    "max": 3600,
+    "group": "Улучшения"
+  },
+  "up.remelt.base": {
+    "value": "2500",
+    "title": "Переплавка: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.remelt.growth": {
+    "value": 3,
+    "title": "Переплавка: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.remelt.step": {
+    "value": 0.2,
+    "title": "Переплавка: плюс к доле продажи",
+    "min": 0,
+    "max": 1,
+    "step": 0.05,
+    "group": "Улучшения"
+  },
+  "up.remelt.max": {
+    "value": 10000,
+    "title": "Переплавка: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "up.banner.base": {
+    "value": "50000",
+    "title": "Знамя: цена",
+    "big": true,
+    "group": "Улучшения"
+  },
+  "up.banner.growth": {
+    "value": 4,
+    "title": "Знамя: рост цены",
+    "min": 1.01,
+    "max": 50,
+    "step": 0.1,
+    "group": "Улучшения"
+  },
+  "up.banner.step": {
+    "value": 0.01,
+    "title": "Знамя: плюс к урону за каждую десятку волн",
+    "min": 0,
+    "max": 1,
+    "step": 0.005,
+    "group": "Улучшения"
+  },
+  "up.banner.max": {
+    "value": 10000,
+    "title": "Знамя: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Улучшения"
+  },
+  "event.minSec": {
+    "value": 180,
+    "title": "События: не чаще раза в, секунд игры",
+    "min": 10,
+    "max": 7200,
+    "group": "События"
+  },
+  "event.maxSec": {
+    "value": 360,
+    "title": "События: не реже раза в, секунд игры",
+    "min": 10,
+    "max": 7200,
+    "group": "События"
+  },
+  "event.chance": {
+    "value": 0.8,
+    "title": "События: шанс, что придёт",
+    "min": 0,
+    "max": 1,
+    "step": 0.05,
+    "group": "События"
+  },
+  "event.w.caravan": {
+    "value": 3,
+    "title": "Вес события «Караван»",
+    "min": 0,
+    "max": 100,
+    "group": "События"
+  },
+  "event.w.wanderer": {
+    "value": 2,
+    "title": "Вес события «Странник»",
+    "min": 0,
+    "max": 100,
+    "group": "События"
+  },
+  "event.w.starfall": {
+    "value": 2,
+    "title": "Вес события «Звездопад»",
+    "min": 0,
+    "max": 100,
+    "group": "События"
+  },
+  "event.w.storm": {
+    "value": 2,
+    "title": "Вес события «Гроза над горном»",
+    "min": 0,
+    "max": 100,
+    "group": "События"
+  },
+  "event.w.order": {
+    "value": 2,
+    "title": "Вес события «Заказ короля»",
+    "min": 0,
+    "max": 100,
+    "group": "События"
+  },
+  "event.caravan.sec": {
+    "value": 30,
+    "title": "Караван: сундук за секунд фарма",
+    "min": 1,
+    "max": 3600,
+    "group": "События"
+  },
+  "event.ttlSec": {
+    "value": 90,
+    "title": "Караван и странник ждут, секунд",
+    "min": 10,
+    "max": 3600,
+    "group": "События"
+  },
+  "event.starfall.sec": {
+    "value": 20,
+    "title": "Звездопад: секунд",
+    "min": 1,
+    "max": 600,
+    "group": "События"
+  },
+  "event.starfall.mult": {
+    "value": 2,
+    "title": "Звездопад: множитель урона",
+    "min": 1,
+    "max": 20,
+    "step": 0.5,
+    "group": "События"
+  },
+  "event.storm.blades": {
+    "value": 5,
+    "title": "Гроза над горном: клинков на уровень выше",
+    "min": 1,
+    "max": 100,
+    "group": "События"
+  },
+  "event.order.sec": {
+    "value": 180,
+    "title": "Заказ короля: секунд на заказ",
+    "min": 10,
+    "max": 3600,
+    "group": "События"
+  },
+  "event.order.rewardSec": {
+    "value": 600,
+    "title": "Заказ короля: награда — доход за, секунд",
+    "min": 10,
+    "max": 36000,
+    "group": "События"
+  },
+  "coals.fromWave": {
+    "value": 60,
+    "title": "Перековка: рекорд волны не меньше",
+    "min": 2,
+    "max": 10000,
+    "group": "Перековка"
+  },
+  "coals.base": {
+    "value": 40,
+    "title": "Угли: волна, от которой считаются",
+    "min": 0,
+    "max": 10000,
+    "group": "Перековка"
+  },
+  "coals.div": {
+    "value": 10,
+    "title": "Угли: волн на шаг",
+    "min": 1,
+    "max": 1000,
+    "group": "Перековка"
+  },
+  "coals.power": {
+    "value": 2.2,
+    "title": "Угли: степень",
+    "min": 0.5,
+    "max": 5,
+    "step": 0.05,
+    "group": "Перековка"
+  },
+  "coals.bonus": {
+    "value": 0.05,
+    "title": "Каждый уголь: плюс к урону и золоту",
+    "min": 0,
+    "max": 1,
+    "step": 0.01,
+    "group": "Перековка"
+  },
+  "mf.startLevel.cost": {
+    "value": 5,
+    "title": "Горн мастера, стартовый уровень клинка: цена в углях",
+    "min": 1,
+    "max": 100000,
+    "group": "Горн мастера"
+  },
+  "mf.startLevel.growth": {
+    "value": 3,
+    "title": "Стартовый уровень клинка: рост цены",
+    "min": 1.1,
+    "max": 20,
+    "step": 0.1,
+    "group": "Горн мастера"
+  },
+  "mf.startGold.cost": {
+    "value": 2,
+    "title": "Стартовое золото: цена в углях",
+    "min": 1,
+    "max": 100000,
+    "group": "Горн мастера"
+  },
+  "mf.startGold.growth": {
+    "value": 2,
+    "title": "Стартовое золото: рост цены",
+    "min": 1.1,
+    "max": 20,
+    "step": 0.1,
+    "group": "Горн мастера"
+  },
+  "mf.startGold.amount": {
+    "value": "500",
+    "title": "Стартовое золото: за первый уровень",
+    "big": true,
+    "group": "Горн мастера"
+  },
+  "mf.startGold.mult": {
+    "value": 5,
+    "title": "Стартовое золото: множитель за уровень",
+    "min": 1,
+    "max": 100,
+    "step": 0.5,
+    "group": "Горн мастера"
+  },
+  "mf.auto.cost": {
+    "value": 8,
+    "title": "Автоклик горна: цена в углях",
+    "min": 1,
+    "max": 100000,
+    "group": "Горн мастера"
+  },
+  "mf.auto.growth": {
+    "value": 2.5,
+    "title": "Автоклик горна: рост цены",
+    "min": 1.1,
+    "max": 20,
+    "step": 0.1,
+    "group": "Горн мастера"
+  },
+  "mf.auto.soft": {
+    "value": 6,
+    "title": "Автоклик горна: после этого уровня каждый следующий даёт меньше",
+    "min": 1,
+    "max": 10000,
+    "group": "Горн мастера"
+  },
+  "mf.auto.taps": {
+    "value": 0.5,
+    "title": "Автоклик горна: тапов в секунду за уровень",
+    "min": 0,
+    "max": 10,
+    "step": 0.1,
+    "group": "Горн мастера"
+  },
+  "mf.rune.cost": {
+    "value": 15,
+    "title": "Руны мастера: цена в углях",
+    "min": 1,
+    "max": 100000,
+    "group": "Горн мастера"
+  },
+  "mf.rune.growth": {
+    "value": 3,
+    "title": "Руны мастера: рост цены",
+    "min": 1.1,
+    "max": 20,
+    "step": 0.1,
+    "group": "Горн мастера"
+  },
+  "mf.rune.power": {
+    "value": 0.1,
+    "title": "Руны мастера: руны сильнее за уровень",
+    "min": 0,
+    "max": 5,
+    "step": 0.05,
+    "group": "Горн мастера"
+  },
+  "mf.memory.cost": {
+    "value": 25,
+    "title": "Память наковальни: цена в углях",
+    "min": 1,
+    "max": 100000,
+    "group": "Горн мастера"
+  },
+  "mf.memory.maxLevel": {
+    "value": 10,
+    "title": "Память наковальни: уровень клинка не выше",
+    "min": 1,
+    "max": 40,
+    "group": "Горн мастера"
+  },
+  "mf.rush.cost": {
+    "value": 6,
+    "title": "Ускоренный ранний ход: цена в углях",
+    "min": 1,
+    "max": 100000,
+    "group": "Горн мастера"
+  },
+  "mf.rush.waves": {
+    "value": 30,
+    "title": "Ускоренный ранний ход: первых волн",
+    "min": 1,
+    "max": 1000,
+    "group": "Горн мастера"
+  },
+  "mf.rush.mult": {
+    "value": 3,
+    "title": "Ускоренный ранний ход: множитель золота",
+    "min": 1,
+    "max": 100,
+    "step": 0.5,
+    "group": "Горн мастера"
+  },
+  "star.fromCoals": {
+    "value": 1000,
+    "title": "Звёздный металл: суммарных углей не меньше",
+    "min": 10,
+    "max": 1000000000,
+    "group": "Звёздный металл"
+  },
+  "star.offset": {
+    "value": 2,
+    "title": "Слитки: lg(углей) минус",
+    "min": 0,
+    "max": 10,
+    "step": 0.5,
+    "group": "Звёздный металл"
+  },
+  "star.mult": {
+    "value": 2,
+    "title": "Каждый слиток: множитель ко всему",
+    "min": 1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Звёздный металл"
+  },
+  "star.tripleFrom": {
+    "value": 1,
+    "title": "Двойные клинки (три в один, +2) со слитков",
+    "min": 1,
+    "max": 100,
+    "group": "Звёздный металл"
+  },
+  "bellows.minutes": {
+    "value": 2,
+    "title": "Раздуть горн: минут",
+    "min": 1,
+    "max": 60,
+    "group": "Энергия"
+  },
+  "bellows.mult": {
+    "value": 0.5,
+    "title": "Раздуть горн: интервал горна умножается на",
+    "min": 0.05,
+    "max": 1,
+    "step": 0.05,
+    "group": "Энергия"
+  },
+  "chest.blades": {
+    "value": 3,
+    "title": "Сундук за поездку: клинков",
+    "min": 1,
+    "max": 35,
+    "group": "Связки"
+  },
+  "chest.levelPlus": {
+    "value": 1,
+    "title": "Сундук за поездку: клинки выше горна на, уровней",
+    "min": 0,
+    "max": 10,
+    "group": "Связки"
+  },
+  "offline.share": {
+    "value": 0.5,
+    "title": "Офлайн: доля ставки фарма",
+    "min": 0,
+    "max": 1,
+    "step": 0.05,
+    "group": "Офлайн"
+  },
+  "offline.maxEvents": {
+    "value": 30000,
+    "title": "Офлайн: событий горна за подсчёт, максимум",
+    "min": 100,
+    "max": 1000000,
+    "group": "Офлайн"
+  },
+  "ach.starLevel": {
+    "value": 30,
+    "title": "Ачивка «Первый звёздный клинок»: уровень",
+    "min": 1,
+    "max": 100,
+    "group": "Ачивки"
+  },
+  "ach.wave": {
+    "value": 100,
+    "title": "Ачивка «Волна 100»: волна",
+    "min": 1,
+    "max": 100000,
+    "group": "Ачивки"
+  },
+  "ach.reforges": {
+    "value": 10,
+    "title": "Ачивка «Десять перековок»: перековок",
+    "min": 1,
+    "max": 1000,
+    "group": "Ачивки"
+  },
+  "ach.noTapWave": {
+    "value": 50,
+    "title": "Ачивка «Без единого тапа»: до волны",
+    "min": 1,
+    "max": 10000,
+    "group": "Ачивки"
+  },
+  "ach.lastSecond": {
+    "value": 1,
+    "title": "Ачивка «Босс за последнюю секунду»: осталось меньше, секунд",
+    "min": 0.1,
+    "max": 10,
+    "step": 0.1,
+    "group": "Ачивки"
+  },
+  "encounter.fromWave": {
+    "value": 20,
+    "title": "Особенности чудищ: с волны",
+    "group": "Форпост",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "encounter.prepare.fromWave": {
+    "value": 10,
+    "title": "Подготовка к бою: с волны",
+    "group": "Форпост",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "encounter.armor.share": {
+    "value": 0.1,
+    "title": "Панцирь: доля здоровья",
+    "group": "Форпост",
+    "min": 0,
+    "max": 100,
+    "step": 0.005
+  },
+  "encounter.regen.budget": {
+    "value": 0.08,
+    "title": "Восстановление: весь запас от здоровья",
+    "group": "Форпост",
+    "min": 0,
+    "max": 100,
+    "step": 0.005
+  },
+  "encounter.regen.rate": {
+    "value": 0.005,
+    "title": "Восстановление: доля здоровья в секунду",
+    "group": "Форпост",
+    "min": 0,
+    "max": 100,
+    "step": 0.005
+  },
+  "encounter.cast.sec": {
+    "value": 8,
+    "title": "Заклинатель: секунд между заклинаниями",
+    "group": "Форпост",
+    "min": 0.001,
+    "max": 100,
+    "step": 1
+  },
+  "encounter.cast.windSec": {
+    "value": 2,
+    "title": "Заклинатель: секунд заметной подготовки",
+    "group": "Форпост",
+    "min": 0.001,
+    "max": 100,
+    "step": 1
+  },
+  "encounter.cast.penalty": {
+    "value": 0.25,
+    "title": "Заклинатель: ослабление одного залпа",
+    "group": "Форпост",
+    "min": 0,
+    "max": 100,
+    "step": 0.005
+  },
+  "encounter.fire.sec": {
+    "value": 4,
+    "title": "Ожог: секунд блокировки восстановления",
+    "group": "Форпост",
+    "min": 0.001,
+    "max": 100,
+    "step": 1
+  },
+  "encounter.ice.sec": {
+    "value": 4,
+    "title": "Ледяное умение: секунд замедления",
+    "group": "Форпост",
+    "min": 0.001,
+    "max": 100,
+    "step": 1
+  },
+  "encounter.ice.slow": {
+    "value": 0.1,
+    "title": "Лёд: добавка к замедлению таймера босса",
+    "group": "Форпост",
+    "min": 0,
+    "max": 100,
+    "step": 0.005
+  },
+  "encounter.meet.minSec": {
+    "value": 1,
+    "title": "Встретить: минимум секунд подхода",
+    "group": "Форпост",
+    "min": 0.001,
+    "max": 100,
+    "step": 1
+  },
+  "encounter.meet.cutSec": {
+    "value": 1,
+    "title": "Встретить: сокращение подхода, секунд",
+    "group": "Форпост",
+    "min": 0.001,
+    "max": 100,
+    "step": 1
+  },
+  "encounter.meet.cooldown": {
+    "value": 30,
+    "title": "Встретить: перезарядка, секунд",
+    "group": "Форпост",
+    "min": 0,
+    "max": 100,
+    "step": 1
+  },
+  "encounter.aim.bonus": {
+    "value": 0.1,
+    "title": "Прицелиться: усиление первого залпа",
+    "group": "Форпост",
+    "min": 0,
+    "max": 100,
+    "step": 0.005
+  },
+  "up.hammer.base": {
+    "value": "180",
+    "title": "Удар молота: цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.hammer.growth": {
+    "value": 1.8,
+    "title": "Удар молота: рост цены",
+    "group": "Улучшения",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.01
+  },
+  "up.hammer.step": {
+    "value": 0.15,
+    "title": "Удар молота: сила улучшения",
+    "group": "Улучшения",
+    "min": 0,
+    "max": 5,
+    "step": 0.05
+  },
+  "up.hammer.soft": {
+    "value": 8,
+    "title": "Удар молота: после уровня прирост уменьшается",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10000
+  },
+  "up.hammer.max": {
+    "value": 10000,
+    "title": "Удар молота: уровней максимум",
+    "group": "Улучшения",
+    "min": 0,
+    "max": 100000
+  },
+  "up.stall.base": {
+    "value": "150",
+    "title": "Лавка кузнеца: цена",
+    "group": "Улучшения",
+    "big": true
+  },
+  "up.stall.growth": {
+    "value": 1.9,
+    "title": "Лавка кузнеца: рост цены",
+    "group": "Улучшения",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.01
+  },
+  "up.stall.step": {
+    "value": 0.25,
+    "title": "Лавка кузнеца: сила улучшения",
+    "group": "Улучшения",
+    "min": 0,
+    "max": 5,
+    "step": 0.05
+  },
+  "up.stall.soft": {
+    "value": 8,
+    "title": "Лавка кузнеца: после уровня прирост уменьшается",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10000
+  },
+  "up.stall.max": {
+    "value": 10000,
+    "title": "Лавка кузнеца: уровней максимум",
+    "group": "Улучшения",
+    "min": 0,
+    "max": 100000
+  },
+  "up.hammer.fromWave": {
+    "value": 20,
+    "title": "Удар молота: с волны",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10000
+  },
+  "up.stall.fromWave": {
+    "value": 10,
+    "title": "Лавка кузнеца: с волны",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10000
+  },
+  "up.stall.fromSold": {
+    "value": 10,
+    "title": "Лавка кузнеца: или после продаж",
+    "group": "Улучшения",
+    "min": 1,
+    "max": 10000
+  },
+  "mf.rhythm.cost": {
+    "value": 12,
+    "title": "Ритм мастерской: цена в углях",
+    "group": "Горн мастера",
+    "min": 1,
+    "max": 100000
+  },
+  "mf.rhythm.growth": {
+    "value": 2.8,
+    "title": "Ритм мастерской: рост цены",
+    "group": "Горн мастера",
+    "min": 1.1,
+    "max": 20,
+    "step": 0.1
+  },
+  "mf.trade.cost": {
+    "value": 10,
+    "title": "Клеймо мастера: цена в углях",
+    "group": "Горн мастера",
+    "min": 1,
+    "max": 100000
+  },
+  "mf.trade.growth": {
+    "value": 3,
+    "title": "Клеймо мастера: рост цены",
+    "group": "Горн мастера",
+    "min": 1.1,
+    "max": 20,
+    "step": 0.1
+  },
+  "mf.team.cost": {
+    "value": 25,
+    "title": "Плечом к плечу: цена в углях",
+    "group": "Горн мастера",
+    "min": 1,
+    "max": 100000
+  },
+  "mf.dragonCare.cost": {
+    "value": 15,
+    "title": "Тёплое логово: цена в углях",
+    "group": "Горн мастера",
+    "min": 1,
+    "max": 100000
+  },
+  "mf.dragonCare.growth": {
+    "value": 3,
+    "title": "Тёплое логово: рост цены",
+    "group": "Горн мастера",
+    "min": 1.1,
+    "max": 20,
+    "step": 0.1
+  },
+  "mf.trade.step": {
+    "value": 0.25,
+    "title": "Клеймо мастера: прибавка к множителю продажи",
+    "group": "Горн мастера",
+    "min": 0,
+    "max": 5,
+    "step": 0.05
+  },
+  "mf.trade.soft": {
+    "value": 4,
+    "title": "Клеймо мастера: после уровня прирост уменьшается",
+    "group": "Горн мастера",
+    "min": 1,
+    "max": 10000
+  },
+  "encounter.resonant.share": {
+    "value": 0.2,
+    "title": "Звонкая закалка: доля силы героя в следующем залпе",
+    "min": 0,
+    "max": 1,
+    "step": 0.05,
+    "group": "Форпост"
+  },
+  "outpost.hero.wave": {
+    "value": 11,
+    "title": "Герои: открытие с волны",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.pet.wave": {
+    "value": 20,
+    "title": "Питомцы: открытие с волны",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.temper.wave": {
+    "value": 20,
+    "title": "Закалка: открытие с волны",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.dragon.wave": {
+    "value": 30,
+    "title": "Яйцо дракона: открытие с волны",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.rack.size": {
+    "value": 4,
+    "title": "Стойка: мест",
+    "min": 1,
+    "max": 16,
+    "group": "Форпост"
+  },
+  "outpost.hero.xpStep": {
+    "value": 12,
+    "title": "Герой: опыт для первого ранга",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.hero.xpKnee": {
+    "value": 120,
+    "title": "Герой: опыт для половины бонуса мастерства",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.hero.masteryMax": {
+    "value": 0.25,
+    "title": "Герой: максимальный бонус мастерства",
+    "min": 0,
+    "max": 1,
+    "group": "Форпост",
+    "step": 0.01
+  },
+  "outpost.hero.killXp": {
+    "value": 1,
+    "title": "Герой: опыт за чудище",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.hero.bossXp": {
+    "value": 3,
+    "title": "Герой: опыт за босса",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.bran.hit": {
+    "value": 2,
+    "title": "Бран: сила раскола от оружия",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.bran.cooldown": {
+    "value": 18,
+    "title": "Бран: перезарядка, секунд",
+    "min": 0.1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.veya.hit": {
+    "value": 3,
+    "title": "Вея: сила рипоста от оружия",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.veya.cooldown": {
+    "value": 16,
+    "title": "Вея: перезарядка, секунд",
+    "min": 0.1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.temper.base": {
+    "value": 75,
+    "title": "Закалка: начальная цена",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.temper.growth": {
+    "value": 1.6,
+    "title": "Закалка: рост цены с уровнем оружия",
+    "min": 1,
+    "max": 10,
+    "group": "Форпост",
+    "step": 0.01
+  },
+  "outpost.salamander.taps": {
+    "value": 12,
+    "title": "Саламандра: ударов на заряд",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.salamander.seconds": {
+    "value": 0.5,
+    "title": "Саламандра: ускорение поковки, секунд",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост",
+    "step": 0.01
+  },
+  "outpost.fox.merges": {
+    "value": 3,
+    "title": "Лиса: слияний на заряд",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.fox.seconds": {
+    "value": 0.75,
+    "title": "Лиса: ускорение поковки, секунд",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост",
+    "step": 0.01
+  },
+  "outpost.pet.xpStep": {
+    "value": 50,
+    "title": "Питомец: действий на ступень роста",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.dragon.share": {
+    "value": 0.1,
+    "title": "Дракон: усваиваемая доля базовой силы",
+    "min": 0,
+    "max": 1,
+    "group": "Форпост",
+    "step": 0.01
+  },
+  "outpost.dragon.cap": {
+    "value": 1,
+    "title": "Дракон: предел силы от уровня горна",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.dragon.queue": {
+    "value": 3,
+    "title": "Дракон: мест в очереди",
+    "min": 1,
+    "max": 20,
+    "group": "Форпост"
+  },
+  "outpost.dragon.digestSec": {
+    "value": 20,
+    "title": "Дракон: переваривание клинка, секунд",
+    "min": 0.1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.dragon.hatch": {
+    "value": 3,
+    "title": "Дракон: клинков до вылупления",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.dragon.adult": {
+    "value": 20,
+    "title": "Дракон: клинков до взросления",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.dragon.chargeMax": {
+    "value": 100,
+    "title": "Дракон: жар для дыхания",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.dragon.feedCharge": {
+    "value": 12,
+    "title": "Дракон: жар от кормления",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.dragon.killCharge": {
+    "value": 4,
+    "title": "Дракон: жар от победы",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.dragon.hit": {
+    "value": 3,
+    "title": "Дракон: сила дыхания",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.dragon.cooldown": {
+    "value": 30,
+    "title": "Дракон: перезарядка дыхания, секунд",
+    "min": 0.1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.mf.dragonCare.step": {
+    "value": 0.08,
+    "title": "Уход за драконом: ускорение за уровень",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост",
+    "step": 0.01
+  },
+  "outpost.mf.dragonCare.soft": {
+    "value": 6,
+    "title": "Уход за драконом: порог ослабления прироста",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "outpost.mf.rhythm.step": {
+    "value": 0.08,
+    "title": "Ритм мастера: скорость заряда питомца за уровень",
+    "min": 0,
+    "max": 100000,
+    "group": "Форпост",
+    "step": 0.01
+  },
+  "outpost.mf.rhythm.soft": {
+    "value": 6,
+    "title": "Ритм мастера: порог ослабления прироста",
+    "min": 1,
+    "max": 100000,
+    "group": "Форпост"
+  },
+  "encounter.riposte.bonus": {
+    "value": 0.5,
+    "title": "Рипост: дополнительный урон во время замаха заклинателя",
+    "min": 0,
+    "max": 2,
+    "step": 0.1,
+    "group": "Форпост"
+  },
+  "campaign.mark.maxShare": {
+    "value": 0.2,
+    "title": "Метка охотника: максимум прибавки к золоту",
+    "min": 0,
+    "max": 0.5,
+    "step": 0.01,
+    "group": "Форпост"
+  },
+  "campaign.opening.maxShare": {
+    "value": 0.1,
+    "title": "Окно уязвимости: максимум усиления следующего залпа",
+    "min": 0,
+    "max": 0.5,
+    "step": 0.01,
+    "group": "Форпост"
+  },
+  "mf.command.cost": {
+    "value": 40,
+    "title": "Командный строй: цена в углях",
+    "min": 1,
+    "max": 100000,
+    "group": "Горн мастера"
+  },
+  "outpost.eira.wave": {
+    "value": 40,
+    "title": "Эйра: с волны",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.corvin.wave": {
+    "value": 50,
+    "title": "Корвин: с волны",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.raven.wave": {
+    "value": 40,
+    "title": "Ворон-торговец: с волны",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.turtle.wave": {
+    "value": 50,
+    "title": "Руническая черепаха: с волны",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.eira.hit": {
+    "value": 2,
+    "title": "Печать стихий: множитель силы героя",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.eira.cooldown": {
+    "value": 20,
+    "title": "Печать стихий: перезарядка, секунд",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.corvin.hit": {
+    "value": 2,
+    "title": "Метка добычи: множитель силы героя",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.corvin.cooldown": {
+    "value": 22,
+    "title": "Метка добычи: перезарядка, секунд",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.eira.suppressSec": {
+    "value": 5,
+    "title": "Огненная печать: секунд подавления восстановления",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.eira.slowSec": {
+    "value": 3,
+    "title": "Ледяная печать: секунд контроля",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.eira.echoShare": {
+    "value": 0.25,
+    "title": "Звонкая печать: доля силы героя в эхо",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.corvin.markShare": {
+    "value": 0.08,
+    "title": "Метка добычи: добавка к золоту за победу",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.talent.hit": {
+    "value": 0.15,
+    "title": "Талант удара: прибавка к урону приёма",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.talent.cooldown": {
+    "value": 0.12,
+    "title": "Талант ритма: сокращение перезарядки",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 0.5,
+    "step": 0.01
+  },
+  "outpost.talent.opening": {
+    "value": 0.04,
+    "title": "Талант бреши: прибавка следующему залпу",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.talent.suppressSec": {
+    "value": 4,
+    "title": "Талант углей: секунд подавления восстановления",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.talent.slowSec": {
+    "value": 2,
+    "title": "Талант льда: дополнительных секунд контроля",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.talent.boss": {
+    "value": 0.25,
+    "title": "Талант охоты: прибавка урону приёма по боссу",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.talent.echo": {
+    "value": 0.2,
+    "title": "Талант эха: доля силы героя в следующем залпе",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.talent.riposte": {
+    "value": 0.25,
+    "title": "Талант рипоста: прибавка точному ответу",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.talent.mark": {
+    "value": 0.03,
+    "title": "Талант трофея: дополнительная доля золота",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.talent.contract": {
+    "value": 0.05,
+    "title": "Талант связей: прибавка к награде заказа",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.raven.bonus": {
+    "value": 0.05,
+    "title": "Ворон: начальная прибавка к заказам",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.raven.mastery": {
+    "value": 0.05,
+    "title": "Ворон: предел прибавки от опыта",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.raven.xpKnee": {
+    "value": 200,
+    "title": "Ворон: опыт для половины прибавки",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.forms.wave": {
+    "value": 50,
+    "title": "Формы взрослого дракона: с волны",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.frost.hitShare": {
+    "value": 0.7,
+    "title": "Иней: доля обычного урона дыхания",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.frost.slowSec": {
+    "value": 6,
+    "title": "Иней: секунд контроля",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.frost.slowStrength": {
+    "value": 0.5,
+    "title": "Иней: сила замедления",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.storm.directShare": {
+    "value": 0.6,
+    "title": "Грозовой дракон: доля первого удара",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.storm.echoShare": {
+    "value": 0.4,
+    "title": "Грозовой дракон: доля отложенного эха",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "outpost.molt.wave": {
+    "value": 80,
+    "title": "Первая линька: рекорд волны",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.molt.waveStep": {
+    "value": 20,
+    "title": "Линька: прирост рекорда для следующей",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.molt.feedStep": {
+    "value": 20,
+    "title": "Линька: новых кормлений для следующей",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 10000,
+    "step": 1
+  },
+  "outpost.molt.costShare": {
+    "value": 0.25,
+    "title": "Линька: расход доли накопленной силы",
+    "group": "Развитие форпоста",
+    "min": 0.01,
+    "max": 0.9,
+    "step": 0.01
+  },
+  "outpost.molt.perkMax": {
+    "value": 3,
+    "title": "Линька: максимум ступеней одного дара",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "outpost.molt.strength": {
+    "value": 0.08,
+    "title": "Глубокое дыхание: урон за ступень",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 0.2,
+    "step": 0.01
+  },
+  "outpost.molt.ember": {
+    "value": 0.05,
+    "title": "Бережный жар: снижение расхода за ступень",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 0.1,
+    "step": 0.01
+  },
+  "adventures.contract.wave": {
+    "value": 25,
+    "title": "Заказы: с рекорда волны",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.contract.count": {
+    "value": 3,
+    "title": "Заказы: базовое число клинков",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.contract.cooldown": {
+    "value": 120,
+    "title": "Заказы: ожидание следующего, секунд",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.contract.gold": {
+    "value": 1.15,
+    "title": "Заказ за золото: множитель стоимости",
+    "group": "Поручения",
+    "min": 0,
+    "max": 2,
+    "step": 0.01
+  },
+  "adventures.contract.trainingGold": {
+    "value": 0.8,
+    "title": "Заказ за обучение: доля стоимости",
+    "group": "Поручения",
+    "min": 0,
+    "max": 2,
+    "step": 0.01
+  },
+  "adventures.contract.xp": {
+    "value": 10,
+    "title": "Заказ: опыт наставника",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.contract.bonusCap": {
+    "value": 0.1,
+    "title": "Заказ: максимальная прибавка помощника",
+    "group": "Поручения",
+    "min": 0,
+    "max": 2,
+    "step": 0.01
+  },
+  "adventures.expedition.wave": {
+    "value": 45,
+    "title": "Походы: с рекорда волны",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.expedition.first": {
+    "value": 2,
+    "title": "Поход: побед до развилки",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.expedition.short": {
+    "value": 1,
+    "title": "Короткая дорога: дополнительных побед",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.expedition.ruins": {
+    "value": 3,
+    "title": "Руины: дополнительных побед",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.expedition.cooldown": {
+    "value": 180,
+    "title": "Походы: ожидание следующего, секунд",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.expedition.hp": {
+    "value": 1.08,
+    "title": "Поход: множитель здоровья врага",
+    "group": "Поручения",
+    "min": 1,
+    "max": 1.15,
+    "step": 0.01
+  },
+  "adventures.expedition.ruinsHp": {
+    "value": 1.15,
+    "title": "Руины: множитель здоровья врага",
+    "group": "Поручения",
+    "min": 1,
+    "max": 1.15,
+    "step": 0.01
+  },
+  "adventures.expedition.shortGold": {
+    "value": 0.1,
+    "title": "Короткая дорога: бонус от золота встреч",
+    "group": "Поручения",
+    "min": 0,
+    "max": 2,
+    "step": 0.01
+  },
+  "adventures.expedition.ruinsGold": {
+    "value": 0.15,
+    "title": "Руины: бонус от золота встреч",
+    "group": "Поручения",
+    "min": 0,
+    "max": 2,
+    "step": 0.01
+  },
+  "adventures.expedition.shortXp": {
+    "value": 6,
+    "title": "Короткая дорога: опыт наставника",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.expedition.ruinsXp": {
+    "value": 10,
+    "title": "Руины: опыт наставника",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.trial.wave": {
+    "value": 60,
+    "title": "Испытания: с рекорда волны",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.trial.waveStep": {
+    "value": 10,
+    "title": "Испытания: шаг нового рекорда",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.trial.xp": {
+    "value": 10,
+    "title": "Испытание: опыт наставника",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.training.chunk": {
+    "value": 10,
+    "title": "Обучение: опыта за передачу",
+    "group": "Поручения",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "adventures.training.cap": {
+    "value": 1000000000,
+    "title": "Обучение: предельный запас опыта",
+    "group": "Поручения",
+    "min": 0,
+    "max": 1000000000000,
+    "step": 1
+  },
+  "outpost.dragon.storm.mult": {
+    "value": 1.1,
+    "title": "Грозовой дракон: суммарный множитель урона",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 1.5,
+    "step": 0.01
+  },
+  "outpost.turtle.wardXp": {
+    "value": 1,
+    "title": "Черепаха: опыт за фактическую защиту",
+    "group": "Развитие форпоста",
+    "min": 0,
+    "max": 100,
+    "step": 1
+  },
+  "outpost.turtle.secondWardRank": {
+    "value": 3,
+    "title": "Черепаха: ранг второй защиты",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "outpost.turtle.maxWards": {
+    "value": 2,
+    "title": "Черепаха: защит максимум за встречу",
+    "group": "Развитие форпоста",
+    "min": 1,
+    "max": 2,
+    "step": 1
+  }
+}

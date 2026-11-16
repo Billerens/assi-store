@@ -1,0 +1,2079 @@
+{
+  "start.coins": {
+    "value": 60,
+    "title": "Старт: начальные монеты",
+    "group": "Старт",
+    "min": 0,
+    "max": 600,
+    "step": 1
+  },
+  "start.beasts": {
+    "value": 4,
+    "title": "Старт: число зверей",
+    "group": "Старт",
+    "min": 0,
+    "max": 40,
+    "step": 1
+  },
+  "start.level": {
+    "value": 5,
+    "title": "Старт: уровень",
+    "group": "Старт",
+    "min": 0,
+    "max": 50,
+    "step": 1
+  },
+  "start.geneMin": {
+    "value": 34,
+    "title": "Старт: минимальное качество",
+    "group": "Старт",
+    "min": 0,
+    "max": 340,
+    "step": 1
+  },
+  "start.geneMax": {
+    "value": 46,
+    "title": "Старт: максимальное качество",
+    "group": "Старт",
+    "min": 0,
+    "max": 460,
+    "step": 1
+  },
+  "genes.baseCap": {
+    "value": 60,
+    "title": "Генетика: начальный потолок",
+    "group": "Генетика",
+    "min": 0,
+    "max": 600,
+    "step": 1
+  },
+  "genes.softCap": {
+    "value": 100,
+    "title": "Генетика: порог замедления роста потолка",
+    "group": "Генетика",
+    "min": 60,
+    "max": 1000,
+    "step": 1
+  },
+  "genes.pointsPerCap": {
+    "value": 10,
+    "title": "Генетика: очков на единицу потолка",
+    "group": "Генетика",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "genes.latePointsPerCap": {
+    "value": 25,
+    "title": "Генетика: очков на единицу после порога",
+    "group": "Генетика",
+    "min": 1,
+    "max": 250,
+    "step": 1
+  },
+  "genes.legacyPerTen": {
+    "value": 0.1,
+    "title": "Генетика: наследие за шаг генофонда",
+    "group": "Генетика",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "genes.coinPerTen": {
+    "value": 0.01,
+    "title": "Генетика: монеты за шаг генофонда",
+    "group": "Генетика",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "genes.sigma": {
+    "value": 6,
+    "title": "Генетика: шум наследования",
+    "group": "Генетика",
+    "min": 0,
+    "max": 60,
+    "step": 1
+  },
+  "genes.sigmaMin": {
+    "value": 3,
+    "title": "Генетика: минимальный шум",
+    "group": "Генетика",
+    "min": 0,
+    "max": 30,
+    "step": 1
+  },
+  "genes.breakChance": {
+    "value": 0.03,
+    "title": "Генетика: шанс прорыва",
+    "group": "Генетика",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "genes.breakAmount": {
+    "value": 15,
+    "title": "Генетика: сила прорыва",
+    "group": "Генетика",
+    "min": 0,
+    "max": 150,
+    "step": 1
+  },
+  "genes.noiseSamples": {
+    "value": 12,
+    "title": "Генетика: выборок шума",
+    "group": "Генетика",
+    "min": 1,
+    "max": 120,
+    "step": 1
+  },
+  "breed.adultLevel": {
+    "value": 5,
+    "title": "Разведение: уровень взросления",
+    "group": "Разведение",
+    "min": 0,
+    "max": 50,
+    "step": 1
+  },
+  "breed.maxEggs": {
+    "value": 6,
+    "title": "Разведение: яиц за жизнь",
+    "group": "Разведение",
+    "min": 0,
+    "max": 60,
+    "step": 1
+  },
+  "breed.restSec": {
+    "value": 7200,
+    "title": "Разведение: отдых, секунд",
+    "group": "Разведение",
+    "min": 0,
+    "max": 72000,
+    "step": 1
+  },
+  "breed.durationSec": {
+    "value": 1800,
+    "title": "Разведение: инкубация, секунд",
+    "group": "Разведение",
+    "min": 0,
+    "max": 18000,
+    "step": 1
+  },
+  "breed.generationGrowth": {
+    "value": 1.25,
+    "title": "Разведение: рост инкубации",
+    "group": "Разведение",
+    "min": 0.01,
+    "max": 12.5,
+    "step": 0.01
+  },
+  "breed.generationDivisor": {
+    "value": 5,
+    "title": "Разведение: поколений на шаг формулы",
+    "group": "Разведение",
+    "min": 1,
+    "max": 50,
+    "step": 1
+  },
+  "breed.maxDurationSec": {
+    "value": 14400,
+    "title": "Разведение: предел инкубации, секунд",
+    "group": "Разведение",
+    "min": 0,
+    "max": 144000,
+    "step": 1
+  },
+  "breed.offlineRate": {
+    "value": 0.5,
+    "title": "Разведение: скорость инкубации офлайн",
+    "group": "Разведение",
+    "min": 0.01,
+    "max": 1,
+    "step": 0.01
+  },
+  "breed.minRestSec": {
+    "value": 0,
+    "title": "Разведение: минимальный отдых, секунд",
+    "group": "Разведение",
+    "min": 0,
+    "max": 1,
+    "step": 1
+  },
+  "breed.minDurationFactor": {
+    "value": 0.2,
+    "title": "Разведение: минимальная доля инкубации",
+    "group": "Разведение",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "breed.doubleChance": {
+    "value": 0.05,
+    "title": "Разведение: шанс двойной кладки за уровень",
+    "group": "Разведение",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "capacity.base": {
+    "value": 8,
+    "title": "Вольер: начальное значение",
+    "group": "Вольер",
+    "min": 0,
+    "max": 80,
+    "step": 1
+  },
+  "capacity.max": {
+    "value": 60,
+    "title": "Вольер: предел",
+    "group": "Вольер",
+    "min": 1,
+    "max": 60,
+    "step": 1
+  },
+  "capacity.perUpgrade": {
+    "value": 4,
+    "title": "Вольер: за улучшение",
+    "group": "Вольер",
+    "min": 0,
+    "max": 40,
+    "step": 1
+  },
+  "nests.base": {
+    "value": 1,
+    "title": "Гнёзда: начальное значение",
+    "group": "Гнёзда",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "nests.max": {
+    "value": 8,
+    "title": "Гнёзда: предел",
+    "group": "Гнёзда",
+    "min": 1,
+    "max": 8,
+    "step": 1
+  },
+  "xp.win": {
+    "value": 30,
+    "title": "Опыт: за победу",
+    "group": "Опыт",
+    "min": 0,
+    "max": 300,
+    "step": 1
+  },
+  "xp.loss": {
+    "value": 10,
+    "title": "Опыт: за поражение",
+    "group": "Опыт",
+    "min": 0,
+    "max": 100,
+    "step": 1
+  },
+  "xp.base": {
+    "value": 20,
+    "title": "Опыт: начальное значение",
+    "group": "Опыт",
+    "min": 0,
+    "max": 200,
+    "step": 1
+  },
+  "xp.growth": {
+    "value": 1.3,
+    "title": "Опыт: рост",
+    "group": "Опыт",
+    "min": 0.01,
+    "max": 13,
+    "step": 0.01
+  },
+  "xp.maxLevel": {
+    "value": 30,
+    "title": "Опыт: максимальный уровень",
+    "group": "Опыт",
+    "min": 1,
+    "max": 30,
+    "step": 1
+  },
+  "xp.trainingHourly": {
+    "value": 5,
+    "title": "Опыт: за круг в час",
+    "group": "Опыт",
+    "min": 0,
+    "max": 50,
+    "step": 1
+  },
+  "xp.walk": {
+    "value": 30,
+    "title": "Опыт: за прогулку",
+    "group": "Опыт",
+    "min": 0,
+    "max": 300,
+    "step": 1
+  },
+  "fight.cooldownSec": {
+    "value": 1200,
+    "title": "Турнир: между боями, секунд",
+    "group": "Турнир",
+    "min": 0,
+    "max": 12000,
+    "step": 1
+  },
+  "fight.retireAt": {
+    "value": 40,
+    "title": "Турнир: боёв до отставки",
+    "group": "Турнир",
+    "min": 0,
+    "max": 400,
+    "step": 1
+  },
+  "fight.longlifeExtra": {
+    "value": 20,
+    "title": "Турнир: дополнительные бои долгожителя",
+    "group": "Турнир",
+    "min": 0,
+    "max": 200,
+    "step": 1
+  },
+  "fight.tirelessFactor": {
+    "value": 0.5,
+    "title": "Турнир: отдых неутомимого",
+    "group": "Турнир",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "fight.coachExtra": {
+    "value": 10,
+    "title": "Турнир: боёв за тренера",
+    "group": "Турнир",
+    "min": 0,
+    "max": 100,
+    "step": 1
+  },
+  "fight.enemyGeneBase": {
+    "value": 25,
+    "title": "Турнир: качество соперника в начале",
+    "group": "Турнир",
+    "min": 0,
+    "max": 250,
+    "step": 1
+  },
+  "fight.enemyGeneStep": {
+    "value": 0.65,
+    "title": "Турнир: качество соперника за ступень",
+    "group": "Турнир",
+    "min": 0,
+    "max": 6.5,
+    "step": 0.01
+  },
+  "fight.enemyGeneLeague": {
+    "value": 6,
+    "title": "Турнир: качество соперника за лигу",
+    "group": "Турнир",
+    "min": 0,
+    "max": 60,
+    "step": 1
+  },
+  "fight.enemyLevelBase": {
+    "value": 4,
+    "title": "Турнир: уровень первого соперника",
+    "group": "Турнир",
+    "min": 0,
+    "max": 40,
+    "step": 1
+  },
+  "fight.enemyLevelLeague": {
+    "value": 2,
+    "title": "Турнир: уровни соперника за лигу",
+    "group": "Турнир",
+    "min": 0,
+    "max": 20,
+    "step": 1
+  },
+  "fight.enemySpread": {
+    "value": 4,
+    "title": "Турнир: разброс качеств соперника",
+    "group": "Турнир",
+    "min": 0,
+    "max": 40,
+    "step": 1
+  },
+  "league.steps": {
+    "value": 10,
+    "title": "Лиги: ступеней в лиге",
+    "group": "Лиги",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "league.count": {
+    "value": 6,
+    "title": "Лиги: число лиг",
+    "group": "Лиги",
+    "min": 1,
+    "max": 6,
+    "step": 1
+  },
+  "league.streak": {
+    "value": 3,
+    "title": "Лиги: побед или поражений подряд",
+    "group": "Лиги",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "coins.win": {
+    "value": 10,
+    "title": "Монеты: за победу",
+    "group": "Монеты",
+    "min": 0,
+    "max": 100,
+    "step": 1
+  },
+  "coins.leagueGrowth": {
+    "value": 1.6,
+    "title": "Монеты: множитель за лигу",
+    "group": "Монеты",
+    "min": 0.01,
+    "max": 16,
+    "step": 0.01
+  },
+  "coins.stepDivisor": {
+    "value": 10,
+    "title": "Монеты: ступеней на единицу награды",
+    "group": "Монеты",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "coins.lossFactor": {
+    "value": 0.2,
+    "title": "Монеты: доля награды за поражение",
+    "group": "Монеты",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "pool.divisor": {
+    "value": 10,
+    "title": "Генофонд: делитель среднего качества",
+    "group": "Генофонд",
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  "pool.power": {
+    "value": 1.5,
+    "title": "Генофонд: степень награды",
+    "group": "Генофонд",
+    "min": 0,
+    "max": 15,
+    "step": 0.01
+  },
+  "pool.generationDivisor": {
+    "value": 5,
+    "title": "Генофонд: поколений на шаг формулы",
+    "group": "Генофонд",
+    "min": 1,
+    "max": 50,
+    "step": 1
+  },
+  "expedition.threshold": {
+    "value": 200,
+    "title": "Экспедиция: очков на новый материк",
+    "group": "Экспедиция",
+    "min": 0,
+    "max": 2000,
+    "step": 1
+  },
+  "expedition.maxContinent": {
+    "value": 3,
+    "title": "Экспедиция: число материков",
+    "group": "Экспедиция",
+    "min": 1,
+    "max": 3,
+    "step": 1
+  },
+  "expedition.founders": {
+    "value": 3,
+    "title": "Экспедиция: число основателей",
+    "group": "Экспедиция",
+    "min": 3,
+    "max": 3,
+    "step": 1
+  },
+  "world.initialSpecies": {
+    "value": 5,
+    "title": "Мир: стартовых видов",
+    "group": "Мир",
+    "min": 1,
+    "max": 14,
+    "step": 1
+  },
+  "world.baseSpecies": {
+    "value": 8,
+    "title": "Мир: видов первого материка",
+    "group": "Мир",
+    "min": 1,
+    "max": 14,
+    "step": 1
+  },
+  "world.newSpecies": {
+    "value": 3,
+    "title": "Мир: новых видов на материк",
+    "group": "Мир",
+    "min": 1,
+    "max": 14,
+    "step": 1
+  },
+  "world.baseSpeciesLeagueStep": {
+    "value": 1,
+    "title": "Мир: лиг для открытия вида",
+    "group": "Мир",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "event.intervalMinSec": {
+    "value": 1800,
+    "title": "События: минимальный интервал, секунд",
+    "group": "События",
+    "min": 0,
+    "max": 18000,
+    "step": 1
+  },
+  "event.intervalMaxSec": {
+    "value": 3600,
+    "title": "События: максимальный интервал, секунд",
+    "group": "События",
+    "min": 0,
+    "max": 36000,
+    "step": 1
+  },
+  "event.fairSec": {
+    "value": 1800,
+    "title": "События: длительность ярмарки, секунд",
+    "group": "События",
+    "min": 0,
+    "max": 18000,
+    "step": 1
+  },
+  "event.fairMult": {
+    "value": 2,
+    "title": "События: множитель ярмарки",
+    "group": "События",
+    "min": 0,
+    "max": 20,
+    "step": 1
+  },
+  "event.guestTaps": {
+    "value": 3,
+    "title": "События: касаний для приручения",
+    "group": "События",
+    "min": 0,
+    "max": 30,
+    "step": 1
+  },
+  "event.circusMult": {
+    "value": 3,
+    "title": "События: множитель цены цирка",
+    "group": "События",
+    "min": 0,
+    "max": 30,
+    "step": 1
+  },
+  "event.salePerGene": {
+    "value": 1,
+    "title": "События: цена единицы качества",
+    "group": "События",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "wild.cooldownSec": {
+    "value": 86400,
+    "title": "Дикие звери: между боями, секунд",
+    "group": "Дикие звери",
+    "min": 0,
+    "max": 864000,
+    "step": 1
+  },
+  "wild.geneMin": {
+    "value": 28,
+    "title": "Дикие звери: минимальное качество",
+    "group": "Дикие звери",
+    "min": 0,
+    "max": 280,
+    "step": 1
+  },
+  "wild.geneMax": {
+    "value": 44,
+    "title": "Дикие звери: максимальное качество",
+    "group": "Дикие звери",
+    "min": 0,
+    "max": 440,
+    "step": 1
+  },
+  "wild.level": {
+    "value": 5,
+    "title": "Дикие звери: уровень",
+    "group": "Дикие звери",
+    "min": 0,
+    "max": 50,
+    "step": 1
+  },
+  "trait.oneParent": {
+    "value": 0.5,
+    "title": "Черты: наследование от одного родителя",
+    "group": "Черты",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "trait.twoParents": {
+    "value": 0.9,
+    "title": "Черты: наследование от обоих родителей",
+    "group": "Черты",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "trait.newChance": {
+    "value": 0.01,
+    "title": "Черты: шанс новой черты",
+    "group": "Черты",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "trait.baseCount": {
+    "value": 8,
+    "title": "Черты: основных черт",
+    "group": "Черты",
+    "min": 1,
+    "max": 8,
+    "step": 1
+  },
+  "upgrade.bedding.effect": {
+    "value": 0.08,
+    "title": "Улучшение: ускорение высиживания",
+    "group": "Баланс",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "upgrade.feed.effect": {
+    "value": 0.1,
+    "title": "Улучшение: добавка опыта",
+    "group": "Баланс",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "upgrade.vet.effect": {
+    "value": 900,
+    "title": "Улучшение: сокращение отдыха, секунд",
+    "group": "Баланс",
+    "min": 0,
+    "max": 9000,
+    "step": 1
+  },
+  "upgrade.selection.effect": {
+    "value": 0.5,
+    "title": "Улучшение: снижение шума",
+    "group": "Баланс",
+    "min": 0,
+    "max": 5,
+    "step": 0.01
+  },
+  "upgrade.luck.effect": {
+    "value": 0.005,
+    "title": "Улучшение: добавка шанса прорыва",
+    "group": "Баланс",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "upgrade.banners.effect": {
+    "value": 0.08,
+    "title": "Улучшение: добавка монет за победу",
+    "group": "Баланс",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "upgrade.keeper.effect": {
+    "value": 0.1,
+    "title": "Улучшение: добавка генофонда",
+    "group": "Баланс",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "achievement.generation": {
+    "value": 10,
+    "title": "Достижения: поколение для достижения",
+    "group": "Достижения",
+    "min": 0,
+    "max": 100,
+    "step": 1
+  },
+  "achievement.potential": {
+    "value": 100,
+    "title": "Достижения: потенциал для достижения",
+    "group": "Достижения",
+    "min": 0,
+    "max": 1000,
+    "step": 1
+  },
+  "ancestry.depth": {
+    "value": 4,
+    "title": "Родословная: колен",
+    "group": "Родословная",
+    "min": 0,
+    "max": 40,
+    "step": 1
+  },
+  "history.battles": {
+    "value": 20,
+    "title": "История: сохранённых результатов",
+    "group": "История",
+    "min": 0,
+    "max": 200,
+    "step": 1
+  },
+  "history.news": {
+    "value": 20,
+    "title": "История: газетных заметок",
+    "group": "История",
+    "min": 0,
+    "max": 200,
+    "step": 1
+  },
+  "offline.capHours": {
+    "value": 24,
+    "title": "Офлайн: потолок, часов",
+    "group": "Офлайн",
+    "min": 0,
+    "max": 240,
+    "step": 1
+  },
+  "offline.efficiency": {
+    "value": 1,
+    "title": "Офлайн: доля прогресса",
+    "group": "Офлайн",
+    "min": 0,
+    "max": 1,
+    "step": 1
+  },
+  "tick.hz": {
+    "value": 2,
+    "title": "Движок: тактов в секунду",
+    "group": "Движок",
+    "min": 1,
+    "max": 20,
+    "step": 1
+  },
+  "render.fps": {
+    "value": 15,
+    "title": "Экран: кадров в секунду",
+    "group": "Экран",
+    "min": 1,
+    "max": 150,
+    "step": 1
+  },
+  "screen.portrait": {
+    "value": true,
+    "title": "Экран: портретная ориентация",
+    "group": "Экран"
+  },
+  "upgrade.nest.cost": {
+    "value": 100,
+    "title": "Гнездо: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 1000,
+    "step": 1
+  },
+  "upgrade.nest.growth": {
+    "value": 3,
+    "title": "Гнездо: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 30,
+    "step": 1
+  },
+  "upgrade.nest.max": {
+    "value": 7,
+    "title": "Гнездо: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 70,
+    "step": 1
+  },
+  "upgrade.aviary.cost": {
+    "value": 80,
+    "title": "Вольер: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 800,
+    "step": 1
+  },
+  "upgrade.aviary.growth": {
+    "value": 1.8,
+    "title": "Вольер: рост цены",
+    "group": "Баланс",
+    "min": 0.01,
+    "max": 18,
+    "step": 0.01
+  },
+  "upgrade.aviary.max": {
+    "value": 13,
+    "title": "Вольер: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 130,
+    "step": 1
+  },
+  "upgrade.bedding.cost": {
+    "value": 150,
+    "title": "Тёплая подстилка: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 1500,
+    "step": 1
+  },
+  "upgrade.bedding.growth": {
+    "value": 2,
+    "title": "Тёплая подстилка: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 20,
+    "step": 1
+  },
+  "upgrade.bedding.max": {
+    "value": 10,
+    "title": "Тёплая подстилка: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 100,
+    "step": 1
+  },
+  "upgrade.feed.cost": {
+    "value": 60,
+    "title": "Корм: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 600,
+    "step": 1
+  },
+  "upgrade.feed.growth": {
+    "value": 1.7,
+    "title": "Корм: рост цены",
+    "group": "Баланс",
+    "min": 0.01,
+    "max": 17,
+    "step": 0.01
+  },
+  "upgrade.feed.max": {
+    "value": 9999,
+    "title": "Корм: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 9999,
+    "step": 1
+  },
+  "upgrade.training.cost": {
+    "value": 300,
+    "title": "Тренировочный круг: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 3000,
+    "step": 1
+  },
+  "upgrade.training.growth": {
+    "value": 2,
+    "title": "Тренировочный круг: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 20,
+    "step": 1
+  },
+  "upgrade.training.max": {
+    "value": 9999,
+    "title": "Тренировочный круг: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 9999,
+    "step": 1
+  },
+  "upgrade.vet.cost": {
+    "value": 200,
+    "title": "Ветеринар: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 2000,
+    "step": 1
+  },
+  "upgrade.vet.growth": {
+    "value": 2,
+    "title": "Ветеринар: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 20,
+    "step": 1
+  },
+  "upgrade.vet.max": {
+    "value": 8,
+    "title": "Ветеринар: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 80,
+    "step": 1
+  },
+  "upgrade.book.cost": {
+    "value": 500,
+    "title": "Племенная книга: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 5000,
+    "step": 1
+  },
+  "upgrade.book.growth": {
+    "value": 1,
+    "title": "Племенная книга: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.book.max": {
+    "value": 1,
+    "title": "Племенная книга: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.pedigree.cost": {
+    "value": 400,
+    "title": "Родословная: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 4000,
+    "step": 1
+  },
+  "upgrade.pedigree.growth": {
+    "value": 1,
+    "title": "Родословная: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.pedigree.max": {
+    "value": 1,
+    "title": "Родословная: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.selection.cost": {
+    "value": 800,
+    "title": "Отбор: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 8000,
+    "step": 1
+  },
+  "upgrade.selection.growth": {
+    "value": 2.5,
+    "title": "Отбор: рост цены",
+    "group": "Баланс",
+    "min": 0.01,
+    "max": 25,
+    "step": 0.01
+  },
+  "upgrade.selection.max": {
+    "value": 6,
+    "title": "Отбор: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 60,
+    "step": 1
+  },
+  "upgrade.luck.cost": {
+    "value": 1000,
+    "title": "Удача заводчика: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 10000,
+    "step": 1
+  },
+  "upgrade.luck.growth": {
+    "value": 2.3,
+    "title": "Удача заводчика: рост цены",
+    "group": "Баланс",
+    "min": 0.01,
+    "max": 23,
+    "step": 0.01
+  },
+  "upgrade.luck.max": {
+    "value": 200,
+    "title": "Удача заводчика: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 9999,
+    "step": 1
+  },
+  "upgrade.catcher.cost": {
+    "value": 700,
+    "title": "Ловчий: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 7000,
+    "step": 1
+  },
+  "upgrade.catcher.growth": {
+    "value": 1,
+    "title": "Ловчий: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.catcher.max": {
+    "value": 1,
+    "title": "Ловчий: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.arena.cost": {
+    "value": 250,
+    "title": "Арена во дворе: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 2500,
+    "step": 1
+  },
+  "upgrade.arena.growth": {
+    "value": 1,
+    "title": "Арена во дворе: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.arena.max": {
+    "value": 1,
+    "title": "Арена во дворе: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.banners.cost": {
+    "value": 120,
+    "title": "Знамёна: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 1200,
+    "step": 1
+  },
+  "upgrade.banners.growth": {
+    "value": 1.6,
+    "title": "Знамёна: рост цены",
+    "group": "Баланс",
+    "min": 0.01,
+    "max": 16,
+    "step": 0.01
+  },
+  "upgrade.banners.max": {
+    "value": 9999,
+    "title": "Знамёна: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 9999,
+    "step": 1
+  },
+  "upgrade.bench.cost": {
+    "value": 2000,
+    "title": "Сменный состав: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 20000,
+    "step": 1
+  },
+  "upgrade.bench.growth": {
+    "value": 1,
+    "title": "Сменный состав: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.bench.max": {
+    "value": 1,
+    "title": "Сменный состав: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.tactician.cost": {
+    "value": 900,
+    "title": "Тактик: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 9000,
+    "step": 1
+  },
+  "upgrade.tactician.growth": {
+    "value": 1,
+    "title": "Тактик: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.tactician.max": {
+    "value": 1,
+    "title": "Тактик: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.coach.cost": {
+    "value": 1500,
+    "title": "Старый тренер: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 15000,
+    "step": 1
+  },
+  "upgrade.coach.growth": {
+    "value": 3,
+    "title": "Старый тренер: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 30,
+    "step": 1
+  },
+  "upgrade.coach.max": {
+    "value": 9999,
+    "title": "Старый тренер: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 9999,
+    "step": 1
+  },
+  "upgrade.incubator.cost": {
+    "value": 1200,
+    "title": "Инкубатор: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 12000,
+    "step": 1
+  },
+  "upgrade.incubator.growth": {
+    "value": 1,
+    "title": "Инкубатор: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.incubator.max": {
+    "value": 1,
+    "title": "Инкубатор: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.chronicle.cost": {
+    "value": 300,
+    "title": "Летопись: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 3000,
+    "step": 1
+  },
+  "upgrade.chronicle.growth": {
+    "value": 1,
+    "title": "Летопись: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.chronicle.max": {
+    "value": 1,
+    "title": "Летопись: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "upgrade.double.cost": {
+    "value": 2500,
+    "title": "Двойная кладка: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 25000,
+    "step": 1
+  },
+  "upgrade.double.growth": {
+    "value": 2.5,
+    "title": "Двойная кладка: рост цены",
+    "group": "Баланс",
+    "min": 0.01,
+    "max": 25,
+    "step": 0.01
+  },
+  "upgrade.double.max": {
+    "value": 20,
+    "title": "Двойная кладка: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 200,
+    "step": 1
+  },
+  "upgrade.keeper.cost": {
+    "value": 3000,
+    "title": "Смотритель заповедника: цена",
+    "group": "Баланс",
+    "min": 0,
+    "max": 30000,
+    "step": 1
+  },
+  "upgrade.keeper.growth": {
+    "value": 2,
+    "title": "Смотритель заповедника: рост цены",
+    "group": "Баланс",
+    "min": 1,
+    "max": 20,
+    "step": 1
+  },
+  "upgrade.keeper.max": {
+    "value": 9999,
+    "title": "Смотритель заповедника: предел",
+    "group": "Баланс",
+    "min": 0,
+    "max": 9999,
+    "step": 1
+  },
+  "dominance.0.0": {
+    "value": 20,
+    "title": "Мохорог: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 200,
+    "step": 1
+  },
+  "dominance.0.1": {
+    "value": 6,
+    "title": "Мохорог: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 60,
+    "step": 1
+  },
+  "dominance.0.2": {
+    "value": 11,
+    "title": "Мохорог: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 110,
+    "step": 1
+  },
+  "dominance.0.3": {
+    "value": 2,
+    "title": "Мохорог: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 20,
+    "step": 1
+  },
+  "dominance.0.4": {
+    "value": 7,
+    "title": "Мохорог: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 70,
+    "step": 1
+  },
+  "dominance.1.0": {
+    "value": 21,
+    "title": "Ушань: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 210,
+    "step": 1
+  },
+  "dominance.1.1": {
+    "value": 9,
+    "title": "Ушань: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 90,
+    "step": 1
+  },
+  "dominance.1.2": {
+    "value": 14,
+    "title": "Ушань: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 140,
+    "step": 1
+  },
+  "dominance.1.3": {
+    "value": 5,
+    "title": "Ушань: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 50,
+    "step": 1
+  },
+  "dominance.1.4": {
+    "value": 10,
+    "title": "Ушань: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 100,
+    "step": 1
+  },
+  "dominance.2.0": {
+    "value": 7,
+    "title": "Колючник: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 70,
+    "step": 1
+  },
+  "dominance.2.1": {
+    "value": 12,
+    "title": "Колючник: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 120,
+    "step": 1
+  },
+  "dominance.2.2": {
+    "value": 3,
+    "title": "Колючник: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 30,
+    "step": 1
+  },
+  "dominance.2.3": {
+    "value": 8,
+    "title": "Колючник: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 80,
+    "step": 1
+  },
+  "dominance.2.4": {
+    "value": 22,
+    "title": "Колючник: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 220,
+    "step": 1
+  },
+  "dominance.3.0": {
+    "value": 10,
+    "title": "Перолап: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 100,
+    "step": 1
+  },
+  "dominance.3.1": {
+    "value": 1,
+    "title": "Перолап: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "dominance.3.2": {
+    "value": 23,
+    "title": "Перолап: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 230,
+    "step": 1
+  },
+  "dominance.3.3": {
+    "value": 11,
+    "title": "Перолап: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 110,
+    "step": 1
+  },
+  "dominance.3.4": {
+    "value": 2,
+    "title": "Перолап: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 20,
+    "step": 1
+  },
+  "dominance.4.0": {
+    "value": 13,
+    "title": "Хвостун: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 130,
+    "step": 1
+  },
+  "dominance.4.1": {
+    "value": 4,
+    "title": "Хвостун: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 40,
+    "step": 1
+  },
+  "dominance.4.2": {
+    "value": 9,
+    "title": "Хвостун: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 90,
+    "step": 1
+  },
+  "dominance.4.3": {
+    "value": 24,
+    "title": "Хвостун: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 240,
+    "step": 1
+  },
+  "dominance.4.4": {
+    "value": 5,
+    "title": "Хвостун: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 50,
+    "step": 1
+  },
+  "dominance.5.0": {
+    "value": 2,
+    "title": "Панцирник: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 20,
+    "step": 1
+  },
+  "dominance.5.1": {
+    "value": 25,
+    "title": "Панцирник: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 250,
+    "step": 1
+  },
+  "dominance.5.2": {
+    "value": 12,
+    "title": "Панцирник: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 120,
+    "step": 1
+  },
+  "dominance.5.3": {
+    "value": 3,
+    "title": "Панцирник: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 30,
+    "step": 1
+  },
+  "dominance.5.4": {
+    "value": 8,
+    "title": "Панцирник: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 80,
+    "step": 1
+  },
+  "dominance.6.0": {
+    "value": 5,
+    "title": "Крылан: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 50,
+    "step": 1
+  },
+  "dominance.6.1": {
+    "value": 26,
+    "title": "Крылан: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 260,
+    "step": 1
+  },
+  "dominance.6.2": {
+    "value": 1,
+    "title": "Крылан: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "dominance.6.3": {
+    "value": 6,
+    "title": "Крылан: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 60,
+    "step": 1
+  },
+  "dominance.6.4": {
+    "value": 11,
+    "title": "Крылан: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 110,
+    "step": 1
+  },
+  "dominance.7.0": {
+    "value": 8,
+    "title": "Светляк: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 80,
+    "step": 1
+  },
+  "dominance.7.1": {
+    "value": 13,
+    "title": "Светляк: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 130,
+    "step": 1
+  },
+  "dominance.7.2": {
+    "value": 4,
+    "title": "Светляк: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 40,
+    "step": 1
+  },
+  "dominance.7.3": {
+    "value": 9,
+    "title": "Светляк: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 90,
+    "step": 1
+  },
+  "dominance.7.4": {
+    "value": 27,
+    "title": "Светляк: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 270,
+    "step": 1
+  },
+  "dominance.8.0": {
+    "value": 28,
+    "title": "Ледовик: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 280,
+    "step": 1
+  },
+  "dominance.8.1": {
+    "value": 2,
+    "title": "Ледовик: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 20,
+    "step": 1
+  },
+  "dominance.8.2": {
+    "value": 7,
+    "title": "Ледовик: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 70,
+    "step": 1
+  },
+  "dominance.8.3": {
+    "value": 12,
+    "title": "Ледовик: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 120,
+    "step": 1
+  },
+  "dominance.8.4": {
+    "value": 3,
+    "title": "Ледовик: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 30,
+    "step": 1
+  },
+  "dominance.9.0": {
+    "value": 14,
+    "title": "Песчаник: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 140,
+    "step": 1
+  },
+  "dominance.9.1": {
+    "value": 5,
+    "title": "Песчаник: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 50,
+    "step": 1
+  },
+  "dominance.9.2": {
+    "value": 29,
+    "title": "Песчаник: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 290,
+    "step": 1
+  },
+  "dominance.9.3": {
+    "value": 1,
+    "title": "Песчаник: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "dominance.9.4": {
+    "value": 6,
+    "title": "Песчаник: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 60,
+    "step": 1
+  },
+  "dominance.10.0": {
+    "value": 3,
+    "title": "Камышник: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 30,
+    "step": 1
+  },
+  "dominance.10.1": {
+    "value": 8,
+    "title": "Камышник: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 80,
+    "step": 1
+  },
+  "dominance.10.2": {
+    "value": 13,
+    "title": "Камышник: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 130,
+    "step": 1
+  },
+  "dominance.10.3": {
+    "value": 30,
+    "title": "Камышник: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 40,
+    "step": 1
+  },
+  "dominance.10.4": {
+    "value": 9,
+    "title": "Камышник: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 300,
+    "step": 1
+  },
+  "dominance.11.0": {
+    "value": 6,
+    "title": "Туманник: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 60,
+    "step": 1
+  },
+  "dominance.11.1": {
+    "value": 11,
+    "title": "Туманник: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 110,
+    "step": 1
+  },
+  "dominance.11.2": {
+    "value": 2,
+    "title": "Туманник: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 20,
+    "step": 1
+  },
+  "dominance.11.3": {
+    "value": 7,
+    "title": "Туманник: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 70,
+    "step": 1
+  },
+  "dominance.11.4": {
+    "value": 31,
+    "title": "Туманник: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 310,
+    "step": 1
+  },
+  "dominance.12.0": {
+    "value": 32,
+    "title": "Рогоклюв: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 320,
+    "step": 1
+  },
+  "dominance.12.1": {
+    "value": 14,
+    "title": "Рогоклюв: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 140,
+    "step": 1
+  },
+  "dominance.12.2": {
+    "value": 5,
+    "title": "Рогоклюв: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 50,
+    "step": 1
+  },
+  "dominance.12.3": {
+    "value": 10,
+    "title": "Рогоклюв: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 100,
+    "step": 1
+  },
+  "dominance.12.4": {
+    "value": 1,
+    "title": "Рогоклюв: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 10,
+    "step": 1
+  },
+  "dominance.13.0": {
+    "value": 12,
+    "title": "Каменный пёс: проявление 0",
+    "group": "Наследование",
+    "min": 0,
+    "max": 120,
+    "step": 1
+  },
+  "dominance.13.1": {
+    "value": 33,
+    "title": "Каменный пёс: проявление 1",
+    "group": "Наследование",
+    "min": 0,
+    "max": 330,
+    "step": 1
+  },
+  "dominance.13.2": {
+    "value": 8,
+    "title": "Каменный пёс: проявление 2",
+    "group": "Наследование",
+    "min": 0,
+    "max": 80,
+    "step": 1
+  },
+  "dominance.13.3": {
+    "value": 13,
+    "title": "Каменный пёс: проявление 3",
+    "group": "Наследование",
+    "min": 0,
+    "max": 130,
+    "step": 1
+  },
+  "dominance.13.4": {
+    "value": 4,
+    "title": "Каменный пёс: проявление 4",
+    "group": "Наследование",
+    "min": 0,
+    "max": 40,
+    "step": 1
+  },
+  "combat.levelScale": {
+    "value": 0.05,
+    "title": "Бой: качество за уровень",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.hpBase": {
+    "value": 30,
+    "title": "Бой: начальные HP",
+    "group": "Бой",
+    "min": 0,
+    "max": 300,
+    "step": 0.01
+  },
+  "combat.hpStamina": {
+    "value": 3,
+    "title": "Бой: HP на единицу стойкости",
+    "group": "Бой",
+    "min": 0,
+    "max": 30,
+    "step": 0.01
+  },
+  "combat.defenseScale": {
+    "value": 0.5,
+    "title": "Бой: доля стойкости в защите",
+    "group": "Бой",
+    "min": 0,
+    "max": 5,
+    "step": 0.01
+  },
+  "combat.minDamage": {
+    "value": 1,
+    "title": "Бой: минимальный урон",
+    "group": "Бой",
+    "min": 0,
+    "max": 10,
+    "step": 0.01
+  },
+  "combat.senseChance": {
+    "value": 0.0025,
+    "title": "Бой: шанс уклона и крита за чутьё",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.critMultiplier": {
+    "value": 1.5,
+    "title": "Бой: множитель крита",
+    "group": "Бой",
+    "min": 0,
+    "max": 15,
+    "step": 0.01
+  },
+  "combat.teamSize": {
+    "value": 3,
+    "title": "Бой: бойцов на поле",
+    "group": "Бой",
+    "min": 3,
+    "max": 3,
+    "step": 1
+  },
+  "combat.maxRounds": {
+    "value": 120,
+    "title": "Бой: предел раундов",
+    "group": "Бой",
+    "min": 1,
+    "max": 1200,
+    "step": 0.01
+  },
+  "combat.leaderBonus": {
+    "value": 0.05,
+    "title": "Бой: бонус вожака",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.tricksterDodge": {
+    "value": 0.1,
+    "title": "Бой: уклон хитреца",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.chargeMultiplier": {
+    "value": 2,
+    "title": "Бой: множитель разбега",
+    "group": "Бой",
+    "min": 0,
+    "max": 20,
+    "step": 0.01
+  },
+  "combat.thornsReturn": {
+    "value": 0.2,
+    "title": "Бой: возврат колючек",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.featherDodge": {
+    "value": 0.1,
+    "title": "Бой: уклон пернатых лап",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.tripChance": {
+    "value": 0.15,
+    "title": "Бой: шанс подсечки",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.armorReduction": {
+    "value": 0.2,
+    "title": "Бой: защита панциря",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.blindReduction": {
+    "value": 0.3,
+    "title": "Бой: ослабление чутья",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.blindTurns": {
+    "value": 2,
+    "title": "Бой: длительность ослепления",
+    "group": "Бой",
+    "min": 0,
+    "max": 20,
+    "step": 0.01
+  },
+  "combat.frostReduction": {
+    "value": 0.12,
+    "title": "Бой: ослабление силы холодом",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.frostTurns": {
+    "value": 2,
+    "title": "Бой: длительность холода",
+    "group": "Бой",
+    "min": 0,
+    "max": 20,
+    "step": 0.01
+  },
+  "combat.sandReduction": {
+    "value": 0.3,
+    "title": "Бой: ослабление ловкости песком",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.sandTurns": {
+    "value": 2,
+    "title": "Бой: длительность песка",
+    "group": "Бой",
+    "min": 0,
+    "max": 20,
+    "step": 0.01
+  },
+  "combat.shelterShield": {
+    "value": 0.06,
+    "title": "Бой: щит укрытия",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.shelterCooldown": {
+    "value": 3,
+    "title": "Бой: ходов между укрытиями",
+    "group": "Бой",
+    "min": 1,
+    "max": 30,
+    "step": 0.01
+  },
+  "combat.mirageDodge": {
+    "value": 0.06,
+    "title": "Бой: уклон морока",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.poundDefense": {
+    "value": 0.2,
+    "title": "Бой: пробитие стойкости",
+    "group": "Бой",
+    "min": 0,
+    "max": 2,
+    "step": 0.01
+  },
+  "combat.stanceReduction": {
+    "value": 0.12,
+    "title": "Бой: защита стойки",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.stanceThreshold": {
+    "value": 0.5,
+    "title": "Бой: порог HP стойки",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.keenChance": {
+    "value": 0.02,
+    "title": "Бой: бонус зоркого",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.resilientHp": {
+    "value": 0.05,
+    "title": "Бой: HP живучего",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  },
+  "combat.vigorousForce": {
+    "value": 0.03,
+    "title": "Бой: сила ретивого",
+    "group": "Бой",
+    "min": 0,
+    "max": 1,
+    "step": 0.01
+  }
+}

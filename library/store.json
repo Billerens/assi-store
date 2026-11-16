@@ -1,0 +1,8 @@
+{
+  "id": "library",
+  "kind": "game",
+  "title": "Библиотека",
+  "target": "modules/games/library",
+  "requires": [],
+  "shell": []
+}

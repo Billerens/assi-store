@@ -1,0 +1,7 @@
+[
+  {"id": "guard", "title": "Стражник", "text": "{hero.guard.hp} здоровья, без особенностей", "unlock": "есть сразу"},
+  {"id": "thief", "title": "Воровка", "text": "{hero.thief.hp} здоровья, ключ на старте, золото ×{hero.thief.gold}", "unlock": "пройти Склеп"},
+  {"id": "priestess", "title": "Жрица", "text": "Зелья ×{hero.priestess.potion}, у оружия на заряд меньше", "unlock": "пройти Корни"},
+  {"id": "smith", "title": "Кузнец", "text": "Заряды оружия +{hero.smith.charges}, {hero.smith.hp} здоровья", "unlock": "сломать {hero.smith.unlock} оружий за всё время"},
+  {"id": "madman", "title": "Безумец", "text": "Щит недоступен, сила оружия +{hero.madman.strength}", "unlock": "победить хозяина глубины"}
+]

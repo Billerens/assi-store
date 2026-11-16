@@ -1,0 +1,12 @@
+{
+  "id": "subway",
+  "kind": "game",
+  "title": "Подземка",
+  "target": "modules/games/subway",
+  "requires": [],
+  "shell": [
+    "app.visible",
+    "job.once",
+    "vibrate.pattern"
+  ]
+}

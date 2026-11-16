@@ -1,0 +1,8 @@
+{
+  "id": "fishing",
+  "kind": "game",
+  "title": "Рыбалка",
+  "target": "modules/games/fishing",
+  "requires": [],
+  "shell": ["vibrate.pattern", "app.visible"]
+}

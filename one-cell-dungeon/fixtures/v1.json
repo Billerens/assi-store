@@ -1,0 +1,333 @@
+{
+ "format": 1,
+ "game": "one-cell-dungeon",
+ "ver": 1,
+ "seq": 57,
+ "created": 1794641400000,
+ "savedAt": 1794641400000,
+ "lastTick": 1794641400000,
+ "run": {
+  "phase": "play",
+  "seed": 777,
+  "rs": 375182098,
+  "day": "",
+  "hero": "guard",
+  "depth": 0,
+  "floor": 2,
+  "hp": 12,
+  "maxHp": 12,
+  "shield": 10,
+  "wpn": {
+   "s": 4,
+   "c": 4,
+   "n": 5
+  },
+  "gold": 0,
+  "keys": 0,
+  "blades": 5,
+  "uid": 35,
+  "grid": [
+   null,
+   {
+    "k": "weapon",
+    "v": 3,
+    "c": 4,
+    "u": 35
+   },
+   {
+    "k": "foe",
+    "e": "rat",
+    "v": 3,
+    "v0": 3,
+    "u": 26
+   },
+   {
+    "k": "foe",
+    "e": "mold",
+    "v": 5,
+    "v0": 5,
+    "u": 27
+   },
+   {
+    "k": "foe",
+    "e": "mold",
+    "v": 3,
+    "v0": 3,
+    "u": 34
+   },
+   {
+    "k": "foe",
+    "e": "dog",
+    "v": 4,
+    "v0": 4,
+    "u": 28
+   },
+   {
+    "k": "foe",
+    "e": "fly",
+    "v": 3,
+    "v0": 3,
+    "u": 29
+   },
+   {
+    "k": "foe",
+    "e": "mold",
+    "v": 4,
+    "v0": 4,
+    "u": 30
+   },
+   {
+    "k": "gold",
+    "v": 3,
+    "u": 31
+   }
+  ],
+  "pos": 0,
+  "under": null,
+  "deck": [
+   {
+    "k": "foe",
+    "e": "dog",
+    "v": 3,
+    "v0": 3
+   },
+   {
+    "k": "foe",
+    "e": "mold",
+    "v": 3,
+    "v0": 3
+   },
+   {
+    "k": "potion",
+    "v": 5,
+    "kind": "hearth"
+   },
+   {
+    "k": "foe",
+    "e": "fly",
+    "v": 3,
+    "v0": 3
+   },
+   {
+    "k": "potion",
+    "v": 4
+   },
+   {
+    "k": "weapon",
+    "v": 5,
+    "c": 2
+   },
+   {
+    "k": "weapon",
+    "v": 4,
+    "c": 3,
+    "kind": "smith"
+   },
+   {
+    "k": "potion",
+    "v": 4
+   },
+   {
+    "k": "foe",
+    "e": "rat",
+    "v": 3,
+    "v0": 3
+   },
+   {
+    "k": "foe",
+    "e": "fly",
+    "v": 3,
+    "v0": 3
+   },
+   {
+    "k": "altar"
+   },
+   {
+    "k": "stairs"
+   },
+   {
+    "k": "altar"
+   },
+   {
+    "k": "foe",
+    "e": "rat",
+    "v": 3,
+    "v0": 3
+   },
+   {
+    "k": "potion",
+    "v": 5
+   },
+   {
+    "k": "altar"
+   },
+   {
+    "k": "foe",
+    "e": "dog",
+    "v": 4,
+    "v0": 4
+   }
+  ],
+  "stairsOut": false,
+  "bossFloor": false,
+  "peek": 0,
+  "delayed": -1,
+  "silence": 0,
+  "dbl": 0,
+  "slept": false,
+  "picked": false,
+  "bossBlade": 0,
+  "lastUsed": false,
+  "dead": false,
+  "won": false,
+  "endless": false,
+  "hand": [
+   {
+    "id": "sip",
+    "lvl": 0,
+    "used": 0
+   },
+   {
+    "id": "horseshoe",
+    "lvl": 0,
+    "used": 0
+   }
+  ],
+  "seals": [
+   "leech"
+  ],
+  "kinds": [
+   "smith",
+   "hearth"
+  ],
+  "charge": false,
+  "rule": null,
+  "st": {
+   "moves": 20,
+   "kills": 7,
+   "potions": 1,
+   "floors": 1,
+   "bosses": 0,
+   "gold": 0,
+   "damage": 0,
+   "bitten": 3,
+   "broke": 1,
+   "gifts": 1,
+   "choices": 3
+  },
+  "log": [
+   "Этаж 1 — Погреб",
+   "Оружие 3×2",
+   "Щит: +3",
+   "Плесень 2: без урона",
+   "Оружие сломалось",
+   "Плесень 3: без урона",
+   "Оружие 3×2",
+   "Плесень 3: без урона",
+   "Щит: +3",
+   "Щит: +3",
+   "Оружие 4×3",
+   "Плесень 3: без урона",
+   "Плесень 4: без урона",
+   "Щит: +1",
+   "Оружие 4×3",
+   "Плесень 2: без урона",
+   "Алтарь: оружие 5×3",
+   "Глоток: +3",
+   "Вниз по лестнице",
+   "Печать: Кровопийца",
+   "Этаж 2 — Склеп",
+   "Плесень 5: без урона",
+   "Укусы хищников: −1",
+   "Оружие 4×4",
+   "Укусы хищников: −1",
+   "Зелье: +0",
+   "Укусы хищников: −1",
+   "Щит: +3"
+  ],
+  "news": [],
+  "met": {
+   "mold": 1
+  },
+  "pending": null,
+  "shop": null,
+  "fair": null,
+  "result": null,
+  "fm": 4
+ },
+ "layers": {
+  "depth": {
+   "currency": "0e0",
+   "count": 0,
+   "best": "0e0",
+   "state": {}
+  }
+ },
+ "meta": {
+  "embers": 41,
+  "shop": {
+   "gifts": [
+    "sip",
+    "horseshoe"
+   ],
+   "lv": {},
+   "slots": 0,
+   "fort": 0,
+   "blade": 0
+  },
+  "unlocked": {
+   "guard": true
+  },
+  "album": {
+   "seals": {
+    "leech": 1
+   },
+   "foes": {}
+  },
+  "rec": {
+   "runs": 4,
+   "wins": 0,
+   "bestFloor": 0,
+   "floors": 7,
+   "broke": 4,
+   "bosses": 0,
+   "deepest": 0,
+   "noPotion": 0,
+   "oneBlade": 0,
+   "embers": 0,
+   "firstWinRun": 0
+  },
+  "pref": {
+   "hero": "guard",
+   "depth": 0,
+   "hand": [
+    "sip",
+    "horseshoe"
+   ],
+   "kinds": [
+    "smith",
+    "hearth"
+   ],
+   "charge": false,
+   "rules": true
+  },
+  "daily": {
+   "day": "",
+   "best": 0,
+   "tries": 0
+  },
+  "ascend": false,
+  "seed": 31,
+  "achievements": {},
+  "applied": [],
+  "stockUsed": [],
+  "taken": {},
+  "stats": {
+   "playMs": 0,
+   "sessions": 0,
+   "offlineMs": 0,
+   "trips": 0
+  }
+ },
+ "card": ""
+}

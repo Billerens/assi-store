@@ -1,0 +1,48 @@
+Current Alarm Manager state:
+  Settings:
+    min_futurity=+5s0ms
+    min_interval=+1m0s0ms
+    max_interval=+365d0h0m0s0ms
+    allow_while_idle_short_time=+5s0ms
+    allow_while_idle_long_time=+9m0s0ms
+
+  nowRTC=1763064000000=2026-11-13 23:00:00.000 nowELAPSED=3600000
+  mLastTimeChangeClockTime=1763050000000=2026-11-13 19:06:40.000
+  mLastTimeChangeRealtime=0
+  Next non-wakeup delivery time: -1s210ms
+  Next wakeup alarm: +4m12s0ms = 2026-11-13 23:04:12.000
+
+  Pending alarm batches: 32
+  Batch{4c2a1f7 num=1 start=3852000 end=3852000 flgs=0x1}:
+    RTC_WAKEUP #0: Alarm{1d2f3a4 type 0 origWhen 1763064252000 whenElapsed 3852000 ru.marketplace.app}
+      tag=*walarm*:ru.marketplace.app.SYNC
+      type=RTC_WAKEUP origWhen=2026-11-13 23:04:12.000 window=0 repeatInterval=0 count=0 flags=0x1
+
+  Top Alarms:
+    +4m12s310ms running, 412 wakeups, 412 alarms: u0a160:com.google.android.gms
+      *walarm*:com.google.android.gms.gcm.ACTION_CHECK_QUEUE
+    +1m2s3ms running, 230 wakeups, 230 alarms: u0a245:ru.marketplace.app
+      *walarm*:ru.marketplace.app.SYNC
+    +32s210ms running, 1012 wakeups, 1012 alarms: 1000:android
+      *walarm*:android.appwidget.action.APPWIDGET_UPDATE
+
+  Alarm Stats:
+  1000:android +1m55s493ms running, 2024 wakeups:
+    +32s210ms 1012 wakes 1012 alarms, last -5m0s1ms:
+      *walarm*:android.appwidget.action.APPWIDGET_UPDATE
+    +20s5ms 1012 wakes 1012 alarms, last -1m3s0ms:
+      *walarm*:com.android.server.action.NETWORK_STATS_POLL
+  u0a160:com.google.android.gms +4m12s310ms running, 412 wakeups:
+    +3m1s0ms 300 wakes 300 alarms, last -2m1s0ms:
+      *walarm*:com.google.android.gms.gcm.ACTION_CHECK_QUEUE
+    +1m11s310ms 112 wakes 150 alarms, last -30m0s0ms:
+      *alarm*:com.google.android.location.ALARM_WAKEUP_LOCATOR
+  u0a245:ru.marketplace.app +1m2s3ms running, 230 wakeups:
+    +1m2s3ms 230 wakes 230 alarms, last -12m3s456ms:
+      *walarm*:ru.marketplace.app.SYNC
+  u0a301:org.telegram.messenger +8s100ms running, 40 wakeups:
+    +8s100ms 40 wakes 52 alarms, last -1h0m0s0ms:
+      *walarm*:org.telegram.messenger.KEEP_ALIVE
+  u0a199:app.assi +2s0ms running, 10 wakeups:
+    +2s0ms 10 wakes 10 alarms, last -3h0m0s0ms:
+      *walarm*:app.assi.JOB

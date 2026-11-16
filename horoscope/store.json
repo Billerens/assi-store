@@ -1,0 +1,8 @@
+{
+  "id": "horoscope",
+  "kind": "module",
+  "title": "Гороскоп по данным",
+  "target": "modules/horoscope",
+  "requires": ["health", "spending", "achievements", "rpg"],
+  "shell": []
+}

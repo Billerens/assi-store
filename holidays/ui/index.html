@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Праздники</title>
+<link rel="stylesheet" href="/ui/kit/kit.css">
+<link rel="stylesheet" href="holidays.css">
+<body>
+<main class="page wide">
+  <header class="topbar">
+    <button class="icon-btn" id="back" aria-label="Назад" data-icon="back"></button>
+    <h1 class="grow">Праздники</h1>
+    <button class="icon-btn" id="recheck" aria-label="Проверить сегодняшний день" data-icon="refresh"></button>
+  </header>
+
+  <section class="card today" id="today" aria-live="polite"></section>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <div class="tab" data-tab="upcoming">
+    <div class="split" id="split">
+      <section class="section">
+        <div class="list" id="occList"></div>
+        <p class="muted small" id="occFoot"></p>
+      </section>
+      <section class="card preview-pane" id="previewPane"></section>
+    </div>
+  </div>
+
+  <div class="tab" data-tab="people">
+    <div class="people-grid">
+      <section class="section" id="peopleMain"></section>
+      <section class="section" id="peopleSide"></section>
+    </div>
+  </div>
+
+  <div class="tab" data-tab="own">
+    <div class="people-grid">
+      <section class="card section" id="ownForm"></section>
+      <section class="section" id="ownList"></section>
+    </div>
+  </div>
+
+  <div class="tab" data-tab="settings">
+    <div class="groups" id="settingsView"></div>
+  </div>
+</main>
+<script src="/ui/kit/kit.js"></script>
+<script src="holidays.js"></script>
+</body>
+</html>

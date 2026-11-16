@@ -1,0 +1,8 @@
+{
+  "id": "game-of-the-day",
+  "kind": "module",
+  "title": "Игра дня",
+  "target": "modules/game-of-the-day",
+  "requires": [],
+  "shell": ["notify.actions", "job.once", "home.cards"]
+}

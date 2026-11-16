@@ -1,0 +1,663 @@
+/* The screen of «Рыбалка»; the frame (bar, sheets, buttons) is engine/game.css. */
+
+.f-app .g-mark {
+  font-size: 15px;
+}
+
+.f-app .g-btn .g-sub {
+  font-size: 15px;
+}
+
+.f-where {
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+/* ---- the field: the water on a canvas, the status and the card over it ---- */
+
+.g-field.f-field {
+  padding: 0;
+  overflow: hidden;
+  min-height: 180px;
+}
+
+.f-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+.f-events {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.f-ev {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(8, 12, 16, 0.74);
+  color: var(--ink);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+button.f-ev {
+  min-height: 44px;
+  pointer-events: auto;
+}
+
+.f-ev.hot {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.f-ev svg.i {
+  width: 16px;
+  height: 16px;
+}
+
+.f-status {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 36px;
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(8, 12, 16, 0.74);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.3;
+  text-align: center;
+  pointer-events: none;
+}
+
+.f-status:empty {
+  display: none;
+}
+
+.f-card {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.f-card[hidden] {
+  display: none;
+}
+
+.f-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.f-card-icon svg.i {
+  width: 40px;
+  height: 40px;
+}
+
+.f-card-name {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.f-card-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+.f-marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.f-card-btns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.f-card-btns .g-btn {
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 4px;
+}
+
+.f-card-btns .g-btn.f-off {
+  opacity: .55;
+}
+
+.f-stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--accent);
+}
+
+.f-stars svg.i {
+  width: 18px;
+  height: 18px;
+}
+
+.f-stars svg.i.off {
+  color: var(--ink-3);
+}
+
+/* ---- fish silhouettes ---- */
+
+.f-fish {
+  display: inline-block;
+  flex: none;
+  line-height: 0;
+}
+
+.f-fish svg {
+  width: 100%;
+  height: auto;
+}
+
+.f-fish.big {
+  width: 96px;
+}
+
+.f-fish.small {
+  width: 56px;
+}
+
+.f-fish.tiny {
+  width: 36px;
+}
+
+/* ---- the controls under the thumb: one family of cards with drawn pictures ---- */
+
+.g-actions.f-actions {
+  max-height: none;
+  min-height: 0;
+  overflow: visible;
+}
+
+.f-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 128px minmax(0, 1fr);
+  align-items: stretch;
+  gap: 8px;
+}
+
+.f-left,
+.f-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.f-left .g-btn,
+.f-right .g-btn {
+  flex: 1 0 auto;
+}
+
+.f-ico {
+  flex: none;
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+}
+
+.f-ico svg {
+  width: 100%;
+  height: 100%;
+}
+
+.f-ico:empty {
+  display: none;
+}
+
+.g-btn.f-side {
+  flex-direction: column;
+  gap: 2px;
+  min-height: 64px;
+  padding: 6px 4px;
+  border-color: var(--line);
+  background: var(--surface);
+  font-size: 15px;
+}
+
+.g-btn.f-side > span:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.g-btn.f-side .g-sub {
+  max-width: 100%;
+  color: var(--ink-2);
+  line-height: 1.15;
+  text-align: center;
+  overflow-wrap: anywhere;
+  opacity: 1;
+}
+
+.g-btn.f-side .g-sub:empty {
+  display: none;
+}
+
+.f-big-wrap {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  align-self: center;
+}
+
+.f-ring {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.f-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.f-ring circle {
+  fill: none;
+  stroke-width: 8;
+}
+
+.f-track {
+  stroke: var(--surface-2);
+}
+
+.f-arc {
+  stroke: var(--accent);
+  stroke-linecap: round;
+}
+
+.f-big-wrap.ok .f-arc {
+  stroke: var(--ok);
+}
+
+.f-big-wrap.warn .f-arc {
+  stroke: #d9b45a;
+}
+
+.f-big-wrap.bad .f-arc {
+  stroke: var(--danger);
+}
+
+.f-big {
+  position: absolute;
+  inset: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  background: var(--accent);
+  color: var(--accent-ink);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.f-big.down {
+  filter: brightness(1.15);
+}
+
+.f-big-wrap.bite .f-big {
+  border-color: var(--accent);
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.f-big-wrap.bad .f-big {
+  border-color: transparent;
+  background: var(--danger);
+  color: var(--ink);
+}
+
+.f-big-label {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.f-big-sub {
+  max-width: 84px;
+  font-size: 15px;
+  line-height: 1.15;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  opacity: .85;
+}
+
+.f-big-sub:empty {
+  display: none;
+}
+
+/* Every chip is in sight: two in a row, the line inside wraps instead of being cut. */
+.f-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.f-chip {
+  flex: 1 1 40%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 4px 10px 4px 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: left;
+}
+
+.f-chip[hidden] {
+  display: none;
+}
+
+.f-chip.on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.f-chip .f-ico {
+  width: 32px;
+  height: 32px;
+}
+
+.f-chip-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.g-btn.f-prestige[hidden] {
+  display: none;
+}
+
+/* ---- the wide screen: the live aquarium and the journal above the controls ---- */
+
+.f-aside {
+  display: none;
+}
+
+.g-app[data-layout="wide"] .f-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+}
+
+.g-app[data-layout="wide"] .g-actions.f-actions {
+  overflow: auto;
+}
+
+.g-app.f-app[data-layout="wide"] {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 42%);
+}
+
+.f-aside-aq,
+.f-aside-j {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  padding: 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+}
+
+.f-aside-aq {
+  flex: 1 0 140px;
+}
+
+.f-aside-j {
+  flex: none;
+}
+
+.f-aside-head {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.f-aq-box {
+  position: relative;
+  flex: 1;
+  min-height: 100px;
+}
+
+.f-aq-live {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-s);
+  display: block;
+}
+
+.f-aside-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.f-aside-journal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.f-recent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+/* ---- sheets ---- */
+
+.f-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.f-sheet h3 {
+  margin-top: 6px;
+}
+
+.f-sub {
+  margin-top: 8px;
+  color: var(--ink-2);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.f-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.f-row.has {
+  border-color: #3a444a;
+}
+
+.f-row.here {
+  border-color: var(--accent);
+}
+
+.f-row.done {
+  border-color: rgba(95, 208, 138, 0.45);
+}
+
+.f-row.locked {
+  border-style: dashed;
+  background: transparent;
+}
+
+.f-pic {
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  width: 46px;
+  height: 46px;
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #101315;
+}
+
+.f-pic > svg:first-child {
+  width: 100%;
+  height: 100%;
+}
+
+.f-pic.locked > svg:first-child {
+  opacity: .45;
+  filter: grayscale(1);
+}
+
+.f-tick {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  width: 16px;
+  height: 16px;
+}
+
+.f-row > .g-btn {
+  width: auto;
+  flex: none;
+  min-width: 108px;
+}
+
+.f-row-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.f-row-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.f-row-title svg.i {
+  width: 18px;
+  height: 18px;
+}
+
+.f-level {
+  color: var(--ink-2);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.f-row-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: none;
+}
+
+.f-row-btns .g-btn {
+  min-height: 44px;
+  width: auto;
+  padding: 4px 10px;
+}
+
+.f-lock {
+  max-width: 120px;
+  text-align: right;
+}
+
+.f-note {
+  color: var(--ink);
+  font-size: 15px;
+  font-style: italic;
+}
+
+.f-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.f-trophy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 10px;
+  border-radius: var(--radius-s);
+  border: 1px dashed var(--line);
+  color: var(--ink-3);
+}
+
+.f-trophy.has {
+  border-style: solid;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.f-trophy.rare {
+  border-color: #d9b45a;
+}

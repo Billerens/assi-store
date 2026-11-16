@@ -1,0 +1,16 @@
+/* A finite daily composition; one bounded transform/opacity animation. */
+.page { isolation: isolate; }
+.page::before {
+  content: "";
+  position: fixed;
+  inset: -12px;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .65;
+  background: scatter(meteors) center / cover no-repeat;
+  animation: holiday-meteors var(--holiday-motion) ease-out 1 both;
+}
+@keyframes holiday-meteors {
+  from { transform: translate3d(-8px, -14px, 0); opacity: 0; }
+  to { transform: none; opacity: .65; }
+}

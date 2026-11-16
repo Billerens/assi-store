@@ -1,0 +1,170 @@
+{
+ "result_count": 240,
+ "page_count": 48,
+ "page_size": 5,
+ "page": 1,
+ "results": [
+  {
+   "id": "0e6f5ef3-2b63-4d78-8768-8b23a7be2057",
+   "title": "Mountain Fog",
+   "indexed_on": "2026-02-10T00:48:10.495871Z",
+   "foreign_landing_url": "https://commons.wikimedia.org/w/index.php?curid=183576731",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Mountain_Fog.jpg",
+   "creator": "U Sakshi Rao",
+   "creator_url": "https://commons.wikimedia.org/w/index.php?title=User:U_Sakshi_Rao&action=edit&redlink=1",
+   "license": "by-sa",
+   "license_version": "4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "provider": "wikimedia",
+   "source": "wikimedia",
+   "category": null,
+   "filesize": 3936091,
+   "filetype": "jpg",
+   "tags": [],
+   "attribution": "\"Mountain Fog\" by U Sakshi Rao is licensed under CC BY-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/.",
+   "fields_matched": [
+    "description",
+    "title"
+   ],
+   "mature": false,
+   "height": 4096,
+   "width": 3072,
+   "thumbnail": "https://api.openverse.org/v1/images/0e6f5ef3-2b63-4d78-8768-8b23a7be2057/thumb/",
+   "detail_url": "https://api.openverse.org/v1/images/0e6f5ef3-2b63-4d78-8768-8b23a7be2057/",
+   "related_url": "https://api.openverse.org/v1/images/0e6f5ef3-2b63-4d78-8768-8b23a7be2057/related/",
+   "unstable__sensitivity": []
+  },
+  {
+   "id": "fadb606d-b4bf-4b25-abb8-92b1e8201cb0",
+   "title": "Suspension footbridge vanishing into misty mountain fog in Nepal",
+   "indexed_on": "2026-06-14T01:54:18.805118Z",
+   "foreign_landing_url": "https://wordpress.org/photos/photo/9416a27014/",
+   "url": "https://pd.w.org/2026/06/9416a27014e7c46f2.62764540-1537x2048.jpg",
+   "creator": "shirishpoudel07",
+   "creator_url": "https://sirishpdl.com.np/",
+   "license": "cc0",
+   "license_version": "1.0",
+   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "provider": "wordpress",
+   "source": "wordpress",
+   "category": null,
+   "filesize": 437354,
+   "filetype": "jpg",
+   "tags": [
+    {
+     "name": "#NepalPhotoFestival2026",
+     "accuracy": null,
+     "unstable__provider": "wordpress"
+    },
+    {
+     "name": "bridge",
+     "accuracy": null,
+     "unstable__provider": "wordpress"
+    },
+    {
+     "name": "fence",
+     "accuracy": null,
+     "unstable__provider": "wordpress"
+    }
+   ],
+   "attribution": "\"Suspension footbridge vanishing into misty mountain fog in Nepal\" by shirishpoudel07 is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "fields_matched": [
+    "title"
+   ],
+   "mature": false,
+   "height": 2048,
+   "width": 1537,
+   "thumbnail": "https://api.openverse.org/v1/images/fadb606d-b4bf-4b25-abb8-92b1e8201cb0/thumb/",
+   "detail_url": "https://api.openverse.org/v1/images/fadb606d-b4bf-4b25-abb8-92b1e8201cb0/",
+   "related_url": "https://api.openverse.org/v1/images/fadb606d-b4bf-4b25-abb8-92b1e8201cb0/related/",
+   "unstable__sensitivity": []
+  },
+  {
+   "id": "f50bc293-d098-491c-93b8-74de33100fb8",
+   "title": "Mahai-River in Royal Natal National Park",
+   "indexed_on": "2020-05-11T00:58:20.568066Z",
+   "foreign_landing_url": "https://commons.wikimedia.org/w/index.php?curid=90077893",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/9/94/Mahai-River_in_Royal_Natal_National_Park.jpg",
+   "creator": "TheStorm",
+   "creator_url": "https://commons.wikimedia.org/w/index.php?title=User:TheStorm&action=edit&redlink=1",
+   "license": "by-sa",
+   "license_version": "4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "provider": "wikimedia",
+   "source": "wikimedia",
+   "category": null,
+   "filesize": 19179449,
+   "filetype": "jpg",
+   "tags": [],
+   "attribution": "\"Mahai-River in Royal Natal National Park\" by TheStorm is licensed under CC BY-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/.",
+   "fields_matched": [
+    "description"
+   ],
+   "mature": false,
+   "height": 6000,
+   "width": 4000,
+   "thumbnail": "https://api.openverse.org/v1/images/f50bc293-d098-491c-93b8-74de33100fb8/thumb/",
+   "detail_url": "https://api.openverse.org/v1/images/f50bc293-d098-491c-93b8-74de33100fb8/",
+   "related_url": "https://api.openverse.org/v1/images/f50bc293-d098-491c-93b8-74de33100fb8/related/",
+   "unstable__sensitivity": []
+  },
+  {
+   "id": "4239495c-0bad-45d1-bf1e-58e3c09a8484",
+   "title": "Blassenstein Kreuz mit Nebel 01",
+   "indexed_on": "2020-04-30T19:40:20.914847Z",
+   "foreign_landing_url": "https://commons.wikimedia.org/w/index.php?curid=30566375",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Blassenstein_Kreuz_mit_Nebel_01.JPG",
+   "creator": "Uoaei1",
+   "creator_url": "https://commons.wikimedia.org/wiki/User:Uoaei1",
+   "license": "by-sa",
+   "license_version": "3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+   "provider": "wikimedia",
+   "source": "wikimedia",
+   "category": null,
+   "filesize": 11475956,
+   "filetype": "JPG",
+   "tags": [],
+   "attribution": "\"Blassenstein Kreuz mit Nebel 01\" by Uoaei1 is licensed under CC BY-SA 3.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/3.0/.",
+   "fields_matched": [
+    "description"
+   ],
+   "mature": false,
+   "height": 6000,
+   "width": 4000,
+   "thumbnail": "https://api.openverse.org/v1/images/4239495c-0bad-45d1-bf1e-58e3c09a8484/thumb/",
+   "detail_url": "https://api.openverse.org/v1/images/4239495c-0bad-45d1-bf1e-58e3c09a8484/",
+   "related_url": "https://api.openverse.org/v1/images/4239495c-0bad-45d1-bf1e-58e3c09a8484/related/",
+   "unstable__sensitivity": []
+  },
+  {
+   "id": "de458b0c-6d05-4adb-8dc5-38047a2d8126",
+   "title": "Ricardo Hoffmann 2010",
+   "indexed_on": "2020-06-01T14:51:24.676374Z",
+   "foreign_landing_url": "https://commons.wikimedia.org/w/index.php?curid=21899316",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Ricardo_Hoffmann_2010.jpg",
+   "creator": "SilasSpade",
+   "creator_url": "https://commons.wikimedia.org/w/index.php?title=User:SilasSpade&action=edit&redlink=1",
+   "license": "by-sa",
+   "license_version": "3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+   "provider": "wikimedia",
+   "source": "wikimedia",
+   "category": null,
+   "filesize": 528615,
+   "filetype": "jpg",
+   "tags": [],
+   "attribution": "\"Ricardo Hoffmann 2010\" by SilasSpade is licensed under CC BY-SA 3.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/3.0/.",
+   "fields_matched": [
+    "description"
+   ],
+   "mature": false,
+   "height": 3600,
+   "width": 2399,
+   "thumbnail": "https://api.openverse.org/v1/images/de458b0c-6d05-4adb-8dc5-38047a2d8126/thumb/",
+   "detail_url": "https://api.openverse.org/v1/images/de458b0c-6d05-4adb-8dc5-38047a2d8126/",
+   "related_url": "https://api.openverse.org/v1/images/de458b0c-6d05-4adb-8dc5-38047a2d8126/related/",
+   "unstable__sensitivity": []
+  }
+ ]
+}

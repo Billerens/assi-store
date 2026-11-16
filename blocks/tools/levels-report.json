@@ -1,0 +1,35 @@
+{
+  "levels": 1000,
+  "firstSeed": 10001,
+  "lastSeed": 11469,
+  "rejectedReverseConstructions": 469,
+  "searchedWithoutWitness": true,
+  "solutionCount": {
+    "min": 1,
+    "max": 118,
+    "mean": 5.218
+  },
+  "firstSolutionMs": {
+    "mean": 1.926,
+    "p95": 7.865,
+    "max": 50.703
+  },
+  "exactCountMs": {
+    "mean": 8.9,
+    "p95": 36.497,
+    "max": 365.942
+  },
+  "slowestCountSeed": 10913,
+  "reverseGenerationMs": {
+    "mean": 0.161,
+    "p95": 0.399,
+    "max": 5.811
+  },
+  "maxSearchNodes": 2215,
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v22.19.0"
+  },
+  "phoneTimingVerified": false
+}

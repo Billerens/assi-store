@@ -1,0 +1,61 @@
+Словарь игры «Словоплёт» (dict.txt) — производная работа, распространяется на условиях
+Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0), совместимых с условиями источников.
+
+Собран скриптом tools/build-dict.js игры 2026-11-14 из:
+
+1. Словарь OpenCorpora (opencorpora.org), CC BY-SA 3.0 — леммы и словоформы
+   существительных. Файл: pymorphy3-dicts-ru: OpenCorpora 0.92, ревизия 417150, словоформ 5140211 ((кэш)).
+   Изменения: оставлены нарицательные существительные в начальной форме и их
+   именительный падеж множественного числа, убраны слова с пометами имя, фамилия,
+   отчество, топоним, организация, торговая марка, аббревиатура, ошибка, искажение,
+   жаргон, а также слова с дефисом и цифрами, короче 3 и длиннее 12 букв.
+
+2. Орфографический словарь hunspell ru_RU — Copyright (c) 1997-2008, Alexander I. Lebedev,
+   из словарей LibreOffice; лицензия в стиле BSD (текст ниже). Использован только для
+   проверки: в словарь игры попали слова, которые он принимает. Сам он не включён.
+
+3. FrequencyWords (Hermit Dave, github.com/hermitdave/FrequencyWords), CC BY-SA 4.0 —
+   частоты слов по субтитрам OpenSubtitles 2018 (ru_full.txt). Использован для порядка
+   слов: частые — первыми; первые 20000 строк игра считает обычными словами.
+
+Лицензии: creativecommons.org/licenses/by-sa/3.0/ и creativecommons.org/licenses/by-sa/4.0/
+
+---- Лицензия hunspell ru_RU ----
+* Copyright (c) 1997-2008, Alexander I. Lebedev
+
+Modifications:
+------------------------------------------------------------------
+2012-08-24: Laszlo Nemeth (nemeth at numbertext org)
+* ru_RU.aff: add TRY line for better suggestions
+  (fix fdo#35001, reported by sasha.libreoffice at gmail)
+
+Copyright:
+------------------------------------------------------------------
+* Copyright (c) 1997-2008, Alexander I. Lebedev
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+* Redistributions of source code must retain the above copyright
+  notice, this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright
+  notice, this list of conditions and the following disclaimer in the
+  documentation and/or other materials provided with the distribution.
+* Modified versions must be clearly marked as such.
+* The name of Alexander I. Lebedev may not be used to endorse or promote
+  products derived from this software without specific prior written
+  permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.

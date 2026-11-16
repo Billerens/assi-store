@@ -1,0 +1,12 @@
+[
+  {"id": "power", "type": "enemy", "title": "сила", "text": "сила +N"},
+  {"id": "bite", "type": "enemy", "title": "соседство", "text": "хищник: кусает героя по соседству"},
+  {"id": "armour", "type": "enemy", "title": "панцирь", "text": "слабое оружие бьёт вполсилы"},
+  {"id": "drain", "type": "enemy", "title": "заряды", "text": "в бою оружие теряет ещё N зарядов"},
+  {"id": "loot", "type": "enemy", "title": "добыча", "text": "убитый оставляет золото"},
+  {"id": "maxhp", "type": "seal", "title": "здоровье", "text": "+N к наибольшему здоровью"},
+  {"id": "heal", "type": "seal", "title": "лечение", "text": "+N здоровья в начале каждого этажа"},
+  {"id": "guard", "type": "seal", "title": "щит", "text": "+N щита в начале каждого этажа"},
+  {"id": "charges", "type": "seal", "title": "заряды", "text": "+N заряд каждому новому оружию"},
+  {"id": "bounty", "type": "seal", "title": "награда", "text": "+N золота за каждого убитого врага"}
+]
