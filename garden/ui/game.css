@@ -34,15 +34,24 @@
   color: var(--ink-2);
 }
 
+/* A banner with a button: the text is never narrower than its longest word, the button goes under it when both do not fit. */
+.gd-ban:has(> .grow) {
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+
 .gd-ban .grow {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 7em;
+  min-width: min-content;
+  max-width: 100%;
 }
 
 .gd-ban .g-btn {
   flex: none;
   width: auto;
   min-width: 88px;
+  max-width: 100%;
+  margin-left: auto;
 }
 
 #tetrad-open {
@@ -353,7 +362,21 @@
 
 .gd-cost {
   flex: none;
+  max-width: 100%;
+  margin-left: auto;
   color: var(--ink-2);
+}
+
+/* An upgrade: the price stays whole and goes under the text when the text would turn into a narrow column. */
+.gd-up {
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+
+.gd-up .grow {
+  flex: 1 1 9em;
+  min-width: min-content;
+  max-width: 100%;
 }
 
 .gd-sheetart {

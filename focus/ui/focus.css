@@ -369,7 +369,9 @@ upper half, the buttons in the lower one. Kit tokens only; neutral grey cards, n
   gap: 10px;
 }
 
-.compose .chips .chip {
+/* A draft or an earlier task is of any length: its chip wraps instead of leaving the screen. */
+.compose .chips .chip,
+.setup .chips .chip:not(.big) {
   max-width: 100%;
   white-space: normal;
   text-align: left;

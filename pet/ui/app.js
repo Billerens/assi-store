@@ -254,8 +254,7 @@ function drawStrip() {
     const d = new Date(day.date + 'T12:00:00');
     return h('div', { class: 'day', title: day.date + ': ' + day.title },
       h('i', { class: 'cell st-' + (day.state || 'none') }),
-      h('span', { class: 'dnum' }, String(d.getDate())),
-      h('span', { class: 'dstate' }, day.state ? day.title : '—'));
+      h('span', { class: 'dnum' }, String(d.getDate())));
   });
   const seen = [];
   V.strip.forEach(day => { if (day.state && seen.indexOf(day.state) < 0) seen.push(day.state); });

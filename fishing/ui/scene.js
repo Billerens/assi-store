@@ -752,10 +752,13 @@
     ctx.font = '500 ' + 15 * dpr + 'px system-ui, sans-serif';
     ctx.textBaseline = 'bottom';
     ctx.fillStyle = css(WHITE, 0.55);
-    [['берег', (x0 + z1) / 2], ['середина', (z1 + z2) / 2], ['глубина', (z2 + W) / 2]].forEach((l) => {
+    // On a narrow screen the zones are narrower than their names: a name moves aside, never onto its neighbour.
+    const names = [['берег', (x0 + z1) / 2], ['середина', (z1 + z2) / 2], ['глубина', (z2 + W) / 2]].map((l) => {
       const w = ctx.measureText(l[0]).width;
-      ctx.fillText(l[0], clamp(l[1] - w / 2, 4 * dpr, W - w - 4 * dpr), H - 6 * dpr);
+      return { text: l[0], w, x: clamp(l[1] - w / 2, 4 * dpr, W - w - 4 * dpr) };
     });
+    for (let i = names.length - 2; i >= 0; i--) names[i].x = Math.max(4 * dpr, Math.min(names[i].x, names[i + 1].x - names[i].w - 8 * dpr));
+    names.forEach((l) => ctx.fillText(l.text, l.x, H - 6 * dpr));
 
     // ---- what floats on the strip: lilies, tussocks, boulders, a buoy ----
     const midY = S + B * 0.58;

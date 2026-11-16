@@ -642,14 +642,13 @@
 
 .b-challenges {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(3, minmax(min-content, 1fr));
+  gap: 6px;
 }
 
 .b-challenges .g-btn {
-  min-width: 0;
   min-height: 82px;
-  padding: 8px 4px;
+  padding: 8px 2px;
   border-radius: 8px;
   font-size: 18px;
 }

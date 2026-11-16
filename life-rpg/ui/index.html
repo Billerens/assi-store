@@ -53,14 +53,29 @@
     gap: 6px;
   }
 
+  /* The title keeps whole words; the short number beside it is never broken and goes under, to the right, when it does not fit. */
   .level-line {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
-    gap: 10px;
+    gap: 0 10px;
+  }
+
+  .level-line > :first-child {
+    flex: 1 1 5em;
+    min-width: auto;
+    max-width: 100%;
+  }
+
+  .level-line > :last-child {
+    margin-left: auto;
+    max-width: 100%;
+    white-space: nowrap;
   }
 
   .level-line .big {
+    flex-basis: auto;
     font-size: 26px;
     font-weight: 600;
   }
@@ -92,14 +107,21 @@
 
   .entries > div {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 12px;
+    gap: 0 12px;
     font-size: 14px;
   }
 
+  .entries > div > span {
+    max-width: 100%;
+  }
+
   .entries .plus {
+    margin-left: auto;
     color: var(--ok);
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
 
   .skill {

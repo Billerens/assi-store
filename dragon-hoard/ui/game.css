@@ -332,7 +332,7 @@ html:root {
   min-width: 0;
   color: var(--ink-2);
   font-size: 15px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 /* A drawn picture in its frame: a servant, a hall, a trophy. Locked — dimmed, a lock in the corner;
@@ -411,7 +411,7 @@ html:root {
 .dh-info > :last-child {
   flex: 1;
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .dh-info.locked {
@@ -500,8 +500,9 @@ html:root {
 
 .dh-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 6px 10px;
   width: 100%;
   min-height: 62px;
   padding: 7px 12px 7px 7px;
@@ -537,9 +538,10 @@ html:root {
 }
 
 .dh-row .grow {
-  flex: 1;
-  min-width: 0;
-  overflow-wrap: anywhere;
+  flex: 1 1 7em;
+  min-width: min-content;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .dh-row .t {
@@ -554,11 +556,12 @@ html:root {
 
 .dh-row .r {
   flex: none;
-  max-width: 38%;
+  max-width: 100%;
+  margin-left: auto;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   text-align: right;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .dh-row:not(:disabled) .r:not(:empty) {
@@ -604,8 +607,9 @@ html:root {
 
 .dh-toggle {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 6px 12px;
   min-height: 62px;
   padding: 7px 12px 7px 7px;
   border-radius: var(--radius-s);
@@ -620,17 +624,25 @@ html:root {
 }
 
 .dh-toggle .grow {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
+}
+
+.dh-toggle > :last-child {
+  margin-left: auto;
 }
 
 .dh-trophies {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 
 .dh-trophy {
+  flex: 1 1 calc(50% - 3px);
+  min-width: min-content;
+  max-width: 100%;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -653,9 +665,9 @@ html:root {
 }
 
 .dh-trophy .grow {
-  flex: 1;
-  min-width: 0;
-  overflow-wrap: anywhere;
+  flex: 1 1 0;
+  min-width: min-content;
+  overflow-wrap: break-word;
 }
 
 .dh-trophy .dh-art {
@@ -702,7 +714,7 @@ html:root {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .dh-entry.on {
@@ -738,6 +750,7 @@ html:root {
 /* The strip of the tabs under the panel, then the two big buttons. */
 .dh-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 0;
   margin: 0 -12px;
 }

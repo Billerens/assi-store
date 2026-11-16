@@ -81,18 +81,21 @@
   min-width: 0;
 }
 
+/* The name keeps whole words; the time goes under it, to the right, when it does not fit beside. */
 .conv .top {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 8px;
+  justify-content: flex-end;
+  gap: 0 8px;
   min-width: 0;
 }
 
 .conv .name {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 5em;
+  min-width: auto;
+  max-width: 100%;
   font-weight: 600;
-  overflow-wrap: anywhere;
 }
 
 .conv.read .name {
@@ -197,7 +200,6 @@
   letter-spacing: 0;
   text-transform: none;
   color: var(--ink);
-  overflow-wrap: anywhere;
 }
 
 .chat-head .sub {
@@ -314,12 +316,14 @@
   display: none;
 }
 
+/* A suggested reply is shown whole: a long one wraps inside its chip. */
 .compose .chip {
   flex: none;
   min-height: 44px;
   max-width: 260px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  padding: 8px 14px;
+  white-space: normal;
+  text-align: left;
 }
 
 .compose .chip.draft {

@@ -375,11 +375,13 @@ body.g-body {
   line-height: 1.4;
 }
 
+/* A row: the picture, the text, the controls. The text is never narrower than its longest
+   word: when that does not fit beside the controls, they go under the text. */
 .ac-row {
-  display: grid;
-  grid-template-columns: 44px minmax(0, 1fr) auto;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 8px 10px;
   min-height: 68px;
   margin-bottom: 6px;
   padding: 8px;
@@ -389,7 +391,6 @@ body.g-body {
 }
 
 .ac-row-plain {
-  grid-template-columns: 44px minmax(0, 1fr);
   min-height: 0;
   margin-bottom: 0;
 }
@@ -440,11 +441,17 @@ body.g-body {
   min-width: 0;
 }
 
+.ac-row > .ac-row-body {
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
+}
+
 .ac-row-title {
   font-size: 16px;
   font-weight: 600;
   line-height: 1.3;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .ac-row-info {
@@ -452,15 +459,18 @@ body.g-body {
   color: var(--ac-muted);
   font-size: 15px;
   line-height: 1.3;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .ac-row-controls {
+  flex: none;
   display: flex;
   flex-direction: column;
   gap: 5px;
   align-items: stretch;
   width: 106px;
+  max-width: 100%;
+  margin-left: auto;
 }
 
 .ac-row-controls:empty {
@@ -488,7 +498,7 @@ body.g-body {
   margin-top: 3px;
   font-variant-numeric: tabular-nums;
   font-weight: 450;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .ac-buy:not(:disabled) {
@@ -538,10 +548,13 @@ button:focus-visible {
 
 .ac-mode button,
 .ac-colonies button {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
 }
 
+.ac-mode,
+.ac-colonies,
 .ac-tools {
   flex-wrap: wrap;
 }
@@ -552,9 +565,11 @@ button:focus-visible {
   font-weight: 500;
 }
 
+/* Equal tabs while every word fits; a tab is never narrower than its word, and on a panel
+   too narrow for all five the last ones go to a second line. */
 .ac-tabs {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   flex: none;
   min-height: 62px;
   border-top: 1px solid var(--ac-line);
@@ -568,8 +583,11 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  min-width: 44px;
+  flex: 1 0 44px;
+  min-width: max-content;
+  max-width: 100%;
   min-height: 56px;
+  padding: 0 2px;
   border: 0;
   border-top: 2px solid transparent;
   border-radius: 0;
@@ -625,11 +643,14 @@ button:focus-visible {
 
 .ac-event-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 
 .ac-event-actions button {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
   min-height: 44px;
 }
 

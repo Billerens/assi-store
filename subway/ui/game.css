@@ -113,7 +113,7 @@
   min-width: 0;
   font-size: 17px;
   font-weight: 600;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .sw-arrow {
@@ -368,7 +368,7 @@
 
 .sw-ev-btns > * {
   flex: 1 1 120px;
-  min-width: 0;
+  min-width: min-content;
 }
 
 .sw-ev-btns.three {
@@ -379,7 +379,9 @@
   justify-content: flex-start;
 }
 
+/* A buy button is never narrower than its longest word: on a narrow screen the pair wraps. */
 .sw-buyrow .g-btn {
+  min-width: min-content;
   min-height: 56px;
   padding: 4px 10px;
   gap: 6px;
@@ -403,7 +405,7 @@
 
 .sw-q {
   flex: 1 1 64px;
-  min-width: 0;
+  min-width: min-content;
   min-height: 44px;
   border-radius: var(--radius-s);
   border: 1px solid var(--line);
@@ -444,8 +446,10 @@
   font-weight: 500;
 }
 
+/* The tabs share the row; a tab is never narrower than its word, the row wraps instead. */
 .sw-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
 }
 
@@ -454,8 +458,8 @@
 }
 
 .sw-tab {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -478,7 +482,6 @@
 .sw-tab span {
   max-width: 100%;
   font-size: 14px;
-  overflow-wrap: anywhere;
 }
 
 .sw-tab.on {
@@ -552,13 +555,13 @@
 .sw-ptitle {
   font-size: 15px;
   font-weight: 600;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .sw-psub {
   color: var(--ink-2);
   font-size: 15px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .sw-psub[hidden] {
@@ -705,7 +708,7 @@ background:#10232b;
 color:#b6d0be;
 font-size:12px;
 line-height:1.5;
-overflow-wrap:anywhere
+overflow-wrap:break-word
 }
 
 @media(max-width:420px) {

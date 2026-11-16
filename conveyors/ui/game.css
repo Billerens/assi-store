@@ -8,17 +8,22 @@
 
 .cv-top {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
 }
 
 .cv-top-l {
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
 }
 
 .cv-planet {
-  flex: none;
+  flex: 0 1 auto;
+  min-width: min-content;
+  margin-left: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -36,7 +41,7 @@
 }
 
 .cv-planet span {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .cv-ico {
@@ -214,6 +219,13 @@ button.cv-chip {
 
 .cv-controls {
   display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cv-sqs {
+  flex: 1 0 auto;
+  display: flex;
   gap: 6px;
 }
 
@@ -222,10 +234,11 @@ button.cv-chip {
 }
 
 .cv-mode {
-  flex: 1;
+  flex: 999 1 auto;
   width: auto;
-  min-width: 0;
-  padding: 0 8px;
+  min-width: max-content;
+  max-width: 100%;
+  padding: 0 4px;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
@@ -235,8 +248,7 @@ button.cv-chip {
 
 .cv-sq {
   position: relative;
-  flex: none;
-  width: 48px;
+  flex: 1 0 44px;
   padding: 0;
   display: grid;
   place-items: center;
@@ -312,8 +324,9 @@ button.cv-chip {
 
 .cv-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 8px 10px;
   padding: 8px 10px;
   border-radius: var(--radius-s);
   border: 1px solid var(--line);
@@ -368,8 +381,9 @@ button.cv-chip {
 }
 
 .cv-row-t {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
   font-size: 15px;
 }
 
@@ -382,6 +396,8 @@ button.cv-chip {
   flex: none;
   width: auto;
   min-width: 84px;
+  max-width: 100%;
+  margin-left: auto;
   min-height: 44px;
 }
 

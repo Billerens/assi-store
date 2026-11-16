@@ -36,6 +36,7 @@
   border: 1px solid var(--line);
   border-radius: 12px;
   flex: none;
+  max-width: 100%;
   color: var(--mf-gold);
 }
 .mfa-wallet .mf-ic {
@@ -112,7 +113,7 @@
 .mfa-card-title > strong {
   font-size: 16px;
   line-height: 1.35;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .mfa-chevron {
   color: var(--mf-gold);
@@ -124,7 +125,7 @@
   font-size: 14px;
   line-height: 1.45;
   color: var(--ink);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .mfa-detail {
   display: flex;
@@ -165,16 +166,20 @@
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+/* The price stays whole; it drops under the label when the two do not fit one line. */
 .mfa-buy {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding: 10px 12px;
-  gap: 12px;
+  gap: 4px 12px;
   font-size: 14px;
   text-align: left;
 }
 .mfa-buy > strong {
+  max-width: 100%;
+  margin-left: auto;
   white-space: nowrap;
 }
 .mfa-toggle {
@@ -184,6 +189,7 @@
 }
 .mfa-use {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 10px;
   min-height: 44px;

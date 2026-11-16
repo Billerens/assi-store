@@ -122,7 +122,7 @@
     view.undo = h('button', { class: 'g-btn small cv-sq', id: 'undo', 'aria-label': 'Отменить', onclick: undo }, icon('undo'));
     view.researchBtn = h('button', { class: 'g-btn small cv-sq', id: 'research-btn', 'aria-label': 'Исследования', onclick: researchSheet }, icon('research'), h('span', { class: 'cv-badge' }));
     view.ordersBtn = h('button', { class: 'g-btn small cv-sq', id: 'orders-btn', 'aria-label': 'Заказы', onclick: ordersSheet }, icon('orders'), h('span', { class: 'cv-badge' }));
-    view.controls = h('div', { class: 'cv-controls' }, view.mode, view.dir, view.undo, view.researchBtn, view.ordersBtn);
+    view.controls = h('div', { class: 'cv-controls' }, view.mode, h('div', { class: 'cv-sqs' }, view.dir, view.undo, view.researchBtn, view.ordersBtn));
     view.tools = h('div', { class: 'cv-tools' }, view.palette, view.controls);
 
     view.orders = h('div', { class: 'cv-orders' });

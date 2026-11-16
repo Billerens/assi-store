@@ -11,9 +11,10 @@
 
 .dm-top-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  gap: 2px 12px;
 }
 
 .dm-money {
@@ -120,9 +121,12 @@
   display: none;
 }
 
+/* The picture and the text share a line with the buttons while the longest word of the text
+   fits; on a narrower card the buttons go under the text at the full width. */
 .dm-card {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   padding: 8px 8px 8px 14px;
@@ -147,11 +151,14 @@
 }
 
 .dm-card-btns {
-  flex: none;
+  flex: 1 0 116px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  width: 116px;
+}
+
+.dm-card > .dm-row-text {
+  flex-grow: 999;
 }
 
 .dm-card-btns .g-btn {
@@ -183,6 +190,7 @@
 
 .dm-heat {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
 }
@@ -193,13 +201,16 @@
 
 .dm-heat .g-btn {
   width: auto;
-  flex: none;
+  flex: 1 0 auto;
+  max-width: 100%;
 }
 
 .dm-heat-bar {
   position: relative;
-  flex: 1;
-  height: 44px;
+  flex: 999 1 120px;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
   border-radius: var(--radius-s);
   border: 1px solid var(--line);
   background: var(--surface);
@@ -221,12 +232,10 @@
 
 .dm-heat-text {
   position: relative;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  padding: 0 10px;
+  padding: 4px 10px;
   font-size: 14px;
   font-weight: 600;
+  line-height: 1.25;
 }
 
 .dm-bottom > .g-btn {
@@ -248,10 +257,12 @@
   overflow: hidden;
 }
 
+/* Five tabs in one line while their words fit; a narrower panel moves the last ones to a
+   second line instead of running them into each other. */
 .dm-tabs {
   flex: none;
-  display: grid;
-  grid-template-columns: repeat(5, auto);
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 2px;
   padding-bottom: 6px;
@@ -264,9 +275,10 @@
   align-items: center;
   justify-content: center;
   gap: 2px;
-  min-width: 0;
+  flex: 1 0 auto;
+  max-width: 100%;
   min-height: 56px;
-  padding: 4px 6px;
+  padding: 4px 2px;
   border-radius: var(--radius-s);
   border: 1px solid transparent;
   background: transparent;
@@ -311,10 +323,13 @@
   overflow-y: auto;
 }
 
+/* A row: the picture, the text, the price button. The text never gets narrower than its
+   longest word: when that does not fit beside the button, the button goes under the text. */
 .dm-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 6px 10px;
   min-height: 60px;
   padding: 6px 0;
   border-bottom: 1px solid var(--line);
@@ -441,8 +456,9 @@
 }
 
 .dm-row-text {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
 }
 
 .dm-row-title {
@@ -465,6 +481,7 @@
 
 .g-btn.dm-buy {
   flex: none;
+  margin-left: auto;
   width: auto;
   min-width: 96px;
   max-width: 40%;

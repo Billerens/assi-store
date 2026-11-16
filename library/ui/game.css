@@ -37,14 +37,16 @@
 
 .l-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 4px 8px;
   min-height: 36px;
 }
 
 .l-h {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
   margin: 0;
   color: var(--ink);
   font-size: 19px;
@@ -65,10 +67,12 @@
   gap: 6px;
 }
 
+/* A desk: the title is never narrower than its longest word; the time goes under it when both do not fit. */
 .l-desk {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 6px 10px;
   width: 100%;
   min-height: 72px;
   padding: 8px 12px 8px 8px;
@@ -96,8 +100,9 @@
 }
 
 .l-desk-main {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 6em;
+  min-width: min-content;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -119,6 +124,8 @@
 .l-desk-time {
   flex: none;
   min-width: 64px;
+  max-width: 100%;
+  margin-left: auto;
   text-align: right;
   font-size: 14px;
   font-variant-numeric: tabular-nums;
@@ -140,11 +147,11 @@
   background: var(--l-paper);
 }
 
+/* Every tab is in sight: the ones that do not fit go to the next line. */
 .l-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-  overflow-x: auto;
-  scrollbar-width: none;
   padding-top: 4px;
 }
 
@@ -154,6 +161,7 @@
 
 .l-tabs .chip {
   flex: none;
+  max-width: 100%;
   min-height: 40px;
 }
 
@@ -179,15 +187,27 @@
   color: var(--ink-2);
 }
 
+/* A row: the name keeps its words whole; the count, the mark or the button goes under it when both do not fit. */
 .l-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 6px 10px;
 }
 
 .l-row .grow {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 6em;
+  min-width: min-content;
+  max-width: 100%;
+}
+
+.l-row:has(> .g-btn) .grow {
+  flex-basis: 9em;
+}
+
+.l-row > :last-child:not(.grow):not(.l-ic) {
+  max-width: 100%;
+  margin-left: auto;
 }
 
 .l-name {
@@ -320,7 +340,8 @@
 
 .l-book-head {
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 8px 12px;
   align-items: center;
 }
 
@@ -601,8 +622,9 @@ details > summary {
 }
 
 .l-book-head .grow {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 8em;
+  min-width: min-content;
+  max-width: 100%;
 }
 
 .l-book-head h3 {

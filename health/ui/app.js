@@ -217,7 +217,7 @@ function medsCard() {
     return h('div', { class: 'dose' },
       h('span', { class: 'time' }, dose.time),
       h('div', { class: 'what' }, h('div', { 'data-raw': '' }, dose.name), dose.dose ? h('div', { class: 'small', 'data-raw': '' }, dose.dose) : null),
-      ...right);
+      h('div', { class: 'acts' }, right));
   })) : empty('Сегодня приёмов нет.');
   return card('pill', 'Лекарства', null, body);
 }

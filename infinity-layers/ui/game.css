@@ -170,7 +170,7 @@
   font-size: 15px;
   font-weight: 600;
   line-height: 20px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .il-tier-detail {
   display: flex;
@@ -331,9 +331,11 @@
   flex-wrap: wrap;
   gap: 5px;
 }
+/* A tab is as wide as its word: the ones that do not fit go to the next line. */
 .il-tab {
-  flex: 1;
+  flex: 1 0 auto;
   min-width: 70px;
+  max-width: 100%;
   min-height: 44px;
   padding: 7px;
   border: 1px solid var(--line, #414147);
@@ -362,12 +364,15 @@
 }
 .il-card-top {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 4px 8px;
 }
 .il-card-top .il-head {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
 }
 .il-head {
   display: flex;
@@ -379,12 +384,12 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  min-width: 0;
+  min-width: min-content;
 }
 .il-head strong {
   font-size: 16px;
   line-height: 1.25;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .il-state {
   color: var(--ink-2, #b3b3bc);
@@ -446,8 +451,11 @@
   min-width: 0;
 }
 .il-currency {
+  max-width: 100%;
+  margin-left: auto;
   font-size: 20px;
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 .il-card .g-btn {
   min-height: 48px;
@@ -460,9 +468,10 @@
 }
 .il-automation-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 4px 10px;
   min-height: 44px;
 }
 .il-automation-row.closed {
@@ -472,9 +481,13 @@
   opacity: .4;
 }
 .il-row-text {
-  flex: 1;
-  min-width: 0;
-  overflow-wrap: anywhere;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+.il-automation-row input {
+  margin-left: auto;
 }
 .il-row-indent {
   padding-left: 38px;

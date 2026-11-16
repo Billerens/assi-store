@@ -1986,7 +1986,7 @@
     box.replaceChildren(h('h2', {}, 'Сравнение моделей'), h('span', { class: 'spinner' }));
     const [data, bench] = await Promise.all([call('compare'), call('bench')]);
     const own = bench.filter((item) => item.own);
-    const row = (model, a, b) => h('div', { class: 'compare-row' }, h('span', { class: 'truncate' }, raw(model || '—')), h('span', {}, a), h('span', { class: 'muted' }, b));
+    const row = (model, a, b) => h('div', { class: 'compare-row' }, h('span', { class: 'model' }, raw(model || '—')), h('span', {}, a), h('span', { class: 'muted' }, b));
     box.replaceChildren(...[
       h('h2', {}, 'Сравнение моделей'),
       h('p', { class: 'small muted' }, 'Набор: ' + own.length + ' ваших рисунков и ' + (bench.length - own.length) +

@@ -15,7 +15,8 @@
 }
 .mfo-launch {
   flex: 1 1 96px;
-  min-width: 0;
+  min-width: min-content;
+  max-width: 100%;
   align-items: flex-start;
   text-align: left;
 }
@@ -40,21 +41,16 @@
   min-width: 64px;
   font-size: 12px;
 }
+/* The title and the line under it wrap by words: nothing is cut and no dots. */
 .mfo-launch-title {
   font-size: 13px;
   font-weight: 650;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .mfo-launch-sub {
   font-size: 11px;
   line-height: 13px;
   color: var(--ink-2);
-  overflow: hidden;
-  text-overflow: ellipsis;
   max-width: 100%;
-  white-space: nowrap;
 }
 .mfo-skills {
   display: flex;
@@ -71,7 +67,7 @@
 }
 .mfo-skill {
   flex: 1;
-  min-width: 48px;
+  min-width: min-content;
   overflow: hidden;
 }
 .mfo-skill.ready {
@@ -104,16 +100,18 @@
 }
 .mfo-sheet-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
 }
 .mfo-sheet-head h3 {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
 }
 .mfo-sheet-head .g-btn {
   width: auto;
   flex: none;
+  max-width: 100%;
   min-height: 44px;
 }
 .mfo-tabs {
@@ -138,7 +136,7 @@
   flex-direction: column;
   gap: 12px;
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .mfo-card {
   display: flex;
@@ -159,17 +157,20 @@
 }
 .mfo-card-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   min-width: 0;
 }
 .mfo-card-head > h4 {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
 }
 .mfo-card-head > .g-btn {
   width: auto;
   flex: none;
+  max-width: 100%;
 }
 .mfo-card-title {
   display: flex;
@@ -206,6 +207,8 @@
 .mfo-card > .g-btn {
   min-height: 44px;
   flex: 1;
+  min-width: min-content;
+  max-width: 100%;
   padding: 6px 10px;
 }
 .mfo-detail,
@@ -230,6 +233,8 @@
 }
 .mfo-tempers .g-btn {
   flex: 1;
+  min-width: min-content;
+  max-width: 100%;
   min-height: 44px;
   padding: 5px 8px;
   font-size: 13px;
@@ -246,19 +251,23 @@
 .mfo-temper.selected {
   border-color: currentColor;
 }
+/* Two numbers side by side while each fits whole; a long one takes the row. */
 .mfo-values {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 .mfo-values > div {
   display: flex;
+  flex: 1 1 calc(50% - 4px);
   flex-direction: column;
   padding: 8px;
   gap: 4px;
   background: var(--bg);
   border-radius: 9px;
-  min-width: 0;
+  min-width: min-content;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .mfo-values small {
   color: var(--ink-2);
@@ -288,11 +297,24 @@
 }
 .mfo-queue-item {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   gap: 8px;
   padding: 7px 0;
   border-bottom: 1px solid var(--line);
   font-size: 13px;
+}
+.mfo-queue-item > :first-child {
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
+}
+.mfo-queue-item > .g-btn {
+  flex: none;
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
 }
 .mfo-picker {
   display: flex;
@@ -355,15 +377,14 @@
     max-width: 150px;
   }
 }
+/* The tabs wrap to a second row on a narrow screen; none is hidden behind a scroll. */
 .mfo-tabs {
-  overflow-x: auto;
-  scrollbar-width: thin;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 .mfo-tabs .g-btn {
   flex: 1 0 auto;
+  max-width: 100%;
   font-size: 13px;
-  white-space: nowrap;
 }
 .mfo-skills {
   flex-wrap: wrap;
@@ -388,17 +409,20 @@
   padding-top: 12px;
   margin-top: 2px;
 }
+/* Two choices in a row while both titles fit whole; otherwise one under the other. */
 .mfo-talent-choices {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 7px;
 }
 .mfo-talent {
   display: flex;
+  flex: 1 1 calc(50% - 4px);
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  min-width: 0;
+  min-width: min-content;
+  max-width: 100%;
   min-height: 88px;
   padding: 9px;
   gap: 5px;
@@ -509,24 +533,29 @@
   min-width: 0;
 }
 .mfo-section-heading {
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 .mfo-section-heading > .mfo-pill {
   align-self: center;
+  max-width: 100%;
   white-space: nowrap;
 }
+/* Two heroes in a row while both names fit whole; a long name takes the row. */
 .mfo-roster {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 7px;
 }
 .mfo-roster .mfo-roster-row {
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
+  flex: 1 1 calc(50% - 4px);
+  grid-template-columns: 36px minmax(min-content, 1fr);
   align-items: center;
   gap: 5px;
   padding: 8px;
-  min-width: 0;
+  min-width: min-content;
+  max-width: 100%;
   text-align: left;
   justify-content: start;
   background: var(--bg);
@@ -649,6 +678,9 @@
   border: 0;
   background: transparent;
 }
+.mfo-selection .mfo-values {
+  display: flex;
+}
 .mfo-selection .mfo-values > div {
   background: var(--surface-2);
 }
@@ -710,8 +742,8 @@
   line-height: 1.4;
 }
 @media (min-width: 650px) {
-  .mfo-roster {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .mfo-roster .mfo-roster-row {
+    flex-basis: calc(25% - 6px);
   }
   .mfo-cell-picker {
     grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));

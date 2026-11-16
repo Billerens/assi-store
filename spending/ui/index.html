@@ -74,21 +74,69 @@
     font-weight: 600;
   }
 
+  /* Rows of every list here: the name keeps its longest word, and a sum, a date or a button
+     that does not fit beside it goes to a second line instead of squeezing the name. */
+  .list > * {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+
+  .list > * > .grow,
+  .op .what,
+  .sub-row .what {
+    flex: 1 1 7em;
+    min-width: auto;
+    max-width: 100%;
+  }
+
+  .list > * > .grow ~ :last-child,
+  .list > * > .what ~ :last-child {
+    margin-left: auto;
+  }
+
+  /* A choice and its buttons stay together when they go under the name. */
+  .list > * > .acts {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: none;
+    max-width: 100%;
+  }
+
+  .budget-top {
+    flex-wrap: wrap;
+    gap: 2px 10px;
+  }
+
+  .budget-top .big {
+    flex: 1 1 auto;
+    min-width: auto;
+    max-width: 100%;
+  }
+
   .cat {
     flex-direction: column;
+    flex-wrap: nowrap;
     align-items: stretch !important;
     gap: 6px !important;
   }
 
   .cat .top {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
-    gap: 8px;
+    gap: 2px 8px;
   }
 
   .cat .name {
-    flex: 1;
-    min-width: 0;
+    flex: 1 1 6em;
+    min-width: auto;
+    max-width: 100%;
+  }
+
+  .cat .sum,
+  .sub-row .sum {
+    white-space: nowrap;
   }
 
   .cat .share {
@@ -96,6 +144,7 @@
     font-size: 13px;
     min-width: 36px;
     text-align: right;
+    white-space: nowrap;
   }
 
   .chart {
@@ -166,15 +215,9 @@
   }
 
   .op .what {
-    flex: 1;
-    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 3px;
-  }
-
-  .op .name {
-    overflow-wrap: anywhere;
   }
 
   .op .meta {
@@ -187,6 +230,7 @@
   }
 
   .op .sum {
+    max-width: 100%;
     font-weight: 600;
     white-space: nowrap;
     text-align: right;
@@ -260,11 +304,6 @@
 
   .scroll-chips .chip {
     flex: none;
-  }
-
-  .sub-row .what {
-    flex: 1;
-    min-width: 0;
   }
 
   .pair {
@@ -458,7 +497,7 @@
     const pct = Math.max(0, Math.min(100, s.pct || 0));
     return h('button', { class: 'card', style: 'text-align: left; border: 0; width: 100%', onclick: () => budgetSheet(o), 'aria-label': 'Бюджет месяца' },
       h('div', { class: 'section' },
-        h('div', { class: 'row' },
+        h('div', { class: 'row budget-top' },
           h('div', { class: 'big grow' }, money(s.spent, o.currency, false)),
           h('div', { class: 'muted' }, 'из ' + money(s.budget, o.currency, false))),
         h('div', { class: 'meter' + ((s.pct || 0) >= warn ? ' over' : '') }, h('div', { style: 'width: ' + pct + '%' })),
@@ -479,7 +518,7 @@
         const width = item.limit ? Math.min(100, item.sum / item.limit * 100) : Math.round(item.share * 100);
         return h('button', { class: 'cat', onclick: () => openFeed(item.name) },
           h('div', { class: 'top' },
-            h('span', { class: 'name truncate', 'data-raw': '' }, item.name),
+            h('span', { class: 'name', 'data-raw': '' }, item.name),
             h('span', { class: 'sum' }, money(item.sum, o.currency, false)),
             h('span', { class: 'share' }, item.limit ? 'из ' + money(item.limit, o.currency, false) : Math.round(item.share * 100) + '%')),
           h('div', { class: 'meter thin' + (item.limit && item.sum >= item.limit ? ' over' : '') }, h('div', { style: 'width: ' + width + '%' })));
@@ -548,7 +587,9 @@
         if (bars[i]) bars[i].classList.add('picked');
         tip.hidden = false;
         tip.textContent = day.getDate() + ' ' + MONTHS_OF[day.getMonth()] + ': ' + money(value, o.currency, false);
-        tip.style.left = Math.min(width - 60, Math.max(60, x + bar / 2)) + 'px';
+        // The note is centred on its bar but never leaves the chart, however long the sum is.
+        const half = Math.max(60, tip.offsetWidth / 2);
+        tip.style.left = Math.max(half, Math.min(width - half, x + bar / 2)) + 'px';
         tip.style.top = Math.max(16, yy) + 'px';
       });
       svg.appendChild(hit);
@@ -570,7 +611,7 @@
       o.upcoming.length
         ? h('div', { class: 'list' }, ...o.upcoming.map(sub => h('button', { onclick: () => showTab('subs') },
           h('span', { 'data-icon': 'calendar', class: 'src' }),
-          h('span', { class: 'grow truncate', 'data-raw': '' }, sub.merchant),
+          h('span', { class: 'grow', 'data-raw': '' }, sub.merchant),
           h('span', { class: 'muted small' }, dateText(sub.next)),
           h('span', { class: 'sum' }, money(sub.amount, sub.currency)))))
         : card('', h('div', { class: 'muted small' }, 'Подтверждённых подписок нет. Модуль ищет их сам — загляните во вкладку «Подписки».')));
@@ -893,8 +934,8 @@
           return h('div', { class: 'sub-row' },
             h('span', { class: 'src', 'data-icon': 'clock' }),
             h('span', { class: 'what' }, h('div', { 'data-raw': '' }, sub.merchant), h('div', { class: 'small muted' }, 'кончается ' + dateText(sub.next))),
-            days,
-            h('button', { class: 'icon-btn', 'aria-label': 'Не пробный период', onclick: async () => { await call('confirmSub', sub.id, false).catch(fail); renderSubs(); } }, ui.icon('close')));
+            h('span', { class: 'acts' }, days,
+              h('button', { class: 'icon-btn', 'aria-label': 'Не пробный период', onclick: async () => { await call('confirmSub', sub.id, false).catch(fail); renderSubs(); } }, ui.icon('close'))));
         }))));
     }
     parts.push(h('div', { class: 'section' }, h('h2', {}, 'Подписки'),
@@ -902,7 +943,7 @@
         ? h('div', { class: 'list' }, ...subs.confirmed.map(sub => h('button', { class: 'sub-row', onclick: () => subSheet(sub) },
           h('span', { class: 'src', 'data-icon': sub.remind ? 'bell' : 'mute' }),
           h('span', { class: 'what' },
-            h('div', { class: 'truncate', 'data-raw': '' }, sub.merchant),
+            h('div', { 'data-raw': '' }, sub.merchant),
             h('div', { class: 'small muted' }, (sub.next ? dateText(sub.next) + ' · ' : '') + 'в год ' + money(sub.yearly, sub.currency, false) + (sub.cancelHow ? ' · знаю, как отменить' : ''))),
           h('span', { class: 'sum' }, money(sub.amount, sub.currency), h('div', { class: 'small muted' }, PERIOD[sub.period])))))
         : card('', h('div', { class: 'muted small' }, 'Подтверждённых подписок нет. Модуль ищет их сам раз в сутки: одно и то же место, не меньше ' +
@@ -946,7 +987,7 @@
       src.sources.length
         ? h('div', { class: 'list' }, ...src.sources.map(item => h('div', {},
           h('span', { class: 'src', 'data-icon': SOURCE_ICON[item.source] || 'bell' }),
-          h('span', { class: 'grow' }, h('div', { class: 'truncate', 'data-raw': '' }, item.bank || item.sender), h('div', { class: 'small muted', 'data-raw': '' }, item.sender + ' · ' + (SOURCE_NAME[item.source] || item.source))),
+          h('span', { class: 'grow' }, h('div', { 'data-raw': '' }, item.bank || item.sender), h('div', { class: 'small muted', 'data-raw': '' }, item.sender + ' · ' + (SOURCE_NAME[item.source] || item.source))),
           h('span', { class: 'badge' }, String(item.n)))))
         : card('', h('div', { class: 'small muted' }, 'За 30 дней распознанных трат нет. Проверьте, что у Assi есть доступ к уведомлениям, а приложение банка — в списке во вкладке «Настройки».'))));
     if (src.suggested.length) {
@@ -954,9 +995,10 @@
         h('p', { class: 'small muted' }, 'Эти приложения и отправители присылали уведомления с суммой и словом операции, но их нет в списке. Текст не сохранялся — только счёт.'),
         h('div', { class: 'list' }, ...src.suggested.map(item => h('div', {},
           h('span', { class: 'src', 'data-icon': item.kind === 'sms' ? 'message' : 'bell' }),
-          h('span', { class: 'grow' }, h('div', { class: 'truncate', 'data-raw': '' }, item.app), h('div', { class: 'small muted', 'data-raw': '' }, item.id + ' · ' + item.count + ' ' + plural(item.count, 'раз', 'раза', 'раз'))),
-          h('button', { class: 'btn small primary', onclick: async () => { await call('setSource', item.kind === 'sms' ? 'sms' : 'app', item.id, true).catch(fail); renderSources(); } }, 'Читать'),
-          h('button', { class: 'icon-btn', 'aria-label': 'Скрыть', onclick: async () => { await call('ignoreSuggestion', item.kind, item.id).catch(fail); renderSources(); } }, ui.icon('close')))))));
+          h('span', { class: 'grow' }, h('div', { 'data-raw': '' }, item.app), h('div', { class: 'small muted', 'data-raw': '' }, item.id + ' · ' + item.count + ' ' + plural(item.count, 'раз', 'раза', 'раз'))),
+          h('span', { class: 'acts' },
+            h('button', { class: 'btn small primary', onclick: async () => { await call('setSource', item.kind === 'sms' ? 'sms' : 'app', item.id, true).catch(fail); renderSources(); } }, 'Читать'),
+            h('button', { class: 'icon-btn', 'aria-label': 'Скрыть', onclick: async () => { await call('ignoreSuggestion', item.kind, item.id).catch(fail); renderSources(); } }, ui.icon('close'))))))));
     }
     const again = h('button', { class: 'btn small' }, 'Разобрать заново');
     again.onclick = spinnerButton(again, async () => {

@@ -99,8 +99,23 @@
     margin-top: 12px;
   }
 
+  /* The title keeps whole words; the two buttons stay together and go under it when they do not fit beside. */
+  .season-row {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
   .season-row .grow {
-    min-width: 0;
+    flex: 1 1 6em;
+    min-width: auto;
+    max-width: 100%;
+  }
+
+  .season-row .acts {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: none;
   }
 
   .form-label {
@@ -473,17 +488,18 @@
     $('seasonsBox').hidden = !others.length;
     $('seasons').replaceChildren(...others.map(s => h('div', { class: 'row season-row' },
       h('div', { class: 'grow' },
-        h('div', { class: 'truncate', style: 'font-weight: 600', 'data-raw': '' }, s.title),
-        h('div', { class: 'small muted truncate', 'data-raw': '' }, ui.t('{}: прослушано {} из {}', s.genreTitle || s.custom, s.listened, s.episodes))),
-      h('button', { class: 'icon-btn', 'aria-label': 'Сделать текущим', onclick: async () => {
-        await call('selectSeason', s.id);
-        refresh();
-      } }, ui.icon('play')),
-      h('button', { class: 'icon-btn', 'aria-label': 'Удалить сезон', onclick: async () => {
-        if (!(await ui.confirm(ui.t('Удалить сезон «{}» со всеми сериями и записями?', s.title), 'Удалить', true))) return;
-        await call('removeSeason', s.id);
-        refresh();
-      } }, ui.icon('trash')))));
+        h('div', { style: 'font-weight: 600', 'data-raw': '' }, s.title),
+        h('div', { class: 'small muted', 'data-raw': '' }, ui.t('{}: прослушано {} из {}', s.genreTitle || s.custom, s.listened, s.episodes))),
+      h('span', { class: 'acts' },
+        h('button', { class: 'icon-btn', 'aria-label': 'Сделать текущим', onclick: async () => {
+          await call('selectSeason', s.id);
+          refresh();
+        } }, ui.icon('play')),
+        h('button', { class: 'icon-btn', 'aria-label': 'Удалить сезон', onclick: async () => {
+          if (!(await ui.confirm(ui.t('Удалить сезон «{}» со всеми сериями и записями?', s.title), 'Удалить', true))) return;
+          await call('removeSeason', s.id);
+          refresh();
+        } }, ui.icon('trash'))))));
   }
 
   // ---- the night light ----------------------------------------------------------------------------------

@@ -201,16 +201,20 @@
   font-size: 15px;
 }
 
+/* The label is never narrower than its longest word: a field with a unit that does not fit beside it goes under. */
 .setting {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  justify-content: flex-end;
+  gap: 6px 12px;
   min-height: 44px;
 }
 
 .setting .label {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 9em;
+  min-width: auto;
+  max-width: 100%;
 }
 
 .setting .hint {
@@ -225,7 +229,17 @@
 
 .setting select.input {
   width: auto;
-  max-width: 60%;
+  max-width: 100%;
+}
+
+/* A field and its unit stay together when they go under the label. */
+.setting .field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  max-width: 100%;
 }
 
 .setting .unit {
@@ -236,7 +250,13 @@
 
 .setting.column {
   flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
   align-items: stretch;
+}
+
+.setting.column .label {
+  flex: none;
 }
 
 .setting.column .input {
@@ -261,6 +281,17 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) 72px 44px;
   gap: 8px;
   align-items: center;
+}
+
+/* A narrow screen: the topic name takes its own line, so both words stay readable in their fields. */
+@media (max-width: 480px) {
+  .topic {
+    grid-template-columns: minmax(0, 1fr) 72px 44px;
+  }
+
+  .topic > :first-child {
+    grid-column: 1 / -1;
+  }
 }
 
 .topic .flags {

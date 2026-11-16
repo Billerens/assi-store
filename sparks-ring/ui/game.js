@@ -172,11 +172,8 @@
   function hintLine(run) {
     if (run.over) return [h('span', {}, 'Тапните по кольцу или жмите «Ещё раз»')];
     if (!run.live) {
-      return [
-        h('span', {}, 'Искры летят к ядру: '),
-        h('b', {}, 'тапните встречную'),
-        h('span', {}, ' в полосе. Улетающие не трогайте.')
-      ];
+      // one sentence in one box: three boxes in the row of the hint would stand as three columns
+      return [h('span', {}, 'Искры летят к ядру: ', h('b', {}, 'тапните встречную'), ' в полосе. Улетающие не трогайте.')];
     }
     return [h('span', {}, 'Уровень ' + (run.level || 1) + ' · точных ' + (run.perfects || 0))];
   }

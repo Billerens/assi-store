@@ -107,6 +107,13 @@
       -webkit-line-clamp: 5;
     }
   }
+
+  /* On a tall tile of the phone's width the creature keeps half: the name beside it is not squeezed into a column. */
+  @media (min-width: 300px) and (min-height: 240px) {
+    .pet-pic {
+      max-width: 50%;
+    }
+  }
 </style>
 <body>
 <div class="pet-card">

@@ -326,7 +326,7 @@
       h('div', { class: 'grow' },
         h('div', { class: 'small muted' }, 'Обои дня'),
         h('div', { 'data-raw': '' }, w.title),
-        w.credit ? h('div', { class: 'small muted truncate', 'data-raw': '' }, w.credit) : null),
+        w.credit ? h('div', { class: 'small muted', 'data-raw': '' }, w.credit) : null),
       ui.icon('right'));
   }
 
@@ -383,7 +383,7 @@
       view.archive.length ? h('div', { class: 'list archive' }, view.archive.map(item => h('button', { onclick: () => openDay(item.date) },
         h('div', { class: 'grow' },
           h('div', {}, dateText(item.date, true)),
-          h('div', { class: 'small muted truncate', 'data-raw': '' }, item.first)),
+          h('div', { class: 'small muted', 'data-raw': '' }, item.first)),
         h('span', { class: 'score' }, item.checked ? ui.raw(item.hits + '/' + item.checked) : '—'))))
         : h('div', { class: 'empty' }, 'Архив начнётся завтра.'));
   }

@@ -11,20 +11,23 @@
 
 .ev-heading {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 8px;
+  gap: 2px 8px;
   margin: 2px 0 8px;
 }
 
 .ev-stage {
+  max-width: 100%;
   font-size: 17px;
   font-weight: 650;
-  white-space: nowrap;
 }
 
 .ev-constant {
+  min-width: min-content;
   max-width: 46%;
+  margin-left: auto;
   color: var(--ink-2);
   font-size: 15px;
   text-align: right;
@@ -440,8 +443,9 @@
 }
 
 .ev-buy {
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 10px;
+  gap: 6px 10px;
   min-height: 64px;
   padding: 8px 12px 8px 8px;
   border-radius: var(--radius-s);
@@ -450,10 +454,11 @@
 
 .ev-row-copy {
   display: flex;
-  flex: 1;
+  flex: 1 1 7em;
   flex-direction: column;
   gap: 3px;
-  min-width: 0;
+  min-width: min-content;
+  max-width: 100%;
 }
 
 .ev-row-title {
@@ -472,7 +477,8 @@
 .ev-row-end {
   display: flex;
   flex: none;
-  max-width: 40%;
+  max-width: 100%;
+  margin-left: auto;
   flex-direction: column;
   gap: 3px;
   align-items: flex-end;

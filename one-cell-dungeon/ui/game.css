@@ -214,15 +214,11 @@
   padding: 4px 0 8px;
 }
 
+/* The gifts share the row; one that does not fit goes to the next row, none is cut by the edge. */
 .d-hand {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.d-hand::-webkit-scrollbar {
-  display: none;
 }
 
 .d-gift-b {
@@ -233,7 +229,8 @@
 }
 
 .d-gift {
-  flex: 1 0 150px;
+  flex: 1 1 128px;
+  max-width: 100%;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -454,7 +451,14 @@
   line-height: 1.15;
   color: var(--ink-2);
   text-align: center;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+}
+
+/* A cell of the board is a third of the screen: on a narrow one the name is set smaller to keep its words whole. */
+@media (max-width: 339px) {
+  .d-name {
+    font-size: 13px;
+  }
 }
 
 .d-hero {
@@ -548,6 +552,8 @@
 
 .d-cost {
   flex: none;
+  max-width: 100%;
+  margin-left: auto;
   font-size: 16px;
   font-weight: 600;
 }
@@ -558,6 +564,7 @@
 
 .d-buy {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   width: 100%;
@@ -583,6 +590,7 @@
 
 .d-buy .grow {
   flex: 1;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -743,7 +751,9 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  flex: 0 0 136px;
+  flex: 0 0 auto;
+  width: min-content;
+  min-width: 136px;
   max-height: min(100%, 52vh, 480px);
   overflow: auto;
 }
@@ -854,4 +864,10 @@
 
 .d-board.d-has-world .d-card.far {
   background: #13252b22;
+}
+
+/* A button of a row is never narrower than its longest word: a crowded row wraps instead of cutting the text.
+   (The engine means the same with min(100%, max-content), which the WebView does not accept.) */
+.g-btns > .g-btn {
+  min-width: min-content;
 }

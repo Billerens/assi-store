@@ -36,7 +36,7 @@
 
 .ww-last-word .ww-def {
   line-height: 1.45;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 /* ---- the city ---- */
@@ -140,9 +140,15 @@
   flex-wrap: wrap;
 }
 
+/* A long event (an order of the town hall) wraps inside its chip instead of leaving the screen. */
 .ww-chip {
+  max-width: 100%;
   min-height: 36px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   font-size: 15px;
+  text-align: left;
+  white-space: normal;
 }
 
 button.ww-chip {
@@ -242,6 +248,7 @@ button.ww-chip {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  max-width: 100%;
   min-height: 44px;
   padding: 0 10px;
   border-radius: var(--radius-s);
@@ -306,12 +313,14 @@ button.ww-chip {
 }
 
 /* ---- the word over the wheel ---- */
+/* A note and its «Нет в словаре?» chip: the chip drops under a note that needs the row. */
 .ww-word {
   flex: none;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px 8px;
   min-height: 44px;
   text-align: center;
   font-size: 16px;
@@ -507,7 +516,7 @@ button.ww-chip {
 }
 
 .ww-row .g-btn {
-  min-width: 0;
+  min-width: min-content;
   padding: 4px 6px;
   gap: 6px;
   white-space: nowrap;
@@ -562,9 +571,22 @@ button.ww-chip {
   font-weight: 600;
 }
 
+/* The text of a building keeps 150 px and its words whole; on a narrow screen the button
+   drops under it, to the right edge. */
+.ww-build {
+  flex-wrap: wrap;
+}
+
+.ww-build > .grow {
+  flex: 1 1 150px;
+  min-width: min-content;
+}
+
 .ww-build-btn {
   flex: none;
   width: 104px;
+  max-width: 100%;
+  margin-left: auto;
 }
 
 .ww-build-btn .g-btn {

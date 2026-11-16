@@ -47,9 +47,7 @@
   }
 
   .gc-head .gc-when {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    min-width: 0;
   }
 
   .gc-stars {
@@ -124,6 +122,8 @@
     grid-column: 1 / -1;
     min-width: 0;
     min-height: 0;
+    /* A long title stays inside its row and does not run over the head and the foot. */
+    max-height: 100%;
     overflow: hidden;
   }
 
@@ -194,7 +194,7 @@
 
   .gc-line {
     display: none;
-    align-items: center;
+    align-items: flex-start;
     gap: 6px;
     min-width: 0;
     font-size: 12px;
@@ -208,9 +208,7 @@
   }
 
   .gc-line span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    min-width: 0;
   }
 
   .gc-bar {
@@ -265,13 +263,13 @@
   }
 
   .gc-draw .grow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    padding: 4px 0;
+    line-height: 1.25;
     color: var(--ink-2);
   }
 
   .gc-draw .btn {
+    flex: none;
     min-height: 32px;
     padding: 0 12px;
     font-size: 13px;

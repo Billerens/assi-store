@@ -133,6 +133,7 @@
 }
 .mf-gate-top {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
   gap: 8px;
@@ -141,22 +142,27 @@
 }
 .mf-wave {
   flex: none;
+  max-width: 100%;
   font-weight: 700;
 }
+/* The name wraps by words next to the wave and drops under it when its longest word has no room. */
 .mf-mname {
-  min-width: 0;
-  overflow-wrap: anywhere;
+  flex: 1 1 0;
+  min-width: min-content;
+  overflow-wrap: break-word;
   text-align: right;
   color: var(--ink-2);
 }
 .mf-bars {
   display: flex;
+  align-items: flex-start;
   gap: 6px;
 }
+/* A bar grows by a line when its numbers do not fit: nothing is cut. */
 .mf-hp,
 .mf-timer {
   position: relative;
-  height: 20px;
+  min-height: 20px;
   overflow: hidden;
   border-radius: 10px;
   border: 1px solid var(--line);
@@ -168,7 +174,9 @@
   min-width: 0;
 }
 .mf-timer {
-  flex: 0 0 30%;
+  flex: 0 0 auto;
+  min-width: 30%;
+  max-width: 100%;
 }
 .mf-timer[hidden] {
   display: none;
@@ -191,13 +199,13 @@
   font-size: 15px;
   font-weight: 600;
   line-height: 18px;
-  white-space: nowrap;
   color: #ffffff;
 }
 
 /* the anvil */
 .mf-anvil-tools {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 6px;
   min-height: 44px;
@@ -205,8 +213,8 @@
   flex: none;
 }
 .mf-anvil-tools .mf-info {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
   font-size: 14px;
   line-height: 18px;
   text-align: left;
@@ -224,17 +232,19 @@
 }
 .mf-blade-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 5px;
   width: 100%;
   min-width: 0;
 }
 .mf-blade-actions > .g-btn {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
 }
 .mf-blade-actions .mf-selected-blade {
   flex: 0 0 auto;
+  max-width: 100%;
   color: var(--mf-gold);
   border-color: var(--mf-bronze);
 }
@@ -259,7 +269,7 @@
   font-size: 15px;
   line-height: 20px;
   text-align: center;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   color: var(--ink-2);
 }
 .mf-info[hidden] {
@@ -441,12 +451,13 @@
 }
 .mf-event .grow {
   flex: 1 1 0;
-  min-width: 0;
+  min-width: min-content;
+  max-width: 100%;
 }
 .mf-ev-t,
 .mf-ev-d,
 .mf-ev-m {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .mf-ev-m {
   font-size: 15px;
@@ -483,9 +494,11 @@
 }
 .mf-context .g-btn {
   min-height: 44px;
+  min-width: min-content;
 }
 .mf-up-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   position: sticky;
   top: 0;
@@ -501,6 +514,7 @@
 }
 .mf-sheet-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -513,7 +527,9 @@
   margin: 0;
 }
 .mf-sheet-head .g-btn {
+  flex: none;
   width: auto;
+  max-width: 100%;
   min-width: 44px;
   min-height: 44px;
   padding: 6px 12px;
@@ -522,8 +538,8 @@
   top: 56px;
 }
 .mf-up-tabs .g-btn {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
   min-height: 44px;
   padding: 6px 8px;
   font-size: 14px;
@@ -578,6 +594,7 @@
 }
 .mf-preparation {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 .mf-preparation[hidden] {
@@ -585,7 +602,8 @@
 }
 .mf-preparation .g-btn {
   min-height: 44px;
-  flex: 1;
+  flex: 1 1 0;
+  min-width: min-content;
   font-size: 12px;
 }
 .mf-ev-x {
@@ -606,11 +624,12 @@
   padding: 6px 8px;
   font-size: 15px;
 }
+/* The title and the line under it wrap inside a narrow button instead of being cut by it. */
 .mf-btn-head {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  white-space: nowrap;
+  max-width: 100%;
 }
 .mf-ic.mf-btn-ic {
   width: 26px;
@@ -621,7 +640,7 @@
   background: var(--accent-ink);
 }
 .mf-bottom .g-sub {
-  white-space: nowrap;
+  max-width: 100%;
 }
 .mf-bottom .g-btn[hidden] {
   display: none;
@@ -665,16 +684,20 @@
 .mf-master {
   padding-right: 4px;
 }
+/* The text keeps its words whole; the button or the mark stands beside it while the text has
+   130px left, otherwise it drops under the text to the right edge. */
 .mf-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   padding: 9px 0;
   border-bottom: 1px solid var(--line);
 }
 .mf-row .grow {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 130px;
+  min-width: min-content;
+  max-width: 100%;
 }
 .mf-row.locked .grow,
 .mf-row.locked .mf-ic > svg,
@@ -687,11 +710,11 @@
 .mf-row-t {
   font-size: 16px;
   font-weight: 600;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .mf-row-d {
   font-size: 15px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   color: var(--ink-2);
 }
 .mf-now {
@@ -702,6 +725,8 @@
   flex: none;
   width: auto;
   min-width: 88px;
+  max-width: 100%;
+  margin-left: auto;
   min-height: 48px;
   padding: 4px 10px;
 }
@@ -719,6 +744,8 @@
   justify-content: center;
   gap: 5px;
   min-width: 88px;
+  max-width: 100%;
+  margin-left: auto;
   min-height: 48px;
   box-sizing: border-box;
   padding: 4px 10px;
@@ -752,6 +779,7 @@
 }
 .mf-seg {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 .mf-seg > button {
@@ -771,6 +799,8 @@
 }
 .mf-pick {
   flex: none;
+  max-width: 100%;
+  margin-left: auto;
 }
 .mf-rune-row {
   flex-wrap: wrap;
@@ -779,13 +809,12 @@
   flex: 1 0 auto;
 }
 .mf-tabs {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   min-width: 0;
   margin-bottom: 8px;
 }
 .mf-tabs > button {
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
   white-space: normal;
   padding: 6px;
   font-size: 14px;
@@ -814,7 +843,7 @@
 .mf-alb-t {
   font-size: 15px;
   line-height: 1.2;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .mf-alb.unseen {
   border-style: dashed;

@@ -14,27 +14,34 @@
   padding: 0 10px 8px;
   max-height: none;
 }
+/* The depth drops under a title that leaves it no room; neither is ever cut. */
 .mr-heading {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 8px;
+  gap: 0 8px;
 }
 .mr-title {
+  flex: 1 1 50%;
+  max-width: 100%;
   margin: 0;
   font-size: 19px;
   font-weight: 700;
   line-height: 1.25;
 }
 .mr-depth {
+  max-width: 100%;
+  margin-left: auto;
   color: var(--ink-2);
   font-size: 15px;
   white-space: nowrap;
 }
 .mr-counters {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 14px;
+  gap: 0 14px;
   min-height: 32px;
   font-size: 15px;
   font-variant-numeric: tabular-nums;
@@ -45,6 +52,8 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  max-width: 100%;
+  min-height: 32px;
   white-space: nowrap;
 }
 .mr-health {
@@ -283,9 +292,10 @@
   background: var(--surface);
   font-size: 15px;
 }
+/* Five to a row; a tool whose name is one long word takes the room it needs and the row wraps. */
 .mr-tools {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 4px;
 }
 .mr-tool {
@@ -295,8 +305,10 @@
   justify-content: center;
   flex-direction: column;
   gap: 3px;
+  flex: 0 1 calc((100% - 16px) / 5);
   min-height: 60px;
-  min-width: 0;
+  min-width: min-content;
+  max-width: 100%;
   padding: 4px 2px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -322,7 +334,7 @@
 .mr-tool > span:not(.mr-art) {
   max-width: 100%;
   font-size: 13px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   text-align: center;
 }
 .mr-tool.on {
@@ -365,23 +377,26 @@
 .mr-notice:empty {
   display: none;
 }
+/* The button stands beside the text while both fit, and drops under it at full width when not. */
 .mr-event {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
 }
 .mr-event-text {
-  flex: 1;
-  min-width: 0;
+  flex: 999 1 50%;
+  max-width: 100%;
 }
 .mr-event-title {
   font-size: 17px;
   font-weight: 700;
 }
 .mr-event .g-btn {
-  flex: none;
+  flex: 1 0 auto;
   width: auto;
   min-width: 110px;
+  max-width: 100%;
   min-height: 52px;
   padding: 6px 12px;
 }
@@ -401,12 +416,13 @@
 }
 .mr-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-  overflow-x: auto;
   padding-bottom: 4px;
 }
 .mr-tab {
-  flex: none;
+  flex: 0 1 auto;
+  max-width: 100%;
   min-height: 44px;
   padding: 8px 12px;
   border: 1px solid var(--line);
@@ -424,8 +440,11 @@
   flex-direction: column;
   gap: 10px;
 }
+/* The price or the mark stands on the right while the text keeps a readable column,
+   and drops under the text when it does not. */
 .mr-card {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   padding: 12px;
@@ -463,8 +482,8 @@ button.mr-card {
   gap: 8px;
 }
 .mr-card-main {
-  flex: 1;
-  min-width: 0;
+  flex: 999 1 110px;
+  max-width: 100%;
 }
 .mr-card-title {
   display: block;
@@ -480,13 +499,17 @@ button.mr-card {
   line-height: 1.4;
 }
 .mr-card-tag {
-  flex: none;
+  flex: 0 1 auto;
+  max-width: 100%;
+  margin-left: auto;
   font-size: 15px;
   color: var(--ink-2);
 }
 .mr-buy {
+  flex: 1 0 auto;
   min-height: 44px;
   min-width: 64px;
+  max-width: 100%;
   padding: 8px;
   border: 1px solid var(--line);
   border-radius: 8px;

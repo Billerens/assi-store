@@ -306,7 +306,7 @@ function control(item, values) {
   if (item.type === 'number' || item.type === 'time') {
     const input = h('input', { class: 'input', value: String(value), type: item.type === 'time' ? 'time' : 'text', inputMode: 'decimal', 'aria-label': item.label });
     input.onchange = () => saveOne(item.key, input.value);
-    return h('label', { class: 'setting' }, labelOf(item), input, item.unit && h('span', { class: 'unit' }, item.unit));
+    return h('label', { class: 'setting' }, labelOf(item), item.unit ? h('span', { class: 'field' }, input, h('span', { class: 'unit' }, item.unit)) : input);
   }
   if (item.type === 'select') {
     const select = h('select', { class: 'input', 'aria-label': item.label },

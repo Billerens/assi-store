@@ -12,18 +12,22 @@ html[data-phase="pick"] .g-field {
 
 /* ---- the start screen ---- */
 
+/* The records stand beside the number while they keep a readable column, and go under it when not. */
 .s-hud {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 12px;
+  gap: 2px 12px;
 }
 
 .s-cur {
   display: flex;
-  flex: none;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 8px;
+  gap: 0 8px;
+  max-width: 100%;
   white-space: nowrap;
 }
 
@@ -40,7 +44,8 @@ html[data-phase="pick"] .g-field {
 }
 
 .s-side {
-  min-width: 0;
+  flex: 1 1 130px;
+  max-width: 100%;
   color: var(--ink-2);
   font-size: 14px;
   text-align: right;
@@ -54,7 +59,7 @@ html[data-phase="pick"] .g-field {
 
 .s-snakes {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
   gap: 8px;
 }
 
@@ -376,6 +381,7 @@ html[data-phase="pick"] .g-field {
 
 .s-tag {
   flex: none;
+  max-width: 100%;
   padding: 2px 8px;
   border-radius: 999px;
   border: 1px solid var(--line);
@@ -606,4 +612,16 @@ html[data-layout="wide"] .s-abs {
   gap: 8px;
   margin-top: 8px;
   font-weight: 600;
+}
+
+/* A button of a row is never narrower than its longest word: a crowded row wraps instead of cutting the text.
+   (The engine means the same with min(100%, max-content), which the WebView does not accept.) */
+.g-btns > .g-btn {
+  min-width: min-content;
+}
+
+/* A button with its note beside the title: the note goes under the title when the two do not fit in one line. */
+.g-btn.s-two {
+  flex-wrap: wrap;
+  row-gap: 0;
 }

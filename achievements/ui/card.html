@@ -75,16 +75,25 @@
   .main {
     grid-area: main;
     min-width: 0;
+    /* A long title must not push this column over the ring's row: it stays in its cell, the head on top. */
+    min-height: 0;
+    max-height: 100%;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 9px;
   }
 
+  .main > * {
+    flex: none;
+  }
+
   .head {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
-    gap: 8px;
+    gap: 0 8px;
   }
 
   .head h3 {
@@ -131,7 +140,6 @@
 
   .near-title {
     min-width: 0;
-    overflow-wrap: anywhere;
   }
 
   .near-pct {
@@ -226,8 +234,9 @@
 
   .legend {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 6px;
+    gap: 2px 6px;
     margin-top: 6px;
     font-size: 11px;
     color: var(--ink-2);
@@ -305,7 +314,7 @@
   /* 4×3 and taller: the rarity breakdown and the chart under the ring. */
   @media (min-width: 300px) and (min-height: 240px) {
     .ach {
-      grid-template-rows: auto minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr) auto;
       grid-template-areas: "ring main" "stats stats";
       align-items: start;
       row-gap: 12px;

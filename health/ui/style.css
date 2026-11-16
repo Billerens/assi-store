@@ -160,11 +160,15 @@
   opacity: .8;
 }
 
+/* The name keeps its longest word; the state and the buttons that do not fit beside it go to a second line. */
 .dose {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-end;
+  gap: 4px 10px;
   min-height: 52px;
+  padding: 4px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -180,8 +184,17 @@
 }
 
 .dose .what {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 6em;
+  min-width: auto;
+  max-width: 100%;
+}
+
+/* The state and the buttons stay together when they go under the name. */
+.dose .acts {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
 }
 
 .dose .what .small {
@@ -195,6 +208,7 @@
   border-radius: 999px;
   background: var(--surface-2);
   color: var(--ink-2);
+  white-space: nowrap;
 }
 
 .state.taken {
@@ -393,11 +407,19 @@
 
 .line-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  justify-content: flex-end;
+  gap: 6px 12px;
   min-height: 56px;
   padding: 8px 0;
   border-top: 1px solid var(--line);
+}
+
+.line-row > .grow {
+  flex: 1 1 8em;
+  min-width: auto;
+  max-width: 100%;
 }
 
 .line-row:first-child {
@@ -442,13 +464,31 @@
   gap: 10px;
 }
 
+/* The label is never narrower than its longest word: a field with a unit that does not fit beside it goes under. */
 .setting {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 6px 12px;
   min-height: 52px;
   border-top: 1px solid var(--line);
   padding: 6px 0;
+}
+
+.setting > .grow {
+  flex: 1 1 9em;
+  min-width: auto;
+  max-width: 100%;
+}
+
+/* A row with a field: one line while the whole label fits beside the field, otherwise the field goes under. */
+div.setting > .grow {
+  flex-basis: auto;
+}
+
+.setting > .row {
+  margin-left: auto;
+  max-width: 100%;
 }
 
 .setting:first-of-type {
@@ -468,9 +508,22 @@
   width: 100%;
 }
 
+/* A list of choices is as wide as its longest choice, so the chosen one is never cut. */
+.setting select.input {
+  width: auto;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
 .setting.column {
   flex-direction: column;
+  flex-wrap: nowrap;
   align-items: stretch;
+}
+
+.setting.column > .grow {
+  flex: none;
 }
 
 .unit {

@@ -10,9 +10,11 @@
   flex-wrap: wrap;
   gap: 6px;
 }
+/* Equal tabs from 75px; one never gets narrower than its own word, the row wraps instead. */
 .mfa-tabs .g-btn {
-  flex: 1;
-  min-width: 75px;
+  flex: 1 1 75px;
+  min-width: min-content;
+  max-width: 100%;
   padding: 6px;
   font-size: 13px;
   white-space: nowrap;
@@ -21,7 +23,7 @@
 .mfa .g-btn {
   min-height: 44px;
   white-space: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .mfa .g-btn.selected {
   border-color: var(--mf-gold);
@@ -51,7 +53,7 @@
   margin: 0;
   line-height: 1.45;
   white-space: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .mfa-training {
   display: flex;

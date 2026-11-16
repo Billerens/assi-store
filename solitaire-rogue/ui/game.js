@@ -465,7 +465,8 @@
         const x = hostOf(id);
         if (x) parts.push(h('div', { class: 'p-host' }, pic(Art.host(id), 40), h('div', { class: 'p-host-b' }, h('b', {}, 'Хозяин: ' + x.title), h('span', {}, ' — '), h('span', {}, fill(x)))));
       });
-      if (d.hx) parts.push(h('div', { class: 'p-host' + (d.hx.kind === 'relic' ? ' rule' : '') }, h('b', {}, (d.hx.kind === 'host' ? 'Хозяин: ' : 'Правило дня: ')), d.hx.procedural ? h('span', {}, d.hx.title) : ui.raw(d.hx.title), ' — ', d.hx.procedural ? h('span', {}, d.hx.text) : ui.raw(d.hx.text)));
+      // one block of running text, like a host above: the parts are not columns of a row
+      if (d.hx) parts.push(h('div', { class: 'p-host' + (d.hx.kind === 'relic' ? ' rule' : '') }, h('div', { class: 'p-host-b' }, h('b', {}, (d.hx.kind === 'host' ? 'Хозяин: ' : 'Правило дня: ')), d.hx.procedural ? h('span', {}, d.hx.title) : ui.raw(d.hx.title), ' — ', d.hx.procedural ? h('span', {}, d.hx.text) : ui.raw(d.hx.text))));
       return parts;
     }
 
@@ -596,7 +597,7 @@
       if (mode) extra.push(h('div', { class: 'p-mode' }, h('span', { class: 'grow' }, MODE_TEXT[mode]), h('button', { class: 'g-btn small', type: 'button', onclick: () => { mode = null; g.redraw(); } }, 'Отмена')));
       if (sim.stuck(state, g.config) && !d.over) {
         const left2 = sim.tableCount(d) + sim.pocketCount(d);
-        const btn = h('button', { class: 'g-btn primary', id: 'giveup', type: 'button' }, 'Закончить расклад', h('span', { class: 'g-sub' }, 'держите · карт на столе ' + left2));
+        const btn = h('button', { class: 'g-btn primary p-two', id: 'giveup', type: 'button' }, 'Закончить расклад', h('span', { class: 'g-sub' }, 'держите · карт на столе ' + left2));
         g.ui.hold(btn, 700, () => act((s) => sim.giveUp(s, g.config)));
         extra.push(btn);
       }
@@ -651,7 +652,7 @@
         h('h3', { class: 'p-h' }, 'Услуги'), services]);
       const wide = g.layout === 'wide';
       actions([wide ? h('div', { class: 'p-panel' }, relicPanel(run), chainLog(run)) : (run.relics.length ? relicStrip(run) : null),
-        h('button', { class: 'g-btn primary', id: 'next', type: 'button', onclick: () => act((s) => sim.nextDeal(s, g.config)) }, 'Дальше', h('span', { class: 'g-sub' }, nextTitle(run))),
+        h('button', { class: 'g-btn primary p-two', id: 'next', type: 'button', onclick: () => act((s) => sim.nextDeal(s, g.config)) }, 'Дальше', h('span', { class: 'g-sub' }, nextTitle(run))),
         run.whiteOn ? h('button', { class: 'g-btn small', id: 'finish', type: 'button', onclick: () => act((s) => sim.finish(s, g.config)) }, 'Закончить забег') : null]);
     }
 
@@ -690,7 +691,7 @@
         h('div', { class: 'g-note' }, 'Все три круга позади. Можно забрать воск или продолжить «Белой ночью»: бесконечные расклады, хозяин — каждый ' +
           g.config['whiteNight.hostEvery'] + '-й, счёт — по раскладам.'))]);
       actions([
-        g.config['whiteNight.on'] ? h('button', { class: 'g-btn primary', id: 'white', type: 'button', onclick: () => act((s) => sim.whiteNight(s, g.config)) }, 'Белая ночь', h('span', { class: 'g-sub' }, 'на рекорд')) : null,
+        g.config['whiteNight.on'] ? h('button', { class: 'g-btn primary p-two', id: 'white', type: 'button', onclick: () => act((s) => sim.whiteNight(s, g.config)) }, 'Белая ночь', h('span', { class: 'g-sub' }, 'на рекорд')) : null,
         h('button', { class: 'g-btn' + (g.config['whiteNight.on'] ? '' : ' primary'), id: 'finish', type: 'button', onclick: () => act((s) => sim.finish(s, g.config)) }, 'Закончить забег')
       ]);
     }
@@ -728,7 +729,7 @@
     function relicsSheet() {
       const run = g.state.run;
       let close = null;
-      const quit = ['play', 'shop', 'pick', 'won'].indexOf(run.phase) >= 0 ? h('button', { class: 'g-btn small', type: 'button' }, 'Сдаться', h('span', { class: 'g-sub' }, 'держите — забег кончится, воск за сделанное останется')) : null;
+      const quit = ['play', 'shop', 'pick', 'won'].indexOf(run.phase) >= 0 ? h('button', { class: 'g-btn small p-two', type: 'button' }, 'Сдаться', h('span', { class: 'g-sub' }, 'держите — забег кончится, воск за сделанное останется')) : null;
       if (quit) g.ui.hold(quit, 1200, () => { act((s) => sim.abandon(s)); if (close) close(); });
       const curses = run.cards.filter((c) => c.c);
       close = g.sheet([h('h3', {}, 'Реликвии забега'),

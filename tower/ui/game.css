@@ -53,6 +53,7 @@
 }
 .tw-currency {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   font-variant-numeric: tabular-nums;
 }
@@ -233,12 +234,15 @@
   width: 15px;
   height: 15px;
 }
+/* Three equal tiles; a tile is never narrower than its longest word, the row wraps instead. */
 .tw-flights {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 .tw-flight {
+  flex: 1 1 0;
+  min-width: min-content;
   display: grid;
   gap: 4px;
   padding: 7px 8px;
@@ -250,7 +254,6 @@
 }
 .tw-flight-name {
   font-weight: 600;
-  overflow-wrap: anywhere;
 }
 .tw-flight-num {
   color: var(--ink-2);
@@ -319,6 +322,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  max-width: 100%;
   white-space: nowrap;
 }
 
@@ -361,7 +365,7 @@
   font-size: 25px;
   line-height: 1.15;
   font-weight: 600;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .tw-scene p {
   margin: 6px 0;
@@ -440,10 +444,14 @@
 }
 .tw-choices {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 7px;
 }
+/* The text keeps its words whole and takes the rest of the row; a price that would leave it
+   less than 120 px drops under it, to the right edge. */
 .tw-card {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
   gap: 10px;
@@ -462,9 +470,9 @@ button.tw-card {
   cursor: pointer;
 }
 .tw-card-text {
-  flex: 1;
-  min-width: 0;
-  overflow-wrap: anywhere;
+  flex: 1 1 120px;
+  min-width: min-content;
+  overflow-wrap: break-word;
 }
 .tw-card strong {
   display: block;
@@ -525,10 +533,12 @@ button.tw-card:hover:not(:disabled) {
 }
 .tw-price {
   display: inline-flex;
-  flex: none;
+  flex: 0 0 auto;
   align-items: center;
   gap: 4px;
-  max-width: 34%;
+  max-width: 100%;
+  margin-left: auto;
+  white-space: nowrap;
   padding: 4px 8px 4px 6px;
   border: 1px solid #46564f;
   border-radius: 14px;
@@ -583,20 +593,28 @@ button:focus-visible {
   outline: 2px solid var(--tower-tint, var(--ink));
   outline-offset: 2px;
 }
+/* Two moves in a row while a card has room for its picture and its longest word (150 px);
+   narrower than that, one move in a row. */
 .tw-hand {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, max(150px, calc(50% - 4px))), 1fr));
 }
 .tw-hand .tw-card {
+  flex-wrap: nowrap;
   min-height: 66px;
   padding: 7px;
   gap: 7px;
 }
+.tw-hand .tw-card-text {
+  flex-basis: 0;
+}
 .tw-nav {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 .tw-nav button {
+  flex: 1 1 0;
+  min-width: min-content;
   min-height: 44px;
   padding: 5px 2px;
   border: 0;
@@ -652,10 +670,11 @@ button:focus-visible {
 }
 .tw-relic > span:last-child {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .tw-sheet {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 9px;
   font-size: 16px;
 }
@@ -665,12 +684,15 @@ button:focus-visible {
   line-height: 1.45;
   color: var(--ink-2);
 }
+/* Two equal buttons; a button is never narrower than its picture and its longest word. */
 .tw-selects {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 .tw-selection {
+  flex: 1 1 0;
+  min-width: min-content;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -686,7 +708,7 @@ button:focus-visible {
 }
 .tw-selection > span:last-child {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .tw-subtitle {
   display: block;

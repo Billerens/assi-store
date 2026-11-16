@@ -22,7 +22,7 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
     gap: 10px;
   }
 
@@ -53,7 +53,7 @@
     font-size: 13px;
     line-height: 1.25;
     display: -webkit-box;
-    overflow-wrap: anywhere;
+    max-width: 100%;
   }
 
   .cell.open .name,
@@ -95,9 +95,15 @@
     text-align: center;
   }
 
-  .detail .badge {
+  /* Only the drawn badge: the date chip of a step is a .badge too and must keep its own size. */
+  .detail svg.badge {
     width: 150px;
     height: 150px;
+  }
+
+  .detail .tiers .badge {
+    flex: none;
+    white-space: nowrap;
   }
 
   .detail .meta {
@@ -110,8 +116,18 @@
     text-align: left;
   }
 
+  /* A step keeps whole words in its name; the date goes under it, to the right, when it does not fit beside. */
   .detail .tiers > div {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 4px 12px;
     min-height: 44px;
+  }
+
+  .detail .tiers .grow {
+    flex: 1 1 7em;
+    min-width: auto;
+    max-width: 100%;
   }
 
   .flavor {

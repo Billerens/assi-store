@@ -47,7 +47,7 @@
   font-size: 18px;
   font-weight: 700;
   line-height: 1.2;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .d-age {
@@ -199,14 +199,16 @@
   top: 0;
   z-index: 2;
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
   padding: 6px 0 8px;
   background: var(--bg);
 }
 
 .d-tab {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: max-content;
+  max-width: 100%;
   min-height: 44px;
   padding: 0 2px;
   border-radius: 999px;
@@ -285,8 +287,9 @@
 
 .d-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 6px 10px;
   min-height: 60px;
   padding: 6px;
   border-radius: var(--radius-s);
@@ -303,14 +306,16 @@
 }
 
 .d-row .grow {
-  min-width: 0;
-  flex: 1;
+  flex: 1 1 7em;
+  min-width: min-content;
+  max-width: 100%;
 }
 
 .d-row-t {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 8px;
+  gap: 0 8px;
   font-size: 16px;
   font-weight: 600;
   line-height: 1.25;
@@ -332,6 +337,8 @@
 
 .d-buy {
   flex: none;
+  max-width: 100%;
+  margin-left: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -410,13 +417,15 @@
 
 .d-person-h {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
-  gap: 8px;
+  gap: 4px 8px;
 }
 
 .d-person-h .grow {
-  min-width: 0;
-  flex: 1;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
 }
 
 .d-more summary {
@@ -470,7 +479,9 @@
   right: 8px;
   bottom: 8px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   gap: 6px;
   color: var(--ink-3);
   font-size: 13px;
@@ -478,10 +489,13 @@
 }
 
 .d-tree-bar span {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: min-content;
 }
 
 .d-tree-bar .d-mode {
+  flex: none;
+  max-width: 100%;
   pointer-events: auto;
   background: var(--surface-2);
 }
@@ -567,9 +581,10 @@
 
 .d-card-t {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 8px;
+  gap: 2px 8px;
   font-size: 17px;
 }
 
@@ -580,6 +595,13 @@
 
 .d-answers .g-btn {
   min-height: 56px;
+}
+
+/* A button of a pair is never narrower than its longest word: the pair wraps instead. */
+.d-page .g-btns > *,
+.d-answers > * {
+  min-width: min-content;
+  max-width: 100%;
 }
 
 .d-peek {

@@ -995,7 +995,7 @@
       const run = g.state.run;
       let close = null;
       const ids = Object.keys(run.ab || {});
-      const quit = alive(run) ? h('button', { class: 'g-btn small', type: 'button' }, 'Сдаться', h('span', { class: 'g-sub' }, 'держите — забег кончится, чешуйки за сделанное останутся')) : null;
+      const quit = alive(run) ? h('button', { class: 'g-btn small s-two', type: 'button' }, 'Сдаться', h('span', { class: 'g-sub' }, 'держите — забег кончится, чешуйки за сделанное останутся')) : null;
       if (quit) g.ui.hold(quit, 1200, () => { act((s) => sim.quit(s, g.config), { now: true, reason: 'run' }); if (close) close(); });
       const wasPaused = run.paused;
       if (alive(run) && !run.paused) act((s) => sim.pause(s));

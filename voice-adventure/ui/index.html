@@ -72,8 +72,23 @@
     text-align: left;
   }
 
+  /* The title keeps whole words; the two buttons stay together and go under it when they do not fit beside. */
+  .plot-row {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
   .plot-row .grow {
-    min-width: 0;
+    flex: 1 1 6em;
+    min-width: auto;
+    max-width: 100%;
+  }
+
+  .plot-row .acts {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: none;
   }
 
   /* The playing view: one big line, one big button. */
@@ -159,13 +174,16 @@
     opacity: .5;
   }
 
+  /* Three equal buttons while their words fit; a button that does not fit goes to the next line at full width. */
   .controls {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 8px;
   }
 
   .controls .btn {
+    flex: 1 1 calc((100% - 16px) / 3);
+    max-width: 100%;
     min-height: 52px;
     padding: 0 8px;
   }
@@ -187,14 +205,20 @@
     margin-top: 12px;
   }
 
+  /* The label keeps whole words; a field that does not fit beside it goes under, to the right. */
   .set-row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
+    justify-content: flex-end;
+    gap: 6px 12px;
     min-height: 52px;
   }
 
   .set-row .grow {
+    flex: 1 1 8em;
+    min-width: auto;
+    max-width: 100%;
     font-size: 14px;
     line-height: 1.3;
   }
@@ -360,17 +384,18 @@
     $('plotsBox').hidden = !others.length;
     $('plots').replaceChildren(...others.map(p => h('div', { class: 'plot-row' },
       h('div', { class: 'grow' },
-        h('div', { class: 'truncate', style: 'font-weight: 600', 'data-raw': '' }, p.title),
-        h('div', { class: 'small muted truncate', 'data-raw': '' }, p.line + (p.lastPlayed ? ' · ' + ui.ago(p.lastPlayed) : ''))),
-      h('button', { class: 'icon-btn', 'aria-label': 'Продолжить этот сюжет', onclick: async () => {
-        await call('selectPlot', p.id);
-        await refresh();
-      } }, ui.icon('play')),
-      h('button', { class: 'icon-btn', 'aria-label': 'Удалить сюжет', onclick: async () => {
-        if (!(await ui.confirm(ui.t('Удалить сюжет «{}» со всеми главами?', p.title), 'Удалить', true))) return;
-        await call('removePlot', p.id);
-        await refresh();
-      } }, ui.icon('trash')))));
+        h('div', { style: 'font-weight: 600', 'data-raw': '' }, p.title),
+        h('div', { class: 'small muted', 'data-raw': '' }, p.line + (p.lastPlayed ? ' · ' + ui.ago(p.lastPlayed) : ''))),
+      h('span', { class: 'acts' },
+        h('button', { class: 'icon-btn', 'aria-label': 'Продолжить этот сюжет', onclick: async () => {
+          await call('selectPlot', p.id);
+          await refresh();
+        } }, ui.icon('play')),
+        h('button', { class: 'icon-btn', 'aria-label': 'Удалить сюжет', onclick: async () => {
+          if (!(await ui.confirm(ui.t('Удалить сюжет «{}» со всеми главами?', p.title), 'Удалить', true))) return;
+          await call('removePlot', p.id);
+          await refresh();
+        } }, ui.icon('trash'))))));
   }
 
   function renderPlay() {

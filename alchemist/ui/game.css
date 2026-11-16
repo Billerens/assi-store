@@ -29,6 +29,7 @@
 .a-slots {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -41,6 +42,8 @@
   justify-content: center;
   gap: 4px;
   width: 88px;
+  min-width: min-content;
+  max-width: 100%;
   min-height: 84px;
   padding: 6px;
   border-radius: var(--radius-s);
@@ -168,9 +171,11 @@
   font-size: 15px;
 }
 
+/* A tile is wide enough for a name of ten letters in one piece (88px less its sides);
+   only a longer single word is hyphenated. */
 .a-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
   gap: 6px;
   padding: 10px 0 16px;
 }
@@ -186,7 +191,7 @@
   align-items: center;
   gap: 2px;
   min-height: 108px;
-  padding: 6px 4px;
+  padding: 6px 2px;
   border-radius: var(--radius-s);
   border: 1px solid var(--line);
   background: var(--surface);
@@ -218,7 +223,7 @@
   font-size: 15px;
   line-height: 1.15;
   text-align: center;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   hyphens: auto;
 }
 
@@ -306,6 +311,7 @@
 
 .a-rec {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   width: 100%;
@@ -325,9 +331,16 @@
   color: var(--ink-3);
 }
 
+/* The text of a row never gets narrower than its longest word: a button that does not fit
+   beside it goes under the text (the rows wrap). */
 .a-rec .grow,
 .a-cube .grow,
-.a-order .grow,
+.a-order .grow {
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
+}
+
 /* The drawn pictures of the workshop (ui/art.js). */
 .a-pic {
   flex: none;
@@ -350,8 +363,9 @@
 
 .a-up .grow,
 .a-sellrow .grow {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 0;
+  min-width: min-content;
+  max-width: 100%;
 }
 
 .a-cube,
@@ -359,8 +373,9 @@
 .a-up,
 .a-sellrow {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 8px 12px;
   width: 100%;
   min-height: 64px;
   padding: 8px 12px;
@@ -389,7 +404,7 @@
 .a-cube-t {
   font-size: 15px;
   font-weight: 600;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .a-order.empty {
@@ -399,6 +414,7 @@
 
 .a-mini {
   flex: none;
+  margin-left: auto;
   width: auto;
   min-width: 88px;
   max-width: 45%;
@@ -411,6 +427,11 @@
   gap: 8px;
   max-height: 55vh;
   overflow: auto;
+}
+
+/* The rows of a scrolling list keep their height: the list scrolls, the rows are not squeezed. */
+.a-list > * {
+  flex-shrink: 0;
 }
 
 /* ---- actions: the panel (wide), the row, the tabs ---- */
@@ -440,23 +461,27 @@
   min-height: 48px;
 }
 
+/* Equal tabs while every word fits; a tab is never narrower than its word, and on a panel too
+   narrow for all five the last ones go to a second line. */
 .a-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 0;
   border-top: 1px solid var(--line);
   padding-top: 6px;
 }
 
 .a-tab {
-  flex: 1;
+  flex: 1 1 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2px;
-  min-width: 0;
+  min-width: max-content;
+  max-width: 100%;
   min-height: 52px;
-  padding: 4px 0;
+  padding: 4px 2px;
   border-radius: var(--radius-s);
   border: 0;
   background: transparent;

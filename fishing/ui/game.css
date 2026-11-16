@@ -141,15 +141,19 @@ button.f-ev {
   margin-top: 6px;
 }
 
+/* Three answers in a row while each fits its longest word; the last one goes to its own line otherwise. */
 .f-card-btns {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
 .f-card-btns .g-btn {
+  flex: 1 1 0;
   flex-direction: column;
   gap: 2px;
+  min-width: min-content;
+  max-width: 100%;
   padding: 6px 4px;
 }
 
@@ -205,9 +209,10 @@ button.f-ev {
   overflow: visible;
 }
 
+/* A side card is never narrower than its longest word: on a narrow screen the round button gives way. */
 .f-controls {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 128px minmax(0, 1fr);
+  grid-template-columns: minmax(min-content, 1fr) minmax(112px, 128px) minmax(min-content, 1fr);
   align-items: stretch;
   gap: 8px;
 }
@@ -264,8 +269,15 @@ button.f-ev {
   color: var(--ink-2);
   line-height: 1.15;
   text-align: center;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   opacity: 1;
+}
+
+/* Narrower than any phone: the last resort, so that nothing leaves the screen. */
+@media (max-width: 339px) {
+  .g-btn.f-side .g-sub {
+    overflow-wrap: anywhere;
+  }
 }
 
 .g-btn.f-side .g-sub:empty {
@@ -274,9 +286,12 @@ button.f-ev {
 
 .f-big-wrap {
   position: relative;
-  width: 128px;
-  height: 128px;
+  width: 100%;
+  max-width: 128px;
+  aspect-ratio: 1;
   align-self: center;
+  justify-self: center;
+  container-type: inline-size;
 }
 
 .f-ring {
@@ -353,11 +368,12 @@ button.f-ev {
 
 .f-big-label {
   font-size: 17px;
+  font-size: clamp(15px, 13.3cqw, 17px);
   font-weight: 700;
 }
 
 .f-big-sub {
-  max-width: 84px;
+  max-width: 92%;
   font-size: 15px;
   line-height: 1.15;
   text-align: center;
@@ -381,7 +397,8 @@ button.f-ev {
   display: flex;
   align-items: center;
   gap: 8px;
-  min-width: 0;
+  min-width: min-content;
+  max-width: 100%;
   min-height: 48px;
   padding: 4px 10px 4px 8px;
   border-radius: var(--radius);
@@ -410,7 +427,7 @@ button.f-ev {
 
 .f-chip-text {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .g-btn.f-prestige[hidden] {
@@ -522,8 +539,9 @@ button.f-ev {
 
 .f-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 8px 12px;
   padding: 10px;
   border-radius: var(--radius-s);
   border: 1px solid var(--line);
@@ -581,11 +599,14 @@ button.f-ev {
   width: auto;
   flex: none;
   min-width: 108px;
+  max-width: 100%;
+  margin-left: auto;
 }
 
 .f-row-main {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 9em;
+  min-width: min-content;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -616,6 +637,8 @@ button.f-ev {
   flex-direction: column;
   gap: 6px;
   flex: none;
+  max-width: 100%;
+  margin-left: auto;
 }
 
 .f-row-btns .g-btn {
@@ -626,7 +649,12 @@ button.f-ev {
 
 .f-lock {
   max-width: 120px;
+  margin-left: auto;
   text-align: right;
+}
+
+.f-row > .g-mark {
+  margin-left: auto;
 }
 
 .f-note {
