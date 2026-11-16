@@ -1,7 +1,7 @@
 # Ачивки за жизнь
 
 Достижения за реальную жизнь: сон, шаги, привычки, места, траты, экран и игры Игротеки.
-Описание — `docs/modules/achievements.md` в Assi. Ставится в `modules/achievements`.
+Описание — `docs/modules/achievements.md` в Аксико. Ставится в `modules/achievements`.
 
 ## Что включить на телефоне
 

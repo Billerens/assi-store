@@ -34,6 +34,13 @@ var HOUR = 3600000;
 var DAY = 86400000;
 var ROLES = { triage: 'inbox.triage', digest: 'inbox.digest', draft: 'inbox.draft' };
 
+// The app's own notifications: the install id is read from the app (app.axiko, its clean preview),
+// and app.assi still counts for builds made before the rename.
+function ownPackage(pkg) {
+  var own = typeof context !== 'undefined' && context ? String(context.getPackageName()) : 'app.axiko';
+  return pkg.indexOf(own) === 0 || pkg.indexOf('app.assi') === 0;
+}
+
 // What lives as long as the process, kept on the engine's global object: a reload of this file
 // (after an edit) must not start a second batch timer or lose the lock.
 var G = typeof global !== 'undefined' ? global : {};
@@ -337,7 +344,7 @@ exports.handle = function (notice, options) {
   options = options || {};
   if (!notice || !notice.package) return { skipped: 'empty' };
   var pkg = String(notice.package);
-  if (pkg.indexOf('app.assi') === 0) return { skipped: 'own' };
+  if (ownPackage(pkg)) return { skipped: 'own' };
   var s = settings();
   if (!options.test) rememberApp(pkg, notice.app);
   if (!options.test && collected(s).indexOf(pkg) < 0) return { skipped: 'app' };
