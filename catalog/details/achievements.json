@@ -13,5 +13,15 @@
   ],
   "id": "achievements",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "achievements/store/shots/1.webp",
+      "sha256": "e8254bc3639079b2bbced33ec760028a183ad4f291c4711b94db911725833986",
+      "size": 25586,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

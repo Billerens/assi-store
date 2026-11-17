@@ -13,5 +13,15 @@
   ],
   "id": "hat",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "hat/store/shots/1.webp",
+      "sha256": "42d6de8fa39c836fc3a2f88bb5193a9136f9d5d056b776aafea73b94e87bde1a",
+      "size": 43740,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

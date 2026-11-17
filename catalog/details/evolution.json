@@ -13,5 +13,15 @@
   ],
   "id": "evolution",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "evolution/store/shots/1.webp",
+      "sha256": "fe93c3a27f0153951da6e2c7a1359ca064b3c78afca9c6dfdee42f0b0880cf63",
+      "size": 42632,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

@@ -13,5 +13,15 @@
   ],
   "id": "holidays",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "holidays/store/shots/1.webp",
+      "sha256": "8c305cf5a6a90753811b3b5a1e08dacef384d39930347c61f4ec82bb3accd290",
+      "size": 32050,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

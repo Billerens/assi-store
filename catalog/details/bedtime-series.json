@@ -13,5 +13,15 @@
   ],
   "id": "bedtime-series",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "bedtime-series/store/shots/1.webp",
+      "sha256": "9c945c2b88537ea9ee61530212e7299686426677f4d499f5824079550c1493a6",
+      "size": 54482,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

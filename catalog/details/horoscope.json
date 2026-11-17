@@ -13,5 +13,15 @@
   ],
   "id": "horoscope",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "horoscope/store/shots/1.webp",
+      "sha256": "2b24f7cf96b38258fa4c1b2c1b37c71de8485b9ed2993587a837ff74f890edb6",
+      "size": 60344,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

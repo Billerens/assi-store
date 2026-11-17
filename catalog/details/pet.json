@@ -18,5 +18,15 @@
   ],
   "id": "pet",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "pet/store/shots/1.webp",
+      "sha256": "db095b8a9235bd65c05c88efe1a6cbc37fd368fb14d55674b21296d3d75ee4bf",
+      "size": 31378,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.2"
 }

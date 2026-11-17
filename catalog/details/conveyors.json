@@ -13,5 +13,15 @@
   ],
   "id": "conveyors",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "conveyors/store/shots/1.webp",
+      "sha256": "7d9ed7cd32a71b7d20a806733530d70f88ccd057c68bcaa5c725c56afb95e90d",
+      "size": 27090,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

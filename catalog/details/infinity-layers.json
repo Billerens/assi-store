@@ -13,5 +13,15 @@
   ],
   "id": "infinity-layers",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "infinity-layers/store/shots/1.webp",
+      "sha256": "f1f93af6fc059a4daa6f06d56b8a9ec8ae8b6487b978cff40dd411daf338ee0d",
+      "size": 28336,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

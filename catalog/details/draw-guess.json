@@ -13,5 +13,15 @@
   ],
   "id": "draw-guess",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "draw-guess/store/shots/1.webp",
+      "sha256": "27a6c088b389ce6d42a5dbb91353b5b145cdb9656260a0007ca0f6d5a3fc351f",
+      "size": 47796,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

@@ -13,5 +13,15 @@
   ],
   "id": "minesweeper-rogue",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "minesweeper-rogue/store/shots/1.webp",
+      "sha256": "30ca3d4e0134e485d020f25ea7a536128debec6355b883f968f2cd0d6c4c38a2",
+      "size": 26468,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

@@ -13,5 +13,15 @@
   ],
   "id": "wallpapers",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "wallpapers/store/shots/1.webp",
+      "sha256": "6fbc6e5331ae7289b4aedca607f6c0bf2ad9612983e1a3176cf4e8917ce4f326",
+      "size": 36808,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

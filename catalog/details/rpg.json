@@ -13,5 +13,15 @@
   ],
   "id": "rpg",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "life-rpg/store/shots/1.webp",
+      "sha256": "a06e93e654d451fafc4408378307f82009100816561f754263b37acf052931b3",
+      "size": 34910,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

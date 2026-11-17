@@ -13,5 +13,15 @@
   ],
   "id": "fishing",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "fishing/store/shots/1.webp",
+      "sha256": "df9a58106989542752c4c21d55270e320f3456ec00ff68549e6011b077843371",
+      "size": 43908,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

@@ -13,5 +13,15 @@
   ],
   "id": "asteroid-colony",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "asteroid-colony/store/shots/1.webp",
+      "sha256": "3c12c8b592ae45e07ffa8a8045e5142a65f5ed1a46dbca5d45fc687484b9be87",
+      "size": 41594,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

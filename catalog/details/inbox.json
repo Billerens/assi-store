@@ -13,5 +13,15 @@
   ],
   "id": "inbox",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "inbox/store/shots/1.webp",
+      "sha256": "094a18583e21437be633a8bdd6c810db56526b3668e326f2c6848b05a284c6e8",
+      "size": 30528,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

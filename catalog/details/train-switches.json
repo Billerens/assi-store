@@ -13,5 +13,15 @@
   ],
   "id": "train-switches",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "train-switches/store/shots/1.webp",
+      "sha256": "f288b3053c9f1a355f08bda2ebfe9bf4cc9ac412e3498dfbdf9a38f4eaec2335",
+      "size": 62722,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

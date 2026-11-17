@@ -13,5 +13,15 @@
   ],
   "id": "word-weaver",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "word-weaver/store/shots/1.webp",
+      "sha256": "6d1226635a4bf6fe1c4d776241fdb1dd9859a7e7017657ef8624029753eb8095",
+      "size": 29152,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

@@ -13,5 +13,15 @@
   ],
   "id": "focus",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "focus/store/shots/1.webp",
+      "sha256": "3eb76dc6751df08a8b7ca405782d29492566a535a683ba5db1e4b7f81ecabd09",
+      "size": 37212,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

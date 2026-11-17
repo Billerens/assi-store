@@ -13,5 +13,15 @@
   ],
   "id": "blocks",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "blocks/store/shots/1.webp",
+      "sha256": "4324838673188a239968455d1301bb23154866317eee1c7f9a100ab06ba5d292",
+      "size": 32496,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

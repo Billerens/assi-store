@@ -13,5 +13,15 @@
   ],
   "id": "menagerie",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "menagerie/store/shots/1.webp",
+      "sha256": "f8689bd362b0aa80c609bc59b32ed9da3cf5e9b8301c93e1959288f5fad0a230",
+      "size": 53184,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

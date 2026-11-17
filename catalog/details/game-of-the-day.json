@@ -13,5 +13,15 @@
   ],
   "id": "game-of-the-day",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "game-of-the-day/store/shots/1.webp",
+      "sha256": "a5e03739507cb7a718aa9dc91fe82ad880eab5ee13a9a2f711003c3edc27b273",
+      "size": 45356,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

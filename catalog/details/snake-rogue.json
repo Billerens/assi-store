@@ -13,5 +13,15 @@
   ],
   "id": "snake-rogue",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "snake-rogue/store/shots/1.webp",
+      "sha256": "fa503f0d1516ed7027762201c30cad2f42ce8496d30664d2378f96c0350133eb",
+      "size": 43446,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

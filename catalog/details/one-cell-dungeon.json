@@ -13,5 +13,15 @@
   ],
   "id": "one-cell-dungeon",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "one-cell-dungeon/store/shots/1.webp",
+      "sha256": "e88b4bdba81970b2be78c885764d35c869fbbf1d6981769f7d3bf2955da3a03d",
+      "size": 38718,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

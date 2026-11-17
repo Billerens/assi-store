@@ -13,5 +13,15 @@
   ],
   "id": "health",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "health/store/shots/1.webp",
+      "sha256": "247a5105f8b47fcbcf9a9fc911805ecbf089d88576669cee18481493b919bc4b",
+      "size": 44388,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

@@ -13,5 +13,15 @@
   ],
   "id": "phone-night",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "phone-night/store/shots/1.webp",
+      "sha256": "a73b4e1bc4eb61b3f372a3257bc3197628c063acae2f2ecd8863736167bfda43",
+      "size": 54896,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

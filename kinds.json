@@ -1,0 +1,8 @@
+{
+  "game": {
+    "host": "games",
+    "descriptor": "game.json",
+    "engine": "gamesEngine",
+    "version": 1
+  }
+}

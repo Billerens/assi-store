@@ -13,8 +13,8 @@
       },
       "details": {
         "path": "catalog/details/achievements.json",
-        "sha256": "0741cec0fc4753f5c12adc5f60007cbc4074fa9e69428bce4728dca720cb04f6",
-        "size": 470
+        "sha256": "abe1def7ccd9d1f84d964e121b3178a49030f3b928fc086d74cdd1fdfc48c90c",
+        "size": 729
       },
       "icon": {
         "path": "achievements/icon.svg",
@@ -88,8 +88,8 @@
       },
       "details": {
         "path": "catalog/details/asteroid-colony.json",
-        "sha256": "5d6ad8156b5af24a52a20a43a0016a198258fb92f352857d87d9cca504f8faaf",
-        "size": 473
+        "sha256": "e6a2382823f7d42f80b3af387e40a655a93a326c918ea3529b8f58286392f397",
+        "size": 735
       },
       "icon": {
         "path": "asteroid-colony/icon.svg",
@@ -125,8 +125,8 @@
       },
       "details": {
         "path": "catalog/details/bedtime-series.json",
-        "sha256": "0ecfdf1673c1bed264da93f2f84c6b59c1d04ac703433bdcb1b7a832faf617dd",
-        "size": 472
+        "sha256": "fd2c626cb9be71c081171c6f45e4bae93470b89f6a72738b3491419ce1618a9b",
+        "size": 733
       },
       "icon": {
         "path": "bedtime-series/icon.svg",
@@ -163,8 +163,8 @@
       },
       "details": {
         "path": "catalog/details/blocks.json",
-        "sha256": "a8cf12a3bcb6b5dc85da8e1427f4e85d694b427601d32ef3f168dd468f331161",
-        "size": 464
+        "sha256": "aa60f3e4573d456c1254cb3184fdb82d626e005889a17f669ac39163f7002caa",
+        "size": 717
       },
       "icon": {
         "path": "blocks/icon.svg",
@@ -200,8 +200,8 @@
       },
       "details": {
         "path": "catalog/details/conveyors.json",
-        "sha256": "4e45a44ab4cebec9f823943edb765d2ad1d6cbeefe9affab9b7504fb294e0f99",
-        "size": 467
+        "sha256": "b908f2934f5d5dbcf17093149fe286e7a6383d0b5a0ea1c893857262eac6cd6c",
+        "size": 723
       },
       "icon": {
         "path": "conveyors/icon.svg",
@@ -238,8 +238,8 @@
       },
       "details": {
         "path": "catalog/details/deep-mine.json",
-        "sha256": "37ef1e654152e7f2448e327c4631236c3620af3b8dca74a9f8e0d964793cc201",
-        "size": 401
+        "sha256": "1bcdcfbcc528482e5780cc02617b6b6e754c6cd8f7069d8461c675050899db34",
+        "size": 657
       },
       "icon": {
         "path": "deep-mine/icon.svg",
@@ -275,8 +275,8 @@
       },
       "details": {
         "path": "catalog/details/dragon-hoard.json",
-        "sha256": "754e0a30f65a40605e115b967ed995f7e077cd0f38bd296bccc88929210e3970",
-        "size": 470
+        "sha256": "2b18ff57331a29a60c15ca8a6d80f770ac0b2aa1c3b1cf9eae4d5596f3abef40",
+        "size": 729
       },
       "icon": {
         "path": "dragon-hoard/icon.svg",
@@ -311,8 +311,8 @@
       },
       "details": {
         "path": "catalog/details/draw-guess.json",
-        "sha256": "f9197ef9af70cc9b3be189edee7685e34fa9f51b58b0eccd54ec438632380eb6",
-        "size": 468
+        "sha256": "2ddd7ba835a912d9bb4be78ca1b43ea55d330a8c9de1a65967b8b985a5109c7d",
+        "size": 725
       },
       "icon": {
         "path": "draw-guess/icon.svg",
@@ -386,8 +386,8 @@
       },
       "details": {
         "path": "catalog/details/evolution.json",
-        "sha256": "7e479c438b4c21339e648e3f26cd1bf9169a6cd0ea5d3e2392a8e6823678993d",
-        "size": 467
+        "sha256": "55f79a2c0f2234b6c4873ff8085211e02097f8c9a54c072395e9eb59c38863f7",
+        "size": 723
       },
       "icon": {
         "path": "evolution/icon.svg",
@@ -423,8 +423,8 @@
       },
       "details": {
         "path": "catalog/details/fishing.json",
-        "sha256": "98d939dd7acedf7bf5120bd6f29b8d8cc4b3585ac0c7e052501f8183bc4c16a8",
-        "size": 465
+        "sha256": "d887ab8b3888b489da392b24db54453ba92fadf6ff762c06e3e90ceb83f24408",
+        "size": 719
       },
       "icon": {
         "path": "fishing/icon.svg",
@@ -459,8 +459,8 @@
       },
       "details": {
         "path": "catalog/details/focus.json",
-        "sha256": "b1513e2d0a146eef70b4053568a46ac4ecdc3c7d3691fb865dafcd55abb747d1",
-        "size": 463
+        "sha256": "a4ac001a00797b171b5d95f08ecab4fdd40ba09f2eaf9ca69ccfa35590d38e1f",
+        "size": 715
       },
       "icon": {
         "path": "focus/icon.svg",
@@ -495,8 +495,8 @@
       },
       "details": {
         "path": "catalog/details/game-of-the-day.json",
-        "sha256": "465e0baee40b96db558081a1b6269782cebb51653b529901820bcf45efd8368e",
-        "size": 758
+        "sha256": "a44c5a5b08289007504f00633c6533b82162bdf6a9625f222be44b63de34d5cc",
+        "size": 1020
       },
       "icon": {
         "path": "game-of-the-day/icon.svg",
@@ -569,8 +569,8 @@
       },
       "details": {
         "path": "catalog/details/hat.json",
-        "sha256": "764ebb8476972b4c7c36432a25e3a384dc5e029e6c443c6ce0586b68196038dc",
-        "size": 461
+        "sha256": "83da9c4cbaeab4de0ad7eb0befe9ce9691001eec29272495ed7da60d1a71bff9",
+        "size": 711
       },
       "icon": {
         "path": "hat/icon.svg",
@@ -606,8 +606,8 @@
       },
       "details": {
         "path": "catalog/details/health.json",
-        "sha256": "49146437c85cea22f74fe076456ff7139c8052332ec0ae8e7b6a4da8fc93ecb4",
-        "size": 464
+        "sha256": "1fc8dae673415eab15b75d2097131d1e2515e8fa3c1b26aa288b1c8fc4302637",
+        "size": 717
       },
       "icon": {
         "path": "health/icon.svg",
@@ -642,8 +642,8 @@
       },
       "details": {
         "path": "catalog/details/holidays.json",
-        "sha256": "14a2112b6da3808fda748b60aedce9767f07222c5a9bedc0e4a520e7daf5fdfa",
-        "size": 466
+        "sha256": "e4b9a36115df9f0a74016871769d275e40542188911049e3b22093b07ab96eab",
+        "size": 721
       },
       "icon": {
         "path": "holidays/icon.svg",
@@ -678,8 +678,8 @@
       },
       "details": {
         "path": "catalog/details/horoscope.json",
-        "sha256": "46b645271c43c917ff212936816a5688967330cac76b471996657f91b30ff621",
-        "size": 467
+        "sha256": "5eed6ca6880c315e5d3ed72d5de0b9c8213092985cd23ec29d1857891a062f5b",
+        "size": 723
       },
       "icon": {
         "path": "horoscope/icon.svg",
@@ -714,8 +714,8 @@
       },
       "details": {
         "path": "catalog/details/inbox.json",
-        "sha256": "286a90bea3739729de0270e86a186ca8b7df9cdcc4edef93b4adad116c71f1aa",
-        "size": 620
+        "sha256": "f8b097676e565baf70c52f2952bab797f6b2692fe6230b022c196d40d27e4ef0",
+        "size": 872
       },
       "icon": {
         "path": "inbox/icon.svg",
@@ -751,8 +751,8 @@
       },
       "details": {
         "path": "catalog/details/infinity-layers.json",
-        "sha256": "83e9f659af03cc5885ffbeb0ca10783b3e2513a8f7eac4fcd1b477e4143d2118",
-        "size": 473
+        "sha256": "c5e1341006333fe4e634a930defeaec6ee09bea06182a7d9c180faaf790900b8",
+        "size": 735
       },
       "icon": {
         "path": "infinity-layers/icon.svg",
@@ -825,8 +825,8 @@
       },
       "details": {
         "path": "catalog/details/menagerie.json",
-        "sha256": "1719d78be41dbf5cf09dde377b7f27b38f9d97ca133c30185740f0aadb1b52ea",
-        "size": 467
+        "sha256": "2e8092ac35ddbc043f9f88820f49cf20bd99b0c7838fea0b5c4a8cc6e4d8cc21",
+        "size": 723
       },
       "icon": {
         "path": "menagerie/icon.svg",
@@ -862,8 +862,8 @@
       },
       "details": {
         "path": "catalog/details/merge-forge.json",
-        "sha256": "510d37ba6ffbf2674433d2dbd11436d0a14491f75450c5ef857179d718f5b96c",
-        "size": 1068
+        "sha256": "5ed80cd0ba9d9f19ab4c7a522f3ea64d95b6da92c7163d219d6bd5c49a88c285",
+        "size": 1326
       },
       "icon": {
         "path": "merge-forge/icon.svg",
@@ -900,8 +900,8 @@
       },
       "details": {
         "path": "catalog/details/minesweeper-rogue.json",
-        "sha256": "175f9c0ccddcb38899426529e56dc1f183bb9a20cf5b63476a9ef45be0614b56",
-        "size": 475
+        "sha256": "fd0424490b27e6e8e3a9e17eb7c872139261bcf13de67f76155ceea5a8a751b8",
+        "size": 739
       },
       "icon": {
         "path": "minesweeper-rogue/icon.svg",
@@ -937,8 +937,8 @@
       },
       "details": {
         "path": "catalog/details/one-cell-dungeon.json",
-        "sha256": "2f268498b0ce046b54991d5135bde99f9a3c0c5de840e188b8190145257ea439",
-        "size": 474
+        "sha256": "669c09c414a779ccd6d92df2abacd475471d3e767a393156a5388fdf732ce45a",
+        "size": 737
       },
       "icon": {
         "path": "one-cell-dungeon/icon.svg",
@@ -973,8 +973,8 @@
       },
       "details": {
         "path": "catalog/details/pet.json",
-        "sha256": "cd4955b1f5e57d8169ca7a5bc2b022bcadc8c88d99110c39b2ce9c649ef52c28",
-        "size": 1013
+        "sha256": "b2b8eeaa9bc37319109778b2a9a91a5b10dd5bddbf6b14a441a6d93e2d4e3a44",
+        "size": 1263
       },
       "icon": {
         "path": "pet/icon.svg",
@@ -1009,8 +1009,8 @@
       },
       "details": {
         "path": "catalog/details/phone-night.json",
-        "sha256": "73819aba27f518f5ee573fea76f655fb4a8f059af5394d5ad438c3e92ce47dc8",
-        "size": 469
+        "sha256": "d2613baf925d0d60910d7cf7eeb2fe59b098d265404ae9d6cc15d932f1118571",
+        "size": 727
       },
       "icon": {
         "path": "phone-night/icon.svg",
@@ -1045,8 +1045,8 @@
       },
       "details": {
         "path": "catalog/details/recorder.json",
-        "sha256": "8dad34ce9c989dcb954f8033123a2a162d28d0579ba19ba087c27114831f2729",
-        "size": 466
+        "sha256": "c08f909c773ee90cb6e0b1500e23be36d566619618b621a77be4f684f588b726",
+        "size": 721
       },
       "icon": {
         "path": "recorder/icon.svg",
@@ -1082,8 +1082,8 @@
       },
       "details": {
         "path": "catalog/details/rpg.json",
-        "sha256": "b41dab1afab4b977da14387bc44fd1343c606090798f4e57d372ae5d7692131f",
-        "size": 461
+        "sha256": "b062057eb5639070fe9d77ef41cd8b23971022124f96dd085feef89585c0b48f",
+        "size": 716
       },
       "icon": {
         "path": "life-rpg/icon.svg",
@@ -1120,8 +1120,8 @@
       },
       "details": {
         "path": "catalog/details/snake-rogue.json",
-        "sha256": "f8e8903e74db348bc0a90b598d38cb062e77e194d5f0e1a7060906578282691f",
-        "size": 469
+        "sha256": "f8a16e4037ab901cf27b5b76f559e39bc6adf97aabfc4639e14a010ec190f0a5",
+        "size": 727
       },
       "icon": {
         "path": "snake-rogue/icon.svg",
@@ -1157,8 +1157,8 @@
       },
       "details": {
         "path": "catalog/details/solitaire-rogue.json",
-        "sha256": "cb7bb062a0a8f2151ebff4454007da4ad1523af39c81fc0fc053a1c2380de394",
-        "size": 473
+        "sha256": "d96c4ddeb4af220b44b80a6c5debfbc67b932e7d75714fea4210a1e5536ea67c",
+        "size": 735
       },
       "icon": {
         "path": "solitaire-rogue/icon.svg",
@@ -1193,8 +1193,8 @@
       },
       "details": {
         "path": "catalog/details/spending.json",
-        "sha256": "d9d9367017831da4ad7a6eaa32c137643a8d8058d9d7b02ed05e85ee818269b4",
-        "size": 466
+        "sha256": "7301644788ccfb4d8e9f1a989022358cbfcf4fc3b7144a8aa9a0e8684599f299",
+        "size": 721
       },
       "icon": {
         "path": "spending/icon.svg",
@@ -1304,8 +1304,8 @@
       },
       "details": {
         "path": "catalog/details/train-switches.json",
-        "sha256": "be733a5c64de0c6e67119e5a8bf6f8b06323d8791d64d52ded011b2a93771342",
-        "size": 472
+        "sha256": "b3c21320c776db52beb73ab30aeae776264ee097f17aa42309124c4f9a1ede39",
+        "size": 733
       },
       "icon": {
         "path": "train-switches/icon.svg",
@@ -1340,8 +1340,8 @@
       },
       "details": {
         "path": "catalog/details/voice-adventure.json",
-        "sha256": "38a283071e9997d61313a7cbe7f4cada0d14a7722a1374e4403096ff974af726",
-        "size": 473
+        "sha256": "1f7fc8654b5bc40b813bafcd128e0c6cbd67dc7a9692cbe69f97b9c9bd4bf7af",
+        "size": 735
       },
       "icon": {
         "path": "voice-adventure/icon.svg",
@@ -1377,8 +1377,8 @@
       },
       "details": {
         "path": "catalog/details/wallpapers.json",
-        "sha256": "91f3555e5f9757f3a497770e8aea396b3b58ddbdffb46cab481e9a3a446c47ff",
-        "size": 468
+        "sha256": "7807d0a312559ec5bb58f064ea1fcc1decd4925e591361a49803d4ed1baadaae",
+        "size": 725
       },
       "icon": {
         "path": "wallpapers/icon.svg",
@@ -1414,8 +1414,8 @@
       },
       "details": {
         "path": "catalog/details/wave-survival.json",
-        "sha256": "b5b396b7caddca74b9b1d7cfe80343086035a57221687db92c2fc5bb5b459370",
-        "size": 471
+        "sha256": "063e3b324188c5948ad58691ceb84899a4aa458941a329c1d827af660f4a96e9",
+        "size": 731
       },
       "icon": {
         "path": "wave-survival/icon.svg",
@@ -1451,8 +1451,8 @@
       },
       "details": {
         "path": "catalog/details/word-weaver.json",
-        "sha256": "e1d2979a67b33fbdb03fef2fd7bfb641c737eca167185d3fc51927375483d89e",
-        "size": 469
+        "sha256": "ed6f0d91260515eadeb62e930d2c049cc50c659550cccb74b49091ad9a09d6c8",
+        "size": 727
       },
       "icon": {
         "path": "word-weaver/icon.svg",

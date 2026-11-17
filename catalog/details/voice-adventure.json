@@ -13,5 +13,15 @@
   ],
   "id": "voice-adventure",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "voice-adventure/store/shots/1.webp",
+      "sha256": "50abe2b7ee2295c7e959be3918bf1a2dd7aa8f64bcfa39a66d841c27cf779f10",
+      "size": 53062,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

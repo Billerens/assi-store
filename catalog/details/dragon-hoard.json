@@ -13,5 +13,15 @@
   ],
   "id": "dragon-hoard",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "dragon-hoard/store/shots/1.webp",
+      "sha256": "e2f3e688f08089f93940d980e8f58fb3719c3f0b9e5406ead30db38b2b9f1166",
+      "size": 40882,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }

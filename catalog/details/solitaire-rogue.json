@@ -13,5 +13,15 @@
   ],
   "id": "solitaire-rogue",
   "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1460,
+      "path": "solitaire-rogue/store/shots/1.webp",
+      "sha256": "59ff5a6f3ce177ed8d7c06233587f2023f0f0fcb37b66a22b5f44b6ac2fa2b56",
+      "size": 41264,
+      "type": "image/webp",
+      "width": 720
+    }
+  ],
   "version": "0.1.1"
 }
