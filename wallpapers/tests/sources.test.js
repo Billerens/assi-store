@@ -7,6 +7,13 @@ var sources = require('../sources');
 
 var OPTS = { minSide: 2400, maxArea: 4800000 };
 
+h.test('ключ в адресе: имя секрета идёт как есть, обычный ключ кодируется', function () {
+  assert.ok(sources.request('apod', { key: '{{secret:nasa.key}}' }).url.indexOf('api_key={{secret:nasa.key}}&') > 0);
+  assert.ok(sources.request('apod', { key: 'a b' }).url.indexOf('api_key=a%20b&') > 0);
+  assert.ok(sources.request('apod', {}).url.indexOf('api_key=DEMO_KEY&') > 0);
+  assert.strictEqual(sources.request('pexels', { query: 'sea', key: '{{secret:pexels.key}}' }).headers.Authorization, '{{secret:pexels.key}}');
+});
+
 h.test('свободные лицензии', function () {
   ['CC BY 4.0', 'CC BY-SA 3.0', 'CC0', 'CC0 1.0', 'Public domain', 'PD-USGov-NASA', 'Attribution', 'Public Domain Mark 1.0', 'Unsplash License', 'Pexels License']
     .forEach(function (name) { assert.ok(sources.freeLicense(name), name); });

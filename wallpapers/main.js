@@ -69,14 +69,24 @@ function progress(step, text) {
 function keys() {
   var out = {};
   Object.keys(sources.KEYS).forEach(function (id) {
-    try { out[id] = Boolean(assi.secret.get(sources.KEYS[id].secret)); } catch (error) { out[id] = false; }
+    var name = sources.KEYS[id].secret;
+    try { out[id] = assi.secret.has ? assi.secret.has(name) === true : Boolean(assi.secret.get(name)); } catch (error) { out[id] = false; }
   });
   return out;
 }
 
+/**
+ * How a source's key goes into a request. The module does not hold the key: it names the secret
+ * ('{{secret:name}}') and the shell puts the value in when it sends the request. A shell that cannot
+ * do that yet (it has no assi.secret.has) gives the key itself, as before.
+ */
 function keyOf(id) {
   if (!sources.KEYS[id]) return null;
-  try { return assi.secret.get(sources.KEYS[id].secret); } catch (error) { return null; }
+  var name = sources.KEYS[id].secret;
+  try {
+    if (assi.secret.has) return assi.secret.has(name) === true ? '{{secret:' + name + '}}' : null;
+    return assi.secret.get(name);
+  } catch (error) { return null; }
 }
 
 /** Is a model there for this role, and does it see pictures? */

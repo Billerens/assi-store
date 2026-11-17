@@ -1367,18 +1367,18 @@
     {
       "archive": {
         "fileCount": 27,
-        "sha256": "6316edb5478e456df5bef1f94bd1eb8a714ace2e1e6fb77cf96a16a784c75a43",
-        "size": 92302,
-        "unpackedSize": 288696,
-        "url": "https://github.com/Billerens/assi-store/releases/download/wallpapers-v0.1.1/wallpapers-0.1.1.zip"
+        "sha256": "5108d64b794958147d70e9f4eac5a3eff3f08dc5adcd50f97a15b49f0bcda4b8",
+        "size": 92714,
+        "unpackedSize": 289657,
+        "url": "https://github.com/Billerens/assi-store/releases/download/wallpapers-v0.1.2/wallpapers-0.1.2.zip"
       },
       "compatibility": {
         "minAssiApi": 1
       },
       "details": {
         "path": "catalog/details/wallpapers.json",
-        "sha256": "7807d0a312559ec5bb58f064ea1fcc1decd4925e591361a49803d4ed1baadaae",
-        "size": 725
+        "sha256": "ccd7dca0b65633c0e68b6778ed60c6c1203ecacb66aedcb716676ddc42aeb0c8",
+        "size": 1074
       },
       "icon": {
         "path": "wallpapers/icon.svg",
@@ -1389,7 +1389,7 @@
       "id": "wallpapers",
       "kind": "module",
       "license": "UNLICENSED",
-      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/wallpapers-v0.1.1/wallpapers-0.1.1.package.json",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/wallpapers-v0.1.2/wallpapers-0.1.2.package.json",
       "publisher": "billerens",
       "summary": "Каждое утро фотография из открытых источников под погоду, сезон и ваш вкус — на внешний и внутренний экраны Fold и на блокировку, с автором и лицензией",
       "tags": [
@@ -1398,7 +1398,7 @@
       ],
       "title": "Обои дня",
       "updated": "2026-11-17",
-      "version": "0.1.1"
+      "version": "0.1.2"
     },
     {
       "archive": {

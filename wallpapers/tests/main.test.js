@@ -483,6 +483,18 @@ h.test('ключ Unsplash включает Unsplash, и ему сообщает�
   assert.strictEqual(row.source, 'unsplash');
   assert.strictEqual(row.author, 'Anna Petrova');
   assert.strictEqual(e.log.pings.length, 1);
+  // The key is named, not read: the shell puts the value in when it sends the request.
+  assert.strictEqual(e.log.requests[0].headers.Authorization, 'Client-ID {{secret:unsplash.key}}');
+  assert.ok(!JSON.stringify(e.log.requests).includes('KEY'), 'значение ключа в запросы модуля не попадает');
+});
+
+h.test('на оболочке, которая не подставляет секреты, ключ читается как раньше', function () {
+  var e = make({ oldShell: true });
+  e.main.saveSettings({ sources: { commons: false, openverse: false, aic: false, pexels: false } });
+  assert.strictEqual(e.main.keys().unsplash, false);
+  e.log.secrets['unsplash.key'] = 'KEY';
+  assert.strictEqual(e.main.keys().unsplash, true);
+  assert.ok(e.main.run({}).ok);
   assert.strictEqual(e.log.requests[0].headers.Authorization, 'Client-ID KEY');
 });
 

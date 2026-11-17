@@ -107,6 +107,8 @@ exports.make = function (options) {
     widget: { refresh: function () { log.widget++; } },
     secret: {
       get: function (name) { return log.secrets[name] === undefined ? null : log.secrets[name]; },
+      // A shell that seals secrets says whether one is set; an older one (options.oldShell) only hands the value out.
+      has: options.oldShell ? undefined : function (name) { return log.secrets[name] !== undefined; },
       ask: function (name) { log.secrets[name] = 'typed-' + name; return true; },
       set: function (name, value) { log.secrets[name] = String(value); },
       remove: function (name) { delete log.secrets[name]; }

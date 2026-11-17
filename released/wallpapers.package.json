@@ -18,8 +18,8 @@
     },
     {
       "path": "code/android.js",
-      "sha256": "5f9ca5f6b660922d5878ce02e5c8b56fb52d5573196dcae676cea76d563d9431",
-      "size": 24527
+      "sha256": "70ec940e4433a10e3da157a33f9b69a07773f68039691b2bcbe07e7bd96d29a7",
+      "size": 24748
     },
     {
       "path": "code/checks.js",
@@ -43,8 +43,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "8b94d68ca382e4993b44df1829850785d6357f48ee3e8188048a2d584bfd56e9",
-      "size": 63365
+      "sha256": "c6ab2bced16e16277aaaeb96c5c74bca4c176a4c4e38dda8c2f8d6e40597232f",
+      "size": 63844
     },
     {
       "path": "code/module.json",
@@ -118,8 +118,8 @@
     },
     {
       "path": "code/sources.js",
-      "sha256": "7dfe3a56619b151ec51cd661997a4b06448814719964e4c7d08fe4f47f5945c1",
-      "size": 23778
+      "sha256": "e5060b5abe3bfeda6131aca3aa26d54794a9081ecd07f13dca2950cec3152590",
+      "size": 24039
     },
     {
       "path": "code/ui/index.html",
@@ -165,5 +165,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

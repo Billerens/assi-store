@@ -1,7 +1,7 @@
 {
   "id": "wallpapers",
   "kind": "module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "title": "Обои дня",
   "tags": ["оформление", "виджет"],
   "target": "modules/wallpapers",

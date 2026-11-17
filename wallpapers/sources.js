@@ -148,7 +148,7 @@ exports.request = function (source, opts) {
   }
   if (source === 'apod') {
     var count = Math.max(1, Math.min(100, Number(opts.apodCount) || 10));
-    return { url: 'https://api.nasa.gov/planetary/apod?api_key=' + encodeURIComponent(opts.key || 'DEMO_KEY') + '&count=' + count + '&thumbs=true', headers: headers };
+    return { url: 'https://api.nasa.gov/planetary/apod?api_key=' + inAddress(opts.key || 'DEMO_KEY') + '&count=' + count + '&thumbs=true', headers: headers };
   }
   if (source === 'nasa-images') {
     return { url: 'https://images-api.nasa.gov/search?q=' + encodeURIComponent(q) + '&media_type=image&page_size=' + n, headers: headers };
@@ -486,6 +486,11 @@ exports.credit = function (item) {
   var name = NAMES[item.source] || item.source;
   return 'Фото: ' + (item.author || 'автор не указан') + ', ' + name;
 };
+
+/** A key in an address: a secret named for the shell ('{{secret:name}}') goes in as it is, the shell encodes the value it puts there. */
+function inAddress(key) {
+  return /^\{\{secret:[A-Za-z0-9_.-]+\}\}$/.test(String(key)) ? String(key) : encodeURIComponent(key);
+}
 
 /**
  * Sources to ask for a topic, in order: free ones first (they need nothing), keyed ones when

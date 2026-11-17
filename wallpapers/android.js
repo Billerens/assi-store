@@ -138,6 +138,8 @@ exports.headBytes = function (url, count, headers) {
 /** A GET that only has to happen (Unsplash asks to be told about each download). */
 exports.ping = function (url, headers) {
   try {
+    // A request that names a secret is the shell's to send: only it puts the value in.
+    if (/\{\{secret:[A-Za-z0-9_.-]+\}\}/.test(JSON.stringify([url, headers || {}]))) return assi.http.get(url, headers).ok === true;
     var response = http().newCall(request(url, headers).build()).execute();
     var ok = response.isSuccessful();
     response.close();
