@@ -11,7 +11,7 @@ test('коллекция работает одновременно и уголь
  const {state}=fresh();const layer=S.forgeLayer(state);layer.count=1;layer.currency='1e5';layer.state.record=150;
  const before=S.coalsAll(state),upgrades=copy(state.run.up);
  for(const d of A.CATALOG)assert.ok(S.buyArtifact(state,x.cfg,d.id).ok,d.id);
- assert.strictEqual(A.model(state,x.cfg).owned,36);close(S.coalsAll(state),before);assert.deepStrictEqual(state.run.up,upgrades);
+ assert.strictEqual(A.model(state,x.cfg).owned,37);close(S.coalsAll(state),before);assert.deepStrictEqual(state.run.up,upgrades);
  const mods=A.modifiers(state,x.cfg);for(const k of Object.keys(A.LIMITS))assert.ok(mods[k]>=0&&mods[k]<A.LIMITS[k]);
  for(const id of ['whetstone','goldenSeal','forgeHeart'])assert.strictEqual(state.meta.artifacts.items[id].enabled,true);
  const damage=S.dmgMult(state,x.cfg,NOW),gold=S.goldMult(state,x.cfg,1),speed=S.forgeSpeed(state,x.cfg);
@@ -55,7 +55,7 @@ test('добавление времени ограничено текущим б
 });
 
 test('ускорение кормления обрабатывает очередь без снижения геройских откатов',()=>{
- const {state}=fresh();own(state,'feedingBowl');state.run.grid[0]=7;
+ const {state}=fresh();own(state,'feedingBowl');O.noteForged(state,10);state.run.grid[0]=7;
  assert.ok(O.feed(state,x.cfg,0,S.openCells(state,x.cfg)).ok);state.run.outpost.cooldowns.bran=17;
  const left=state.run.outpost.dragon.queue[0].left,grid=JSON.stringify(state.run.grid),fed=state.meta.outpost.dragon.fed;
  assert.ok(S.activateArtifact(state,x.cfg,'feedingBowl',NOW).ok);close(state.run.outpost.dragon.queue[0].left,left-4);
@@ -64,7 +64,7 @@ test('ускорение кормления обрабатывает очере�
 });
 
 test('предпросмотр еды и очередь показывают реальное время с колыбелью и логовом',()=>{
- const {state}=fresh();own(state,'dragonCradle');S.forgeLayer(state).state.mf.dragonCare=2;state.run.grid[0]=7;
+ const {state}=fresh();own(state,'dragonCradle');S.forgeLayer(state).state.mf.dragonCare=2;O.noteForged(state,10);state.run.grid[0]=7;
  const preview=O.feedPreview(state,x.cfg,0,S.openCells(state,x.cfg));assert.ok(preview.ok);assert.ok(preview.seconds<x.cfg['outpost.dragon.digestSec']);
  assert.ok(O.feed(state,x.cfg,0,S.openCells(state,x.cfg)).ok);close(O.model(state,x.cfg).dragon.queue[0].left,preview.seconds);
  O.digest(state,preview.seconds/2,x.cfg);close(O.model(state,x.cfg).dragon.queue[0].left,preview.seconds/2);

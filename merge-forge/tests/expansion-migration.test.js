@@ -71,13 +71,13 @@ test('уровень 1000 считается в Big без Infinity в боев�
  const {state,rng}=fresh();state.run.maxWave=1000;state.run.grid[0]=1000;
  assert.ok(x.Big.valid(x.sim.cellPower(state,x.cfg,0)));assert.ok(x.Big.valid(x.sim.dps(state,x.cfg,0)));
  O.recruit(state,x.cfg,'bran');assert.ok(O.equip(state,x.cfg,0,'bran',x.sim.openCells(state,x.cfg)).ok);
- assert.ok(x.Big.valid(O.passivePower(state,x.cfg)));state.run.grid[1]=1000;assert.ok(O.feed(state,x.cfg,1,x.sim.openCells(state,x.cfg)).ok);
+ assert.ok(x.Big.valid(O.passivePower(state,x.cfg)));state.run.grid[1]=1000;O.noteForged(state,1000);assert.ok(O.feed(state,Object.assign({},x.cfg,{'outpost.dragon.gap':0}),1,x.sim.openCells(state,x.cfg)).ok);
  O.tick(state,60,x.cfg,{offline:true});assert.ok(x.Big.valid(state.meta.outpost.dragon.absorbed));assert.ok(x.Big.valid(O.dragonPower(state,x.cfg)));
  assert.equal(x.sim.validate(state),null);
 });
 
 test('час офлайн с лисой, героями и кормлением совпадает с пошаговым расчётом',()=>{
- const {state}=fresh();state.run.maxWave=35;state.run.up.apprentice=1;state.run.up.bellows=6;state.run.grid[0]=8;state.run.grid[1]=5;state.run.grid[2]=6;
+ const {state}=fresh();state.run.maxWave=35;state.run.up.apprentice=1;state.run.up.bellows=6;state.run.grid[0]=8;state.run.grid[1]=5;state.run.grid[2]=6;O.noteForged(state,9);
  O.recruit(state,x.cfg,'bran');O.equip(state,x.cfg,0,'bran',x.sim.openCells(state,x.cfg));O.choosePet(state,x.cfg,'fox');
  O.feed(state,x.cfg,1,x.sim.openCells(state,x.cfg));O.feed(state,x.cfg,2,x.sim.openCells(state,x.cfg));
  state.run.farmRate='3e0';state.run.outpost.cooldowns.bran=18;

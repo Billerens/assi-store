@@ -476,10 +476,10 @@
     {
       "archive": {
         "fileCount": 34,
-        "sha256": "bbdf7031aef99840871a2e013bae5a6a6bff8734269a58af6c1d11f7c960d720",
-        "size": 217945,
-        "unpackedSize": 787502,
-        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/merge-forge-0.1.0.zip"
+        "sha256": "22cff318b3894c46602df30ab4234307e53eab39c09f508a6d2d4f75f22135c8",
+        "size": 219657,
+        "unpackedSize": 793614,
+        "url": "https://github.com/Billerens/assi-store/releases/download/merge-forge-v0.1.1/merge-forge-0.1.1.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -488,11 +488,11 @@
       "id": "merge-forge",
       "kind": "game",
       "license": "UNLICENSED",
-      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/merge-forge-0.1.0.package.json",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/merge-forge-v0.1.1/merge-forge-0.1.1.package.json",
       "publisher": "billerens",
       "summary": "Горн куёт клинки, два одинаковых сливаются в один сильнее, клинки сами рубят чудищ у ворот",
       "title": "Кузница слияний",
-      "version": "0.1.0"
+      "version": "0.1.1"
     },
     {
       "archive": {

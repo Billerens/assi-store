@@ -8,12 +8,13 @@
   var WAVES = [60, 70, 80, 100, 120, 150];
   var LIMITS = { damage: 0.75, gold: 0.5, forgeSpeed: 0.75, sale: 0.6, critChance: 0.12, critMult: 0.35,
     bossSeconds: 14, apprenticeSpeed: 0.5, offlineIncome: 0.15, runePower: 0.5, petXp: 0.75, heroXp: 0.75,
-    dragonDigest: 0.6, dragonCharge: 0.5, cryRecovery: 0.5, walkSpeed: 0.4, bossSlow: 0.6 };
+    dragonDigest: 0.6, dragonCharge: 0.5, cryRecovery: 0.5, walkSpeed: 0.4, bossSlow: 0.6, dragonMeals: 8 };
   var LABELS = { damage: 'Урон всех клинков: +{}%', gold: 'Золото за врагов: +{}%', forgeSpeed: 'Скорость ковки: +{}%',
     sale: 'Выручка продажи: +{}%', critChance: 'Шанс крита: +{} п.п.', critMult: 'Сила критов: +{}%', bossSeconds: 'Время босса: +{} с',
     apprenticeSpeed: 'Скорость подмастерья: +{}%', offlineIncome: 'Офлайн-золото: +{}%', runePower: 'Сила рун: +{}%',
     petXp: 'Опыт питомцев: +{}%', heroXp: 'Опыт героев: +{}%', dragonDigest: 'Скорость кормления: +{}%',
-    dragonCharge: 'Заряд дракона: +{}%', cryRecovery: 'Восстановление клича: +{}%', walkSpeed: 'Скорость подхода врага: +{}%', bossSlow: 'Замедление таймера босса: +{}%' };
+    dragonCharge: 'Заряд дракона: +{}%', cryRecovery: 'Восстановление клича: +{}%', walkSpeed: 'Скорость подхода врага: +{}%', bossSlow: 'Замедление таймера босса: +{}%',
+    dragonMeals: 'Кормлений дракона за забег: +{}' };
   function relic(id, title, kind, stage, icon, description, effect, maximum, options) {
     var r = { id: id, title: title, kind: kind, stage: stage, wave: WAVES[stage], icon: icon, description: description,
       effect: effect, maximum: maximum, baseCost: [2, 3, 4, 6, 9, 14][stage] };
@@ -38,6 +39,7 @@
     relic('heavyPommel', 'Навершие великана', 'passive', 2, 'hand', 'Повышает силу критов; герой получает тот же средний критический бонус, что и клинок на поле.', 'critMult', 0.3),
     relic('keeperSand', 'Песок хранителя', 'passive', 2, 'hourglass', 'Даёт дополнительное начальное время каждой битве с боссом.', 'bossSeconds', 10),
     relic('mentorBook', 'Записки оруженосца', 'passive', 2, 'hunter', 'Герои получают больше опыта в бою. Опыт наставника и купленные уровни не умножаются.', 'heroXp', 0.5),
+    relic('hungryCrop', 'Ненасытный зоб', 'passive', 2, 'temper', 'Дракон принимает больше клинков за один забег.', 'dragonMeals', 12),
     relic('marketBell', 'Рыночный звон', 'active', 2, 'stall', 'По нажатию временно повышает цену продажи. Учитывается и автоматическая продажа излишков.', 'sale', 0.4, { duration: 15, recharge: 120 }),
     relic('shieldAwl', 'Панцирное шило', 'click', 3, 'temper', 'Ручной удар иногда снимает небольшую долю текущего панциря врага; не наносит бесплатный залп.', 'shieldFraction', 0.04),
     relic('mossVial', 'Склянка сухого мха', 'click', 3, 'runePower', 'Ручной удар иногда ненадолго подавляет восстановление текущего врага.', 'suppressSeconds', 0.8),
@@ -203,7 +205,11 @@
     }
   }
   function rounded(n) { return Math.round(n * 1000) / 1000; }
-  function statText(stat, value) { return { template: LABELS[stat], args: [rounded(value * (stat === 'bossSeconds' ? 1 : 100))] }; }
+  function statText(stat, value) {
+    // Feedings are whole: the outpost rounds the bonus the same way.
+    if (stat === 'dragonMeals') return { template: LABELS[stat], args: [Math.round(value)] };
+    return { template: LABELS[stat], args: [rounded(value * (stat === 'bossSeconds' ? 1 : 100))] };
+  }
   var CLICK_TEXT = { merge: 'Шанс слияния: {}% · не более одной пары', forgeSeconds: 'Шанс: {}% · ковка −{} с', goldSaleShare: 'Шанс: {}% · {}% цены клинка',
     dragonCharge: 'Шанс: {}% · заряд +{}', heroCooldown: 'Шанс: {}% · откаты героев −{} с', bossSeconds: 'Шанс: {}% · боссу +{} с',
     shieldFraction: 'Шанс: {}% · снять {}% панциря', suppressSeconds: 'Шанс: {}% · подавление на {} с', petXp: 'Шанс: {}% · питомцу +{} опыта',

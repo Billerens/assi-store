@@ -67,7 +67,7 @@
     'outpost.fox.merges': 3, 'outpost.fox.seconds': 0.75, 'outpost.pet.xpStep': 50,
     'outpost.dragon.share': 0.1, 'outpost.dragon.cap': 1,
     'outpost.dragon.queue': 3, 'outpost.dragon.digestSec': 20,
-    'outpost.dragon.hatch': 3, 'outpost.dragon.adult': 20,
+    'outpost.dragon.hatch': 3, 'outpost.dragon.adult': 20, 'outpost.dragon.gap': 3, 'outpost.dragon.perRun': 6,
     'outpost.dragon.chargeMax': 100, 'outpost.dragon.feedCharge': 12, 'outpost.dragon.killCharge': 4,
     'outpost.dragon.hit': 3, 'outpost.dragon.cooldown': 30,
     'outpost.mf.dragonCare.step': 0.08, 'outpost.mf.dragonCare.soft': 6,
@@ -159,6 +159,8 @@
     if (r.dragon.anchorLevel === undefined) r.dragon.anchorLevel = initialAnchor(state);
     r.dragon.queue = r.dragon.queue || [];
     if (r.dragon.charge === undefined) r.dragon.charge = 0;
+    // Blades given to the dragon in this run; the count starts over with the forge.
+    if (r.dragon.eaten === undefined) r.dragon.eaten = 0;
     return state;
   }
   function available(state, cfg) {
@@ -412,6 +414,18 @@
     var d = state.meta.outpost.dragon;
     return dragonPowerFor(state, cfg, d.absorbed, d.fed);
   }
+  /**
+   * The strongest blade the dragon takes: a few levels below the best one forged in this run, so
+   * the blades that carry a run cannot be turned into lasting power just before a reforge.
+   */
+  function feedMaxLevel(state, cfg) {
+    ensure(state);
+    return state.run.outpost.dragon.anchorLevel - Math.max(0, Math.floor(setting(cfg, 'outpost.dragon.gap')));
+  }
+  /** Blades the dragon takes in one run: the setting, and more with the relic. */
+  function feedLimit(state, cfg) {
+    return Math.max(0, Math.floor(setting(cfg, 'outpost.dragon.perRun'))) + Math.round(Artifacts.modifiers(state, cfg).dragonMeals || 0);
+  }
   function queueCapacity(cfg) { return Math.max(1, Math.min(20, Math.floor(setting(cfg, 'outpost.dragon.queue')))); }
   function digestSpeed(state, cfg) { return masteryBonus(state, cfg, 'dragonCare') * (1 + Artifacts.modifiers(state, cfg).dragonDigest); }
   function feedPreview(state, cfg, cell, cells) {
@@ -421,6 +435,8 @@
     var level = state.run.grid[cell];
     if (!integer(level) || level < 1 || level > 1000) return fail('Некорректный клинок');
     var r = state.run.outpost.dragon;
+    if (r.eaten >= feedLimit(state, cfg)) return fail('Дракон сыт до перековки');
+    if (level > feedMaxLevel(state, cfg)) return fail('Выберите клинок слабее');
     if (r.queue.length >= queueCapacity(cfg)) return fail('Очередь кормления заполнена');
     var d = state.meta.outpost.dragon;
     var absorbed = Big.mul(basePower(cfg, level), setting(cfg, 'outpost.dragon.share'));
@@ -433,6 +449,7 @@
     var preview = feedPreview(state, cfg, cell, cells);
     if (!preview.ok) return preview;
     state.run.outpost.dragon.queue.push({ level: preview.level, left: preview.workSeconds });
+    state.run.outpost.dragon.eaten++;
     state.run.grid[cell] = 0;
     return preview;
   }
@@ -668,6 +685,7 @@
         anchorLevel: r.dragon.anchorLevel, charge: r.dragon.charge, chargeMax: setting(cfg, 'outpost.dragon.chargeMax'), chargeCost: breathCost(state, cfg), cooldown: r.cooldowns.dragon,
         ready: unlocks.dragon && fed >= setting(cfg, 'outpost.dragon.hatch') && !pendingHero(state, 'dragon') && r.cooldowns.dragon <= 0 && r.dragon.charge >= breathCost(state, cfg),
         queue: r.dragon.queue.map(function (q) { return { level: q.level, left: q.left / digestSpeed(state, cfg) }; }), queueCapacity: queueCapacity(cfg),
+        eaten: r.dragon.eaten, feedLimit: feedLimit(state, cfg), feedMaxLevel: feedMaxLevel(state, cfg),
         form: m.dragon.form, forms: FORMS.map(function (f) { return { id: f.id, title: f.title, description: f.description, unlocked: formUnlocked(state, cfg, f.id), selected: m.dragon.form === f.id }; }),
         formReady: formsReady && !pendingHero(state, 'dragon') && r.cooldowns.dragon <= 0, formsWave: setting(cfg, 'outpost.forms.wave'), lineage: m.dragon.lineage, moltPreview: moltPreview(state, cfg) },
       rack: r.rack.map(copyGear), rackCapacity: rackCapacity(state, cfg), slots: slots(state), nextUnlock: next };
@@ -686,6 +704,7 @@
     if (!Array.isArray(r.rack) || r.rack.length > 20 || !Array.isArray(r.dragon.queue) || r.dragon.queue.length > 20) return 'очередь форпоста повреждена';
     if (!Big.valid(m.dragon.absorbed) || Big.sign(m.dragon.absorbed) < 0) return 'сила дракона повреждена';
     if (!integer(m.dragon.fed) || m.dragon.fed < 0 || !integer(r.dragon.anchorLevel) || r.dragon.anchorLevel < 1 || r.dragon.anchorLevel > 1000) return 'уровень дракона повреждён';
+    if (!integer(r.dragon.eaten) || r.dragon.eaten < 0) return 'кормление повреждено';
     var error = null;
     HEROS.forEach(function (h) {
       var own = m.heroes[h.id];
@@ -706,7 +725,7 @@
     ensure: ensure, migrate: ensure, available: available, recruit: recruit, selectHero: selectHero, reserveHero: reserveHero,
     chooseTalent: chooseTalent, setAttunement: setAttunement, selectForm: selectForm, molt: molt, moltPreview: moltPreview, benefits: benefits, onContract: onContract, onWard: onWard, heroLevel: heroLevel,
     equip: equip, unequip: unequip, equipRack: equipRack, releaseRack: releaseRack, temper: temper, temperCost: temperCost,
-    choosePet: choosePet, feed: feed, feedPreview: feedPreview, tick: tick, digest: digest, digestSpeed: digestSpeed, rewardPet: rewardPet, noteForged: noteForged,
+    choosePet: choosePet, feed: feed, feedPreview: feedPreview, feedLimit: feedLimit, feedMaxLevel: feedMaxLevel, tick: tick, digest: digest, digestSpeed: digestSpeed, rewardPet: rewardPet, noteForged: noteForged,
     onTap: onTap, onMerge: onMerge, onKill: onKill, passivePower: passivePower, heroPower: heroPower,
     dragonPower: dragonPower, basePower: basePower, elements: elements, active: active,
     model: model, onPrestige: onPrestige, validate: validate };

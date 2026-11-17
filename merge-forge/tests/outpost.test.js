@@ -154,7 +154,7 @@ test('перезарядку нельзя сбросить переключен�
 
 test('дракон съедает только выбранные клинки и начисляет исходную долю один раз', () => {
   const state = fresh(30);state.run.grid[0] = 5;state.run.grid[1] = 6;state.run.grid[2] = 7;
-  O.noteForged(state, 7);
+  O.noteForged(state, 10);
   const before = inventory(state);const previews = [];
   for (let cell=0;cell<3;cell++) { previews.push(O.feedPreview(state,cfg,cell,cells(state)));assert.ok(O.feed(state,cfg,cell,cells(state)).ok); }
   assert.deepStrictEqual(inventory(state), before);
@@ -166,6 +166,48 @@ test('дракон съедает только выбранные клинки �
   assert.equal(O.model(state,cfg).dragon.stage,'young');assert.equal(state.run.grid[3],4);
   const unchanged=state.meta.outpost.dragon.absorbed;O.tick(state,100000,cfg,{offline:true});equalBig(state.meta.outpost.dragon.absorbed,unchanged);
   assert.equal(O.validate(state),null);
+});
+
+test('дракон берёт клинки не выше лучшего в забеге минус отступ', () => {
+  const state = fresh(30);O.noteForged(state, 10);
+  state.run.grid[0] = 8;state.run.grid[1] = 7;
+  const strong = O.feedPreview(state, cfg, 0, cells(state));
+  assert.equal(strong.ok, false);assert.equal(strong.reason, 'Выберите клинок слабее');
+  assert.ok(O.feed(state, cfg, 1, cells(state)).ok);
+  assert.equal(O.model(state, cfg).dragon.feedMaxLevel, 7);
+  const wide = Object.assign({}, cfg, { 'outpost.dragon.gap': 0 });
+  assert.ok(O.feed(state, wide, 0, cells(state)).ok);
+});
+
+test('кормлений за забег не больше предела; перековка начинает счёт заново, реликвия добавляет', () => {
+  const state = fresh(30);O.noteForged(state, 20);
+  const limit = cfg['outpost.dragon.perRun'];
+  assert.equal(O.feedLimit(state, cfg), limit);
+  for (let i = 0; i < limit; i++) {
+    state.run.grid[0] = 5;assert.ok(O.feed(state, cfg, 0, cells(state)).ok, 'кормление ' + (i + 1));
+    O.tick(state, 1000, cfg, { offline: true });
+  }
+  state.run.grid[0] = 5;
+  const sated = O.feed(state, cfg, 0, cells(state));
+  assert.equal(sated.ok, false);assert.equal(sated.reason, 'Дракон сыт до перековки');
+  assert.equal(state.run.grid[0], 5);
+  assert.deepStrictEqual([O.model(state, cfg).dragon.eaten, O.model(state, cfg).dragon.feedLimit], [limit, limit]);
+  state.meta.artifacts = { version: 1, items: { hungryCrop: { level: 1, enabled: true, cooldown: 0 } } };
+  assert.equal(O.feedLimit(state, cfg), limit + 1);
+  assert.ok(O.feed(state, cfg, 0, cells(state)).ok);
+  state.meta.artifacts.items.hungryCrop.level = 1000;
+  assert.ok(O.feedLimit(state, cfg) <= limit + 5);
+  O.onPrestige(state);
+  assert.equal(state.run.outpost.dragon.eaten, 0);
+  assert.equal(O.validate(state), null);
+});
+
+test('старое сохранение без счёта кормлений читается, испорченный счёт — нет', () => {
+  const state = fresh(30);
+  delete state.run.outpost.dragon.eaten;
+  O.ensure(state);assert.equal(state.run.outpost.dragon.eaten, 0);assert.equal(O.validate(state), null);
+  state.run.outpost.dragon.eaten = -1;assert.equal(O.validate(state), 'кормление повреждено');
+  state.run.outpost.dragon.eaten = 1.5;assert.equal(O.validate(state), 'кормление повреждено');
 });
 
 test('подготовленное умение фиксирует владельца и оружие до настоящего залпа', () => {
@@ -187,7 +229,7 @@ test('подготовленное умение фиксирует владел�
 });
 
 test('переваривание совпадает длинным и короткими шагами, включая улучшение ухода', () => {
-  const state=fresh(30);for(let c=0;c<3;c++){state.run.grid[c]=c+3;assert.ok(O.feed(state,cfg,c,cells(state)).ok);}
+  const state=fresh(30);O.noteForged(state,8);for(let c=0;c<3;c++){state.run.grid[c]=c+3;assert.ok(O.feed(state,cfg,c,cells(state)).ok);}
   x.sim.forgeLayer(state).state.mf.dragonCare=7;
   const split=json(state),whole=json(state);
   O.tick(whole,35.5,cfg,{offline:true});for(let i=0;i<355;i++)O.tick(split,.1,cfg,{offline:true});

@@ -321,7 +321,10 @@
       if (!isFeed && target) body.append(h('div', { class: 'mfo-picker-target' }, portrait('hero', target),
         h('div', {}, h('strong', {}, tr(target.title)), note(target.active ? tr('В отряде') : tr('В резерве · оружие пока не участвует в бою')))));
       else body.append(note(tr('Выберите один клинок. Он исчезнет, а его сила останется у дракона.')),
-        pill(tr('Кормление: {} / {} мест занято', model.dragon.queue.length, model.dragon.queueCapacity)));
+        h('div', { class: 'mfo-pills' },
+          pill(tr('Кормление: {} / {} мест занято', model.dragon.queue.length, model.dragon.queueCapacity)),
+          pill(tr('За забег: {} / {}', model.dragon.eaten, model.dragon.feedLimit)),
+          pill(model.dragon.feedMaxLevel >= 1 ? tr('Клинки до ур. {}', model.dragon.feedMaxLevel) : tr('Выкуйте клинок сильнее'))));
 
       // Keep the result and its single confirmation before the inventory: no hunt for a button below 35 items.
       const resultBox = h('div', { class: 'mfo-selection', id: 'outpost-picker-selection', 'aria-live': 'polite' });
@@ -369,7 +372,8 @@
       Array.from(groups.values()).sort((a, b) => (isFeed ? a.level - b.level : b.level - a.level) || Number(!!a.rune) - Number(!!b.rune)).forEach(group => {
         const selected = p.source === 'grid' && group.cells.includes(p.cell) && p.level === group.level;
         const cell = selected ? p.cell : group.cells[0];
-        const b = button('', () => { p.source = 'grid'; p.cell = cell; p.level = group.level; p.temper = ''; sheetKey = ''; buildSheet(); }, false,
+        // The dragon takes only blades a few levels below the best of the run: the others are shown, not offered.
+        const b = button('', () => { p.source = 'grid'; p.cell = cell; p.level = group.level; p.temper = ''; sheetKey = ''; buildSheet(); }, isFeed && group.level > model.dragon.feedMaxLevel,
           { id: 'outpost-cell-' + cell, class: 'g-btn mfo-weapon-choice' + (selected ? ' selected' : ''), 'data-equip-cell': cell,
             'data-weapon-count': group.cells.length, 'aria-pressed': String(selected) });
         b.append(weaponArt(group), h('strong', {}, tr('Ур. {}', group.level)), h('span', { class: 'mfo-choice-note' }, tr('{} шт.', group.cells.length)));
@@ -509,10 +513,13 @@
         return card;
       }
       card.append(note(tr('Отдавайте ненужные клинки. Они исчезают, а накопленная сила сохраняется после перековки.')),
-        button(d.queue.length >= d.queueCapacity ? tr('Очередь кормления заполнена') : tr('Покормить дракона'), () => chooseCell('feed'), d.queue.length >= d.queueCapacity,
+        button(d.eaten >= d.feedLimit ? tr('Дракон сыт до перековки') : d.queue.length >= d.queueCapacity ? tr('Очередь кормления заполнена') : tr('Покормить дракона'),
+          () => chooseCell('feed'), d.eaten >= d.feedLimit || d.queue.length >= d.queueCapacity,
           { id: 'outpost-feed', class: 'g-btn primary' }));
       const queue = h('div', { class: 'mfo-queue', 'aria-label': tr('Кормление') },
-        h('div', { class: 'mfo-label' }, tr('Кормление: {} / {} мест занято', d.queue.length, d.queueCapacity)));
+        h('div', { class: 'mfo-label' }, tr('Кормление: {} / {} мест занято', d.queue.length, d.queueCapacity)),
+        h('div', { class: 'mfo-label' }, tr('За забег: {} / {}', d.eaten, d.feedLimit) + ' · ' +
+          (d.feedMaxLevel >= 1 ? tr('Клинки до ур. {}', d.feedMaxLevel) : tr('Выкуйте клинок сильнее'))));
       if (!d.queue.length) queue.append(note(tr('Выберите клинок, чтобы увидеть прибавку силы до кормления.')));
       d.queue.forEach((entry, i) => queue.append(h('div', { class: 'mfo-queue-item' },
         h('span', {}, tr('Клинок ур. {}', entry.level)), h('span', { class: 'g-num', 'data-digest': i }, i === 0 ? tr('{} с', Math.ceil(entry.left)) : tr('В очереди')))));

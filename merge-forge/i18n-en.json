@@ -1320,5 +1320,15 @@
  "Рычаг близнецов": "Twin Lever",
  "По нажатию выполняет одно обычное слияние подходящей пары. Улучшения сокращают собственный откат.": "Activate to perform one normal merge of a matching pair. Upgrades reduce its own cooldown.",
  "Дерево": "Tree",
- "Металлы": "Metals"
+ "Металлы": "Metals",
+ "Дракон сыт до перековки": "The dragon is full until the reforge",
+ "Выберите клинок слабее": "Pick a weaker blade",
+ "За забег: {} / {}": "This run: {} / {}",
+ "Клинки до ур. {}": "Blades up to lv. {}",
+ "Выкуйте клинок сильнее": "Forge a stronger blade",
+ "Ненасытный зоб": "Hungry Crop",
+ "Дракон принимает больше клинков за один забег.": "The dragon takes more blades in one run.",
+ "Кормлений дракона за забег: +{}": "Dragon feedings per run: +{}",
+ "Дракон: клинки ниже лучшего в забеге на уровней": "Dragon: levels below the run's best blade",
+ "Дракон: кормлений за забег": "Dragon: feedings per run"
 }
