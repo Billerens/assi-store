@@ -1,0 +1,130 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "184e479546032d274d815d3693f631be37425161353963d2a2748f659fe58484",
+      "size": 11370
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "379831bb5189b24bf665d5fb82a3e5992a838dd91dacb21a755f8fbbb4d94c42",
+      "size": 8931
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "f6f574dbd67b3cd47cb16599927466348f5ae9166eb0268c57c6332042609324",
+      "size": 21688
+    },
+    {
+      "path": "code/content/cards.json",
+      "sha256": "4c868e4dc2f78b9d8bc7090b580640825020356c12d067d1546f6a384ca61777",
+      "size": 8041
+    },
+    {
+      "path": "code/content/chronicle.json",
+      "sha256": "19407f51b32f2cedecb60fad06471c2b9b50a453698ec1c76b5a7fe5e899338c",
+      "size": 3822
+    },
+    {
+      "path": "code/content/names.json",
+      "sha256": "c2e47d962994c83569beed0b859e1b53d91aaa7515e07d66210a7b31f1a40ad0",
+      "size": 2815
+    },
+    {
+      "path": "code/content/traits.json",
+      "sha256": "8e5f3dac053b285f6749e130f312d5b8198c19eec9c67d9bc2374a76de55e616",
+      "size": 6799
+    },
+    {
+      "path": "code/content/world.json",
+      "sha256": "bc74e16fb89bc0a3a54a3a3b55a44be6803c12c7d22bdd61f29bd91d0f3d0bf7",
+      "size": 5481
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "8ad0b972b59faf95f82178b2996cccbb4312d034b3b77cfedb7551046dbbe176",
+      "size": 5692
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "5e3578f072e17a48c9ad2ea2b49568551ea3386e5ff518bb26ca9289015ddb51",
+      "size": 30799
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "deefc23eae282a1d6bed4ea59e1eb4cdb4dc02dc74d57b0cdc6fb7422ef6f82c",
+      "size": 291
+    },
+    {
+      "path": "code/prompts/cards.md",
+      "sha256": "48357d038a6ac28ac73f0a5fcf5f21d4fff110f8cd160e14375c97229a1828dd",
+      "size": 3043
+    },
+    {
+      "path": "code/prompts/chronicle.md",
+      "sha256": "ca3fd76583e5937f675118eacf400ab6d0dbb3164762007d2ee5534e2eb6d258",
+      "size": 2354
+    },
+    {
+      "path": "code/prompts/names.md",
+      "sha256": "bd6781bfdf3c0bce56cfc148acafe98391b3d29ac6721e5b2066c387f13c771b",
+      "size": 2976
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "9d5b01d3e3ad8815a94c3cabe7eaa8df939e6a199b4c501b0ac2cc923ecd8a63",
+      "size": 72651
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "158f9c130d6a745271400fd2eff4109cbfe0d2e1d50e2a7d6bd0b640d411dc2f",
+      "size": 11317
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "f19a9dc06e3474fc7c38ba341c8074968d6fcef954071809608a7f86a762f26d",
+      "size": 10824
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "5760efb020cbbf552376ec78b82b5419a6f7b151018e1e2ffa62dc9aa9964948",
+      "size": 57746
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "92cf52c7d5024ad6b49487ea642e48d99935e92ac6301dde58291e59c657d572",
+      "size": 914
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "2dc4efb7ec5ab0a6aa782a28947a214dea7dca46c1fc351cd5bb6c1db7488f5f",
+      "size": 20629
+    }
+  ],
+  "id": "dynasty",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

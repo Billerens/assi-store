@@ -1,0 +1,170 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "fbdf3676970212c8bcc1ea15a170b01a73e59f37573b0721063f19bbcc55a6d5",
+      "size": 18569
+    },
+    {
+      "path": "code/board.js",
+      "sha256": "dc6521298be615cf47c0063f148390a6b406317f90a84278dd5e9b586965c416",
+      "size": 20883
+    },
+    {
+      "path": "code/bot.js",
+      "sha256": "a031b5f384d68585135a50be390b25fb4522c0201cae24147dac78d3773d8cae",
+      "size": 6581
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "ffe56e3354e83f060c3b3e389e7a598980c4f9cd426537c385159727c6f0b908",
+      "size": 4879
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "a89a11d65870df790e79c34eae17fe2eaba98cdf23b73a470dfbc569ffb60a0f",
+      "size": 24844
+    },
+    {
+      "path": "code/content/challenges.json",
+      "sha256": "41b76c23bd4e1cf21f3c2b0a10980848b1ff81624507b1d52faa1a5bbdaac5a4",
+      "size": 40473
+    },
+    {
+      "path": "code/content/events.json",
+      "sha256": "b8013422f926fffd95c9934ee1e409e70d7779e0b301cdfb65d97a56210224b5",
+      "size": 524
+    },
+    {
+      "path": "code/content/pieces.json",
+      "sha256": "178966f87ff59597005d14dc117234a00ace4362a614bae7cbbcd37c7ac81a79",
+      "size": 859
+    },
+    {
+      "path": "code/content/ranks.json",
+      "sha256": "299d946dfd2e1dd1ee637fbaf836b47b2456cb2411c332e551b9c782f79d4e3f",
+      "size": 748
+    },
+    {
+      "path": "code/content/themes.json",
+      "sha256": "9209135cf7b6f41c5acb0dde6348e1e567c0076f423dc16bc4cebb14974052ae",
+      "size": 2362
+    },
+    {
+      "path": "code/content/upgrades.json",
+      "sha256": "a23b434f77c529635f0881bc0cdded40cc0a2b9b5ecce753be4392cddacabec0",
+      "size": 4200
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "1d631eb9087a43e3010e25dfd4571fbda6b04acd373c6a1b6e2eb53cfdb3a0dd",
+      "size": 4936
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "8674d07f19053b534f189d03bebd302816ae5819532faa0ba82f398a183fd189",
+      "size": 33743
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "c34fa74dfe573600d21e20626fb016710d6ed95cbe9b22b92c9aa8e750f4ac33",
+      "size": 298
+    },
+    {
+      "path": "code/levels.js",
+      "sha256": "19efccaa5ad757e77c43d3322f1be6050959e2ffd19e0f8afa987df2b14d2546",
+      "size": 14218
+    },
+    {
+      "path": "code/prompts/names.md",
+      "sha256": "9a133e4858d62b83d74821fe7bcddfee85ae8ecfbb961ebb8cd9ddf06e06ed2b",
+      "size": 732
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "e7e962b8aec72d0f8e8d25d2c32516acf3333aa3950ef5a83beb4f9fb3f7f75a",
+      "size": 36357
+    },
+    {
+      "path": "code/tools/balance-report.json",
+      "sha256": "d1c0c4db78556cfcebddbe9032cb077bee3cb22149d45a1b5a2e1dffdaf69c4a",
+      "size": 3721
+    },
+    {
+      "path": "code/tools/build-content.js",
+      "sha256": "8b2ea9537ed0296b8ca69cf7bf465d93b7710b138fe02c8f41136439b79c0fcc",
+      "size": 20478
+    },
+    {
+      "path": "code/tools/gen-challenges.js",
+      "sha256": "6e0710ea808eebf0dd55dbff54e221e7d27da937fe32cbf8b38ffd11c5c53105",
+      "size": 4367
+    },
+    {
+      "path": "code/tools/hub.js",
+      "sha256": "d12240934b8d754ecedd6ebb9d41d210114cda8a7c47ff058275495189809fc3",
+      "size": 1066
+    },
+    {
+      "path": "code/tools/levels-report.json",
+      "sha256": "2cff54677ea5918c352a735036db96f19c0b29d75a00454ab4698950f7e3213e",
+      "size": 638
+    },
+    {
+      "path": "code/tools/preview-server.js",
+      "sha256": "cc30e8fbe90b463c70e21d5ee8246483b8fb2c3634b5223065908b4a67dc6bbd",
+      "size": 6530
+    },
+    {
+      "path": "code/tools/verify-levels.js",
+      "sha256": "99342722bdbc6e9d9d12f126822189e52cc2e748755cf1a43303170282ea4195",
+      "size": 2906
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "7a46b926db0046e5fefc15097265961b967bd4f4d52f1820ad89ffb4010417aa",
+      "size": 8521
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "205b51ff99ad9a25b42fb7a7731528606563197673b24f6a8720decc93946955",
+      "size": 12417
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "1e979dd606a220880fbadfa566533483ab83436c132fbf280dff94e881702788",
+      "size": 46142
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "b7bb9be50dade9a3e20c1aaf478ae378e460ded07e6bb2e1e6fca54d24a427b9",
+      "size": 1026
+    }
+  ],
+  "id": "blocks",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

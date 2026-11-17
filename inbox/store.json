@@ -1,6 +1,7 @@
 {
   "id": "inbox",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Входящие",
   "target": "modules/inbox",
   "requires": [],

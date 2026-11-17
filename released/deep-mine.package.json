@@ -1,0 +1,130 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "2d6d0df741d0a7362a8af3ec08b2b74ea9e69e65bf453440ea02a4916a421fba",
+      "size": 12156
+    },
+    {
+      "path": "code/bot.js",
+      "sha256": "1da9cdf0036dc538dba7b09a5846cf83ee82030f2118e299d4461d50cacadac6",
+      "size": 5284
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "ee466516c52ca61924e7b3bac6a6c79953f35ca5f2f773e4f474e8d626e14d15",
+      "size": 6204
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "7f1676ead68aa16954edcd81cf764e32d66bc31fcfdc4e4826cd7000fb980858",
+      "size": 25326
+    },
+    {
+      "path": "code/content/echoes.json",
+      "sha256": "0638a24b148dcf6b06a0ce6392296d58637402378969529e614af10e36c6d374",
+      "size": 654
+    },
+    {
+      "path": "code/content/notes.json",
+      "sha256": "a2d17a3a0c8da909d303c5de299b62dc9f926415881064924b8e04104e97f748",
+      "size": 1953
+    },
+    {
+      "path": "code/content/rocks.json",
+      "sha256": "5c2ccc7d8e91a14d4131e2327c5654093af2e0d35d928f2a70c3cc7f3146b428",
+      "size": 5180
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "f52f8148c3d612ad736344915cbd9d7550a04705ffbd3c173efbe77ae6dff10b",
+      "size": 1185
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "9b164b77539e1ec535890b6d663dcabd3f6b219ab64c0172bebfe7c4376c7032",
+      "size": 5885
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "aee0c8fd709386cec3a53f2c7065c943c5ddfa7172c3aeeb9a662ab191b993cd",
+      "size": 13945
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "6988b73b2c6a4947055a36ec0eb6dae51a086033cc983122184d14a6cb3bc78a",
+      "size": 276
+    },
+    {
+      "path": "code/prompts/echoes.md",
+      "sha256": "fafcd8d63b51f1717f2aa340883ff78969fed46dfeb265ef7d52996e076a9144",
+      "size": 954
+    },
+    {
+      "path": "code/prompts/notes.md",
+      "sha256": "fb156b93a3afc17a085e2abe32d9f0112045b24cd92e0de726822dc349645204",
+      "size": 1015
+    },
+    {
+      "path": "code/prompts/rocks.md",
+      "sha256": "a526a205b2bb5b86ac0e18c5756ed06e09f5966f692542936a8c345f56731b30",
+      "size": 1149
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "6038b4d602b89059def0ddc06bb84d0690edb8f885d9fe97c029f8ccd7339d0f",
+      "size": 54997
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "297eed711c285bb62ef8bf7a0ba3cce7a9dbf08ae794aa2d5162cbac983bbfbb",
+      "size": 19523
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "a07be3e720074eacc09f815e4fb3bf2087a6733b36832d973117235c04e4af37",
+      "size": 9322
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "343400fc245981e2123057fbeb75756df01c603adfa4b10859a46275cec63458",
+      "size": 45301
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "baed714f9e8084e0fed0e8a386faa7d5c8d4c5943e6608a291245b16f986b8b9",
+      "size": 923
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "594199ccaac7213fe8a10dcf634363928705a0b9de2fd10edcceb4902550e896",
+      "size": 60381
+    }
+  ],
+  "id": "deep-mine",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

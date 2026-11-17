@@ -1,0 +1,176 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "25c1c89601d6411a67ee7a4e3e0d1c63a14acce303a33c2d24cf5db030450b25",
+      "size": 12198
+    },
+    {
+      "path": "code/achieve.js",
+      "sha256": "44ba50d758b8bb43ee37730c27a935dc6b128fb524c62f3aad927a648160501d",
+      "size": 3312
+    },
+    {
+      "path": "code/awards.js",
+      "sha256": "8b0a2528aae12e12dc8430fb211d66d92a39692b4dd1adfc5b0deace39f6078c",
+      "size": 2730
+    },
+    {
+      "path": "code/birthdays.js",
+      "sha256": "f74e2648a1c2c8c733f9b9aa635903cb3b50a00a4c7450243bfbdf0a1c30b9a1",
+      "size": 8315
+    },
+    {
+      "path": "code/calendar.js",
+      "sha256": "7fe96cda423aa01d85f6cf7e275517c3fb2bc12d71346249b8570d0ce94a7b20",
+      "size": 14224
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "a5663fb0d0900defc9b7792e0a51a94b1ac7e2da552ed5bd7d70c17692464f66",
+      "size": 9644
+    },
+    {
+      "path": "code/decor.js",
+      "sha256": "f33e189a389a963649e5a89be1e386ecbb661a0d67d8cc341fef6d97ed75eb6d",
+      "size": 19596
+    },
+    {
+      "path": "code/decor/aurora.css",
+      "sha256": "b93511afe25bb20d763dad42d3d527bea1254b7e3eae16b2851ea5213e7aa535",
+      "size": 454
+    },
+    {
+      "path": "code/decor/fireflies.css",
+      "sha256": "529643b1bb9ac9ad01757afdf2a8bfdaf500a568999d49259340e3c248d621f9",
+      "size": 463
+    },
+    {
+      "path": "code/decor/flicker.css",
+      "sha256": "c4a3208bfdf97f37c4d2fc26a1d13652cb8f08091ac21c6f757786c94028e8eb",
+      "size": 242
+    },
+    {
+      "path": "code/decor/garland.css",
+      "sha256": "1ae6f994514055c2614f8ac50af9f534d401e293f3ede664e6d1488738e80520",
+      "size": 476
+    },
+    {
+      "path": "code/decor/home-star.css",
+      "sha256": "67f6cb8442351243929cba45005de2047c2f4bbd4476f9871399010dc5ac0c18",
+      "size": 305
+    },
+    {
+      "path": "code/decor/leaves.css",
+      "sha256": "5782e44e71a6bc7320da282dbe36828d9e02a3b634968facc9953ab6b4cf3f31",
+      "size": 454
+    },
+    {
+      "path": "code/decor/meteors.css",
+      "sha256": "36243f215db38a25a2d3d80c087aa79f1f29897a622876ca7b5b6629b8b50ebb",
+      "size": 488
+    },
+    {
+      "path": "code/decor/pancakes.css",
+      "sha256": "cd41da441463c7dcf48b6ff37af9d87b26571b27a5e320a336d159ad609f138e",
+      "size": 275
+    },
+    {
+      "path": "code/decor/petals.css",
+      "sha256": "b79f7f45f586ef635e5108ee7246581f285eab71d3ab297caf19812b04853b50",
+      "size": 454
+    },
+    {
+      "path": "code/decor/pumpkins.css",
+      "sha256": "92b3c9b1789a732793dc1bc4b1a9d49b4d15bd9616872d9a133bb7f9d20dc81c",
+      "size": 1002
+    },
+    {
+      "path": "code/decor/rocket.css",
+      "sha256": "617a16bcc87a32f770329174016b16247b4ba83dc4afb93022dac88de41eeaaf",
+      "size": 831
+    },
+    {
+      "path": "code/decor/snow.css",
+      "sha256": "5f753f9e603619dbf861ef2a4c2ab9410775ff423bc1af7f8d3e1cac6d129495",
+      "size": 477
+    },
+    {
+      "path": "code/decor/sparks.css",
+      "sha256": "de6c98d9ee7170cf662f8916975ea84383bddced5f5a772acf64886c8bb85639",
+      "size": 935
+    },
+    {
+      "path": "code/decor/stars.css",
+      "sha256": "28b1b7ab55119b15b6ba2293a733b5794882746af445b9681412cff0d3baab88",
+      "size": 461
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "36e4bebeed596f74c8bf5aab2fc8cb77ce8b57aed384d0a1b8c5ef3fc930a32e",
+      "size": 343
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "df2a0d19129789eaa463eec1d495b0fb9651ed11cf5908955792532e13c34aba",
+      "size": 66453
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "7a591bf6cd664297515bad06c49dfc220a8f54a17804b9fc42247da960f8beb2",
+      "size": 533
+    },
+    {
+      "path": "code/occasions.json",
+      "sha256": "264caaf9ca3c5e852c8f2ca3d2768e38b4d07120cc51c26b6d7a80291d5cf873",
+      "size": 6211
+    },
+    {
+      "path": "code/settings.js",
+      "sha256": "67662b93e133ec3ca7b51d53a827db35c34232ae66dcf8e5ed678ddde07ae522",
+      "size": 10839
+    },
+    {
+      "path": "code/ui/holidays.css",
+      "sha256": "a0bd32a06a94ff673ab186f9fb2bb2ec7095e495f4b5ac4a641fe869db6e10d0",
+      "size": 4539
+    },
+    {
+      "path": "code/ui/holidays.js",
+      "sha256": "ddc1a4318d750a7d0b5fb567e69cb3bdf226ce2cc217001ed8f5c5723eadd977",
+      "size": 38655
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "d0d25f9fe53b2479d94a7cc22aac2df812db0ae9f3ce229e8229c4dbb6040ffa",
+      "size": 1634
+    }
+  ],
+  "id": "holidays",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "api.open-meteo.com",
+    "geocoding-api.open-meteo.com",
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

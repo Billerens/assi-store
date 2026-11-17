@@ -1,6 +1,7 @@
 {
   "id": "achievements",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Ачивки за жизнь",
   "target": "modules/achievements",
   "requires": ["health", "pet", "spending"],

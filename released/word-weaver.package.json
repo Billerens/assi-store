@@ -1,0 +1,180 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "d5a2eccd316f8ab2837e9d15b2b14bac475067b780d9d772caa6c8d5600f7ad0",
+      "size": 10770
+    },
+    {
+      "path": "assets/LICENSE.txt",
+      "sha256": "0a259972cc6e070bc617ab40ba990019fcda8e45ff934b2fc258e2ee764e4070",
+      "size": 3953
+    },
+    {
+      "path": "assets/dict.txt",
+      "sha256": "03fd7b22d1fa0e8296f12770809c8e0b1008b2d263f8525796d36cabbeb40f65",
+      "size": 709903
+    },
+    {
+      "path": "code/bot.js",
+      "sha256": "f1531f61333c13969a92f3c92a39ac16e43d1a16baf8a1b64f540d22420c137e",
+      "size": 2732
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "51509d23898d480375a221f3cb0ce92bada69ca525b6692d1913aa16680e8e29",
+      "size": 5867
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "0a6145f9c04fd8f4aecce2f7a9b8c703cc4c8e65a0f7f8a8e0b8ff6d6a9d7b2b",
+      "size": 23142
+    },
+    {
+      "path": "code/content/about.json",
+      "sha256": "8b8e4055e946427d2be1f45211a0b00ad12c4d76d48bc69370723806a1219cd0",
+      "size": 2128
+    },
+    {
+      "path": "code/dictionary.js",
+      "sha256": "4ee11ccff0f285842bae3507b0448024910796873ede42a4d0f4e28be9884b88",
+      "size": 972
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "4580e3ea6acbcf0098cdbb5cb63ce5907e120d17ee219ec536b467df2ec87157",
+      "size": 11803
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "6d4215c357be53b2e65b8807426be2ca14d6ea5cc8f756ade44fc60d23e56b13",
+      "size": 4346
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "f4e1df7a4f0751b8162f66a10662950e983e97f315a9d932e2b2c07b50b8a3d3",
+      "size": 34788
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "a2bfcbbfbdc15f2e7dca4f359a378fbb87bd84676863a92747f33536642c4b90",
+      "size": 325
+    },
+    {
+      "path": "code/lexicon.js",
+      "sha256": "82b920ff654890513f224e3875c00996277f5888a1d5bf0a6b3e47c2a7c21a12",
+      "size": 8607
+    },
+    {
+      "path": "code/model.js",
+      "sha256": "5746977843fccdfcc3a66679179f4b44d63b89f5e9921b13d6d577f806f4d5b0",
+      "size": 5769
+    },
+    {
+      "path": "code/prompts/check.md",
+      "sha256": "d1bcf0f3b0ea7eb9c00827308c1dfcef6f299106feb9fbdc1b3f97ff2d96c23a",
+      "size": 1719
+    },
+    {
+      "path": "code/prompts/defs.md",
+      "sha256": "bacf6d1235d50659c769d3dda48244acd2843a209b97dfd6e46305af0268f079",
+      "size": 1112
+    },
+    {
+      "path": "code/prompts/themes.md",
+      "sha256": "dd431d2f30ffe7cfceec99ecbbf1b614ed615f864c438e30e12dbb93ceff2821",
+      "size": 1492
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "f51b83587acdd8d40ac975d61024d792365bf92a1cb89996f7b2f15cfea293e2",
+      "size": 38477
+    },
+    {
+      "path": "code/tools/blocklist.txt",
+      "sha256": "5ad38104214a0f98434b29b01831ab9974e326f11416c073d48f0d1e165a8533",
+      "size": 961
+    },
+    {
+      "path": "code/tools/build-dict.js",
+      "sha256": "0fa1099c7c0a85f138c933a601234949ea6fbf786c9071b256ef13951fb64457",
+      "size": 29407
+    },
+    {
+      "path": "code/tools/control.txt",
+      "sha256": "76ed520402f9f9e6dff9f4e83c90e3b14ab2a2262054b4a43762b06f4c9ba3d7",
+      "size": 856
+    },
+    {
+      "path": "code/tools/demote.txt",
+      "sha256": "28b33435795ef466169afcf4600063e85e452a0abb08bb6c82b8915d2d1d6ab3",
+      "size": 491
+    },
+    {
+      "path": "code/tools/dict-report.txt",
+      "sha256": "65433b76714ebd65d767dc36cd8f5778f097a79af6617f2e1e27de6e0625e4d5",
+      "size": 11320
+    },
+    {
+      "path": "code/tools/sources.json",
+      "sha256": "f6f70a6575df16082d7bfdffc430a6d543cb3f1e2cb8614776631e1bf5ae1ac5",
+      "size": 2931
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "5d0570649a5b897887afb00065e9f7d308b053448e224f1c243fb2bbadb557ec",
+      "size": 11499
+    },
+    {
+      "path": "code/ui/city.js",
+      "sha256": "a0dc8f342a4b1d0b09bb90d5b2d9f6dfa27d82696e432bb9ffce0e02186e3932",
+      "size": 5975
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "7ab712fca69c7f9535ffbc5c3c263ba60c11fe0de95617d3570769915baecee4",
+      "size": 10252
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "a4a60d79b5854a543cc2413d8944c9cf1cabaee2d0e952ae722498efb234d6b0",
+      "size": 42814
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "e378ee101297b6398168810924f9264b6122785bf1199778e0c74e25cc4e76fa",
+      "size": 1006
+    },
+    {
+      "path": "code/ui/wheel.js",
+      "sha256": "ac17e8efc8e9d47574e33e471aed61afec90da6619ee599c687432f7c914cde7",
+      "size": 7679
+    }
+  ],
+  "id": "word-weaver",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

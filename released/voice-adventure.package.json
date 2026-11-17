@@ -1,0 +1,152 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "c06c41711868f706bc06a5fd265898f62cd7bcefb94ee1f173f2537d16bf379c",
+      "size": 14209
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "4e4b31bd354ec5f2441c045905d4d92cb3ecaea1d9645eae435641093e567fa5",
+      "size": 10394
+    },
+    {
+      "path": "code/content/demo.json",
+      "sha256": "ab55d74947570205349610ff232b53041047755fba65379121f12ba4226665c2",
+      "size": 11108
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "a330f60a498f4967175f0f7ff3ec0fbcc150a7be1c9f03c3606a09341fc8edcd",
+      "size": 370
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "2c31540b72e3752f41b26103d9e3cd6ff22857d6723372daa9066bc77f66d010",
+      "size": 40338
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "9e2a316b25df83763443f1ad50bc4e42591cdfe7d351058d621dc99290d03528",
+      "size": 704
+    },
+    {
+      "path": "code/prompt.js",
+      "sha256": "08f93646ee744c73a04a7ef07ee435ade15371475881caf99dbbca25ab270733",
+      "size": 7596
+    },
+    {
+      "path": "code/prompts/chapter.md",
+      "sha256": "bba41de21e48b1357c00aa9a9ef7e0554cad408711c36cdaa79dcf4d278880bc",
+      "size": 4905
+    },
+    {
+      "path": "code/schema.js",
+      "sha256": "82b522c3421311c754205004f6640b32a57944f76a966d0c66fb8e5a9abaf0a7",
+      "size": 8058
+    },
+    {
+      "path": "code/stock.js",
+      "sha256": "41d8ff52c7e35a00d3129153aef90ce0eece6721ceab5206baea99a5792c24dc",
+      "size": 2663
+    },
+    {
+      "path": "code/story-engine/audio.js",
+      "sha256": "2e4b5e1ac6b2736b066be8401c4448ce267ad3fd54833ec206cd19932f8c1405",
+      "size": 10332
+    },
+    {
+      "path": "code/story-engine/branch.js",
+      "sha256": "121c3e1a03a84b89ef524fd6ea812aa0cee918433e0d320449327dc3204ca372",
+      "size": 4598
+    },
+    {
+      "path": "code/story-engine/chapter.js",
+      "sha256": "efb57cc6836d24592617bd02b6066200de10a238c0bf1f67be597b60028a080d",
+      "size": 12771
+    },
+    {
+      "path": "code/story-engine/controls.js",
+      "sha256": "d8a0b752a0cd433fa86dc45bdf84e23da46b0774b496f69840ab7080c7e8bc17",
+      "size": 6698
+    },
+    {
+      "path": "code/story-engine/index.js",
+      "sha256": "dc0204947c12851302079e12a9e07dd67936921a6580127c92887b7cf45f58e2",
+      "size": 963
+    },
+    {
+      "path": "code/story-engine/lines.js",
+      "sha256": "8b95817d9d794f0427c8a451872a3f07fc1c735d5ba62d4f983448df18d91fa7",
+      "size": 2451
+    },
+    {
+      "path": "code/story-engine/parse.js",
+      "sha256": "84c79697a760c34268a24483558df74f60f6afd748d4b4846c040266ec9820de",
+      "size": 15626
+    },
+    {
+      "path": "code/story-engine/phone.js",
+      "sha256": "eb47b3c3f533811e6197ec5c04f1042f366f15f8a8c70247f295cf603998cfca",
+      "size": 4562
+    },
+    {
+      "path": "code/story-engine/quest.js",
+      "sha256": "9081515213248c4222502ff54da97877f351943ff114110e223032d1ebca9e54",
+      "size": 17810
+    },
+    {
+      "path": "code/story-engine/settings.js",
+      "sha256": "76361c1da0c8548722906440552bd8ca346329a3d4b9ffb5c5e156f464734897",
+      "size": 3460
+    },
+    {
+      "path": "code/story-engine/store.js",
+      "sha256": "c39e1c319c3517bbdf59f47072161dca99b5547d30cfb3193a95a3bebe5d8999",
+      "size": 3762
+    },
+    {
+      "path": "code/story-engine/voice.js",
+      "sha256": "fd65039d7281a019a89f3fd939e3c97a5b829a2b00dce2ec6c51b444c6bbc7d2",
+      "size": 16598
+    },
+    {
+      "path": "code/story-engine/wav.js",
+      "sha256": "725f2dd03093e552c06d9086967b30f0ee05174466524c1a2e2116d3e12934c4",
+      "size": 2846
+    },
+    {
+      "path": "code/story-engine/words.js",
+      "sha256": "a80ad390ad40134f88900568d6d6891c269bb206972a3fad081c05d45534f650",
+      "size": 6857
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "8706dcdb1234d0e32471a530e2c0a6f33cd188817aae7745132a1180cb4e446e",
+      "size": 21087
+    }
+  ],
+  "id": "voice-adventure",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

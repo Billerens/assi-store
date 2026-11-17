@@ -1,6 +1,7 @@
 {
   "id": "spending",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Траты",
   "target": "modules/spending",
   "requires": ["health"],

@@ -1,6 +1,7 @@
 {
   "id": "conveyors",
   "kind": "game",
+  "version": "0.1.1",
   "title": "Конвейеры",
   "target": "modules/games/conveyors",
   "requires": [],

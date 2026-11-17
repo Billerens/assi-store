@@ -1,6 +1,7 @@
 {
   "id": "garden",
   "kind": "game",
+  "version": "0.1.1",
   "title": "Сад",
   "target": "modules/games/garden",
   "requires": [],

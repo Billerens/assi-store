@@ -1,0 +1,121 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "bfa915762c927d6dd8f8b5f52dba2cf8e4020606532956ae8620a72947236762",
+      "size": 20379
+    },
+    {
+      "path": "code/achieve.js",
+      "sha256": "44ba50d758b8bb43ee37730c27a935dc6b128fb524c62f3aad927a648160501d",
+      "size": 3312
+    },
+    {
+      "path": "code/android.js",
+      "sha256": "30645d6ae0c04a685caaab31cfb99395590ef7e585226802a4d0ec23fa099a53",
+      "size": 18109
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "2bd0a6e8fd91d921194d73cde5e79f50fb9277c5b1e74b6650155ed8819bbae9",
+      "size": 11694
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "d2d8c66e6a3c62c7743388cce538fbef18bffe0b0e874e069b71d85a1b697abb",
+      "size": 308
+    },
+    {
+      "path": "code/logic/awards.js",
+      "sha256": "9064600d650258d21ef9cc0781e0989c68b964b4c81349ca1219238bdea3e86a",
+      "size": 1523
+    },
+    {
+      "path": "code/logic/extract.js",
+      "sha256": "5725397da9dcbafd7cc96446d38bc73199177ea34ab5fb5bdcee388a9df091f5",
+      "size": 28422
+    },
+    {
+      "path": "code/logic/parts.js",
+      "sha256": "cd72d676cc5c68622703bc36271c1eb4ec7dbd422565c87f172e669ef948dae6",
+      "size": 6085
+    },
+    {
+      "path": "code/logic/prompts.js",
+      "sha256": "7d1473244c2d3df14a31b12379f1d150d23cc605dcc374b9c97e90dcac06cf74",
+      "size": 9836
+    },
+    {
+      "path": "code/logic/settings.js",
+      "sha256": "ce82616f082402aa86e8ebc4ca67b2c253c1f8f50d843fc6c39e21920792ec68",
+      "size": 8186
+    },
+    {
+      "path": "code/logic/text.js",
+      "sha256": "2097f13e31f7b78064831a286bfd5969c06f00667765810ef1d0bbf51cb6867f",
+      "size": 8135
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "371e5d99eac5841063c85fd85d2fe9dd2689d937b49fbc41ffaeafac6ca3be9d",
+      "size": 76814
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "71c71467af4428e5d1bd64a9b43d0c63b3c58e919fd1451e8af38ee7a6229d89",
+      "size": 861
+    },
+    {
+      "path": "code/tool.js",
+      "sha256": "5adc67dc5025d9be1db6a0b28b15942c34a6e80a9e90ddb9c631811bb0ff2329",
+      "size": 7387
+    },
+    {
+      "path": "code/ui/common.js",
+      "sha256": "664ac6e10f28ae966ba9d10731dd396409565ec36055bea17e9811e5dac1b97a",
+      "size": 6666
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "9419c3689350f97cf3c3cd2cc1578c884836033549688eca09c3df7b28840fb5",
+      "size": 39985
+    },
+    {
+      "path": "code/ui/item.html",
+      "sha256": "9b208dadc8432b325aac3437f9582f0c8d331a6e3488e12165916728ca6d96bc",
+      "size": 32456
+    }
+  ],
+  "id": "recorder",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [],
+  "optionalDependencies": [
+    {
+      "id": "inbox",
+      "version": ">=0.1.1"
+    },
+    {
+      "id": "spending",
+      "version": ">=0.1.1"
+    }
+  ],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

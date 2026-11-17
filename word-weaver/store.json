@@ -1,1 +1,1 @@
-{"id": "word-weaver", "kind": "game", "title": "Словоплёт", "target": "modules/games/word-weaver", "requires": [], "shell": [], "data": "games/word-weaver"}
+{"id": "word-weaver", "kind": "game", "version": "0.1.1", "title": "Словоплёт", "target": "modules/games/word-weaver", "requires": [], "shell": [], "data": "games/word-weaver"}

@@ -1,6 +1,7 @@
 {
   "id": "evolution",
   "kind": "game",
+  "version": "0.1.1",
   "title": "Эволюция",
   "target": "modules/games/evolution",
   "requires": [],

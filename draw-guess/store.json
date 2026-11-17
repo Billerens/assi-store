@@ -1,6 +1,7 @@
 {
   "id": "draw-guess",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Рисуй — угадаю",
   "target": "modules/draw-guess",
   "requires": ["hat"],

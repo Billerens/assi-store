@@ -1,0 +1,135 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "2945695a164efdd6483a21483788f5106f14e13136e16b63dd43815b8d6e4f88",
+      "size": 8448
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "a9c7b9207cd79d7222d953136c76e64228f4312bb7b758ed027235f172b91f60",
+      "size": 6687
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "4a2a3f39ac6ee1bf6c35a81f2635761fc1c8986faa1b261851dff84008b16b8a",
+      "size": 27986
+    },
+    {
+      "path": "code/content/notes.json",
+      "sha256": "fe09b4e7920053647cbfdc096b1b0a3e088f5ecc0db6df0f5a55097e6580eb15",
+      "size": 9657
+    },
+    {
+      "path": "code/content/species.json",
+      "sha256": "8f9f3253c84fb6ae92b613050cc3be0a7aa061a166f52729779de5cc559e9ebc",
+      "size": 14858
+    },
+    {
+      "path": "code/content/trophies.json",
+      "sha256": "a90ed829ea40ce2c60cce69a2bfc9a9da23cc9752c4ca301208cf26bedb11a59",
+      "size": 2316
+    },
+    {
+      "path": "code/content/waters.json",
+      "sha256": "adc673b2d5e432ebb65639628b68fef89a33db4a186c25d98455f1c3f8994be8",
+      "size": 1454
+    },
+    {
+      "path": "code/content/world.json",
+      "sha256": "e2a62b496254a854e449d61f4671860f5e9ab7ab7ecf0594ad5e553e3278be1d",
+      "size": 6219
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "5eff5285dafe46481e3c0799a7e9726304c1668a1307432021fd51228b36a5ad",
+      "size": 4530
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "2f5111627690fa41278d108b9e777046e8a1eab4dd31e06f4ffc9f9d508265bc",
+      "size": 5047
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "24b2f1f5dfd2f66360ee7b76d13d3c243bce8d7c1b4b3cd3c0bad324ca2a585b",
+      "size": 16116
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "4ca6acf4e86c1040a18b9e8e83a98156d36a2ec813ddf1826bfc491f57530535",
+      "size": 289
+    },
+    {
+      "path": "code/prompts/bottles.md",
+      "sha256": "de0ddaf80f10def428a533f013e1f2be9842a04bdefea4bdc3447536b2c20de3",
+      "size": 967
+    },
+    {
+      "path": "code/prompts/legends.md",
+      "sha256": "e722c7710794eca616eb10b5b2e49c29aeedc76ceb114469b39f52bc10a8c15b",
+      "size": 2638
+    },
+    {
+      "path": "code/prompts/notes.md",
+      "sha256": "5fe9571f4cf0b85f47803edffa55658d7a33d151d7debe92ed6e50254aa4e4ba",
+      "size": 3649
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "fe7c7131891bca2834d0ed8c19108072f4f95b659bd48e11c3fa6d3d6c36c7e8",
+      "size": 61393
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "40dba67537c3f2b7314dabd66c3fb17f68525eebffc835d2e4f45555dab44333",
+      "size": 13366
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "ddcf127ea152a790a30a2b03acabf896b8ee2f6c32e0bcd93bd198a57374a4d1",
+      "size": 11175
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "9faff5b94625f8651f335a57714af382010622c9a3ad5d5c5b0871ac12f642c9",
+      "size": 52285
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "8e6598740ed7a7ec8a0b54d929b0722302bdb84a422f03e90844ecef3d98cb3d",
+      "size": 891
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "fa568f476dd01b86c2c669f5222205080bc96ec9a0e8478ac7d61fbe0bc9eeaa",
+      "size": 56765
+    }
+  ],
+  "id": "fishing",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

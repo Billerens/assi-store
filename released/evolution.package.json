@@ -1,0 +1,140 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "10a78d80c261f1ab1aa3ae14c92e82ec7ca260601df784a9ecad785f531f9d01",
+      "size": 22145
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "8a9cb232b559d3fb69c9b304bb0fd12c1ab3106a34c9f90cf6e50746309e786f",
+      "size": 4610
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "aa083b844f08ec5130b0d797eca9dac67b7324646449279dfcaf4d113467f6e8",
+      "size": 36944
+    },
+    {
+      "path": "code/content/chronicle.json",
+      "sha256": "d58177ed2504b294f1854ac8de97a7fcfd7baad4f0960e0f7dcd247a8fb0eb0b",
+      "size": 4751
+    },
+    {
+      "path": "code/content/constants.json",
+      "sha256": "7f4cb3c7225ced4bed1337254f6fcabde63db4339e23573641129bb9ca0af943",
+      "size": 3997
+    },
+    {
+      "path": "code/content/events.json",
+      "sha256": "2bcfbd083a84fb47eaa7664eb4c3493d3b66b4eea030fe87acf7cee8bae23865",
+      "size": 7825
+    },
+    {
+      "path": "code/content/laws.json",
+      "sha256": "eb32ebd776a445e93405477d42eea64c4d463cb3f5af42d9fc951691bd4cd72f",
+      "size": 3343
+    },
+    {
+      "path": "code/content/mutations.json",
+      "sha256": "7bcfa1d69b88b9b0269761b20605796326f786595cbd3512751e28186cbf3e89",
+      "size": 7518
+    },
+    {
+      "path": "code/content/world.json",
+      "sha256": "d6dd50cf7121edf100ba57c906cb43ed3e5b4459c3fdde3ef9c2001fd10a65a4",
+      "size": 17728
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "48c2912e0656ba00267c78a7fdfac8ed391a958acf175abb82a0f7585524f092",
+      "size": 7131
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "6371d60ba46820440f76ac5657961f4055279e97dd9a4093681986b6d8e4fc6e",
+      "size": 82645
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "b384eb2227e7272f754eadea7be90f0e6e0d8a27efff042fd21d198e1b5ccc0b",
+      "size": 299
+    },
+    {
+      "path": "code/prompts/chronicle.md",
+      "sha256": "3441a34e71428c394deb00087b1b9113c3d4428ec0fa5f29ef759e3a8df7fad9",
+      "size": 1962
+    },
+    {
+      "path": "code/prompts/constants.md",
+      "sha256": "252dc9071719766c9498a0e42852045f9b2ba3725786c7aebd9d48bd1feaffef",
+      "size": 2773
+    },
+    {
+      "path": "code/prompts/descriptions.md",
+      "sha256": "f542d48d4eb1d390c4e9520337637c2e3d617f890a6ffbcf06f1c84c698fcc73",
+      "size": 2928
+    },
+    {
+      "path": "code/prompts/mutations.md",
+      "sha256": "c2e9b91212ae67b7285d14862c7e1dc49bebbc78b6bc8de5262971bd8f3d1d75",
+      "size": 2162
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "73e22b38000c0cf83631b494cd4813e40d65472c0b38519dea41698f00348059",
+      "size": 39772
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "7cf2d7f0efd88973246ea8e194ca23800982d30b439069e4e392c50756abb762",
+      "size": 38920
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "3af923c35e4f36171fa424509e78232a966257d7dedf89bf92bd8391f0dd4000",
+      "size": 11824
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "4ef63af32f10f60e7b5c10d25db7a6b20c7efe62b2c61e8a3a55a712b0d1bebc",
+      "size": 34901
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "dddd3ade8fc7b905d6d18fc102f2dd180d627948ae26e89a0d9ba16bf321fd77",
+      "size": 895
+    },
+    {
+      "path": "code/ui/scenes.js",
+      "sha256": "8185c4d40b45edd0c79d90cf07b70afd1486ba208592878f08f9ad354f2acf5e",
+      "size": 56657
+    }
+  ],
+  "id": "evolution",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

@@ -1,0 +1,135 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "31e68e4427b81fd0ed04fdb07f7decd0d1ad6f3970e50389c4296f6f596621cf",
+      "size": 15118
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "c7f8af90698793b822c9c2edf069550482b455d896f06043578b226da1678c85",
+      "size": 5995
+    },
+    {
+      "path": "code/combat.js",
+      "sha256": "86f4f53b9c7513f7c930542a5b3883c90c194b3ecdaca4b61920ce034d3de002",
+      "size": 13966
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "982aad04a17f43dfd9904e18bdb22f461eb5e077cca6148cc571629b3c1b504b",
+      "size": 47585
+    },
+    {
+      "path": "code/content/catalog.json",
+      "sha256": "7fc0b4f22b3751406ac69136a97751b24170397f3ccf4baea52f068d6fae628f",
+      "size": 8163
+    },
+    {
+      "path": "code/content/names.json",
+      "sha256": "7576d8d9ada850e01da315105954738540da1592b8d3139b0eabb1d754c25064",
+      "size": 368
+    },
+    {
+      "path": "code/content/news.json",
+      "sha256": "8c42c5adcf92cf70b9f503d6874308c0bcd9ff60053a7e4941a387518e33bfd5",
+      "size": 542
+    },
+    {
+      "path": "code/content/species.json",
+      "sha256": "b3492554a1759de7dae357e7c4aafd4661ff382e6898d55dfb81f7783211cfd1",
+      "size": 398
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "c7b3de507a79476069187d5eb77597f723ae954b2e89935350258756954e972c",
+      "size": 4471
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "195045c75b48293fba943741784134ebf2e31b324c556d314c7a4d52ff1170dd",
+      "size": 45671
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "60d73f15c551184525c1a340cf7ad528a8602157161eb07d93540167a4d9ebc2",
+      "size": 315
+    },
+    {
+      "path": "code/prompts/names.md",
+      "sha256": "fcfd4432a11142907ad0a1d5778b5af06bb3372afa7300b7984ed6f3d2fbaefd",
+      "size": 1628
+    },
+    {
+      "path": "code/prompts/news.md",
+      "sha256": "cebacc4357d14b99feb08f85678eb132b137c3d078ebd149bd6e5047669a0e59",
+      "size": 537
+    },
+    {
+      "path": "code/prompts/species.md",
+      "sha256": "75fd8243fb0af9b234033b177960628affccc979331fdfd385771448d4978c3c",
+      "size": 598
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "6c23314701e2125c67a61360649c97d367f2970a3f44b5d76ac15f060c899b3d",
+      "size": 28962
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "4896afabac2fa9d7a98c00495daff868e9508e73b3825cf8fdb8b42392d9b7c9",
+      "size": 22463
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "a901a2d4b8e8c3641a3db930f5d7977c551ac72ee65beeaca1a0b890b74f0556",
+      "size": 15061
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "a0227fc8661280ef57ca9929a199ab2a162ba2fb1755daa0cbc52feef614de52",
+      "size": 39514
+    },
+    {
+      "path": "code/ui/icons.js",
+      "sha256": "649008d21ffdc1c3960cbc61cf4f41de4c69c0e523f81af72eab46e7a0b2ef66",
+      "size": 11715
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "3a31c832db065b402d7fded38692f750907a94b8cc8d6439c9f3aa7a1bdab1dc",
+      "size": 964
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "9eb80ee29a01ff04af8404fcab866b2fb553bb9b87d8310533d5756ad00222a1",
+      "size": 13644
+    }
+  ],
+  "id": "menagerie",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

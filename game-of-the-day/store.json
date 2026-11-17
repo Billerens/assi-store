@@ -1,6 +1,7 @@
 {
   "id": "game-of-the-day",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Игра дня",
   "target": "modules/game-of-the-day",
   "requires": [],

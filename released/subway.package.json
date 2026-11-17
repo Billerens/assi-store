@@ -1,0 +1,138 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "f38ee6b95ab0d350ec89e70352afb00e655156ca0adb2ce50fbb3cf3b9d02ecf",
+      "size": 20589
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "9569fc1a975c86c3626f0fd4cc652d3dc22d6d726fc1ec12f47861179edf4723",
+      "size": 8423
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "8eaf24453c1c1091e4c39b981e75a68314b5826f95f6965d0dd8f56936fcc5b7",
+      "size": 29354
+    },
+    {
+      "path": "code/content/bureau.json",
+      "sha256": "733829fd9a7bc97328c8918e6e414182ec59e2bcf7ca6f1e5c1fa1295b53e058",
+      "size": 2782
+    },
+    {
+      "path": "code/content/city.json",
+      "sha256": "560aa7e7051352b3e3336bf61514c0f084b5425180cece3154e7e7b811c534b8",
+      "size": 4169
+    },
+    {
+      "path": "code/content/events.json",
+      "sha256": "ea5e6e9dd5570ef502af4fcbe38a184fb5bd1f2aad83375e8442d686a4c5604e",
+      "size": 3712
+    },
+    {
+      "path": "code/content/lines.json",
+      "sha256": "3daca0428bba7586df30da0102dff4a26e4da00a8d4c55096a339525cd697a2c",
+      "size": 2238
+    },
+    {
+      "path": "code/content/stations.json",
+      "sha256": "6e917f752871f2457e2603c481ddc2d44a5547f2d277ec248157220aabf2d4a5",
+      "size": 1579
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "6ad5054eeeac1d3804d72e8c4f84304f6e3f9faa83c7f87bc8612f72f536b777",
+      "size": 1759
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "80d0b92959057597458472fa9131a5fbcadbfd975378ee320edf0f774191ef54",
+      "size": 7208
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "7b5097d38b6ff87a933ec4e546a83f0652314c21973bf668cf73880508e6d1e7",
+      "size": 34129
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "02aa1e01efe8c915479af1a7cf39be20168f3bc1b3a625684529302a285f6b2d",
+      "size": 235
+    },
+    {
+      "path": "code/prompts/events.md",
+      "sha256": "9ed91b66a42b3e1e01704314cf01e5d40afe6110aeb1a907882c738e35aeed74",
+      "size": 2101
+    },
+    {
+      "path": "code/prompts/notes.md",
+      "sha256": "24f4d6d464e44134e2310594437f9a28de59ad584eb72bb0877a94e6b8935e4d",
+      "size": 953
+    },
+    {
+      "path": "code/prompts/stations.md",
+      "sha256": "1cf1527ae03a89c489bc6df553cb2729663d1dac2af09cf969c6d13a66f09578",
+      "size": 842
+    },
+    {
+      "path": "code/prompts/tariffs.md",
+      "sha256": "4eb9e030ca30db2314454ca5ad91c5d956852d470437855f00789180fe9a9c75",
+      "size": 1010
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "7eb6b5c317a69fcea094fcadbf1996c98a1b6cc252e1f8c2dbef4a308f86f72b",
+      "size": 75821
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "13837b251e400995c0e2e2cdb51ba8d20e12ce0edfbefe0c1577697df1e96427",
+      "size": 19008
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "532c54a7221c577d9f2bd9ea32a0a194eca7ae46bc3744ce638031c44ce58fe7",
+      "size": 11086
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "3072b9df4f5eed55fb94c405fb0b7466a76ae24154a5f1d94b2c833eb88a7fb0",
+      "size": 73428
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "d7083f40888b7a46129e5f8d8465e7bbd56878c5523fe7fdce8b26be6612a9b1",
+      "size": 893
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "ee07406ad8c76b826a42792b0ec1f20bfa155cd6bc2ff4faf0f164f4d6c0aa0f",
+      "size": 19526
+    }
+  ],
+  "id": "subway",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

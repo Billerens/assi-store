@@ -1,6 +1,7 @@
 {
   "id": "dynasty",
   "kind": "game",
+  "version": "0.1.1",
   "title": "Династия",
   "target": "modules/games/dynasty",
   "requires": [],

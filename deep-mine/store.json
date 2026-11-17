@@ -1,1 +1,1 @@
-{"id": "deep-mine", "kind": "game", "title": "Шахта вглубь", "target": "modules/games/deep-mine", "requires": [], "shell": ["app.visible", "job.once", "vibrate.pattern"]}
+{"id": "deep-mine", "kind": "game", "version": "0.1.1", "title": "Шахта вглубь", "target": "modules/games/deep-mine", "requires": [], "shell": ["app.visible", "job.once", "vibrate.pattern"]}

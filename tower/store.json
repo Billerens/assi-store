@@ -1,6 +1,7 @@
 {
   "id": "tower",
   "kind": "game",
+  "version": "0.1.1",
   "title": "Башня",
   "target": "modules/games/tower",
   "requires": [],

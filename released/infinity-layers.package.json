@@ -1,0 +1,128 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "a3a8ff236756a04c0663e29d9f6d5eb193bb7f5639ac5868223ee9189bc3e5c1",
+      "size": 14567
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "d3748a19621db0d2d22a37d4829a964a7d61162f385fb66e1a0c1170008e8461",
+      "size": 5078
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "75b7b850144e8bfbe49cd4cd977d69fc7a99366366dae121f46701b3bb0d0140",
+      "size": 24669
+    },
+    {
+      "path": "code/content/aphorisms.json",
+      "sha256": "3672b48b54a8343a63a75cbe13486e0a76a37828cf102c4e6e872be8442c9016",
+      "size": 764
+    },
+    {
+      "path": "code/content/challenges.json",
+      "sha256": "32ee3ac4a88e0b48a6d80f7f4eca86bdbf32a8cc4212496f8f551e375ddaff75",
+      "size": 1598
+    },
+    {
+      "path": "code/content/events.json",
+      "sha256": "0604fa826b9869e8eddda5b8f3156921163eabd44da36b7b9cb6f24702b096ad",
+      "size": 1075
+    },
+    {
+      "path": "code/content/rules.json",
+      "sha256": "d46de5e66504fae7cdc4e7a5d805e32274538579fd848aa9880cdc2a37845d36",
+      "size": 1209
+    },
+    {
+      "path": "code/content/tiers.json",
+      "sha256": "4194e650de8d6f309df8a65623582630c11b898f745c69c4c070b76d2d3ae6da",
+      "size": 956
+    },
+    {
+      "path": "code/content/upgrades.json",
+      "sha256": "a89a59d184723d4bb4308d1be3b3daddca3752458a127decb4447f6a72e4f75d",
+      "size": 3566
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "e537a56204b99bdb8cec2e10b498bd33c00ef8966ab78f36b2126085d8c7a0a5",
+      "size": 6505
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "1920d951cc9cd632297445f9f31dfc6b62e44c1f0d8f4a7dbaf0c188c07f18c4",
+      "size": 39593
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "8abc645551e6a388ba788102b46afe4046813bfb8c1bed6aebbcc7b8d99745a2",
+      "size": 300
+    },
+    {
+      "path": "code/numbers.js",
+      "sha256": "d8456efeab6f3ccab58d7f6c86f5d92cfea0a2f16f53d7ffc2bb533a84810660",
+      "size": 11625
+    },
+    {
+      "path": "code/prompts/aphorisms.md",
+      "sha256": "a3fc3b2de8622b606bd9b421fbfd020295d2f00639f7c6751e6ecb9a192bbc19",
+      "size": 689
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "22cfc4a0ed48b623031640db8db44e141f5f8c426f904430133fcbd4b00d623e",
+      "size": 28416
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "0bc8c314e53117101179ec7ecc35e906ea17385ff3de2580e6773c88ec6c9f64",
+      "size": 10308
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "50c59a255f51545aaa8a46e3a2a6802c99f1ba56ca97b2ad5f0aa6ccb451e1ac",
+      "size": 13506
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "225f2652028bd5fc8bbf38e64162000e08d65db347fc8a3c21effdddacc60836",
+      "size": 31177
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "9413d88af3eadf4e79c1d8967a1edee81a2bd2c8ae5cbc6f28357c5fd9a641bc",
+      "size": 1010
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "90f53775f20f537f3e6661d5147e44646da3139976e96558ec2cdeeb99debb7c",
+      "size": 15512
+    }
+  ],
+  "id": "infinity-layers",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

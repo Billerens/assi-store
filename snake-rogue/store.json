@@ -1,1 +1,1 @@
-{"id": "snake-rogue", "kind": "game", "title": "Змейка-рогалик", "target": "modules/games/snake-rogue", "requires": [], "shell": []}
+{"id": "snake-rogue", "kind": "game", "version": "0.1.1", "title": "Змейка-рогалик", "target": "modules/games/snake-rogue", "requires": [], "shell": []}

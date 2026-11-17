@@ -1,0 +1,117 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "58d856cd7f84d9a5fbd83ca41c430b2eaa3815e1f5a23284a85fb84779474270",
+      "size": 26310
+    },
+    {
+      "path": "code/agent/gamesmith/agent.json",
+      "sha256": "1a443f1af7ecfb3e0de7b48e8df8a6f8b5e69c47ec27676ba2dc2df2a68ff6d0",
+      "size": 407
+    },
+    {
+      "path": "code/agent/gamesmith/system.md",
+      "sha256": "8a503afde8656146fd2d53fa87fd3429729628d719590c13491bb7fe34171c3d",
+      "size": 2325
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "900a611db6c6ab859e053ce878546c45443a14b6be671385f9ba7238e76f8280",
+      "size": 11989
+    },
+    {
+      "path": "code/days.js",
+      "sha256": "15de2a6518b16e8f9db9dc2e3067b1ba64f72bacc310cd71831dadf10af0e0f7",
+      "size": 9918
+    },
+    {
+      "path": "code/device.js",
+      "sha256": "74c9fe4f3254c5c6d8debf0e6ff1be4d4f01f1a5dbd0a6e4db81f598d43f7c84",
+      "size": 1773
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "8bb2cdf5b8a4470580aa69323537edc59a3aeeff935abe7fa0c14dfc4f34a519",
+      "size": 407
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "9540a58373085dfbc77119ccda5829c166c112167f79680c7043eb42da72000d",
+      "size": 72249
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "58fbac002bdd5754509096d7d90f065595a94dfc65fea9935eae85fa06261b8f",
+      "size": 789
+    },
+    {
+      "path": "code/prompt.js",
+      "sha256": "be7d6954ff0ca84b4651cf4427718581f3b3585ba61cb4aa95f259698fb14d91",
+      "size": 11375
+    },
+    {
+      "path": "code/prompts/task.md",
+      "sha256": "f2031fea7c776a3434dbfc299b1f7c27baeea0a36297af279cc0ebe67648a3df",
+      "size": 4017
+    },
+    {
+      "path": "code/prompts/taste.md",
+      "sha256": "492d56f2ceeba4f38571c4a5b51c9785a68d2058b3f9087bb27968b71e95b2ac",
+      "size": 1706
+    },
+    {
+      "path": "code/schema.js",
+      "sha256": "3cbad18b4286806b4cf8159bda49a7a126988c18f43019c7ec07821eaf544eff",
+      "size": 13146
+    },
+    {
+      "path": "code/slug.js",
+      "sha256": "e51d41ec90756ce005f5b956bc86bd37b074b340e4fa4b0ca850f389879667d1",
+      "size": 5312
+    },
+    {
+      "path": "code/taste.js",
+      "sha256": "5f8b2e31dca47c278c06029a54a72c3b4eba8d661a476cd5229fe98003777158",
+      "size": 11261
+    },
+    {
+      "path": "code/ui/card.html",
+      "sha256": "2bce019f47015439773e44ed7658388aa999a2d9f30a23887a761f6b0e6946ba",
+      "size": 14523
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "afcb60c8740175b2b0cdd5e540eab81f5db63ea8ae9e50e9f0f8f5fd0cc74a72",
+      "size": 39460
+    },
+    {
+      "path": "code/ui/rate.js",
+      "sha256": "721cfa938e2835a898e25ce7b8f6b2c5375d51fab1eeeb67af4aba7304c6eac1",
+      "size": 10698
+    }
+  ],
+  "id": "game-of-the-day",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

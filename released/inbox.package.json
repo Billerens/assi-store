@@ -1,0 +1,127 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "693b080e0deac735885bf04360450355fe41fa084e02fe1d1dc1eecdcdb70229",
+      "size": 12194
+    },
+    {
+      "path": "code/achieve.js",
+      "sha256": "44ba50d758b8bb43ee37730c27a935dc6b128fb524c62f3aad927a648160501d",
+      "size": 3312
+    },
+    {
+      "path": "code/android.js",
+      "sha256": "0d6325634be49020e1b1851ab1f651e8bd1a85ef3c9562f147f971a9bc73e773",
+      "size": 13676
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "8c4b4b01d205b82b910abd70b1675b413bcd39627b221d042d07cfdf71ceed72",
+      "size": 7720
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "be87c116c1659cc90c50fe2e4bc332bfd8a2689b21f764c7509075a222deab09",
+      "size": 261
+    },
+    {
+      "path": "code/logic/awards.js",
+      "sha256": "54052f88c5072c593002364a5f0a7716a8de4559eb3ead47f1d1797b382f6f81",
+      "size": 2385
+    },
+    {
+      "path": "code/logic/dedup.js",
+      "sha256": "a79bb0697dbc7fbe2c3fe6ba6a5884392991550a13d496d9717bbaf133f0d795",
+      "size": 4216
+    },
+    {
+      "path": "code/logic/digest.js",
+      "sha256": "d5e9c05b64f5fbc1c7dedab2cf0581bda0c615e3a56959c33bd56340af0cac8e",
+      "size": 7017
+    },
+    {
+      "path": "code/logic/feed.js",
+      "sha256": "81bde7f3189b678f47a1fa3a317896404f22a6077fb33debe135d3a79ad42410",
+      "size": 9920
+    },
+    {
+      "path": "code/logic/parse.js",
+      "sha256": "6da413615a8087f009bb29172ef82679b4ebee91e25bcd93a414562bf7ac2bb0",
+      "size": 11731
+    },
+    {
+      "path": "code/logic/settings.js",
+      "sha256": "578b003dade34ef564833e12d714b44e8a66ecc9fb1624b91f582639c088619d",
+      "size": 6267
+    },
+    {
+      "path": "code/logic/sha1.js",
+      "sha256": "13ecdbebe165188bb4449b385e72159234320ed908f5de321aa3e270462b47a4",
+      "size": 2752
+    },
+    {
+      "path": "code/logic/triage.js",
+      "sha256": "73af23b3c49ea11c560f0b43724a9cc08620af0846af27027e7f4ead9861c86a",
+      "size": 10944
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "fd639fdad2133cef947f90c8e517b21c0403b4ff0a2a9c5cc9f5d95c50dd7636",
+      "size": 63738
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "cb71ce48587ee5ec2a473b19074bd28fde3492409fe420984cf4f392b9ca4ba8",
+      "size": 643
+    },
+    {
+      "path": "code/parsers.json",
+      "sha256": "9a5700d7f212cc75063fb392076185c16cc64fc9b821b23b68b32bed6a05d480",
+      "size": 5556
+    },
+    {
+      "path": "code/tools/inbox.js",
+      "sha256": "1448a3e9b2edb64c8a646c8f3fc6bf6fce06c9a2af016d97bfb400dddcefff51",
+      "size": 9095
+    },
+    {
+      "path": "code/ui/inbox.css",
+      "sha256": "028a9dae51aa53aa4952c0ca32e63837ff807e9b4ce87e7a8c2b076e7f00144e",
+      "size": 7324
+    },
+    {
+      "path": "code/ui/inbox.js",
+      "sha256": "eda439f64323dd54eaebbf68c424f0234a84b57c5637db64f76cc67f421ed9e0",
+      "size": 34817
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "fa452ac7ec3307243b3f728fb6f2a7403c3944a14041987461a65a5fadaa6b6f",
+      "size": 1221
+    }
+  ],
+  "id": "inbox",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

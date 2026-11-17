@@ -1,6 +1,7 @@
 {
   "id": "recorder",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Диктофон",
   "target": "modules/recorder",
   "requires": ["inbox", "spending"],

@@ -1,0 +1,190 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "eff524e958a517d150b012ae35bdffd2ae1c64f51cc85ec40e1969a4cca1f1e8",
+      "size": 34780
+    },
+    {
+      "path": "code/adventures.js",
+      "sha256": "90a18a96abf077f7003c6ac09684c0567a88efb7cb43b16c0b8d6b77bf4c65c7",
+      "size": 25079
+    },
+    {
+      "path": "code/artifacts.js",
+      "sha256": "129a666d7ee49603af2458db0c7c207a9559dc89aaf0471d18f7c1b33c2c2af5",
+      "size": 25640
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "fa267637b163d8f7d0113f559599abbc64c474384d65ebc84643e71a89662d78",
+      "size": 22042
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "45ddd08119ab106999018fcb2c97cfa4a1544c06b1fdfee5043d5054123d5d77",
+      "size": 64069
+    },
+    {
+      "path": "code/content/blades.json",
+      "sha256": "6115b7b47135f89e24b0ce2b099c8c9a6ae19d02620609aad031e0138aaf12c9",
+      "size": 4727
+    },
+    {
+      "path": "code/content/bosses.json",
+      "sha256": "ddef74bbe54fcd41e3f2f82385d9bab2b28bdecc75099fef54910c4c17e7f10b",
+      "size": 2255
+    },
+    {
+      "path": "code/content/events.json",
+      "sha256": "fd89b24431c37013739e868323cd0910a94422d54688963294b3d1853b0804fe",
+      "size": 793
+    },
+    {
+      "path": "code/content/monsters.json",
+      "sha256": "f9c369c237ea16b8fc1e85e769fc6705a8cf4eec0a04350cb8c6c0990a29428f",
+      "size": 2170
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "a3c35e2f208e787d9166153dbcdf250841084ec581df0dd386b6d581fd90868b",
+      "size": 2432
+    },
+    {
+      "path": "code/fixtures/v2.json",
+      "sha256": "96ec6ea52d929c7bac2574a88cef642fca3f8f5531b6b1fac67e33687e268fe0",
+      "size": 3599
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "286058410e6b8a1c8ddfebc4b19088a927229d5836af5e29bf735dd08ab3159d",
+      "size": 10711
+    },
+    {
+      "path": "code/guide.md",
+      "sha256": "6399786a579e80584198a2e2a68348b33d2abd365eac8a7acfc64c8c40e4bbc4",
+      "size": 49062
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "4fbf1a08d30757b131a66a7835e2a379ffca7c43944796d6246b114e4bd38045",
+      "size": 129626
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "d969c594c163c2c250940c8a4d9ef8300256d429726b9000c7f78e303e3923b7",
+      "size": 324
+    },
+    {
+      "path": "code/outpost.js",
+      "sha256": "db3d6aebbb970f1885c7555fdc864cbb659cf894088dcb207cdaee61692193b5",
+      "size": 53067
+    },
+    {
+      "path": "code/prompts/blades.md",
+      "sha256": "30321938f33e0b0bd1129c3c20f98f88e21dcb8945864b74fb71f61bb8e21e49",
+      "size": 7500
+    },
+    {
+      "path": "code/prompts/caravan.md",
+      "sha256": "14870015431f854e072cdabdf541fbbc52a59e8c763d103ab52ecce02356750d",
+      "size": 907
+    },
+    {
+      "path": "code/prompts/monsters.md",
+      "sha256": "4919d742459a3d48e8f6de6b9a6fd2aa0e8454159f36b2436ea093f6a073c0af",
+      "size": 1961
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "9cb0d881e30a32fc9d7cd8d13a6f08512baddd7017b812075f843ff1ff311a2c",
+      "size": 76765
+    },
+    {
+      "path": "code/ui/adventures.css",
+      "sha256": "d93c690281975c795116344330d2f4f80001d505d2c65d9f22d7a15132bc91d8",
+      "size": 3432
+    },
+    {
+      "path": "code/ui/adventures.js",
+      "sha256": "0ff1155e09a2b7d03a3cf7d95ca9c89d5d0ab43d2893fcc7c7b7cfed737600b5",
+      "size": 18244
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "b2dbd5c09c8827c0639a869e18d2316dd9f04c92e83eed09e2463433b643bd1d",
+      "size": 23162
+    },
+    {
+      "path": "code/ui/artifacts.css",
+      "sha256": "241508eafaa7a1340c1a4aafa79ac50f4b6aebc132fe1627a5df2ac31a4c0857",
+      "size": 4940
+    },
+    {
+      "path": "code/ui/artifacts.js",
+      "sha256": "fc61ba2ed54b8adc91809dce5e6c4b855307dde03c43f0bd127044dfa368793f",
+      "size": 16806
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "d2431cbc3c7fb0be9d85e3c3ed650734f035c86ae0ea5a48ef275f1ecd2801bb",
+      "size": 15460
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "ac2b0190ab41c27572ad080fecb921f30091aa25de998e8ae812e0c2b138d143",
+      "size": 72411
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "b0e02c869200f2b8a5bfd8219652487bbe39cfa6e019037264c3f4fcbfc22398",
+      "size": 1372
+    },
+    {
+      "path": "code/ui/monsters.js",
+      "sha256": "fcdfa5e6b0eb65a8eb4f315250a6df57acfaab2f1942d6e84ec80d66e7b0ca4e",
+      "size": 33181
+    },
+    {
+      "path": "code/ui/outpost.css",
+      "sha256": "8a5af528116f1c6895abbc58a061b112f841e9ffa50cac65bc2f68c564942988",
+      "size": 15218
+    },
+    {
+      "path": "code/ui/outpost.js",
+      "sha256": "b9e1e72dd7ff91b2a793f6ce60ed7937a0438d3cced5ef140059ce6fa5c54dea",
+      "size": 63429
+    },
+    {
+      "path": "code/upgrade-progress.js",
+      "sha256": "0a5ba2d78bd4943591ff2a533a58763eb7beb8601e8aa4803f76329ec959a447",
+      "size": 2470
+    }
+  ],
+  "id": "merge-forge",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

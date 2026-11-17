@@ -1,0 +1,114 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "d427798d690b5a568d44630ee46595ee7b38c954304da781069e4d58e4cdcc16",
+      "size": 20163
+    },
+    {
+      "path": "code/agent/storyteller/agent.json",
+      "sha256": "ffed8540e7b63e957e56ae3dd64ebdca32c1e0de9a694b8e9e61b189b02bfc50",
+      "size": 299
+    },
+    {
+      "path": "code/agent/storyteller/system.md",
+      "sha256": "5de3e9209d350b2741b70d0bc36d91bd8f0c0faa2afd14b6b8081fd66e159cc1",
+      "size": 2196
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "b75150b69cb3cf24e972e0164eb8aabab63c3be846bf5e90b301d301d9e03d8c",
+      "size": 11704
+    },
+    {
+      "path": "code/content/sample.json",
+      "sha256": "fc1fabffec47149615ff6fef248175c772476b89f17d5598a0c38a501cd81993",
+      "size": 11603
+    },
+    {
+      "path": "code/details.js",
+      "sha256": "0e7a9298b2a4ab7dad30d720355f74c2a515a160fb841bd42fab82707b2e9379",
+      "size": 18487
+    },
+    {
+      "path": "code/graph.js",
+      "sha256": "8f185ccd04bc9b2a88b2d132392aff5393b594485e5579f6792191361ee18915",
+      "size": 11666
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "cc76d46eacb7370900a22453344db31c9f4114d3484768f6783ffd740f57988c",
+      "size": 294
+    },
+    {
+      "path": "code/links.js",
+      "sha256": "399e925064a17c61bf746d32a311268f261c29cd39b8a3228d0f823689959eb7",
+      "size": 6851
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "754267e937974caee138f3876d9b8f2ce10a521e31939ab6e05b6f4dfef66514",
+      "size": 58307
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "b1e213ef3b88bfc1a6d4dfe0ad69de970e1f9be21955791670a45943a0d2cafd",
+      "size": 554
+    },
+    {
+      "path": "code/plan.js",
+      "sha256": "d3f91312cf42472c9401a50be5b85852e0c72fe112a840a75a214bf77cfc18c7",
+      "size": 8102
+    },
+    {
+      "path": "code/prompt.js",
+      "sha256": "32867e87a6b3cf4ff86f010f6a360a732530601a46b7fe50878b799df1943911",
+      "size": 7893
+    },
+    {
+      "path": "code/prompts/episode.md",
+      "sha256": "bfe41ed7e4e9c33ac76ab82b8af100244ca097abd06dac370c374d900ac665ce",
+      "size": 4690
+    },
+    {
+      "path": "code/schema.js",
+      "sha256": "d3abbebd4b8fa124f43923653ba462d7e9f8894fa66ffdac7fc4921ee06af58c",
+      "size": 10357
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "ba20a968300c03a6366fdbc9745fafb68291ae692f8648f617b3fa147e210e8a",
+      "size": 29174
+    }
+  ],
+  "id": "bedtime-series",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [
+    {
+      "id": "voice-adventure",
+      "version": ">=0.1.1"
+    }
+  ],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

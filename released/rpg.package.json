@@ -1,0 +1,128 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "8f92e3364de4541c69384995006f30a492393d8f8f329322ff93c9d47f482c5e",
+      "size": 9607
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "20b41e94ddf4588b9f39676bdfac1c902b55f1dabd02e7b453c91a327746e797",
+      "size": 6218
+    },
+    {
+      "path": "code/chronicle.js",
+      "sha256": "385de8d475cdf479d03b4a1f889284d95cc79ea9ab5e024529d467cb9302e0d4",
+      "size": 4267
+    },
+    {
+      "path": "code/dates.js",
+      "sha256": "33bde2d2f6707e2a8692d4e17db3f0d5ab34db49686ca67a226f080e96d623ef",
+      "size": 4633
+    },
+    {
+      "path": "code/fallback.js",
+      "sha256": "759e0b0404feb802021eb4ed806122ddf2c25d6c75393ffed82083c24b9f3e5c",
+      "size": 8722
+    },
+    {
+      "path": "code/geo.js",
+      "sha256": "ddb8f7bd01964923de5cb23f704c9a26c6f9574cc962021d5ff344b89f36b281",
+      "size": 2719
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "4f4072210dff6e55291d37edb58afd8db1f36b77b26872b1f9516d26529e220a",
+      "size": 334
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "55d2151b735bd03edccf5653d86ec363e5b8eeff2d3c014533f40d85d33d8ef6",
+      "size": 44061
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "5f59be30edabfe5416dd8f471b4d2ace7149a57b73692c82e2cfb294cd54e313",
+      "size": 688
+    },
+    {
+      "path": "code/quests.js",
+      "sha256": "51e8197fd50e3d3708c68315a49166a41e011db219ce7ef0f7e420a71e1e2427",
+      "size": 9615
+    },
+    {
+      "path": "code/quests.json",
+      "sha256": "c8477d599dfe6ab8d490fa08ba124df704dddbae46ce16fac3b65da552118aa9",
+      "size": 3462
+    },
+    {
+      "path": "code/source.js",
+      "sha256": "e5358b2c3f382f1f31b46d1a16218a5207188f623d587e724b68b80748cd6c23",
+      "size": 7626
+    },
+    {
+      "path": "code/ui/creature.js",
+      "sha256": "b36041e32c797a7f292b79942da04923df7843c73bb9067f97fa9918ad61b381",
+      "size": 7375
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "96ab9c61468fe34936b3c014954f82b0fc1c9682652139c71c090ecfe7703e19",
+      "size": 34968
+    },
+    {
+      "path": "code/ui/map.js",
+      "sha256": "d8d16761a30594bd1763c8cbcd2d4ab6fae7e2e398f2c777357b42b7d77c0d2f",
+      "size": 12086
+    },
+    {
+      "path": "code/xp.js",
+      "sha256": "a816fc676a1b5150e7f1e690ca311d2b85fd42126f81ec4e2febe10822578bbe",
+      "size": 9860
+    }
+  ],
+  "id": "rpg",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "cdn.jsdelivr.net",
+    "tile.openstreetmap.org",
+    "www.w3.org"
+  ],
+  "optionalDependencies": [
+    {
+      "id": "achievements",
+      "version": ">=0.1.1"
+    },
+    {
+      "id": "health",
+      "version": ">=0.1.1"
+    },
+    {
+      "id": "pet",
+      "version": ">=0.1.1"
+    },
+    {
+      "id": "spending",
+      "version": ">=0.1.1"
+    }
+  ],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

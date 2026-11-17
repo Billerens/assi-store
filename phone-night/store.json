@@ -1,6 +1,7 @@
 {
   "id": "phone-night",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Тайная жизнь телефона",
   "target": "modules/phone-night",
   "requires": [],

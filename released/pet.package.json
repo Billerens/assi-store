@@ -1,0 +1,134 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "726879aad6d250b727993bcd3056d239bc807537cd8f6ceac9d79e380c1e51a6",
+      "size": 19112
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "1146f9bf536e2293467eabe10be16ec9fe709e9428dcdffe11d63b0353ea7beb",
+      "size": 10944
+    },
+    {
+      "path": "code/draw.js",
+      "sha256": "da8e014a421247a6a6d2edb581fbab123c68db5e724f14cf7b96542910cc5e1a",
+      "size": 3118
+    },
+    {
+      "path": "code/history.js",
+      "sha256": "b2c3c5ef8e02d29958f47f416a9c0c9dc5591718c9053b87503c0fffcce4971f",
+      "size": 2684
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "58aab4d00afd9538ab90d506cad8bd3325d22f2c5b2d7d100fbae358fe369397",
+      "size": 443
+    },
+    {
+      "path": "code/links.js",
+      "sha256": "8f27232b2a0c0da180592ec31db66e257695be8fa452b80f4ebf8b2db13a893f",
+      "size": 8330
+    },
+    {
+      "path": "code/look.js",
+      "sha256": "36e9f73aad74791ef9029367ff91425f538a4c9e561a1cb215b1fba764cf6b97",
+      "size": 7102
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "2d434169bcb9f7215435c3df9f3939b5880be05e72feb9f3825dba775faed922",
+      "size": 47461
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "f038f9ad612ea0a0f7ef4d811a483a2b86e23286c59f8a693c1070e2205b89e4",
+      "size": 682
+    },
+    {
+      "path": "code/mood.js",
+      "sha256": "0a6db89c7f1ac6d02857a3f1949b43a380521412984eb9e81e75d7ea820881c3",
+      "size": 12134
+    },
+    {
+      "path": "code/phrases.js",
+      "sha256": "7ccc650e85c77eff64b39e212e911c8a67d7f0d3682b8f2db4d4e58b072954a1",
+      "size": 4136
+    },
+    {
+      "path": "code/phrases.json",
+      "sha256": "d013968c6ec0a62db5c88bfbde1adb43503740f0a04ee2a223a56d4fc78c0114",
+      "size": 6236
+    },
+    {
+      "path": "code/settings.js",
+      "sha256": "18fc60d90c2da29527ed4ca9c81f829ced66aa4b8a30f6f7a5b002e9f74e9fd2",
+      "size": 11957
+    },
+    {
+      "path": "code/shapes.js",
+      "sha256": "13a315b75cd516d8e2092f0ffc48981378166481de1810f5044d534002405ecc",
+      "size": 27764
+    },
+    {
+      "path": "code/svg.js",
+      "sha256": "e21f9f40aa571a9ab2a990500f9ae14f924d39049e68813cfe5b27f1d87a57b1",
+      "size": 10606
+    },
+    {
+      "path": "code/tools/pet_state.js",
+      "sha256": "e8c202d480f12055c79e09adea9abb38d540e3d504ff4840619b1345c58e701c",
+      "size": 1089
+    },
+    {
+      "path": "code/ui/app.js",
+      "sha256": "f38487bf7bbf380199547c2d7d27f2bd15b1645eb530472647d71091d8673c89",
+      "size": 26006
+    },
+    {
+      "path": "code/ui/card.html",
+      "sha256": "b839b1206f750f175be495b8cb1ebe9b6c898cb9d20229069e41fcb0f396bb87",
+      "size": 4128
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "29a630c3299075bc31095955d48e49a0be95169d0b03a75aaf78566fb7dc0d2e",
+      "size": 2053
+    },
+    {
+      "path": "code/ui/style.css",
+      "sha256": "f38091636acc3e6bab866871828cd22f9323fba83cf0c5062f6489828cc1ef0f",
+      "size": 9260
+    }
+  ],
+  "id": "pet",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [
+    {
+      "id": "health",
+      "version": ">=0.1.1"
+    }
+  ],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

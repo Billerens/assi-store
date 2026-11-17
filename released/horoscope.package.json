@@ -1,0 +1,119 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "acdde191be1f8a79d911fd8b223d2c5c459420cd32c1beb92070f76c4af2632e",
+      "size": 8115
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "5326b210d17a8896471678ba958a4e9e6f132aff93170daa4649a10ff5e7b824",
+      "size": 6039
+    },
+    {
+      "path": "code/dates.js",
+      "sha256": "33bde2d2f6707e2a8692d4e17db3f0d5ab34db49686ca67a226f080e96d623ef",
+      "size": 4633
+    },
+    {
+      "path": "code/detectors.js",
+      "sha256": "866b82087c7b1ced24144b3369f335f49f89c231f5b12419a4b4de31f92c51d3",
+      "size": 24075
+    },
+    {
+      "path": "code/fallback.js",
+      "sha256": "759e0b0404feb802021eb4ed806122ddf2c25d6c75393ffed82083c24b9f3e5c",
+      "size": 8722
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "a2a349de3c27badfbe8e6e6f66b1f353be54602eddfc5d0d0946f107f27a0d63",
+      "size": 362
+    },
+    {
+      "path": "code/links.js",
+      "sha256": "d95bcee4f8939840d51c0dc4334581cddb696839c092f9e5f3d6061a4336f907",
+      "size": 4357
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "d6661623ce58e4873dd378468cc34b0029c71fd6d0f13703b8cfca1245e497eb",
+      "size": 23080
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "a43e60f7087998ef40db0a28839e6dbe6f1fdb7eabdddd3005b388dc39d73913",
+      "size": 567
+    },
+    {
+      "path": "code/signs.js",
+      "sha256": "66ab6837e32213944bfa141ed994e77e3bffdef4bcbb3a3ccf057830b023e5f5",
+      "size": 3210
+    },
+    {
+      "path": "code/source.js",
+      "sha256": "e5358b2c3f382f1f31b46d1a16218a5207188f623d587e724b68b80748cd6c23",
+      "size": 7626
+    },
+    {
+      "path": "code/stars.json",
+      "sha256": "c11469012b12a6ef6c35a2d4b2d54413db34388ce07275b5ceebde6907148736",
+      "size": 3581
+    },
+    {
+      "path": "code/templates.json",
+      "sha256": "5130c6f3b6d359df94c34803e237bd8a9bacc53232f4b4dac2e9ca36e615641d",
+      "size": 19172
+    },
+    {
+      "path": "code/text.js",
+      "sha256": "9ae8bfad1352b75389a7f3f2de1c29f4f581275d2ff8f1f16ac057754a899c2e",
+      "size": 8758
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "770f7ea397ddacccecfec1522f19307f52d0770760bb2dad00a155de3e2d4c9e",
+      "size": 20450
+    }
+  ],
+  "id": "horoscope",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [],
+  "optionalDependencies": [
+    {
+      "id": "achievements",
+      "version": ">=0.1.1"
+    },
+    {
+      "id": "health",
+      "version": ">=0.1.1"
+    },
+    {
+      "id": "rpg",
+      "version": ">=0.1.1"
+    },
+    {
+      "id": "spending",
+      "version": ">=0.1.1"
+    }
+  ],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

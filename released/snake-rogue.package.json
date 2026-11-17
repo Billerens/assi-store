@@ -1,0 +1,135 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "c6a007fa5ceb6221d82e2e650ea60e0a7d2ac18ce3ecdbeaef21ee0ff469cf89",
+      "size": 13244
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "879b3875e48aab392158db3f9e08fa41271fce5b65b7b4dbaa467dbfec3cf4a4",
+      "size": 6783
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "cfec308370271fefaf81b987b80d62611d6ac8b78c986543b9a27c6f1947395a",
+      "size": 26648
+    },
+    {
+      "path": "code/content/abilities.json",
+      "sha256": "ee9ec5d7e345d29c95d179fd2afdc92093bcecc2b23ca4168aa57fd70900de7e",
+      "size": 6121
+    },
+    {
+      "path": "code/content/enemies.json",
+      "sha256": "72a40184a653d32f47fe635e6bcaba081c4aa09860d74513deb7a06f3883de6e",
+      "size": 1801
+    },
+    {
+      "path": "code/content/glades.json",
+      "sha256": "6e8332f11e038eb2fa5f86eab925b4101f8d0cca46ff56b1e19c50bd25dcb6a1",
+      "size": 3309
+    },
+    {
+      "path": "code/content/lands.json",
+      "sha256": "9a4afb0d4e4e9f1a6a456ed76dd7887e7270bba061b885aeeaaa3d0de50a78d0",
+      "size": 784
+    },
+    {
+      "path": "code/content/molts.json",
+      "sha256": "0b3f08e69dadbf33602dee6e305af1e47ed750377b0e8414526c233145a5b93b",
+      "size": 807
+    },
+    {
+      "path": "code/content/snakes.json",
+      "sha256": "190121e0ea05c6c9e4a5000f1011cdcde2f5b81ad24cf70af4a4ec6be8ed85ce",
+      "size": 922
+    },
+    {
+      "path": "code/content/upgrades.json",
+      "sha256": "3e9eda68356daf78a8b4a22f2db412b674bb8e751921202570643e97a2eba430",
+      "size": 671
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "9b4e3ae59a64a0a970c6e391e172d2bb0c3d3dc71a945b9d5aabdb614d1a9919",
+      "size": 2718
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "6c4128f9ca65e5dd34e86718a15322d25a1e7af4f85c1a417828d98823c853d3",
+      "size": 4666
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "e0ce957ed1f3f4cc53ba286cd305cef9d91410cf36ea02b3c3bf8400f7ccc155",
+      "size": 23685
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "2aced7efce4a694f21c25ca29a48ea8a5cf1c9548e87bf531d111b08c2192cc2",
+      "size": 279
+    },
+    {
+      "path": "code/prompts/abilities.md",
+      "sha256": "0e89aba22940cbdb0b748a10dbe751f673db88e08ab022009afd77528eb1dd20",
+      "size": 2424
+    },
+    {
+      "path": "code/prompts/glades.md",
+      "sha256": "7421f1f816b428cf06e9709db4edf357dc766e3397adfafe486f1820108e7226",
+      "size": 2175
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "def86f78601db9a6517115b46bd1aaedd8096d36427d5900d3e92c51817afddc",
+      "size": 97667
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "825f44b5456695ec557fd7d4035fdf6dd4374e4a8d5a6005afb83d9a05f9dd81",
+      "size": 16576
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "5b553e9399d139d6c206317aead0b4494adf34a6fa6d0cef14414cbc880ec925",
+      "size": 10358
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "84577a6d4c2167da9c5277fd3b741aad9f2d96b5e31db163257b10d0d253dc36",
+      "size": 58884
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "e01d697d00622f7f85c4fe1f878ee363bac04b87f1e02863b54ff6d0e8601d32",
+      "size": 871
+    }
+  ],
+  "id": "snake-rogue",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

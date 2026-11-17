@@ -1,0 +1,129 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "ad3b1015aff5b0a40d712a56b6b17cb564569fa7891863c18db260a0001033a1",
+      "size": 15732
+    },
+    {
+      "path": "code/achieve.js",
+      "sha256": "44ba50d758b8bb43ee37730c27a935dc6b128fb524c62f3aad927a648160501d",
+      "size": 3312
+    },
+    {
+      "path": "code/android.js",
+      "sha256": "0f088d3554e6e01d315a31d1cec4bb31c8d4a41657cabc8dffb5343123cca143",
+      "size": 17476
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "6c252f4742a44abc8c27d65a66c24a7205e58a54dcf7dfa66b711a4f8e35e54b",
+      "size": 11130
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "6326b6f13d2c9c40bcd14b346e06cc59768631057831b1648d008da1367a94a1",
+      "size": 265
+    },
+    {
+      "path": "code/logic/awards.js",
+      "sha256": "a16ad03b642b0d8dc274a18f226167eeea7dbbb7ac0b003ce9ed62d5a5d30fd3",
+      "size": 1075
+    },
+    {
+      "path": "code/logic/calls.js",
+      "sha256": "2d53c22440ed1ce786591759a2006bde6e72e1d1389fb1d345c580268b9190ba",
+      "size": 1653
+    },
+    {
+      "path": "code/logic/distract.js",
+      "sha256": "a762ed04c95d4341310d88d71a4b9e3afdae49cb6baad686c5122a3bcd9d41ea",
+      "size": 3546
+    },
+    {
+      "path": "code/logic/dnd.js",
+      "sha256": "7076c66b753e41c3cddbbfec02fe513158f3991e8794123ebff780b6aa474a5e",
+      "size": 2732
+    },
+    {
+      "path": "code/logic/history.js",
+      "sha256": "270f087a6bb0fe89a22488f14edbe7a4b2b2a78213115318002e42c448eda772",
+      "size": 3663
+    },
+    {
+      "path": "code/logic/settings.js",
+      "sha256": "d50bef6ef6f5bf8f35365f33a6d322209b30831095854a3e106c081d267e9019",
+      "size": 7566
+    },
+    {
+      "path": "code/logic/summary.js",
+      "sha256": "2b8a4ff573481818e7b9168796efcbb6282a85de0c6cd24329035a9d581c0576",
+      "size": 10445
+    },
+    {
+      "path": "code/logic/timer.js",
+      "sha256": "ef9b94b8cb19ec0a751a6e173a2c76e759f859439a18fd0af4b3bad670fa781a",
+      "size": 6798
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "f0253bfaeaa04be6527c33b03e1e341dc6ff5ea00f4bba549a50735e57b4fa40",
+      "size": 48715
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "701192c73902d925dc4312fe9a4384f1716107e70cedf6c21d043e8bafcbc78a",
+      "size": 490
+    },
+    {
+      "path": "code/tools/focus.js",
+      "sha256": "7891cd952a86093c0eefb26c38aa37c8f31a02a3103db76525929c876d627ae5",
+      "size": 4205
+    },
+    {
+      "path": "code/ui/focus.css",
+      "sha256": "603d1950f98bbaaae9d8f078e1cc3e51c3f559ce27a70b31aeff9ad026abb6a1",
+      "size": 8550
+    },
+    {
+      "path": "code/ui/focus.js",
+      "sha256": "ee06d2f7051340458523dff871e060813abf9974a77d7175a7293b6282761536",
+      "size": 45905
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "037cf3b2c12cb3483aa6bd1c71a6cb55d792fc47df715198bc285fe46cadd083",
+      "size": 788
+    }
+  ],
+  "id": "focus",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [
+    {
+      "id": "inbox",
+      "version": ">=0.1.1"
+    }
+  ],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

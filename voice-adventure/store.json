@@ -1,6 +1,7 @@
 {
   "id": "voice-adventure",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Текстовое приключение для дороги",
   "target": "modules/voice-adventure",
   "requires": [],

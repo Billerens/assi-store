@@ -1,6 +1,7 @@
 {
   "id": "rpg",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Жизнь-RPG",
   "target": "modules/rpg",
   "requires": ["health", "pet", "achievements", "spending"],

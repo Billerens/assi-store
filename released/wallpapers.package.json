@@ -1,0 +1,169 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "ccb4e757fd0e1a450d00b66d3071ba6196b195f7bf239e5742859e228198a11f",
+      "size": 20471
+    },
+    {
+      "path": "code/android.js",
+      "sha256": "5f9ca5f6b660922d5878ce02e5c8b56fb52d5573196dcae676cea76d563d9431",
+      "size": 24527
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "64f4f138a601832800e1dcdc2d9a6b6fd536caf3f45921682beacd31d1b59b8f",
+      "size": 10731
+    },
+    {
+      "path": "code/context.js",
+      "sha256": "a8b15d1d7960473882616904cb4d98ce0a7064052b21e2ebcffdc0a0d06159ea",
+      "size": 11535
+    },
+    {
+      "path": "code/fold.js",
+      "sha256": "7000e3404cc6c9141a7cf883bccdcc8b37c6ce3f583af5b8062e1752d1cad9c4",
+      "size": 5494
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "0d709394de56b78f95f00d194e5663b92d21733b557e645db86ccf72f3a6e253",
+      "size": 302
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "8b94d68ca382e4993b44df1829850785d6357f48ee3e8188048a2d584bfd56e9",
+      "size": 63365
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "044c1243c5f934282970f988f2e38d22a7665f90b96e5489328bf0db191875d5",
+      "size": 658
+    },
+    {
+      "path": "code/samples/aic-info.json",
+      "sha256": "4ddc094ff405de9b5285adc22550e876bf31341c360965cab5ad10f2a4c3b597",
+      "size": 1173
+    },
+    {
+      "path": "code/samples/aic.json",
+      "sha256": "d56964ded095d329de57add0310f676c8220d4724133991cee3470785b22870b",
+      "size": 3268
+    },
+    {
+      "path": "code/samples/apod-classic.json",
+      "sha256": "1b302186b2469e0f08b07c41a4358646c8eb456ba43cfccb66239fee93fb83c4",
+      "size": 1455
+    },
+    {
+      "path": "code/samples/apod-placeholder.json",
+      "sha256": "f1788ca4af90042a71418fc5953954c3106ad10cbf5872331dfad19b4b90093c",
+      "size": 2187
+    },
+    {
+      "path": "code/samples/commons.json",
+      "sha256": "5dd02825a646f7f3e01cda7ca8a6f40c3959cb9e8a83835dcb5dc81c1aba544b",
+      "size": 16508
+    },
+    {
+      "path": "code/samples/geocoding.json",
+      "sha256": "ddb3a195ac9a0f9e2aac7559f54b5e8047c6e71dc153ebaf3ebb952b6003117d",
+      "size": 727
+    },
+    {
+      "path": "code/samples/nasa-images.json",
+      "sha256": "fdef1ee4b295302ff84b531b13270567e0f1af97dcd4f1fa44be45a4ebee8648",
+      "size": 8992
+    },
+    {
+      "path": "code/samples/open-meteo.json",
+      "sha256": "1b4f06b69b084e6259c7b1e600c7fb87233cd12f0e4836ec90d2346b5fe42bad",
+      "size": 477
+    },
+    {
+      "path": "code/samples/openverse.json",
+      "sha256": "01188be38abcfe2b182928b811c8e71552435bb204f8d27fcedd71b1e5bd8964",
+      "size": 7036
+    },
+    {
+      "path": "code/samples/pexels.json",
+      "sha256": "90ca1c6aefc8b6662f4b056e3f40d1073ba5176d596c46d615284697480aea23",
+      "size": 2619
+    },
+    {
+      "path": "code/samples/unsplash.json",
+      "sha256": "9d83a583c22de05208bc434550ca27fc7f8f78eff5cd5606f6916570f4e26e13",
+      "size": 3518
+    },
+    {
+      "path": "code/select.js",
+      "sha256": "1528fd6300855e8493cbef0a524566e450e21c7de96a6018dc13532a115dfa4e",
+      "size": 17980
+    },
+    {
+      "path": "code/settings.js",
+      "sha256": "3cd5e1d18152f5009d2dd6b78ca87d4fc1f38f6498617d82ed406051f27468ff",
+      "size": 19487
+    },
+    {
+      "path": "code/sources.js",
+      "sha256": "7dfe3a56619b151ec51cd661997a4b06448814719964e4c7d08fe4f47f5945c1",
+      "size": 23778
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "35fff5f3265b2fe92437c8daa7965bd26088af8dd2fa800b999d40f070298b92",
+      "size": 1429
+    },
+    {
+      "path": "code/ui/wallpapers.css",
+      "sha256": "93c26abb62aa240bd11a45cb31c499cdc3960ecdfca816e8d65f48e17d6ecf49",
+      "size": 6399
+    },
+    {
+      "path": "code/ui/wallpapers.js",
+      "sha256": "4451201982e97e606bbd2f9a47e250ae9c424b22f875ca29f2281396147dd27e",
+      "size": 29287
+    }
+  ],
+  "id": "wallpapers",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "api.artic.edu",
+    "api.nasa.gov",
+    "api.open-meteo.com",
+    "api.openverse.org",
+    "api.pexels.com",
+    "api.unsplash.com",
+    "apod.nasa.gov",
+    "commons.wikimedia.org",
+    "creativecommons.org",
+    "geocoding-api.open-meteo.com",
+    "images-api.nasa.gov",
+    "images.nasa.gov",
+    "unsplash.com",
+    "www.artic.edu",
+    "www.nasa.gov",
+    "www.pexels.com"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

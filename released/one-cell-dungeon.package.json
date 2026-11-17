@@ -1,0 +1,140 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "539af6c8c1ba1859d4a6b45883f5fd6b10d079bdda6d117b32421f1201099a60",
+      "size": 9826
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "735ee2c0e054f60b9703274156fa618c0976cc98226776dc232be47c1b0437ee",
+      "size": 3409
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "004f0a7d490e971560a2f42e6cf8a85a5fa5b6d18d7af2bf67160cd9ade29c7b",
+      "size": 33989
+    },
+    {
+      "path": "code/content/bricks.json",
+      "sha256": "f2799d300134546dd107f90be9c6b80d1fbb4160977dc0762c01fba69541916e",
+      "size": 1235
+    },
+    {
+      "path": "code/content/depths.json",
+      "sha256": "4cfd2c0db8b36a6443e0a3e3123bc08ea0e45daeeff82ec17967c162951f08a8",
+      "size": 753
+    },
+    {
+      "path": "code/content/enemies.json",
+      "sha256": "38dee473006cba8721221beb257994105e66ba7e241d2933a6b7e69b681133d1",
+      "size": 1549
+    },
+    {
+      "path": "code/content/floors.json",
+      "sha256": "7e7e7d8f98cf0f2c9a75cbfee9ccfa465891268434d26baeacee5f67547c5f93",
+      "size": 250
+    },
+    {
+      "path": "code/content/gifts.json",
+      "sha256": "87c1348577104220ca82926a9fa050e119d68a636f8f21065d72d22d149a79e8",
+      "size": 1827
+    },
+    {
+      "path": "code/content/heroes.json",
+      "sha256": "b61faabdd03a91c033de7ea8553782bc6bb88efd246d415cad85292a469fd95c",
+      "size": 941
+    },
+    {
+      "path": "code/content/kind.json",
+      "sha256": "ec4e9facde2082d53821399e0db4d8a13e7b15477f70a47081cdbef7d7f067d1",
+      "size": 944
+    },
+    {
+      "path": "code/content/seals.json",
+      "sha256": "45e695308da6a558197ba90bad523f4b6eb13c617bda0246cfae09e29d498c3e",
+      "size": 3647
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "be9e88c644014e126f6ab1d46ceb201d64e51923741122c279e905a7d7669749",
+      "size": 4671
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "5751392a5683d21dc277a023c4cff7465788f3107c8156dd3bac42535ac2dfbf",
+      "size": 4436
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "9eb48b72f1bef63f820624c9c92798b6e65c559e6faba493f1989762bf6b662c",
+      "size": 54702
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "a95d389a789239a5bbf05ff9c88c8c0dbea6334fa6f02746e0f4ee140c41ec57",
+      "size": 288
+    },
+    {
+      "path": "code/prompts/rules.md",
+      "sha256": "66cbf5572b94608bbff2ee960585ed0594807d9978f2edf5ba7956a1f7fb77d2",
+      "size": 2701
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "385fe63b76408317f6c08c2446531fe780a07956dfc167e7096d92bc30b2292c",
+      "size": 78925
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "365d2bfb7a062f9acc2f83eff3ed4c6ba8d367536f655a32ae3caa3afa8cfcec",
+      "size": 24233
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "0548778656829b4db3240548011c20f71efc352dc56c01bb758f3d00b1d87157",
+      "size": 13577
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "c0c9fc02cd7a0e82842ca6dc329afb6cae196745babffcb9fbd6ee2ee1b7fab0",
+      "size": 46436
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "75b2de03d980ef7dce18016e1eb13d346de2af11a4dc688fde2847b376dbd575",
+      "size": 922
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "8b005a45d3c3ec57da96cba02005cdf29b5f5057f53ae5d70003bd964968f1f5",
+      "size": 12814
+    }
+  ],
+  "id": "one-cell-dungeon",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

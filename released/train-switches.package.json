@@ -1,0 +1,190 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "7dc1ebb4292b825458d162cc74bccc00840ec9e8602664b0cfb5588193bdc824",
+      "size": 10700
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "f176dc4f66ed9157b085bf904d4dfabdebb705cfc819f346b7ebf5b9ce3ec32a",
+      "size": 5007
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "9c01c622eaf324de047fa841643cf091c1259092da9a51f6a0c08160269dc479",
+      "size": 10411
+    },
+    {
+      "path": "code/content/chapters.json",
+      "sha256": "191e18ee9d5eb358b9a175ff673d5ce152f105f5e34c5010d486799e539610b3",
+      "size": 6633
+    },
+    {
+      "path": "code/content/intros.json",
+      "sha256": "9292cfb9ae261d6fc51ffed2c9790132d1dec6922d79d11f903aad85ac608a32",
+      "size": 2295
+    },
+    {
+      "path": "code/content/levels-01.json",
+      "sha256": "87b6e8639c3ea9bd0b29bf3fcc1b5de0a827691c489b7e9dc42df9d442e20407",
+      "size": 16976
+    },
+    {
+      "path": "code/content/levels-02.json",
+      "sha256": "d248b7c16f609634323b45ea5a32b385742c1c8a50e5c9c38aba27fa72145ed6",
+      "size": 16178
+    },
+    {
+      "path": "code/content/levels-03.json",
+      "sha256": "22d14087f36553426a26957210e2f528d3336fa05993fce93190a06d4fd63960",
+      "size": 16742
+    },
+    {
+      "path": "code/content/levels-04.json",
+      "sha256": "ed19fb42d018090b28ae6f2f1d53738e8d2cfdb7589483af9805da2ddb0f5cda",
+      "size": 16710
+    },
+    {
+      "path": "code/content/levels-05.json",
+      "sha256": "347b3e278046ddd49e8377bbe2812d6ca0b346066e73d37bcb85e7bc8425d480",
+      "size": 18268
+    },
+    {
+      "path": "code/content/levels-06.json",
+      "sha256": "7746645afc78ac56b612634ac64c481b096d55304f064e9fad320857b14245df",
+      "size": 22366
+    },
+    {
+      "path": "code/content/levels-07.json",
+      "sha256": "b9d4c922fab8f98acd91a05e07270e6c40afb46fecb44e244d0518547282e1cc",
+      "size": 22302
+    },
+    {
+      "path": "code/content/levels-08.json",
+      "sha256": "f5ac1ad69da58d3b3f1b3ccd2a8eae2fb3fb7fb19f794cc25d2f82396597f170",
+      "size": 21466
+    },
+    {
+      "path": "code/content/levels-09.json",
+      "sha256": "524b3d9310712d90d385160f68bbf76ecf8bc8e51fe46d2da027325e845348f1",
+      "size": 25596
+    },
+    {
+      "path": "code/content/levels-10.json",
+      "sha256": "c80105598a68d8cafb0be245c5b77ab6d0374d5547084c0cb06951b99cc3e0be",
+      "size": 23784
+    },
+    {
+      "path": "code/content/names.json",
+      "sha256": "cdd24610995a8cf46238dba3bcf54fdbee6b44464af3eb9f56fe69e3b3d81621",
+      "size": 1665
+    },
+    {
+      "path": "code/content/tutorials.json",
+      "sha256": "d20325f955872f5462c110020227ba768f91e782d0c3b37b596e1dfd131c123a",
+      "size": 772
+    },
+    {
+      "path": "code/endless.js",
+      "sha256": "ae6b35abd4e76c0e4a46ec8e8cc5d725135f46f876d956ddb38f71f7ab3f2aa8",
+      "size": 23374
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "15c4dc2e0c92264b8d6ffafc541428728f6c8ab65556f030bd104fac4a9360b5",
+      "size": 3178
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "ef22502ca255413a25b8c8f70f5d9e9efc6238b010118de23528334be6e26f50",
+      "size": 4597
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "ae1626aee7b59987d0b08ec98deac05d48d8b23b3a342f5a05c01aacf142400c",
+      "size": 8283
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "ef3445703b303dcc8182278eebdaccdcfd9b5a9cc21c46f47aa309727072eb57",
+      "size": 329
+    },
+    {
+      "path": "code/prompts/intros.md",
+      "sha256": "98ead484811dc5f3cae33be095a013875a91425e0b8c7076dc2b071bb0672ad1",
+      "size": 1965
+    },
+    {
+      "path": "code/prompts/stations.md",
+      "sha256": "6e0065532ff9989609fb31c9bb9dda15311a66b462f5f669187d9f69407bb987",
+      "size": 830
+    },
+    {
+      "path": "code/rails.js",
+      "sha256": "6ba37872cbf47ef503f02fddd88c60d7e595ea81b6fd6b7b6d33b25d35f990be",
+      "size": 38073
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "1569ff365a36021793858c159e07a081854539fd62275fee7221fcf413a56053",
+      "size": 19028
+    },
+    {
+      "path": "code/tools/gen-levels.js",
+      "sha256": "fefba472db9e960e84e993da831bb73eb4b05e77581ae4a32cf9bf3e8bec493a",
+      "size": 9577
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "6a1c2b6f141bb73057ec88c2f74eb4adce89cd205e1858c3c32e8889e772bd6c",
+      "size": 13279
+    },
+    {
+      "path": "code/ui/draw.js",
+      "sha256": "74c73db48d37c685cce9bd021e307b35353dcf8769ae327f1e84dfc4f79fe425",
+      "size": 23154
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "82ea98bb6c02dbee02fde1996b5be69e74a9bb5ae8d7ff6828ca9f3bdf7000a4",
+      "size": 10818
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "153de713fb84ba9ed3cd1f80585262ae7b59e266eb9ab7837b5cb7c8af8a5e41",
+      "size": 53887
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "1cf0d8c77ea7e4dd65a14c5cf0609070743ded7826b47e43c998086d534d21fa",
+      "size": 975
+    }
+  ],
+  "id": "train-switches",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

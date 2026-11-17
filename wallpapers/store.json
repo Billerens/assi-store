@@ -1,6 +1,7 @@
 {
   "id": "wallpapers",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Обои дня",
   "target": "modules/wallpapers",
   "requires": [],

@@ -1,0 +1,159 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "c63b27520fc47cd7c4f52806df98428f37b7ff41b23952bd3faf179577c686fe",
+      "size": 16344
+    },
+    {
+      "path": "code/android/hc.js",
+      "sha256": "fe01d73e45319efcd5b2009100d273aafb68e356886acf2cd69f6eec3ff49405",
+      "size": 6895
+    },
+    {
+      "path": "code/android/location.js",
+      "sha256": "ad2916194bb946d79b30f59116bfb1a2a2d82558e3d443bc84ad570afbc6d1f3",
+      "size": 2453
+    },
+    {
+      "path": "code/android/sensor.js",
+      "sha256": "fd81f150e2a21685735fa7ddd0a7c69c92ccc481f18c8c5af9b503ef6514ce4e",
+      "size": 1596
+    },
+    {
+      "path": "code/android/usage.js",
+      "sha256": "0c2ad6574123c64e5e3389ec8fae02193b167d51c80248db08eb8211daa93425",
+      "size": 3016
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "77f4a5df51d696312ef561d01710a09f803903f13179e1b5b2a9b9bf79fb1610",
+      "size": 8703
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "7d0727017880b1a368e400b69461ad0d7552584fef5ab9c7397192feecd23e94",
+      "size": 323
+    },
+    {
+      "path": "code/logic/habits.js",
+      "sha256": "f49aa29ad0d771531f0d7f31c313eff9982f14f454314c7739e45f8aa3a2fe3c",
+      "size": 7000
+    },
+    {
+      "path": "code/logic/hooks.js",
+      "sha256": "e3b7e3d3cc3b19611433df37c6d8264fe59ebca3d4cd42eaea589a632944fbde",
+      "size": 2123
+    },
+    {
+      "path": "code/logic/meds.js",
+      "sha256": "7a83bb0ed9fd476ce0f35c1015ca0fa9ce56f9fd3f1d1858abadec51098cf777",
+      "size": 4216
+    },
+    {
+      "path": "code/logic/places.js",
+      "sha256": "9b621a9b9fdd700b65f49837358afcd19fab9b9a8f9222dcafaae849d76098e1",
+      "size": 5217
+    },
+    {
+      "path": "code/logic/screen.js",
+      "sha256": "48db2aecbad9c2aae79ef2f66e02d16855133c59187318d706a877b6ac5b8aca",
+      "size": 4091
+    },
+    {
+      "path": "code/logic/settings.js",
+      "sha256": "87f862ecd725042fa399d401a26a201c45d0da6c4321574db942bf348a0271b3",
+      "size": 14690
+    },
+    {
+      "path": "code/logic/sleep.js",
+      "sha256": "d8a013917c5e180a51851edc2bb61926412af0d9552819225500ce0ebd4dc606",
+      "size": 7370
+    },
+    {
+      "path": "code/logic/steps.js",
+      "sha256": "cc9cb9095c33278b9675a67322f11df230d7a5e74497b91f6803bf0aaedbce95",
+      "size": 3153
+    },
+    {
+      "path": "code/logic/summary.js",
+      "sha256": "188fe0ce2d67b0e996f4fc87dd600ac404c85695e664f0bb8c33d3c3eb4644d7",
+      "size": 8412
+    },
+    {
+      "path": "code/logic/text.js",
+      "sha256": "902bac98a5238cfc7a3e715d85970abceb01209f42b60eaddbc4a1664494b826",
+      "size": 2552
+    },
+    {
+      "path": "code/logic/time.js",
+      "sha256": "da5443356108034f8466e238cfec0c2bf9390e0ab64c041bac2f26c9b3677cb6",
+      "size": 5435
+    },
+    {
+      "path": "code/logic/weekly.js",
+      "sha256": "1c0abd5c77dfaac5477a6fac852d92036004181fa89f5afdda3358527a70c0bd",
+      "size": 9385
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "2d170ea3ee79809f92430b28f92289e0b57ee5f9a7ff8b36c2a83f7ae438e76e",
+      "size": 78820
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "a696579fc1bdc3c0d9330092c4fba341bc7e2ec3aa098642455bda981f07785e",
+      "size": 524
+    },
+    {
+      "path": "code/tools/health_day.js",
+      "sha256": "f2d7db6aec4a813f24966c89672668ceca45ac6733b50c88ce906094b6ae92d5",
+      "size": 1282
+    },
+    {
+      "path": "code/tools/health_mark.js",
+      "sha256": "0a0da6a5250d22b86fb840762264e686aed9d219589f4b87a3202ac6996e7d3c",
+      "size": 4446
+    },
+    {
+      "path": "code/ui/app.js",
+      "sha256": "47d1767cdc782828b44bcc72ea9531a11e9009f6f83cb24ca09705f0ae4e6f3d",
+      "size": 47904
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "68c81f405aeffae0440019df3bdd56984318a2daf2911ff425f203be34454810",
+      "size": 1411
+    },
+    {
+      "path": "code/ui/style.css",
+      "sha256": "2581c1846ada2d4e2b57e833758e7a7fa54476df285a5049ff77bab73e287cd3",
+      "size": 9286
+    }
+  ],
+  "id": "health",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

@@ -1,6 +1,7 @@
 {
   "id": "wave-survival",
   "kind": "game",
+  "version": "0.1.1",
   "title": "Последний рубеж",
   "target": "modules/games/wave-survival",
   "requires": [],

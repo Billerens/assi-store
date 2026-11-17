@@ -1,0 +1,140 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "84e1759f55ed31429ac32cabc50b5b3e3a492241d4cc5952a1efa043d1cdb233",
+      "size": 14811
+    },
+    {
+      "path": "code/achieve.js",
+      "sha256": "44ba50d758b8bb43ee37730c27a935dc6b128fb524c62f3aad927a648160501d",
+      "size": 3312
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "ce21ecd44b6313d0511ce221455f7d53e8f4992273bedaa55c8dc49ad52ffde3",
+      "size": 8884
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "518fbc29c756308a1817bf36ba40c1d9ab0b41db0108e961b480f76ae25343e7",
+      "size": 316
+    },
+    {
+      "path": "code/logic/awards.js",
+      "sha256": "45df26d80c4ba45f1d67ccdfaa922d0389473f81949b6ad23505e83ed8774d9d",
+      "size": 2007
+    },
+    {
+      "path": "code/logic/budget.js",
+      "sha256": "a37442290c2bf1f16364c526f7dfcfad0a2b7114955b0389031431d93a96aa5d",
+      "size": 8445
+    },
+    {
+      "path": "code/logic/dedupe.js",
+      "sha256": "ea0f8193c85d2d095419f9eeb3b0debf1f633d01b2d4ecef0afb8670c607d13c",
+      "size": 6135
+    },
+    {
+      "path": "code/logic/merchant.js",
+      "sha256": "5794b19bf1008b5d36b7f83b415abbd9ead6870f8ff1de8f10664bd3220cdf5f",
+      "size": 7100
+    },
+    {
+      "path": "code/logic/merchants.js",
+      "sha256": "e397c0e37503e39ccf41c44ea02f5ddcb2d67bf2d5b7dfed562b8e52a32d88e9",
+      "size": 13859
+    },
+    {
+      "path": "code/logic/money.js",
+      "sha256": "1aed0d5029bb0df456662fead8aafb55e47c0dbbbbe468b2b1d0edc016a16e80",
+      "size": 6861
+    },
+    {
+      "path": "code/logic/parse.js",
+      "sha256": "ba96e356190e0daa52c1b5b68ff1425d7d95b04b2ecfe4c497786cc76bb02579",
+      "size": 19505
+    },
+    {
+      "path": "code/logic/review.js",
+      "sha256": "f0f4e8b053f9635cce58243a79da29deb8da7129f672177051a58b253c455577",
+      "size": 8402
+    },
+    {
+      "path": "code/logic/rules.js",
+      "sha256": "da49819ff5d358416fdf2a5a0d300c4bf1c9a6d1338757204fb70d4a21306716",
+      "size": 8987
+    },
+    {
+      "path": "code/logic/settings.js",
+      "sha256": "aa6a7bab5f93e083006e228b83a9153f2d8a937d4c5c9c35030cec74ccd9138f",
+      "size": 9517
+    },
+    {
+      "path": "code/logic/subs.js",
+      "sha256": "f9bd65a311640be578f11a97f339ff66249539e1b9a84688dd12a50c9d0b5d45",
+      "size": 7427
+    },
+    {
+      "path": "code/logic/view.js",
+      "sha256": "d75e6c3a1031d27dbdd892618ecd8d8e65648f66ee34b5317c143ac6976a4bb7",
+      "size": 8399
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "22cb5c11b0be79d08706af08abeb538f6688c77a2bafe723562917d37fc4228d",
+      "size": 95354
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "e5a9d0a9fa4f73b709089ab80b36408e2f93d3bfc4698786ec49025ece84ad8b",
+      "size": 850
+    },
+    {
+      "path": "code/shell.js",
+      "sha256": "ff828f25fd26015b3caa5e8b2d9cacbc8441b6e0e7050f37f41d8b095a4b9033",
+      "size": 3022
+    },
+    {
+      "path": "code/tool.js",
+      "sha256": "bfcf7562882a06929edc42d06381c0b9f995aef734cab16fda3242a127ed42f6",
+      "size": 10090
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "a0ccd5b764b8e8f7a164624f1af68da1b12c7e61e27a1ad27d10f284fcdc4ca9",
+      "size": 69517
+    }
+  ],
+  "id": "spending",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.cbr-xml-daily.ru",
+    "www.w3.org"
+  ],
+  "optionalDependencies": [
+    {
+      "id": "health",
+      "version": ">=0.1.1"
+    }
+  ],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

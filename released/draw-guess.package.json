@@ -1,0 +1,119 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "090570128f75aec0d0297420c1ba6b161dad8c1fe688e6943cb52591d310f488",
+      "size": 19456
+    },
+    {
+      "path": "code/awards.js",
+      "sha256": "3ef646cbbf9960906f17eb37ed7b9d61c34e3d69a5513f93f85921f604196764",
+      "size": 5198
+    },
+    {
+      "path": "code/canvas.js",
+      "sha256": "82f31beb472ae34a84c9533972377c850e61ce5b992cee83937c53a4fb4b7126",
+      "size": 18033
+    },
+    {
+      "path": "code/cards.js",
+      "sha256": "3a69fd59f4d92d3a8ba8f8d69ed9c9e9ef5ff4af4ba70323d519a36d321e8794",
+      "size": 3260
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "2f0ec24577889f40f8367d8786fc057711babf74bd2298b9b6678e0618e0a39f",
+      "size": 17495
+    },
+    {
+      "path": "code/config.js",
+      "sha256": "836c8e4e1a9793cdc1be2cb6f3682d2d57aa05af56e51aefa81cde97b722b49d",
+      "size": 11246
+    },
+    {
+      "path": "code/guess.js",
+      "sha256": "1d9649d7543e77ee8f2a1ca4951f80502484b35b45ae385e815b4a78d6a8357d",
+      "size": 7485
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "f53544168e1e2569be056c3b95e7577b4823f24e6e6452b6bcaf274f64de493a",
+      "size": 293
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "bd7a4a2f8e21daf337937356f29484996d69b1517a2ff202a8c6f4cce7d2f895",
+      "size": 34740
+    },
+    {
+      "path": "code/match.js",
+      "sha256": "04c0feb836ed59a960a23bf9f86944986df8e07cc5a83edb1d65dbc7ea5b60a0",
+      "size": 30099
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "54c7b4d9722c7bb88b644cfa66fc3b4535af444217ff7034e3a92ec056efa901",
+      "size": 617
+    },
+    {
+      "path": "code/samples.js",
+      "sha256": "d7c1d98bf85680648acdf56f621db4d609e223ddd17839fd068bc2ef37dbe146",
+      "size": 3635
+    },
+    {
+      "path": "code/tool.js",
+      "sha256": "73467a560ba09e8299204dedc5e3065d7491a025a0c4c9c677b116c84722ee78",
+      "size": 4402
+    },
+    {
+      "path": "code/ui/dg.css",
+      "sha256": "aed980546280d0e60e2413b82e164d9a09bef5b7b65bf7d2d5c4cc16faf50e8b",
+      "size": 11546
+    },
+    {
+      "path": "code/ui/dg.js",
+      "sha256": "0718bde979088ac1665a211577fe4fc81721d86480891427eaa32a18d72fa28d",
+      "size": 90993
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "26d053c48895c05bc1e242954ee4224e1fb386d222b6d0d81c799ab4922e5a56",
+      "size": 611
+    },
+    {
+      "path": "code/words.json",
+      "sha256": "c869bcfc248240c107149fa98a02d00d6a11f58a6ed7d93967933b83d58b4382",
+      "size": 6844
+    }
+  ],
+  "id": "draw-guess",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [
+    {
+      "id": "hat",
+      "version": ">=0.1.1"
+    }
+  ],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

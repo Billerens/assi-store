@@ -1,0 +1,140 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "92801360b56fc7bd9e32efb8284ec965cd6b939221b61bc808289f9bc39dc541",
+      "size": 16839
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "730e531cc4bab32c8d608569335498026d5adba7f6da4b134d1c9cc459966776",
+      "size": 8093
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "7650d8b3430cf6a548595af200edc4adc9a15d9427d5fe425c63ffbd6afcc249",
+      "size": 21033
+    },
+    {
+      "path": "code/content/banned.json",
+      "sha256": "a863964f615f8b0255b724a06fbe074b28f3713e4abe0cf3e18ca1edd5c0233c",
+      "size": 938
+    },
+    {
+      "path": "code/content/categories.json",
+      "sha256": "2aa1eab8bf4b2ff909c88b2faaee28449636cd084ea42ce6fc9a6a735b4fffc2",
+      "size": 2339
+    },
+    {
+      "path": "code/content/elements.json",
+      "sha256": "10f8e5a8e0eedca0670f213978db395f19e0ef945b369a9f91d0c759cfd0f58b",
+      "size": 33440
+    },
+    {
+      "path": "code/content/glyphs.json",
+      "sha256": "737a0bb99eda3d7ae235e0f81b8039caa03a2312e5a34cdfe2fc96a89e27a46d",
+      "size": 5705
+    },
+    {
+      "path": "code/content/palette.json",
+      "sha256": "c865227c99cf0f6dc65bdce314dc32712ead62fcd1ad94fbc885ee60faf5e316",
+      "size": 930
+    },
+    {
+      "path": "code/content/recipes.json",
+      "sha256": "c21107349dc6bd2f87c3b1c31377722e8beadd4971e8fe3c581360a3b7a7d650",
+      "size": 10104
+    },
+    {
+      "path": "code/content/triples.json",
+      "sha256": "4ff41498175ee56db10077e55bbff6ba95f208f91ae90a11809f0ad85f569043",
+      "size": 705
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "aad42f1049bfec8b40b76e33ab89c1e96a70afea3a050682e34d167e5ef5538a",
+      "size": 5056
+    },
+    {
+      "path": "code/graph.js",
+      "sha256": "c709f4b7ebd796a3913ba100a4ee54f80335fd747f3fe15be9eb9b809f32a4aa",
+      "size": 19924
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "0531c5c565622e7c1e8718d0573948b65101c9456addfadcb2cdd5a10245f598",
+      "size": 24068
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "d84add22d6721c4bfcce4387bbe45ce83cee54c358d706c550c8f688cca24058",
+      "size": 337
+    },
+    {
+      "path": "code/prompts/pairs-rules.md",
+      "sha256": "ef11bbab7477a3fdf0dbdd84f665baa0564b38f816ea6c5a06e602b0912f7b9b",
+      "size": 3137
+    },
+    {
+      "path": "code/prompts/pairs.md",
+      "sha256": "892c4b3c7aa93c61ffc421c1a27bb6381263931239be6ff9c0dd80e8aa714941",
+      "size": 17165
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "35ec2c4b28fff696b36cbffa0cf1acfd5f78dca782fb330ac752d29885a6541e",
+      "size": 82210
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "f2cf20899873675f42fbc6ddfd3cc34f04a903d2cfd417a76c58f406b02c8302",
+      "size": 8839
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "dafa6bee1e104ea261510004b0d66864df260260d9f9b04a64fb0c052c172890",
+      "size": 9615
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "fb6f547abe04d98c8ac511e4809703c787677fcf2f4af535fcff0da81914a2f7",
+      "size": 44473
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "980a8b99225c394a2819e98e1b761eb7d238153dcc12e999d6f8a27a41f5950b",
+      "size": 944
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "2363134bd84e5e06ba500a2ed47639bbe0e2be2a28e7590e372e25be50ceac4a",
+      "size": 17760
+    }
+  ],
+  "id": "alchemist",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

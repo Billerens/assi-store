@@ -1,0 +1,145 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "64c8ce8be626e4e166f77e4c331cacb0b874854d14a52063d66663669ab12143",
+      "size": 19124
+    },
+    {
+      "path": "code/bot.js",
+      "sha256": "676fbd3e84f2446ae7bcc532e0c36dbd15547efde3388dd6b28e94e4b4ccae01",
+      "size": 4525
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "71fd6fc6ef8417212df4f0c46ff1da905a604d20810772b0ef1757f129c08802",
+      "size": 5783
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "e662681f6f60db7c4cf22b95c856d84f413c26e3fa1db532385f39a5171eb984",
+      "size": 41724
+    },
+    {
+      "path": "code/content/catalog.json",
+      "sha256": "930984466b44b18614ea556c8e1a38322dbb5f48289b485a5dd585545c69609e",
+      "size": 27380
+    },
+    {
+      "path": "code/content/events.json",
+      "sha256": "5cb6a6a2d7839b1c3f2ccc9f3e5dbe7d7f31774ede809e0833299f984c791c37",
+      "size": 3317
+    },
+    {
+      "path": "code/content/log.json",
+      "sha256": "430a745dfb434b24dcba0ecc97f7716980a7d866dbd8e9e7303ca445934e1909",
+      "size": 3817
+    },
+    {
+      "path": "code/content/samples.json",
+      "sha256": "71c888490fccb73126f1694bd76ff10623fb5e4363312abbe5b7ce4ea6b62edf",
+      "size": 2844
+    },
+    {
+      "path": "code/content/stars.json",
+      "sha256": "564c2819c6f0dec0116ff60ee883f2daeb3aec0adf2da73337c26495a39c246e",
+      "size": 2307
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "ce9d4ba7601018eaa7428348f6877605405cb4cb87c509a6d9b3d3d9bbe3867f",
+      "size": 2077
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "4a5ccd424d685c7028e02df2421c50bf71d8062f8c44164ec291ab06492021dd",
+      "size": 7899
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "acf234d5a355c2e71ae62d4d36e6ce8bd7824db940a99ca327c2e2284b8e00a0",
+      "size": 74515
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "cb2368c4e6befc38bacb4cc0c45b7af9c5ea98de5963e75279118f56c585febe",
+      "size": 322
+    },
+    {
+      "path": "code/prompts/events.md",
+      "sha256": "af5dd64d866a6eae6e54861da2dad574815142b85e7b5ecfe7d522e80c4ceeca",
+      "size": 3875
+    },
+    {
+      "path": "code/prompts/log.md",
+      "sha256": "48334d2bc484c58effeedade4e9eb85d4136188cacff7e5cefcb1e4383a74cf6",
+      "size": 2242
+    },
+    {
+      "path": "code/prompts/samples.md",
+      "sha256": "4465a0fbbea6fc33327cc11a6f3b84e5518b9f4808bd56dd5a541858af077f9d",
+      "size": 3417
+    },
+    {
+      "path": "code/prompts/stars.md",
+      "sha256": "031e12ac9d3723a1c016cc1cad37b2fac6e81962cccce213ab41db46e949b1de",
+      "size": 3245
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "b93f936f251e61f48018e16a19b62d85993957f5ebedea5e69feea09bce4d1ef",
+      "size": 68309
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "2f489b73ca194cbe99da2496c99a18463f0519214725eb8cde471414c83a939d",
+      "size": 19386
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "bee7a161efa88ec3efed85e7fbb2bd2bcf3d175141d628ab7ae180fedbcefe6f",
+      "size": 13939
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "26164837258864cab5d4231efe751f6288e8cd0b0266075768e571902141ccab",
+      "size": 50163
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "1dcd9e9d7d5d9b4a3721780e887cdc36fd67f37bcbf9e07b8f1dff008e9f334c",
+      "size": 974
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "d7179d97ea61cd234200857dd139597991634329233a59678f3e1fb9ece4fd07",
+      "size": 19382
+    }
+  ],
+  "id": "asteroid-colony",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

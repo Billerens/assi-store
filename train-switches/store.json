@@ -1,6 +1,7 @@
 {
   "id": "train-switches",
   "kind": "game",
+  "version": "0.1.1",
   "title": "Ветки поездов",
   "target": "modules/games/train-switches",
   "requires": [],

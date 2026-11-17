@@ -1,0 +1,110 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "d454429afc417f47959a6a26141f85ecc496483d17a625d8e8af48f309f065f7",
+      "size": 15691
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "f412d1c873cd7e126ab1201924634c4ccba77a7b4fad8694597765ccdadc06de",
+      "size": 6491
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "bf7af4e6af7869c9255176a71c5ef9d46c2fe4c4f96f732a658b4fdc5c111c25",
+      "size": 21251
+    },
+    {
+      "path": "code/content/names.json",
+      "sha256": "c196f971eeec35df615af1b712b1e01b95003f6deaab2838faa3cee422da16d8",
+      "size": 1629
+    },
+    {
+      "path": "code/content/upgrades.json",
+      "sha256": "63292fb08f7c39ceacdeb7c6901a0550517d4a94ebd6928bc11120082c4dd341",
+      "size": 2975
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "8b942a9b19ddeb75f841016382eb3130fa36518f033ce4aa4b371f80272906c7",
+      "size": 5687
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "1008c236bff18732441558c340914b1a2488c53a846a38a1d8553007b835e0e1",
+      "size": 196354
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "7c532f0cb2a02f4287c75c38293a105e6e4c5a9cfa9c258ecb4e8544c833738d",
+      "size": 551
+    },
+    {
+      "path": "code/prompts/names.md",
+      "sha256": "d8d98663861d59664f4c809e585931f393a1a67ccbb153dd5046625bdbcf108f",
+      "size": 2851
+    },
+    {
+      "path": "code/prompts/seasonal.md",
+      "sha256": "212a871951b4e92e190216e0021308972d386240a06e9370d86676652dfb2ff5",
+      "size": 1396
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "c69ef8bcbbf58d07282dd52508f672d14d9868eb974679fe928f341ee349987d",
+      "size": 81253
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "0d6ea9691a037b1909361642bd8dc42c506bc4a894b5663d7719db915f4ff4f4",
+      "size": 9331
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "2d539d93ac7037aef859f38bd694c59bb94df900e2f8cf43c6b8a7230c6c322c",
+      "size": 7978
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "258abe39e1af99ea956538d322b3ee33d44db540142e652c252d68f733abad73",
+      "size": 54059
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "cf5030aab202d499dbad718d1a7a3d3b594cd7016eecb1ab0b33cadc4f3582b3",
+      "size": 868
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "f2f65949ad1ed6b68427522efaf3d24a407cb499dffaab34ebf6571774f6bab0",
+      "size": 26816
+    }
+  ],
+  "id": "garden",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

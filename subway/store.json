@@ -1,6 +1,7 @@
 {
   "id": "subway",
   "kind": "game",
+  "version": "0.1.1",
   "title": "Подземка",
   "target": "modules/games/subway",
   "requires": [],

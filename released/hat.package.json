@@ -1,0 +1,107 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "159d6430b5eeab76a1dcea113c2b15e24e2054db049fb073be346750a577a900",
+      "size": 11182
+    },
+    {
+      "path": "code/achieve.js",
+      "sha256": "44ba50d758b8bb43ee37730c27a935dc6b128fb524c62f3aad927a648160501d",
+      "size": 3312
+    },
+    {
+      "path": "code/cases.js",
+      "sha256": "fff8d27c89cdb48e3124b928c12344819c6fbfeb7a4bd3b156b751081d7ee98b",
+      "size": 14914
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "cc442b1923b84727e64a3f3e75f0e8a3d0e751a25749716e416da0b9371548f1",
+      "size": 9964
+    },
+    {
+      "path": "code/config.js",
+      "sha256": "92a87c44787d0a137d53ce814528b6724bea42e7dfbeee3d928d9c0dc3390f26",
+      "size": 9179
+    },
+    {
+      "path": "code/deck.js",
+      "sha256": "f51171b1880d7d4fe25f7f13d580649396a82b02b4b649e35c6cc91e147dadf1",
+      "size": 11444
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "5324a51afdbba1c76259875c3415ddd8ffec704423253d487ecefd20f98f30cf",
+      "size": 348
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "7996b2673d892c61aeffda2998b0dd98dc05bccf8b4cbd9455564ca05aa77955",
+      "size": 26998
+    },
+    {
+      "path": "code/match.js",
+      "sha256": "04c0feb836ed59a960a23bf9f86944986df8e07cc5a83edb1d65dbc7ea5b60a0",
+      "size": 30099
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "1c9f72a7554a46b12876266a0a7e1b016cce620d3cdc2f51913caf25d5de6491",
+      "size": 412
+    },
+    {
+      "path": "code/rules.js",
+      "sha256": "19f00ac70d8cc2bbdbb5bc21bd77d080743e4034625c2b9db2e959ece5c5bb17",
+      "size": 15137
+    },
+    {
+      "path": "code/tool.js",
+      "sha256": "022c30e35abb61ecff7dccc535dfec8cf90f2a474d8bb0ca0f08c72811b096dc",
+      "size": 4221
+    },
+    {
+      "path": "code/ui/hat.css",
+      "sha256": "98da68ef1e77b4fda20ee8a8144e1a23f2c9b6b309958c86cacafe33ca5826a6",
+      "size": 10918
+    },
+    {
+      "path": "code/ui/hat.js",
+      "sha256": "1a465aff2c711bb0d3449939835fbb42cea6637edb4b59a8294da96e27a4b9b2",
+      "size": 70338
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "fb86759f9b030a44bf9389596014ddedc12d566c056d21a4d25182d05d35b195",
+      "size": 554
+    },
+    {
+      "path": "code/words.json",
+      "sha256": "8c02cac39e570eaf88a7cae32b373582b9233bcbed5d8fc1f025a23f7b4863d1",
+      "size": 13217
+    }
+  ],
+  "id": "hat",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

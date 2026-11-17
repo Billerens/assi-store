@@ -1,0 +1,130 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "1c4d13dc4e5292729aa9a960d585ded44742f6bdb34b23800abd31a91f82c1cb",
+      "size": 13509
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "4a69546db1a918100b760ec3fb251fabad68d6b05b745ddc5844a9895043fcd3",
+      "size": 7346
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "fc8342e4f5f87818679bd8a69d99b6101352e295836ebfd37c33077026c11146",
+      "size": 77327
+    },
+    {
+      "path": "code/content/items.json",
+      "sha256": "21c4e75fadba7077dafee954abbc850629765218073b38269565cf3dc1496d38",
+      "size": 6359
+    },
+    {
+      "path": "code/content/world.json",
+      "sha256": "71340285a644fe7cb393bf70e007ccb226baee9c097c5741b2da697714035848",
+      "size": 9018
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "866c153f25486ab6f31822fbc14d8249d0d40f6e9a85f3fb6d0342975fbcc9bd",
+      "size": 56501
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "6d919fddcd7ab16e595c9dc7a22cee1eaeb0551eedf9affb4cf2f2a10c6fb726",
+      "size": 5569
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "849909e2e25f575ea56096b0c6896205aafdbeb73f312a6c08267841483c4ead",
+      "size": 68386
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "16907c696a2d91fab85690a6682dd0630d213e14d8fb3a609ac03deb1ceaa681",
+      "size": 386
+    },
+    {
+      "path": "code/prompts/cards.md",
+      "sha256": "21ab585f3d7ff96bf5820d27effe2d170cfadf65955fa99f37a3fad5b9452599",
+      "size": 3106
+    },
+    {
+      "path": "code/prompts/daily.md",
+      "sha256": "8776bd2779664d1812a5aa4eb5809db1becd9bd3af34e501cce2f15a6057f282",
+      "size": 1779
+    },
+    {
+      "path": "code/prompts/waves.md",
+      "sha256": "5f619dc6a8972752dd08667a1d8c9d068cd7dd7a6bf591860ddeb9ca7cfc6125",
+      "size": 1554
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "d117b4116af4ed11aee3693b38c2e0aa2f0fca5be0e12882ba00b222ab428f00",
+      "size": 30621
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "ae74c5c6e1ca39f0d16ddfc08d63038ae1f948c035b4a81ebcec9763dddd3b26",
+      "size": 16800
+    },
+    {
+      "path": "code/ui/draw.js",
+      "sha256": "6a7e7996b0a43e23907eb42a8da0f0bea5e0d8840c08127322a5b604e5b16ed5",
+      "size": 31936
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "4e35bf10a5c2887958bc1463a9cd64dcd8431c5b34c8d50a09dde11ce7ee6b4a",
+      "size": 11236
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "59ddf1ec147aad91ef12b767001ec63282cdbb0913a6f21629257e464782c9d7",
+      "size": 47714
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "391e85ab06de312e43a08bb28b8e1ff5cfbba17dea4576ef143f4d228df52392",
+      "size": 1027
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "4ed35abb4e4641775034e56a43b10e3f26eb1071e2fc81e6bd175d8fdc5f1c24",
+      "size": 8907
+    },
+    {
+      "path": "code/world.js",
+      "sha256": "06f731f067ed8b792c4f8768d6e350d9e78da39f73cfb8b6fbccad1fe3bb8954",
+      "size": 105247
+    }
+  ],
+  "id": "wave-survival",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

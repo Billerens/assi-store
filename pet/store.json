@@ -1,6 +1,7 @@
 {
   "id": "pet",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Питомец",
   "target": "modules/pet",
   "requires": ["health"],

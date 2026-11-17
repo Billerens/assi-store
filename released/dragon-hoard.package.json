@@ -1,0 +1,115 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "a07fcee84fa5a91b6ad9e3b6777e605444a5d30833dde3b5e4e4581d9028698e",
+      "size": 17076
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "438a070db33e19226c921a5a3ecd006f27a4dc072913602abb03878a70c4066f",
+      "size": 6943
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "2395beb9db36230a0b8f62114cfde3152fa7233136b8defbb91cac91391fedcd",
+      "size": 32147
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "2b5865634aeac27fce02e523673884b8587ea793c2125dfb9dfa82abf8553603",
+      "size": 2997
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "5b14d29ac13a0b932070bab1738d5c814ee6dfc0bc4ecd518cb30b3439b9a963",
+      "size": 6067
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "5bfa7018bfe86f4acc4f2f9508360b250ece3f8c3c665749d62bc93d98be3176",
+      "size": 28136
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "cb5324940db99376b05e1ccc2817313f4e6f68e7ec841ece2190c9aa63b658b1",
+      "size": 329
+    },
+    {
+      "path": "code/prompts/ballads.md",
+      "sha256": "1fa9dbb18a3ec2806d83fe713fe94b67819acab99aa98d7422a7df2267c0125f",
+      "size": 1472
+    },
+    {
+      "path": "code/prompts/knights.md",
+      "sha256": "3eeeae05f19297369fef9e1f2961813f98284a21faad50a478145a18e5458148",
+      "size": 1465
+    },
+    {
+      "path": "code/prompts/tales.md",
+      "sha256": "b26da458bbb2e1f1582820620c51f0a7d4291acdbefce55fe7b81a2d2cc84852",
+      "size": 1898
+    },
+    {
+      "path": "code/prompts/worlds.md",
+      "sha256": "d14e48cdce099949be2a21f89975bc9dc39b0ce4927889ddc3583f4ef11ab382",
+      "size": 2059
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "93ff27cc442797bdadc109a4364b353dc6d2d7d19371049ea1a9945dd8dd6062",
+      "size": 66148
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "3f9418d75a30637c86bed59228791de0a78f8d12427ee4af88b54f6a15672fbe",
+      "size": 27144
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "0bc0bd29e66485c382e720b47d98620549adb0102929011bbcfa51d4a700bfeb",
+      "size": 14529
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "94266c156f0b58713bc95683d15d0df7cf68193cabec0e381bf7481ac42cec25",
+      "size": 53475
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "9c91b7026b30796622bf54fd2118a786fd258cc24d1d5e87111a75fba3c43ed1",
+      "size": 937
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "dccfc8888cde6440f1b1956d8e2f30877a834f2c0e1642117bd61b9e8f04d695",
+      "size": 27466
+    }
+  ],
+  "id": "dragon-hoard",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

@@ -1,6 +1,7 @@
 {
   "id": "one-cell-dungeon",
   "kind": "game",
+  "version": "0.1.1",
   "title": "Подземелье в одну клетку",
   "target": "modules/games/one-cell-dungeon",
   "requires": [],

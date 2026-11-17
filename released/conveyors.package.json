@@ -1,0 +1,110 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "2e52aecb7ea700055e3180c609e1efe7bff36feec58a478f7243ecc2bb2da764",
+      "size": 10191
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "6909492b6bb350479c7f8a7cf0c72ecbd8b21e71f9e6088ca9a237a37552d02b",
+      "size": 5530
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "8b444ec3e0d2c1c7b56c20388c7aa7415223e2efc62f38574167b1eee7c955fe",
+      "size": 23894
+    },
+    {
+      "path": "code/content/planets.json",
+      "sha256": "8303ae631a9cc5e39fedea8261961f3fefac7da6e77c7cec71120fc625a6fd85",
+      "size": 18369
+    },
+    {
+      "path": "code/factory.js",
+      "sha256": "6bb53e17444f085ee469d99f9c263038ed1e184b926870e0d7a3f6a36e056802",
+      "size": 20526
+    },
+    {
+      "path": "code/fixtures/v1.json",
+      "sha256": "e58101230d9a02ce9352f6583ad37a6cdc0b04742187ac792ce8ce0cc1f4a335",
+      "size": 9833
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "a059ffb3d462d07b3d703b19921882b17a3266ae3dc43f82b1941478dc85802c",
+      "size": 4521
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "15adb1af1a3a0c95173fb20f0caf3293fc87a2e1886f97b042f4453cc2a2e173",
+      "size": 7114
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "1891ebac51cc7d2286358e6aeaad6b70e17d19d25d49c14f286db9b30f93b262",
+      "size": 314
+    },
+    {
+      "path": "code/prompts/lore.md",
+      "sha256": "d1e1ac5222e9309507f1ebaf9801643871b5fd2b0c26115f201ac16df9c2719f",
+      "size": 1217
+    },
+    {
+      "path": "code/prompts/planet.md",
+      "sha256": "2de9c34ffb55f7fe1a964f4470ac15c3fa137a33b71b84fb94b3daecfee59cda",
+      "size": 2176
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "c136c772887a6e38f510457936c2fca3b0483be48880879bdb3be0176b6398d2",
+      "size": 49091
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "aace9329f063507f21c9e60357fbc86f4075dc1d269df42fbda43828985cfd8b",
+      "size": 10709
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "b528ee9b1678e2dcd5c80c9482f737ca4512899ec6b618747a9739fca088e45c",
+      "size": 7356
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "db849fc1cb5d13fd36f7d33171ef6b714f703972a9be94a2a535f6a3b349f0f8",
+      "size": 54703
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "69c99f36faa04a4f16941f9ceb959603d44f331cc77ed36a57dfd34110df1541",
+      "size": 900
+    }
+  ],
+  "id": "conveyors",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

@@ -1,6 +1,7 @@
 {
   "id": "focus",
   "kind": "module",
+  "version": "0.1.1",
   "title": "Фокус",
   "target": "modules/focus",
   "requires": ["inbox"],

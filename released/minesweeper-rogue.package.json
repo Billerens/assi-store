@@ -1,0 +1,140 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "1dcb60772f1edd660d2c57d692c73d5c1c68e1f5a1f8764d28e94e042529ee91",
+      "size": 16743
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "806b24c1b880bd4f6a36e12c54092a5acc3a2984291fa2e29afe5cf3023c8bcd",
+      "size": 3805
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "a5d5fd479bcfb409f7e25b2edbd3a447f9fb715c9b116f212b51a1d94e6d3dd8",
+      "size": 23961
+    },
+    {
+      "path": "code/content/bosses.json",
+      "sha256": "eac79a040609177c039c71d77d0e1a08d4de5e6d2ed224f4e2b416c798940964",
+      "size": 694
+    },
+    {
+      "path": "code/content/depths.json",
+      "sha256": "d4e6fb6e8ead989884a3cf5497a9b13faed7bec450dd410564be6db6d1aa78e1",
+      "size": 929
+    },
+    {
+      "path": "code/content/finds.json",
+      "sha256": "ee075a6ba1ab3b458e7b444f06a4dfa1d00479fd16948ee395183deea0ca36c0",
+      "size": 5547
+    },
+    {
+      "path": "code/content/layers.json",
+      "sha256": "3d63985b1013e7a429116512e1be1630ba09e77b8d07e0a5ca52742cc0fb1de4",
+      "size": 645
+    },
+    {
+      "path": "code/content/sappers.json",
+      "sha256": "72fd690ec2dcaec4f2604f70354b9c71ae64a3e4f0472990f7eb10e8ba723002",
+      "size": 909
+    },
+    {
+      "path": "code/content/workshop.json",
+      "sha256": "11a3d71167318cc1e5d32bfbadc0a7168d41bf611fd621b403efbe843f2c360c",
+      "size": 704
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "b90532ef4ec3d18cfcbb8393edf5479a068d72a52882ba5da26b89ada5d3b470",
+      "size": 4616
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "6624322cdb23e38e15508edf0c40001ca7cac4dafba5acd6fa329f3dc8d82171",
+      "size": 38010
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "00527225c96c1842e206a3929ae7e22db208e9b87fc220fb107a1477e43daf81",
+      "size": 261
+    },
+    {
+      "path": "code/logic/board.js",
+      "sha256": "5397033a67aa3d302afd701baa064eb32424f8ad52b490839f71538c9719e7ce",
+      "size": 43923
+    },
+    {
+      "path": "code/logic/worker.js",
+      "sha256": "18003512b6d577a594c28e9746ac63a3ea5004eea68d807e000003097fc3c002",
+      "size": 1598
+    },
+    {
+      "path": "code/prompts/daily.md",
+      "sha256": "d8d2755409290539cfef2763d35932d1c98b63e90b1da8c910f1a7221e553183",
+      "size": 1118
+    },
+    {
+      "path": "code/prompts/finds.md",
+      "sha256": "6650ec4c796287c2b1e297408efb51820832ce645dab8fa77dd64f713fbd8f27",
+      "size": 1348
+    },
+    {
+      "path": "code/prompts/rules.md",
+      "sha256": "f20598717529635914735efff0d39f1479dc4f8a5990340fd698bb95983964b3",
+      "size": 1424
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "3ee12f8f28259b7ee095f64c2f5050cf19f737e0a3c3ecfe595f0514bf05769d",
+      "size": 47745
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "fa64d77146bc9e42871ad46a586f03b0f5453135ae13f70237dbda97e942f301",
+      "size": 12836
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "f9414e03e329b929138314645d7f0d3e1acb17e7eeaeee58721e10a40a227e51",
+      "size": 12419
+    },
+    {
+      "path": "code/ui/game.js",
+      "sha256": "b369789cb7b004a137fd13cc8f2fadf7a2ab48f5de636e5aef478c1d033085d2",
+      "size": 43121
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "36c7fc6ae51ba8e411f878d9cb881d0f418b2c0550b57657e3bab2f15959f6b6",
+      "size": 934
+    }
+  ],
+  "id": "minesweeper-rogue",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}

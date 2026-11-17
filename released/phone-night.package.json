@@ -1,0 +1,122 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
+      "size": 497
+    },
+    {
+      "path": "README.md",
+      "sha256": "352dbc1c2bdb0b8c7682a14af7f5ff9d67549e2162641a6708b6611f8461c809",
+      "size": 19062
+    },
+    {
+      "path": "code/android.js",
+      "sha256": "0dadcb80279747a5a6acd2fed9c5c62ca6542cde0d8b8b48ae5c3c27f1b06102",
+      "size": 17466
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "f5a9679edc466e31d3e0042323ee5af52ba67ceac7a936c584c389409012ab37",
+      "size": 6952
+    },
+    {
+      "path": "code/fixture.js",
+      "sha256": "8b49e24dd4424df4778e20dedc9854f89b7401db83183fc5f541cd3607cc5378",
+      "size": 6970
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "99225971928c7bf16995930217663c75d0ce912227aec5798a426741f850b314",
+      "size": 305
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "649131bbd50776e320ed05b022ed092f4357d88917381816d932d492d9d249ed",
+      "size": 53773
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "cb661bb3c058c6111e5e09950352e07a7989ae151cea9a6cb69f569fe7b5814e",
+      "size": 503
+    },
+    {
+      "path": "code/night.js",
+      "sha256": "197344954d5d2264e830251db565ac9f7539891b9886503b5ab48e5d14e4b746",
+      "size": 75919
+    },
+    {
+      "path": "code/parse.js",
+      "sha256": "06b27e6e7f6f2541bdeaeeabfcdd3a6dfdd8017515729a7927f74a88d19870aa",
+      "size": 24333
+    },
+    {
+      "path": "code/samples/alarm-evening.txt",
+      "sha256": "65fb2a64c27cc799aaab70b32cae80ec0325ac9a5468345c7c113a00d1eb6400",
+      "size": 2197
+    },
+    {
+      "path": "code/samples/alarm-morning.txt",
+      "sha256": "5a9c6666cdd140b10767ca6cbb3fd5f2fb93dd4b466a7a59cd2814b264037b22",
+      "size": 1745
+    },
+    {
+      "path": "code/samples/checkin-evening.txt",
+      "sha256": "08e519cb592252dfcc941dfa5c61a9ccea9f678f7e65fa9861157bc64ae66af2",
+      "size": 1268
+    },
+    {
+      "path": "code/samples/checkin-morning.txt",
+      "sha256": "0a4ff9f3123c5e80eaadfae49d7d67da74e2f4e728772066386be6517a0e7c9d",
+      "size": 1492
+    },
+    {
+      "path": "code/samples/deviceidle.txt",
+      "sha256": "a718e41395ee948f3ab2a00a49718a42e344650366e9371b5e4c9e02fe5022d3",
+      "size": 757
+    },
+    {
+      "path": "code/samples/history.txt",
+      "sha256": "40fe57f6db3e76145787df068bc0d089e11bf7ff669b4c0f63fa6f575f4e6a15",
+      "size": 1957
+    },
+    {
+      "path": "code/samples/jobscheduler.txt",
+      "sha256": "eac444d8059e1a7be8ba9e285a768e6c52dc0dd7eccb7e66739de822da916f98",
+      "size": 1156
+    },
+    {
+      "path": "code/settings.js",
+      "sha256": "9c2c6da0bb8ba5820143c95fe512cf27890283770c79fe3e85a8f151ab3108a8",
+      "size": 14033
+    },
+    {
+      "path": "code/tools/phone_night.js",
+      "sha256": "03b5b87bfaabe0666fea89e7afc95667c3b3705c7309933d0933b63f7ffc8fdf",
+      "size": 1381
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "4f22ea9245379f5c24dac7879e43bb16b07dcb1f914fe34fe6d134d17fc76c96",
+      "size": 45211
+    }
+  ],
+  "id": "phone-night",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "assiApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}
