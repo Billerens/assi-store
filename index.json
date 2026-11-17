@@ -272,10 +272,10 @@
     {
       "archive": {
         "fileCount": 20,
-        "sha256": "53e3ebcd66538ce79ad9a6eaa23a543f35aa107a92c8a9a925efc9b7872d2cc2",
-        "size": 81019,
-        "unpackedSize": 241178,
-        "url": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/game-of-the-day-0.1.0.zip"
+        "sha256": "d89f4dfb3ffd7b9b6b7a4ce52cdf876ea537603f98ce08eae756ce5068017833",
+        "size": 81155,
+        "unpackedSize": 241425,
+        "url": "https://github.com/Billerens/assi-store/releases/download/game-of-the-day-v0.1.1/game-of-the-day-0.1.1.zip"
       },
       "compatibility": {
         "minAssiApi": 1
@@ -283,11 +283,11 @@
       "id": "game-of-the-day",
       "kind": "module",
       "license": "UNLICENSED",
-      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/v0.1.0/game-of-the-day-0.1.0.package.json",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/game-of-the-day-v0.1.1/game-of-the-day-0.1.1.package.json",
       "publisher": "billerens",
       "summary": "Агент делает новую мини-игру для Игротеки — каждый день, через день, по выбранным дням или несколько раз в день; вы играете и оцениваете, удачные остаются, а агент учится вашему вкусу",
       "title": "Игра дня",
-      "version": "0.1.0"
+      "version": "0.1.1"
     },
     {
       "archive": {
