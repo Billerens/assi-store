@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Игра дня",
+  "tags": ["игротека", "нейросеть"],
   "target": "modules/game-of-the-day",
   "requires": [],
   "shell": ["notify.actions", "job.once", "home.cards"]

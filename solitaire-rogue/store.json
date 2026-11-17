@@ -1,1 +1,1 @@
-{"id": "solitaire-rogue", "kind": "game", "version": "0.1.1", "title": "Пасьянс-рогалик", "target": "modules/games/solitaire-rogue", "requires": [], "shell": []}
+{"id": "solitaire-rogue", "kind": "game", "version": "0.1.1", "title": "Пасьянс-рогалик", "tags": ["рогалик", "карты"], "target": "modules/games/solitaire-rogue", "requires": [], "shell": []}

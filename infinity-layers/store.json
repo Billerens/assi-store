@@ -1,1 +1,1 @@
-{"id":"infinity-layers","kind":"game","version":"0.1.1","title":"Слои бесконечности","target":"modules/games/infinity-layers","requires":[],"shell":["app.visible","job.once","vibrate.pattern"]}
+{"id":"infinity-layers","kind":"game","version":"0.1.1","title":"Слои бесконечности","tags":["инкрементальная","числа"],"target":"modules/games/infinity-layers","requires":[],"shell":["app.visible","job.once","vibrate.pattern"]}

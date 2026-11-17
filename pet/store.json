@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.2",
   "title": "Питомец",
+  "tags": ["жизнь", "виджет"],
   "target": "modules/pet",
   "requires": ["health"],
   "shell": ["widget.image", "home.cards", "notify.actions", "off"]

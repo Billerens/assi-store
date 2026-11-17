@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Фокус",
+  "tags": ["продуктивность", "таймер"],
   "target": "modules/focus",
   "requires": ["inbox"],
   "shell": ["dnd", "notify.actions", "off", "job.once", "vibrate.pattern", "usage"]

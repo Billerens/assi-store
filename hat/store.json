@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Шляпа",
+  "tags": ["для компании", "голос", "слова"],
   "target": "modules/hat",
   "requires": [],
   "shell": ["speech.stream", "vibrate.pattern", "app.visible"]

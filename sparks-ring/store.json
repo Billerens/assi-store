@@ -3,6 +3,7 @@
   "kind": "game",
   "version": "0.1.0",
   "title": "Искры в кольце",
+  "tags": ["аркада"],
   "gameId": "daily/2026-11-15",
   "target": "modules/games/daily/2026-11-15",
   "requires": ["game-of-the-day"],

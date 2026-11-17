@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Диктофон",
+  "tags": ["голос", "заметки", "продуктивность"],
   "target": "modules/recorder",
   "requires": ["inbox", "spending"],
   "shell": ["notify.actions", "transcribe.segments", "job.once", "speech.render"]

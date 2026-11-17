@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Входящие",
+  "tags": ["сообщения", "продуктивность"],
   "target": "modules/inbox",
   "requires": [],
   "shell": ["notice.full", "notice.removed", "notice.open", "notify.actions", "dnd"]

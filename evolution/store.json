@@ -3,6 +3,7 @@
   "kind": "game",
   "version": "0.1.1",
   "title": "Эволюция",
+  "tags": ["инкрементальная", "космос"],
   "target": "modules/games/evolution",
   "requires": [],
   "shell": []

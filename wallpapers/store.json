@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Обои дня",
+  "tags": ["оформление", "виджет"],
   "target": "modules/wallpapers",
   "requires": [],
   "shell": ["notify.actions", "widget.image", "job.once"]

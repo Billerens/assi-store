@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Траты",
+  "tags": ["финансы", "отчёты"],
   "target": "modules/spending",
   "requires": ["health"],
   "shell": ["notify.actions", "notice.full", "usage"]

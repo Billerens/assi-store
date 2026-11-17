@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Ачивки за жизнь",
+  "tags": ["жизнь", "достижения"],
   "target": "modules/achievements",
   "requires": ["health", "pet", "spending"],
   "shell": ["home.cards"]

@@ -3,6 +3,7 @@
   "kind": "game",
   "version": "0.1.1",
   "title": "Сокровищница дракона",
+  "tags": ["инкрементальная", "фэнтези"],
   "target": "modules/games/dragon-hoard",
   "requires": [],
   "shell": []

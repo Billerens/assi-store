@@ -3,6 +3,7 @@
   "kind": "game",
   "version": "0.1.1",
   "title": "Блоки",
+  "tags": ["головоломка", "аркада"],
   "target": "modules/games/blocks",
   "requires": [],
   "shell": [

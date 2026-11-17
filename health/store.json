@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Здоровье и привычки",
+  "tags": ["здоровье", "привычки"],
   "target": "modules/health",
   "requires": [],
   "shell": ["notify.actions", "job.once", "usage", "off"]

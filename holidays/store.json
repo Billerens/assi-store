@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Праздничные пасхалки",
+  "tags": ["оформление", "праздники"],
   "target": "modules/holidays",
   "requires": [],
   "shell": ["theme.decor", "notify.actions", "job.once", "app.visible"]

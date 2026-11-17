@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Рисуй — угадаю",
+  "tags": ["рисование", "нейросеть", "для компании"],
   "target": "modules/draw-guess",
   "requires": ["hat"],
   "shell": ["speech.stream", "app.visible"]

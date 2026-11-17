@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Сериал на ночь",
+  "tags": ["голос", "истории", "нейросеть"],
   "target": "modules/bedtime-series",
   "requires": ["voice-adventure"],
   "shell": ["speech.render", "notify.actions", "app.visible", "job.once"]

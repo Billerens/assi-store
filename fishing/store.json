@@ -3,6 +3,7 @@
   "kind": "game",
   "version": "0.1.1",
   "title": "Рыбалка",
+  "tags": ["симулятор", "спокойная"],
   "target": "modules/games/fishing",
   "requires": [],
   "shell": ["vibrate.pattern", "app.visible"]

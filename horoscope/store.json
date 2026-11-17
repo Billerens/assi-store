@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Гороскоп по данным",
+  "tags": ["жизнь", "юмор"],
   "target": "modules/horoscope",
   "requires": ["health", "spending", "achievements", "rpg"],
   "shell": []

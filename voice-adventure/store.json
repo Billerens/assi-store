@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Текстовое приключение для дороги",
+  "tags": ["голос", "истории", "нейросеть"],
   "target": "modules/voice-adventure",
   "requires": [],
   "shell": ["speech.render", "notify.actions", "app.visible"]

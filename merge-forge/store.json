@@ -3,6 +3,7 @@
   "kind": "game",
   "version": "0.1.1",
   "title": "Кузница слияний",
+  "tags": ["слияние", "инкрементальная", "фэнтези"],
   "target": "modules/games/merge-forge",
   "requires": [],
   "shell": ["vibrate.pattern", "app.visible"]

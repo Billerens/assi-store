@@ -3,6 +3,7 @@
   "kind": "game",
   "version": "0.1.1",
   "title": "Подземелье в одну клетку",
+  "tags": ["рогалик", "карты"],
   "target": "modules/games/one-cell-dungeon",
   "requires": [],
   "shell": []

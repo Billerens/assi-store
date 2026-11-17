@@ -3,6 +3,7 @@
   "kind": "module",
   "version": "0.1.1",
   "title": "Тайная жизнь телефона",
+  "tags": ["телефон", "отчёты"],
   "target": "modules/phone-night",
   "requires": [],
   "shell": ["notify.actions", "notice.full"]
