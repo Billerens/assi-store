@@ -135,13 +135,30 @@
       document.getElementById('title').textContent = c.name + ' · ' + String(c.title).toLowerCase();
       document.getElementById('energy').textContent = typeof c.energy === 'number' ? c.energy : '';
       document.getElementById('phrase').textContent = c.phrase || '';
-      var lids = document.querySelectorAll('#pic .pt-blink');
-      var again = function () {
-        var seconds = (3 + Math.random() * 4).toFixed(1) + 's';
+      live(document.querySelector('#pic svg'));
+    }
+
+    var MOVE_MS = 4500;      // long enough for one breath and one blink
+    var REST_MS = 115000;
+    var lifeTimer = null;
+
+    // The card is on the home screen all the time: the creature moves for a few seconds, then
+    // rests. A blink comes within every move.
+    function live(svg) {
+      clearInterval(lifeTimer);
+      if (!svg) return;
+      var lids = svg.querySelectorAll('.pt-blink');
+      var move = function () {
+        if (document.visibilityState === 'hidden') return;
+        var seconds = (3 + Math.random()).toFixed(1) + 's';
         lids.forEach(function (lid) { lid.style.animationDuration = seconds; });
+        svg.classList.remove('rest');
+        setTimeout(function () { svg.classList.add('rest'); }, MOVE_MS);
       };
-      again();
-      if (lids[0]) lids[0].addEventListener('animationiteration', again);
+      // At rest from the start: a card drawn while nobody looks must not be left moving.
+      svg.classList.add('rest');
+      move();
+      lifeTimer = setInterval(move, MOVE_MS + REST_MS);
     }
 
     function load() {

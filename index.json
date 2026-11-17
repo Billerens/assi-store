@@ -539,10 +539,10 @@
     {
       "archive": {
         "fileCount": 22,
-        "sha256": "6dd4bb95e3c84987afe97c0e568cad48276f0cb2a2bec84b336465118827ebe4",
-        "size": 75138,
-        "unpackedSize": 219340,
-        "url": "https://github.com/Billerens/assi-store/releases/download/pet-v0.1.1/pet-0.1.1.zip"
+        "sha256": "637321d642a2f2531f652af7c8637ee5094c4a33b24ceb1028f7f1bb9aa34e96",
+        "size": 75549,
+        "unpackedSize": 220439,
+        "url": "https://github.com/Billerens/assi-store/releases/download/pet-v0.1.2/pet-0.1.2.zip"
       },
       "compatibility": {
         "minAssiApi": 1
@@ -550,11 +550,11 @@
       "id": "pet",
       "kind": "module",
       "license": "UNLICENSED",
-      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/pet-v0.1.1/pet-0.1.1.package.json",
+      "manifestUrl": "https://github.com/Billerens/assi-store/releases/download/pet-v0.1.2/pet-0.1.2.package.json",
       "publisher": "billerens",
       "summary": "Маленькое нарисованное существо: настроение — из сна, шагов, экрана ночью и отметок за сегодня, рост — из Жизни-RPG, вещи — из Ачивок; карточка на главном экране и виджет",
       "title": "Питомец",
-      "version": "0.1.1"
+      "version": "0.1.2"
     },
     {
       "archive": {

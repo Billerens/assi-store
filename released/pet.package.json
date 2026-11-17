@@ -83,8 +83,8 @@
     },
     {
       "path": "code/svg.js",
-      "sha256": "e21f9f40aa571a9ab2a990500f9ae14f924d39049e68813cfe5b27f1d87a57b1",
-      "size": 10606
+      "sha256": "b0bca5845e4c9e2a71014be7c0b1765fd751da1816146fb76866ba85c2a9f5e7",
+      "size": 11025
     },
     {
       "path": "code/tools/pet_state.js",
@@ -98,8 +98,8 @@
     },
     {
       "path": "code/ui/card.html",
-      "sha256": "b839b1206f750f175be495b8cb1ebe9b6c898cb9d20229069e41fcb0f396bb87",
-      "size": 4128
+      "sha256": "26a9f7307a59991d8fc74176ab8626e8585c840eb51c48e43ff217b083dec409",
+      "size": 4808
     },
     {
       "path": "code/ui/index.html",
@@ -130,5 +130,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

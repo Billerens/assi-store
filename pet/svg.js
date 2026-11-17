@@ -295,6 +295,15 @@ function css(blinkSeconds) {
     '    transform: scaleX(-1);',
     '  }',
     '}',
+    // At rest (the class "rest" on the svg) nothing moves: a picture that is always on a screen,
+    // like the home card, moves for a few seconds now and then, because an endless animation
+    // keeps the phone drawing the whole screen on every frame.
+    '.pet-svg.rest * {',
+    '  animation-play-state: paused !important;',
+    '}',
+    '.pet-svg.rest .pt-blink {',
+    '  animation: none !important;',
+    '}',
     // Less motion asked: only the blink stays.
     '@media (prefers-reduced-motion: reduce) {',
     '  .pet-svg .pt-anim, .pet-svg .pt-pupils, .pet-svg.jump .pt-all, .pet-svg.turn .pt-all {',
