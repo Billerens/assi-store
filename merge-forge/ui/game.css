@@ -653,6 +653,16 @@
   outline: 2px solid var(--ok);
   outline-offset: -2px;
 }
+/* The heat of the forge: a strip along the top of the button, the colour of embers. */
+.mf-heat-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #e07b4f, #ffb347);
+  border-radius: 0 2px 2px 0;
+  transition: width 0.18s linear;
+}
 .mf-forge-fill {
   position: absolute;
   left: 0;

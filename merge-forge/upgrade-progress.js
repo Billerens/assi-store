@@ -13,14 +13,22 @@
     return isFinite(n) && n > 0 ? Math.floor(n) : 0;
   }
   function supported(id) { return SUPPORTED.indexOf(id) >= 0; }
-  function milestone(n) {
-    var raw = 0.02 * Math.floor(n / 10) + 0.025 * Math.floor(n / 50) + 0.05 * Math.floor(n / 100);
-    return 0.5 * raw / (0.5 + raw);
+  // What every 10th, 50th and 100th level adds, and what the sum of them tends to: the game's settings
+  // (milestone.*), with these values when a setting is missing.
+  var MILESTONE = { per10: 0.1, per50: 0.25, per100: 0.5, cap: 4 };
+  function setting(cfg, name) {
+    var value = Number(cfg && cfg['milestone.' + name]);
+    return isFinite(value) && value >= 0 ? value : MILESTONE[name];
   }
-  function factor(n) {
-    return 1 + (n ? 0.04 / (1 + 100 / n) : 0) + milestone(n);
+  function milestone(n, cfg) {
+    var raw = setting(cfg, 'per10') * Math.floor(n / 10) + setting(cfg, 'per50') * Math.floor(n / 50) + setting(cfg, 'per100') * Math.floor(n / 100);
+    var cap = setting(cfg, 'cap');
+    return cap > 0 && raw > 0 ? cap * raw / (cap + raw) : 0;
   }
-  function strength(id, value) { return supported(id) ? factor(level(value)) : 1; }
+  function factor(n, cfg) {
+    return 1 + (n ? 0.04 / (1 + 100 / n) : 0) + milestone(n, cfg);
+  }
+  function strength(id, value, cfg) { return supported(id) ? factor(level(value), cfg) : 1; }
   function base(id, n, cfg) {
     if (!Object.prototype.hasOwnProperty.call(SOFT, id)) return n;
     var knee = Number(cfg && cfg['up.' + id + '.soft']);
@@ -30,7 +38,7 @@
   function effective(id, value, cfg) {
     var n = level(value);
     if (!supported(id)) return n;
-    var raw = base(id, n, cfg), mult = factor(n);
+    var raw = base(id, n, cfg), mult = factor(n, cfg);
     return raw > Number.MAX_VALUE / mult ? Number.MAX_VALUE : raw * mult;
   }
   function progress(id, value, cfg) {
@@ -40,11 +48,11 @@
     return {
       supported: on, level: n,
       effective: effective(id, n, cfg), nextEffective: effective(id, n + 1, cfg),
-      factor: on ? factor(n) : 1, previousFactor: on ? factor(Math.max(0, n - 1)) : 1, nextFactor: on ? factor(n + 1) : 1,
-      milestoneBonus: on ? milestone(n) : 0,
+      factor: on ? factor(n, cfg) : 1, previousFactor: on ? factor(Math.max(0, n - 1), cfg) : 1, nextFactor: on ? factor(n + 1, cfg) : 1,
+      milestoneBonus: on ? milestone(n, cfg) : 0,
       nextAt: on ? next : null,
       nextTier: on && next !== null ? (next % 100 === 0 ? 100 : next % 50 === 0 ? 50 : 10) : null,
-      nextMilestoneJump: on && next !== null ? milestone(next) - milestone(next - 1) : 0
+      nextMilestoneJump: on && next !== null ? milestone(next, cfg) - milestone(next - 1, cfg) : 0
     };
   }
   return { supported: supported, strength: strength, effective: effective, progress: progress };

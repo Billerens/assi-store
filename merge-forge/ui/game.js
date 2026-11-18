@@ -175,9 +175,11 @@
 
     view.gold = h('div', { class: 'g-big g-num', id: 'gold' });
     view.rate = h('span', { class: 'g-rate', id: 'rate' });
+    // Damage a second as it is now, with the heat of the forge and the timed bonuses.
+    view.dps = h('span', { class: 'g-rate mf-dps', id: 'dps' });
     view.coalsText = h('span', { class: 'g-num' });
     view.coals = h('span', { class: 'mf-chip', id: 'coals', hidden: true }, MFArt.el('ui', 'coal', 'mf-chip-ic'), view.coalsText);
-    g.el.top.append(view.gold, h('div', { class: 'mf-toprow' }, view.rate, view.coals));
+    g.el.top.append(view.gold, h('div', { class: 'mf-toprow' }, view.rate, view.dps, view.coals));
 
     view.canvas = h('canvas', { class: 'mf-canvas', id: 'gate-canvas' });
     view.ctx = view.canvas.getContext('2d');
@@ -218,8 +220,9 @@
     view.anvilTools.append(view.sort);
 
     view.forgeFill = h('i', { class: 'mf-forge-fill' });
+    view.heatFill = h('i', { class: 'mf-heat-fill' });
     view.forgeSub = h('span', { class: 'g-sub g-num' });
-    view.forge = h('button', { class: 'g-btn primary mf-forge', id: 'forge', onclick: tapForge }, view.forgeFill, head('forge', 'Горн'), view.forgeSub);
+    view.forge = h('button', { class: 'g-btn primary mf-forge', id: 'forge', onclick: tapForge }, view.heatFill, view.forgeFill, head('forge', 'Горн'), view.forgeSub);
     view.chestSub = h('span', { class: 'g-sub', role: 'status', 'aria-live': 'polite' }, 'продать');
     view.chest = h('button', { class: 'g-btn mf-chest', id: 'chest', onclick: () => g.flash('chest', 'Сундук продажи', 'Перетащите сюда клинок, чтобы продать его за золото') }, head('chest', 'Сундук'), view.chestSub);
     view.upBtn = h('button', { class: 'g-btn mf-up-btn', id: 'upgrades', onclick: openUpgrades }, head('upgrades', 'Улучшения'), h('span', { class: 'g-sub' }, 'кузня и руны'));
@@ -748,7 +751,7 @@
     twin: (c) => tx('Клинков из горна больше на {}', pct(c['up.twin.step'])),
     melt: (c) => tx('Шанс клинка на уровень выше +{}', pct(c['up.melt.step'])),
     apprentice: () => tx('Сам сливает пары, чаще с каждым уровнем'),
-    hourglass: (c) => tx('Таймер босса +{} с', c['up.hourglass.step']),
+    hourglass: (c) => tx('Таймер босса +{} с', g.fmt(c['up.hourglass.step'], { digits: 2 })),
     hunter: (c) => tx('Золото с босса +{}', pct(c['up.hunter.step'])),
     temper: (c) => tx('Урон клинков от {}-го уровня +{}', c['temper.fromLevel'], pct(c['up.temper.step'])),
     runeMason: () => tx('Ещё одно гнездо руны'),
@@ -759,6 +762,8 @@
     remelt: (c) => tx('Продажа клинка даёт на {} цены больше', pct(c['up.remelt.step'])),
     banner: (c) => tx('Урон +{} за каждую десятку волн', pct(c['up.banner.step'])),
     hammer: () => tx('Ручной удар сильнее; прирост постепенно уменьшается'),
+    ember: (c) => tx('При полном жаре залпы чаще ещё на {}', pct(c['up.ember.step'])),
+    pilot: (c) => tx('Жар горна не опускается ниже ещё на {}', pct(c['up.pilot.step'])),
     stall: () => tx('Дороже продаёт обычные клинки и излишки ковки')
   };
 
@@ -771,7 +776,9 @@
     if (id === 'eye') return tx('крит {}', pct(sim.critChance(state, c)));
     if (id === 'hand') return tx('крит ×{}', g.fmt(sim.critMult(state, c), { digits: 2 }));
     if (id === 'apprentice') return sim.apprenticeInterval(state, c) ? tx('раз в {} с', g.fmt(sim.apprenticeInterval(state, c) / sim.apprenticeSpeed(state, c), { digits: 1 })) : tx('нет');
-    if (id === 'hourglass') return tx('таймер {} с', sim.bossTimer(state, c));
+    if (id === 'hourglass') return tx('таймер {} с', g.fmt(sim.bossTimer(state, c), { digits: 1 }));
+    if (id === 'ember') return tx('полный жар: залп раз в {} с', g.fmt(c['combat.hitSec'] / (1 + sim.heatPower(state, c)), { digits: 2 }));
+    if (id === 'pilot') return tx('жар не ниже {}', pct(sim.heatFloor(state, c)));
     if (id === 'wide') return tx('{} клеток', sim.openCells(state, c).length);
     if (id === 'night') return tx('офлайн {}', pct(sim.offlineShare(state, c)));
     if (id === 'remelt') return tx('продажа {}', pct(sim.sellShare(state, c)));
@@ -794,7 +801,7 @@
     const c = cfg();
     const groups = [
       { id: 'forge', title: 'Ковка', items: ['bellows', 'steel', 'wide', 'twin', 'melt', 'apprentice', 'hammer'] },
-      { id: 'battle', title: 'Бой', items: ['sharp', 'eye', 'hand', 'hourglass', 'temper', 'runeMason', 'runePower', 'cry', 'banner'] },
+      { id: 'battle', title: 'Бой', items: ['sharp', 'eye', 'hand', 'hourglass', 'temper', 'ember', 'pilot', 'runeMason', 'runePower', 'cry', 'banner'] },
       { id: 'income', title: 'Доход', items: ['purse', 'hunter', 'caravan', 'night', 'remelt', 'stall'] }
     ];
     view.upTab = view.upTab || 'forge';
@@ -842,7 +849,7 @@
       const can = open && Big.gte(state.run.gold, price);
       const n = lvl(state, u.id);
       const unlocked = sim.upUnlocked(state, c, u.id);
-      const requirement = u.id === 'hammer' ? tx('Откроется с волны {}', c['up.hammer.fromWave']) : tx('Откроется с волны {} или после {} продаж', c['up.stall.fromWave'], c['up.stall.fromSold']);
+      const requirement = ['hammer', 'ember', 'pilot'].includes(u.id) ? tx('Откроется с волны {}', c['up.' + u.id + '.fromWave']) : tx('Откроется с волны {} или после {} продаж', c['up.stall.fromWave'], c['up.stall.fromSold']);
       let side;
       if (open) {
         side = buyButton(can, g.fmt.price(price), n + 1, () => buyUp(u.id));
@@ -1037,6 +1044,7 @@
     view.gold.textContent = g.fmt.live(r.gold);
     const mult = g.links.mult ? g.links.mult() : 1;
     view.rate.textContent = tx('{} фарм', g.fmt.rate(Big.mul(r.farmRate, mult)));
+    view.dps.textContent = tx('{} урон', g.fmt.rate(sim.dps(state, c, t)));
     const coals = sim.coalsAll(state);
     view.coals.hidden = !coals && !sim.ingots(state);
     view.coalsText.textContent = sim.ingots(state) ? tx('угли {} · слитки {}', g.fmt(coals), sim.ingots(state)) : tx('угли {}', g.fmt(coals));
@@ -1123,7 +1131,10 @@
     const share = Math.max(0, Math.min(1, 1 - Math.max(0, r.forgeT) / sim.forgeInterval(state, c, t)));
     view.forgeFill.style.width = (share * 100) + '%';
     view.forgeSub.textContent = full ? tx('продажа · {} с', g.fmt(remaining, { digits: 1 })) : tx('ур. {} · {} с', sim.forgeLevel(state, c), g.fmt(remaining, { digits: 1 }));
-    view.forge.title = tx('Горн куёт сам. Нажатия ускоряют тот же цикл. Если места нет, новый клинок продаётся.');
+    view.forge.title = tx('Горн куёт сам. Нажатия ускоряют тот же цикл и раздувают жар: пока горн горяч, клинки бьют чаще. Если места нет, новый клинок продаётся.');
+    const hot = sim.heat(state, c);
+    view.heatFill.style.width = (hot * 100) + '%';
+    view.forge.setAttribute('aria-label', hot > 0.005 ? tx('Горн, жар {}, залп раз в {} с', pct(hot), g.fmt(sim.volleySec(state, c, false), { digits: 2 })) : tx('Горн'));
     view.forge.classList.toggle('blow', r.bellowsUntil > t);
     const sale = r.lastForgeSale;
     const saleKey = sale ? sale.at + ':' + sale.serial : '';

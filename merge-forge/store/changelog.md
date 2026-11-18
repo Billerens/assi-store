@@ -1,8 +1,16 @@
 # Merge Forge: what’s new
 
-## 0.1.3 — 2026-11-18
+## 0.2.1 — 2026-11-18
 
 - The module API is now called `axiko`; this version needs a build of Axiko with that API.
+
+## 0.2.0 — 2026-11-18
+
+- Forge heat: taps on the forge heat it, and while it is hot the blades strike more often. Left alone, it cools in a few seconds. A strip on the forge button shows the heat.
+- Two new upgrades: “Hot embers” makes full heat stronger, “Undying fire” keeps part of the heat for good, offline included.
+- Damage per second is shown at the top, next to the farm rate.
+- Upgrade milestones are worth reaching: every 10th level now adds about 10% instead of 2%, the 100th about 130% in all. Their size is a setting of the game.
+- The boss timer and the hourglass upgrade no longer show numbers with a dozen decimals.
 
 ## 0.1.2 — 2026-11-18
 

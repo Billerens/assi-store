@@ -4,6 +4,11 @@ const { open, ctxOf, test, done } = require('./env');
 const x = open(), S = x.sim, O = S.outpost, NOW = Date.UTC(2026, 10, 16, 9);
 const SUPPORTED = ['sharp', 'purse', 'hand', 'twin', 'temper', 'runePower', 'hunter', 'hourglass', 'cry', 'banner', 'caravan', 'hammer', 'stall'];
 function fresh() { const rng=x.Rng.make(57), state=x.Core.newState(x.game,S,ctxOf(x,NOW,rng));S.ensure(state);return {state,rng}; }
+// What the milestones add at level n, by the game's own settings (milestone.*).
+function milestone(n) {
+  const c=x.cfg, raw=c['milestone.per10']*Math.floor(n/10)+c['milestone.per50']*Math.floor(n/50)+c['milestone.per100']*Math.floor(n/100), cap=c['milestone.cap'];
+  return cap>0&&raw>0?cap*raw/(cap+raw):0;
+}
 function close(a,b,message) { assert.ok(Math.abs(a-b)<1e-10*Math.max(1,Math.abs(b)),message||`${a} != ${b}`); }
 
 test('пороги 10/50/100 и следующие столетия повторяются без геометрии', () => {
@@ -15,11 +20,16 @@ test('пороги 10/50/100 и следующие столетия повтор
     close(a.nextMilestoneJump,b.milestoneBonus-previous.milestoneBonus);
     assert.ok(b.factor>previous.factor);assert.ok(b.effective>at);
   }
-  close(S.upgradeProgress(state,x.cfg,'sharp',10).factor,1+0.04*10/110+0.5*0.02/0.52);
-  close(S.upgradeProgress(state,x.cfg,'sharp',50).factor,1+0.04*50/150+0.5*0.125/0.625);
-  close(S.upgradeProgress(state,x.cfg,'sharp',100).factor,1.2075);
+  close(S.upgradeProgress(state,x.cfg,'sharp',10).factor,1+0.04*10/110+milestone(10));
+  close(S.upgradeProgress(state,x.cfg,'sharp',50).factor,1+0.04*50/150+milestone(50));
+  close(S.upgradeProgress(state,x.cfg,'sharp',100).factor,1+0.04*100/200+milestone(100));
   assert.strictEqual(S.upgradeProgress(state,x.cfg,'sharp',100).nextAt,110);
-  assert.ok(S.upgradeProgress(state,x.cfg,'sharp',1000).factor<1.5);
+  // A milestone is worth reaching: the tenth level alone adds several per cent, the hundredth far more.
+  assert.ok(milestone(10)>=0.05);assert.ok(milestone(100)>=0.5);
+  assert.ok(S.upgradeProgress(state,x.cfg,'sharp',1000).factor<1.04+x.cfg['milestone.cap']);
+  // The settings are the game's: other values give other milestones, and none switches them off.
+  const kept=x.cfg['milestone.per10'];x.cfg['milestone.per10']=0;
+  assert.ok(S.upgradeProgress(state,x.cfg,'sharp',10).milestoneBonus===0);x.cfg['milestone.per10']=kept;
 });
 
 test('медленный прирост есть между вехами, суммарное усиление ограничено', () => {
@@ -28,7 +38,7 @@ test('медленный прирост есть между вехами, сум
     let previous=0;
     for (const n of [0,1,2,9,10,11,49,50,99,100,101,190,200,1000,10000,1e12,1e300,Number.MAX_VALUE]) {
       const p=S.upgradeProgress(state,x.cfg,id,n);
-      assert.strictEqual(p.supported,true);assert.ok(Number.isFinite(p.factor));assert.ok(p.factor>=1&&p.factor<=1.54);
+      assert.strictEqual(p.supported,true);assert.ok(Number.isFinite(p.factor));assert.ok(p.factor>=1&&p.factor<=1.04+x.cfg['milestone.cap']+1e-9);
       assert.ok(Number.isFinite(p.effective));assert.ok(p.effective>=previous);previous=p.effective;
       close(p.nextEffective,S.upgradeEffective(state,x.cfg,id,n+1));
     }
@@ -41,7 +51,7 @@ test('вклад мягких улучшений остаётся логариф
   for(const id of ['caravan','hammer','stall']) {
     const knee=x.cfg['up.'+id+'.soft'],p=S.upgradeProgress(state,x.cfg,id,100);
     close(p.effective/p.factor,knee*(1+Math.log(100/knee)));
-    assert.ok(p.effective<100);
+    assert.ok(p.effective/p.factor<100);
   }
 });
 

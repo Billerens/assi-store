@@ -48,6 +48,11 @@
   const line = (d, stroke, w) => '<path d="' + d + '" stroke="' + stroke + '" stroke-width="' + (w || 2) + '" stroke-linecap="round" stroke-linejoin="round" fill="none"/>';
 
   const UP = {
+    ember: crucible + '<path d="M20 2c3 3.5 5 6 5 9a5 5 0 0 1-10 0c0-2 1-3.4 2.2-5 .5 1.6 1 2.3 1.6 2.3.6-2.2.6-4 1.2-6.3z" fill="' + FL + '"/>' +
+      line('M9 9c1-2 1-3.5 0-5.5M31 9c-1-2-1-3.5 0-5.5', EM, 1.8) + '<rect x="14" y="31" width="12" height="4" rx="1.5" fill="' + CL + '"/>',
+    pilot: '<path d="M20 4c5.5 6.5 10 10.5 10 17a10 10 0 0 1-20 0c0-4.4 2.2-6.8 4.4-10 1.1 3.2 2.2 4.4 3.3 4.4 1.2-4.2 1.2-7.4 2.3-11.4z" fill="' + EM + '"/>' +
+      '<path d="M20 16c3 3.2 4.5 5.2 4.5 8.4a4.5 4.5 0 0 1-9 0c0-3.2 2-5.2 4.5-8.4z" fill="' + FL + '"/>' +
+      '<rect x="7" y="32" width="26" height="5" rx="2" fill="' + CL + '"/>' + line('M11 34.5h18', SD, 1.4),
     hammer: anvil('translate(3 11) scale(.8)') + '<path d="M15 23L27 9l3 2.5-12 14z" fill="' + WD + '"/>' +
       '<path d="M20 6l9-3 7 10-9 4z" fill="' + SM + '"/><path d="M29 3l7 10-2.5 1-7-10z" fill="' + ST + '"/>' +
       spark(13, 20, 4.5, FL) + line('M6 11l3 4M5 20h3M18 10l-1 4', EM, 1.8),
