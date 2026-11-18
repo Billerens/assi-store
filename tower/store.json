@@ -1,9 +1,17 @@
 {
   "id": "tower",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Башня",
-  "tags": ["рогалик", "тактика"],
+  "version": "0.1.2",
+  "title": "Tower",
+  "summary": "Choose doors, read enemy intents, and combine moves with relics. Every climb leaves shards for the next attempt.",
+  "tags": ["roguelike", "tactics"],
+  "locales": {
+    "ru": {
+      "title": "Башня",
+      "summary": "Выбирайте двери, читайте намерения врагов и стройте сборку из приёмов и реликвий. Каждый подъём оставляет осколки для новой попытки.",
+      "tags": ["рогалик", "тактика"]
+    }
+  },
   "target": "modules/games/tower",
   "requires": [],
   "shell": [

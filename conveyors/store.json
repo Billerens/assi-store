@@ -1,9 +1,17 @@
 {
   "id": "conveyors",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Конвейеры",
-  "tags": ["автоматизация", "производство", "космос"],
+  "version": "0.1.2",
+  "title": "Conveyors",
+  "summary": "Drills, belts, furnaces and assemblers on a grid plot of an alien planet",
+  "tags": ["automation", "production", "space"],
+  "locales": {
+    "ru": {
+      "title": "Конвейеры",
+      "summary": "Буры, ленты, печи и сборщики на клетчатом участке чужой планеты",
+      "tags": ["автоматизация", "производство", "космос"]
+    }
+  },
   "target": "modules/games/conveyors",
   "requires": [],
   "shell": []

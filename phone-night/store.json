@@ -1,9 +1,17 @@
 {
   "id": "phone-night",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Тайная жизнь телефона",
-  "tags": ["телефон", "отчёты"],
+  "version": "0.1.2",
+  "title": "The Secret Life of the Phone",
+  "summary": "A morning report on what the phone did at night: who woke it, who used the network, where the battery went — with a smile, but every number is real",
+  "tags": ["phone", "reports"],
+  "locales": {
+    "ru": {
+      "title": "Тайная жизнь телефона",
+      "summary": "Утренний отчёт о том, что телефон делал ночью: кто его будил, кто ходил в сеть, куда ушла батарея — с улыбкой, но каждая цифра настоящая",
+      "tags": ["телефон", "отчёты"]
+    }
+  },
   "target": "modules/phone-night",
   "requires": [],
   "shell": ["notify.actions", "notice.full"]

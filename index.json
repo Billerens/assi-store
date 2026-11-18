@@ -4,12 +4,11 @@
     {
       "count": 40,
       "path": "catalog/p-0.json",
-      "sha256": "5fbba5ecc9e8ef6b47278fe02da27a1f71b8b8f53352eccd9b9d579cc2db6259",
-      "size": 57716
+      "sha256": "950691b3e01c507a0f50b334624f430f8b3de154ec21c89e533edc2b008c8550",
+      "size": 70632
     }
   ],
   "repository": {
-    "description": "Модули и игры для Axiko: читаемые исходники, которые можно изучить и доработать под себя.",
     "homepage": "https://github.com/Billerens/assi-store",
     "id": "billerens.assi-store",
     "title": "Axiko Store"

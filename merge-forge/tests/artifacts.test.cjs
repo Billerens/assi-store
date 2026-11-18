@@ -11,10 +11,10 @@ function sameBig(a,b){assert.equal(Big.str(a),Big.str(b));}
 function unlockAll(s,n=1){for(const d of A.CATALOG)s.meta.artifacts.items[d.id]={level:n,enabled:true,cooldown:0};}
 function notExtensions(s){const c=copy(s);delete c.meta.artifacts;delete c.run.artifacts;return c;}
 function allZero(mods){assert.ok(Object.values(mods).every(v=>v===0));}
-test('36 distinct relics: 16 simultaneous passives,12 manual procs,8 independent actives',()=>{
- assert.equal(A.CATALOG.length,36);assert.equal(new Set(A.CATALOG.map(d=>d.id)).size,36);
- for(const [kind,n]of [['passive',16],['click',12],['active',8]])assert.equal(A.CATALOG.filter(d=>d.kind===kind).length,n);
- assert.equal(new Set(A.CATALOG.filter(d=>d.kind==='passive').map(d=>d.effect)).size,16);
+test('37 distinct relics: 17 simultaneous passives,12 manual procs,8 independent actives',()=>{
+ assert.equal(A.CATALOG.length,37);assert.equal(new Set(A.CATALOG.map(d=>d.id)).size,37);
+ for(const [kind,n]of [['passive',17],['click',12],['active',8]])assert.equal(A.CATALOG.filter(d=>d.kind===kind).length,n);
+ assert.equal(new Set(A.CATALOG.filter(d=>d.kind==='passive').map(d=>d.effect)).size,17);
 });
 test('empty collection is exact identity; additive ensure preserves arbitrary legacy data and consumes no RNG',()=>{
  const s=fresh();delete s.meta.artifacts;delete s.run.artifacts;const before=copy(s);A.ensure(s);assert.deepEqual(notExtensions(s),before);const once=JSON.stringify(s);A.ensure(s);assert.equal(JSON.stringify(s),once);
@@ -22,7 +22,7 @@ test('empty collection is exact identity; additive ensure preserves arbitrary le
 });
 test('six progressive groups require first prestige; old owned items remain accessible',()=>{
  const s=fresh(60,0);assert.equal(A.model(s,cfg).availableCount,0);s.layers.forge.count=1;
- for(const[wave,count]of [[60,6],[70,12],[80,18],[100,24],[120,30],[150,36]]){s.run.maxWave=wave;s.layers.forge.state.record=wave;assert.equal(A.model(s,cfg).availableCount,count);}
+ for(const[wave,count]of [[60,6],[70,12],[80,19],[100,25],[120,31],[150,37]]){s.run.maxWave=wave;s.layers.forge.state.record=wave;assert.equal(A.model(s,cfg).availableCount,count);}
  assert.ok(A.buy(s,cfg,'twinLever').ok);s.run.maxWave=1;s.layers.forge.state.record=0;s.layers.forge.count=0;assert.ok(A.available(s,'twinLever'));assert.ok(!A.available(s,'feedingBowl'));
 });
 test('purchase and upgrade spend exactly live price, preserve total-earned coal bonus, never grant ordinary upgrade levels',()=>{
@@ -33,7 +33,7 @@ test('purchase and upgrade spend exactly live price, preserve total-earned coal 
  s.layers.forge.currency='0e0';const poor=JSON.stringify(s);assert.equal(A.buy(s,cfg,'whetstone').ok,false);assert.equal(JSON.stringify(s),poor);
 });
 test('every owned passive contributes simultaneously; toggling one never disables another, each upgrade has positive marginal value',()=>{
- const s=fresh();unlockAll(s);const all=A.modifiers(s);assert.equal(A.model(s,cfg).owned,36);assert.ok(A.model(s,cfg).allOwnedActive);
+ const s=fresh();unlockAll(s);const all=A.modifiers(s);assert.equal(A.model(s,cfg).owned,37);assert.ok(A.model(s,cfg).allOwnedActive);
  for(const d of A.CATALOG.filter(d=>d.kind==='passive')){
   assert.ok(all[d.effect]>0,d.id);A.setEnabled(s,d.id,false);const without=A.modifiers(s);assert.ok(without[d.effect]<all[d.effect],d.id);for(const k in all)if(k!==d.effect)assert.equal(without[k],all[k]);
   A.setEnabled(s,d.id,true);s.meta.artifacts.items[d.id].level++;assert.ok(A.modifiers(s)[d.effect]>all[d.effect],d.id);s.meta.artifacts.items[d.id].level--;

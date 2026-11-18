@@ -1,9 +1,17 @@
 {
   "id": "bedtime-series",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Сериал на ночь",
-  "tags": ["голос", "истории", "нейросеть"],
+  "version": "0.1.2",
+  "title": "Bedtime Series",
+  "summary": "Every evening a new episode of an interactive story by voice: you are the hero, the plot has details of your day, you choose at the forks by voice, and you can fall asleep mid-episode",
+  "tags": ["voice", "stories", "ai"],
+  "locales": {
+    "ru": {
+      "title": "Сериал на ночь",
+      "summary": "Каждый вечер новая серия интерактивной истории голосом: вы — герой, в сюжете — детали вашего дня, выбор на развилках — голосом, засыпать можно посреди серии",
+      "tags": ["голос", "истории", "нейросеть"]
+    }
+  },
   "target": "modules/bedtime-series",
   "requires": ["voice-adventure"],
   "shell": ["speech.render", "notify.actions", "app.visible", "job.once"]

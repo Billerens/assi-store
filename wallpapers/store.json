@@ -1,9 +1,17 @@
 {
   "id": "wallpapers",
   "kind": "module",
-  "version": "0.1.2",
-  "title": "Обои дня",
-  "tags": ["оформление", "виджет"],
+  "version": "0.1.3",
+  "title": "Wallpaper of the Day",
+  "summary": "Every morning a photo from open sources to match the weather, the season and your taste — for the outer and inner Fold screens and the lock screen, with the author and license",
+  "tags": ["appearance", "widget"],
+  "locales": {
+    "ru": {
+      "title": "Обои дня",
+      "summary": "Каждое утро фотография из открытых источников под погоду, сезон и ваш вкус — на внешний и внутренний экраны Fold и на блокировку, с автором и лицензией",
+      "tags": ["оформление", "виджет"]
+    }
+  },
   "target": "modules/wallpapers",
   "requires": [],
   "shell": ["notify.actions", "widget.image", "job.once"]

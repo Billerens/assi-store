@@ -47,6 +47,11 @@
       "size": 11666
     },
     {
+      "path": "code/i18n-en.json",
+      "sha256": "f9042d7795e60d740805ec974eb027946041095fe2787b5b9c79d471a814247d",
+      "size": 24989
+    },
+    {
       "path": "code/icon.svg",
       "sha256": "cc76d46eacb7370900a22453344db31c9f4114d3484768f6783ffd740f57988c",
       "size": 294
@@ -101,7 +106,7 @@
   "optionalDependencies": [
     {
       "id": "voice-adventure",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     }
   ],
   "publisher": "billerens",
@@ -110,5 +115,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

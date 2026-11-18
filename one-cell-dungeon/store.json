@@ -1,9 +1,17 @@
 {
   "id": "one-cell-dungeon",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Подземелье в одну клетку",
-  "tags": ["рогалик", "карты"],
+  "version": "0.1.2",
+  "title": "One-Cell Dungeon",
+  "summary": "A descent on a 3×3 grid: a step eats the neighbouring card, and the next one is laid down behind you",
+  "tags": ["roguelike", "cards"],
+  "locales": {
+    "ru": {
+      "title": "Подземелье в одну клетку",
+      "summary": "Спуск по сетке 3×3: шаг съедает соседнюю карту, за спиной тут же ложится следующая",
+      "tags": ["рогалик", "карты"]
+    }
+  },
   "target": "modules/games/one-cell-dungeon",
   "requires": [],
   "shell": []

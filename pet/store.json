@@ -1,9 +1,17 @@
 {
   "id": "pet",
   "kind": "module",
-  "version": "0.1.2",
-  "title": "Питомец",
-  "tags": ["жизнь", "виджет"],
+  "version": "0.1.3",
+  "title": "Pet",
+  "summary": "A little drawn creature: its mood comes from sleep, steps, screen at night and today’s marks, its growth from Life RPG, its items from Achievements; a card on the home screen and a widget",
+  "tags": ["life", "widget"],
+  "locales": {
+    "ru": {
+      "title": "Питомец",
+      "summary": "Маленькое нарисованное существо: настроение — из сна, шагов, экрана ночью и отметок за сегодня, рост — из Жизни-RPG, вещи — из Ачивок; карточка на главном экране и виджет",
+      "tags": ["жизнь", "виджет"]
+    }
+  },
   "target": "modules/pet",
   "requires": ["health"],
   "shell": ["widget.image", "home.cards", "notify.actions", "off"]

@@ -1,9 +1,17 @@
 {
   "id": "rpg",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Жизнь-RPG",
-  "tags": ["жизнь", "достижения", "привычки"],
+  "version": "0.1.2",
+  "title": "Life RPG",
+  "summary": "A role-playing game on top of your life: XP and skills for steps, sleep and habits, a map of discovered places in the fog, quests drawn from your usual days, and a chronicle. The character is the Pet’s creature.",
+  "tags": ["life", "achievements", "habits"],
+  "locales": {
+    "ru": {
+      "title": "Жизнь-RPG",
+      "summary": "Ролевая игра поверх жизни: опыт и навыки за шаги, сон и привычки, карта открытых мест в тумане, квесты от ваших обычных дней и хроника. Персонаж — существо Питомца.",
+      "tags": ["жизнь", "достижения", "привычки"]
+    }
+  },
   "target": "modules/rpg",
   "requires": ["health", "pet", "achievements", "spending"],
   "shell": []

@@ -1,17 +1,31 @@
 {
   "changes": [
     {
+      "date": "2026-11-18",
+      "notes": "- Interface texts are translated into English.\n- The store listing is in English and Russian.",
+      "version": "0.1.2"
+    },
+    {
       "date": "2026-11-17",
-      "notes": "- «Мастер игр» проверяет экран новой игры одним шагом (ui_check), на скрытом экране — работает и при выключенном экране телефона.\n- После работы он проверяет только свою игру, а не все игры Игротеки: прежняя полная проверка утром съедала заметную часть батареи.",
+      "notes": "- The Gamesmith checks the screen of a new game in a single step (ui_check), on a hidden screen, so it works even when the phone’s screen is off.\n- After its work it checks only its own game, not all the games in Game Room: the earlier full check in the morning used a noticeable part of the battery.",
       "version": "0.1.1"
     },
     {
       "date": "2026-11-16",
-      "notes": "- Первый выпуск.",
+      "notes": "- First release.",
       "version": "0.1.0"
     }
   ],
   "id": "game-of-the-day",
+  "locales": {
+    "ru": {
+      "changes": {
+        "0.1.0": "- Первый выпуск.",
+        "0.1.1": "- «Мастер игр» проверяет экран новой игры одним шагом (ui_check), на скрытом экране — работает и при выключенном экране телефона.\n- После работы он проверяет только свою игру, а не все игры Игротеки: прежняя полная проверка утром съедала заметную часть батареи.",
+        "0.1.2": "- Тексты интерфейса переведены на английский.\n- Описание в магазине — на английском и русском."
+      }
+    }
+  },
   "schemaVersion": 1,
   "screenshots": [
     {
@@ -23,5 +37,5 @@
       "width": 720
     }
   ],
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

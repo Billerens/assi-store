@@ -1,9 +1,17 @@
 {
   "id": "recorder",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Диктофон",
-  "tags": ["голос", "заметки", "продуктивность"],
+  "version": "0.1.2",
+  "title": "Recorder",
+  "summary": "Record meetings, lectures and thoughts out loud: on-phone transcription as you record, a summary with decisions and tasks, search by words and by meaning",
+  "tags": ["voice", "notes", "productivity"],
+  "locales": {
+    "ru": {
+      "title": "Диктофон",
+      "summary": "Запись встреч, лекций и мыслей вслух: расшифровка на телефоне по ходу записи, конспект с решениями и задачами, поиск по словам и по смыслу",
+      "tags": ["голос", "заметки", "продуктивность"]
+    }
+  },
   "target": "modules/recorder",
   "requires": ["inbox", "spending"],
   "shell": ["notify.actions", "transcribe.segments", "job.once", "speech.render"]

@@ -32,6 +32,11 @@
       "size": 2684
     },
     {
+      "path": "code/i18n-en.json",
+      "sha256": "24081bc8580c356864f04117ab6d6946fb2baa928b41cbeb9119378d7db366a5",
+      "size": 28562
+    },
+    {
       "path": "code/icon.svg",
       "sha256": "58aab4d00afd9538ab90d506cad8bd3325d22f2c5b2d7d100fbae358fe369397",
       "size": 443
@@ -121,7 +126,7 @@
   "optionalDependencies": [
     {
       "id": "health",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     }
   ],
   "publisher": "billerens",
@@ -130,5 +135,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

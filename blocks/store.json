@@ -1,9 +1,17 @@
 {
   "id": "blocks",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Блоки",
-  "tags": ["головоломка", "аркада"],
+  "version": "0.1.2",
+  "title": "Blocks",
+  "summary": "Complete lines, keep your streak and rescue the board with tools",
+  "tags": ["puzzle", "arcade"],
+  "locales": {
+    "ru": {
+      "title": "Блоки",
+      "summary": "Собирайте линии, берегите серии и спасайте поле инструментами",
+      "tags": ["головоломка", "аркада"]
+    }
+  },
   "target": "modules/games/blocks",
   "requires": [],
   "shell": [

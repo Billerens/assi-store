@@ -1,17 +1,31 @@
 {
   "changes": [
     {
+      "date": "2026-11-18",
+      "notes": "- Interface texts are translated into English.\n- The store listing is in English and Russian.",
+      "version": "0.1.2"
+    },
+    {
       "date": "2026-11-17",
-      "notes": "- Строки интерфейса переносятся, а не сжимаются и не обрезаются.\n- В описании приложение названо Axiko.",
+      "notes": "- Interface text now wraps instead of being squeezed or cut off.\n- The description now calls the app Axiko.",
       "version": "0.1.1"
     },
     {
       "date": "2026-11-16",
-      "notes": "- Первый выпуск.",
+      "notes": "- First release.",
       "version": "0.1.0"
     }
   ],
   "id": "blocks",
+  "locales": {
+    "ru": {
+      "changes": {
+        "0.1.0": "- Первый выпуск.",
+        "0.1.1": "- Строки интерфейса переносятся, а не сжимаются и не обрезаются.\n- В описании приложение названо Axiko.",
+        "0.1.2": "- Тексты интерфейса переведены на английский.\n- Описание в магазине — на английском и русском."
+      }
+    }
+  },
   "schemaVersion": 1,
   "screenshots": [
     {
@@ -23,5 +37,5 @@
       "width": 720
     }
   ],
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

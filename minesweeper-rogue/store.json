@@ -1,9 +1,17 @@
 {
   "id": "minesweeper-rogue",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Сапёр-рогалик",
-  "tags": ["рогалик", "головоломка"],
+  "version": "0.1.2",
+  "title": "Minesweeper Rogue",
+  "summary": "Seven fields without guessing: find caches, collect tools and unlock new depths",
+  "tags": ["roguelike", "puzzle"],
+  "locales": {
+    "ru": {
+      "title": "Сапёр-рогалик",
+      "summary": "Семь полей без угадывания: ищите тайники, собирайте инструменты и открывайте новые глубины",
+      "tags": ["рогалик", "головоломка"]
+    }
+  },
   "target": "modules/games/minesweeper-rogue",
   "requires": [],
   "shell": []

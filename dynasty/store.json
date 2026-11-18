@@ -1,9 +1,17 @@
 {
   "id": "dynasty",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Династия",
-  "tags": ["инкрементальная", "стратегия"],
+  "version": "0.1.2",
+  "title": "Dynasty",
+  "summary": "A ruler lives, grows rich and ages; his death is a change of generation, and the family tree gains a name",
+  "tags": ["idle", "strategy"],
+  "locales": {
+    "ru": {
+      "title": "Династия",
+      "summary": "Правитель живёт, богатеет и стареет; его смерть — смена поколения, и на древе рода прибавляется имя",
+      "tags": ["инкрементальная", "стратегия"]
+    }
+  },
   "target": "modules/games/dynasty",
   "requires": [],
   "shell": []

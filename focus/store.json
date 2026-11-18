@@ -1,9 +1,17 @@
 {
   "id": "focus",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Фокус",
-  "tags": ["продуктивность", "таймер"],
+  "version": "0.1.2",
+  "title": "Focus",
+  "summary": "A work timer: the phone goes into Do Not Disturb, messages pile up in Inbox, distracting apps won’t open, and at the end you get a summary of what you missed",
+  "tags": ["productivity", "timer"],
+  "locales": {
+    "ru": {
+      "title": "Фокус",
+      "summary": "Таймер работы: телефон уходит в «не беспокоить», сообщения копятся во Входящих, отвлекающие приложения не открываются, в конце — сводка пропущенного",
+      "tags": ["продуктивность", "таймер"]
+    }
+  },
   "target": "modules/focus",
   "requires": ["inbox"],
   "shell": ["dnd", "notify.actions", "off", "job.once", "vibrate.pattern", "usage"]

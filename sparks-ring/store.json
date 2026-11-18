@@ -2,8 +2,16 @@
   "id": "sparks-ring",
   "kind": "game",
   "version": "0.1.0",
-  "title": "Искры в кольце",
-  "tags": ["аркада"],
+  "title": "Sparks in the Ring",
+  "summary": "Sparks fly toward the core: deflect the incoming ones with a tap, leave the outgoing ones alone",
+  "tags": ["arcade"],
+  "locales": {
+    "ru": {
+      "title": "Искры в кольце",
+      "summary": "Искры летят к ядру: встречные отражайте тапом, улетающие не трогайте",
+      "tags": ["аркада"]
+    }
+  },
   "gameId": "daily/2026-11-15",
   "target": "modules/games/daily/2026-11-15",
   "requires": ["game-of-the-day"],

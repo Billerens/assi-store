@@ -1,9 +1,17 @@
 {
   "id": "garden",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Сад",
-  "tags": ["симулятор", "спокойная", "реальное время"],
+  "version": "0.1.2",
+  "title": "Garden",
+  "summary": "Plants grow by the real clock; cross them by exact rules of inheritance to breed new varieties and fill an album of 258 entries",
+  "tags": ["simulation", "relaxing", "real time"],
+  "locales": {
+    "ru": {
+      "title": "Сад",
+      "summary": "Растения растут по настоящим часам; скрещивая их по точным правилам наследования, выводите новые сорта и собирайте альбом из 258 записей",
+      "tags": ["симулятор", "спокойная", "реальное время"]
+    }
+  },
   "target": "modules/games/garden",
   "requires": [],
   "shell": ["app.visible", "job.once", "vibrate.pattern"]

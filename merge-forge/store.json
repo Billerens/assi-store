@@ -1,9 +1,17 @@
 {
   "id": "merge-forge",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Кузница слияний",
-  "tags": ["слияние", "инкрементальная", "фэнтези"],
+  "version": "0.1.2",
+  "title": "Merge Forge",
+  "summary": "The forge makes blades, two alike merge into a stronger one, and the blades cut down the monsters at the gate",
+  "tags": ["merge", "idle", "fantasy"],
+  "locales": {
+    "ru": {
+      "title": "Кузница слияний",
+      "summary": "Горн куёт клинки, два одинаковых сливаются в один сильнее, клинки сами рубят чудищ у ворот",
+      "tags": ["слияние", "инкрементальная", "фэнтези"]
+    }
+  },
   "target": "modules/games/merge-forge",
   "requires": [],
   "shell": ["vibrate.pattern", "app.visible"]

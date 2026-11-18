@@ -47,6 +47,11 @@
       "size": 7485
     },
     {
+      "path": "code/i18n-en.json",
+      "sha256": "7a1985cefde185460aba9916c07ef9f487bd61d112a86d63370874e189282d32",
+      "size": 23934
+    },
+    {
       "path": "code/icon.svg",
       "sha256": "f53544168e1e2569be056c3b95e7577b4823f24e6e6452b6bcaf274f64de493a",
       "size": 293
@@ -106,7 +111,7 @@
   "optionalDependencies": [
     {
       "id": "hat",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     }
   ],
   "publisher": "billerens",
@@ -115,5 +120,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

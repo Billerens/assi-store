@@ -1,9 +1,17 @@
 {
   "id": "inbox",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Входящие",
-  "tags": ["сообщения", "продуктивность"],
+  "version": "0.1.2",
+  "title": "Inbox",
+  "summary": "One feed of messages from all messengers: important, later, noise; digests of chatty groups and replies right from the feed",
+  "tags": ["messages", "productivity"],
+  "locales": {
+    "ru": {
+      "title": "Входящие",
+      "summary": "Одна лента сообщений из всех мессенджеров: важно, подождёт, шум; выжимки болтливых групп и ответы прямо из ленты",
+      "tags": ["сообщения", "продуктивность"]
+    }
+  },
   "target": "modules/inbox",
   "requires": [],
   "shell": ["notice.full", "notice.removed", "notice.open", "notify.actions", "dnd"]

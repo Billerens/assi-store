@@ -1,9 +1,17 @@
 {
   "id": "achievements",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Ачивки за жизнь",
-  "tags": ["жизнь", "достижения"],
+  "version": "0.1.2",
+  "title": "Life Achievements",
+  "summary": "Achievements for real life: sleep, steps, habits, places, spending, screen and games. The format for the agent is AGENT.md",
+  "tags": ["life", "achievements"],
+  "locales": {
+    "ru": {
+      "title": "Ачивки за жизнь",
+      "summary": "Достижения за реальную жизнь: сон, шаги, привычки, места, траты, экран и игры. Формат для агента — AGENT.md",
+      "tags": ["жизнь", "достижения"]
+    }
+  },
   "target": "modules/achievements",
   "requires": ["health", "pet", "spending"],
   "shell": ["home.cards"]

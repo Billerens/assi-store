@@ -1,9 +1,17 @@
 {
   "id": "library",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Библиотека",
-  "tags": ["инкрементальная", "спокойная"],
+  "version": "0.1.2",
+  "title": "Library",
+  "summary": "Collect books, read them on a timer and open halls: knowledge grows the branches, rare tomes unlock new doors, and every book comes with a made-up annotation for the trip",
+  "tags": ["idle", "relaxing"],
+  "locales": {
+    "ru": {
+      "title": "Библиотека",
+      "summary": "Собирайте книги, читайте их по таймеру и открывайте залы: знания растят ветви, редкие тома отпирают новые двери, к каждой книге — выдуманная аннотация на поездку",
+      "tags": ["инкрементальная", "спокойная"]
+    }
+  },
   "target": "modules/games/library",
   "requires": [],
   "shell": []

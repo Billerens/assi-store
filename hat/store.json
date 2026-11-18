@@ -1,9 +1,17 @@
 {
   "id": "hat",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Шляпа",
-  "tags": ["для компании", "голос", "слова"],
+  "version": "0.1.2",
+  "title": "Hat",
+  "summary": "A party game: you explain a word without saying it, and the phone itself hears when it’s guessed",
+  "tags": ["party", "voice", "words"],
+  "locales": {
+    "ru": {
+      "title": "Шляпа",
+      "summary": "Игра для компании: объясняешь слово, не называя его, а телефон сам слышит, когда его угадали",
+      "tags": ["для компании", "голос", "слова"]
+    }
+  },
   "target": "modules/hat",
   "requires": [],
   "shell": ["speech.stream", "vibrate.pattern", "app.visible"]

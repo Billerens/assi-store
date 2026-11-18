@@ -1,9 +1,17 @@
 {
   "id": "draw-guess",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Рисуй — угадаю",
-  "tags": ["рисование", "нейросеть", "для компании"],
+  "version": "0.1.2",
+  "title": "Draw & Guess",
+  "summary": "A two-way game: you draw and the model guesses aloud as you go; the model draws stroke by stroke and you shout guesses, the phone hears the right one",
+  "tags": ["drawing", "ai", "party"],
+  "locales": {
+    "ru": {
+      "title": "Рисуй — угадаю",
+      "summary": "Игра в две стороны: вы рисуете — модель угадывает вслух по ходу; модель рисует штрих за штрихом — вы кричите догадки, телефон слышит верную",
+      "tags": ["рисование", "нейросеть", "для компании"]
+    }
+  },
   "target": "modules/draw-guess",
   "requires": ["hat"],
   "shell": ["speech.stream", "app.visible"]

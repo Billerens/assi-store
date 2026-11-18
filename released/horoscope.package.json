@@ -37,6 +37,11 @@
       "size": 8722
     },
     {
+      "path": "code/i18n-en.json",
+      "sha256": "8933f8b5a075b8fdb4a2ebdbc9e42f510e425c5b26e296e61f22faaaa5d640bd",
+      "size": 40215
+    },
+    {
       "path": "code/icon.svg",
       "sha256": "a2a349de3c27badfbe8e6e6f66b1f353be54602eddfc5d0d0946f107f27a0d63",
       "size": 362
@@ -94,19 +99,19 @@
   "optionalDependencies": [
     {
       "id": "achievements",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     },
     {
       "id": "health",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     },
     {
       "id": "rpg",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     },
     {
       "id": "spending",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     }
   ],
   "publisher": "billerens",
@@ -115,5 +120,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

@@ -1,9 +1,17 @@
 {
   "id": "voice-adventure",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Текстовое приключение для дороги",
-  "tags": ["голос", "истории", "нейросеть"],
+  "version": "0.1.2",
+  "title": "Text Adventure for the Road",
+  "summary": "A voice quest for the road: played by voice in headphones, with no network and no screen. The model writes the chapters ahead of time while there is a network",
+  "tags": ["voice", "stories", "ai"],
+  "locales": {
+    "ru": {
+      "title": "Текстовое приключение для дороги",
+      "summary": "Голосовой квест для дороги: играется голосом в наушниках, без сети и без экрана. Главы пишет модель заранее, пока есть сеть",
+      "tags": ["голос", "истории", "нейросеть"]
+    }
+  },
   "target": "modules/voice-adventure",
   "requires": [],
   "shell": ["speech.render", "notify.actions", "app.visible"]

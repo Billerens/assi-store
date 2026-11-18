@@ -1,9 +1,17 @@
 {
   "id": "dragon-hoard",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Сокровищница дракона",
-  "tags": ["инкрементальная", "фэнтези"],
+  "version": "0.1.2",
+  "title": "Dragon's Hoard",
+  "summary": "A dragon hoards gold, knights come for the pile, a sleep for an age makes it older",
+  "tags": ["idle", "fantasy"],
+  "locales": {
+    "ru": {
+      "title": "Сокровищница дракона",
+      "summary": "Дракон копит золото, рыцари приходят за кучей, сон на век делает его древнее",
+      "tags": ["инкрементальная", "фэнтези"]
+    }
+  },
   "target": "modules/games/dragon-hoard",
   "requires": [],
   "shell": []

@@ -1,9 +1,17 @@
 {
   "id": "subway",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Подземка",
-  "tags": ["стратегия", "транспорт"],
+  "version": "0.1.2",
+  "title": "Underground",
+  "summary": "Build a metro: stations make demand, trains carry it, a finished city is handed over for the next one",
+  "tags": ["strategy", "transport"],
+  "locales": {
+    "ru": {
+      "title": "Подземка",
+      "summary": "Стройте метро: станции дают спрос, поезда его вывозят, построенный город сдаётся ради следующего",
+      "tags": ["стратегия", "транспорт"]
+    }
+  },
   "target": "modules/games/subway",
   "requires": [],
   "shell": [

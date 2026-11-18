@@ -1,9 +1,17 @@
 {
   "id": "alchemist",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Алхимик",
-  "tags": ["головоломка", "открытия", "нейросеть"],
+  "version": "0.1.2",
+  "title": "Alchemist",
+  "summary": "Mix the elements and discover substances, from steam to the subway; while there is network the model extends the recipe tree, and on the road the game takes discoveries from the stock",
+  "tags": ["puzzle", "discovery", "ai"],
+  "locales": {
+    "ru": {
+      "title": "Алхимик",
+      "summary": "Смешивайте стихии и открывайте вещества, от пара до метро; пока есть сеть, модель дописывает дерево рецептов вглубь, а в дороге игра берёт открытия из запаса",
+      "tags": ["головоломка", "открытия", "нейросеть"]
+    }
+  },
   "target": "modules/games/alchemist",
   "requires": [],
   "shell": ["app.visible", "job.once", "vibrate.pattern"]

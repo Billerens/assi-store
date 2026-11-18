@@ -32,6 +32,11 @@
       "size": 11694
     },
     {
+      "path": "code/i18n-en.json",
+      "sha256": "1ab12eb484df78b428e55ecf1e7303c199cff099c221c5d3ff504bf32ad10dd5",
+      "size": 31587
+    },
+    {
       "path": "code/icon.svg",
       "sha256": "d2d8c66e6a3c62c7743388cce538fbef18bffe0b0e874e069b71d85a1b697abb",
       "size": 308
@@ -104,11 +109,11 @@
   "optionalDependencies": [
     {
       "id": "inbox",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     },
     {
       "id": "spending",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     }
   ],
   "publisher": "billerens",
@@ -117,5 +122,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

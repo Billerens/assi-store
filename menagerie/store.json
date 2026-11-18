@@ -1,9 +1,17 @@
 {
   "id": "menagerie",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Зверинец",
-  "tags": ["симулятор", "разведение"],
+  "version": "0.1.2",
+  "title": "Menagerie",
+  "summary": "Breed remarkable beasts, improve your bloodline and win tournaments.",
+  "tags": ["simulation", "breeding"],
+  "locales": {
+    "ru": {
+      "title": "Зверинец",
+      "summary": "Выводите удивительных зверей, растите породу и побеждайте на турнирах.",
+      "tags": ["симулятор", "разведение"]
+    }
+  },
   "target": "modules/games/menagerie",
   "requires": [],
   "shell": [

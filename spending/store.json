@@ -1,9 +1,17 @@
 {
   "id": "spending",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Траты",
-  "tags": ["финансы", "отчёты"],
+  "version": "0.1.2",
+  "title": "Spending",
+  "summary": "Expenses recorded automatically from bank pushes and SMS: categories, monthly budget, “per day” and subscriptions up to the next charge",
+  "tags": ["finance", "reports"],
+  "locales": {
+    "ru": {
+      "title": "Траты",
+      "summary": "Расходы, которые записываются сами из пушей и SMS банков: категории, бюджет месяца, «на день» и подписки до следующего списания",
+      "tags": ["финансы", "отчёты"]
+    }
+  },
   "target": "modules/spending",
   "requires": ["health"],
   "shell": ["notify.actions", "notice.full", "usage"]

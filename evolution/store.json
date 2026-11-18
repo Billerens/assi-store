@@ -1,9 +1,17 @@
 {
   "id": "evolution",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Эволюция",
-  "tags": ["инкрементальная", "космос"],
+  "version": "0.1.2",
+  "title": "Evolution",
+  "summary": "From a drop of primordial soup to stellar colonies: eight stages of life and new universes with different laws.",
+  "tags": ["idle", "space"],
+  "locales": {
+    "ru": {
+      "title": "Эволюция",
+      "summary": "От капли бульона до звёздных колоний: восемь этапов жизни и новые вселенные с другими законами.",
+      "tags": ["инкрементальная", "космос"]
+    }
+  },
   "target": "modules/games/evolution",
   "requires": [],
   "shell": []

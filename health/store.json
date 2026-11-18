@@ -1,9 +1,17 @@
 {
   "id": "health",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Здоровье и привычки",
-  "tags": ["здоровье", "привычки"],
+  "version": "0.1.2",
+  "title": "Health and Habits",
+  "summary": "Sleep, steps, water, scheduled medications and habits with streaks; a weekly sleep review and a daily summary for Pet, Achievements, Life RPG and Horoscope",
+  "tags": ["health", "habits"],
+  "locales": {
+    "ru": {
+      "title": "Здоровье и привычки",
+      "summary": "Сон, шаги, вода, лекарства по расписанию и привычки с цепочками; разбор сна за неделю и сводка дня для Питомца, Ачивок, Жизни-RPG и Гороскопа",
+      "tags": ["здоровье", "привычки"]
+    }
+  },
   "target": "modules/health",
   "requires": [],
   "shell": ["notify.actions", "job.once", "usage", "off"]

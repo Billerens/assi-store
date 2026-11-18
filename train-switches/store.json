@@ -1,9 +1,17 @@
 {
   "id": "train-switches",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Ветки поездов",
-  "tags": ["головоломка", "транспорт"],
+  "version": "0.1.2",
+  "title": "Train Switches",
+  "summary": "Set the switches: every train to the station of its colour, no crashes",
+  "tags": ["puzzle", "transport"],
+  "locales": {
+    "ru": {
+      "title": "Ветки поездов",
+      "summary": "Расставьте стрелки: каждый поезд — к станции своего цвета, без столкновений",
+      "tags": ["головоломка", "транспорт"]
+    }
+  },
   "target": "modules/games/train-switches",
   "requires": [],
   "shell": []

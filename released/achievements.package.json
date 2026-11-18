@@ -42,6 +42,11 @@
       "size": 8722
     },
     {
+      "path": "code/i18n-en.json",
+      "sha256": "2b64ca68917c7a04d25a48d8ec6d63b7916de2582305d6bb5e26d1e691ecf768",
+      "size": 30458
+    },
+    {
       "path": "code/icon.svg",
       "sha256": "77a8f99281b031b8bca1d7e075c80b9e1821adb1c98fe8e9499818f9d34cd24f",
       "size": 311
@@ -96,15 +101,15 @@
   "optionalDependencies": [
     {
       "id": "health",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     },
     {
       "id": "pet",
-      "version": ">=0.1.1"
+      "version": ">=0.1.3"
     },
     {
       "id": "spending",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     }
   ],
   "publisher": "billerens",
@@ -113,5 +118,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

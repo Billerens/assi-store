@@ -1,9 +1,17 @@
 {
   "id": "wave-survival",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Последний рубеж",
-  "tags": ["аркада", "рогалик"],
+  "version": "0.1.2",
+  "title": "Last Bastion",
+  "summary": "The hero fires on their own; you steer with a finger or the keyboard and pick upgrades; five minutes of chaos",
+  "tags": ["arcade", "roguelike"],
+  "locales": {
+    "ru": {
+      "title": "Последний рубеж",
+      "summary": "Герой стреляет сам, вы управляете им пальцем или клавиатурой и выбираете улучшения; пять минут хаоса",
+      "tags": ["аркада", "рогалик"]
+    }
+  },
   "target": "modules/games/wave-survival",
   "requires": [],
   "shell": [

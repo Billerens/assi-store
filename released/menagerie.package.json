@@ -58,8 +58,8 @@
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "195045c75b48293fba943741784134ebf2e31b324c556d314c7a4d52ff1170dd",
-      "size": 45671
+      "sha256": "0b57e98aab4f6cfdde3f2384d3271c1cb120499e1b2d442b8f7cf8d39719cc71",
+      "size": 48938
     },
     {
       "path": "code/icon.svg",
@@ -131,5 +131,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

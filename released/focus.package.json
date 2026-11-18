@@ -32,6 +32,11 @@
       "size": 11130
     },
     {
+      "path": "code/i18n-en.json",
+      "sha256": "37c3cb1551443a837546c9a21147c9a79e938d032f108c98d36a31cf3783700a",
+      "size": 21773
+    },
+    {
       "path": "code/icon.svg",
       "sha256": "6326b6f13d2c9c40bcd14b346e06cc59768631057831b1648d008da1367a94a1",
       "size": 265
@@ -116,7 +121,7 @@
   "optionalDependencies": [
     {
       "id": "inbox",
-      "version": ">=0.1.1"
+      "version": ">=0.1.2"
     }
   ],
   "publisher": "billerens",
@@ -125,5 +130,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

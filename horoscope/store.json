@@ -1,9 +1,17 @@
 {
   "id": "horoscope",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Гороскоп по данным",
-  "tags": ["жизнь", "юмор"],
+  "version": "0.1.2",
+  "title": "Data Horoscope",
+  "summary": "A joke forecast for the day from your own habits: delivery on Thursdays, lack of sleep, steps, streaks. The next day the stars check what came true and count their accuracy.",
+  "tags": ["life", "humor"],
+  "locales": {
+    "ru": {
+      "title": "Гороскоп по данным",
+      "summary": "Шуточный прогноз на день из ваших же привычек: доставка по четвергам, недосып, шаги, цепочки. Назавтра звёзды сами проверяют, что сбылось, и считают точность.",
+      "tags": ["жизнь", "юмор"]
+    }
+  },
   "target": "modules/horoscope",
   "requires": ["health", "spending", "achievements", "rpg"],
   "shell": []

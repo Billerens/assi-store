@@ -1,9 +1,17 @@
 {
   "id": "game-of-the-day",
   "kind": "module",
-  "version": "0.1.1",
-  "title": "Игра дня",
-  "tags": ["игротека", "нейросеть"],
+  "version": "0.1.2",
+  "title": "Game of the Day",
+  "summary": "An agent makes a new mini-game for Game Room — every day, every other day, on chosen days or several times a day; you play and rate, the good ones stay, and the agent learns your taste",
+  "tags": ["game room", "ai"],
+  "locales": {
+    "ru": {
+      "title": "Игра дня",
+      "summary": "Агент делает новую мини-игру для Игротеки — каждый день, через день, по выбранным дням или несколько раз в день; вы играете и оцениваете, удачные остаются, а агент учится вашему вкусу",
+      "tags": ["игротека", "нейросеть"]
+    }
+  },
   "target": "modules/game-of-the-day",
   "requires": [],
   "shell": ["notify.actions", "job.once", "home.cards"]

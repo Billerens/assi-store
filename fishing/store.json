@@ -1,9 +1,17 @@
 {
   "id": "fishing",
   "kind": "game",
-  "version": "0.1.1",
-  "title": "Рыбалка",
-  "tags": ["симулятор", "спокойная"],
+  "version": "0.1.2",
+  "title": "Fishing",
+  "summary": "Cast, hook, reel in — and an aquarium that earns while the phone is in your pocket",
+  "tags": ["simulation", "relaxing"],
+  "locales": {
+    "ru": {
+      "title": "Рыбалка",
+      "summary": "Заброс, подсечка, вываживание — и аквариум, который приносит доход, пока телефон в кармане",
+      "tags": ["симулятор", "спокойная"]
+    }
+  },
   "target": "modules/games/fishing",
   "requires": [],
   "shell": ["vibrate.pattern", "app.visible"]
