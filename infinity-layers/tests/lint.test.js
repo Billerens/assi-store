@@ -1,5 +1,5 @@
 // The code rules of «Игротека» over this game's folder (the same rules as
-// Assi/scripts/games/lint-shared.js applies to the hub): node --check of every .js, the shared
+// Axiko/scripts/games/lint-shared.js applies to the hub): node --check of every .js, the shared
 // subset for sim.js (Core.lint) and strict ES5 for checks.js (it runs in Rhino), no Math.random
 // in the logic, no emoji, no shadows, one CSS declaration a line, no network addresses.
 // node tests/lint.test.js
@@ -9,7 +9,7 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 
 const GAME = path.resolve(__dirname, '..');
-const HARNESS = path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js');
+const HARNESS = path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js');
 const { test, done, HUB } = require(HARNESS);
 const Core = require(path.join(HUB, 'engine', 'core.js'));
 

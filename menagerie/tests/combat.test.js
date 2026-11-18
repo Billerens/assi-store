@@ -3,7 +3,7 @@ const fs = require('fs');
 const vm = require('vm');
 const assert = require('assert/strict');
 const path = require('path');
-const { test, done, engine } = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const { test, done, engine } = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const Rng = engine('rng.js');
 const Core = engine('core.js');
 const source = fs.readFileSync(path.join(__dirname, '..', 'combat.js'), 'utf8');
@@ -61,7 +61,7 @@ test('immutable inputs and exact repeatability including replay log', () => {
 test('browser UMD and Rhino-style exports give byte-identical seeded replays', () => {
   const browser = {};
   vm.runInNewContext('Math.imul = undefined;', browser);
-  vm.runInNewContext(fs.readFileSync(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'app/src/main/assets/factory/modules/games/engine/rng.js'), 'utf8'), browser);
+  vm.runInNewContext(fs.readFileSync(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'app/src/main/assets/factory/modules/games/engine/rng.js'), 'utf8'), browser);
   vm.runInNewContext(source, browser);
   const a = [creature('a', 8), creature('b', 9), creature('c', 10)];
   const b = [creature('d', 11), creature('e', 12), creature('f', 13)];

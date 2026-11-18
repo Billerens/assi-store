@@ -3,7 +3,7 @@ require('../tools/hub.js');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { test, done, engine } = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const { test, done, engine } = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const sim = require('../sim.js');
 const Bot = require('../bot.js');
 const Core = engine('core.js');

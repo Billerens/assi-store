@@ -135,7 +135,7 @@ test('facts: battery, screen, the owner, wakers, traffic, cpu, notifications, jo
   assert.strictEqual(f.jobs.total, 4);
   assert.strictEqual(f.doze.fullMinutes, 254);
   assert.strictEqual(night.hhmm(f.doze.first), '02:10');
-  assert.deepStrictEqual(f.exempt.apps.map(function (r) { return r.app; }), ['Assi', 'Telegram']);
+  assert.deepStrictEqual(f.exempt.apps.map(function (r) { return r.app; }), ['Axiko', 'Telegram']);
   assert.strictEqual(f.foreground[0].minutes, 30);
   assert.strictEqual(f.network.offline, 1);
   assert.strictEqual(f.reboots.length, 0);
@@ -299,7 +299,7 @@ test('battery use by apps: the estimate of batterystats, in the report, to the m
   assert.deepStrictEqual(night.checkStory(told, mf, s).errors, []);
 });
 
-test('reboot from Assi\'s own journal (kind reboot)', function () {
+test('reboot from Axiko\'s own journal (kind reboot)', function () {
   var f = facts(scenario('2026-11-13', function (m) {
     m.input.events = m.input.events.concat([{ at: local(2026, 11, 14, 3, 12), kind: 'reboot', src: 'live' }]);
   }));

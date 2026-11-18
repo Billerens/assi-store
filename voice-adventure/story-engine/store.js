@@ -1,15 +1,15 @@
 // Saving that survives the app being killed mid-write: the new version goes to a temporary file
 // first, the previous one is kept as *.prev.json, and the swap is a rename (java.io.File.renameTo),
-// not assi.files.write, which writes over the file in place. Engine only (Rhino).
+// not axiko.files.write, which writes over the file in place. Engine only (Rhino).
 //
 //   store.saveState('data/stories/quest/observatory', state)
 //   store.loadState('data/stories/quest/observatory') -> state or null (the previous version if the last is broken)
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 
 var lock = new java.util.concurrent.locks.ReentrantLock();
 
 function file(path) {
-  return new java.io.File(String(assi.files.path(path)));
+  return new java.io.File(String(axiko.files.path(path)));
 }
 
 function prevOf(target) {

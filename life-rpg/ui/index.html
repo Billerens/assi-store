@@ -401,7 +401,7 @@
 <body>
 <main class="page wide">
   <header class="topbar">
-    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <button class="icon-btn" onclick="axiko.back()" aria-label="Назад" data-icon="back"></button>
     <h1>Жизнь-RPG</h1>
     <button class="icon-btn" id="open-settings" aria-label="Настройки" data-icon="settings"></button>
   </header>
@@ -436,7 +436,7 @@
 <script>
   const h = ui.h;
   const MAIN = 'modules/rpg/main.js';
-  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
   const wide = window.matchMedia('(min-width: 700px)');
   const TABS = [['hero', 'Персонаж'], ['skills', 'Навыки'], ['map', 'Карта'], ['quests', 'Квесты'], ['chronicle', 'Хроника']];
   const SKILL_TITLES = { endurance: 'Выносливость', regime: 'Режим', exploration: 'Исследование', will: 'Воля', household: 'Хозяйство', care: 'Забота', achievement: 'Ачивки', quest: 'Квесты', play: 'Игры' };
@@ -834,7 +834,7 @@
   document.getElementById('zoom-out').onclick = () => mapControl && mapControl.zoom(1.5);
   document.getElementById('zoom-fit').onclick = () => mapControl && mapControl.fit();
   wide.addEventListener('change', () => { tab = null; mapDrawn = false; load(); });
-  assi.on('rpg.changed', load);
+  axiko.on('rpg.changed', load);
   load();
 </script>
 </body>

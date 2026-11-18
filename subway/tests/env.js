@@ -1,9 +1,9 @@
-// The shared setup of the tests of «Подземка»: a temporary workspace of Assi (the engine as the
+// The shared setup of the tests of «Подземка»: a temporary workspace of Axiko (the engine as the
 // phone has it) with this game copied in as modules/games/subway, and the pace bot.
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const harness = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const harness = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 
 const GAME = path.resolve(__dirname, '..');
 

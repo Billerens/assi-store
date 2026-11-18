@@ -491,7 +491,7 @@
 <body>
 <main class="page">
   <header class="topbar">
-    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <button class="icon-btn" onclick="axiko.back()" aria-label="Назад" data-icon="back"></button>
     <h1>Диктофон</h1>
   </header>
 
@@ -552,7 +552,7 @@
   let state = { tab: 'record', mode: null, status: null, at: 0, kind: null, query: '', settings: null };
 
   function open(id, t) {
-    assi.open(ITEM + '?id=' + id + (t !== null && t !== undefined ? '&t=' + Math.round(t) : ''));
+    axiko.open(ITEM + '?id=' + id + (t !== null && t !== undefined ? '&t=' + Math.round(t) : ''));
   }
 
   // ---- the recording -------------------------------------------------------------------------
@@ -664,8 +664,8 @@
     const st = state.status;
     const box = document.getElementById('warnings');
     const items = [];
-    if (!st.speech.ready) items.push(warning('info', 'Модель распознавания речи не скачана: записи подождут. Скачайте её в настройках Assi.'));
-    if (!st.permission) items.push(warning('mic', 'Assi спросит доступ к микрофону при первой записи.'));
+    if (!st.speech.ready) items.push(warning('info', 'Модель распознавания речи не скачана: записи подождут. Скачайте её в настройках Axiko.'));
+    if (!st.permission) items.push(warning('mic', 'Axiko спросит доступ к микрофону при первой записи.'));
     if (st.speech.live) items.push(warning('mic', 'Идёт живой разговор с ассистентом — микрофон занят.'));
     if (st.queue.waiting && !(st.recording)) {
       items.push(warning('clock', 'В очереди на расшифровку ' + st.queue.waiting + ' ' + plural(st.queue.waiting, 'отрезок', 'отрезка', 'отрезков') +
@@ -675,7 +675,7 @@
       items.push(warning('file', 'Есть ' + st.uploads + ' ' + plural(st.uploads, 'аудиофайл', 'аудиофайла', 'аудиофайлов') + ' из «Поделиться»',
         h('button', { class: 'btn small soft', onclick: () => showTab('archive') }, 'Расшифровать')));
     }
-    if (st.wake && st.wake.on && !st.recording) items.push(h('div', { class: 'muted small' }, 'На время записи Assi перестанет откликаться на имя «' + (st.wake.name || '') + '» — микрофон один.'));
+    if (st.wake && st.wake.on && !st.recording) items.push(h('div', { class: 'muted small' }, 'На время записи Axiko перестанет откликаться на имя «' + (st.wake.name || '') + '» — микрофон один.'));
     box.replaceChildren(...items);
     ui.icons(box);
   }
@@ -742,7 +742,7 @@
     const box = document.getElementById('uploads');
     const pick = h('button', { class: 'btn soft', onclick: () => document.getElementById('file').click() }, ui.icon('file'), ' Выбрать аудиофайл');
     if (!list.length) {
-      box.replaceChildren(h('div', { class: 'row' }, pick, h('span', { class: 'muted small grow' }, 'или «Поделиться» → Assi из другого приложения')));
+      box.replaceChildren(h('div', { class: 'row' }, pick, h('span', { class: 'muted small grow' }, 'или «Поделиться» → Axiko из другого приложения')));
       return;
     }
     box.replaceChildren(
@@ -949,7 +949,7 @@
       stat('Время фраз', st.features.segments ? 'есть' : 'по отрезкам'),
       stat('Слушание имени', st.wake ? (st.wake.on ? 'включено — на время записи выключается' : 'выключено') : '—'));
     const actions = h('section', { class: 'section' },
-      h('button', { class: 'btn soft wide', onclick: () => assi.native('shortcut.pin', 'Диктофон', 'modules/recorder/ui/index.html').then(() => ui.toast('Ярлык отправлен на рабочий стол')).catch(fail) }, ui.icon('pin'), ' Ярлык на рабочий стол'),
+      h('button', { class: 'btn soft wide', onclick: () => axiko.native('shortcut.pin', 'Диктофон', 'modules/recorder/ui/index.html').then(() => ui.toast('Ярлык отправлен на рабочий стол')).catch(fail) }, ui.icon('pin'), ' Ярлык на рабочий стол'),
       h('button', { class: 'btn soft wide', onclick: () => call('clean').then((r) => ui.toast('Звук удалён у записей: ' + r.audioRemoved)).catch(fail) }, ui.icon('trash'), ' Удалить старый звук сейчас'),
       h('button', { class: 'btn soft wide', onclick: () => call('runQueue').then(() => ui.toast('Очередь пройдена')).catch(fail) }, ui.icon('refresh'), ' Пройти очередь расшифровки'));
     document.getElementById('settings').replaceChildren(...groups, status, actions);
@@ -985,13 +985,13 @@
     if (f) uploadFile(f);
   });
 
-  assi.on('recorder.level', (e) => {
+  axiko.on('recorder.level', (e) => {
     if (!e || !state.status || !state.status.recording || state.status.recording.id !== e.id) return;
     document.querySelector('#level > div').style.transform = 'scaleX(' + Math.max(0.02, e.level).toFixed(3) + ')';
     state.status.recording.activeMs = e.ms;
     state.at = Date.now();
   });
-  assi.on('recorder.state', (r) => {
+  axiko.on('recorder.state', (r) => {
     if (state.status) {
       state.status.recording = r;
       state.at = Date.now();
@@ -1000,7 +1000,7 @@
     if (!r) refresh().catch(fail);
   });
   let changedTimer = null;
-  assi.on('recorder.changed', () => {
+  axiko.on('recorder.changed', () => {
     if (document.querySelector('.sheet')) return;
     clearTimeout(changedTimer);
     changedTimer = setTimeout(() => {

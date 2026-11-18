@@ -3,7 +3,7 @@
 (function () {
   const MAIN = 'modules/inbox/main.js';
   const h = ui.h;
-  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
   const $ = (id) => document.getElementById(id);
   const TABS = [['important', 'Важно'], ['later', 'Подождёт'], ['noise', 'Шум'], ['all', 'Все'], ['settings', 'Настройки']];
   const BUCKET = { important: 'важно', later: 'подождёт', noise: 'шум' };
@@ -83,7 +83,7 @@
       parts.push(h('div', { class: 'card danger section' },
         h('p', {}, 'Входящие не видят уведомлений: доступ к ним выключен.'),
         h('div', { class: 'row' },
-          h('button', { class: 'btn', onclick: () => assi.native('sense.open', 'notices') }, 'Включить доступ'))));
+          h('button', { class: 'btn', onclick: () => axiko.native('sense.open', 'notices') }, 'Включить доступ'))));
     }
     if (status && status.pending > 0 && status.why) {
       parts.push(h('div', { class: 'card flat section' },
@@ -300,7 +300,7 @@
       else closeChat();
       return;
     }
-    assi.back();
+    axiko.back();
   };
 
   async function loadChat(id, markRead, scrollDown) {
@@ -468,12 +468,12 @@
 
     const mic = h('button', { class: 'icon-btn', 'aria-label': 'Надиктовать', onclick: async () => {
       if (mic.classList.contains('listening')) {
-        assi.native('speech.stopListening').catch(() => null);
+        axiko.native('speech.stopListening').catch(() => null);
         return;
       }
       mic.classList.add('listening');
       try {
-        const said = await assi.native('speech.listen', 30);
+        const said = await axiko.native('speech.listen', 30);
         if (said) {
           area.value = (area.value ? area.value.trim() + ' ' : '') + said;
           view.draftId = view.draftId || null;
@@ -597,7 +597,7 @@
     if (!status.notices) {
       sections.push(h('div', { class: 'card danger section' },
         h('p', {}, 'Доступ к уведомлениям выключен — Входящим нечего собирать.'),
-        h('div', {}, h('button', { class: 'btn', onclick: () => assi.native('sense.open', 'notices') }, 'Включить доступ'))));
+        h('div', {}, h('button', { class: 'btn', onclick: () => axiko.native('sense.open', 'notices') }, 'Включить доступ'))));
     }
 
     // Apps
@@ -631,7 +631,7 @@
     sections.push(h('section', { class: 'section' }, h('h2', {}, 'Где разбирать'),
       h('label', { class: 'field' }, h('span', {}, 'Кому отдавать тексты сообщений'), mode),
       h('div', { class: 'card flat section' }, roleLines,
-        h('div', { class: 'hint' }, 'Модель для каждой роли выбирается в настройках Assi, раздел моделей.'),
+        h('div', { class: 'hint' }, 'Модель для каждой роли выбирается в настройках Axiko, раздел моделей.'),
         status.why ? h('div', { class: 'hint' }, ui.raw(status.why)) : null),
       switchLine('Без модели раскладывать простыми правилами', 'Иначе всё новое ждёт в «Подождёт» с пометкой «не разобрано»', v.heuristics, (on) => save({ heuristics: on }))));
 
@@ -703,7 +703,7 @@
   };
 
   let chatTimer = null;
-  assi.on('inbox.feed', (event) => {
+  axiko.on('inbox.feed', (event) => {
     if (view.tab === 'settings') return;
     scheduleFeed();
     if (view.chatId && event && (event.chatId === view.chatId || !event.chatId)) {

@@ -1,7 +1,7 @@
 // The workspace of the tests: the hub's modules/games with this game copied in as the phone has it.
 const fs = require('fs');
 const path = require('path');
-const H = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const H = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const DIR = path.resolve(__dirname, '..');
 const ID = require(path.join(DIR, 'store.json')).id;
 

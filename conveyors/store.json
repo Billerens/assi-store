@@ -1,7 +1,7 @@
 {
   "id": "conveyors",
   "kind": "game",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "title": "Conveyors",
   "summary": "Drills, belts, furnaces and assemblers on a grid plot of an alien planet",
   "tags": ["automation", "production", "space"],

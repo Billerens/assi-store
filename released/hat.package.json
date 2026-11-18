@@ -8,13 +8,13 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "159d6430b5eeab76a1dcea113c2b15e24e2054db049fb073be346750a577a900",
-      "size": 11182
+      "sha256": "52cb3a495940abaab9587934790374f18c20b6e5bc2e2a1a141d13fe952fe0ae",
+      "size": 11184
     },
     {
       "path": "code/achieve.js",
@@ -28,8 +28,8 @@
     },
     {
       "path": "code/checks.js",
-      "sha256": "cc442b1923b84727e64a3f3e75f0e8a3d0e751a25749716e416da0b9371548f1",
-      "size": 9964
+      "sha256": "6f5500bf40ffa623937826339e3d5d363e5f7bc193e9604a1db0ebc61072136d",
+      "size": 9966
     },
     {
       "path": "code/config.js",
@@ -53,8 +53,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "7996b2673d892c61aeffda2998b0dd98dc05bccf8b4cbd9455564ca05aa77955",
-      "size": 26998
+      "sha256": "7a6c3a8df0b5cddfa9123fdd8d1cb46c78fbabb9074c62db56a791e4ebb61476",
+      "size": 27033
     },
     {
       "path": "code/match.js",
@@ -73,18 +73,18 @@
     },
     {
       "path": "code/tool.js",
-      "sha256": "022c30e35abb61ecff7dccc535dfec8cf90f2a474d8bb0ca0f08c72811b096dc",
-      "size": 4221
+      "sha256": "36babb7706993379cb8e1a9b1de5e1e2933a5a5d5f5e51823aa090abaabd69e5",
+      "size": 4224
     },
     {
       "path": "code/ui/hat.css",
-      "sha256": "98da68ef1e77b4fda20ee8a8144e1a23f2c9b6b309958c86cacafe33ca5826a6",
-      "size": 10918
+      "sha256": "a090daa6c905926a1b1072392f5621468e6c7735a538b58c5c8ad5f188943e39",
+      "size": 10919
     },
     {
       "path": "code/ui/hat.js",
-      "sha256": "1a465aff2c711bb0d3449939835fbb42cea6637edb4b59a8294da96e27a4b9b2",
-      "size": 70338
+      "sha256": "b03fbbb70b40a185d239560d3729694f369601b0113c849a68f0d5df87bf4556",
+      "size": 70356
     },
     {
       "path": "code/ui/index.html",
@@ -104,9 +104,9 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

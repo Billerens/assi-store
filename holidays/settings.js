@@ -22,7 +22,7 @@ exports.SCHEMA = [
   { key: 'previewSeconds', group: 'Оформление', label: 'Предпросмотр праздника', type: 'number', def: 30, min: 5, max: 300, step: 5, unit: 'с' },
 
   { key: 'off', group: 'Поводы', label: 'Поводы', type: 'list', def: OFF_BY_DEFAULT,
-    hint: 'Какие праздники Assi отмечает. Свои поводы — на вкладке «Свои поводы».' },
+    hint: 'Какие праздники Axiko отмечает. Свои поводы — на вкладке «Свои поводы».' },
   { key: 'upcomingDays', group: 'Поводы', label: 'Показывать поводы вперёд на', type: 'number', def: 60, min: 7, max: 400, step: 1, unit: 'дн.' },
   { key: 'dailyTime', group: 'Поводы', label: 'Время ежедневной проверки', type: 'time', def: '00:05' },
 

@@ -2,7 +2,7 @@
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
-const {test, done} = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const {test, done} = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const root = path.resolve(__dirname, '..');
 const json = name => JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 test('полный каталог: 10 инструментов, 20 талисманов, 5 сапёров, 6 улучшений, 4 хозяина, 12 глубин',()=>{

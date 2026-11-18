@@ -1,5 +1,5 @@
 // Инструмент агента для Шляпы. Агент на телефоне не видит README модуля и комментариев main.js,
-// поэтому про «Assi, давай в шляпу» он узнаёт из инструмента tools/hat.js: main.js пишет его при
+// поэтому про «Axiko, давай в шляпу» он узнаёт из инструмента tools/hat.js: main.js пишет его при
 // запуске (module.json "autostart"), если файла нет или он другой.
 // Здесь — текст этого файла и разбор аргументов в поля подготовки для open().
 // Чистая логика: движок (require('./tool')) и node (tests/tool.test.js).
@@ -21,7 +21,7 @@ var SOURCE = [
   "  rounds: { type: 'integer', description: 'раундов' }",
   "}, required: ['action'] };",
   'exports.run = function (args) {',
-  "  if (!require('lib/assi').files.exists('modules/hat/main.js')) return 'Модуль «Шляпа» не установлен';",
+  "  if (!require('lib/axiko').files.exists('modules/hat/main.js')) return 'Модуль «Шляпа» не установлен';",
   "  return require('modules/hat/main.js').tool(args || {});",
   '};',
   ''
@@ -53,7 +53,7 @@ exports.prefill = function (args) {
   return out;
 };
 
-/** Записывает tools/hat.js, если его нет или он другой (files — assi.files). → записан ли сейчас. */
+/** Записывает tools/hat.js, если его нет или он другой (files — axiko.files). → записан ли сейчас. */
 exports.write = function (files) {
   try {
     if (files.exists(FILE) && files.read(FILE) === SOURCE) return false;

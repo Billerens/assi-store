@@ -6,7 +6,7 @@
   const INBOX_SCREEN = 'modules/inbox/ui/index.html';
   const RECORDER_ITEM = 'modules/recorder/ui/item.html';
   const h = ui.h;
-  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
   const $ = (id) => document.getElementById(id);
   const TABS = [['now', 'Фокус'], ['history', 'История'], ['settings', 'Настройки']];
   const wide = window.matchMedia('(min-width: 600px)');
@@ -421,7 +421,7 @@
           const row = h(item.chatId && data.inbox && sum.source === 'inbox' ? 'button' : 'div', { class: 'other' });
           row.appendChild(h('span', { class: 'grow', 'data-raw': '' }, item.line));
           if (row.tagName === 'BUTTON') {
-            row.onclick = () => assi.open(INBOX_SCREEN + '?chat=' + encodeURIComponent(item.chatId));
+            row.onclick = () => axiko.open(INBOX_SCREEN + '?chat=' + encodeURIComponent(item.chatId));
             row.appendChild(ui.icon('right'));
           }
           return row;
@@ -446,7 +446,7 @@
     // tied to this session; once said, the button opens that note.
     let dictateButton = null;
     if (data.recorder && data.session.recordingId) {
-      dictateButton = h('button', { class: 'btn', onclick: () => assi.open(RECORDER_ITEM + '?id=' + data.session.recordingId) }, ui.icon('mic'), 'Итог голосом');
+      dictateButton = h('button', { class: 'btn', onclick: () => axiko.open(RECORDER_ITEM + '?id=' + data.session.recordingId) }, ui.icon('mic'), 'Итог голосом');
     } else if (data.recorder) {
       dictateButton = h('button', { class: 'btn', onclick: dictate }, ui.icon('mic'), 'Надиктовать итог');
     }
@@ -466,7 +466,7 @@
     async function dictate() {
       const result = await call('dictate', id).catch((error) => ({ ok: false, why: errorText(error) }));
       if (!result.ok) ui.toast(result.why);
-      if (result.screen) assi.open(result.screen);
+      if (result.screen) axiko.open(result.screen);
     }
 
     async function again() {
@@ -489,7 +489,7 @@
     const actions = h('div', { class: 'actions' });
     if (canReply) actions.appendChild(h('button', { class: 'btn small soft', onclick: () => { actions.remove(); box.appendChild(compose(item, inboxItem)); } }, ui.icon('send'), 'Ответить'));
     if (inboxItem && view.status && view.status.inbox) {
-      actions.appendChild(h('button', { class: 'btn small', onclick: () => assi.open(INBOX_SCREEN + '?chat=' + encodeURIComponent(item.chatId)) }, ui.icon('message'), 'Открыть беседу'));
+      actions.appendChild(h('button', { class: 'btn small', onclick: () => axiko.open(INBOX_SCREEN + '?chat=' + encodeURIComponent(item.chatId)) }, ui.icon('message'), 'Открыть беседу'));
     }
     if (!canReply) actions.appendChild(h('div', { class: 'hint' }, 'Ответить отсюда нельзя: уведомление уже убрано'));
     box.appendChild(actions);
@@ -705,8 +705,8 @@
     durations.onchange = () => save({ durations: durations.value });
     const ways = data.ways;
     const wayLines = [
-      ['shell', 'Оболочка Assi (операция «не беспокоить»)'],
-      ['listener', 'Служба уведомлений Assi'],
+      ['shell', 'Оболочка Axiko (операция «не беспокоить»)'],
+      ['listener', 'Служба уведомлений Axiko'],
       ['manager', 'Доступ к режиму «Не беспокоить»'],
       ['shizuku', 'Shizuku']
     ].map(([id, title]) => h('div', { class: 'way' + (ways[id] ? ' yes' : '') }, ui.icon(ways[id] ? 'check' : 'close'), ' ', title));
@@ -726,7 +726,7 @@
       h('button', { class: 'icon-btn', 'aria-label': 'Убрать', onclick: () => save({ distractApps: v.distractApps.filter((pkg) => pkg !== app.package) }, true) }, ui.icon('close'))))
       : h('div', { class: 'hint' }, 'Список пуст'));
     sections.push(h('section', { class: 'section' }, h('h2', {}, 'Отвлекающие приложения'),
-      !data.screen ? h('div', { class: 'card danger' }, h('p', {}, 'Служба специальных возможностей Assi выключена: без неё приложения не остановить, Фокус только посчитает открытия по истории использования.'),
+      !data.screen ? h('div', { class: 'card danger' }, h('p', {}, 'Служба специальных возможностей Axiko выключена: без неё приложения не остановить, Фокус только посчитает открытия по истории использования.'),
         h('button', { class: 'btn small', onclick: () => call('openAccess', 'screen') }, 'Включить службу')) : null,
       picked,
       h('div', { class: 'actions' }, h('button', { class: 'btn small', onclick: () => pickApps(v.distractApps) }, ui.icon('plus'), 'Выбрать приложения')),
@@ -801,7 +801,7 @@
       loadNow();
       return;
     }
-    assi.back();
+    axiko.back();
   };
 
   let reloadTimer = null;
@@ -810,16 +810,16 @@
     reloadTimer = setTimeout(() => { if (view.tab === 'now') loadNow(); }, 250);
   }
 
-  assi.on('focus.changed', (event) => {
+  axiko.on('focus.changed', (event) => {
     if (event && event.type === 'settings') return;
     reloadSoon();
   });
-  assi.on('focus.ended', (event) => {
+  axiko.on('focus.ended', (event) => {
     if (view.tab !== 'now' || !event || !event.sessionId) return;
     view.summaryId = event.sessionId;
     reloadSoon();
   });
-  assi.on('focus.summary', (event) => {
+  axiko.on('focus.summary', (event) => {
     if (view.tab === 'now' && event && view.summaryId === event.sessionId) renderSummary(event.sessionId);
   });
   document.addEventListener('visibilitychange', () => {

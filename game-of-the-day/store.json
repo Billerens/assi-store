@@ -1,7 +1,7 @@
 {
   "id": "game-of-the-day",
   "kind": "module",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "title": "Game of the Day",
   "summary": "An agent makes a new mini-game for Game Room — every day, every other day, on chosen days or several times a day; you play and rate, the good ones stay, and the agent learns your taste",
   "tags": ["game room", "ai"],

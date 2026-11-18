@@ -6,7 +6,7 @@ const path = require('path');
 const http = require('http');
 const assert = require('assert');
 const { spawn } = require('child_process');
-const H = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const H = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 
 const GAME = path.resolve(__dirname, '..');
 const ID = 'word-weaver';
@@ -22,7 +22,7 @@ async function run() {
   const scratch = fs.mkdtempSync(path.join(os.tmpdir(), 'word-weaver-browser-'));
   const faults = [];
   let dictionary = '';
-  const stub = '<script>window.__stageCalls=[];window.assi={platform:"web",call:async function(module,fn){if(fn==="defs")return {defs:window.__testModelDefs||{}};if(fn==="check")return {answers:[]};var args=Array.prototype.slice.call(arguments,2);var r=await fetch("/__call",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({fn:fn,args:args})});var out=await r.json();if(out.error)throw new Error(out.error);return out.value;},native:async function(){return {};},stage:async function(on){window.__stageCalls.push(on);return true;},on:function(){return function(){};},back:function(){},open:async function(){return true;}};</script>';
+  const stub = '<script>window.__stageCalls=[];window.axiko={platform:"web",call:async function(module,fn){if(fn==="defs")return {defs:window.__testModelDefs||{}};if(fn==="check")return {answers:[]};var args=Array.prototype.slice.call(arguments,2);var r=await fetch("/__call",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({fn:fn,args:args})});var out=await r.json();if(out.error)throw new Error(out.error);return out.value;},native:async function(){return {};},stage:async function(on){window.__stageCalls.push(on);return true;},on:function(){return function(){};},back:function(){},open:async function(){return true;}};</script>';
   const server = http.createServer(async (req, res) => {
     try {
       if (req.url === '/__call') {

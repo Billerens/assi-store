@@ -42,8 +42,8 @@ exports['темп: три дня по две поездки'] = function (t) {
 
 function load() {
   var id = kit.idOf(__dirname);
-  var assi = require('lib/assi');
-  var game = JSON.parse(assi.files.read('modules/games/' + id + '/game.json'));
+  var axiko = require('lib/axiko');
+  var game = JSON.parse(axiko.files.read('modules/games/' + id + '/game.json'));
   game.id = id;
   var sim = require('modules/games/' + id + '/sim.js');
   return { game: game, sim: sim, cfg: kit.configOf(game, 'modules/games/' + id) };

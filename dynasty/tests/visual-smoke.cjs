@@ -1,14 +1,14 @@
 // Local synthetic four-world integration smoke. No device, personal saves, or remote requests.
 const fs=require('fs'),path=require('path'),http=require('http'),assert=require('node:assert/strict');
 const storeRoot=path.resolve(__dirname,'../..');
-const assiRoot=process.env.ASSI_ROOT||path.resolve(storeRoot,'../Assi');
-const H=require(path.join(assiRoot,'scripts/games/harness.js'));
+const axikoRoot=process.env.AXIKO_ROOT||path.resolve(storeRoot,'../Axiko');
+const H=require(path.join(axikoRoot,'scripts/games/harness.js'));
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright-core');
 const ids=['dynasty','library','garden','dragon-hoard'];
-const OUT=path.join(path.resolve(process.env.ASSI_TEST_ARTIFACTS||path.join(storeRoot,'build/artifacts')),'worlds-visual-smoke'),env=H.workspace({fixture:false});fs.mkdirSync(OUT,{recursive:true});
+const OUT=path.join(path.resolve(process.env.AXIKO_TEST_ARTIFACTS||path.join(storeRoot,'build/artifacts')),'worlds-visual-smoke'),env=H.workspace({fixture:false});fs.mkdirSync(OUT,{recursive:true});
 for(const part of ['ui/kit','themes'])if(fs.existsSync(path.join(H.FACTORY,part)))fs.cpSync(path.join(H.FACTORY,part),path.join(env.root,part),{recursive:true});
 for(const id of ids){const src=path.join(storeRoot,id),dest=path.join(env.root,'modules/games',id);for(const file of fs.readdirSync(src))if(!['tests','README.md','store.json','_data'].includes(file))fs.cpSync(path.join(src,file),path.join(dest,file),{recursive:true});if(fs.existsSync(path.join(src,'_data')))fs.cpSync(path.join(src,'_data'),path.join(env.root,'data/games',id),{recursive:true});}
-const bridge=`<script>window.assi={platform:'web',call:async function(module,fn,...args){let r=await fetch('/__call',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({module,fn,args})});let x=await r.json();if(x.error)throw Error(x.error);return x.value;},native:async()=>({}),stage:async()=>true,on:()=>()=>{},back:()=>{},open:()=>{},chat:()=>{}};</script>`;
+const bridge=`<script>window.axiko={platform:'web',call:async function(module,fn,...args){let r=await fetch('/__call',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({module,fn,args})});let x=await r.json();if(x.error)throw Error(x.error);return x.value;},native:async()=>({}),stage:async()=>true,on:()=>()=>{},back:()=>{},open:()=>{},chat:()=>{}};</script>`;
 const server=http.createServer(async(req,res)=>{try{
  if(req.url==='/__call'){let raw='';for await(const b of req)raw+=b;const x=JSON.parse(raw);if(!x.module.startsWith('modules/games/'))throw Error('Unexpected module');const m=env.require(x.module);const value=await m[x.fn](...x.args);res.setHeader('Content-Type','application/json');res.end(JSON.stringify({value:value===undefined?null:value}));return;}
  const rel=decodeURIComponent(req.url.split('?')[0]).replace(/^\/+/,''),p=path.resolve(env.root,rel);if(!p.startsWith(env.root+path.sep)||!fs.existsSync(p)||fs.statSync(p).isDirectory()){res.statusCode=404;res.end();return;}

@@ -8,18 +8,18 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "726879aad6d250b727993bcd3056d239bc807537cd8f6ceac9d79e380c1e51a6",
-      "size": 19112
+      "sha256": "19ab6854eecb28c7b9b3b3d006b9b09df2159099b304c0a3096bf24b6e02c2bd",
+      "size": 19116
     },
     {
       "path": "code/checks.js",
-      "sha256": "1146f9bf536e2293467eabe10be16ec9fe709e9428dcdffe11d63b0353ea7beb",
-      "size": 10944
+      "sha256": "1c16f89c07c29f31e703df9ca73c2c5b4f3e0abd6c859425236e3d8342a7b370",
+      "size": 10967
     },
     {
       "path": "code/draw.js",
@@ -33,8 +33,8 @@
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "24081bc8580c356864f04117ab6d6946fb2baa928b41cbeb9119378d7db366a5",
-      "size": 28562
+      "sha256": "d1b8d12151624570d5d8145f7f1bfa3d2adf9efb51f6e33148a7932d1fd1e55d",
+      "size": 28563
     },
     {
       "path": "code/icon.svg",
@@ -43,8 +43,8 @@
     },
     {
       "path": "code/links.js",
-      "sha256": "8f27232b2a0c0da180592ec31db66e257695be8fa452b80f4ebf8b2db13a893f",
-      "size": 8330
+      "sha256": "378d8eaf5d336aa5bb6cfe3625da4efa682cd91d3a663e9deb776d4e3c59f2c0",
+      "size": 8331
     },
     {
       "path": "code/look.js",
@@ -53,8 +53,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "2d434169bcb9f7215435c3df9f3939b5880be05e72feb9f3825dba775faed922",
-      "size": 47461
+      "sha256": "852fa69180c5fb6455e886a60fd0cc34ebeaca97249653b990a552077c57095e",
+      "size": 47499
     },
     {
       "path": "code/module.json",
@@ -93,23 +93,23 @@
     },
     {
       "path": "code/tools/pet_state.js",
-      "sha256": "e8c202d480f12055c79e09adea9abb38d540e3d504ff4840619b1345c58e701c",
-      "size": 1089
+      "sha256": "6dfbaecb8a53fba7a4eb6933b3df3d88ae8c14ce9c48cf68b65e29e316b2ecb7",
+      "size": 1091
     },
     {
       "path": "code/ui/app.js",
-      "sha256": "f38487bf7bbf380199547c2d7d27f2bd15b1645eb530472647d71091d8673c89",
-      "size": 26006
+      "sha256": "023a9b04be165a1bbfcfd6c0a67ffa82ee1bba31b2f5c06262bcfcc23c1009c4",
+      "size": 26014
     },
     {
       "path": "code/ui/card.html",
-      "sha256": "26a9f7307a59991d8fc74176ab8626e8585c840eb51c48e43ff217b083dec409",
-      "size": 4808
+      "sha256": "2184c6064cbf968aef4ced6a4a0229f7b005d2db394a85be0dca97a545fd055b",
+      "size": 4810
     },
     {
       "path": "code/ui/index.html",
-      "sha256": "29a630c3299075bc31095955d48e49a0be95169d0b03a75aaf78566fb7dc0d2e",
-      "size": 2053
+      "sha256": "73f84ce5165ab1730a92034d07abe1e37eda93c2dcbbdb4eea5e3f0f2d151d7f",
+      "size": 2054
     },
     {
       "path": "code/ui/style.css",
@@ -126,14 +126,14 @@
   "optionalDependencies": [
     {
       "id": "health",
-      "version": ">=0.1.2"
+      "version": ">=0.1.3"
     }
   ],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.3"
+  "version": "0.1.4"
 }

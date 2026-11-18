@@ -278,7 +278,7 @@
 <body>
 <main class="page wide">
   <header class="topbar">
-    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <button class="icon-btn" onclick="axiko.back()" aria-label="Назад" data-icon="back"></button>
     <h1>Ачивки</h1>
     <button class="icon-btn" id="open-settings" aria-label="Настройки" data-icon="settings"></button>
   </header>
@@ -305,7 +305,7 @@
 <script>
   const h = ui.h;
   const MAIN = 'modules/achievements/main.js';
-  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
   const wide = window.matchMedia('(min-width: 700px)');
   let view = null;
   let group = 'Все';
@@ -573,7 +573,7 @@
 
   document.getElementById('open-settings').onclick = () => view && settings();
   wide.addEventListener('change', () => view && load());
-  assi.on('achievements.changed', load);
+  axiko.on('achievements.changed', load);
   load();
 </script>
 </body>

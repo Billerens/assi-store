@@ -1,8 +1,8 @@
 // The model's work for «Словоплёт», on the engine side (Rhino): definitions for the album and the
 // check of the words the owner asked about («Нет в словаре?»). The screen calls it while it is
 // open and there is network:
-//   assi.call('modules/games/word-weaver/model.js', 'defs', ['кошка', …], {batch, maxLen})
-//   assi.call('modules/games/word-weaver/model.js', 'check', [{k, w}], {maxLen})
+//   axiko.call('modules/games/word-weaver/model.js', 'defs', ['кошка', …], {batch, maxLen})
+//   axiko.call('modules/games/word-weaver/model.js', 'check', [{k, w}], {maxLen})
 // Everything is written under data/games/word-weaver/: defs.json ({key: definition}, "" when the
 // model did not know the word) and extra.txt (the personal dictionary, a word a line).
 // Without network or a model the calls answer {error} and change nothing: the game works on.
@@ -11,7 +11,7 @@ var DEFS = DIR + '/defs.json';
 var EXTRA = DIR + '/extra.txt';
 var HERE = 'modules/games/word-weaver';
 
-function files() { return require('lib/assi').files; }
+function files() { return require('lib/axiko').files; }
 
 function key(word) {
   var k = String(word || '').toLowerCase().replace(/ё/g, 'е');

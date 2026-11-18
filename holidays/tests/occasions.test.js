@@ -26,7 +26,7 @@ t.test('у каждого повода свой id, название и верн
 
 t.test('все поводы из таблицы описания на месте', function () {
   ['new-year', 'christmas', 'maslenitsa', 'womens-day', 'defender-day', 'april-fools', 'cosmonautics', 'easter',
-    'victory-day', 'knowledge-day', 'halloween', 'first-snow', 'birthday-owner', 'birthday-contact', 'assi-anniversary'].forEach(function (id) {
+    'victory-day', 'knowledge-day', 'halloween', 'first-snow', 'birthday-owner', 'birthday-contact', 'axiko-anniversary'].forEach(function (id) {
     assert.ok(occasions.some(function (occasion) { return occasion.id === id; }), id);
   });
 });

@@ -1,6 +1,6 @@
 // Фокус: a work timer. For its time the phone goes into "do not disturb", messages quietly pile
 // up in the inbox, distracting apps do not open, and at the end a short summary of what was
-// missed comes. The description: docs/modules/focus.md in Assi.
+// missed comes. The description: docs/modules/focus.md in Axiko.
 //
 // A session lives in data/focus/state.json (so it survives the app being unloaded): its start and
 // end, how "do not disturb" was switched, attempts, calls. The end comes by the shell's exact
@@ -12,7 +12,7 @@
 //
 // Events to the screens: emit('focus.changed', { type }), emit('focus.ended', { sessionId, … }),
 // emit('focus.summary', { sessionId }) — the model's digest is ready.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var timer = require('./logic/timer.js');
 var dndLib = require('./logic/dnd.js');
 var distract = require('./logic/distract.js');
@@ -66,7 +66,7 @@ function message(error) {
 
 // ---- storage ---------------------------------------------------------------------------------
 
-var db = assi.db('focus');
+var db = axiko.db('focus');
 
 function columns(table) {
   return db.query('pragma table_info(' + table + ')').map(function (row) { return row.name; });
@@ -86,20 +86,20 @@ db.exec('create table if not exists sessions (id text primary key, task text, st
 db.exec('create index if not exists sessions_start on sessions (startAt)');
 
 function settings() {
-  return settingsLib.normalize(assi.files.readJson(SETTINGS_PATH, {}));
+  return settingsLib.normalize(axiko.files.readJson(SETTINGS_PATH, {}));
 }
 
 /** The session now, as state.json holds it: { id, kind, startAt, endAt, … } or {} (maybe { next }). */
 function readState() {
   try {
-    return assi.files.readJson(STATE_PATH, {}) || {};
+    return axiko.files.readJson(STATE_PATH, {}) || {};
   } catch (error) {
     return {};
   }
 }
 
 function writeState(state) {
-  assi.files.writeJson(STATE_PATH, state || {});
+  axiko.files.writeJson(STATE_PATH, state || {});
 }
 
 function changeState(fn) {
@@ -122,14 +122,14 @@ function changed(type, data) {
 function refreshWidget() {
   if (Date.now() - LIVE.widgetAt < 3000) return;
   LIVE.widgetAt = Date.now();
-  try { assi.widget.refresh('focus'); } catch (error) { /* no widget */ }
+  try { axiko.widget.refresh('focus'); } catch (error) { /* no widget */ }
 }
 
 // ---- the inbox, when it is installed -----------------------------------------------------------
 
 /** modules/inbox/main.js, or null: Focus works without it. */
 function inbox() {
-  if (!assi.files.exists('modules/inbox/main.js')) return null;
+  if (!axiko.files.exists('modules/inbox/main.js')) return null;
   try {
     var found = require('modules/inbox/main.js');
     return found && typeof found.since === 'function' ? found : null;
@@ -143,7 +143,7 @@ function inbox() {
 
 /** modules/recorder/main.js, or null: without it there is no «Надиктовать итог». */
 function recorder() {
-  if (!assi.files.exists(RECORDER_MAIN)) return null;
+  if (!axiko.files.exists(RECORDER_MAIN)) return null;
   try {
     var found = require(RECORDER_MAIN);
     return found && typeof found.startRecording === 'function' ? found : null;
@@ -158,7 +158,7 @@ function modelAllowed() {
   if (!inbox()) return { ok: false, why: 'Без Входящих выжимки моделью нет' };
   var mode = 'auto';
   try {
-    mode = String((assi.files.readJson('data/inbox/settings.json', {}) || {}).triageMode || 'auto');
+    mode = String((axiko.files.readJson('data/inbox/settings.json', {}) || {}).triageMode || 'auto');
   } catch (error) { /* the default */ }
   if (mode === 'off') return { ok: false, why: 'Во Входящих разбор моделью выключен' };
   var target;
@@ -606,7 +606,7 @@ function gather(session, from, to, s) {
   if (!made) {
     var list = [];
     try {
-      list = assi.notifications.recent(s.noticesLimit) || [];
+      list = axiko.notifications.recent(s.noticesLimit) || [];
     } catch (error) {
       list = [];
     }
@@ -624,7 +624,7 @@ function countSince(from, to, s) {
   }
   var list = [];
   try {
-    list = assi.notifications.recent(s.noticesLimit) || [];
+    list = axiko.notifications.recent(s.noticesLimit) || [];
   } catch (error) {
     list = [];
   }
@@ -836,12 +836,12 @@ exports.digest = function (sessionId) {
  */
 function quietAward(s) {
   try {
-    if (achieve.given(assi.files, ACHIEVED_PATH, 'focus/quiet-week')) return null;
+    if (achieve.given(axiko.files, ACHIEVED_PATH, 'focus/quiet-week')) return null;
     var now = Date.now();
     var rows = db.query('select startAt, blockedAttempts from sessions where attemptsKnown = 1 and startAt >= ?', [now - s.quietDays * DAY]);
     var got = awardsLib.quiet(rows, now, s.quietDays, s.quietMinDays);
     if (!got.ok) return null;
-    return achieve.give(assi.files, require, {
+    return achieve.give(axiko.files, require, {
       key: 'focus/quiet-week', source: 'focus', category: 'Экран', title: 'Неделя без единой попытки отвлечься', icon: 'lock', rarity: 'rare',
       text: s.quietDays + ' дней ни одной попытки открыть отвлекающее приложение во время фокуса (сессии в ' + got.days + ' из них)', at: now
     }, ACHIEVED_PATH);
@@ -1010,7 +1010,7 @@ exports.reply = function (item, text) {
   }
   if (item && item.key) {
     try {
-      var done = assi.notifications.reply(item.key, value);
+      var done = axiko.notifications.reply(item.key, value);
       return done === false ? { ok: false, why: 'Уведомление уже убрано' } : { ok: true };
     } catch (error) {
       return { ok: false, why: message(error) };
@@ -1052,8 +1052,8 @@ exports.settings = function () {
 
 exports.saveSettings = function (patch) {
   var next = locked(function () {
-    var saved = settingsLib.apply(assi.files.readJson(SETTINGS_PATH, {}), patch || {});
-    assi.files.writeJson(SETTINGS_PATH, saved);
+    var saved = settingsLib.apply(axiko.files.readJson(SETTINGS_PATH, {}), patch || {});
+    axiko.files.writeJson(SETTINGS_PATH, saved);
     return saved;
   });
   if (patch && patch.cleanAt) job(JOB_CLEAN, { at: next.cleanAt }, function () { require('modules/focus/main.js').clean(); });
@@ -1092,10 +1092,10 @@ function installTool() {
   var stub = TOOL_MARK + ' (modules/focus/tools/focus.js). Файл ставит сам модуль при запуске;\n' +
     '// удалите модуль — заглушка молча выключится.\n' +
     'try {\n  module.exports = require(\'modules/focus/tools/focus.js\');\n} catch (error) {\n  exports.name = null;\n}\n';
-  var there = assi.files.exists(TOOL_PATH) ? assi.files.read(TOOL_PATH) : null;
+  var there = axiko.files.exists(TOOL_PATH) ? axiko.files.read(TOOL_PATH) : null;
   if (there === stub) return;
   if (there !== null && there.indexOf(TOOL_MARK) !== 0) return;   // the owner's own tool: not ours to replace
-  assi.files.write(TOOL_PATH, stub);
+  axiko.files.write(TOOL_PATH, stub);
 }
 
 /** After a restart: a session that is over is ended, one that is not is armed again. */

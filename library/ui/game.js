@@ -77,7 +77,7 @@
     if (trips.busy || (trips.at && now() - trips.at < 600000)) return;
     trips.busy = true;
     try {
-      const info = await window.assi.call(MAIN, 'linkSheet', 'passenger', null);
+      const info = await window.axiko.call(MAIN, 'linkSheet', 'passenger', null);
       trips.usual = sim.usualTripMin(cfg(), info && info.trips);
     } catch (e) {
       trips.usual = null;

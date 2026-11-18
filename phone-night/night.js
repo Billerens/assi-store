@@ -469,7 +469,7 @@ exports.buildFacts = function (input, s) {
     minutes: sessions.reduce(function (sum, session) { return sum + session.minutes; }, 0)
   };
 
-  // Reboots: Assi's own journal (kind 'reboot', written at the first start after a boot), the usage
+  // Reboots: Axiko's own journal (kind 'reboot', written at the first start after a boot), the usage
   // journal, the battery history, the uptime of the snapshots.
   var signs = [];
   events.forEach(function (event) {
@@ -596,7 +596,7 @@ exports.buildFacts = function (input, s) {
   var liveOk = input.live ? input.live.ok : true;
   facts.notifications = {
     ok: Boolean(noteSource) || liveOk, source: noteSource || 'live',
-    note: noteSource === 'usage' ? 'по статистике Android: журнал Assi уведомлений не видел' : (input.live && input.live.note) || '',
+    note: noteSource === 'usage' ? 'по статистике Android: журнал Axiko уведомлений не видел' : (input.live && input.live.note) || '',
     total: notes.length, top: noteRows.slice(0, top)
   };
 
@@ -665,8 +665,8 @@ exports.buildFacts = function (input, s) {
   var offline = events.filter(function (event) { return event.kind === 'network' && inside(event.at) && event.extra && event.extra.online === false; });
   facts.network = { offline: offline.length };
 
-  // Gaps of the live journal (Assi was restarted during the night).
-  facts.gaps = events.filter(function (event) { return event.kind === 'assi_start' && inside(event.at); }).map(function (event) { return event.at; });
+  // Gaps of the live journal (Axiko was restarted during the night).
+  facts.gaps = events.filter(function (event) { return event.kind === 'axiko_start' && inside(event.at); }).map(function (event) { return event.at; });
 
   // What the neighbours recorded (each part is null when there is nothing to tell).
   var linked = exports.linkFacts(input.links || null, window, events, input.night, s);
@@ -973,8 +973,8 @@ var SOURCE_TEXT = {
   battery: 'снимки батареи вечером и утром (ACTION_BATTERY_CHANGED)',
   history: 'лента батареи: dumpsys batterystats --history',
   alarm: 'dumpsys alarm, разница вечер–утро',
-  screen: 'журнал экрана Assi и UsageStatsManager',
-  live: 'журнал уведомлений и сети Assi',
+  screen: 'журнал экрана Axiko и UsageStatsManager',
+  live: 'журнал уведомлений и сети Axiko',
   usage: 'UsageStatsManager',
   netstats: 'NetworkStatsManager — примерно, корзинами по ~2 ч',
   checkin: 'dumpsys batterystats --checkin, разница вечер–утро — оценка самого Android',
@@ -984,7 +984,7 @@ var SOURCE_TEXT = {
   series: 'общая база: «Сериал на ночь» (запись story — во сколько уснули)',
   games: 'общая база: сессии Игротеки (play), часть внутри окна ночи',
   spending: 'общая база: траты (expense) за окно ночи',
-  focus: 'Фокус: время «не беспокоить» и журнал уведомлений Assi',
+  focus: 'Фокус: время «не беспокоить» и журнал уведомлений Axiko',
   focusDay: 'общая база: сессии Фокуса (focus) и попытки отвлечься',
   health: 'Здоровье: отметка привычки'
 };
@@ -1239,7 +1239,7 @@ exports.storyPrompt = function (mf, style, s, errors) {
   return { system: system, prompt: prompt };
 };
 
-var LATIN_OK = ['doze', 'wi-fi', 'wifi', 'android', 'assi', 'shizuku', 'samsung', 'json'];
+var LATIN_OK = ['doze', 'wi-fi', 'wifi', 'android', 'axiko', 'shizuku', 'samsung', 'json'];
 var WORD_NUMBERS = {
   'один': 1, 'одна': 1, 'одно': 1, 'однажды': 1, 'два': 2, 'две': 2, 'дважды': 2, 'три': 3, 'трижды': 3, 'четыре': 4,
   'пять': 5, 'шесть': 6, 'семь': 7, 'восемь': 8, 'девять': 9, 'десять': 10

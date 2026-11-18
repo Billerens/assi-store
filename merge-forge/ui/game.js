@@ -247,7 +247,7 @@
     window.addEventListener('resize', size);
     load('blades', (v) => { view.blades = v; for (const k in SVG_CACHE) delete SVG_CACHE[k]; });
     syncArt(true);
-    window.assi.on('games.stock', (e) => { if (e && e.game === 'merge-forge' && e.kind === 'blades') syncArt(true); });
+    window.axiko.on('games.stock', (e) => { if (e && e.game === 'merge-forge' && e.kind === 'blades') syncArt(true); });
     g.on('visible', () => syncArt(true));
     load('monsters', (v) => { view.monsters = v; });
     load('bosses', (v) => { view.bosses = v; });

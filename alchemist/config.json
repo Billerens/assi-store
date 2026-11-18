@@ -140,7 +140,7 @@
   "desc.max": {"value": 120, "title": "Описание: знаков до", "min": 20, "max": 400, "group": "Проверка ответа"},
   "near.minLen": {"value": 6, "title": "Почти дубль по одной букве: с длины ключа", "min": 2, "max": 20, "group": "Проверка ответа"},
   "near.distance": {"value": 1, "title": "Почти дубль: расстояние Левенштейна до", "min": 0, "max": 3, "group": "Проверка ответа"},
-  "semantic.on": {"value": true, "title": "Дубли по смыслу через векторы, если в Assi есть модель «embed»", "group": "Проверка ответа"},
+  "semantic.on": {"value": true, "title": "Дубли по смыслу через векторы, если в Axiko есть модель «embed»", "group": "Проверка ответа"},
   "semantic.threshold": {"value": 0.92, "title": "Дубль по смыслу: сходство больше", "min": 0.5, "max": 0.999, "step": 0.005, "group": "Проверка ответа"},
 
   "steps.cost.insight": {"value": 1, "title": "Вдохновение: энергии", "min": 1, "max": 10, "group": "Связки"},

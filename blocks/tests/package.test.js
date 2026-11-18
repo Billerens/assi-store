@@ -4,7 +4,7 @@ const path = require('path');
 const os = require('os');
 const assert = require('node:assert/strict');
 const { execFileSync } = require('node:child_process');
-const { test, done, workspace, gameOf, engine } = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const { test, done, workspace, gameOf, engine } = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const root = path.resolve(__dirname, '..');
 const Core = engine('core.js');
 function walk(dir) {
@@ -41,12 +41,12 @@ test('All runtime config references and content are present', () => {
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'store.json'),'utf8'));
   assert.equal(manifest.target,'modules/games/blocks');
 });
-test('Assi harness: installed package and engine checks', () => {
+test('Axiko harness: installed package and engine checks', () => {
   const env=workspace({fixture:false});
   assert.ok(path.resolve(env.root).startsWith(path.resolve(os.tmpdir())+path.sep),'temporary harness workspace');
   try {
     const dest=path.join(env.root,'modules/games/blocks');
-    // Match assi-store/install.ps1: development tools are copied, tests and store metadata are not.
+    // Match axiko-store/install.ps1: development tools are copied, tests and store metadata are not.
     const excluded = ['store.json', 'README.md', 'tests', '_data'];
     fs.cpSync(root,dest,{recursive:true,filter:f=>!excluded.includes(path.relative(root,f).split(path.sep)[0])});
     const x=gameOf(env,'blocks');

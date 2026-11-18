@@ -159,7 +159,7 @@ exports.reachesShelf = function (rarity, from) {
 /**
  * The thing for the shelf from a badge he held (celebrate('achievement')), or null: below the
  * setting, without an id, or the achievement has already put its own thing there (the cup of «Год
- * с Assi») or a badge of the same rarity. items — the things he has.
+ * с Axiko») or a badge of the same rarity. items — the things he has.
  */
 exports.badgeItem = function (held, s, items) {
   if (!held || !held.id) return null;

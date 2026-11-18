@@ -1,11 +1,11 @@
-# Installs projects of the store into Assi on a device (phone over Wi-Fi debugging or emulator).
+# Installs projects of the store into Axiko on a device (phone over Wi-Fi debugging or emulator).
 #
 #   .\install.ps1                          # every project
 #   .\install.ps1 inbox spending           # only these
 #   .\install.ps1 subway -Serial 192.0.2.1:41234
 #
 # Each project folder has store.json: {"id", "kind": "module"|"game", "target": "modules/<id>" | "modules/games/<id>"}.
-# Games go inside the game hub (Игротека), which ships with Assi itself.
+# Games go inside the game hub (Игротека), which ships with Axiko itself.
 # The folder is copied into the app's workspace at `target` (the previous copy of the code is
 # replaced, the module's data in data/ stays). The workspace is snapshotted first, so the install
 # can be undone in «История изменений». A module whose module.json says "autostart": true is
@@ -32,14 +32,14 @@ if ($Projects) {
     $chosen = $all
 }
 
-$remote = '/data/local/tmp/assi-store'
+$remote = '/data/local/tmp/axiko-store'
 & $adb -s $Serial shell "rm -rf $remote && mkdir -p $remote" | Out-Null
 
 $entries = @()
 foreach ($dir in $chosen) {
     $meta = Get-Content (Join-Path $dir.FullName 'store.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     if ($meta.target -notmatch '^modules/(?:[a-z0-9-]+|games/(?:[a-z0-9-]+|daily/[0-9]{4}-[0-9]{2}-[0-9]{2}))$') { throw "$($dir.Name): странный target $($meta.target)" }
-    $stage = Join-Path ([System.IO.Path]::GetTempPath()) ("assi-store-" + $meta.id)
+    $stage = Join-Path ([System.IO.Path]::GetTempPath()) ("axiko-store-" + $meta.id)
     if (Test-Path $stage) { Remove-Item -Recurse -Force $stage }
     New-Item -ItemType Directory $stage | Out-Null
     Get-ChildItem $dir.FullName -Force | Where-Object { $skip -notcontains $_.Name } | Copy-Item -Destination $stage -Recurse -Force
@@ -63,7 +63,7 @@ $script = @"
 (function () {
   var list = $list;
   var Files = java.nio.file.Files;
-  var root = new java.io.File(context.getFilesDir(), 'assi');
+  var root = new java.io.File(context.getFilesDir(), 'axiko');
   function wipe(file) {
     if (file.isDirectory()) { var inner = file.listFiles(); for (var i = 0; i < inner.length; i++) wipe(inner[i]); }
     file['delete']();
@@ -77,7 +77,7 @@ $script = @"
       Files.copy(from.toPath(), to.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
     }
   }
-  Packages.app.assi.core.Workspace.INSTANCE.snapshot('Перед установкой из assi-store: ' + list.map(function (e) { return e.id; }).join(', '));
+  Packages.app.axiko.core.Workspace.INSTANCE.snapshot('Перед установкой из axiko-store: ' + list.map(function (e) { return e.id; }).join(', '));
   var out = [];
   list.forEach(function (entry) {
     var to = new java.io.File(root, entry.target);
@@ -103,8 +103,8 @@ $script = @"
   return out.join('\n');
 })()
 "@
-$file = Join-Path ([System.IO.Path]::GetTempPath()) 'assi-store-install.js'
+$file = Join-Path ([System.IO.Path]::GetTempPath()) 'axiko-store-install.js'
 Set-Content -Path $file -Value $script -Encoding UTF8
-& (Join-Path $PSScriptRoot '..\Assi\scripts\eval.ps1') $file -Serial $Serial -WaitSeconds $WaitSeconds |
+& (Join-Path $PSScriptRoot '..\Axiko\scripts\eval.ps1') $file -Serial $Serial -WaitSeconds $WaitSeconds |
     Where-Object { $_ -notmatch 'pushed|Activity not' }
 & $adb -s $Serial shell "rm -rf $remote" | Out-Null

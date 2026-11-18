@@ -8,13 +8,13 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "eff524e958a517d150b012ae35bdffd2ae1c64f51cc85ec40e1969a4cca1f1e8",
-      "size": 34780
+      "sha256": "59d48c9be0b4be516c2bd7ef135e74ea163972240fb69bc389a29b7bf8d451ae",
+      "size": 34781
     },
     {
       "path": "code/adventures.js",
@@ -28,8 +28,8 @@
     },
     {
       "path": "code/checks.js",
-      "sha256": "fa267637b163d8f7d0113f559599abbc64c474384d65ebc84643e71a89662d78",
-      "size": 22042
+      "sha256": "6129e8b8868867fe55352cec337789a648e29e8091c82bcc7f74dd4751e6b2f9",
+      "size": 22045
     },
     {
       "path": "code/config.json",
@@ -143,8 +143,8 @@
     },
     {
       "path": "code/ui/game.js",
-      "sha256": "ac2b0190ab41c27572ad080fecb921f30091aa25de998e8ae812e0c2b138d143",
-      "size": 72411
+      "sha256": "f4ec11e23a505d931dd4e4680d14c200285634fafe1a55c62d67b7cc8c6f57af",
+      "size": 72412
     },
     {
       "path": "code/ui/index.html",
@@ -181,10 +181,10 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1,
+    "axikoApi": 1,
     "gamesEngine": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

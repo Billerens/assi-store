@@ -254,7 +254,7 @@
 <body>
 <main class="page">
   <header class="topbar">
-    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <button class="icon-btn" onclick="axiko.back()" aria-label="Назад" data-icon="back"></button>
     <h1>Приключение</h1>
     <button class="icon-btn" id="openSettings" aria-label="Настройки" data-icon="settings"></button>
   </header>
@@ -307,7 +307,7 @@
   // (event story.state) and sends commands. It may be closed or dark while the story plays.
   const h = ui.h;
   const MAIN = 'modules/voice-adventure/main.js';
-  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
   const $ = id => document.getElementById(id);
   const PHASES = {
     starting: 'Начинаю',
@@ -358,7 +358,7 @@
 
   function renderNotes() {
     const list = [];
-    if (!status.speech.ready) list.push(note('mic', 'Распознавание речи на телефоне не скачано. Его ставят в настройках голоса Assi — без него игра не услышит ответы.'));
+    if (!status.speech.ready) list.push(note('mic', 'Распознавание речи на телефоне не скачано. Его ставят в настройках голоса Axiko — без него игра не услышит ответы.'));
     if (!status.write.ok) list.push(note('info', ui.t('Новые главы пишутся, когда модель доступна. Сейчас: {}.', status.write.why)));
     if (status.trip) list.push(note('phone', 'Вы в поездке: говорите, удерживая кнопку «Говорить» или нажав кнопку гарнитуры, — объявления станций не примутся за ход.'));
     if (!status.local.ok) list.push(note('info', 'Модель на телефоне не скачана — непонятные фразы игра переспросит, а не угадает.'));
@@ -563,7 +563,7 @@
     const journal = await call('log', 30);
     body.push(h('div', { class: 'set-group' }, 'Журнал'));
     body.push(h('div', { 'data-raw': '' }, journal.length ? journal.map(entry => h('div', { class: 'log-row' }, ui.raw(ui.ago(entry.at) + ' — ' + entry.text))) : h('div', { class: 'small muted' }, ui.t('Пока пусто'))));
-    body.push(h('p', { class: 'small muted' }, 'Какая модель пишет главы и какая понимает фразы без сети — в Настройках Assi, раздел «Кто на какой модели»: «Приключение: главы» и «Приключение: модель на телефоне».'));
+    body.push(h('p', { class: 'small muted' }, 'Какая модель пишет главы и какая понимает фразы без сети — в Настройках Axiko, раздел «Кто на какой модели»: «Приключение: главы» и «Приключение: модель на телефоне».'));
     ui.sheet(h('div', { class: 'sheet-scroll' }, body));
   }
 
@@ -571,7 +571,7 @@
 
   // ---- events from the engine ------------------------------------------------------------------------
 
-  assi.on('story.state', state => {
+  axiko.on('story.state', state => {
     if (!state || (state.id && state.id !== 'quest')) return;
     const was = voice.running;
     voice = state;
@@ -579,7 +579,7 @@
     else show();
   });
 
-  assi.on('stories.quest', event => {
+  axiko.on('stories.quest', event => {
     if (event && event.phase === 'written' && waitingFor && event.plot === waitingFor && event.chapter === 1) {
       waitingFor = null;
       if (visible) {
@@ -594,12 +594,12 @@
     if (!voice.running) refresh();
   });
 
-  assi.on('speech', event => {
+  axiko.on('speech', event => {
     if (!event || voice.phase !== 'listening') return;
     $('levelBar').style.width = Math.min(100, Math.round((event.level || 0) * 400)) + '%';
   });
 
-  assi.on('app.visible', event => {
+  axiko.on('app.visible', event => {
     visible = !!(event && event.on);
     if (visible) refresh();
   });

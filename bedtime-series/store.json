@@ -1,7 +1,7 @@
 {
   "id": "bedtime-series",
   "kind": "module",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "title": "Bedtime Series",
   "summary": "Every evening a new episode of an interactive story by voice: you are the hero, the plot has details of your day, you choose at the forks by voice, and you can fall asleep mid-episode",
   "tags": ["voice", "stories", "ai"],

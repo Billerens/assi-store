@@ -1,4 +1,4 @@
-// Рисуй — угадаю — экран: выбор режима, «Я рисую» (холст, догадки модели по ходу), «Assi рисует»
+// Рисуй — угадаю — экран: выбор режима, «Я рисую» (холст, догадки модели по ходу), «Axiko рисует»
 // (штрихи появляются со скоростью руки, угадывание голосом), итоги, настройки, сравнение моделей.
 // Правила отправки, разбор путей, расписание анимации — ../canvas.js; промпт и судья — ../guess.js;
 // сравнение слов — ../match.js (общий со Шляпой); всё, что хранится и ходит в модель, — ../main.js.
@@ -13,7 +13,7 @@
   const raw = ui.raw;
   const app = document.getElementById('app');
   const TEST = /[?&]test=1(&|$)/.test(location.search);
-  // ?daily=1 — «рисунок дня», заказанный «Игрой дня»: один раунд «Assi рисует» с отложенным рисунком.
+  // ?daily=1 — «рисунок дня», заказанный «Игрой дня»: один раунд «Axiko рисует» с отложенным рисунком.
   const DAILY = /[?&]daily=1(&|$)/.test(location.search);
   const MODELS_LINK = 'ui/settings/index.html?tab=models';
   const SVG_NS = 'http://www.w3.org/2000/svg';
@@ -38,7 +38,7 @@
   // ---- связь с движком ------------------------------------------------------------------------
 
   function call(fn, ...args) {
-    return assi.call(MAIN, fn, ...args);
+    return axiko.call(MAIN, fn, ...args);
   }
 
   /** Обработчик, чья ошибка становится понятной подсказкой, а не красной кнопкой «починить». */
@@ -209,7 +209,7 @@
         return h('div', { class: 'card', id: 'vision-warning' },
           h('p', { class: 'warn' }, 'Назначьте роли «Угадывание рисунка» модель, которая понимает картинки'),
           guess.model ? h('p', { class: 'small muted' }, 'Сейчас: ', raw(guess.model), guess.assigned ? '' : ' (основная модель)', ' — без зрения') : null,
-          h('button', { class: 'btn', id: 'open-models', onclick: () => assi.open(MODELS_LINK) }, ui.icon('settings'), 'Модели'));
+          h('button', { class: 'btn', id: 'open-models', onclick: () => axiko.open(MODELS_LINK) }, ui.icon('settings'), 'Модели'));
       }
       if (guess.local) lines.push('Модель на телефоне: рисунок уходит ей не чаще раза в ' + S.settings.localInterval + ' с');
       if (guess.slow) lines.push('Медленно: в среднем ' + secondsText(guess.avgMs) + ' на догадку');
@@ -331,7 +331,7 @@
     const st = S.stock || { ready: 0, size: 0, filling: false };
     return h('section', { class: 'section', id: 'stock' },
       h('h2', {}, 'Запас рисунков'),
-      h('p', {}, 'Готово ' + st.ready + ' из ' + st.size, st.filling ? h('span', { class: 'muted' }, ' — Assi рисует ещё ', h('span', { class: 'spinner' })) : null),
+      h('p', {}, 'Готово ' + st.ready + ' из ' + st.size, st.filling ? h('span', { class: 'muted' }, ' — Axiko рисует ещё ', h('span', { class: 'spinner' })) : null),
       h('p', { class: 'small muted' }, 'Рисунки готовятся заранее, пока есть сеть; из запаса можно играть без сети'),
       st.size > 0 && st.ready < st.size && !st.filling ? h('button', { class: 'btn', id: 'fill', onclick: act(async () => {
         S.stock = await call('fillStock');
@@ -362,13 +362,13 @@
     const s = S.settings;
     const page = h('main', { class: 'page home' },
       h('header', { class: 'topbar' },
-        h('button', { class: 'icon-btn', 'aria-label': 'Назад', onclick: () => assi.back() }, ui.icon('back')),
+        h('button', { class: 'icon-btn', 'aria-label': 'Назад', onclick: () => axiko.back() }, ui.icon('back')),
         h('h1', {}, 'Рисуй — угадаю'),
         h('button', { class: 'icon-btn', 'aria-label': 'Как играть', onclick: showRules }, ui.icon('info')),
         h('button', { class: 'icon-btn', 'aria-label': 'Настройки', id: 'open-settings', onclick: showSettings }, ui.icon('settings'))),
       h('div', { class: 'modes' },
-        modeCard('human', 'edit', 'Я рисую — Assi угадывает', 'Рисуйте пальцем или пером, модель угадывает вслух по ходу'),
-        modeCard('model', 'spark', 'Assi рисует — мы угадываем', 'Модель рисует штрих за штрихом, кричите догадки — телефон услышит')),
+        modeCard('human', 'edit', 'Я рисую — Axiko угадывает', 'Рисуйте пальцем или пером, модель угадывает вслух по ходу'),
+        modeCard('model', 'spark', 'Axiko рисует — мы угадываем', 'Модель рисует штрих за штрихом, кричите догадки — телефон услышит')),
       roleNotes(),
       playersSection(),
       S.mode === 'human' ? secretSection() : null,
@@ -384,7 +384,7 @@
       h('h3', {}, 'Как играть'),
       h('div', { class: 'md' },
         h('p', {}, h('b', {}, 'Я рисую. '), 'Рисуйте пальцем или пером. Модель смотрит на рисунок по ходу и говорит, что видит. «Нет» — эта догадка неверна, «Тепло» — близко, «Да!» — угадала. По карточке телефон сам знает слово и сам засчитывает; модель слова не видит никогда.'),
-        h('p', {}, h('b', {}, 'Assi рисует. '), 'Модель рисует штрих за штрихом, а вы кричите догадки. Телефон слышит верное слово и останавливает рисунок; кто угадал — отметьте касанием. Без микрофона — вводите догадку в поле.'),
+        h('p', {}, h('b', {}, 'Axiko рисует. '), 'Модель рисует штрих за штрихом, а вы кричите догадки. Телефон слышит верное слово и останавливает рисунок; кто угадал — отметьте касанием. Без микрофона — вводите догадку в поле.'),
         h('p', {}, h('b', {}, 'Очки. '), 'Угадано быстро — до 10 очков, к концу времени — 1.'),
         h('p', {}, h('b', {}, 'Честно о микрофоне. '), 'Телефон слышит всех. Засчитал по ошибке — «Ошибка — рисуем дальше».')),
       h('button', { class: 'btn wide', onclick: () => close() }, 'Понятно')
@@ -396,7 +396,7 @@
   let heartbeat = null;
 
   function enterStage() {
-    quiet(assi.stage(true));
+    quiet(axiko.stage(true));
     clearInterval(heartbeat);
     heartbeat = null;
     if (S.game && !S.game.test) {
@@ -408,7 +408,7 @@
   function leaveStage() {
     clearInterval(heartbeat);
     heartbeat = null;
-    quiet(assi.stage(false));
+    quiet(axiko.stage(false));
   }
 
   function stageView(node, scroll) {
@@ -517,7 +517,7 @@
       if (S.game !== g) return;
       S.round = humanRound(drawer, card);
     } else {
-      busy('Assi готовит рисунок…');
+      busy('Axiko готовит рисунок…');
       const drawing = await prepareDrawing(g);
       if (S.game !== g) return;
       if (drawing.error) {
@@ -957,7 +957,7 @@
     const r = S.round;
     if (!r || r.kind !== 'human') return;
     r.voiceOn = !r.voiceOn;
-    if (!r.voiceOn) quiet(assi.native('speech.stop'));
+    if (!r.voiceOn) quiet(axiko.native('speech.stop'));
     const node = document.getElementById('voice');
     if (node) node.replaceChildren(ui.icon(r.voiceOn ? 'speaker' : 'mute'));
   }
@@ -1066,8 +1066,8 @@
 
   function say(r, text) {
     if (!r.voiceOn || !text) return;
-    if (S.game.settings.localVoice) quiet(assi.native('speech.say', text, 'local'));
-    else quiet(assi.native('speech.say', text));
+    if (S.game.settings.localVoice) quiet(axiko.native('speech.say', text, 'local'));
+    else quiet(axiko.native('speech.say', text));
   }
 
   function onAnswer(r, answer, context) {
@@ -1222,7 +1222,7 @@
     render();
   }
 
-  // ---- «Assi рисует»: рисунок модели --------------------------------------------------------------
+  // ---- «Axiko рисует»: рисунок модели --------------------------------------------------------------
 
   /** Пути, которые экран сможет нарисовать: разбор canvas.js и Path2D (бросил — штрих выброшен). */
   function usable(list) {
@@ -1249,7 +1249,7 @@
     if (!made || made.error) return { error: made && made.error ? made.error : 'нет рисунка' };
     let strokes = usable(made.strokes);
     if (s.checkPaint && !g.test && !made.checked && made.id) {
-      busy('Assi проверяет свой рисунок…');
+      busy('Axiko проверяет свой рисунок…');
       const image = artCanvas('model', strokes, s.imageSize, s).toDataURL('image/jpeg', s.jpegQuality);
       const checked = await call('verifyDrawing', made.id, image);
       if (checked && checked.drawing) {
@@ -1265,7 +1265,7 @@
 
   function renderPaintError(why) {
     stageView(h('div', { class: 'overlay' },
-      h('div', { class: 'hero' }, 'Assi не смог нарисовать'),
+      h('div', { class: 'hero' }, 'Axiko не смог нарисовать'),
       h('p', { class: 'muted' }, raw(String(why).slice(0, 200))),
       h('button', { class: 'btn primary go', id: 'retry', onclick: act(beginRound) }, ui.icon('refresh'), 'Ещё раз'),
       h('button', { class: 'btn', onclick: act(exitGame) }, 'Выйти')));
@@ -1304,7 +1304,7 @@
     const svg = document.createElementNS(SVG_NS, 'svg');
     svg.setAttribute('viewBox', '0 0 1000 1000');
     svg.setAttribute('id', 'painting');
-    svg.setAttribute('aria-label', 'Рисунок Assi');
+    svg.setAttribute('aria-label', 'Рисунок Axiko');
     r.paths = r.strokes.map((stroke) => {
       const path = document.createElementNS(SVG_NS, 'path');
       path.setAttribute('d', stroke.d);
@@ -1775,7 +1775,7 @@
     }
     stopTimers();
     await Mic.stop();
-    quiet(assi.native('speech.stop'));
+    quiet(axiko.native('speech.stop'));
     if (g.test) return toHome();
     if (g.rounds.length) return finishGame();
     await quiet(call('gameEnd', g.id, { rounds: 0, toBase: false }));
@@ -1844,9 +1844,9 @@
       micState('on');
       if (S.features.includes('speech.stream')) {
         try {
-          await assi.native('speech.stream.start', { maxMinutes: this.settings.streamMaxMinutes });
+          await axiko.native('speech.stream.start', { maxMinutes: this.settings.streamMaxMinutes });
           if (gen !== this.gen) {
-            quiet(assi.native('speech.stream.stop'));
+            quiet(axiko.native('speech.stream.stop'));
             return;
           }
           this.stream = true;
@@ -1864,7 +1864,7 @@
       while (this.active && gen === this.gen) {
         const begun = Date.now();
         try {
-          const text = await assi.native('speech.listen', this.settings.chunkSeconds);
+          const text = await axiko.native('speech.listen', this.settings.chunkSeconds);
           if (gen !== this.gen) break;
           failures = 0;
           const done = Date.now();
@@ -1893,10 +1893,10 @@
       micState('off');
       if (this.stream) {
         this.stream = false;
-        await quiet(assi.native('speech.stream.stop'));
+        await quiet(axiko.native('speech.stream.stop'));
         quiet(call('streamMark', false));
       } else {
-        await quiet(assi.native('speech.stopListening'));
+        await quiet(axiko.native('speech.stopListening'));
       }
     }
   };
@@ -1911,7 +1911,7 @@
     }
   }
 
-  assi.on('speech', (event) => {
+  axiko.on('speech', (event) => {
     if (!event) return;
     if (event.state === 'processing') Mic.processingAt = Date.now();
     if (!Mic.active) return;
@@ -1932,7 +1932,7 @@
     return 0;
   }
 
-  assi.on('speech.stream', (event) => {
+  axiko.on('speech.stream', (event) => {
     if (!event || event.active !== false || !Mic.active || !Mic.stream) return;
     Mic.stream = false;
     quiet(call('streamMark', false));
@@ -1940,7 +1940,7 @@
     Mic.loop(Mic.gen);
   });
 
-  assi.on('speech.phrase', (event) => {
+  axiko.on('speech.phrase', (event) => {
     if (!Mic.active || !Mic.stream || !Mic.handler || !event || !event.text) return;
     const endAt = phraseEnd(event);
     Mic.handler(event.text, { latency: endAt ? Math.max(0, Date.now() - endAt) : 0 });
@@ -1961,7 +1961,7 @@
       line('Угадывание рисунка', guess, (guess.vision ? ' · видит картинки' : ' · без зрения') + (guess.local ? ' · на телефоне' : '') +
         (guess.avgMs ? ' · в среднем ' + secondsText(guess.avgMs) + (guess.slow ? ' — медленно' : '') : '')),
       line('Рисунок для угадывания', roles.paint, ''),
-      h('button', { class: 'btn', onclick: () => assi.open(MODELS_LINK) }, ui.icon('settings'), 'Назначить модели'));
+      h('button', { class: 'btn', onclick: () => axiko.open(MODELS_LINK) }, ui.icon('settings'), 'Назначить модели'));
   }
 
   function showSettings() {
@@ -2054,7 +2054,7 @@
   });
 
   // Экран уходит с глаз (свернули, погас, сложили) — раунд на паузу, микрофон отпускается.
-  assi.on('app.visible', (event) => {
+  axiko.on('app.visible', (event) => {
     if (event && event.on === false) pauseRound();
   });
   document.addEventListener('visibilitychange', () => {
@@ -2062,8 +2062,8 @@
   });
   window.addEventListener('pagehide', () => {
     if (Mic.active) {
-      if (Mic.stream) quiet(assi.native('speech.stream.stop'));
-      else quiet(assi.native('speech.stopListening'));
+      if (Mic.stream) quiet(axiko.native('speech.stream.stop'));
+      else quiet(axiko.native('speech.stopListening'));
     }
     if (S.game && !S.game.test && S.game.listen) quiet(call('wakeRestore'));
   });
@@ -2187,7 +2187,7 @@
       onAnswer(r, parsed || { error: 'нет догадки' }, { at: Date.now(), atMs: Math.round(elapsed(r)), final: !!final });
       return this.round();
     },
-    /** «Assi рисует» на образце «маяк» (samples.js); seconds — время рисования. */
+    /** «Axiko рисует» на образце «маяк» (samples.js); seconds — время рисования. */
     async testPaint(seconds) {
       await startTest('model', null, seconds);
       const r = S.round;

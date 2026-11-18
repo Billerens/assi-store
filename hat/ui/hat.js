@@ -31,7 +31,7 @@
   // ---- связь с движком ------------------------------------------------------------------------
 
   function call(fn, ...args) {
-    return assi.call(MAIN, fn, ...args);
+    return axiko.call(MAIN, fn, ...args);
   }
 
   /** Обработчик, чья ошибка становится понятной подсказкой, а не красной кнопкой «починить». */
@@ -255,14 +255,14 @@
 
   async function voiceNames() {
     if (S.listeningNames) {
-      await quiet(assi.native('speech.stopListening'));
+      await quiet(axiko.native('speech.stopListening'));
       return;
     }
     S.listeningNames = true;
     render();
     try {
       await quiet(call('wakeOff'));
-      const text = await assi.native('speech.listen', 10);
+      const text = await axiko.native('speech.listen', 10);
       const names = splitNames(text);
       if (!names.length) ui.toast('Не расслышал имён — попробуйте ещё раз');
       addNames(names);
@@ -510,7 +510,7 @@
   function renderSetup() {
     const page = h('main', { class: 'page setup' },
       h('header', { class: 'topbar' },
-        h('button', { class: 'icon-btn', 'aria-label': 'Назад', onclick: () => assi.back() }, ui.icon('back')),
+        h('button', { class: 'icon-btn', 'aria-label': 'Назад', onclick: () => axiko.back() }, ui.icon('back')),
         h('h1', {}, 'Шляпа'),
         h('button', { class: 'icon-btn', 'aria-label': 'Правила', onclick: showRules }, ui.icon('info')),
         h('button', { class: 'icon-btn', 'aria-label': 'Статистика', onclick: act(showStats) }, ui.icon('chart')),
@@ -609,7 +609,7 @@
   let heartbeat = null;
 
   function enterStage() {
-    quiet(assi.stage(true));
+    quiet(axiko.stage(true));
     clearInterval(heartbeat);
     heartbeat = setInterval(() => quiet(call('beat')), S.settings.heartbeatSeconds * 1000);
     quiet(call('beat'));
@@ -618,7 +618,7 @@
   function leaveStage() {
     clearInterval(heartbeat);
     heartbeat = null;
-    quiet(assi.stage(false));
+    quiet(axiko.stage(false));
   }
 
   let persistTimer = null;
@@ -907,9 +907,9 @@
       micState('on');
       if (S.features.includes('speech.stream')) {
         try {
-          await assi.native('speech.stream.start', { maxMinutes: this.settings.streamMaxMinutes });
+          await axiko.native('speech.stream.start', { maxMinutes: this.settings.streamMaxMinutes });
           if (gen !== this.gen) {
-            quiet(assi.native('speech.stream.stop'));
+            quiet(axiko.native('speech.stream.stop'));
             return;
           }
           this.stream = true;
@@ -927,7 +927,7 @@
       while (this.active && gen === this.gen) {
         const begun = Date.now();
         try {
-          const text = await assi.native('speech.listen', this.settings.chunkSeconds);
+          const text = await axiko.native('speech.listen', this.settings.chunkSeconds);
           if (gen !== this.gen) break;
           failures = 0;
           const done = Date.now();
@@ -958,10 +958,10 @@
       micState('off');
       if (this.stream) {
         this.stream = false;
-        await quiet(assi.native('speech.stream.stop'));
+        await quiet(axiko.native('speech.stream.stop'));
         quiet(call('streamMark', false));
       } else {
-        await quiet(assi.native('speech.stopListening'));
+        await quiet(axiko.native('speech.stopListening'));
       }
     }
   };
@@ -976,7 +976,7 @@
     }
   }
 
-  assi.on('speech', (event) => {
+  axiko.on('speech', (event) => {
     if (!event) return;
     if (event.state === 'processing') Mic.processingAt = Date.now();
     if (!Mic.active) return;
@@ -998,7 +998,7 @@
   }
 
   // Поток кончился сам (предел минут, ошибка распознавания) посреди хода — дальше кусками.
-  assi.on('speech.stream', (event) => {
+  axiko.on('speech.stream', (event) => {
     if (!event || event.active !== false || !Mic.active || !Mic.stream) return;
     Mic.stream = false;
     quiet(call('streamMark', false));
@@ -1006,7 +1006,7 @@
     Mic.loop(Mic.gen);
   });
 
-  assi.on('speech.phrase', (event) => {
+  axiko.on('speech.phrase', (event) => {
     if (!Mic.active || !Mic.stream || !Mic.handler || !event || !event.text) return;
     const endAt = phraseEnd(event);
     Mic.handler(event.text, { latency: endAt ? Math.max(0, Date.now() - endAt) : 0 });
@@ -1413,7 +1413,7 @@
         h('button', { class: 'btn go', onclick: act(showStats) }, ui.icon('chart'), 'Статистика игроков'),
         h('button', { class: 'btn go', onclick: () => {
           leaveStage();
-          assi.back();
+          axiko.back();
         } }, 'Выйти')));
   }
 
@@ -1584,7 +1584,7 @@
     if (live && (live.phase === 'run' || live.phase === 'last')) pauseTurn();
   }
 
-  assi.on('app.visible', (event) => {
+  axiko.on('app.visible', (event) => {
     if (event && event.on === false) hidden();
   });
   document.addEventListener('visibilitychange', () => {
@@ -1592,8 +1592,8 @@
   });
   window.addEventListener('pagehide', () => {
     if (Mic.active) {
-      if (Mic.stream) quiet(assi.native('speech.stream.stop'));
-      else quiet(assi.native('speech.stopListening'));
+      if (Mic.stream) quiet(axiko.native('speech.stream.stop'));
+      else quiet(axiko.native('speech.stopListening'));
     }
     if (S.game && !S.game.test) quiet(call('saveState', { game: S.game }));
   });

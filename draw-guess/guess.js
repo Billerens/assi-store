@@ -1,5 +1,5 @@
 // Разговор с моделями: промпт угадывания и разбор ответа, когда говорить догадку вслух,
-// засчитано ли (через match.js), промпт рисунка для «Assi рисует».
+// засчитано ли (через match.js), промпт рисунка для «Axiko рисует».
 // Чистая логика: движок (require('./guess')), node (тесты), экран (window.dgGuess).
 (function (exports) {
   var match = typeof require === 'function' ? require('./match') : window.ruMatch;

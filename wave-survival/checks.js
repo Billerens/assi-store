@@ -18,8 +18,8 @@ for (var name in checks) exports[name] = checks[name];
 
 function load() {
   var id = kit.idOf(__dirname);
-  var assi = require('lib/assi');
-  var game = JSON.parse(assi.files.read('modules/games/' + id + '/game.json'));
+  var axiko = require('lib/axiko');
+  var game = JSON.parse(axiko.files.read('modules/games/' + id + '/game.json'));
   game.id = id;
   var sim = require('modules/games/' + id + '/sim.js');
   return { game: game, sim: sim, W: sim.World, cfg: kit.configOf(game, 'modules/games/' + id) };
@@ -109,14 +109,14 @@ exports['запас: свои элементы проходят проверку
 exports['облик врагов: у каждого вида свой, орда дня берётся из запаса'] = function (t) {
   var x = load();
   var Art = require('../engine/art.js');
-  var assi = require('lib/assi');
-  var world = JSON.parse(assi.files.read('modules/games/' + kit.idOf(__dirname) + '/content/world.json'));
+  var axiko = require('lib/axiko');
+  var world = JSON.parse(axiko.files.read('modules/games/' + kit.idOf(__dirname) + '/content/world.json'));
   x.W.ENEMIES.forEach(function (id) {
     var look = world.enemies[id] && world.enemies[id].look;
     t.equal(Art.lookCheck(look), null, 'облик ' + id);
   });
   // The day's item with a horde look, through the engine's check of the stock and into the save.
-  var md = assi.files.read('modules/games/' + kit.idOf(__dirname) + '/prompts/daily.md');
+  var md = axiko.files.read('modules/games/' + kit.idOf(__dirname) + '/prompts/daily.md');
   var item = { title: 'Стеклянный рой', rules: ['swarm', 'glass', 'rich'], horde: { mask: 'bug', hue: 200, light: 'pale' } };
   t.equal(Core.stock.check(item, Core.stock.schema(md), {}, x.sim, 'daily'), null, 'день с ордой отвергнут');
   var state = Core.newState(x.game, x.sim, { now: Date.now(), config: x.cfg, rng: Rng.make(3) });

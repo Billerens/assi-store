@@ -1,12 +1,12 @@
 // For node scripts outside the phone: `require('../engine/…')` of the game's shared files points
-// at the hub of Assi (scripts run from the store folder, where there is no engine/ beside it).
+// at the hub of Axiko (scripts run from the store folder, where there is no engine/ beside it).
 'use strict';
 const fs = require('fs');
 const path = require('path');
 const Module = require('module');
 
-const HUB = path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'app/src/main/assets/factory/modules/games');
-if (!fs.existsSync(path.join(HUB, 'engine', 'core.js'))) throw new Error('Не найден движок Игротеки (Assi/app/src/main/assets/factory/modules/games)');
+const HUB = path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'app/src/main/assets/factory/modules/games');
+if (!fs.existsSync(path.join(HUB, 'engine', 'core.js'))) throw new Error('Не найден движок Игротеки (Axiko/app/src/main/assets/factory/modules/games)');
 
 const resolve = Module._resolveFilename;
 Module._resolveFilename = function (request, parent, isMain, options) {

@@ -116,7 +116,7 @@
     if (GRAPH_READ || !engineRequire) return;
     GRAPH_READ = true;
     try {
-      var files = engineRequire('lib/assi').files;
+      var files = engineRequire('lib/axiko').files;
       if (files.exists(GRAPH_PATH)) GRAPH = JSON.parse(files.read(GRAPH_PATH));
     } catch (error) {
       GRAPH = null;

@@ -1,8 +1,8 @@
 // Checks of «Приключение» and of the shared «Голосовой движок историй» on the phone (module_check).
 // They neither speak nor listen: the voice loop is exercised through its driver. What they add to
 // data/stories/ they remove; the index, the counters, the journal and the settings are put back.
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 var MAIN = 'modules/voice-adventure/main.js';
 var ENGINE = 'modules/voice-adventure/story-engine/';
 var KEPT = [

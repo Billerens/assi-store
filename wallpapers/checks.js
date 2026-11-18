@@ -1,7 +1,7 @@
 // Checks of «Обои дня» on the phone. They never set a wallpaper: the real setting is seen only
 // by the owner's eyes. What they create (a test picture, a trial pick) they remove, and the
 // module's state and settings are put back as they were.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var sources = require('./sources');
 var select = require('./select');
 var fold = require('./fold');
@@ -12,13 +12,13 @@ var phone = require('./android');
 var MAIN = 'modules/wallpapers/main.js';
 var DIR = 'data/wallpapers/check';
 
-function sample(name) { return assi.files.readJson('modules/wallpapers/samples/' + name + '.json', null); }
+function sample(name) { return axiko.files.readJson('modules/wallpapers/samples/' + name + '.json', null); }
 
-function snapshot(path) { return assi.files.exists(path) ? assi.files.read(path) : null; }
+function snapshot(path) { return axiko.files.exists(path) ? axiko.files.read(path) : null; }
 
 function restore(path, text) {
-  if (text === null) assi.files.remove(path);
-  else assi.files.write(path, text);
+  if (text === null) axiko.files.remove(path);
+  else axiko.files.write(path, text);
 }
 
 /** A 3000×2000 test picture: a dark gradient with a light square in the middle. */
@@ -38,7 +38,7 @@ function testPicture(path) {
     var square = new android.graphics.Paint();
     square['setColor(int)'](0xFFE0E0E0 | 0);
     canvas.drawRect(1300, 800, 1700, 1200, square);
-    var file = new java.io.File(assi.files.path(path));
+    var file = new java.io.File(axiko.files.path(path));
     file.getParentFile().mkdirs();
     var output = new java.io.FileOutputStream(file);
     try {
@@ -52,7 +52,7 @@ function testPicture(path) {
 }
 
 function firstBytes(path, count) {
-  var input = new java.io.FileInputStream(assi.files.path(path));
+  var input = new java.io.FileInputStream(axiko.files.path(path));
   try {
     var buffer = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, count);
     var read = input.read(buffer);
@@ -133,7 +133,7 @@ exports['картинка читается, режется и уменьшает
     var again = phone.analyze(DIR + '/source.jpg');
     t.equal(again.dhash, seen.dhash, 'dHash повторяется');
   } finally {
-    assi.files.remove(DIR);
+    axiko.files.remove(DIR);
   }
 };
 
@@ -141,7 +141,7 @@ exports['можно ли ставить обои — честный ответ']
   var can = phone.canSet();
   ['declared', 'granted', 'supported', 'allowed', 'ok'].forEach(function (key) { t.equal(typeof can[key], 'boolean', key); });
   if (can.declared) t.ok(can.granted, 'SET_WALLPAPER — обычное разрешение: объявлено, значит выдано');
-  if (!can.declared) t.skip('в этой сборке Assi нет SET_WALLPAPER — обои ставятся только вручную');
+  if (!can.declared) t.skip('в этой сборке Axiko нет SET_WALLPAPER — обои ставятся только вручную');
 };
 
 exports['разведка экранов Fold отвечает'] = function (t) {
@@ -184,8 +184,8 @@ exports['настоящий подбор без установки (только
     t.ok(result.ok, 'выбрана картинка: ' + (result.error || ''));
     var row = main.get(result.id);
     t.equal(row.dry, 1, 'это проба');
-    t.ok(assi.files.exists(row.dir + '/inner.jpg') && assi.files.exists(row.dir + '/cover.jpg'), 'кадры сделаны');
-    t.equal(phone.bounds(row.dir + '/cover.jpg').width, settingsLib.normalize(assi.files.readJson('data/wallpapers/settings.json', {})).coverWidth, 'ширина внешнего кадра');
+    t.ok(axiko.files.exists(row.dir + '/inner.jpg') && axiko.files.exists(row.dir + '/cover.jpg'), 'кадры сделаны');
+    t.equal(phone.bounds(row.dir + '/cover.jpg').width, settingsLib.normalize(axiko.files.readJson('data/wallpapers/settings.json', {})).coverWidth, 'ширина внешнего кадра');
     t.ok(row.license && sources.freeLicense(row.license), 'свободная лицензия: ' + row.license);
     t.ok(row.author && row.page_url, 'автор и ссылка');
   } finally {

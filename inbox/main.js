@@ -1,6 +1,6 @@
 // Входящие: one feed of the messages from every messenger, gathered from their notifications —
 // sorted into "important / later / noise", chatty groups folded into a digest, drafts of
-// answers, a reply straight from the feed. The description: docs/modules/inbox.md in Assi.
+// answers, a reply straight from the feed. The description: docs/modules/inbox.md in Axiko.
 //
 // The pipeline of a notification: filter (apps, ongoing, empty) -> parse into messages
 // (logic/parse.js with parsers.json) -> repeats and edits (logic/dedup.js) -> the owner's rules
@@ -9,7 +9,7 @@
 //
 // Events to the screens: emit('inbox.feed', { type, chatId }). Not "inbox.*": the shell already
 // has inbox.peek/add/drop (attachments of the chat), which have nothing to do with this module.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var ai = require('lib/ai');
 var parse = require('./logic/parse.js');
 var dedup = require('./logic/dedup.js');
@@ -35,10 +35,10 @@ var DAY = 86400000;
 var ROLES = { triage: 'inbox.triage', digest: 'inbox.digest', draft: 'inbox.draft' };
 
 // The app's own notifications: the install id is read from the app (app.axiko, its clean preview),
-// and app.assi still counts for builds made before the rename.
+// and app.axiko still counts for builds made before the rename.
 function ownPackage(pkg) {
   var own = typeof context !== 'undefined' && context ? String(context.getPackageName()) : 'app.axiko';
-  return pkg.indexOf(own) === 0 || pkg.indexOf('app.assi') === 0;
+  return pkg.indexOf(own) === 0 || pkg.indexOf('app.axiko') === 0;
 }
 
 // What lives as long as the process, kept on the engine's global object: a reload of this file
@@ -72,7 +72,7 @@ function locked(fn) {
 
 // ---- storage ---------------------------------------------------------------------------------
 
-var db = assi.db('inbox');
+var db = axiko.db('inbox');
 
 function columns(table) {
   return db.query('pragma table_info(' + table + ')').map(function (row) { return row.name; });
@@ -100,12 +100,12 @@ db.exec('create table if not exists drafts (id integer primary key autoincrement
 db.exec('create index if not exists drafts_chat on drafts (chatId, status)');
 
 function settings() {
-  return settingsLib.normalize(assi.files.readJson(SETTINGS_PATH, {}));
+  return settingsLib.normalize(axiko.files.readJson(SETTINGS_PATH, {}));
 }
 
 function readState() {
   try {
-    return assi.files.readJson(STATE_PATH, {}) || {};
+    return axiko.files.readJson(STATE_PATH, {}) || {};
   } catch (error) {
     return {};
   }
@@ -115,7 +115,7 @@ function changeState(fn) {
   return locked(function () {
     var state = readState();
     fn(state);
-    assi.files.writeJson(STATE_PATH, state);
+    axiko.files.writeJson(STATE_PATH, state);
     return state;
   });
 }
@@ -123,7 +123,7 @@ function changeState(fn) {
 function parsers() {
   var own = null;
   try {
-    own = assi.files.readJson(PARSERS_PATH, null);
+    own = axiko.files.readJson(PARSERS_PATH, null);
   } catch (error) {
     console.error('inbox: ' + PARSERS_PATH + ': ' + error);
   }
@@ -146,7 +146,7 @@ function refreshWidget() {
   var wait = 5000 - (Date.now() - LIVE.widgetAt);
   if (wait <= 0) {
     LIVE.widgetAt = Date.now();
-    try { assi.widget.refresh('inbox'); } catch (error) { /* no widget */ }
+    try { axiko.widget.refresh('inbox'); } catch (error) { /* no widget */ }
     return;
   }
   if (LIVE.widgetArmed) return;
@@ -155,7 +155,7 @@ function refreshWidget() {
     sleep(wait + 50);
     LIVE.widgetArmed = false;
     LIVE.widgetAt = Date.now();
-    try { assi.widget.refresh('inbox'); } catch (error) { /* no widget */ }
+    try { axiko.widget.refresh('inbox'); } catch (error) { /* no widget */ }
   });
 }
 
@@ -647,7 +647,7 @@ function importantArrived(ids, s, byModel) {
 
 /**
  * "Повторять важное": while "do not disturb" is on (the owner's setting), or while Focus asked
- * for it (repeatImportant), an important message is repeated with Assi's own notification — at
+ * for it (repeatImportant), an important message is repeated with Axiko's own notification — at
  * most once per repeatEveryMin for one chat.
  */
 function repeat(rows, s) {
@@ -852,7 +852,7 @@ exports.status = function () {
 function liveKey(chat) {
   var active;
   try {
-    active = assi.notifications.active() || [];
+    active = axiko.notifications.active() || [];
   } catch (error) {
     return null;
   }
@@ -1036,7 +1036,7 @@ exports.send = function (chatId, text, draftId) {
     return { ok: false, gone: true, app: chat.app || chat.package, why: 'Ответить отсюда нельзя: уведомление уже убрано' };
   }
   try {
-    assi.notifications.reply(key, body);
+    axiko.notifications.reply(key, body);
   } catch (error) {
     if (draftId) db.exec("update drafts set error = ? where id = ?", [message(error), draftId]);
     return { ok: false, gone: /нет в шторке|уже нет/i.test(message(error)), app: chat.app || chat.package, why: message(error) };
@@ -1078,7 +1078,7 @@ function award(which, text) {
   var item = JSON.parse(JSON.stringify(AWARDS[which]));
   item.text = text;
   item.at = Date.now();
-  return achieve.give(assi.files, require, item, ACHIEVED_PATH);
+  return achieve.give(axiko.files, require, item, ACHIEVED_PATH);
 }
 
 /**
@@ -1092,13 +1092,13 @@ function awards(replied) {
     var midnight = new Date(now);
     midnight.setHours(0, 0, 0, 0);
     var from = midnight.getTime();
-    if (!achieve.given(assi.files, ACHIEVED_PATH, AWARDS.zero.key)) {
+    if (!achieve.given(axiko.files, ACHIEVED_PATH, AWARDS.zero.key)) {
       var came = Number(db.query("select count(*) as n from messages where time >= ? and bucket in ('important', 'later')", [from])[0].n) || 0;
       if (came >= s.zeroMinMessages && awardsLib.zero(feed.counts(cards(s)), came, s.zeroMinMessages)) {
         award('zero', 'Во «Важно» и «Подождёт» пусто в день, когда пришло ' + came + ' сообщений');
       }
     }
-    if (replied && !achieve.given(assi.files, ACHIEVED_PATH, AWARDS.morning.key)) {
+    if (replied && !achieve.given(axiko.files, ACHIEVED_PATH, AWARDS.morning.key)) {
       var at = new Date(now);
       var important = db.query("select chatId, max(time) as time from messages where bucket = 'important' and time >= ? group by chatId", [from]);
       var sent = db.query("select chatId, max(sentAt) as sentAt from drafts where status = 'sent' and sentAt >= ? group by chatId", [from]);
@@ -1113,7 +1113,7 @@ function awards(replied) {
 
 /** Puts a text into the clipboard (a draft to paste in the messenger). */
 exports.copy = function (text) {
-  assi.clipboard.set(String(text || ''));
+  axiko.clipboard.set(String(text || ''));
   return true;
 };
 
@@ -1122,7 +1122,7 @@ exports.replyFromNotice = function (args, text) {
   var chatId = args && args.chatId;
   if (!chatId || !String(text || '').trim()) return { ok: false };
   var result = exports.send(chatId, text, null);
-  if (!result.ok) assi.notify({ title: 'Ответ не ушёл', text: result.why, open: SCREEN + '?chat=' + encodeURIComponent(chatId) });
+  if (!result.ok) axiko.notify({ title: 'Ответ не ушёл', text: result.why, open: SCREEN + '?chat=' + encodeURIComponent(chatId) });
   return result;
 };
 
@@ -1154,7 +1154,7 @@ exports.draftFor = function (name, text, source, options) {
   var chats = db.query("select id, title, isGroup, lastTime, package, app, lastKey, canReply from chats where override is null or override != 'off'");
   var chat = feed.findChat(chats, name);
   if (!chat) {
-    if (options.copy !== false) assi.clipboard.set(body);
+    if (options.copy !== false) axiko.clipboard.set(body);
     var opened = options.open === false ? null : phone.open(null, defaultPackage());
     return { ok: false, found: false, copied: options.copy !== false, why: 'Беседа «' + name + '» не найдена во Входящих' +
       (options.copy !== false ? ': текст скопирован' : '') + (opened ? ', открыт мессенджер' : '') };
@@ -1168,14 +1168,14 @@ exports.draftFor = function (name, text, source, options) {
   var key = liveKey(chat);
   var result = { ok: true, found: true, chatId: chat.id, draftId: draftId, title: chat.title, app: chat.app || chat.package, canReply: Boolean(key), copied: false, why: '' };
   if (!key) {
-    if (options.copy !== false) assi.clipboard.set(body);
+    if (options.copy !== false) axiko.clipboard.set(body);
     result.copied = options.copy !== false;
     result.why = 'Ответить из ленты нельзя: уведомление уже убрано' + (result.copied ? '. Текст скопирован' : '');
     if (options.open !== false && phone.open(chat.lastKey, chat.package)) result.why += ', открыт ' + (chat.app || 'мессенджер');
     return result;
   }
   if (options.notify !== false) {
-    assi.notify({ title: 'Черновик готов · ' + chat.title, text: body, open: SCREEN + '?chat=' + encodeURIComponent(chat.id) });
+    axiko.notify({ title: 'Черновик готов · ' + chat.title, text: body, open: SCREEN + '?chat=' + encodeURIComponent(chat.id) });
   }
   return result;
 };
@@ -1259,8 +1259,8 @@ exports.settings = function () {
 
 exports.saveSettings = function (patch) {
   var next = locked(function () {
-    var saved = settingsLib.apply(assi.files.readJson(SETTINGS_PATH, {}), patch || {});
-    assi.files.writeJson(SETTINGS_PATH, saved);
+    var saved = settingsLib.apply(axiko.files.readJson(SETTINGS_PATH, {}), patch || {});
+    axiko.files.writeJson(SETTINGS_PATH, saved);
     return saved;
   });
   LIVE.apps = null;
@@ -1401,22 +1401,22 @@ function installTool() {
   var stub = TOOL_MARK + ' (modules/inbox/tools/inbox.js). Файл ставит сам модуль при запуске;\n' +
     '// удалите модуль — заглушка молча выключится.\n' +
     'try {\n  module.exports = require(\'modules/inbox/tools/inbox.js\');\n} catch (error) {\n  exports.name = null;\n}\n';
-  var there = assi.files.exists(TOOL_PATH) ? assi.files.read(TOOL_PATH) : null;
+  var there = axiko.files.exists(TOOL_PATH) ? axiko.files.read(TOOL_PATH) : null;
   if (there === stub) return;
   if (there !== null && there.indexOf(TOOL_MARK) !== 0) return;   // the owner's own tool: not ours to replace
-  assi.files.write(TOOL_PATH, stub);
+  axiko.files.write(TOOL_PATH, stub);
 }
 
 function firstRun() {
-  if (!assi.files.exists(PARSERS_PATH)) {
-    assi.files.writeJson(PARSERS_PATH, {
+  if (!axiko.files.exists(PARSERS_PATH)) {
+    axiko.files.writeJson(PARSERS_PATH, {
       about: 'Свои разборщики уведомлений. Заводские — в modules/inbox/parsers.json (там же описан вид записи); запись здесь с тем же id заменяет заводскую, с новым id — добавляет мессенджер.',
       parsers: []
     });
   }
-  if (!assi.files.exists(SETTINGS_PATH)) {
+  if (!axiko.files.exists(SETTINGS_PATH)) {
     var name = phone.ownerName();
-    assi.files.writeJson(SETTINGS_PATH, settingsLib.normalize({ names: name ? [name.split(/\s+/)[0]] : [] }));
+    axiko.files.writeJson(SETTINGS_PATH, settingsLib.normalize({ names: name ? [name.split(/\s+/)[0]] : [] }));
   }
 }
 

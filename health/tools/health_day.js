@@ -13,6 +13,6 @@ exports.parameters = {
 };
 
 exports.run = function (args) {
-  if (!require('lib/assi').files.exists('modules/health/main.js')) return 'Модуль «Здоровье» не установлен.';
+  if (!require('lib/axiko').files.exists('modules/health/main.js')) return 'Модуль «Здоровье» не установлен.';
   return require('modules/health/main.js').toolDay(args || {});
 };

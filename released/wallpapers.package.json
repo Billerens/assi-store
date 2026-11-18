@@ -8,8 +8,8 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
@@ -18,13 +18,13 @@
     },
     {
       "path": "code/android.js",
-      "sha256": "70ec940e4433a10e3da157a33f9b69a07773f68039691b2bcbe07e7bd96d29a7",
-      "size": 24748
+      "sha256": "cb56efda037f510f09bc1804e00a6ce1bbf046facfbd15b0cfaea0c5dd079251",
+      "size": 24756
     },
     {
       "path": "code/checks.js",
-      "sha256": "64f4f138a601832800e1dcdc2d9a6b6fd536caf3f45921682beacd31d1b59b8f",
-      "size": 10731
+      "sha256": "061dc2bb6674af78f0683aa30cb2ff4fcb7879df096d7063b5e9abaa3441da13",
+      "size": 10745
     },
     {
       "path": "code/context.js",
@@ -38,8 +38,8 @@
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "6900f9361a60cbc8ea2a7efbe406f3db8e128e60fed63ba3c3b105d52a053f4f",
-      "size": 36814
+      "sha256": "b24a8299585fde85bd96bc6ac3ab7719d7b7e6dbbd4330f3a148de44ddf4e245",
+      "size": 36816
     },
     {
       "path": "code/icon.svg",
@@ -48,8 +48,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "c6ab2bced16e16277aaaeb96c5c74bca4c176a4c4e38dda8c2f8d6e40597232f",
-      "size": 63844
+      "sha256": "90c69603b9db0acde2c9b2b947c66770fb194e608517733b2cac47df79a2bd21",
+      "size": 63888
     },
     {
       "path": "code/module.json",
@@ -123,8 +123,8 @@
     },
     {
       "path": "code/sources.js",
-      "sha256": "e5060b5abe3bfeda6131aca3aa26d54794a9081ecd07f13dca2950cec3152590",
-      "size": 24039
+      "sha256": "8000b4f11394a3a2fd4a13ba87f12e2cc851999d6b88a22ebcef7d46b5f00097",
+      "size": 24041
     },
     {
       "path": "code/ui/index.html",
@@ -138,8 +138,8 @@
     },
     {
       "path": "code/ui/wallpapers.js",
-      "sha256": "4451201982e97e606bbd2f9a47e250ae9c424b22f875ca29f2281396147dd27e",
-      "size": 29287
+      "sha256": "b45df89e9f976bc893bb288399430ee99782e69b5e1bdb27a1c444e5765e47e9",
+      "size": 29292
     }
   ],
   "id": "wallpapers",
@@ -166,9 +166,9 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.3"
+  "version": "0.1.4"
 }

@@ -9,11 +9,11 @@ exports.FILES = ['alarm-evening', 'alarm-morning', 'history', 'checkin-evening',
 exports.APPS = {
   byPkg: {
     'org.telegram.messenger': 'Telegram', 'com.google.android.gms': 'Сервисы Google Play', 'ru.marketplace.app': 'Маркетплейс',
-    'app.assi': 'Assi', 'com.whatsapp': 'WhatsApp', 'com.sec.android.app.launcher': 'One UI Home'
+    'app.axiko': 'Axiko', 'com.whatsapp': 'WhatsApp', 'com.sec.android.app.launcher': 'One UI Home'
   },
   byUid: {
     10160: { pkg: 'com.google.android.gms', app: 'Сервисы Google Play' },
-    10199: { pkg: 'app.assi', app: 'Assi' },
+    10199: { pkg: 'app.axiko', app: 'Axiko' },
     10245: { pkg: 'ru.marketplace.app', app: 'Маркетплейс' },
     10280: { pkg: 'com.whatsapp', app: 'WhatsApp' },
     10301: { pkg: 'org.telegram.messenger', app: 'Telegram' }
@@ -82,7 +82,7 @@ exports.scenario = function (key, texts, s) {
     return { at: event.at, kind: event.on ? 'screen_on' : 'screen_off', src: 'history' };
   });
   var sources = [
-    { id: 'live', label: 'Журнал Assi', ok: true, via: 'подписки', note: '' },
+    { id: 'live', label: 'Журнал Axiko', ok: true, via: 'подписки', note: '' },
     { id: 'usage', label: 'UsageStatsManager', ok: true, via: 'статистика Android', note: '' },
     { id: 'netstats', label: 'NetworkStatsManager', ok: true, via: 'статистика Android', note: '' },
     { id: 'battery', label: 'Батарея', ok: true, via: 'ACTION_BATTERY_CHANGED', note: '' },

@@ -20,14 +20,14 @@ exports.listed = function (pkg, list) {
  *   { action: 'none' } — not distracting, or still let through;
  *   { action: 'remind' | 'home', attempt: true } — a reminder, and back home when strict;
  *   { action: 'allow', attempt: true } — the second attempt soon after: let through ("если очень надо").
- * Also the memory to keep. `own` — the packages never touched (Assi itself, the launcher).
+ * Also the memory to keep. `own` — the packages never touched (Axiko itself, the launcher).
  */
 exports.decide = function (pkg, now, memory, s, own) {
   memory = memory || {};
   var next = { allowed: memory.allowed || null, at: memory.at || 0, last: memory.last || null };
   var value = String(pkg || '');
   if (!value || (own || []).indexOf(value) >= 0) {
-    // Home or Assi: a permission ends when the owner leaves the app.
+    // Home or Axiko: a permission ends when the owner leaves the app.
     if (value) next.allowed = null;
     return { action: 'none', memory: next };
   }

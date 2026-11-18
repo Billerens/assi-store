@@ -1,4 +1,4 @@
-// SHA-1 of a text (UTF-8), as 40 hex digits. Pure JavaScript: runs the same in Assi's engine
+// SHA-1 of a text (UTF-8), as 40 hex digits. Pure JavaScript: runs the same in Axiko's engine
 // (Rhino) and under node, so the fingerprints of messages are checked on the computer.
 
 function utf8(text) {

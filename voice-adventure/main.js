@@ -9,8 +9,8 @@
 //   quest/index.json              {current, plots: [{id, title, genre, chapter, done, written, …}]}
 //   quest/<plot>/ch<N>.json       chapters; bible.json, summaries.json; state.json (+ .prev.json); audio/
 //   quest/stats.json, quest/log.json
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 var words = require('./story-engine/words.js');
 var parse = require('./story-engine/parse.js');
 var quest = require('./story-engine/quest.js');
@@ -196,7 +196,7 @@ function emitState(phase, extra) {
   Object.keys(extra || {}).forEach(function (key) { data[key] = extra[key]; });
   try { emit('stories.quest', data); } catch (error) { /* no screens */ }
   if (phase === 'written' || phase === 'ended' || phase === 'plots') {
-    try { assi.widget.refresh('voice-adventure'); } catch (error) { /* no widget */ }
+    try { axiko.widget.refresh('voice-adventure'); } catch (error) { /* no widget */ }
   }
 }
 
@@ -317,7 +317,7 @@ function writeChapter(plotId, n) {
   emitState('written', { plot: plotId, chapter: n });
   if (waiting) {
     try {
-      assi.notify({ id: 'stories-ready', title: 'Приключение', text: 'Глава ' + n + ' готова: «' + (chapter.title || '') + '»', open: SCREEN, silent: true });
+      axiko.notify({ id: 'stories-ready', title: 'Приключение', text: 'Глава ' + n + ' готова: «' + (chapter.title || '') + '»', open: SCREEN, silent: true });
     } catch (error) { /* the notification is a courtesy */ }
   }
   return chapter;
@@ -558,7 +558,7 @@ function questDriver(plotId, options) {
     if (!quiet) updatePlot(plotId, function (p) { p.waiting = true; });
     later('chapter-done');
     return {
-      text: (prefix ? prefix + ' ' : '') + 'Следующая глава ещё пишется. Когда будет сеть, Assi её подготовит и пришлёт уведомление.',
+      text: (prefix ? prefix + ' ' : '') + 'Следующая глава ещё пишется. Когда будет сеть, Axiko её подготовит и пришлёт уведомление.',
       end: true, reason: 'done', noRepeat: true
     };
   }
@@ -852,13 +852,13 @@ exports.play = function (options) {
   var idx = readIndex();
   var plot = plotOf(idx, options.plot || idx.current);
   if (!plot) return { ok: false, why: 'Сначала начните приключение' };
-  if (!assi.permission(['RECORD_AUDIO'])) return { ok: false, why: 'Нужен доступ к микрофону' };
-  if (!phone.speech().ready) return { ok: false, why: 'Распознавание речи на телефоне не готово — скачайте его в настройках голоса Assi' };
+  if (!axiko.permission(['RECORD_AUDIO'])) return { ok: false, why: 'Нужен доступ к микрофону' };
+  if (!phone.speech().ready) return { ok: false, why: 'Распознавание речи на телефоне не готово — скачайте его в настройках голоса Axiko' };
   if (plot.done) {
     if (!readChapter(plot.id, plot.chapter + 1)) {
       updatePlot(plot.id, function (p) { p.waiting = true; });
       spawn(function () { try { exports.refill('play'); } catch (error) { log('Пополнение: ' + msg(error)); } });
-      return { ok: false, why: 'Глава ' + (plot.chapter + 1) + ' ещё пишется. Когда будет сеть, Assi её подготовит.' };
+      return { ok: false, why: 'Глава ' + (plot.chapter + 1) + ' ещё пишется. Когда будет сеть, Axiko её подготовит.' };
     }
     updatePlot(plot.id, function (p) {
       p.chapter = plot.chapter + 1;

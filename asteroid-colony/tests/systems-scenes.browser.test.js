@@ -3,17 +3,17 @@
 const fs=require('fs'),path=require('path'),http=require('http'),assert=require('node:assert/strict');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright-core');
 const {load}=require('./support');
-const assiRoot=process.env.ASSI_ROOT||path.resolve(__dirname,'../../../Assi');
-const {FACTORY}=require(path.join(assiRoot,'scripts/games/harness.js'));
-const artifacts=path.resolve(process.env.ASSI_TEST_ARTIFACTS||path.join(__dirname,'../../build/artifacts'));
+const axikoRoot=process.env.AXIKO_ROOT||path.resolve(__dirname,'../../../Axiko');
+const {FACTORY}=require(path.join(axikoRoot,'scripts/games/harness.js'));
+const artifacts=path.resolve(process.env.AXIKO_TEST_ARTIFACTS||path.join(__dirname,'../../build/artifacts'));
 const ids=['infinity-layers','alchemist','asteroid-colony','subway'];
 async function run(){
   fs.mkdirSync(artifacts,{recursive:true});
-  const x=load(),scratch=fs.mkdtempSync(path.join(artifacts,'assi-systems-scenes-'));
+  const x=load(),scratch=fs.mkdtempSync(path.join(artifacts,'axiko-systems-scenes-'));
   for(const id of ids)fs.cpSync(path.resolve(__dirname,'../../',id),path.join(x.env.root,'modules/games',id),{recursive:true,filter:p=>!/[\\/](tests|_data)([\\/]|$)/.test(p)});
   fs.cpSync(path.join(FACTORY,'ui/kit'),path.join(x.env.root,'ui/kit'),{recursive:true});
   const faults=[];
-  const bridge=`<script>window.assi={call:async function(module,fn,...args){const r=await fetch('/__call',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({module,fn,args})});const o=await r.json();if(o.error)throw Error(o.error);return o.value;},native:async()=>({}),stage:async()=>true,on:()=>()=>{},back:()=>{},open:async()=>true};</script>`;
+  const bridge=`<script>window.axiko={call:async function(module,fn,...args){const r=await fetch('/__call',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({module,fn,args})});const o=await r.json();if(o.error)throw Error(o.error);return o.value;},native:async()=>({}),stage:async()=>true,on:()=>()=>{},back:()=>{},open:async()=>true};</script>`;
   const capture=`<script>window.__worlds=[];window.__pulses=[];const originalScene=Game.scene;if(location.search.includes('fallback=1'))Game.scene=undefined;else Game.scene=function(o){const v=originalScene(o),pulse=v.pulse;v.pulse=function(...args){__pulses.push(args[0]);return pulse.apply(v,args)};window.__worlds.push(v);return v};</script>`;
   const server=http.createServer(async(req,res)=>{
     try{

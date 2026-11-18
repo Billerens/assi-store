@@ -3,7 +3,7 @@
 // convention of the life modules (data/health/hooks.json) and the places collector.
 // Engine side (Rhino). The arithmetic lives in logic/*.js (tested in node), the Android parts in
 // android/*.js. The API other modules call is listed in health/README.md.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var base = require('lib/base');
 var T = require('./logic/time.js');
 var Text = require('./logic/text.js');
@@ -55,7 +55,7 @@ function message(error) {
 
 function load(name, fallback) {
   try {
-    return assi.files.readJson(DIR + name, fallback);
+    return axiko.files.readJson(DIR + name, fallback);
   } catch (error) {
     console.warn('health: не читается ' + name + ': ' + message(error));
     return fallback;
@@ -63,8 +63,8 @@ function load(name, fallback) {
 }
 
 function save(name, value, compact) {
-  if (compact) assi.files.write(DIR + name, JSON.stringify(value));
-  else assi.files.writeJson(DIR + name, value);
+  if (compact) axiko.files.write(DIR + name, JSON.stringify(value));
+  else axiko.files.writeJson(DIR + name, value);
 }
 
 function settings() {
@@ -116,12 +116,12 @@ function parse(row) {
 /** Records of these kinds with at in [since, until), oldest first. */
 function rows(kinds, since, until) {
   var marks = kinds.map(function () { return '?'; }).join(', ');
-  return assi.db('base').query('select * from records where kind in (' + marks + ') and at >= ? and at < ? order by at asc, id asc',
+  return axiko.db('base').query('select * from records where kind in (' + marks + ') and at >= ? and at < ? order by at asc, id asc',
     kinds.concat([Math.floor(since), Math.ceil(until)])).map(parse);
 }
 
 function countKind(kind) {
-  var found = assi.db('base').query('select count(*) as n from records where kind = ?', [kind]);
+  var found = axiko.db('base').query('select count(*) as n from records where kind = ?', [kind]);
   return found.length ? Number(found[0].n) : 0;
 }
 
@@ -199,7 +199,7 @@ function makeContext(s) {
     pausedOn: pausedFn(s, pauseRecords()),
     homeIds: places.filter(function (p) { return p.data.type === 'home'; }).map(function (p) { return p.data.id; }),
     cells: load('cells.json', {}),
-    spendKnown: assi.files.exists('modules/spending/main.js') || countKind('expense') > 0
+    spendKnown: axiko.files.exists('modules/spending/main.js') || countKind('expense') > 0
   };
 }
 
@@ -222,7 +222,7 @@ function dayRecords(date, s) {
 }
 
 function fixesDb() {
-  var db = assi.db('health/fixes');
+  var db = axiko.db('health/fixes');
   db.exec('create table if not exists fixes (id integer primary key autoincrement, at integer not null, lat real, lon real, acc real, provider text)');
   db.exec('create index if not exists fixes_at on fixes (at)');
   return db;
@@ -242,7 +242,7 @@ function placesKnown(date, s, records) {
 
 /** Is the day within the spending module's daily budget: its own answer, or null. */
 function budgetOk(date, spend) {
-  if (!assi.files.exists('modules/spending/main.js')) return null;
+  if (!axiko.files.exists('modules/spending/main.js')) return null;
   try {
     var spending = require('modules/spending/main.js');
     var fn = spending.dayBudget || spending.budgetDay;
@@ -461,7 +461,7 @@ exports.unhook = function (path, event, fn) {
 exports.fire = function (event, arg) {
   var list = Hooks.ordered(hookList(), event);
   return list.map(function (entry) {
-    if (!assi.files.exists(entry.path)) return { path: entry.path, fn: entry.fn, ok: false, error: 'модуля нет' };
+    if (!axiko.files.exists(entry.path)) return { path: entry.path, fn: entry.fn, ok: false, error: 'модуля нет' };
     try {
       var module = require(entry.path);
       if (typeof module[entry.fn] !== 'function') throw new Error('нет функции ' + entry.fn);
@@ -506,7 +506,7 @@ function changed(payload, fireHooks) {
   }
   spawn(function () {
     if (fireHooks) exports.fire('life.mark', payload);
-    try { assi.widget.refresh(ID); } catch (error) { /* no widget */ }
+    try { axiko.widget.refresh(ID); } catch (error) { /* no widget */ }
   });
 }
 
@@ -1089,7 +1089,7 @@ exports.collect = function () {
     setState({ lastCollect: now, lastReport: report });
     invalidate([today(s), T.addDays(today(s), -1)]);
     try { emit('health.changed', { type: 'collect' }); } catch (error) { /* no screens */ }
-    try { assi.widget.refresh(ID); } catch (error) { /* no widget */ }
+    try { axiko.widget.refresh(ID); } catch (error) { /* no widget */ }
     return report;
   } finally {
     COLLECTING.unlock();
@@ -1294,7 +1294,7 @@ exports.closeDay = function (date, collected) {
   setState({ closed: closed, lastClosed: date > (state().lastClosed || '') ? date : state().lastClosed });
   var results = exports.fire('life.day', date);
   try { emit('life.day', { date: date }); } catch (error) { /* no screens */ }
-  try { assi.widget.refresh(ID); } catch (error) { /* no widget */ }
+  try { axiko.widget.refresh(ID); } catch (error) { /* no widget */ }
   return { date: date, summary: summary, hooks: results };
 };
 
@@ -1382,7 +1382,7 @@ exports.weekly = function () {
   var report = { week: week, made: now, date: last, by: by, text: text, table: table, averages: averages };
   save('weekly/' + week + '.json', report);
   if (s.notifyWeekly) {
-    assi.notify({ title: 'Разбор сна за неделю', text: text.slice(0, 300), open: SCREEN + '?tab=week' });
+    axiko.notify({ title: 'Разбор сна за неделю', text: text.slice(0, 300), open: SCREEN + '?tab=week' });
   }
   emit('health.changed', { type: 'weekly' });
   return report;
@@ -1392,7 +1392,7 @@ exports.weekly = function () {
 exports.weeklies = function (limit) {
   var names = [];
   try {
-    names = assi.files.list(DIR + 'weekly').filter(function (n) { return /\.json$/.test(n); }).sort().reverse();
+    names = axiko.files.list(DIR + 'weekly').filter(function (n) { return /\.json$/.test(n); }).sort().reverse();
   } catch (error) {
     names = [];
   }
@@ -1419,7 +1419,7 @@ function notifyMed(med, due, attempt) {
   } else {
     options.id = notifyNumber(notifyKey(med.id, due));
   }
-  assi.notify(options);
+  axiko.notify(options);
 }
 
 function doseDone(medId, due) {
@@ -1492,7 +1492,7 @@ function habitFire(habitId) {
   if (!habit || !habit.remind || habit.archived) return;
   var done = habitDone(s, habits)[habit.id] || {};
   if (done[date] || !Habits.isDue(habit, date, done)) return;
-  assi.notify({ title: habit.title, text: 'Если сегодня получится — отметьте одним касанием или голосом.', open: SCREEN });
+  axiko.notify({ title: habit.title, text: 'Если сегодня получится — отметьте одним касанием или голосом.', open: SCREEN });
 }
 
 function safely(name, fn) {
@@ -1554,9 +1554,9 @@ function arm() {
 function installTools() {
   ['health_mark.js', 'health_day.js'].forEach(function (name) {
     try {
-      var text = assi.files.read('modules/health/tools/' + name);
+      var text = axiko.files.read('modules/health/tools/' + name);
       var target = 'tools/' + name;
-      if (!assi.files.exists(target) || assi.files.read(target) !== text) assi.files.write(target, text);
+      if (!axiko.files.exists(target) || axiko.files.read(target) !== text) axiko.files.write(target, text);
     } catch (error) {
       console.error('health: инструмент ' + name + ': ' + message(error));
     }
@@ -1699,7 +1699,7 @@ exports.status = function () {
   out.lastReport = st.lastReport || null;
   out.lastClosed = st.lastClosed || null;
   out.logSince = st.logSince || null;
-  out.tools = assi.files.exists('tools/health_mark.js') && assi.files.exists('tools/health_day.js');
+  out.tools = axiko.files.exists('tools/health_mark.js') && axiko.files.exists('tools/health_day.js');
   return out;
 };
 
@@ -1722,22 +1722,22 @@ function shizukuReady() {
 /** Asks for a permission the module needs: 'steps' | 'hc' | 'usage' | 'location' | 'notifications' | 'battery'. */
 exports.grant = function (what) {
   var pkg = context.getPackageName();
-  if (what === 'steps') assi.permission(['ACTIVITY_RECOGNITION']);
+  if (what === 'steps') axiko.permission(['ACTIVITY_RECOGNITION']);
   else if (what === 'hc') {
     var P = require('./android/hc.js').PERMS;
     var asked = [P.steps, P.sleep, P.exercise, P.background, P.history];
     if (settings().waterToHc) asked.push(P.hydration);
-    assi.permission(asked);
+    axiko.permission(asked);
   } else if (what === 'usage') {
-    if (shizukuReady()) assi.shell('appops set ' + pkg + ' GET_USAGE_STATS allow', { privileged: true });
+    if (shizukuReady()) axiko.shell('appops set ' + pkg + ' GET_USAGE_STATS allow', { privileged: true });
     else openSettings(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS, false);
   } else if (what === 'location') {
-    assi.permission(['ACCESS_FINE_LOCATION', 'ACCESS_COARSE_LOCATION']);
+    axiko.permission(['ACCESS_FINE_LOCATION', 'ACCESS_COARSE_LOCATION']);
     if (!require('./android/location.js').background()) {
-      if (shizukuReady()) assi.shell('pm grant ' + pkg + ' android.permission.ACCESS_BACKGROUND_LOCATION', { privileged: true });
+      if (shizukuReady()) axiko.shell('pm grant ' + pkg + ' android.permission.ACCESS_BACKGROUND_LOCATION', { privileged: true });
       else openSettings(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, true);
     }
-  } else if (what === 'notifications') assi.permission(['POST_NOTIFICATIONS']);
+  } else if (what === 'notifications') axiko.permission(['POST_NOTIFICATIONS']);
   else if (what === 'battery') openSettings(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, true);
   else throw new Error('Не знаю, что выдать: ' + what);
   return exports.status();
@@ -1809,7 +1809,7 @@ exports.view = function () {
     visits: visits,
     weekly: exports.weeklies(1)[0] || null,
     places: exports.places(),
-    focus: assi.files.exists('modules/focus/main.js'),
+    focus: axiko.files.exists('modules/focus/main.js'),
     status: exports.status()
   };
 };

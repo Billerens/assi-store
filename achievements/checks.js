@@ -1,8 +1,8 @@
 // Checks of «Ачивки за жизнь» on the phone (module_check runs them, and the app runs them after
 // every agent's turn that changed the module — this is how rules the agent added get checked).
 // They clean up after themselves: what they add to data/ and to the base, they remove.
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 var MAIN = 'modules/achievements/main.js';
 
 function main() {
@@ -33,7 +33,7 @@ function sandbox(fn) {
   } finally {
     paths.forEach(function (path, i) { restore(path, saved[i]); });
     require('lib/base');
-    assi.db('base').exec("delete from records where kind = 'achievement' and id > ? and data like ?", [lastId, '%"checks/%']);
+    axiko.db('base').exec("delete from records where kind = 'achievement' and id > ? and data like ?", [lastId, '%"checks/%']);
   }
 }
 

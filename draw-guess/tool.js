@@ -11,7 +11,7 @@ var SOURCE = [
   "exports.description = 'Рисуй — угадаю: игра с рисунками. action open открывает игру. «Давай порисуем» — mode human (владелец рисует, модель угадывает вслух); «нарисуй что-нибудь, а я угадаю» — mode model и start true (модель рисует штрихами, люди угадывают голосом). Что не сказано — не передавай, останется как было.';",
   "exports.parameters = { type: 'object', properties: {",
   "  action: { type: 'string', enum: ['open'] },",
-  "  mode: { type: 'string', enum: ['human', 'model'], description: 'human — рисует владелец, model — рисует Assi' },",
+  "  mode: { type: 'string', enum: ['human', 'model'], description: 'human — рисует владелец, model — рисует Axiko' },",
   "  start: { type: 'boolean', description: 'сразу начать партию, без экрана подготовки' },",
   "  theme: { type: 'string', description: 'тема слов любой строкой: животные, еда, транспорт…' },",
   "  difficulty: { type: 'integer', description: 'сложность слов 1–5' },",
@@ -21,7 +21,7 @@ var SOURCE = [
   "  rounds: { type: 'integer', description: 'рисунков в партии' }",
   "}, required: ['action'] };",
   'exports.run = function (args) {',
-  "  if (!require('lib/assi').files.exists('modules/draw-guess/main.js')) return 'Модуль «Рисуй — угадаю» не установлен';",
+  "  if (!require('lib/axiko').files.exists('modules/draw-guess/main.js')) return 'Модуль «Рисуй — угадаю» не установлен';",
   "  return require('modules/draw-guess/main.js').tool(args || {});",
   '};',
   ''
@@ -54,7 +54,7 @@ exports.prefill = function (args) {
   return out;
 };
 
-/** Записывает tools/draw-guess.js, если его нет или он другой (files — assi.files). → записан ли сейчас. */
+/** Записывает tools/draw-guess.js, если его нет или он другой (files — axiko.files). → записан ли сейчас. */
 exports.write = function (files) {
   try {
     if (files.exists(FILE) && files.read(FILE) === SOURCE) return false;

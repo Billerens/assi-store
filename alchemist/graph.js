@@ -4,8 +4,8 @@
 // into data/games/alchemist/graph.json at once, so the next request already sees it. The screen
 // calls sync() (what the owner has and tried), veto() (the owner removes a model's recipe) and
 // graph(); the agent calls check() and journal().
-//   assi.call('modules/games/alchemist/graph.js', 'sync', seen)
-var assi = require('lib/assi');
+//   axiko.call('modules/games/alchemist/graph.js', 'sync', seen)
+var axiko = require('lib/axiko');
 var Core = require('../engine/core.js');
 var Rng = require('../engine/rng.js');
 var sim = require('./sim.js');
@@ -33,15 +33,15 @@ function locked(fn) {
 
 function readJson(path, fallback) {
   try {
-    if (!assi.files.exists(path)) return fallback;
-    var text = String(assi.files.read(path));
+    if (!axiko.files.exists(path)) return fallback;
+    var text = String(axiko.files.read(path));
     return text.trim() ? JSON.parse(text) : fallback;
   } catch (error) {
     return fallback;
   }
 }
 
-function writeJson(path, value) { assi.files.write(path, JSON.stringify(value)); }
+function writeJson(path, value) { axiko.files.write(path, JSON.stringify(value)); }
 
 function now() { return Date.now(); }
 
@@ -125,7 +125,7 @@ function promptPairs() {
   var out = [];
   var text = '';
   try {
-    text = String(assi.files.read(PROMPT));
+    text = String(axiko.files.read(PROMPT));
   } catch (error) {
     return out;
   }
@@ -145,7 +145,7 @@ function seenObj(list) {
 
 function rules() {
   try {
-    return String(assi.files.read(RULES));
+    return String(axiko.files.read(RULES));
   } catch (error) {
     return '';
   }
@@ -181,7 +181,7 @@ function writePrompt(g, t, cfg) {
   if (g.asked.length > 1000) g.asked = g.asked.slice(g.asked.length - 1000);
   var text = sim.buildPrompt(t, pairs, q, cfg, rules());
   try {
-    assi.files.write(PROMPT, text);
+    axiko.files.write(PROMPT, text);
   } catch (error) {
     log('Запрос модели не записан: ' + error);
   }
@@ -235,7 +235,7 @@ function closeBatch(g, cfg) {
   g.batch = { at: 0, total: 0, fresh: 0, none: 0, deferred: 0, rejected: 0 };
 }
 
-// ---- step 5: duplicates by meaning, when Assi has a model for embeddings ---------------------------
+// ---- step 5: duplicates by meaning, when Axiko has a model for embeddings ---------------------------
 
 function cosine(a, b) {
   var dot = 0;
@@ -271,7 +271,7 @@ function similar(g, t, el, cfg) {
   } catch (error) {
     if (!g.embed) {
       g.embed = 'нет: ' + (error && error.message ? error.message : error);
-      log('Проверка дублей по смыслу пропущена: в Assi нет модели «embed» (' + g.embed + ')');
+      log('Проверка дублей по смыслу пропущена: в Axiko нет модели «embed» (' + g.embed + ')');
     }
     return null;
   }

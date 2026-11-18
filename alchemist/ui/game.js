@@ -1,7 +1,7 @@
 // The screen of «Алхимик»: the cauldron and the shelf, the cubes, the Book with the tree of an
 // element, the orders of the guild, the upgrades. The engine (Game.start) gives the frame and
 // keeps the state, saves, offline, prestige, sound; the logic is in ../sim.js, the numbers in
-// g.config. The model's part of the tree comes from graph.js (engine side) through assi.call.
+// g.config. The model's part of the tree comes from graph.js (engine side) through axiko.call.
 (async function () {
   const h = ui.h;
   const sim = window.GameSim;
@@ -28,8 +28,8 @@
   let appSeen = 0;
 
   function engine(fn) {
-    const a = window.assi || (window.parent && window.parent.assi);
-    if (!a || typeof a.call !== 'function') return Promise.reject(new Error('нет связи с Assi'));
+    const a = window.axiko || (window.parent && window.parent.axiko);
+    if (!a || typeof a.call !== 'function') return Promise.reject(new Error('нет связи с Axiko'));
     return a.call.apply(a, [GRAPH, fn].concat(Array.prototype.slice.call(arguments, 1)));
   }
 

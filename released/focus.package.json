@@ -8,13 +8,13 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "ad3b1015aff5b0a40d712a56b6b17cb564569fa7891863c18db260a0001033a1",
-      "size": 15732
+      "sha256": "65f99a446629d2c5f2847dc8542b75f9340f4b1895ba9e5b600a93810f2bcac9",
+      "size": 15735
     },
     {
       "path": "code/achieve.js",
@@ -23,18 +23,18 @@
     },
     {
       "path": "code/android.js",
-      "sha256": "0f088d3554e6e01d315a31d1cec4bb31c8d4a41657cabc8dffb5343123cca143",
-      "size": 17476
+      "sha256": "336181bbff820f14ec1fe182724454dd9faf20e86909924529b031f13185566f",
+      "size": 17496
     },
     {
       "path": "code/checks.js",
-      "sha256": "6c252f4742a44abc8c27d65a66c24a7205e58a54dcf7dfa66b711a4f8e35e54b",
-      "size": 11130
+      "sha256": "a9708b23a2f9f66488ddac765356fabc0a8111e145487409b503dff066dc10f7",
+      "size": 11144
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "37c3cb1551443a837546c9a21147c9a79e938d032f108c98d36a31cf3783700a",
-      "size": 21773
+      "sha256": "b0deae501729d504155d629a36f4ff463e989a337b929f5e2401d92cee4c4f8b",
+      "size": 21776
     },
     {
       "path": "code/icon.svg",
@@ -53,8 +53,8 @@
     },
     {
       "path": "code/logic/distract.js",
-      "sha256": "a762ed04c95d4341310d88d71a4b9e3afdae49cb6baad686c5122a3bcd9d41ea",
-      "size": 3546
+      "sha256": "4b50f5605f5925899b3380eec41c32a442684cecf668cceec3fefd8aef170690",
+      "size": 3548
     },
     {
       "path": "code/logic/dnd.js",
@@ -73,8 +73,8 @@
     },
     {
       "path": "code/logic/summary.js",
-      "sha256": "2b8a4ff573481818e7b9168796efcbb6282a85de0c6cd24329035a9d581c0576",
-      "size": 10445
+      "sha256": "06cc1f4b7e41f973bae21ade8ff7d852c247cad5b24d1aad0cc1a41f355a5d9c",
+      "size": 10446
     },
     {
       "path": "code/logic/timer.js",
@@ -83,8 +83,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "f0253bfaeaa04be6527c33b03e1e341dc6ff5ea00f4bba549a50735e57b4fa40",
-      "size": 48715
+      "sha256": "a5419b4a456a39531f0c021210528380d4223a06ea5a853a2de2259ee4bd7c30",
+      "size": 48736
     },
     {
       "path": "code/module.json",
@@ -103,8 +103,8 @@
     },
     {
       "path": "code/ui/focus.js",
-      "sha256": "ee06d2f7051340458523dff871e060813abf9974a77d7175a7293b6282761536",
-      "size": 45905
+      "sha256": "92ce935753600970689cae10133c0faeef2993241f83d18e37c4efb1e0347420",
+      "size": 45917
     },
     {
       "path": "code/ui/index.html",
@@ -121,14 +121,14 @@
   "optionalDependencies": [
     {
       "id": "inbox",
-      "version": ">=0.1.2"
+      "version": ">=0.1.3"
     }
   ],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

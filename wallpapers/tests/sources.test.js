@@ -161,7 +161,7 @@ h.test('Unsplash: платные пропущены, оригинал умень
   assert.strictEqual(photo.width, 2400);
   assert.strictEqual(photo.fullWidth, 4000);
   assert.ok(/[?&]w=2400&fm=jpg&q=90$/.test(photo.originalUrl));
-  assert.ok(/utm_source=assi/.test(photo.pageUrl));
+  assert.ok(/utm_source=axiko/.test(photo.pageUrl));
   assert.ok(/download_location|\/download/.test(photo.downloadLocation));
   assert.ok(/Unsplash\+: 1/.test(parsed.note));
 });

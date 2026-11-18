@@ -1,7 +1,7 @@
 // Checks of «Гороскоп по данным» on the phone (module_check). Detectors and checks run on made-up
 // days; the real forecast files are only read, and what the checks write is put back.
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 var MAIN = 'modules/horoscope/main.js';
 
 function main() {

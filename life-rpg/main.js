@@ -2,8 +2,8 @@
 // skills when a day closes (hook life.day of «Здоровье», after Achievements); new places open the
 // map; achievements are rewards. The character is the creature of «Питомец»: look() tells it
 // how far it has grown. The journal of experience only grows; levels never fall.
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 var source = require('./source.js');
 var dates = require('./dates.js');
 var xpMod = require('./xp.js');
@@ -70,7 +70,7 @@ var journal = null;
 
 function db() {
   if (journal) return journal;
-  journal = assi.db('rpg/xp');
+  journal = axiko.db('rpg/xp');
   journal.exec('create table if not exists xp (id integer primary key autoincrement, day text not null, at integer not null, ' +
     'skill text not null, amount integer not null, reason text, ref text unique)');
   journal.exec('create index if not exists xp_day on xp (day)');
@@ -171,7 +171,7 @@ function levelUp(date, rise, st, s) {
   if (s.notify.level && st.notifiedLevelDay !== now) {
     st.notifiedLevelDay = now;
     try {
-      assi.notify({ title: 'Новый уровень: ' + rise.to, text: heroName(s) + ' вырос' + (rise.to - rise.from > 1 ? ' сразу на ' + (rise.to - rise.from) + ' ' + levelsWord(rise.to - rise.from) : '') + '. Загляните к нему.', open: SCREEN });
+      axiko.notify({ title: 'Новый уровень: ' + rise.to, text: heroName(s) + ' вырос' + (rise.to - rise.from > 1 ? ' сразу на ' + (rise.to - rise.from) + ' ' + levelsWord(rise.to - rise.from) : '') + '. Загляните к нему.', open: SCREEN });
     } catch (error) {
       console.warn('rpg: notify: ' + error);
     }
@@ -188,7 +188,7 @@ function baseRows(kind, fromMs, toMs) {
   var args = [kind];
   if (fromMs !== undefined && fromMs !== null) { sql += ' and at >= ?'; args.push(fromMs); }
   if (toMs !== undefined && toMs !== null) { sql += ' and at < ?'; args.push(toMs); }
-  return assi.db('base').query(sql + ' order by at', args).map(function (row) {
+  return axiko.db('base').query(sql + ' order by at', args).map(function (row) {
     var data = null;
     try { data = row.data ? JSON.parse(row.data) : null; } catch (error) { data = null; }
     return { id: row.id, at: row.at, title: row.title, data: data || {} };
@@ -304,7 +304,7 @@ function chainsFor(day, st) {
 function achievementEntries(s) {
   if (!s.achievements) return [];
   require('lib/base');
-  return assi.db('base').query("select id, title, data from records where kind = 'achievement' order by id").map(function (row) {
+  return axiko.db('base').query("select id, title, data from records where kind = 'achievement' order by id").map(function (row) {
     var data = {};
     try { data = JSON.parse(row.data || '{}'); } catch (error) { data = {}; }
     return { skill: 'achievement', amount: data.tease ? 0 : Number(data.xp) || 0, reason: 'ачивка «' + row.title + '»', ref: 'ach:' + row.id, title: row.title };
@@ -656,7 +656,7 @@ function settle(date, day, s) {
       q.done = true;
       entries.push({ skill: q.skill || 'quest', amount: Number(q.xp) || 0, reason: 'квест: ' + q.title, ref: 'quest:' + q.id });
       if (q.period === 'week' && s.notify.weeklyQuest) {
-        try { assi.notify({ title: 'Квест недели выполнен', text: q.title + ' — +' + q.xp + ' опыта', open: SCREEN }); } catch (error) { /* no notification */ }
+        try { axiko.notify({ title: 'Квест недели выполнен', text: q.title + ' — +' + q.xp + ' опыта', open: SCREEN }); } catch (error) { /* no notification */ }
       }
     }
     if (dates.diff(q.end, date) > 0) keep.push(q);
@@ -702,7 +702,7 @@ exports.weekParagraph = function (date) {
 // ---- what the screen, the widget and the agent read -------------------------------------------
 
 function changed() {
-  try { assi.widget.refresh('rpg'); } catch (error) { /* no widget */ }
+  try { axiko.widget.refresh('rpg'); } catch (error) { /* no widget */ }
   try { emit('rpg.changed', {}); } catch (error) { /* no screens */ }
 }
 
@@ -874,7 +874,7 @@ var TOOL = [
   "  id: { type: 'string', description: 'id квеста для replace и later' }",
   "}, required: ['action'] };",
   'exports.run = function (args) {',
-  "  if (!require('lib/assi').files.exists('modules/rpg/main.js')) return 'Модуль «Жизнь-RPG» не установлен';",
+  "  if (!require('lib/axiko').files.exists('modules/rpg/main.js')) return 'Модуль «Жизнь-RPG» не установлен';",
   "  return require('modules/rpg/main.js').tool(args || {});",
   '};',
   ''

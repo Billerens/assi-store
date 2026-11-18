@@ -115,7 +115,7 @@ exports['подписки находятся кодом, без модели'] =
 };
 
 exports['инструмент голоса на месте'] = function (t) {
-  var files = require('lib/assi').files;
+  var files = require('lib/axiko').files;
   t.ok(files.exists('tools/spending.js'), 'заглушка tools/spending.js');
   var tool = require('tools/spending.js');
   t.equal(tool.name, 'spending', 'имя инструмента');
@@ -146,7 +146,7 @@ exports['экран открывается: вкладки, лента с опе
 
 exports['SMS: есть разрешение и история читается'] = function (t) {
   if (Number(context.checkSelfPermission('android.permission.READ_SMS')) !== 0) t.skip('нет разрешения READ_SMS — экран «Траты» спросит его при импорте');
-  var rows = require('lib/assi').rows('content://sms/inbox', ['address', 'date'], null, null, 'date desc', 1);
+  var rows = require('lib/axiko').rows('content://sms/inbox', ['address', 'date'], null, null, 'date desc', 1);
   t.ok(Array.isArray(rows), 'content://sms/inbox отвечает');
 };
 

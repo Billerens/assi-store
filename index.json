@@ -4,13 +4,13 @@
     {
       "count": 40,
       "path": "catalog/p-0.json",
-      "sha256": "950691b3e01c507a0f50b334624f430f8b3de154ec21c89e533edc2b008c8550",
-      "size": 70632
+      "sha256": "5060e97a777879b435d184c0da7827bff932680d13362bdfa319eb74e91f7d49",
+      "size": 70755
     }
   ],
   "repository": {
-    "homepage": "https://github.com/Billerens/assi-store",
-    "id": "billerens.assi-store",
+    "homepage": "https://github.com/Billerens/axiko-store",
+    "id": "billerens.axiko-store",
     "title": "Axiko Store"
   },
   "schemaVersion": 1

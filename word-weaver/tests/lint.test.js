@@ -1,4 +1,4 @@
-// node tests/lint.test.js — the rules of scripts/games/lint-shared.js of Assi over this game's files:
+// node tests/lint.test.js — the rules of scripts/games/lint-shared.js of Axiko over this game's files:
 //  1. node --check of every .js; inline <script>s compile;
 //  2. the shared subset (Core.lint): sims and every file the sim requires — not strict;
 //     checks.js (Rhino) — strict ES5;

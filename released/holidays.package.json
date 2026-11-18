@@ -8,8 +8,8 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
@@ -33,13 +33,13 @@
     },
     {
       "path": "code/calendar.js",
-      "sha256": "7fe96cda423aa01d85f6cf7e275517c3fb2bc12d71346249b8570d0ce94a7b20",
-      "size": 14224
+      "sha256": "7a0ec39b72d87e071c7b154548243c710cce4e1dc453464ade8153b9df4d5f31",
+      "size": 14226
     },
     {
       "path": "code/checks.js",
-      "sha256": "a5663fb0d0900defc9b7792e0a51a94b1ac7e2da552ed5bd7d70c17692464f66",
-      "size": 9644
+      "sha256": "8565ad797918c0d3e36770d1903f72d05b4f9f899901e388bb287a5d95fa96f3",
+      "size": 9646
     },
     {
       "path": "code/decor.js",
@@ -118,8 +118,8 @@
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "e5461ee08e7d7bad658e9e7adf33a5541a1d384789f0befa02072d609b561f62",
-      "size": 30482
+      "sha256": "75f58b4fd455e35cbad891c341d2a2a75c8baace53fd0cb67d08a3eda0fecced",
+      "size": 30496
     },
     {
       "path": "code/icon.svg",
@@ -128,23 +128,23 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "df2a0d19129789eaa463eec1d495b0fb9651ed11cf5908955792532e13c34aba",
-      "size": 66453
+      "sha256": "29a114c7aa83648e3b09e2c5672c003d170c8214319827b217a12b0ff3f1ad89",
+      "size": 66490
     },
     {
       "path": "code/module.json",
-      "sha256": "7a591bf6cd664297515bad06c49dfc220a8f54a17804b9fc42247da960f8beb2",
-      "size": 533
+      "sha256": "5e1f43d33b89a392bcfd96dae872c6713dd5ec031219ab23171a109f1a7bd7f6",
+      "size": 534
     },
     {
       "path": "code/occasions.json",
-      "sha256": "264caaf9ca3c5e852c8f2ca3d2768e38b4d07120cc51c26b6d7a80291d5cf873",
-      "size": 6211
+      "sha256": "dea73029e9c07fb3ad4a62c2491814d242cb015667dcb4fa2fa12e08c3e1db43",
+      "size": 6216
     },
     {
       "path": "code/settings.js",
-      "sha256": "67662b93e133ec3ca7b51d53a827db35c34232ae66dcf8e5ed678ddde07ae522",
-      "size": 10839
+      "sha256": "3bf65b024a0516e8e312558a3e3dafbf367a7f4999f84a35d45f2192e12633ea",
+      "size": 10840
     },
     {
       "path": "code/ui/holidays.css",
@@ -153,8 +153,8 @@
     },
     {
       "path": "code/ui/holidays.js",
-      "sha256": "ddc1a4318d750a7d0b5fb567e69cb3bdf226ce2cc217001ed8f5c5723eadd977",
-      "size": 38655
+      "sha256": "07ca39c4507e35bcf51e657747e3cb59c9de0f5f6998eb67a6a483dc7bca407a",
+      "size": 38668
     },
     {
       "path": "code/ui/index.html",
@@ -173,9 +173,9 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

@@ -3,7 +3,7 @@
 // creature for all three. Engine side (Rhino); the arithmetic and the drawing live in pure files
 // (mood.js, look.js, shapes.js, svg.js, draw.js, phrases.js, history.js, settings.js), tested in
 // node. The API other modules call is listed in pet/README.md.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var Settings = require('./settings.js');
 var Mood = require('./mood.js');
 var Look = require('./look.js');
@@ -79,7 +79,7 @@ function minutes(hm) {
 
 function load(name, fallback) {
   try {
-    return assi.files.readJson(DIR + name, fallback);
+    return axiko.files.readJson(DIR + name, fallback);
   } catch (error) {
     console.warn('pet: не читается ' + name + ': ' + message(error));
     return fallback;
@@ -87,8 +87,8 @@ function load(name, fallback) {
 }
 
 function save(name, value, compact) {
-  if (compact) assi.files.write(DIR + name, JSON.stringify(value));
-  else assi.files.writeJson(DIR + name, value);
+  if (compact) axiko.files.write(DIR + name, JSON.stringify(value));
+  else axiko.files.writeJson(DIR + name, value);
 }
 
 function settings() {
@@ -122,7 +122,7 @@ function has(feature) {
 }
 
 function optional(path) {
-  if (!assi.files.exists(path)) return null;
+  if (!axiko.files.exists(path)) return null;
   try {
     return require(path);
   } catch (error) {
@@ -160,7 +160,7 @@ function today() {
  */
 function phoneNightMinutes(date) {
   var night = Links.nightBefore(date);
-  if (!night || !assi.files.exists(PHONE_NIGHT)) return null;
+  if (!night || !axiko.files.exists(PHONE_NIGHT)) return null;
   var pn = optional(PHONE_NIGHT);
   var minutes = null;
   if (pn) {
@@ -182,7 +182,7 @@ function phoneNightMinutes(date) {
 
 /** A Focus work session going on now ({ left, paused }), or null; without «Фокус» — null. */
 function focusNow() {
-  if (!assi.files.exists(FOCUS)) return null;
+  if (!axiko.files.exists(FOCUS)) return null;
   var focus = optional(FOCUS);
   var left = null;
   if (focus && typeof focus.left === 'function') {
@@ -195,7 +195,7 @@ function focusNow() {
   var state = null;
   if (!left) {
     try {
-      state = assi.files.readJson(FOCUS_STATE, null);
+      state = axiko.files.readJson(FOCUS_STATE, null);
     } catch (error) {
       state = null;
     }
@@ -205,7 +205,7 @@ function focusNow() {
 
 /** Minutes of play today: the hub's `play` records in the common base; without the hub — 0. */
 function playToday(t) {
-  if (!assi.files.exists(GAMES)) return 0;
+  if (!axiko.files.exists(GAMES)) return 0;
   var since = Links.dayStart(t.date || ymd(Date.now()), (t.goals || {}).dayEnd);
   if (since === null) return 0;
   try {
@@ -260,7 +260,7 @@ function saveItems(items) {
 var occasionCache = { date: null, id: null, present: false };
 /** The holidays module's occasion of the day (one call a day, again when the module comes or goes). */
 function occasionId(date) {
-  var present = assi.files.exists(HOLIDAYS);
+  var present = axiko.files.exists(HOLIDAYS);
   if (occasionCache.date === date && occasionCache.present === present) return occasionCache.id;
   var id = null;
   var holidays = present ? optional(HOLIDAYS) : null;
@@ -314,7 +314,7 @@ function shelfOf(items) {
 function book() {
   var own = {};
   try {
-    own = assi.files.readJson('modules/pet/phrases.json', {});
+    own = axiko.files.readJson('modules/pet/phrases.json', {});
   } catch (error) {
     console.error('pet: phrases.json модуля: ' + message(error));
   }
@@ -445,7 +445,7 @@ function pngBytes(look, size) {
 
 function writePng(look, path) {
   var bytes = pngBytes(look, 320);
-  var file = new java.io.File(assi.files.path(path));
+  var file = new java.io.File(axiko.files.path(path));
   file.getParentFile().mkdirs();
   var tmp = new java.io.File(file.getPath() + '.tmp');
   var stream = new java.io.FileOutputStream(tmp);
@@ -507,7 +507,7 @@ function afterChange(st, changedState, s) {
   }
   if (redraw || refresh) setState({ lookKey: key, widgetKey: widgetKey });
   if (refresh) {
-    try { assi.widget.refresh(ID); } catch (error) { /* no widget */ }
+    try { axiko.widget.refresh(ID); } catch (error) { /* no widget */ }
   }
   if (changedState || redraw) {
     try { emit('pet.changed', { state: st.state, energy: st.energy }); } catch (error) { /* no screens */ }
@@ -750,7 +750,7 @@ function shelve(held) {
 function fillRarities() {
   var items = loadItems();
   var missing = items.filter(function (item) { return item.slot === 'shelf' && item.from && !Links.rarity(item.rarity); });
-  if (!missing.length || !assi.files.exists(ACHIEVEMENTS)) return 0;
+  if (!missing.length || !axiko.files.exists(ACHIEVEMENTS)) return 0;
   var found = {};
   missing.forEach(function (item) { found[item.id] = achievementRarity(item.from); });
   return locked(function () {
@@ -865,7 +865,7 @@ function maybeNotify(s, st) {
     options.silent = true;
   }
   try {
-    assi.notify(options);
+    axiko.notify(options);
     setState({ notified: date });
     return true;
   } catch (error) {
@@ -953,7 +953,7 @@ function registerHooks() {
   }
   if (!h) return false;
   var path = 'data/health/hooks.json';
-  var current = assi.files.readJson(path, []);
+  var current = axiko.files.readJson(path, []);
   var wrapped = !Array.isArray(current);
   var list = wrapped ? (current && Array.isArray(current.hooks) ? current.hooks : []) : current;
   var changed = false;
@@ -962,7 +962,7 @@ function registerHooks() {
     list.push({ event: w[0], path: MAIN, fn: w[1] });
     changed = true;
   });
-  if (changed) assi.files.writeJson(path, wrapped ? copy({}, current, { hooks: list }) : list);
+  if (changed) axiko.files.writeJson(path, wrapped ? copy({}, current, { hooks: list }) : list);
   return true;
 }
 
@@ -970,7 +970,7 @@ function hooked() {
   var h = health();
   var list = [];
   try {
-    list = h && typeof h.hooks === 'function' ? h.hooks() : assi.files.readJson('data/health/hooks.json', []);
+    list = h && typeof h.hooks === 'function' ? h.hooks() : axiko.files.readJson('data/health/hooks.json', []);
   } catch (error) {
     list = [];
   }
@@ -984,9 +984,9 @@ function ensureSettings() {
   var full = Settings.merge(saved || {});
   var missing = !saved || Object.keys(full).some(function (key) { return !(key in saved); });
   if (missing) save('settings.json', copy({}, full, saved ? Settings.clean(saved) : {}));
-  if (!assi.files.exists(DIR + 'phrases.json')) {
+  if (!axiko.files.exists(DIR + 'phrases.json')) {
     try {
-      assi.files.write(DIR + 'phrases.json', assi.files.read('modules/pet/phrases.json'));
+      axiko.files.write(DIR + 'phrases.json', axiko.files.read('modules/pet/phrases.json'));
     } catch (error) {
       console.warn('pet: копия фраз: ' + message(error));
     }
@@ -995,8 +995,8 @@ function ensureSettings() {
 
 function installTool() {
   try {
-    var text = assi.files.read('modules/pet/tools/pet_state.js');
-    if (!assi.files.exists('tools/pet_state.js') || assi.files.read('tools/pet_state.js') !== text) assi.files.write('tools/pet_state.js', text);
+    var text = axiko.files.read('modules/pet/tools/pet_state.js');
+    if (!axiko.files.exists('tools/pet_state.js') || axiko.files.read('tools/pet_state.js') !== text) axiko.files.write('tools/pet_state.js', text);
   } catch (error) {
     console.error('pet: инструмент pet_state: ' + message(error));
   }
@@ -1037,10 +1037,10 @@ exports.widget = function () {
     open: SCREEN
   };
   if (has('widget.image')) {
-    if (!assi.files.exists(WIDGET_PNG)) {
+    if (!axiko.files.exists(WIDGET_PNG)) {
       try { exports.drawWidget(); } catch (error) { console.error('pet: картинка виджета: ' + message(error)); }
     }
-    if (assi.files.exists(WIDGET_PNG)) out.image = WIDGET_PNG;
+    if (axiko.files.exists(WIDGET_PNG)) out.image = WIDGET_PNG;
   }
   return out;
 };
@@ -1140,7 +1140,7 @@ exports.view = function (opts) {
     holding: sc.holding, party: sc.party ? st.party : null,
     quick: quick(t),
     focus: st.focus || null, lateSource: st.lateSource || null, playMin: st.playMin || 0,
-    health: Boolean(health()), achievements: assi.files.exists(ACHIEVEMENTS), holidays: assi.files.exists(HOLIDAYS),
+    health: Boolean(health()), achievements: axiko.files.exists(ACHIEVEMENTS), holidays: axiko.files.exists(HOLIDAYS),
     hooked: hooked(), features: features(),
     settings: s, states: Mood.STATES, reactions: REACTIONS
   };
@@ -1196,12 +1196,12 @@ exports.status = function () {
   var known = {};
   try { known = native('job.list') || {}; } catch (error) { known = {}; }
   return {
-    features: features(), health: Boolean(health()), rpg: assi.files.exists(RPG), achievements: assi.files.exists(ACHIEVEMENTS),
-    holidays: assi.files.exists(HOLIDAYS), phoneNight: assi.files.exists(PHONE_NIGHT), focus: assi.files.exists(FOCUS), games: assi.files.exists(GAMES),
+    features: features(), health: Boolean(health()), rpg: axiko.files.exists(RPG), achievements: axiko.files.exists(ACHIEVEMENTS),
+    holidays: axiko.files.exists(HOLIDAYS), phoneNight: axiko.files.exists(PHONE_NIGHT), focus: axiko.files.exists(FOCUS), games: axiko.files.exists(GAMES),
     focusNow: st.focus || null, lateSource: st.lateSource || null,
     hooked: hooked(), widgetImage: has('widget.image'), homeCards: has('home.cards'),
-    picture: assi.files.exists(WIDGET_PNG), updated: st.updated || null, jobs: Object.keys(known).filter(function (k) { return k.indexOf('pet:') === 0; }),
-    tool: assi.files.exists('tools/pet_state.js'), model: st.model || null
+    picture: axiko.files.exists(WIDGET_PNG), updated: st.updated || null, jobs: Object.keys(known).filter(function (k) { return k.indexOf('pet:') === 0; }),
+    tool: axiko.files.exists('tools/pet_state.js'), model: st.model || null
   };
 };
 

@@ -1,7 +1,7 @@
 // The «Обои дня» screen. Everything it shows comes from modules/wallpapers/main.js.
 const MAIN = 'modules/wallpapers/main.js';
 const h = ui.h;
-const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
 const DAYS = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
 const PAGE = 60;
 const MINUS = '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg>';
@@ -110,7 +110,7 @@ function action(name, title, about, onclick, options) {
 
 function permissionCard(data) {
   const can = data.canSet;
-  const why = !can.declared ? 'В этой сборке Assi нет разрешения SET_WALLPAPER.' : !can.allowed ? 'Установка обоев на этом телефоне запрещена.' : 'Система не даёт ставить обои.';
+  const why = !can.declared ? 'В этой сборке Axiko нет разрешения SET_WALLPAPER.' : !can.allowed ? 'Установка обоев на этом телефоне запрещена.' : 'Система не даёт ставить обои.';
   return h('section', { class: 'card today' },
     h('p', {}, why, ' ', 'Картинки подбираются и кадрируются, а поставить их можно вручную: откроется системный экран «Установить как обои».'),
     data.current && h('div', { class: 'actions' },
@@ -523,7 +523,7 @@ async function refresh() {
   if (shown === 'favorites') await renderFavorites();
 }
 
-document.getElementById('back').onclick = () => assi.back();
+document.getElementById('back').onclick = () => axiko.back();
 document.getElementById('now').onclick = () => (today && today.current ? act('other') : act('run', [{ manual: true }]));
 
 ui.tabs(document.getElementById('tabs'), [['today', 'Сегодня'], ['history', 'История'], ['favorites', 'Избранное'], ['settings', 'Настройки']], id => {
@@ -533,8 +533,8 @@ ui.tabs(document.getElementById('tabs'), [['today', 'Сегодня'], ['history
   if (id === 'settings') refreshSettings();
 });
 
-assi.on('wallpapers.progress', progress);
-assi.on('wallpapers.changed', () => { if (!busy) refresh(); });
+axiko.on('wallpapers.progress', progress);
+axiko.on('wallpapers.changed', () => { if (!busy) refresh(); });
 
 renderToday().catch(error => ui.toast(error.message || String(error)));
 refreshSettings().catch(() => {});

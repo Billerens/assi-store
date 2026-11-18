@@ -327,7 +327,7 @@
   "Отправить": "Send",
   "неизвестен": "unknown",
   "Откуда пришли траты за 30 дней": "Where spending came from in the last 30 days",
-  "За 30 дней распознанных трат нет. Проверьте, что у Assi есть доступ к уведомлениям, а приложение банка — в списке во вкладке «Настройки».": "No spending recognized in the last 30 days. Check that Assi has access to notifications and that your bank’s app is in the list in the “Settings” tab.",
+  "За 30 дней распознанных трат нет. Проверьте, что у Axiko есть доступ к уведомлениям, а приложение банка — в списке во вкладке «Настройки».": "No spending recognized in the last 30 days. Check that Axiko has access to notifications and that your bank’s app is in the list in the “Settings” tab.",
   "Похоже на банк": "Looks like a bank",
   "Эти приложения и отправители присылали уведомления с суммой и словом операции, но их нет в списке. Текст не сохранялся — только счёт.": "These apps and senders sent notifications with an amount and a transaction word, but they aren’t in the list. The text wasn’t saved — only the count.",
   "Читать": "Read",

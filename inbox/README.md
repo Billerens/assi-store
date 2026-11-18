@@ -49,7 +49,7 @@
 | `notice.full` | массив `messages`, `conversationTitle`, `isGroup` из события | те же поля из живого `StatusBarNotification` через экземпляр `NoticeService`; если не виден — заголовок и текст |
 | `notice.removed` | событие `notification.removed`: прочитанное в мессенджере снимается со счётчика | беседа читается только в ленте |
 | `notice.open` | `native('notices.open', key)` | запомненный `contentIntent`, затем запуск приложения |
-| `notify.actions` | `assi.notify` с кнопками «Ответить» / «Прочитано» | своё `Notification.Builder` + приёмник в движке (пока жив процесс) |
+| `notify.actions` | `axiko.notify` с кнопками «Ответить» / «Прочитано» | своё `Notification.Builder` + приёмник в движке (пока жив процесс) |
 | `dnd` | `native('dnd.get')` | `NotificationManager.getCurrentInterruptionFilter()` |
 
 ## Для других модулей
@@ -96,7 +96,7 @@
   телефона, группы Telegram и WhatsApp, ответ из ленты, смахнутое уведомление, скрытый текст, SMS-код,
   правка, складывание, выгрузка из памяти, лимит 0,01 $. Нужен настоящий телефон и настоящие
   мессенджеры — по заданию adb и эмулятор не использовались.
-- **Видит ли движок компаньон `NoticeService`** (`Packages.app.assi.sense.NoticeService.Companion
+- **Видит ли движок компаньон `NoticeService`** (`Packages.app.axiko.sense.NoticeService.Companion
   .getInstance()`) — от этого зависит запасной путь `MessagingStyle` и запуск `contentIntent` без
   правки `notice.full` / `notice.open`. Код есть, проверить можно только на телефоне.
 - **Разборщики Viber, VK, MAX, Samsung и Google Messages, Signal** написаны по общим правилам

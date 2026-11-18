@@ -16,7 +16,7 @@ function test(name, fn) {
   }
 }
 
-/** Files in memory, as assi.files sees them. */
+/** Files in memory, as axiko.files sees them. */
 function disk(start) {
   var data = {};
   Object.keys(start || {}).forEach(function (key) { data[key] = JSON.stringify(start[key]); });

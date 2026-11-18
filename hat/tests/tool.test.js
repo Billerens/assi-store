@@ -41,7 +41,7 @@ function loadMain(disk, opened) {
     }
   };
   sandbox.require = function (name) {
-    if (name === 'lib/assi') return { files: memoryFiles(disk) };
+    if (name === 'lib/axiko') return { files: memoryFiles(disk) };
     if (name === 'lib/ai') return {};
     if (/^\.\//.test(name)) return require(path.join(ROOT, name.slice(2) + (/\.js(on)?$/.test(name) ? '' : '.js')));
     throw new Error('нет модуля ' + name);
@@ -53,11 +53,11 @@ function loadMain(disk, opened) {
   return sandbox.exports;
 }
 
-/** tools/hat.js, каким его загрузит движок Assi. */
+/** tools/hat.js, каким его загрузит движок Axiko. */
 function loadTool(source, installed, main) {
   var sandbox = { exports: {} };
   sandbox.require = function (name) {
-    if (name === 'lib/assi') return { files: { exists: function (p) { return installed && p === 'modules/hat/main.js'; } } };
+    if (name === 'lib/axiko') return { files: { exists: function (p) { return installed && p === 'modules/hat/main.js'; } } };
     if (name === 'modules/hat/main.js') return main;
     throw new Error('нет модуля ' + name);
   };

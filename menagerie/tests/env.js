@@ -1,4 +1,4 @@
-// The test workspace of the game: the Assi harness (scripts/games/harness.js) with this game
+// The test workspace of the game: the Axiko harness (scripts/games/harness.js) with this game
 // installed at its store.json target, as install.ps1 puts it on the phone (everything but
 // store.json, README.md, tests/ and _data/; _data/ goes to data/<store.json data>).
 'use strict';
@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 function harnessPath() {
-  return path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js');
+  return path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js');
 }
 
 const H = require(harnessPath());

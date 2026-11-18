@@ -1,8 +1,8 @@
 // Checks of «Сериал на ночь» on the phone (module_check). They neither speak nor listen: the
 // episode is walked through the driver of the voice loop. What they add to data/series/ they
 // remove; the index, the state, the counters, the journal and the settings are put back.
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 var MAIN = 'modules/bedtime-series/main.js';
 var ENGINE = 'modules/voice-adventure/story-engine/';
 var KEPT = [
@@ -208,7 +208,7 @@ exports['напоминание и возможности оболочки'] = f
     seasonWith(1);
     var note = main().remind(true);
     t.ok(note.send && /Серия 1 готова: «Смотритель моста»/.test(note.text), 'напоминание: ' + note.text);
-    assi.notify.cancel('series-ready');
+    axiko.notify.cancel('series-ready');
     var features = engine('phone').features();
     t.ok(Array.isArray(features), 'shell.features');
     if (features.indexOf('notify.actions') < 0) t.skip('оболочка без notify.actions — в напоминании нет кнопки «Слушать»');

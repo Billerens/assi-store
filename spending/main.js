@@ -1,6 +1,6 @@
 // Траты: operations that write themselves down from the pushes and SMS of banks, with
 // categories, a month's budget and the subscriptions worth remembering before the next charge.
-// The description: docs/modules/spending.md in Assi.
+// The description: docs/modules/spending.md in Axiko.
 //
 // One message on its way: filter (codes, ads, reminders — never stored, never sent to a model)
 // -> rules (the owner's data/spending/rules.json first, then logic/rules.js) -> the general reader
@@ -11,7 +11,7 @@
 // and the shared base lib/base.js -> notifications, the widget, emit('spending.changed').
 //
 // Everything works without a model: rules first, the model only improves.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var base = require('lib/base');
 var ai = require('lib/ai');
 var shell = require('./shell.js');
@@ -92,7 +92,7 @@ function message(error) {
 
 // ---- storage ---------------------------------------------------------------------------------
 
-var db = assi.db('spending');
+var db = axiko.db('spending');
 
 function columns(table) {
   return db.query('pragma table_info(' + table + ')').map(function (row) { return row.name; });
@@ -125,7 +125,7 @@ db.exec('create index if not exists unparsed_hash on unparsed (hash)');
 
 function readJson(path, fallback) {
   try {
-    return assi.files.readJson(path, fallback);
+    return axiko.files.readJson(path, fallback);
   } catch (error) {
     console.warn('spending: ' + path + ': ' + message(error));
     return fallback;
@@ -151,7 +151,7 @@ function state() {
 function saveState(patch) {
   var s = state();
   Object.keys(patch).forEach(function (key) { s[key] = patch[key]; });
-  assi.files.writeJson(PATHS.state, s);
+  axiko.files.writeJson(PATHS.state, s);
   return s;
 }
 
@@ -227,7 +227,7 @@ function writeMerchant(key, entry) {
   var was = own[key] && typeof own[key] === 'object' ? own[key] : {};
   Object.keys(entry).forEach(function (field) { if (entry[field] !== undefined) was[field] = entry[field]; });
   own[key] = was;
-  assi.files.writeJson(PATHS.merchants, own);
+  axiko.files.writeJson(PATHS.merchants, own);
   LIVE.dict = null;
 }
 
@@ -324,14 +324,14 @@ function ratesFor(time, s, options) {
   var found = null;
   try {
     if (day === today) {
-      var latest = assi.http.get(s.rateUrl);
+      var latest = axiko.http.get(s.rateUrl);
       if (latest.ok) found = validRates(money.cbrRates(latest.json()));
     } else {
       // The archive has no rates on days off: step back to the last working day.
       for (var back = 0; back < 6 && !found; back++) {
         var d = new Date(time - back * DAY);
         var url = s.rateArchiveUrl.replace('{yyyy}', String(d.getFullYear())).replace('{mm}', pad(d.getMonth() + 1)).replace('{dd}', pad(d.getDate()));
-        var response = assi.http.get(url);
+        var response = axiko.http.get(url);
         if (response.ok) found = validRates(money.cbrRates(response.json()));
       }
     }
@@ -345,7 +345,7 @@ function ratesFor(time, s, options) {
   cache[day] = found;
   var days = Object.keys(cache).sort();
   while (days.length > 60) delete cache[days.shift()];
-  assi.files.writeJson(PATHS.rates, cache);
+  axiko.files.writeJson(PATHS.rates, cache);
   return done(found);
 }
 
@@ -563,7 +563,7 @@ function refreshWidget() {
   var wait = 3000 - (Date.now() - LIVE.widgetAt);
   var redraw = function () {
     LIVE.widgetAt = Date.now();
-    try { assi.widget.refresh('spending'); } catch (error) { /* no widget */ }
+    try { axiko.widget.refresh('spending'); } catch (error) { /* no widget */ }
   };
   if (wait <= 0) {
     redraw();
@@ -856,7 +856,7 @@ function learn(item, tx, s) {
   var list = all[key] || [];
   if (!list.some(function (sample) { return sample.text === item.text; })) list.push({ text: item.text, sender: item.sender, tx: tx });
   all[key] = list.slice(-Math.max(s.ruleSamples, 1) * 2);
-  assi.files.writeJson(PATHS.learn, all);
+  axiko.files.writeJson(PATHS.learn, all);
   if (list.length < s.ruleSamples || LIVE.learning[key]) return;
   if (!textsAllowed(ROLES.rules, s)) return;
   LIVE.learning[key] = true;
@@ -872,10 +872,10 @@ function learn(item, tx, s) {
       var own = ownRulesFile();
       own.about = own.about || 'Свои правила разбора, их пробуют раньше заводских (modules/spending/logic/rules.js). Запись {"id": "<заводское id>", "off": true} выключает заводское правило.';
       own.rules = own.rules.filter(function (r) { return r.id !== rule.id; }).concat([rule]);
-      assi.files.writeJson(PATHS.rules, own);
+      axiko.files.writeJson(PATHS.rules, own);
       LIVE.rules = null;
       delete all[key];
-      assi.files.writeJson(PATHS.learn, all);
+      axiko.files.writeJson(PATHS.learn, all);
       console.log('spending: learned rule ' + rule.id + ' for ' + key);
     }
   } catch (error) {
@@ -1013,7 +1013,7 @@ function checkBudget(s, at) {
   if (tellOnce.length) {
     month.notified = told.concat(tellOnce);
     all[period.key] = month;
-    assi.files.writeJson(PATHS.budget, all);
+    axiko.files.writeJson(PATHS.budget, all);
   }
 }
 
@@ -1207,7 +1207,7 @@ exports.runReview = function (key, options) {
   var item = { key: current.key, label: current.label, at: now, lines: lines, via: via, sleep: link ? link.text : null, aggregates: aggr };
   var all = readJson(PATHS.reviews, {});
   all[current.key] = item;
-  assi.files.writeJson(PATHS.reviews, all);
+  axiko.files.writeJson(PATHS.reviews, all);
   if (!options.quiet && s.notify.review) {
     tell({ id: 'spending-review', title: 'Траты: ' + current.label.toLowerCase(), text: lines.slice(0, 2).join(' '), open: SCREEN + '?review=' + current.key });
   }
@@ -1250,7 +1250,7 @@ function award(which, text) {
   var item = JSON.parse(JSON.stringify(AWARDS[which]));
   item.text = text;
   item.at = Date.now();
-  return achieve.give(assi.files, require, item, PATHS.achieved);
+  return achieve.give(axiko.files, require, item, PATHS.achieved);
 }
 
 /**
@@ -1265,12 +1265,12 @@ exports.awards = function () {
     var firstRow = db.query('select min(at) as at from tx')[0];
     var first = firstRow && firstRow.at !== null && firstRow.at !== undefined ? Number(firstRow.at) : null;
     if (first === null) return out;
-    if (!achieve.given(assi.files, PATHS.achieved, AWARDS.delivery.key)) {
+    if (!achieve.given(axiko.files, PATHS.achieved, AWARDS.delivery.key)) {
       var since = now - (s.noDeliveryDays + s.noDeliveryBeforeDays) * DAY;
       var quiet = awardsLib.noDelivery(periodOps(since, now, s), { now: now, days: s.noDeliveryDays, beforeDays: s.noDeliveryBeforeDays, first: first, settings: s });
       if (quiet.ok && award('delivery', s.noDeliveryDays + ' дней подряд без доставки еды')) out.push(AWARDS.delivery.key);
     }
-    if (!achieve.given(assi.files, PATHS.achieved, AWARDS.month.key)) {
+    if (!achieve.given(axiko.files, PATHS.achieved, AWARDS.month.key)) {
       var last = budgetLib.previous(budgetLib.periodOf(now, s.monthStartDay), s.monthStartDay);
       var sum = summaryOf(last, s, now);
       if (awardsLib.monthInBudget(sum, last, first) && award('month', last.label + ': потрачено ' + money.format(sum.spent, s.currency) + ' при бюджете ' + money.format(sum.budget, s.currency))) {
@@ -1315,7 +1315,7 @@ function suggest(kind, id, app, text) {
   item.app = app || item.app;
   list[key] = item;
   all.suggested = list;
-  assi.files.writeJson(PATHS.sources, all);
+  axiko.files.writeJson(PATHS.sources, all);
 }
 
 /** A notification of any app: the module's handler of on('notification'). */
@@ -1353,12 +1353,12 @@ exports.onSms = function (sms) {
 exports.importSms = function (days) {
   var s = settings();
   if (LIVE.importing) return { error: 'Импорт уже идёт' };
-  if (!assi.permission(['READ_SMS', 'RECEIVE_SMS'])) return { error: 'Нет разрешения читать SMS' };
+  if (!axiko.permission(['READ_SMS', 'RECEIVE_SMS'])) return { error: 'Нет разрешения читать SMS' };
   LIVE.importing = true;
   var out = { seen: 0, added: 0, repeats: 0, unknown: 0, skipped: 0 };
   try {
     var since = Date.now() - (days === undefined || days === null ? s.importDays : Number(days)) * DAY;
-    var rows = assi.rows('content://sms/inbox', ['address', 'body', 'date'], 'date > ?', [since], 'date asc', s.importLimit);
+    var rows = axiko.rows('content://sms/inbox', ['address', 'body', 'date'], 'date > ?', [since], 'date asc', s.importLimit);
     rows.forEach(function (row) {
       if (!settingsLib.smsSender(s.smsSenders, row.address)) return;
       out.seen++;
@@ -1416,7 +1416,7 @@ exports.setSource = function (kind, id, on) {
 exports.ignoreSuggestion = function (kind, id) {
   var all = readJson(PATHS.sources, {});
   all.ignored = (all.ignored || []).concat([kind + ':' + id]);
-  assi.files.writeJson(PATHS.sources, all);
+  axiko.files.writeJson(PATHS.sources, all);
   return true;
 };
 
@@ -1797,7 +1797,7 @@ exports.cancelSub = function (id) {
   // Neighbours that count it: Ачивки («Охотник за подписками»), Жизнь-RPG (навык «Хозяйство»).
   ['achievements', 'rpg'].forEach(function (id) {
     var path = 'modules/' + id + '/main.js';
-    if (!assi.files.exists(path)) return;
+    if (!axiko.files.exists(path)) return;
     try {
       var neighbour = require(path);
       if (typeof neighbour.event === 'function') neighbour.event('subscription.cancel', { id: sub.id, merchant: sub.merchant, amount: sub.amount, at: Date.now() });
@@ -1820,19 +1820,19 @@ exports.removeSub = function (id) {
 
 exports.actionNotExpense = function (args) {
   exports.setExcluded(args.id, true);
-  try { assi.notify.cancel('spending-unusual-' + args.id); } catch (error) { /* gone */ }
+  try { axiko.notify.cancel('spending-unusual-' + args.id); } catch (error) { /* gone */ }
   return true;
 };
 
 exports.actionRemindOff = function (args) {
   exports.setSub(args.id, { remind: false });
-  try { assi.notify.cancel('spending-sub-' + args.id); } catch (error) { /* gone */ }
+  try { axiko.notify.cancel('spending-sub-' + args.id); } catch (error) { /* gone */ }
   return true;
 };
 
 exports.actionCancelled = function (args) {
   exports.cancelSub(args.id);
-  try { assi.notify.cancel('spending-sub-' + args.id); } catch (error) { /* gone */ }
+  try { axiko.notify.cancel('spending-sub-' + args.id); } catch (error) { /* gone */ }
   return true;
 };
 
@@ -1884,7 +1884,7 @@ exports.saveSettings = function (patch) {
     var normalized = settingsLib.normalize(saved);
     var keep = {};
     Object.keys(saved).forEach(function (key) { keep[key] = key in settingsLib.DEFAULTS ? normalized[key] : saved[key]; });
-    assi.files.writeJson(PATHS.settings, keep);
+    axiko.files.writeJson(PATHS.settings, keep);
     return repairAmounts(normalized);
   });
   var s = settings();
@@ -1909,7 +1909,7 @@ exports.setMonthBudget = function (key, plan) {
   if (plan.categories !== undefined) month.categories = plan.categories || {};
   month.notified = [];
   all[key] = month;
-  assi.files.writeJson(PATHS.budget, all);
+  axiko.files.writeJson(PATHS.budget, all);
   changed('budget');
   return exports.overview();
 };
@@ -1949,10 +1949,10 @@ function installTool() {
   var stub = TOOL_MARK + ' (modules/spending/tool.js). Файл ставит сам модуль при запуске;\n' +
     '// удалите модуль — заглушка молча выключится.\n' +
     'try {\n  module.exports = require(\'modules/spending/tool.js\');\n} catch (error) {\n  exports.name = null;\n}\n';
-  var there = assi.files.exists(TOOL_PATH) ? assi.files.read(TOOL_PATH) : null;
+  var there = axiko.files.exists(TOOL_PATH) ? axiko.files.read(TOOL_PATH) : null;
   if (there === stub) return;
   if (there !== null && there.indexOf(TOOL_MARK) !== 0) return;   // the owner's own tool: not ours to replace
-  assi.files.write(TOOL_PATH, stub);
+  axiko.files.write(TOOL_PATH, stub);
 }
 
 function registerJobs(s) {
@@ -1971,7 +1971,7 @@ exports.start = function () {
   var s = settings();
   var conversion = exports.repairCurrency({ fetchRates: false });
   if (conversion.pending) refreshCurrencyRates();
-  if (!assi.files.exists(PATHS.settings)) assi.files.writeJson(PATHS.settings, {});
+  if (!axiko.files.exists(PATHS.settings)) axiko.files.writeJson(PATHS.settings, {});
   on('notification', function (notice) {
     try {
       return require(SELF).onNotice(notice);

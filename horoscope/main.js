@@ -1,8 +1,8 @@
 // «Гороскоп по данным»: a joking forecast that comes true because it is made of the owner's own
 // habits; the next morning the module checks what came true. Morning job → check yesterday →
 // sign of the week → detectors → text (model role horoscope.write, or templates) → day file.
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 var source = require('./source.js');
 var dates = require('./dates.js');
 var detectors = require('./detectors.js');
@@ -201,7 +201,7 @@ function calendar(date, s) {
     var goals = source.goals();
     var from = Math.max(Date.now(), dates.start(date, goals.dayEndHour));
     var to = dates.start(dates.add(date, 1), goals.dayEndHour);
-    return assi.rows('content://com.android.calendar/instances/when/' + from + '/' + to, ['title', 'begin', 'end', 'allDay'], null, null, 'begin asc', 10)
+    return axiko.rows('content://com.android.calendar/instances/when/' + from + '/' + to, ['title', 'begin', 'end', 'allDay'], null, null, 'begin asc', 10)
       .filter(function (row) { return String(row.allDay) !== '1'; })
       .map(function (row) { return { begin: Number(row.begin) }; });
   } catch (error) {
@@ -353,9 +353,9 @@ exports.make = function (date, force) {
   prune(date, s);
   if (s.notify && !force) {
     var first = predictions.filter(function (p) { return p.id !== 'calm'; })[0];
-    try { assi.notify({ title: 'Звёзды на сегодня', text: first ? first.claim : text.first(file.text), open: SCREEN }); } catch (error) { /* no notification */ }
+    try { axiko.notify({ title: 'Звёзды на сегодня', text: first ? first.claim : text.first(file.text), open: SCREEN }); } catch (error) { /* no notification */ }
   }
-  try { assi.widget.refresh('horoscope'); } catch (error) { /* no widget */ }
+  try { axiko.widget.refresh('horoscope'); } catch (error) { /* no widget */ }
   try { emit('horoscope.changed', { date: date }); } catch (error) { /* no screens */ }
   return file;
 };
@@ -435,7 +435,7 @@ exports.speech = function () {
 /** Asks Android for the calendar once; on yes, turns the calendar detector on. */
 exports.askCalendar = function () {
   var granted = false;
-  try { granted = Boolean(assi.permission(['READ_CALENDAR'])); } catch (error) { granted = false; }
+  try { granted = Boolean(axiko.permission(['READ_CALENDAR'])); } catch (error) { granted = false; }
   if (granted) exports.saveSettings({ calendar: true });
   return granted;
 };
@@ -464,7 +464,7 @@ var TOOL = [
   "exports.description = 'Гороскоп по данным владельца: готовый текст на сегодня (читай его как есть, не сочиняй новый), знак недели и сбылось ли вчера. what: today | sign | yesterday.';",
   "exports.parameters = { type: 'object', properties: { what: { type: 'string', enum: ['today', 'sign', 'yesterday'] } } };",
   'exports.run = function (args) {',
-  "  if (!require('lib/assi').files.exists('modules/horoscope/main.js')) return 'Модуль «Гороскоп по данным» не установлен';",
+  "  if (!require('lib/axiko').files.exists('modules/horoscope/main.js')) return 'Модуль «Гороскоп по данным» не установлен';",
   "  return require('modules/horoscope/main.js').tool(args || {});",
   '};',
   ''

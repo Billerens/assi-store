@@ -32,9 +32,9 @@ Current Alarm Manager state:
   u0a301:org.telegram.messenger +8s300ms running, 43 wakeups:
     +8s300ms 43 wakes 56 alarms, last -20m0s0ms:
       *walarm*:org.telegram.messenger.KEEP_ALIVE
-  u0a199:app.assi +2s500ms running, 12 wakeups:
+  u0a199:app.axiko +2s500ms running, 12 wakeups:
     +2s500ms 12 wakes 12 alarms, last -12m0s0ms:
-      *walarm*:app.assi.JOB
+      *walarm*:app.axiko.JOB
   u0a280:com.whatsapp +1s0ms running, 4 wakeups:
     +1s0ms 4 wakes 4 alarms, last -2h0m0s0ms:
       *walarm*:com.whatsapp.messaging.MessageService.KEEPALIVE

@@ -2,7 +2,7 @@
 // crops, the wallpaper itself, the reflection probe of the Fold's screens, place and network.
 // Engine only (Rhino): no class, no async, no f(...args).
 
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var select = require('./select');
 var fold = require('./fold');
 
@@ -11,7 +11,7 @@ var Bitmap = android.graphics.Bitmap;
 var WallpaperManager = android.app.WallpaperManager;
 var TimeUnit = java.util.concurrent.TimeUnit;
 
-function abs(path) { return String(assi.files.path(path)); }
+function abs(path) { return String(axiko.files.path(path)); }
 
 function message(error) {
   if (!error) return 'неизвестная ошибка';
@@ -56,7 +56,7 @@ function request(url, headers) {
 /** GET → { ok, status, json, text, error }: never throws. */
 exports.getJson = function (url, headers) {
   try {
-    var response = assi.http.get(url, headers);
+    var response = axiko.http.get(url, headers);
     var out = { ok: response.ok, status: response.status, text: response.text, json: null };
     if (response.ok) {
       try {
@@ -139,7 +139,7 @@ exports.headBytes = function (url, count, headers) {
 exports.ping = function (url, headers) {
   try {
     // A request that names a secret is the shell's to send: only it puts the value in.
-    if (/\{\{secret:[A-Za-z0-9_.-]+\}\}/.test(JSON.stringify([url, headers || {}]))) return assi.http.get(url, headers).ok === true;
+    if (/\{\{secret:[A-Za-z0-9_.-]+\}\}/.test(JSON.stringify([url, headers || {}]))) return axiko.http.get(url, headers).ok === true;
     var response = http().newCall(request(url, headers).build()).execute();
     var ok = response.isSuccessful();
     response.close();
@@ -478,7 +478,7 @@ exports.setWallpaper = function (plan, files, want, sizes) {
 };
 
 /**
- * The way without the permission: the picture goes to the phone's gallery (Pictures/Assi), and
+ * The way without the permission: the picture goes to the phone's gallery (Pictures/Axiko), and
  * the system's own "set as wallpaper" screen opens — the owner taps «Установить» himself.
  * Needs the app in front (Android does not open screens from the background).
  */
@@ -491,7 +491,7 @@ exports.openSetIntent = function (path, name, oldUri) {
   var values = new android.content.ContentValues();
   values.put(MediaStore.MediaColumns.DISPLAY_NAME, String(name));
   values.put(MediaStore.MediaColumns.MIME_TYPE, 'image/jpeg');
-  values.put(MediaStore.MediaColumns.RELATIVE_PATH, 'Pictures/Assi');
+  values.put(MediaStore.MediaColumns.RELATIVE_PATH, 'Pictures/Axiko');
   var uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
   if (!uri) throw new Error('не удалось положить картинку в галерею');
   var output = resolver.openOutputStream(uri);
@@ -574,7 +574,7 @@ exports.probeFold = function () {
   try {
     var shizuku = native('shizuku.status');
     if (shizuku && shizuku.running && shizuku.granted) {
-      var result = assi.shell('cmd wallpaper help 2>&1 | head -40', { privileged: true, timeout: 15 });
+      var result = axiko.shell('cmd wallpaper help 2>&1 | head -40', { privileged: true, timeout: 15 });
       out.shell = String(result.out || '').slice(0, 3000);
     } else {
       out.shell = 'Shizuku не запущен — команда cmd wallpaper не проверялась';

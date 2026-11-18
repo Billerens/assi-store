@@ -10,13 +10,13 @@ for (var name in standard) exports[name] = standard[name];
 
 function load() {
   var id = kit.idOf(__dirname);
-  var assi = require('lib/assi');
+  var axiko = require('lib/axiko');
   var dir = 'modules/games/' + id;
-  var game = JSON.parse(assi.files.read(dir + '/game.json'));
+  var game = JSON.parse(axiko.files.read(dir + '/game.json'));
   var sim = require(dir + '/sim.js');
   var cfg = kit.configOf(game, dir);
   var ctx = { now: Date.UTC(2026, 10, 14, 9), config: cfg, rng: Rng.make(42), mult: 1, links: {}, stock: {} };
-  return { game: game, sim: sim, cfg: cfg, ctx: ctx, state: Core.newState(game, sim, ctx), assi: assi, dir: dir };
+  return { game: game, sim: sim, cfg: cfg, ctx: ctx, state: Core.newState(game, sim, ctx), axiko: axiko, dir: dir };
 }
 
 exports['мастерская: 12 часов формулой равны шагам, монеты не растут'] = function (t) {
@@ -81,7 +81,7 @@ exports['сундук: три разовых инструмента, без ра
 
 exports['60 испытаний воспроизводятся и решаются поиском'] = function (t) {
   var x = load();
-  var data = JSON.parse(x.assi.files.read(x.dir + '/content/challenges.json'));
+  var data = JSON.parse(x.axiko.files.read(x.dir + '/content/challenges.json'));
   t.equal(data.levels.length, x.cfg['challenge.count'], 'число испытаний');
   data.levels.forEach(function (entry) {
     var level = L.generate(entry.seed, entry);

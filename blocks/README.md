@@ -38,7 +38,7 @@
 - `checks.js` — стандартные проверки движка и проверки правил, мастерской, ранга и каталога испытаний.
 - `tests/*.test.js` — проверки на node с harness Axiko; `tools/` — генерация контента, проверка уровней, отчёты и сервер предпросмотра.
 
-Запуск из `assi-store` в PowerShell 7:
+Запуск из `axiko-store` в PowerShell 7:
 
 ```powershell
 Get-ChildItem blocks/tests/*.test.js | ForEach-Object {

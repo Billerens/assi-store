@@ -1,12 +1,12 @@
 // The logic of «Шахта вглубь» against its spec (docs/games/deep-mine.md, «Темп» and «Как
-// проверить»), in a node workspace of the Assi harness. node tests/deep-mine.test.js
+// проверить»), in a node workspace of the Axiko harness. node tests/deep-mine.test.js
 'use strict';
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 
 const GAME = path.resolve(__dirname, '..');
-const HARNESS = path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js');
+const HARNESS = path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js');
 const H = require(HARNESS);
 const { test, done } = H;
 const ID = 'deep-mine';

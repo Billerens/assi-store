@@ -1,7 +1,7 @@
 {
   "id": "achievements",
   "kind": "module",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "title": "Life Achievements",
   "summary": "Achievements for real life: sleep, steps, habits, places, spending, screen and games. The format for the agent is AGENT.md",
   "tags": ["life", "achievements"],

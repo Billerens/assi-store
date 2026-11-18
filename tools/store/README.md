@@ -1,6 +1,6 @@
 # Инструменты автора каталога
 
-Нужны Python 3.10+ и `jsonschema` из `requirements.txt`. Команды ниже выполняются из корня assi-store в PowerShell 7.
+Нужны Python 3.10+ и `jsonschema` из `requirements.txt`. Команды ниже выполняются из корня axiko-store в PowerShell 7.
 
 ```powershell
 python -m pip install -r tools/store/requirements.txt
@@ -16,8 +16,8 @@ python -m unittest discover -s tools/store/tests -p 'test_*.py' -v
 ```powershell
 python tools/store/build_catalog.py `
   --store . `
-  --out ../assi-store-dist `
-  --download-url-template 'https://github.com/Billerens/assi-store/releases/download/{id}-v{version}' `
+  --out ../axiko-store-dist `
+  --download-url-template 'https://github.com/Billerens/axiko-store/releases/download/{id}-v{version}' `
   --publisher billerens `
   --licensefile LICENSE `
   --exclude sparks-ring
@@ -67,7 +67,7 @@ python tools/store/language.py --store . --json            # полный отч
 
 ```powershell
 python tools/store/versions.py check --store . --licensefile LICENSE --exclude sparks-ring
-python tools/store/versions.py record --store . --built ../assi-store-dist
+python tools/store/versions.py record --store . --built ../axiko-store-dist
 ```
 
 `--license-id` по умолчанию `UNLICENSED`: сборщик не выдаёт лицензию за автора. Файл `--licensefile` копируется в корень каждого ZIP как `LICENSE`; лицензии сторонних ресурсов должны оставаться рядом с ресурсами.
@@ -93,8 +93,8 @@ python tools/store/versions.py record --store . --built ../assi-store-dist
 В исходном проекте Axiko есть дополнительный JVM-прогон всех архивов настоящим установщиком, без выполнения кода пакета:
 
 ```powershell
-$env:ASSI_STORE_CATALOG_DIST = (Resolve-Path ../assi-store-dist).Path
-./gradlew.bat :app:testDebugUnitTest --tests app.assi.StoreCatalogDistributionTest --rerun-tasks --console=plain
+$env:AXIKO_STORE_CATALOG_DIST = (Resolve-Path ../axiko-store-dist).Path
+./gradlew.bat :app:testDebugUnitTest --tests app.axiko.StoreCatalogDistributionTest --rerun-tasks --console=plain
 ```
 
 Он создаёт `catalog-validation.json`, привязанный к SHA-256 индекса. Проверяются архивы, которые есть в папке сборки; пакеты без изменений перечислены в `notRebuilt`. Исходники Axiko пока закрыты; этот JVM-тест не входит в публичный магазин. Независимым авторам доступны Python-проверки и проверка плана установки в совместимой сборке приложения.

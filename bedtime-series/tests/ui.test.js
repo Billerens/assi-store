@@ -22,7 +22,7 @@ const status = { engine: true, season: null, next: {}, seasons: [], voice: { run
 const errors = [];
 const scope = vm.createContext({ document, ui: { h, icon: () => new Element('svg'), toast: text => errors.push(text),
   t: (text, ...args) => args.reduce((result, arg) => result.replace('{}', arg), text) },
-  assi: { call: async () => status, on() {} } });
+  axiko: { call: async () => status, on() {} } });
 const page = fs.readFileSync(path.join(__dirname, '..', 'ui', 'index.html'), 'utf8');
 vm.runInContext(page.match(/<script>([\s\S]*?)<\/script>/)[1], scope);
 (async () => {

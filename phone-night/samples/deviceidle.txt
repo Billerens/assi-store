@@ -11,7 +11,7 @@
     com.google.android.gms
     com.android.phone
   Whitelist user apps:
-    app.assi
+    app.axiko
     org.telegram.messenger
   Whitelist (except idle) all app ids:
     1001

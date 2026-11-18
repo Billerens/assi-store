@@ -1,4 +1,4 @@
-// The Assi harness for this game's node tests: a temporary workspace with the hub of the factory
+// The Axiko harness for this game's node tests: a temporary workspace with the hub of the factory
 // (modules/games, lib/) and this game installed into it the way install.ps1 does it (the folder
 // without store.json, README.md, tests, _data at store.json "target"; _data at data/<"data">).
 //   const T = require('./env.js');
@@ -8,8 +8,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const HARNESS = path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js');
-if (!fs.existsSync(HARNESS)) throw new Error('Не найден harness.js Assi (scripts/games/harness.js)');
+const HARNESS = path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js');
+if (!fs.existsSync(HARNESS)) throw new Error('Не найден harness.js Axiko (scripts/games/harness.js)');
 const H = require(HARNESS);
 
 const GAME_DIR = path.resolve(__dirname, '..');

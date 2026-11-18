@@ -342,7 +342,7 @@
 <body>
 <main class="page">
   <header class="topbar">
-    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <button class="icon-btn" onclick="axiko.back()" aria-label="Назад" data-icon="back"></button>
     <button class="title-btn" id="title" data-raw></button>
     <button class="icon-btn" id="more" aria-label="Ещё" data-icon="more"></button>
   </header>
@@ -574,7 +574,7 @@
   function chipsOf(list) {
     return h('div', { class: 'chips' }, ...list.map((word) => h('a', { class: 'chip', href: '#', 'data-raw': '', onclick: (event) => {
       event.preventDefault();
-      assi.open('modules/recorder/ui/index.html?q=' + encodeURIComponent(word));
+      axiko.open('modules/recorder/ui/index.html?q=' + encodeURIComponent(word));
     } }, word)));
   }
 
@@ -587,11 +587,11 @@
       line = { draft: 'Черновик ответа во Входящих — проверьте и отправьте', 'draft-no-reply': 'Черновик во Входящих, но ответить из ленты нельзя — отправьте вручную',
         'not-found': 'Беседа не нашлась во Входящих', 'no-inbox': 'Модуля «Входящие» нет' }[state] || null;
       buttons.push(h('button', { class: 'btn small', onclick: () => call('copy', cmd.text).then(() => ui.toast('Текст скопирован')).catch(fail) }, ui.icon('copy'), ' Скопировать текст'));
-      if (state === 'draft' || state === 'draft-no-reply') buttons.push(h('button', { class: 'btn small soft', onclick: () => assi.open('modules/inbox/ui/index.html') }, 'Входящие'));
+      if (state === 'draft' || state === 'draft-no-reply') buttons.push(h('button', { class: 'btn small soft', onclick: () => axiko.open('modules/inbox/ui/index.html') }, 'Входящие'));
     } else if (cmd.kind === 'expense') {
       what = 'Трата: ' + (cmd.what || 'без названия') + ', ' + cmd.amount + ' ₽';
       line = { expense: 'Записана в «Тратах» с пометкой «голосом»', 'expense-base': 'Записана в общую базу' }[state] || null;
-      if (state === 'expense') buttons.push(h('button', { class: 'btn small soft', onclick: () => assi.open('modules/spending/ui/index.html') }, 'Траты'));
+      if (state === 'expense') buttons.push(h('button', { class: 'btn small soft', onclick: () => axiko.open('modules/spending/ui/index.html') }, 'Траты'));
     } else if (cmd.kind === 'reminder') {
       what = 'Напомнить: ' + cmd.text + (cmd.at ? ', ' + remindText(cmd.at) : cmd.date ? ', ' + dueText(cmd.date) : '');
       line = state === 'proposed' ? 'Предложено — кнопка «Напомнить» у задачи ниже' : null;
@@ -647,7 +647,7 @@
     const box = document.getElementById('state');
     if (it.state === 'recording') {
       box.replaceChildren(h('div', { class: 'card state' }, h('span', { 'data-icon': 'mic' }), h('span', { class: 'grow' }, 'Идёт запись'),
-        h('button', { class: 'btn small primary', onclick: () => assi.open('modules/recorder/ui/index.html') }, 'К записи')));
+        h('button', { class: 'btn small primary', onclick: () => axiko.open('modules/recorder/ui/index.html') }, 'К записи')));
     } else if (it.state === 'transcribing' || it.state === 'summarizing' || it.state === 'importing') {
       const waiting = it.segments.filter((g) => g.state === 'wait' || g.state === 'busy').length;
       box.replaceChildren(h('div', { class: 'card state' }, h('span', { class: 'spinner' }),
@@ -701,7 +701,7 @@
       mic.disabled = true;
       mic.replaceChildren(h('span', { class: 'spinner' }), ' Слушаю…');
       try {
-        const said = String((await assi.native('speech.listen', (window.__settings || {}).markListenSec || 20)) || '').trim();
+        const said = String((await axiko.native('speech.listen', (window.__settings || {}).markListenSec || 20)) || '').trim();
         if (said) input.value = input.value.trim() ? input.value.trim() + ' ' + said : said;
         else ui.toast('Ничего не расслышал');
       } catch (error) {
@@ -735,7 +735,7 @@
         if (await ui.confirm('Удалить звук этой записи? Текст и конспект останутся.', 'Удалить звук', true)) call('dropAudio', id).then(load).catch(fail);
       }, 'danger'),
       item('trash', 'Удалить запись', async () => {
-        if (await ui.confirm('Удалить запись целиком — звук, текст, задачи? Это не отменить.', 'Удалить', true)) call('remove', id).then(() => assi.back()).catch(fail);
+        if (await ui.confirm('Удалить запись целиком — звук, текст, задачи? Это не отменить.', 'Удалить', true)) call('remove', id).then(() => axiko.back()).catch(fail);
       }, 'danger'))]);
   }
 
@@ -767,14 +767,14 @@
   document.getElementById('rawBtn').onclick = () => { showRaw = !showRaw; drawTranscript(); };
 
   let timer = null;
-  assi.on('recorder.changed', (e) => {
+  axiko.on('recorder.changed', (e) => {
     if (!e || (e.id !== null && Number(e.id) !== id)) return;
     if (e.type === 'progress' && it) {
       it.progress = e.progress;
       drawHead();
       return;
     }
-    if (e.type === 'remove' && Number(e.id) === id) { assi.back(); return; }
+    if (e.type === 'remove' && Number(e.id) === id) { axiko.back(); return; }
     if (document.querySelector('.sheet')) return;
     clearTimeout(timer);
     timer = setTimeout(load, 400);

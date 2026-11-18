@@ -1,5 +1,5 @@
 // node tests/links.test.js — the pet's links to its neighbours, through main.js on a pretend phone:
-// the Rhino globals, lib/assi and lib/base are stand-ins, the neighbours («Здоровье», «Тайная жизнь
+// the Rhino globals, lib/axiko and lib/base are stand-ins, the neighbours («Здоровье», «Тайная жизнь
 // телефона», «Фокус», «Игротека», «Ачивки») are fakes that are there or not. Every link is checked
 // with the neighbour present and absent.
 var assert = require('assert');
@@ -54,7 +54,7 @@ function exists(p) {
   return world.files[p] !== undefined || world.modules[p] !== undefined;
 }
 
-var assiMock = {
+var axikoMock = {
   files: {
     exists: exists,
     read: function (p) {
@@ -90,7 +90,7 @@ var baseMock = {
 var MAIN_PATH = path.join(__dirname, '..', 'main.js');
 var originalLoad = Module._load;
 Module._load = function (request, parent, isMain) {
-  if (request === 'lib/assi') return assiMock;
+  if (request === 'lib/axiko') return axikoMock;
   if (request === 'lib/base') return baseMock;
   if (/^modules\//.test(request) && !/^modules\/pet\//.test(request)) {
     if (!world.modules[request]) throw new Error('нет модуля ' + request);
@@ -406,7 +406,7 @@ test('shelf: a rare badge lands on the shelf when seen, in its colour; a common 
 test('shelf: the setting decides from which rarity', function () {
   settings({ shelfFrom: 'off' });
   var p = pet();
-  p.celebrate('achievement', { id: 'year', title: 'Год с Assi', rarity: 'legendary' });
+  p.celebrate('achievement', { id: 'year', title: 'Год с Axiko', rarity: 'legendary' });
   p.seen();
   assert.strictEqual(items().length, 0);
 });
@@ -426,10 +426,10 @@ test('shelf: an old payload without rarity — looked up in Ачивки, else c
   assert.strictEqual(items().filter(function (x) { return x.id === 'lantern'; })[0].rarity, 'uncommon', 'a rarity in the payload is taken');
 });
 
-test('shelf: the cup of «Год с Assi» is not doubled by its badge', function () {
+test('shelf: the cup of «Год с Axiko» is not doubled by its badge', function () {
   var p = pet();
   p.give({ id: 'trophy', from: 'year', slot: 'shelf', worn: false, rarity: 'legendary' });
-  p.celebrate('achievement', { id: 'year', title: 'Год с Assi', rarity: 'legendary' });
+  p.celebrate('achievement', { id: 'year', title: 'Год с Axiko', rarity: 'legendary' });
   assert.strictEqual(p.seen().shelf, null);
   assert.strictEqual(items().length, 1);
 });

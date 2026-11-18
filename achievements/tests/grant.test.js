@@ -33,7 +33,7 @@ function engine(options) {
     writeJson: function (p, value) { disk[p] = JSON.stringify(value); }
   };
   var mocks = {
-    'lib/assi': {
+    'lib/axiko': {
       files: files,
       notify: function (o) { log.notify.push(o); },
       widget: { refresh: function () {} },

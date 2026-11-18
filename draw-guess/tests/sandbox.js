@@ -1,4 +1,4 @@
-// main.js «Рисуй — угадаю» под node: движок Assi подменён (файлы в памяти, база отвечает на
+// main.js «Рисуй — угадаю» под node: движок Axiko подменён (файлы в памяти, база отвечает на
 // нужные запросы, другие модули — по списку), свои файлы модуля — настоящие.
 var fs = require('fs');
 var path = require('path');
@@ -73,7 +73,7 @@ exports.make = function (options) {
     }
   };
   sandbox.require = function (name) {
-    if (name === 'lib/assi') return { files: memoryFiles(disk), db: function () { return db; } };
+    if (name === 'lib/axiko') return { files: memoryFiles(disk), db: function () { return db; } };
     if (name === 'lib/ai') return options.ai || {};
     if (name === 'lib/base') return { add: function (record) { base.push(record); return base.length; } };
     if (modules[name]) return modules[name];
@@ -87,11 +87,11 @@ exports.make = function (options) {
   return { main: sandbox.exports, disk: disk, opened: opened, sql: sql, base: base, files: memoryFiles(disk) };
 };
 
-/** Текст tools/*.js, каким его загрузит движок Assi: installed — есть ли modules/draw-guess/main.js. */
+/** Текст tools/*.js, каким его загрузит движок Axiko: installed — есть ли modules/draw-guess/main.js. */
 exports.loadTool = function (source, installed, main) {
   var sandbox = { exports: {} };
   sandbox.require = function (name) {
-    if (name === 'lib/assi') return { files: { exists: function (p) { return installed && p === 'modules/draw-guess/main.js'; } } };
+    if (name === 'lib/axiko') return { files: { exists: function (p) { return installed && p === 'modules/draw-guess/main.js'; } } };
     if (name === 'modules/draw-guess/main.js') return main;
     throw new Error('нет модуля ' + name);
   };

@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const http = require('node:http');
-const {workspace, FACTORY} = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const {workspace, FACTORY} = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const gameRoot = path.resolve(__dirname,'..');
 const env = workspace({fixture:false});
 if(!path.resolve(env.root).startsWith(path.resolve(os.tmpdir())+path.sep))throw new Error('Unsafe temporary directory');
@@ -20,7 +20,7 @@ function sendReport(data){fetch('/__report',{method:'POST',headers:{'Content-Typ
 window.addEventListener('error',function(e){window.__previewErrors.push(e.message);sendReport({kind:'error',message:e.message,stack:e.error&&e.error.stack})});
 window.addEventListener('unhandledrejection',function(e){window.__previewErrors.push(String(e.reason));sendReport({kind:'error',message:String(e.reason),stack:e.reason&&e.reason.stack})});
 var originalError=console.error;console.error=function(){var args=Array.from(arguments).map(String);sendReport({kind:'error',message:args.join(' ')});originalError.apply(console,arguments)};
-window.assi={on:function(){},stage:function(){return Promise.resolve()},back:function(){},open:function(){return Promise.resolve()},native:function(){return Promise.resolve({language:'ru'})},call:function(module,fn){return fetch('/__call',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fn:fn,args:Array.prototype.slice.call(arguments,2)})}).then(function(r){return r.json()}).then(function(r){if(r.error)throw new Error(r.error);return r.value})}};
+window.axiko={on:function(){},stage:function(){return Promise.resolve()},back:function(){},open:function(){return Promise.resolve()},native:function(){return Promise.resolve({language:'ru'})},call:function(module,fn){return fetch('/__call',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fn:fn,args:Array.prototype.slice.call(arguments,2)})}).then(function(r){return r.json()}).then(function(r){if(r.error)throw new Error(r.error);return r.value})}};
 var lastReport='';setInterval(function(){var g=window.__game;if(!g)return;var buttons=Array.from(document.querySelectorAll('button')).filter(b=>{var r=b.getBoundingClientRect();return r.width&&r.height});var data={kind:'state',ready:true,width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth,errors:window.__previewErrors,score:g.state.run.game&&g.state.run.game.score,mode:g.state.run.game&&g.state.run.game.mode,buttons:buttons.length,smallButtons:buttons.filter(b=>b.getBoundingClientRect().height<44).map(b=>({text:b.textContent,h:b.getBoundingClientRect().height})),text:document.body.innerText.slice(0,2000)};var key=JSON.stringify(data);if(key!==lastReport){lastReport=key;sendReport(data)}},500);
 `;
 async function body(req){let s='';for await(const c of req)s+=c;return JSON.parse(s||'{}');}

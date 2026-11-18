@@ -1,7 +1,7 @@
 // Checks of the health module on the phone (module_check). Every check cleans up what it adds,
 // and keeps the other modules out of it (health._quiet): no pet reaction to a check's glass.
 var base = require('lib/base');
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var MAIN = 'modules/health/main.js';
 var SCREEN = 'modules/health/ui/index.html';
 
@@ -150,8 +150,8 @@ exports['виджет: три строки'] = function (t) {
 };
 
 exports['инструменты агента на месте'] = function (t) {
-  t.ok(assi.files.exists('tools/health_mark.js'), 'нет tools/health_mark.js (модуль не запускался?)');
-  t.ok(assi.files.exists('tools/health_day.js'), 'нет tools/health_day.js');
+  t.ok(axiko.files.exists('tools/health_mark.js'), 'нет tools/health_mark.js (модуль не запускался?)');
+  t.ok(axiko.files.exists('tools/health_day.js'), 'нет tools/health_day.js');
   var text = require('tools/health_day.js').run({});
   t.ok(/^День \d{4}-\d{2}-\d{2}/.test(text), 'health_day: ' + text);
 };

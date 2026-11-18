@@ -8,13 +8,13 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "58d856cd7f84d9a5fbd83ca41c430b2eaa3815e1f5a23284a85fb84779474270",
-      "size": 26310
+      "sha256": "9bef1a2cd119aaebd69caee21c0ce78399266369a1a8a8a6273be67c9b0deac6",
+      "size": 26311
     },
     {
       "path": "code/agent/gamesmith/agent.json",
@@ -28,8 +28,8 @@
     },
     {
       "path": "code/checks.js",
-      "sha256": "900a611db6c6ab859e053ce878546c45443a14b6be671385f9ba7238e76f8280",
-      "size": 11989
+      "sha256": "6d72b7789d7b03161bfda724f1e4949b2a8ab06e65cb1aed416c7d32581b3b57",
+      "size": 11998
     },
     {
       "path": "code/days.js",
@@ -43,8 +43,8 @@
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "1471071d6432f142112d49959555d3a796321ee9f31fde5379adba108a59510f",
-      "size": 28010
+      "sha256": "003b13b9086e16dfbddeef7a68591e04234f1dac29c71a5db44c595dbd9d8a50",
+      "size": 28016
     },
     {
       "path": "code/icon.svg",
@@ -53,8 +53,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "9540a58373085dfbc77119ccda5829c166c112167f79680c7043eb42da72000d",
-      "size": 72249
+      "sha256": "c94ff0c39ba4f18e4d21b011d17b132ca58e90aea9c6bdebaa397de59d3e571f",
+      "size": 72258
     },
     {
       "path": "code/module.json",
@@ -93,18 +93,18 @@
     },
     {
       "path": "code/ui/card.html",
-      "sha256": "2bce019f47015439773e44ed7658388aa999a2d9f30a23887a761f6b0e6946ba",
-      "size": 14523
+      "sha256": "dd787a164cde2f0f2a2b7037483d352ea0c1952c68e5d63a00c85524f0a093db",
+      "size": 14528
     },
     {
       "path": "code/ui/index.html",
-      "sha256": "afcb60c8740175b2b0cdd5e540eab81f5db63ea8ae9e50e9f0f8f5fd0cc74a72",
-      "size": 39460
+      "sha256": "6283fdc108d86bdbae09a11a5a6423f05a4345302e6995b81c5b6860a37b7b58",
+      "size": 39473
     },
     {
       "path": "code/ui/rate.js",
-      "sha256": "721cfa938e2835a898e25ce7b8f6b2c5375d51fab1eeeb67af4aba7304c6eac1",
-      "size": 10698
+      "sha256": "2976ef8a25443b18e34d5f7634788549d13d3e9f257c0d402b2f54fbf897b71d",
+      "size": 10704
     }
   ],
   "id": "game-of-the-day",
@@ -114,9 +114,9 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

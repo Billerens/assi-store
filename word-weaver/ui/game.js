@@ -283,7 +283,7 @@
     try {
       const pending = g.state.meta.pending.slice(0, c['check.batch']);
       if (pending.length) {
-        const r = await window.assi.call(MODEL, 'check', pending, { maxLen: c['defs.maxLen'], batch: c['check.batch'] });
+        const r = await window.axiko.call(MODEL, 'check', pending, { maxLen: c['defs.maxLen'], batch: c['check.batch'] });
         if (r && r.answers && r.answers.length) {
           r.answers.forEach((a) => { if (a.ok && a.text) defs[a.k] = a.text; });
           const res = g.act((s) => sim.approve(s, c, lex, r.answers, now(), mult()), { now: true, reason: 'extra' });
@@ -294,7 +294,7 @@
       }
       const want = wantDefs(c);
       if (want.length) {
-        const r = await window.assi.call(MODEL, 'defs', want, { batch: c['defs.batch'], maxLen: c['defs.maxLen'] });
+        const r = await window.axiko.call(MODEL, 'defs', want, { batch: c['defs.batch'], maxLen: c['defs.maxLen'] });
         if (r && r.defs) Object.assign(defs, r.defs);
         keys.album = '';
         drawDefinition();

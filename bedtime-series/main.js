@@ -13,8 +13,8 @@
 //   <season>/e<N>/audio/     recorded scenes
 //   state.json               the episode and the scene being played (+ state.prev.json)
 //   stats.json, log.json
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 
 var HOME = 'modules/bedtime-series';
 var SCREEN = HOME + '/ui/index.html';
@@ -246,7 +246,7 @@ function emitState(phase, extra) {
   Object.keys(extra || {}).forEach(function (key) { data[key] = extra[key]; });
   try { emit('series.state', data); } catch (error) { /* no screens */ }
   if (phase === 'written' || phase === 'ended' || phase === 'seasons') {
-    try { assi.widget.refresh('bedtime-series'); } catch (error) { /* no widget */ }
+    try { axiko.widget.refresh('bedtime-series'); } catch (error) { /* no widget */ }
   }
 }
 
@@ -263,7 +263,7 @@ function hasPermission(name) {
 function calendarRows(from, to) {
   if (!hasPermission('READ_CALENDAR')) return [];
   try {
-    return assi.rows('content://com.android.calendar/instances/when/' + from + '/' + to,
+    return axiko.rows('content://com.android.calendar/instances/when/' + from + '/' + to,
       ['title', 'begin', 'end', 'allDay'], null, null, 'begin asc', 50) || [];
   } catch (error) {
     log('Календарь не прочитался: ' + msg(error));
@@ -275,7 +275,7 @@ function calendarRows(from, to) {
 function contactNames() {
   if (!hasPermission('READ_CONTACTS')) return [];
   try {
-    return (assi.rows('content://com.android.contacts/contacts', ['display_name'], null, null, null, 3000) || [])
+    return (axiko.rows('content://com.android.contacts/contacts', ['display_name'], null, null, null, 3000) || [])
       .map(function (row) { return row.display_name ? String(row.display_name) : ''; }).filter(Boolean);
   } catch (error) {
     return [];
@@ -583,7 +583,7 @@ exports.remind = function (force) {
     options.actions = [{ title: 'Слушать', call: HOME + '/main.js', fn: 'listenFromNotice', args: {} }];
   }
   try {
-    assi.notify(options);
+    axiko.notify(options);
   } catch (error) {
     log('Уведомление не ушло: ' + msg(error));
   }
@@ -592,7 +592,7 @@ exports.remind = function (force) {
 
 /** The button «Слушать» of the reminder: the episode starts without opening the screen. */
 exports.listenFromNotice = function () {
-  try { assi.notify.cancel(NOTICE_ID); } catch (error) { /* already gone */ }
+  try { axiko.notify.cancel(NOTICE_ID); } catch (error) { /* already gone */ }
   return exports.play({});
 };
 
@@ -1010,7 +1010,7 @@ exports.live = function (pick) {
   var p = pick && pick.episode ? pick : plan.toPlay(season, readState(), Date.now(), s.continueDays);
   if (!p.mode) return { ok: false, why: p.why };
   if (!phone.online()) return { ok: false, why: 'Живому режиму нужна сеть' };
-  if (!phone.speech().ready) return { ok: false, why: 'Распознавание речи на телефоне не готово — скачайте его в настройках голоса Assi' };
+  if (!phone.speech().ready) return { ok: false, why: 'Распознавание речи на телефоне не готово — скачайте его в настройках голоса Axiko' };
   var number = p.mode === 'ask' && (season.written || 0) > p.episode ? p.episode + 1 : p.episode;
   var ep = readEpisode(season.id, number);
   if (!ep) return { ok: false, why: 'Серия ' + number + ' ещё не написана' };
@@ -1230,9 +1230,9 @@ exports.play = function (options) {
     return { ok: false, why: p.why + (need.need && can.ok ? '. Можно написать её сейчас.' : ''), canWrite: !!(need.need && can.ok), finished: !!p.finished };
   }
   if (s.live && !options.recorded) return exports.live(p);
-  if (!assi.permission(['RECORD_AUDIO'])) return { ok: false, why: 'Нужен доступ к микрофону: на развилках отвечают голосом' };
-  if (!phone.speech().ready) return { ok: false, why: 'Распознавание речи на телефоне не готово — скачайте его в настройках голоса Assi' };
-  try { assi.notify.cancel(NOTICE_ID); } catch (error) { /* none */ }
+  if (!axiko.permission(['RECORD_AUDIO'])) return { ok: false, why: 'Нужен доступ к микрофону: на развилках отвечают голосом' };
+  if (!phone.speech().ready) return { ok: false, why: 'Распознавание речи на телефоне не готово — скачайте его в настройках голоса Axiko' };
+  try { axiko.notify.cancel(NOTICE_ID); } catch (error) { /* none */ }
   var state = voice.run(seriesDriver(season.id, p), schema.voiceOptions(s));
   return { ok: true, state: state, mode: p.mode, episode: p.episode };
 };
@@ -1261,7 +1261,7 @@ exports.voiceState = function () {
 /** Asks for a permission the series needs: 'READ_CALENDAR' | 'READ_CONTACTS' | 'RECORD_AUDIO'. */
 exports.askPermission = function (name) {
   if (['READ_CALENDAR', 'READ_CONTACTS', 'RECORD_AUDIO'].indexOf(String(name)) < 0) throw new Error('Не та доступность: ' + name);
-  return assi.permission([String(name)]);
+  return axiko.permission([String(name)]);
 };
 
 exports.widget = function () {

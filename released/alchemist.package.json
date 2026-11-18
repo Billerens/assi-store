@@ -8,8 +8,8 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
@@ -18,13 +18,13 @@
     },
     {
       "path": "code/checks.js",
-      "sha256": "730e531cc4bab32c8d608569335498026d5adba7f6da4b134d1c9cc459966776",
-      "size": 8093
+      "sha256": "5bd98dc3a33164923498680e46078282094ca43cc7b55965c090a26b409abe0c",
+      "size": 8096
     },
     {
       "path": "code/config.json",
-      "sha256": "7650d8b3430cf6a548595af200edc4adc9a15d9427d5fe425c63ffbd6afcc249",
-      "size": 21033
+      "sha256": "1fa17e9fee0392ab1b641a53740f691ad41f8fadc0e28c48779b2907febf0d6f",
+      "size": 21034
     },
     {
       "path": "code/content/banned.json",
@@ -68,13 +68,13 @@
     },
     {
       "path": "code/graph.js",
-      "sha256": "c709f4b7ebd796a3913ba100a4ee54f80335fd747f3fe15be9eb9b809f32a4aa",
-      "size": 19924
+      "sha256": "7c0017ef9ec7347117fe2f2ab37d38c4bf5106356e0d694026ca4bfc61bf8173",
+      "size": 19935
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "1eae0b2990609aedaf2866995448082584c7f7725e2c8b26420d2f76a15a80f2",
-      "size": 48041
+      "sha256": "49ad1415f765b6e65018bae98ed627c4283b4193028ae1ae991e8e69b535f762",
+      "size": 48043
     },
     {
       "path": "code/icon.svg",
@@ -93,8 +93,8 @@
     },
     {
       "path": "code/sim.js",
-      "sha256": "35ec2c4b28fff696b36cbffa0cf1acfd5f78dca782fb330ac752d29885a6541e",
-      "size": 82210
+      "sha256": "330a6b9acb0ae1f6c66bb02130f594ba28ef2eac15492b96ecdf6883b2f19e57",
+      "size": 82211
     },
     {
       "path": "code/ui/art.js",
@@ -108,8 +108,8 @@
     },
     {
       "path": "code/ui/game.js",
-      "sha256": "fb6f547abe04d98c8ac511e4809703c787677fcf2f4af535fcff0da81914a2f7",
-      "size": 44473
+      "sha256": "8700d3929dbac932f844a8d208405a66bb8bca9151567c226110f25e5d9532f9",
+      "size": 44477
     },
     {
       "path": "code/ui/index.html",
@@ -131,10 +131,10 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1,
+    "axikoApi": 1,
     "gamesEngine": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

@@ -4,8 +4,8 @@
 // short thought, into a title, tags and maybe a command: a draft in Входящие, an expense in Траты,
 // a reminder), kept in an archive with search by words and by meaning, in the long memory and the
 // shared base. Every step works without a model: the code cleans and extracts what it can, a model
-// does it better. The description: docs/modules/recorder.md in Assi.
-var assi = require('lib/assi');
+// does it better. The description: docs/modules/recorder.md in Axiko.
+var axiko = require('lib/axiko');
 var settingsLib = require('./logic/settings.js');
 var text = require('./logic/text.js');
 var extract = require('./logic/extract.js');
@@ -57,7 +57,7 @@ function phone() {
 
 function optional(path) {
   try {
-    return assi.files.exists(path) ? require(path) : null;
+    return axiko.files.exists(path) ? require(path) : null;
   } catch (error) {
     console.warn('recorder: ' + path + ': ' + message(error));
     return null;
@@ -66,7 +66,7 @@ function optional(path) {
 
 // ---- the database ------------------------------------------------------------------------------
 
-var db = assi.db('recorder');
+var db = axiko.db('recorder');
 
 function columns(table) {
   return db.query('pragma table_info(' + table + ')').map(function (c) { return c.name; });
@@ -122,7 +122,7 @@ function marksOf(id) {
 // ---- settings and what the shell can -------------------------------------------------------------
 
 function settings() {
-  return settingsLib.normalize(assi.files.readJson(SETTINGS, {}));
+  return settingsLib.normalize(axiko.files.readJson(SETTINGS, {}));
 }
 
 function features() {
@@ -151,7 +151,7 @@ function granted(permission) {
 function ask(permissions) {
   if (permissions.every(granted)) return true;
   if (!host.activity) return false;
-  return Boolean(assi.permission(permissions));
+  return Boolean(axiko.permission(permissions));
 }
 
 /** The model of a role, when the setting lets it work: { provider, local } or null. */
@@ -198,7 +198,7 @@ function changed(type, id) {
 function refreshWidget() {
   if (Date.now() - LIVE.widgetAt < 3000) return;
   LIVE.widgetAt = Date.now();
-  try { assi.widget.refresh('recorder'); } catch (error) { /* no widget */ }
+  try { axiko.widget.refresh('recorder'); } catch (error) { /* no widget */ }
 }
 
 function setState(id, state, extra) {
@@ -221,7 +221,7 @@ function progress(id, words) {
 
 function tell(title, body, open, quiet) {
   try {
-    return assi.notify({ title: title, text: body, open: open || SCREEN, channel: quiet ? 'quiet' : undefined });
+    return axiko.notify({ title: title, text: body, open: open || SCREEN, channel: quiet ? 'quiet' : undefined });
   } catch (error) {
     console.warn('recorder: notify: ' + message(error));
     return null;
@@ -233,7 +233,7 @@ function dirOf(id) {
 }
 
 function mkdirs(rel) {
-  new java.io.File(String(assi.files.path(rel))).mkdirs();
+  new java.io.File(String(axiko.files.path(rel))).mkdirs();
 }
 
 function dateText(time) {
@@ -253,7 +253,7 @@ function activeNow(rec) {
 }
 
 function saveState(rec) {
-  assi.files.writeJson(STATE, {
+  axiko.files.writeJson(STATE, {
     id: rec.id, startedAt: rec.startedAt, pausedMs: rec.pausedMs, pausedAt: rec.pausedAt, paused: rec.paused, n: rec.n,
     partStartActive: rec.partStartActive, wakeWas: rec.wakeWas, mode: rec.mode, splitMode: rec.splitMode,
     lastActive: activeNow(rec), savedAt: Date.now()
@@ -261,7 +261,7 @@ function saveState(rec) {
 }
 
 function clearState() {
-  assi.files.remove(STATE);
+  axiko.files.remove(STATE);
 }
 
 function wakeOff() {
@@ -297,7 +297,7 @@ function partPath(rec, n) {
 function openPart(rec, n) {
   var s = rec.s;
   return phone().record({
-    path: assi.files.path(partPath(rec, n)),
+    path: axiko.files.path(partPath(rec, n)),
     source: settingsLib.SOURCES[s.source] || 1,
     rate: s.sampleRate,
     channels: s.channels,
@@ -312,12 +312,12 @@ function openPart(rec, n) {
 function closePart(rec, n, endActive) {
   var file = partPath(rec, n);
   var size = 0;
-  try { size = phone().size(assi.files.path(file)); } catch (error) { size = 1; }
+  try { size = phone().size(axiko.files.path(file)); } catch (error) { size = 1; }
   if (size > 0 && endActive > rec.partStartActive) {
     db.exec("insert into segments (recordingId, n, offsetMs, durationMs, file, state, tries) values (?, ?, ?, ?, ?, 'wait', 0)",
       [rec.id, n, rec.partStartActive, endActive - rec.partStartActive, file]);
   } else {
-    assi.files.remove(file);
+    axiko.files.remove(file);
   }
   rec.partStartActive = endActive;
   db.exec('update recordings set parts = (select count(*) from segments where recordingId = ?), durationMs = ? where id = ?', [rec.id, endActive, rec.id]);
@@ -331,7 +331,7 @@ function onInfo(rec, kind) {
   if (kind === 'approaching') {
     if (rec.splitMode !== 'next' || rec.nextSet) return;
     try {
-      phone().nextFile(rec.recorder, assi.files.path(partPath(rec, rec.n + 1)));
+      phone().nextFile(rec.recorder, axiko.files.path(partPath(rec, rec.n + 1)));
       rec.nextSet = true;
     } catch (error) {
       console.warn('recorder: setNextOutputFile: ' + message(error) + ' — stop and start from now on');
@@ -383,7 +383,7 @@ function ongoing(rec) {
   ];
   try {
     if (has('notify.actions')) {
-      assi.notify({
+      axiko.notify({
         id: NOTICE_ID, title: title, text: body, open: SCREEN, ongoing: true, silent: true, channel: 'quiet',
         when: rec.paused ? undefined : Date.now() - active, chronometer: !rec.paused,
         actions: buttons.map(function (b) { return { title: b.title, call: SELF, fn: 'fromNotice', args: { act: b.act } }; })
@@ -397,7 +397,7 @@ function ongoing(rec) {
 }
 
 function ongoingOff() {
-  try { if (has('notify.actions')) assi.notify.cancel(NOTICE_ID); } catch (error) { /* gone */ }
+  try { if (has('notify.actions')) axiko.notify.cancel(NOTICE_ID); } catch (error) { /* gone */ }
   try { phone().cancelOngoing(OWN_NOTICE); } catch (error) { /* gone */ }
 }
 
@@ -416,7 +416,7 @@ function emitState() {
 function ticker(rec) {
   var lastSave = 0;
   var lastFree = 0;
-  var dir = assi.files.path(dirOf(rec.id));
+  var dir = axiko.files.path(dirOf(rec.id));
   while (LIVE.rec === rec) {
     var s = rec.s;
     var now = Date.now();
@@ -463,7 +463,7 @@ exports.startRecording = function (options) {
     var s = settings();
     var busy = micBusy();
     if (busy) throw new Error(busy);
-    if (!ask(['RECORD_AUDIO'])) throw new Error('Нет доступа к микрофону: разрешите его Assi');
+    if (!ask(['RECORD_AUDIO'])) throw new Error('Нет доступа к микрофону: разрешите его Axiko');
     var mode = MODES.indexOf(options.mode) >= 0 ? options.mode : s.defaultMode;
     var now = Date.now();
     db.exec("insert into recordings (title, mode, kind, startedAt, durationMs, parts, state, origin, created, edited) values (?, ?, ?, ?, 0, 0, 'recording', 'mic', ?, ?)",
@@ -547,7 +547,7 @@ exports.stopRecording = function (reason) {
     var active = activeNow(rec);
     var ok = rec.recorder ? phone().finish(rec.recorder) : false;
     if (ok) closePart(rec, rec.n, active);
-    else assi.files.remove(partPath(rec, rec.n));
+    else axiko.files.remove(partPath(rec, rec.n));
     var count = db.query('select count(*) as n from segments where recordingId = ?', [rec.id])[0].n;
     db.exec('update recordings set durationMs = ?, parts = ?, state = ?, error = ? where id = ?',
       [active, count, count ? 'transcribing' : 'failed', count ? (reason || null) : (reason || 'В записи нет звука'), rec.id]);
@@ -603,7 +603,7 @@ exports.fromNotice = function (args) {
   if (act === 'stop') return exports.stopRecording();
   if (act === 'mark') {
     var m = exports.mark(null);
-    try { assi.toast('Отметка ' + text.clock(m.atMs)); } catch (error) { /* no toast */ }
+    try { axiko.toast('Отметка ' + text.clock(m.atMs)); } catch (error) { /* no toast */ }
     if (LIVE.rec) ongoing(LIVE.rec);
     return m;
   }
@@ -627,7 +627,7 @@ exports.onPower = function (event) {
 
 /** After the process went down during a recording: what was written stays, the wake word comes back. */
 function recover() {
-  var st = assi.files.readJson(STATE, null);
+  var st = axiko.files.readJson(STATE, null);
   if (!st || !st.id) return null;
   if (LIVE.rec && LIVE.rec.id === st.id) return null;
   var rec = row(st.id);
@@ -637,7 +637,7 @@ function recover() {
   if (!rec || rec.state !== 'recording') return null;
   var end = Math.max(Number(st.lastActive || 0), Number(st.partStartActive || 0));
   var file = dirOf(rec.id) + '/' + parts.partName(st.n, 'm4a');
-  if (assi.files.exists(file) && end > st.partStartActive) {
+  if (axiko.files.exists(file) && end > st.partStartActive) {
     db.exec("insert into segments (recordingId, n, offsetMs, durationMs, file, state, tries) values (?, ?, ?, ?, ?, 'wait', 0)",
       [rec.id, st.n, st.partStartActive, end - st.partStartActive, file]);
   }
@@ -660,10 +660,10 @@ function transcribeOne(seg, s) {
     var raw;
     var phrases = null;
     if (has('transcribe.segments')) {
-      phrases = js(assi.speech.transcribe(seg.file, { segments: true })) || [];
+      phrases = js(axiko.speech.transcribe(seg.file, { segments: true })) || [];
       raw = phrases.map(function (p) { return String(p.text || ''); }).join(' ').trim();
     } else {
-      raw = String(assi.speech.transcribe(seg.file) || '').trim();
+      raw = String(axiko.speech.transcribe(seg.file) || '').trim();
     }
     var clean = text.codeClean(raw, phrases, s.paragraphGapMs);
     db.exec("update segments set raw = ?, phrases = ?, text = ?, cleanedBy = 'code', transcribeMs = ?, state = 'done', error = null where id = ?",
@@ -704,7 +704,7 @@ exports.runQueue = function () {
         if (s.transcribeWhen === 'charging' && !charging() && !LIVE.force[seg.recordingId]) { stopped = 'charging'; break; }
         if (speech().ready === false) {
           stopped = 'model';
-          progress(seg.recordingId, 'Ждёт модель распознавания речи: скачайте её в настройках Assi');
+          progress(seg.recordingId, 'Ждёт модель распознавания речи: скачайте её в настройках Axiko');
           break;
         }
         try {
@@ -909,7 +909,7 @@ function runCommand(rec, cmd, s) {
     var taskId = db.lastId();
     var options = { title: 'Напомнить: ' + cmd.text, text: whenText(at) + ' — нажмите «Напомнить», чтобы поставить', open: open };
     if (has('notify.actions')) options.actions = [{ title: 'Напомнить', call: SELF, fn: 'remindTask', args: { id: taskId } }];
-    try { assi.notify(options); } catch (error) { /* the task is in the recording */ }
+    try { axiko.notify(options); } catch (error) { /* the task is in the recording */ }
     return 'proposed';
   }
   return null;
@@ -1237,7 +1237,7 @@ exports.setTask = function (id, fields) {
  */
 function keptAward() {
   try {
-    if (achieve.given(assi.files, ACHIEVED, 'recorder/no-task-lost')) return null;
+    if (achieve.given(axiko.files, ACHIEVED, 'recorder/no-task-lost')) return null;
     var s = settings();
     var now = new Date(Date.now());
     var pad = function (n) { return (n < 10 ? '0' : '') + n; };
@@ -1245,7 +1245,7 @@ function keptAward() {
     var from = awards.shift(today, -s.keptTasksDays);
     var got = awards.keptAll(db.query('select due, done, proposed from tasks where due >= ? and due < ?', [from, today]), today, s.keptTasksDays, s.keptTasksMin);
     if (!got.ok) return null;
-    return achieve.give(assi.files, require, {
+    return achieve.give(axiko.files, require, {
       key: 'recorder/no-task-lost', source: 'recorder', category: 'Жизнь', title: 'Ни одной задачи не потерял', icon: 'check', rarity: 'rare',
       text: 'Выполнены все задачи из записей со сроком за ' + s.keptTasksDays + ' дн. — ' + got.due + ' из ' + got.due, at: Date.now()
     }, ACHIEVED);
@@ -1376,7 +1376,7 @@ exports.dropAudio = function (id) {
   var r = row(id);
   if (!r) return false;
   if (LIVE.rec && LIVE.rec.id === r.id) throw new Error('Запись ещё идёт');
-  segmentsOf(id).forEach(function (g) { if (g.file) assi.files.remove(g.file); });
+  segmentsOf(id).forEach(function (g) { if (g.file) axiko.files.remove(g.file); });
   db.exec('update recordings set audioRemoved = ?, audioKept = 0 where id = ?', [Date.now(), id]);
   changed('audio', id);
   return true;
@@ -1387,7 +1387,7 @@ exports.remove = function (id) {
   if (!r) return false;
   if (LIVE.rec && LIVE.rec.id === r.id) exports.stopRecording();
   tasksOf(id).forEach(function (t) { if (t.remindAt) { try { unjob(reminderKey(t.id)); } catch (error) { /* none */ } } });
-  assi.files.remove(dirOf(id));
+  axiko.files.remove(dirOf(id));
   dropChunks(id);
   db.exec('delete from segments where recordingId = ?', [id]);
   db.exec('delete from marks where recordingId = ?', [id]);
@@ -1395,9 +1395,9 @@ exports.remove = function (id) {
   db.exec('delete from recordings where id = ?', [id]);
   if (r.memoryId) { try { require('lib/memory').remove(r.memoryId); } catch (error) { /* gone */ } }
   if (r.baseId) { try { require('lib/base').remove(r.baseId); } catch (error) { /* gone */ } }
-  var imported = assi.files.readJson(IMPORTED, {});
+  var imported = axiko.files.readJson(IMPORTED, {});
   Object.keys(imported).forEach(function (k) { if (imported[k] === r.id) delete imported[k]; });
-  assi.files.writeJson(IMPORTED, imported);
+  axiko.files.writeJson(IMPORTED, imported);
   changed('remove', id);
   return true;
 };
@@ -1447,14 +1447,14 @@ exports.summaryText = function (id) {
 };
 
 exports.share = function (id) {
-  assi.share(exports.summaryText(id));
+  axiko.share(exports.summaryText(id));
   return true;
 };
 
 /** A text to the clipboard: the summary of a recording (a number) or any text (a string). */
 exports.copy = function (what) {
   var value = typeof what === 'number' || /^\d+$/.test(String(what)) ? exports.summaryText(Number(what)) : String(what || '');
-  assi.clipboard.set(value);
+  axiko.clipboard.set(value);
   return true;
 };
 
@@ -1463,19 +1463,19 @@ exports.copy = function (what) {
 /** Audio files in data/uploads/ (from «Поделиться») that are not imported yet. */
 exports.uploads = function () {
   var s = settings();
-  var imported = assi.files.readJson(IMPORTED, {});
+  var imported = axiko.files.readJson(IMPORTED, {});
   var names = [];
-  try { names = assi.files.list('data/uploads'); } catch (error) { return []; }
+  try { names = axiko.files.list('data/uploads'); } catch (error) { return []; }
   var since = Date.now() - s.uploadsDays * 864e5;
   return names.map(String).filter(parts.isAudio).map(function (name) {
-    var f = new java.io.File(String(assi.files.path('data/uploads/' + name)));
+    var f = new java.io.File(String(axiko.files.path('data/uploads/' + name)));
     return { name: name, path: 'data/uploads/' + name, size: Number(f.length()), time: Number(f.lastModified()), recordingId: imported[name] || null };
   }).filter(function (u) { return u.time >= since; }).sort(function (a, b) { return b.time - a.time; });
 };
 
 function prepareImport(id, path, own) {
   var s = settings();
-  var abs = String(assi.files.path(path));
+  var abs = String(axiko.files.path(path));
   var dir = dirOf(id);
   mkdirs(dir);
   var length = phone().duration(abs);
@@ -1484,7 +1484,7 @@ function prepareImport(id, path, own) {
   progress(id, 'Разрезаю файл на отрезки');
   if (length === null || length > s.importWholeMaxMin * 60000) {
     try {
-      list = phone().cut(abs, s.partMinutes * 60000, function (n, e) { return assi.files.path(dir + '/' + parts.partName(n, e)); });
+      list = phone().cut(abs, s.partMinutes * 60000, function (n, e) { return axiko.files.path(dir + '/' + parts.partName(n, e)); });
     } catch (error) {
       console.warn('recorder: cut: ' + message(error));
       list = null;
@@ -1492,19 +1492,19 @@ function prepareImport(id, path, own) {
     if (list && !list.length) list = null;
     if (!list) {
       progress(id, 'Разрезаю файл через ffmpeg');
-      list = phone().ffmpeg(assi, abs, assi.files.path(dir), s.partMinutes * 60, 3600);
+      list = phone().ffmpeg(axiko, abs, axiko.files.path(dir), s.partMinutes * 60, 3600);
       if (list && !list.length) list = null;
     }
     if (!list && length !== null) {
-      throw new Error('Файл на ' + text.length(length) + ' не разрезать без ffmpeg: поставьте его в Linux Assi (apt-get install -y ffmpeg) или пришлите файл в m4a, ogg, mp3 или wav');
+      throw new Error('Файл на ' + text.length(length) + ' не разрезать без ffmpeg: поставьте его в Linux Axiko (apt-get install -y ffmpeg) или пришлите файл в m4a, ogg, mp3 или wav');
     }
   }
   if (!list) {
     var target = dir + '/' + parts.partName(1, ext);
-    phone().copy(abs, assi.files.path(target));
-    list = [{ n: 1, path: assi.files.path(target), offsetMs: 0, durationMs: length || 0 }];
+    phone().copy(abs, axiko.files.path(target));
+    list = [{ n: 1, path: axiko.files.path(target), offsetMs: 0, durationMs: length || 0 }];
   }
-  var root = String(assi.files.path('')).replace(/\/+$/, '');
+  var root = String(axiko.files.path('')).replace(/\/+$/, '');
   var total = 0;
   list.forEach(function (p) {
     var rel = String(p.path).indexOf(root) === 0 ? String(p.path).slice(root.length).replace(/^\/+/, '') : dir + '/' + String(p.path).split('/').pop();
@@ -1512,7 +1512,7 @@ function prepareImport(id, path, own) {
     total = Math.max(total, p.offsetMs + p.durationMs);
   });
   db.exec("update recordings set durationMs = ?, parts = ?, state = 'transcribing', progress = ? where id = ?", [total || length || 0, list.length, 'В очереди на расшифровку', id]);
-  if (own) assi.files.remove(path);
+  if (own) axiko.files.remove(path);
   changed('import', id);
   kickQueue();
 }
@@ -1521,18 +1521,18 @@ function prepareImport(id, path, own) {
 exports.importFile = function (path, options) {
   options = options || {};
   var p = String(path || '').replace(/^\/+/, '');
-  if (!p || !assi.files.exists(p)) throw new Error('Нет файла ' + p);
+  if (!p || !axiko.files.exists(p)) throw new Error('Нет файла ' + p);
   var name = p.split('/').pop();
   var now = Date.now();
-  var f = new java.io.File(String(assi.files.path(p)));
+  var f = new java.io.File(String(axiko.files.path(p)));
   var startedAt = Number(f.lastModified()) || now;
   db.exec("insert into recordings (title, mode, kind, startedAt, durationMs, parts, state, origin, sourceName, created, edited, progress) values (?, 'import', ?, ?, 0, 0, 'importing', 'file', ?, ?, ?, ?)",
     [options.title || null, MODES.indexOf(options.mode) > 0 ? options.mode : null, startedAt, options.name || name, now, options.title ? now : null, 'Файл принят']);
   var id = db.lastId();
   if (/^data\/uploads\//.test(p)) {
-    var imported = assi.files.readJson(IMPORTED, {});
+    var imported = axiko.files.readJson(IMPORTED, {});
     imported[name] = id;
-    assi.files.writeJson(IMPORTED, imported);
+    axiko.files.writeJson(IMPORTED, imported);
   }
   changed('import', id);
   var run = function () {
@@ -1553,7 +1553,7 @@ exports.importBegin = function (name) {
   var token = String(Date.now()) + '-' + Math.floor(Math.random() * 1e6);
   mkdirs(DIR + '/incoming');
   var path = DIR + '/incoming/' + token + '-' + safe;
-  assi.files.write(path, '');
+  axiko.files.write(path, '');
   LIVE.uploads[token] = { path: path, name: safe, bytes: 0 };
   return token;
 };
@@ -1561,7 +1561,7 @@ exports.importBegin = function (name) {
 exports.importChunk = function (token, base64) {
   var u = LIVE.uploads[token];
   if (!u) throw new Error('Загрузка прервалась: выберите файл снова');
-  u.bytes += phone().append(assi.files.path(u.path), base64);
+  u.bytes += phone().append(axiko.files.path(u.path), base64);
   return u.bytes;
 };
 
@@ -1578,7 +1578,7 @@ exports.importEnd = function (token, options) {
 // ---- playing on the phone (when the screen cannot) ---------------------------------------------------------
 
 exports.play = function (file, ms) {
-  phone().play(assi.files.path(String(file).replace(/^\/+/, '')), ms || 0, function (path) { emit('recorder.player', { ended: true, file: file }); });
+  phone().play(axiko.files.path(String(file).replace(/^\/+/, '')), ms || 0, function (path) { emit('recorder.player', { ended: true, file: file }); });
   return phone().playerState();
 };
 
@@ -1604,7 +1604,7 @@ exports.settings = function () {
 
 exports.saveSettings = function (patch) {
   var next = settingsLib.normalize(Object.assign({}, settings(), patch || {}));
-  assi.files.writeJson(SETTINGS, settingsLib.diff(next));
+  axiko.files.writeJson(SETTINGS, settingsLib.diff(next));
   job('recorder:clean', { at: next.cleanAt }, function () { require(SELF).clean(); });
   if (patch && patch.transcribeWhen) kickQueue();
   changed('settings', null);
@@ -1658,9 +1658,9 @@ exports.clean = function () {
   var ids = parts.toStrip(db.query('select id, startedAt, state, audioKept, audioRemoved from recordings'), Date.now(), s.keepAudioDays);
   ids.forEach(function (id) { try { exports.dropAudio(id); } catch (error) { /* recording */ } });
   try {
-    assi.files.list(DIR + '/incoming').forEach(function (name) {
+    axiko.files.list(DIR + '/incoming').forEach(function (name) {
       var token = String(name).split('-').slice(0, 2).join('-');
-      if (!LIVE.uploads[token] && Number(String(name).split('-')[0]) < Date.now() - 864e5) assi.files.remove(DIR + '/incoming/' + name);
+      if (!LIVE.uploads[token] && Number(String(name).split('-')[0]) < Date.now() - 864e5) axiko.files.remove(DIR + '/incoming/' + name);
     });
   } catch (error) { /* no folder */ }
   keptAward();
@@ -1671,10 +1671,10 @@ function installTool() {
   var stub = TOOL_MARK + ' (modules/recorder/tool.js). Файл ставит сам модуль при запуске;\n' +
     '// удалите модуль — заглушка молча выключится.\n' +
     'try {\n  module.exports = require(\'modules/recorder/tool.js\');\n} catch (error) {\n  exports.name = null;\n}\n';
-  var there = assi.files.exists(TOOL_PATH) ? assi.files.read(TOOL_PATH) : null;
+  var there = axiko.files.exists(TOOL_PATH) ? axiko.files.read(TOOL_PATH) : null;
   if (there === stub) return;
   if (there !== null && there.indexOf(TOOL_MARK) !== 0) return;   // the owner's own tool: not ours to replace
-  assi.files.write(TOOL_PATH, stub);
+  axiko.files.write(TOOL_PATH, stub);
 }
 
 /** Runs at every start of the app (module.json "autostart"): events, jobs, the tool, what a crash left. */

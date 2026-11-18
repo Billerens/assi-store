@@ -9,7 +9,7 @@ var env = require(path.join(ADVENTURE, 'tests', 'engine-stub.js')).install({
   mounts: { 'modules/voice-adventure': ADVENTURE, 'modules/bedtime-series': ROOT }
 });
 var sample = JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'sample.json'), 'utf8'));
-var fakeAssi = require('lib/assi');
+var fakeAxiko = require('lib/axiko');
 var main = env.require('modules/bedtime-series/main.js');
 var plan = env.require('modules/bedtime-series/plan.js');
 
@@ -21,7 +21,7 @@ var passed = 0;
 function test(name, fn) {
   env.reset();
   granted = { RECORD_AUDIO: true };
-  fakeAssi.rows = function () { return []; };
+  fakeAxiko.rows = function () { return []; };
   try {
     fn();
     passed++;
@@ -129,7 +129,7 @@ test('детали дня: календарь и база — в промпт, �
   granted.READ_CALENDAR = true;
   granted.READ_CONTACTS = true;
   var today = plan.midnight(Date.now());
-  fakeAssi.rows = function (uri) {
+  fakeAxiko.rows = function (uri) {
     if (/calendar\/instances\/when\//.test(uri)) {
       assert.ok(uri.indexOf('/' + today + '/' + (today + 86400000)) > 0, uri);
       return [{ title: 'Обед с Петей и Мариной', begin: today + 15 * 3600000, end: today + 16 * 3600000, allDay: 0 }];

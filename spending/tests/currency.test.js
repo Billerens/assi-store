@@ -8,7 +8,7 @@ var T0 = new Date(2026, 10, 14, 12).getTime();
 var DAY = 864e5;
 var passed = 0, failed = 0;
 
-if (!sim.realBase()) throw new Error('Assi lib/base.js is required for currency integration tests');
+if (!sim.realBase()) throw new Error('Axiko lib/base.js is required for currency integration tests');
 
 function day(at) {
   var d = new Date(at);
@@ -19,11 +19,11 @@ function check(name, fn) {
   e.env.now = T0;
   try {
     var main = e.require('modules/spending/main.js');
-    var assi = e.require('lib/assi');
+    var axiko = e.require('lib/axiko');
     var base = e.require('lib/base');
-    var db = assi.db('spending');
+    var db = axiko.db('spending');
     main.start();
-    fn({ main: main, env: e.env, files: assi.files, db: db, base: base });
+    fn({ main: main, env: e.env, files: axiko.files, db: db, base: base });
     passed++;
   } catch (error) {
     failed++;

@@ -1,15 +1,15 @@
 // «Рисуй — угадаю» — логика в движке: настройки, модели (угадывание по снимку и рисунок
 // штрихами), слова, запас рисунков, раунды и партии в data/draw-guess.db, картинки рисунков,
 // отклик на имя на время голосового угадывания, общая база, сравнение моделей.
-// Экран зовёт эти функции через assi.call('modules/draw-guess/main.js', имя, аргументы).
+// Экран зовёт эти функции через axiko.call('modules/draw-guess/main.js', имя, аргументы).
 //
 // Для агента: «давай порисуем» — require('modules/draw-guess/main.js').open({ mode: 'human' });
 // «нарисуй что-нибудь, а я угадаю» — open({ mode: 'model', start: true }). Ещё можно передать
 // theme (любая строка), difficulty (1–5), players (имена команд), teams, drawSeconds, rounds.
 // Агент узнаёт об этом из инструмента tools/draw-guess.js (action open), который start() пишет при
-// каждом запуске Assi (module.json "autostart"); текст инструмента — в tool.js.
+// каждом запуске Axiko (module.json "autostart"); текст инструмента — в tool.js.
 // Ачивки партии уходят в «Ачивки за жизнь» (awards.js).
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var ai = require('lib/ai');
 var match = require('./match');
 var config = require('./config');
@@ -35,7 +35,7 @@ var DAY = 24 * 3600000;
 var prepared = false;
 
 function db() {
-  var handle = assi.db('draw-guess');
+  var handle = axiko.db('draw-guess');
   if (!prepared) {
     handle.exec('create table if not exists rounds (id integer primary key autoincrement, at integer not null, mode text, word text, ' +
       'secret_known integer, strokes text, guesses text, result text, time_ms integer, requests integer, role_model text, ' +
@@ -88,12 +88,12 @@ function parse(text, fallback) {
 // ---- настройки и возможности ------------------------------------------------------------------
 
 exports.settings = function () {
-  return config.normalize(assi.files.readJson(SETTINGS, {}));
+  return config.normalize(axiko.files.readJson(SETTINGS, {}));
 };
 
 exports.saveSettings = function (patch) {
   var next = config.normalize(merge(exports.settings(), patch));
-  assi.files.writeJson(SETTINGS, next);
+  axiko.files.writeJson(SETTINGS, next);
   return next;
 };
 
@@ -111,7 +111,7 @@ exports.features = function () {
 };
 
 exports.open = function (prefill) {
-  assi.files.writeJson(PREFILL, merge(prefill || {}, { at: Date.now() }));
+  axiko.files.writeJson(PREFILL, merge(prefill || {}, { at: Date.now() }));
   native('ui.open', SCREEN);
   return 'Открыта игра «Рисуй — угадаю»';
 };
@@ -123,16 +123,16 @@ exports.tool = function (args) {
   return 'Неизвестное действие: ' + args.action;
 };
 
-/** Запуск Assi (module.json "autostart"): только записать инструмент агента — игры без экрана нет. */
+/** Запуск Axiko (module.json "autostart"): только записать инструмент агента — игры без экрана нет. */
 exports.start = function () {
-  agentTool.write(assi.files);
+  agentTool.write(axiko.files);
   return true;
 };
 
 function takePrefill() {
-  var found = assi.files.readJson(PREFILL, null);
+  var found = axiko.files.readJson(PREFILL, null);
   if (!found) return null;
-  assi.files.remove(PREFILL);
+  axiko.files.remove(PREFILL);
   return Date.now() - (found.at || 0) < 10 * 60000 ? found : null;
 }
 
@@ -227,7 +227,7 @@ function dictionary() {
 }
 
 function hatInstalled() {
-  return assi.files.exists('modules/hat/main.js');
+  return axiko.files.exists('modules/hat/main.js');
 }
 
 function recentSet(limit) {
@@ -257,9 +257,9 @@ function refill(options) {
       if (made && made.source !== 'offline') {
         var recent = recentSet(exports.settings().recentWords);
         var fresh = (made.cards || []).map(cards.toCard).filter(function (card) { return card.word && !recent[match.normalize(card.word)]; });
-        var queue = assi.files.readJson(QUEUE, {});
+        var queue = axiko.files.readJson(QUEUE, {});
         queue[key] = (queue[key] || []).concat(fresh).slice(0, 40);
-        assi.files.writeJson(QUEUE, queue);
+        axiko.files.writeJson(QUEUE, queue);
       }
     } catch (error) {
       console.warn('draw-guess: слова от Шляпы: ' + message(error));
@@ -286,7 +286,7 @@ exports.card = function (options) {
     return merge(plain[0], { source: 'offline' });
   }
   var key = queueKey(o);
-  var queue = assi.files.readJson(QUEUE, {});
+  var queue = axiko.files.readJson(QUEUE, {});
   var list = queue[key] || [];
   var recent = recentSet(s.recentWords);
   var card = null;
@@ -295,7 +295,7 @@ exports.card = function (options) {
     if (!recent[match.normalize(next.word)]) card = merge(next, { source: 'model' });
   }
   queue[key] = list;
-  assi.files.writeJson(QUEUE, queue);
+  axiko.files.writeJson(QUEUE, queue);
   if (list.length < 3) refill(o);
   if (card) return card;
   var picked = cards.offline(dictionary(), { theme: o.theme, difficulty: o.difficulty, count: 1, exclude: recent });
@@ -347,7 +347,7 @@ function drawingRow(row) {
 }
 
 /**
- * Рисунок для раунда «Assi рисует»: из запаса (старый первым), иначе — нарисовать сейчас.
+ * Рисунок для раунда «Axiko рисует»: из запаса (старый первым), иначе — нарисовать сейчас.
  * → { id, word, strokes, checked, fresh } или { error }.
  */
 exports.takeDrawing = function (options) {
@@ -373,7 +373,7 @@ exports.takeDrawing = function (options) {
 //
 // «Игра дня» (modules/game-of-the-day) утром заказывает dayDrawing(): один рисунок модели на день
 // откладывается из запаса (или рисуется сразу, если запас пуст), а владелец угадывает его, когда
-// удобно, хоть без сети — экран ?daily=1 играет один раунд «Assi рисует» именно с ним.
+// удобно, хоть без сети — экран ?daily=1 играет один раунд «Axiko рисует» именно с ним.
 
 function pad2(n) {
   return (n < 10 ? '0' : '') + n;
@@ -385,7 +385,7 @@ function dayKey(time) {
 }
 
 function dailyMark() {
-  var mark = assi.files.readJson(DAILY, null);
+  var mark = axiko.files.readJson(DAILY, null);
   return mark && typeof mark === 'object' && mark.id ? mark : null;
 }
 
@@ -429,7 +429,7 @@ exports.dayDrawing = function (date, options) {
     id = db().lastId();
   }
   mark = { date: date, id: id, at: Date.now(), played: null, result: null };
-  assi.files.writeJson(DAILY, mark);
+  axiko.files.writeJson(DAILY, mark);
   return dailyView(mark);
 };
 
@@ -441,7 +441,7 @@ function takeDaily() {
   if (!rows.length) return null;
   db().exec('update drawings set used_at = ? where id = ?', [Date.now(), mark.id]);
   mark.played = Date.now();
-  assi.files.writeJson(DAILY, mark);
+  axiko.files.writeJson(DAILY, mark);
   var out = drawingRow(rows[0]);
   out.daily = true;
   return out;
@@ -498,7 +498,7 @@ exports.saveRound = function (round) {
     var mark = dailyMark();
     if (mark) {
       mark.result = round.result === 'guessed' ? 'guessed' : 'missed';
-      assi.files.writeJson(DAILY, mark);
+      axiko.files.writeJson(DAILY, mark);
     }
   }
   return db().lastId();
@@ -515,14 +515,14 @@ exports.saveArt = function (id, dataUrl) {
   if (!found) throw new Error('Нет картинки');
   var path = ART + '/' + String(id).replace(/[^\w-]/g, '') + (found[1] === 'png' ? '.png' : '.jpg');
   var bytes = java.util.Base64.getDecoder().decode(String(found[2]));
-  var target = java.nio.file.Paths.get(assi.files.path(path));
+  var target = java.nio.file.Paths.get(axiko.files.path(path));
   java.nio.file.Files.createDirectories(target.getParent());
   java.nio.file.Files.write(target, bytes);
   return path;
 };
 
 exports.removeArt = function (path) {
-  if (/^data\/draw-guess\/art\/[\w-]+\.(png|jpg)$/.test(path) && assi.files.exists(path)) assi.files.remove(path);
+  if (/^data\/draw-guess\/art\/[\w-]+\.(png|jpg)$/.test(path) && axiko.files.exists(path)) axiko.files.remove(path);
   return true;
 };
 
@@ -593,7 +593,7 @@ function reportAwards(s) {
   var genius = unrecognized.length ? Number(unrecognized[0].genius) || 0 : 0;
   var items = awards.earned(results, s, Date.now(), { genius: genius });
   if (!items.length) return [];
-  return awards.deliver(items, assi.files, function (path) { return require(path); });
+  return awards.deliver(items, axiko.files, function (path) { return require(path); });
 }
 
 exports.removeGame = function (gameId) {
@@ -684,7 +684,7 @@ var lastBeat = 0;
 var watching = false;
 
 function wakeMark() {
-  return assi.files.readJson(WAKE, null) || {};
+  return axiko.files.readJson(WAKE, null) || {};
 }
 
 exports.wakeOff = function () {
@@ -692,7 +692,7 @@ exports.wakeOff = function () {
   var status = tryNative('wake.status');
   if (!mark.pending) {
     mark = { pending: true, was: !!(status && status.on), at: Date.now() };
-    assi.files.writeJson(WAKE, mark);
+    axiko.files.writeJson(WAKE, mark);
   }
   if (status && status.on) tryNative('wake.set', false);
   exports.beat();
@@ -704,11 +704,11 @@ exports.wakeRestore = function () {
   var mark = wakeMark();
   if (mark.stream) tryNative('speech.stream.stop');
   if (!mark.pending) {
-    if (mark.stream) assi.files.writeJson(WAKE, merge(mark, { stream: false }));
+    if (mark.stream) axiko.files.writeJson(WAKE, merge(mark, { stream: false }));
     return false;
   }
   if (mark.was) tryNative('wake.set', true);
-  assi.files.writeJson(WAKE, { pending: false, was: mark.was, restored: Date.now() });
+  axiko.files.writeJson(WAKE, { pending: false, was: mark.was, restored: Date.now() });
   return true;
 };
 
@@ -720,7 +720,7 @@ exports.beat = function () {
 exports.streamMark = function (on) {
   var mark = wakeMark();
   mark.stream = !!on;
-  assi.files.writeJson(WAKE, mark);
+  axiko.files.writeJson(WAKE, mark);
   return true;
 };
 
@@ -750,12 +750,12 @@ function watch() {
 // ---- уборка и открытие -------------------------------------------------------------------------
 
 function cleanup(force) {
-  var stamp = assi.files.readJson(CLEANED, { at: 0 });
+  var stamp = axiko.files.readJson(CLEANED, { at: 0 });
   if (!force && Date.now() - stamp.at < DAY) return;
   var s = exports.settings();
   db().exec('delete from rounds where at < ?', [Date.now() - s.keepDays * DAY]);
   db().exec('delete from drawings where used_at is not null and used_at < ?', [Date.now() - 30 * DAY]);
-  assi.files.writeJson(CLEANED, { at: Date.now() });
+  axiko.files.writeJson(CLEANED, { at: Date.now() });
 }
 
 /**

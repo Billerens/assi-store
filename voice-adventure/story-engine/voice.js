@@ -1,7 +1,7 @@
 // The voice loop of a story — «Голосовой движок историй», shared by the adventure and the night
 // series. It runs here in the engine, on a background thread (spawn), not on the screen: the
 // screen may be off and the phone in a pocket. The screen only shows the state (the event
-// `story.state`) and sends commands (assi.call('modules/voice-adventure/story-engine/voice.js', 'command', …)).
+// `story.state`) and sends commands (axiko.call('modules/voice-adventure/story-engine/voice.js', 'command', …)).
 //
 // One line of the loop: say it (the phone's voice without the network, a recording when there is
 // one) → wait for the end of speech → listen (GigaAM on the phone) → understand (service words

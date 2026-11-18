@@ -8,8 +8,8 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
@@ -23,13 +23,13 @@
     },
     {
       "path": "code/checks.js",
-      "sha256": "ce21ecd44b6313d0511ce221455f7d53e8f4992273bedaa55c8dc49ad52ffde3",
-      "size": 8884
+      "sha256": "f935a2323d37027a413136cf74bf2431bee9311c208693ff73cc43d8a6720b1d",
+      "size": 8886
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "238ea7f9ca88f58168e9ca4f9bb5563fee51f274ee9755a92c53dde7c85fabde",
-      "size": 32350
+      "sha256": "831279329942966db1e0ee4ffa54e9eb5372f2566bf39789b6a4edf0b6113262",
+      "size": 32352
     },
     {
       "path": "code/icon.svg",
@@ -63,8 +63,8 @@
     },
     {
       "path": "code/logic/money.js",
-      "sha256": "1aed0d5029bb0df456662fead8aafb55e47c0dbbbbe468b2b1d0edc016a16e80",
-      "size": 6861
+      "sha256": "c3080a097d94168063c6282189f0ce2fc17a418d4950cc8c6bbe19fdb826d62b",
+      "size": 6862
     },
     {
       "path": "code/logic/parse.js",
@@ -98,8 +98,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "22cb5c11b0be79d08706af08abeb538f6688c77a2bafe723562917d37fc4228d",
-      "size": 95354
+      "sha256": "37709664c842c6972f272a32be9bec2d8ace9297f7aec8fba105b578e4fbc154",
+      "size": 95388
     },
     {
       "path": "code/module.json",
@@ -108,8 +108,8 @@
     },
     {
       "path": "code/shell.js",
-      "sha256": "ff828f25fd26015b3caa5e8b2d9cacbc8441b6e0e7050f37f41d8b095a4b9033",
-      "size": 3022
+      "sha256": "a7716bc3411187b3989d704e8b4d40d6c5ab35828f19f7a04ff1eb312707ccba",
+      "size": 3028
     },
     {
       "path": "code/tool.js",
@@ -118,8 +118,8 @@
     },
     {
       "path": "code/ui/index.html",
-      "sha256": "a0ccd5b764b8e8f7a164624f1af68da1b12c7e61e27a1ad27d10f284fcdc4ca9",
-      "size": 69517
+      "sha256": "48da3d3713e1c1473d107fda982bb2a26aafd9407b492f370c6cc7fef90f0d06",
+      "size": 69535
     }
   ],
   "id": "spending",
@@ -132,14 +132,14 @@
   "optionalDependencies": [
     {
       "id": "health",
-      "version": ">=0.1.2"
+      "version": ">=0.1.3"
     }
   ],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

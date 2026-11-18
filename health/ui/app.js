@@ -2,7 +2,7 @@
 // modules/health/main.js in one call (view) and every change goes back through it.
 const h = ui.h;
 const MAIN = 'modules/health/main.js';
-const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
 const NB = ' ';
 const DAYS = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
 const MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
@@ -788,7 +788,7 @@ async function fromNotification() {
     const out = await call('medTaken', hash.get('med'), Number(hash.get('due')), 'taken');
     ui.toast('Отмечено: ' + out.name + (out.status === 'late' ? ', с опозданием' : ''));
     history.replaceState(null, '', location.pathname + location.search);
-    setTimeout(() => assi.back(), 1400);
+    setTimeout(() => axiko.back(), 1400);
     return true;
   } catch (error) {
     fail(error);
@@ -812,8 +812,8 @@ async function main() {
   } catch (error) {
     fail(error);
   }
-  assi.on('health.changed', later);
-  assi.on('life.place', later);
+  axiko.on('health.changed', later);
+  axiko.on('life.place', later);
 }
 
 main().catch(fail);

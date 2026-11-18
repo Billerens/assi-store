@@ -1,4 +1,4 @@
-// A pretend Assi engine for main.js under node: the workspace files in memory, themes, notifications,
+// A pretend Axiko engine for main.js under node: the workspace files in memory, themes, notifications,
 // jobs and a clock that the test moves. Only what main.js touches is here.
 var fs = require('fs');
 var path = require('path');
@@ -89,7 +89,7 @@ exports.make = function (options) {
   };
 
   var mocks = {
-    'lib/assi': {
+    'lib/axiko': {
       files: files,
       rows: function (uri) {
         if (uri.indexOf('profile') >= 0) return plain(options.profile || []);
@@ -164,7 +164,7 @@ exports.make = function (options) {
     getPackageManager: function () {
       return { getPackageInfo: function () { return { firstInstallTime: Date.parse(options.installed || '2025-11-10T10:00:00') }; } };
     },
-    getPackageName: function () { return 'app.assi'; }
+    getPackageName: function () { return 'app.axiko'; }
   };
 
   var sandbox = {

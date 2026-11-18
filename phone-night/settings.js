@@ -43,7 +43,7 @@ var SCHEMA = [
   { key: 'noticeMin', group: 'Пороги', label: 'Порог уведомлений в строке', type: 'number', def: 3, min: 1, max: 1000, step: 1 },
   { key: 'topCount', group: 'Пороги', label: 'Мест в рейтингах', type: 'number', def: 3, min: 1, max: 10, step: 1 },
   { key: 'mergeSeconds', group: 'Пороги', label: 'Склеивать одинаковые события ближе, с', type: 'number', def: 3, min: 0, max: 60, step: 1, unit: 'с',
-    hint: 'Журнал Assi и статистика Android видят одно включение экрана — это одно событие' },
+    hint: 'Журнал Axiko и статистика Android видят одно включение экрана — это одно событие' },
   { key: 'noticeRepeatSeconds', group: 'Пороги', label: 'Обновление того же уведомления не считать, с', type: 'number', def: 60, min: 0, max: 3600, step: 10, unit: 'с' },
   { key: 'rebootMergeMinutes', group: 'Пороги', label: 'Признаки одной перезагрузки ближе, мин', type: 'number', def: 10, min: 1, max: 120, step: 1, unit: 'мин' },
   { key: 'timelineMarks', group: 'Пороги', label: 'Отметок на шкале ночи, не больше', type: 'number', def: 300, min: 50, max: 2000, step: 50 },

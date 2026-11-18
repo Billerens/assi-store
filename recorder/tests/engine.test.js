@@ -10,7 +10,7 @@ var path = require('path');
 var sim = require('./sim.js');
 
 if (!sim.realBase()) {
-  console.log('engine: пропущено — нужен репозиторий Assi рядом (lib/base.js)');
+  console.log('engine: пропущено — нужен репозиторий Axiko рядом (lib/base.js)');
   process.exit(0);
 }
 
@@ -723,7 +723,7 @@ check('«Ни одной задачи не потерял»: without Ачивк�
   var b = recorder.addTask(1, { text: 'Позвонить Олегу', due: '2026-11-12' });
   recorder.addTask(1, { text: 'Без срока' });
   recorder.addTask(1, { text: 'Срок впереди', due: '2026-11-20' });
-  var files = engine.require('lib/assi').files;
+  var files = engine.require('lib/axiko').files;
   recorder.setTask(a, { done: true });
   assert.strictEqual(files.exists('data/games/achievements-outbox.json'), false, 'one task is still open');
   recorder.setTask(b, { done: true });
@@ -746,7 +746,7 @@ check('«Ни одной задачи не потерял»: with Ачивки i
   var achievements = engine.require('modules/achievements/main.js');
   assert.strictEqual(achievements.got.length, 1);
   assert.strictEqual(achievements.got[0].key, 'recorder/no-task-lost');
-  assert.strictEqual(engine.require('lib/assi').files.exists('data/games/achievements-outbox.json'), false);
+  assert.strictEqual(engine.require('lib/axiko').files.exists('data/games/achievements-outbox.json'), false);
 });
 
 console.log('engine: ' + passed + ' passed, ' + failed + ' failed');

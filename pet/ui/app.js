@@ -4,7 +4,7 @@
 const h = ui.h;
 const MAIN = 'modules/pet/main.js';
 const HEALTH = 'modules/health/main.js';
-const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
 const NB = ' ';
 const LONG_MS = 520;
 const REACTION_TITLES = { water: 'Глоток воды', habit: 'Отметка привычки', med: 'Лекарство', level: 'Новый уровень', achievement: 'Ачивка', welcome: 'Возвращение', tap: 'Касание' };
@@ -222,11 +222,11 @@ function drawQuick() {
   }
   const buttons = [];
   if (q.water) {
-    buttons.push(h('button', { class: 'btn soft quick-btn', onclick: () => mark('water', () => assi.call(HEALTH, 'addWater')) },
+    buttons.push(h('button', { class: 'btn soft quick-btn', onclick: () => mark('water', () => axiko.call(HEALTH, 'addWater')) },
       glyph('drop'), 'Стакан воды'));
   }
   q.habits.forEach(habit => {
-    buttons.push(h('button', { class: 'btn soft quick-btn', onclick: () => mark('habit', () => assi.call(HEALTH, 'markHabit', habit.id)) },
+    buttons.push(h('button', { class: 'btn soft quick-btn', onclick: () => mark('habit', () => axiko.call(HEALTH, 'markHabit', habit.id)) },
       ui.icon('check'), h('span', { 'data-raw': '' }, habit.title)));
   });
   box.replaceChildren(...buttons);
@@ -372,7 +372,7 @@ function drawAccess() {
     accessRow('Праздничные пасхалки', V.holidays, V.holidays ? 'Колпак в день рождения, тыква в Хэллоуин.' : 'Не установлены: остаётся только зимний шарф.'),
     accessRow('Картинка в виджете', f.indexOf('widget.image') >= 0, f.indexOf('widget.image') >= 0 ? 'Виджет показывает его самого.' : 'Оболочка пока умеет только текстовый виджет.',
       f.indexOf('widget.image') >= 0 ? h('button', { class: 'btn small soft', onclick: redraw }, 'Перерисовать') : null),
-    accessRow('Карточка на главном', f.indexOf('home.cards') >= 0, f.indexOf('home.cards') >= 0 ? 'Над плитками модулей.' : 'Нужна новая сборка Assi.'),
+    accessRow('Карточка на главном', f.indexOf('home.cards') >= 0, f.indexOf('home.cards') >= 0 ? 'Над плитками модулей.' : 'Нужна новая сборка Axiko.'),
     accessRow('Ярлык комнаты', true, 'Значок на рабочем столе телефона.', h('button', { class: 'btn small soft', onclick: pin }, 'Добавить'))
   ];
   document.getElementById('access').replaceChildren(card('settings', 'Что подключено', null, h('div', {}, ...rows)));
@@ -519,10 +519,10 @@ async function main() {
   } catch (error) {
     fail(error);
   }
-  assi.on('pet.changed', later);
-  assi.on('pet.react', later);
-  assi.on('life.mark', onMark);
-  assi.on('app.visible', state => { if (state && state.on) later(); });
+  axiko.on('pet.changed', later);
+  axiko.on('pet.react', later);
+  axiko.on('life.mark', onMark);
+  axiko.on('app.visible', state => { if (state && state.on) later(); });
 }
 
 main().catch(fail);

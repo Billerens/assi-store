@@ -8,18 +8,18 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "acdde191be1f8a79d911fd8b223d2c5c459420cd32c1beb92070f76c4af2632e",
-      "size": 8115
+      "sha256": "515592790ceebbceba953b8c220358c76de803667df91e0316248efaa0c5ff99",
+      "size": 8116
     },
     {
       "path": "code/checks.js",
-      "sha256": "5326b210d17a8896471678ba958a4e9e6f132aff93170daa4649a10ff5e7b824",
-      "size": 6039
+      "sha256": "273b874170233ea1b07d8538cd43ce5e7cd7d5f256fefab22fd9c2015d660e9a",
+      "size": 6042
     },
     {
       "path": "code/dates.js",
@@ -53,8 +53,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "d6661623ce58e4873dd378468cc34b0029c71fd6d0f13703b8cfca1245e497eb",
-      "size": 23080
+      "sha256": "1dbc858a4702c6acfcfbbb10212bd079301bf68ae88a11f90d47150694c875e7",
+      "size": 23088
     },
     {
       "path": "code/module.json",
@@ -68,8 +68,8 @@
     },
     {
       "path": "code/source.js",
-      "sha256": "e5358b2c3f382f1f31b46d1a16218a5207188f623d587e724b68b80748cd6c23",
-      "size": 7626
+      "sha256": "8f7a8777875f66dc496669d324a6bedbad51e729b477aeddb9b73a1d8c09ca68",
+      "size": 7638
     },
     {
       "path": "code/stars.json",
@@ -88,8 +88,8 @@
     },
     {
       "path": "code/ui/index.html",
-      "sha256": "770f7ea397ddacccecfec1522f19307f52d0770760bb2dad00a155de3e2d4c9e",
-      "size": 20450
+      "sha256": "9c66fe45d85a56d778fb96c29d5872f96419bbec8fe36a690afb82f78b8e5245",
+      "size": 20456
     }
   ],
   "id": "horoscope",
@@ -99,26 +99,26 @@
   "optionalDependencies": [
     {
       "id": "achievements",
-      "version": ">=0.1.2"
+      "version": ">=0.1.3"
     },
     {
       "id": "health",
-      "version": ">=0.1.2"
+      "version": ">=0.1.3"
     },
     {
       "id": "rpg",
-      "version": ">=0.1.2"
+      "version": ">=0.1.3"
     },
     {
       "id": "spending",
-      "version": ">=0.1.2"
+      "version": ">=0.1.3"
     }
   ],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

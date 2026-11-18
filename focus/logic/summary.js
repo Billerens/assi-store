@@ -59,7 +59,7 @@ exports.fromInbox = function (since, s) {
 };
 
 /**
- * The summary without the inbox, from the recent notifications (assi.notifications.recent): the
+ * The summary without the inbox, from the recent notifications (axiko.notifications.recent): the
  * ones that came during the session, one line per app and title. People of the list are "important".
  */
 exports.fromNotices = function (notices, from, to, s, ownPackage) {

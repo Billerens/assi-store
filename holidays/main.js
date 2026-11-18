@@ -5,12 +5,12 @@
 // and puts its look on: the shell's decoration layer when there is one (theme.decor), otherwise a
 // theme of its own, "holiday", made from the owner's theme — taken off again when the occasion is
 // over. It reminds of close people's birthdays and drafts greetings (the owner sends them), notices
-// the first snow, greets the owner on their birthday and sums up a year of Assi on its anniversary.
+// the first snow, greets the owner on their birthday and sums up a year of Axiko on its anniversary.
 //
 // The agent reaches it through tools/holidays.js, written on start (see "the agent's tool").
 //
 // Pure rules are in calendar.js, birthdays.js, decor.js, settings.js (tested in node).
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var calendar = require('./calendar');
 var birthdays = require('./birthdays');
 var decor = require('./decor');
@@ -45,7 +45,7 @@ function locked(fn) {
 
 // ---- small things ---------------------------------------------------------------------------
 
-/** Shell features (docs/shell-changes.md in Assi); none when the shell does not know the question. */
+/** Shell features (docs/shell-changes.md in Axiko); none when the shell does not know the question. */
 function features() {
   try {
     var list = native('shell.features');
@@ -61,7 +61,7 @@ function shellHas(name) {
 
 function readJson(path, fallback) {
   try {
-    var value = assi.files.readJson(path, fallback);
+    var value = axiko.files.readJson(path, fallback);
     return value === undefined || value === null ? fallback : value;
   } catch (error) {
     console.warn('holidays: не читается ' + path + ': ' + error);
@@ -70,7 +70,7 @@ function readJson(path, fallback) {
 }
 
 function writeJson(path, value) {
-  assi.files.writeJson(path, value);
+  axiko.files.writeJson(path, value);
 }
 
 function copy(value) {
@@ -120,12 +120,12 @@ function notify(options) {
   if (options.silent) payload.silent = true;
   // Buttons in the shade only when the shell can run them; otherwise a tap opens the screen.
   if (options.actions && shellHas('notify.actions')) payload.actions = options.actions;
-  return safely('уведомление', function () { return assi.notify(payload); });
+  return safely('уведомление', function () { return axiko.notify(payload); });
 }
 
 function changed() {
   safely('событие', function () { emit('holidays.changed', { at: Date.now() }); });
-  safely('виджет', function () { assi.widget.refresh('holidays'); });
+  safely('виджет', function () { axiko.widget.refresh('holidays'); });
 }
 
 /** Runs fn at a moment: an exact one-off job when the shell has it, else a waiting thread. */
@@ -192,9 +192,9 @@ function occasions(settings, all) {
 function decorFiles() {
   var files = {};
   safely('украшения', function () {
-    assi.files.list(DIR + '/decor').forEach(function (name) {
+    axiko.files.list(DIR + '/decor').forEach(function (name) {
       name = String(name);
-      if (/\.css$/.test(name)) files[name.replace(/\.css$/, '')] = assi.files.read(DIR + '/decor/' + name);
+      if (/\.css$/.test(name)) files[name.replace(/\.css$/, '')] = axiko.files.read(DIR + '/decor/' + name);
     });
   });
   return files;
@@ -209,7 +209,7 @@ function known(files) {
 function readContacts() {
   if (!granted('READ_CONTACTS')) return null;
   return safely('контакты', function () {
-    var rows = assi.rows('content://com.android.contacts/data', ['contact_id', 'display_name', 'data1', 'data2', 'starred'],
+    var rows = axiko.rows('content://com.android.contacts/data', ['contact_id', 'display_name', 'data1', 'data2', 'starred'],
       "mimetype = 'vnd.android.cursor.item/contact_event' and data2 = 3", null, null, 5000);
     return birthdays.fromRows(rows);
   });
@@ -218,7 +218,7 @@ function readContacts() {
 function calendarEvents(fromMs, toMs) {
   if (!granted('READ_CALENDAR')) return [];
   return safely('календарь', function () {
-    var rows = assi.rows('content://com.android.calendar/instances/when/' + Math.round(fromMs) + '/' + Math.round(toMs),
+    var rows = axiko.rows('content://com.android.calendar/instances/when/' + Math.round(fromMs) + '/' + Math.round(toMs),
       ['title', 'begin', 'allDay', 'calendar_displayName'], null, null, 'begin asc', 5000);
     return rows.map(function (row) {
       // An all-day event starts at midnight UTC; a timed one is read in the phone's time zone.
@@ -266,7 +266,7 @@ function ownerBirthday(settings) {
   }
   if (granted('READ_CONTACTS')) {
     var found = safely('профиль', function () {
-      var rows = assi.rows('content://com.android.contacts/profile/data', ['data1', 'data2'],
+      var rows = axiko.rows('content://com.android.contacts/profile/data', ['data1', 'data2'],
         "mimetype = 'vnd.android.cursor.item/contact_event' and data2 = 3", null, null, 5);
       for (var i = 0; i < rows.length; i++) {
         var parsed = birthdays.parse(rows[i].data1);
@@ -381,7 +381,7 @@ function undoTheme(state, themes) {
 
 /** The decoration layer as it is now: '' when there is none, null when it cannot be read. */
 function readDecorLayer() {
-  return safely('слой украшений', function () { return assi.files.exists(DECOR_FILE) ? assi.files.read(DECOR_FILE) : ''; });
+  return safely('слой украшений', function () { return axiko.files.exists(DECOR_FILE) ? axiko.files.read(DECOR_FILE) : ''; });
 }
 
 /**
@@ -494,14 +494,14 @@ function recentDrafts(limit) {
 
 /** The module's one line in the assistant's memory (agent/memory.md); null removes it. */
 function setMemoryLine(text) {
-  var body = assi.files.exists(MEMORY) ? assi.files.read(MEMORY) : '';
+  var body = axiko.files.exists(MEMORY) ? axiko.files.read(MEMORY) : '';
   var had = body.indexOf(MEMORY_MARK) >= 0;
   if (!text && !had) return;
   var lines = body.split('\n').filter(function (line) { return line.indexOf(MEMORY_MARK) < 0; });
   while (lines.length && lines[lines.length - 1].trim() === '') lines.pop();
   if (text) lines.push('- ' + text + ' ' + MEMORY_MARK);
   var next = lines.join('\n') + '\n';
-  if (next !== body) assi.files.write(MEMORY, next);
+  if (next !== body) axiko.files.write(MEMORY, next);
 }
 
 function memoryLine(settings, active) {
@@ -579,12 +579,12 @@ function rememberGreeting(person, day, next, settings) {
 
 /** The daily check: every close person's birthday of the last year had a greeting in time. Once. */
 function forgotAward(day, settings, ctx) {
-  if (achieve.given(assi.files, ACHIEVED, AWARD_KEY)) return null;
+  if (achieve.given(axiko.files, ACHIEVED, AWARD_KEY)) return null;
   var record = awards.normalize(readJson(GREETED, null), day);
-  if (!assi.files.exists(GREETED)) writeJson(GREETED, record);   // the counting begins today
+  if (!axiko.files.exists(GREETED)) writeJson(GREETED, record);   // the counting begins today
   var got = awards.check(ctx.people, record, day, settings.awardYearDays, settings.awardMinPeople);
   if (!got.ok) return null;
-  return achieve.give(assi.files, require, {
+  return achieve.give(axiko.files, require, {
     key: AWARD_KEY, source: 'holidays', category: 'Жизнь', title: 'Не забыл', icon: 'calendar', rarity: 'epic',
     text: 'Поздравления всем близким за ' + settings.awardYearDays + ' дн. подготовлены вовремя — ' + got.due + ' из ' + got.due,
     at: Date.now()
@@ -640,14 +640,14 @@ function ownerFacts() {
 function ownerTemplate(facts) {
   var text = 'С днём рождения! Пусть этот год будет добрым, а задуманное — сбывается.';
   if (facts.modules) {
-    text += ' В Assi у вас уже ' + facts.modules + ' ' + birthdays.plural(facts.modules, 'модуль', 'модуля', 'модулей');
+    text += ' В Axiko у вас уже ' + facts.modules + ' ' + birthdays.plural(facts.modules, 'модуль', 'модуля', 'модулей');
     if (facts.records) text += ', а в общей базе — ' + facts.records + ' ' + birthdays.plural(facts.records, 'запись', 'записи', 'записей') + ' о вашей жизни';
     text += '.';
   }
   return text;
 }
 
-var OWNER_SYSTEM = 'Ты — ассистент Assi. Сегодня день рождения твоего владельца. Поздравь его в 2–3 предложениях, ' +
+var OWNER_SYSTEM = 'Ты — ассистент Axiko. Сегодня день рождения твоего владельца. Поздравь его в 2–3 предложениях, ' +
   'по-русски, тепло и без пафоса. Можно упомянуть что-то из фактов о его годе, но только то, что в них есть: ' +
   'ничего не выдумывай и не додумывай причин. Ответь только текстом поздравления.';
 
@@ -701,7 +701,7 @@ function placeFor(settings) {
   if (settings.weatherCity) {
     var state = loadState();
     if (state.geo && state.geo.city === settings.weatherCity) return state.geo;
-    var response = assi.http.get('https://geocoding-api.open-meteo.com/v1/search?name=' + encodeURIComponent(settings.weatherCity) + '&count=1&language=ru&format=json');
+    var response = axiko.http.get('https://geocoding-api.open-meteo.com/v1/search?name=' + encodeURIComponent(settings.weatherCity) + '&count=1&language=ru&format=json');
     var hit = response.ok ? (response.json().results || [])[0] : null;
     if (!hit) return null;
     var geo = { city: settings.weatherCity, name: String(hit.name), latitude: Number(hit.latitude), longitude: Number(hit.longitude) };
@@ -747,7 +747,7 @@ function weatherNow(settings) {
   }
   var place = placeFor(settings);
   if (!place) return null;
-  var response = assi.http.get('https://api.open-meteo.com/v1/forecast?latitude=' + place.latitude.toFixed(3) +
+  var response = axiko.http.get('https://api.open-meteo.com/v1/forecast?latitude=' + place.latitude.toFixed(3) +
     '&longitude=' + place.longitude.toFixed(3) + '&current=weather_code,temperature_2m,is_day');
   if (!response.ok) return null;
   var current = response.json().current || {};
@@ -883,7 +883,7 @@ function rearm() {
 }
 
 /**
- * The first time Assi is opened in a day: confetti on a birthday (for the set minutes) and the
+ * The first time Axiko is opened in a day: confetti on a birthday (for the set minutes) and the
  * greeting. voice — the greeting may be said aloud (the first unlock, when the setting allows).
  */
 exports.opened = function (voice) {
@@ -918,7 +918,7 @@ function unlocked() {
     var stale = (state.confettiOn && !confettiAllowed(settings, state, day)) || Boolean(state.preview && state.preview.until < Date.now());
     return { first: first, stale: stale };
   });
-  // Without the shell telling when Assi itself is opened, the first unlock of the day stands in for it.
+  // Without the shell telling when Axiko itself is opened, the first unlock of the day stands in for it.
   var openedNow = !shellHas('app.visible') && exports.opened(true).first;
   if (info.first) {
     if (!openedNow) exports.check();
@@ -962,7 +962,7 @@ exports.stop = function () {
     saveState(state);
   });
   safely('память ассистента', function () { setMemoryLine(null); });
-  safely('инструмент агента', function () { if (assi.files.exists(TOOL_FILE)) assi.files.remove(TOOL_FILE); });
+  safely('инструмент агента', function () { if (axiko.files.exists(TOOL_FILE)) axiko.files.remove(TOOL_FILE); });
   changed();
   return true;
 };
@@ -989,14 +989,14 @@ var TOOL = [
   "  yearly: { type: 'boolean', description: 'add: false — разовый повод (нужен год)' }",
   "}, required: ['action'] };",
   'exports.run = function (args) {',
-  "  if (!require('lib/assi').files.exists('modules/holidays/main.js')) return 'Модуль «Праздники» не установлен';",
+  "  if (!require('lib/axiko').files.exists('modules/holidays/main.js')) return 'Модуль «Праздники» не установлен';",
   "  return require('modules/holidays/main.js').tool(args || {});",
   '};',
   ''
 ].join('\n');
 
 function writeTool() {
-  if (!assi.files.exists(TOOL_FILE) || assi.files.read(TOOL_FILE) !== TOOL) assi.files.write(TOOL_FILE, TOOL);
+  if (!axiko.files.exists(TOOL_FILE) || axiko.files.read(TOOL_FILE) !== TOOL) axiko.files.write(TOOL_FILE, TOOL);
 }
 
 /** What the tool says about an occasion: short, without the look's details. */
@@ -1176,7 +1176,7 @@ exports.requestAccess = function (what) {
   var out = {};
   wanted.forEach(function (kind) {
     if (!names[kind]) return;
-    out[kind] = Boolean(safely('разрешение', function () { return assi.permission([names[kind]]); }));
+    out[kind] = Boolean(safely('разрешение', function () { return axiko.permission([names[kind]]); }));
   });
   spawn(function () { safely('проверка', function () { exports.check(); }); });
   return out;
@@ -1270,14 +1270,14 @@ exports.draft = function (who) {
 /** The button of a birthday reminder: makes the draft, copies it, shows it in a notification. */
 exports.draftFromNotice = function (args) {
   var entry = exports.draft(args && args.contact);
-  safely('буфер обмена', function () { assi.clipboard.set(entry.text); });
+  safely('буфер обмена', function () { axiko.clipboard.set(entry.text); });
   var where = entry.inbox ? ' Черновик лежит и во «Входящих», в беседе «' + entry.inbox + '».' : '';
   notify({ title: 'Черновик: ' + entry.name, text: entry.text + '\n\nТекст скопирован — вставьте его в чат сами.' + where, open: SCREEN + '?tab=people' });
   return entry;
 };
 
 exports.copy = function (text) {
-  assi.clipboard.set(String(text || ''));
+  axiko.clipboard.set(String(text || ''));
   return true;
 };
 
@@ -1285,7 +1285,7 @@ exports.copy = function (text) {
 exports.openContact = function (id) {
   id = String(id || '');
   if (!/^\d+$/.test(id)) return false;
-  assi.openUrl('content://com.android.contacts/contacts/' + id);
+  axiko.openUrl('content://com.android.contacts/contacts/' + id);
   return true;
 };
 

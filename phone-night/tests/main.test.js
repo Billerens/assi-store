@@ -1,5 +1,5 @@
 // node tests/main.test.js — the engine (main.js) through a whole night on a pretend phone: the
-// Rhino globals, lib/assi, lib/base, lib/ai and android.js are stand-ins; SQLite is node:sqlite
+// Rhino globals, lib/axiko, lib/base, lib/ai and android.js are stand-ins; SQLite is node:sqlite
 // (node 22.5+). The night is the sample one (samples/*.txt, fixture.js).
 var assert = require('assert');
 var fs = require('fs');
@@ -80,7 +80,7 @@ function database(name) {
   return handle;
 }
 
-var assiMock = {
+var axikoMock = {
   files: {
     path: function (p) { return '/abs/' + p; },
     read: function (p) {
@@ -215,7 +215,7 @@ Module._load = function (request, parent, isMain) {
     if (!world.mods || !world.mods[request]) throw new Error('Cannot find module ' + request);
     return world.mods[request];
   }
-  if (request === 'lib/assi') return assiMock;
+  if (request === 'lib/axiko') return axikoMock;
   if (request === 'lib/base') return baseMock;
   if (request === 'lib/ai') return aiMock;
   if (request === './android' && parent && parent.filename === MAIN_PATH) return phoneMock;
@@ -477,7 +477,7 @@ test('a reboot at night goes into the journal as kind reboot at the first start 
   m.start();
   m.start();
   var events = function () { return world.dbs['phone-night'].query("select at from events where kind = 'reboot'"); };
-  assert.strictEqual(events().length, 0, 'перезапуск Assi — не перезагрузка');
+  assert.strictEqual(events().length, 0, 'перезапуск Axiko — не перезагрузка');
   world.uptimeBase = t('03:10');
   clock.now = t('03:12');
   m.start();

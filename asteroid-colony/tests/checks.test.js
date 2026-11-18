@@ -1,5 +1,5 @@
 // The game's own device checks (checks.js: the engine's standard ones and the game's) run as
-// module_check runs them on the phone, in a node workspace of the Assi harness: the game is
+// module_check runs them on the phone, in a node workspace of the Axiko harness: the game is
 // copied to modules/games/<id>/ next to the hub's engine. The screen check needs the phone
 // (ui.openWait), so here it is expected to fail on that alone. node tests/checks.test.js
 'use strict';
@@ -8,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 
 const GAME = path.resolve(__dirname, '..');
-const HARNESS = path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js');
+const HARNESS = path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js');
 const { test, done, workspace } = require(HARNESS);
 const ID = JSON.parse(fs.readFileSync(path.join(GAME, 'game.json'), 'utf8')).id;
 

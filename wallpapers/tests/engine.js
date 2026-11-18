@@ -1,4 +1,4 @@
-// A pretend Assi engine for main.js under node: workspace files in memory, SQLite in memory
+// A pretend Axiko engine for main.js under node: workspace files in memory, SQLite in memory
 // (node:sqlite, Node 22.13+), jobs, events, notifications, a clock the test moves, and a pretend
 // phone in place of android.js: the APIs answer with the saved answers from samples/, pictures
 // are strings, the wallpaper calls are written down.
@@ -98,7 +98,7 @@ exports.make = function (options) {
     return handle;
   }
 
-  var assi = {
+  var axiko = {
     files: files,
     db: database,
     notify: function (o) { log.notify.push(plain(o)); return String(o.id || log.notify.length); },
@@ -246,7 +246,7 @@ exports.make = function (options) {
 
   var LOCAL = { './settings': 'settings.js', './context': 'context.js', './sources': 'sources.js', './select': 'select.js', './fold': 'fold.js' };
   function requireFor(name) {
-    if (name === 'lib/assi') return assi;
+    if (name === 'lib/axiko') return axiko;
     if (name === 'lib/ai') return ai;
     if (name === 'lib/memory') return { save: function (text, tags) { log.memory.push({ text: text, tags: tags }); return log.memory.length; } };
     if (name === './android') return phone;

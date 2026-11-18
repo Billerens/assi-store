@@ -3,7 +3,7 @@ require('../tools/hub.js');
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
-const { test, done, engine } = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const { test, done, engine } = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const B = require('../board.js');
 const L = require('../levels.js');
 const catalog = require('../content/challenges.json');

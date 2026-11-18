@@ -8,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
 const { GAME } = require('./env');
-const { test, done, HUB } = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const { test, done, HUB } = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const Core = require(path.join(HUB, 'engine', 'core.js'));
 
 function walk(dir, out) {

@@ -1,8 +1,8 @@
 // Checks of «Игра дня» on the phone (module_check). They do not start the agent (that costs money
 // and 40 minutes): a game of the day is a copy of the hub's template in a folder of a day long past.
 // What they add they remove; the log, the taste, the catalog, the plays and the settings are put back.
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 var HOME = 'modules/game-of-the-day';
 var HUB = 'modules/games';
 var TEMPLATE = HUB + '/engine/template';
@@ -39,7 +39,7 @@ function folders(dir) {
 
 function dropSaves(id) {
   try {
-    assi.db('games').exec('delete from saves where game = ?', [id]);
+    axiko.db('games').exec('delete from saves where game = ?', [id]);
   } catch (error) { /* no table */ }
 }
 
@@ -153,7 +153,7 @@ exports['игра дня из шаблона: проверка папки, оц�
     t.equal(g.status, 'trial');
     t.equal(g.origin, { from: 'game-of-the-day', date: date, rating: 5 });
     t.ok(files.read(HUB + '/' + kept.id + '/ui/index.html').indexOf('rate.js') < 0, 'крючок не снят');
-    var rows = assi.db('games').query('select count(*) as n from saves where game = ?', [kept.id]);
+    var rows = axiko.db('games').query('select count(*) as n from saves where game = ?', [kept.id]);
     t.equal(Number(rows[0].n), 1, 'сохранение не перешло под новый id');
     var listed = games.catalog().games.filter(function (one) { return one.id === kept.id; })[0];
     t.ok(listed && listed.trial, 'нет в «На пробу»');
@@ -165,7 +165,7 @@ exports['игра дня из шаблона: проверка папки, оц�
     files.write('data/games/links/plays.json', JSON.stringify(plays));
     t.equal(main().promote(), [kept.id]);
     t.equal(JSON.parse(files.read(HUB + '/' + kept.id + '/game.json')).status, 'active');
-    try { assi.notify.cancel('daily-game-root-' + kept.id); } catch (error) { /* none */ }
+    try { axiko.notify.cancel('daily-game-root-' + kept.id); } catch (error) { /* none */ }
   });
 };
 
@@ -179,7 +179,7 @@ exports['без оценки старая игра убирается вмест
     var out = main().sweep();
     t.ok(out.removed.indexOf(date) >= 0, 'не убрана: ' + JSON.stringify(out));
     t.ok(!files.exists(HUB + '/daily/' + date), 'папка осталась');
-    t.equal(Number(assi.db('games').query('select count(*) as n from saves where game = ?', ['daily/' + date])[0].n), 0);
+    t.equal(Number(axiko.db('games').query('select count(*) as n from saves where game = ?', ['daily/' + date])[0].n), 0);
   });
 };
 
@@ -197,7 +197,7 @@ exports['лист оценки появляется при выходе из и�
     t.equal(page.count('.gotd-star'), 5, 'нет пяти звёзд');
     t.ok(page.count('.gotd-chips .chip') === 8, 'нет чипов причин');
     t.ok(/Оставить в Игротеке/.test(page.text('.gotd-actions') || ''), 'нет кнопок');
-    page.eval('document.querySelectorAll(".sheet-back").forEach(function (n) { n.remove(); }); window.assi.back(); true', 0);
+    page.eval('document.querySelectorAll(".sheet-back").forEach(function (n) { n.remove(); }); window.axiko.back(); true', 0);
   });
 };
 
@@ -234,5 +234,5 @@ exports['экран и карточка открываются'] = function (t) 
   var card = t.screen(HOME + '/ui/card.html');
   t.wait(500);
   t.ok(/Игра дня/.test(card.text('.gc-head') || ''), 'карточка главного экрана пуста');
-  page.eval('window.assi.back(); true', 0);
+  page.eval('window.axiko.back(); true', 0);
 };

@@ -4,13 +4,13 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const assert = require('assert');
-// ASSI_ROOT may point to an Assi checkout; otherwise expect it beside assi-store.
-const assiRoot = process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi');
-const H = require(path.join(assiRoot, 'scripts/games/harness.js'));
+// AXIKO_ROOT may point to an Axiko checkout; otherwise expect it beside axiko-store.
+const axikoRoot = process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko');
+const H = require(path.join(axikoRoot, 'scripts/games/harness.js'));
 const { open } = require('./env');
 const { chromium } = require(process.env.EVOLUTION_PLAYWRIGHT || process.env.PLAYWRIGHT_MODULE || 'playwright-core');
 const chrome = process.env.EVOLUTION_CHROMIUM || process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
-const artifacts = path.resolve(process.env.ASSI_TEST_ARTIFACTS || path.join(__dirname, '../../build/artifacts'));
+const artifacts = path.resolve(process.env.AXIKO_TEST_ARTIFACTS || path.join(__dirname, '../../build/artifacts'));
 
 async function run() {
   const setup = open();
@@ -60,7 +60,7 @@ async function run() {
         return {};
       });
       await page.addInitScript(() => {
-        window.assi = {
+        window.axiko = {
           call: (_module, fn, ...args) => window.evolutionTestBridge(fn, args),
           native: async () => ({}), stage: async () => true,
           on: () => () => {}, back: () => {}, open: async () => true,

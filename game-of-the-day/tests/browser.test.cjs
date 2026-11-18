@@ -6,9 +6,9 @@ const os = require('node:os');
 const assert = require('node:assert/strict');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const store = path.resolve(__dirname, '../..');
-const factory = path.resolve(store, '../Assi/app/src/main/assets/factory');
+const factory = path.resolve(store, '../Axiko/app/src/main/assets/factory');
 const decor = require('../../holidays/decor.js');
-const screenshots = process.env.TEST_ARTIFACT_DIR || path.join(os.tmpdir(), 'assi-daily-holidays-review');
+const screenshots = process.env.TEST_ARTIFACT_DIR || path.join(os.tmpdir(), 'axiko-daily-holidays-review');
 fs.mkdirSync(screenshots, { recursive: true });
 const entry = { date: '2026-11-15', day: '2026-11-15', slot: 0, title: 'Пульс города',
   pitch: 'Попадите в ритм ночного города: меняйте дорожки, слушайте музыку и собирайте точные серии.',
@@ -26,7 +26,7 @@ const state = { date: entry.date, hub: true, today: entry, games: [entry], recen
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
     const errors = [];
     page.on('pageerror', error => { errors.push(error.message); console.error('PAGE ERROR:', error.message); });
-    await page.route('http://assi.test/**', async route => {
+    await page.route('http://axiko.test/**', async route => {
       const pathname = new URL(route.request().url()).pathname;
       if (pathname === '/modules/games/daily/2026-11-15/ui/index.html') {
         return route.fulfill({ contentType: 'text/html; charset=utf-8', body: '<html lang="ru"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/ui/kit/kit.css"><body><button id="g-exit" class="btn" onclick="window.left=true">Выйти</button><script src="/ui/kit/kit.js"></script><script src="/modules/game-of-the-day/ui/rate.js"></script></body></html>' });
@@ -38,7 +38,7 @@ const state = { date: entry.date, hub: true, today: entry, games: [entry], recen
     await page.addInitScript(({ state }) => {
       window.testState = state;
       window.savedFeedback = [];
-      window.assi = {
+      window.axiko = {
         on() {}, back() { window.left = true; }, open() {}, read: async () => '', native: async () => ({}),
         call: async (module, fn, date, data) => {
           if (fn === 'status') return window.testState;
@@ -54,7 +54,7 @@ const state = { date: entry.date, hub: true, today: entry, games: [entry], recen
         }
       };
     }, { state });
-    await page.goto('http://assi.test/modules/game-of-the-day/ui/index.html');
+    await page.goto('http://axiko.test/modules/game-of-the-day/ui/index.html');
     await page.getByText('Пульс города', { exact: true }).waitFor();
     assert.deepEqual(errors, []);
     const layout = await page.evaluate(() => {
@@ -91,7 +91,7 @@ const state = { date: entry.date, hub: true, today: entry, games: [entry], recen
     await page.waitForTimeout(250);
     await page.screenshot({ path: path.join(screenshots, 'daily-feedback-mobile.png') });
     assert.equal(await page.evaluate(() => document.querySelector('.sheet').getBoundingClientRect().width > innerWidth), false);
-    await page.goto('http://assi.test/modules/games/daily/2026-11-15/ui/index.html');
+    await page.goto('http://axiko.test/modules/games/daily/2026-11-15/ui/index.html');
     await page.waitForTimeout(50);
     await page.locator('#g-exit').click();
     await page.locator('#gotd-comment').fill('Нужна настройка задержки звука');

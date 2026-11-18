@@ -47,7 +47,7 @@
 
 ## Проверки
 
-Запуск из корня `assi-store` в PowerShell 7:
+Запуск из корня `axiko-store` в PowerShell 7:
 
 ```powershell
 node asteroid-colony/tests/economy.test.js

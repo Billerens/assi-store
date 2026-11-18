@@ -8,13 +8,13 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "693b080e0deac735885bf04360450355fe41fa084e02fe1d1dc1eecdcdb70229",
-      "size": 12194
+      "sha256": "8819a3eae52026e9a1620704903ae6e9ccd16d351e8a3b6be5d0c229267e7271",
+      "size": 12196
     },
     {
       "path": "code/achieve.js",
@@ -23,8 +23,8 @@
     },
     {
       "path": "code/android.js",
-      "sha256": "0d6325634be49020e1b1851ab1f651e8bd1a85ef3c9562f147f971a9bc73e773",
-      "size": 13676
+      "sha256": "bd5aa98887d4af7a501c7ea033e84a8ec2cd2937a94c66486b567868f32a3b90",
+      "size": 13688
     },
     {
       "path": "code/checks.js",
@@ -33,8 +33,8 @@
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "2c9d4058186d1b70b46897bc564eaf47be78b70d65abbb0d1501c81f98054309",
-      "size": 17885
+      "sha256": "3e52a629381dda2aa00d81ec623d45952c22ba78b4ae411aabdcfcccf3c70a00",
+      "size": 17886
     },
     {
       "path": "code/icon.svg",
@@ -73,8 +73,8 @@
     },
     {
       "path": "code/logic/sha1.js",
-      "sha256": "13ecdbebe165188bb4449b385e72159234320ed908f5de321aa3e270462b47a4",
-      "size": 2752
+      "sha256": "c9efd89a85d74d8c61a11f978c55cc2b34ad9eaf5d2e4838b48b5b16525da42a",
+      "size": 2753
     },
     {
       "path": "code/logic/triage.js",
@@ -83,8 +83,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "fd639fdad2133cef947f90c8e517b21c0403b4ff0a2a9c5cc9f5d95c50dd7636",
-      "size": 63738
+      "sha256": "4dad465dde9403ab43383e5bf490cdfe848c3077db4512347bbdea75e5c197cb",
+      "size": 63770
     },
     {
       "path": "code/module.json",
@@ -108,8 +108,8 @@
     },
     {
       "path": "code/ui/inbox.js",
-      "sha256": "eda439f64323dd54eaebbf68c424f0234a84b57c5637db64f76cc67f421ed9e0",
-      "size": 34817
+      "sha256": "cd9de5bdde6dcdb8ac55cdae8792ed0bb337f6daf195fc7ee1b1924597103acb",
+      "size": 34825
     },
     {
       "path": "code/ui/index.html",
@@ -124,9 +124,9 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

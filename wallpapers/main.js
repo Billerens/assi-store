@@ -1,12 +1,12 @@
 // «Обои дня»: every morning a photograph from open sources, chosen for the weather, the season
 // and the owner's taste, cropped for the Fold's outer and inner screens and the lock screen.
-// Screens call these functions with assi.call('modules/wallpapers/main.js', name, ...args);
+// Screens call these functions with axiko.call('modules/wallpapers/main.js', name, ...args);
 // the agent calls them with require('modules/wallpapers/main.js').
 //
 // Logic without Android is in settings.js, context.js, sources.js, select.js, fold.js (tested
 // in node); the Android side is in android.js.
 
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var settingsLib = require('./settings');
 var ctx = require('./context');
 var sources = require('./sources');
@@ -21,7 +21,7 @@ var DATA = 'data/wallpapers';
 var NOTICE_ID = 71517;
 var MB = 1048576;
 
-var db = assi.db('wallpapers');
+var db = axiko.db('wallpapers');
 db.exec('create table if not exists history (id integer primary key autoincrement, day text not null, set_at integer, source text, ' +
   'source_id text, title text, author text, author_url text, license text, license_url text, page_url text, original_url text, ' +
   'width integer, height integer, dhash text, brightness real, topic text, weather text, season text, query text, focus_x real, ' +
@@ -44,15 +44,15 @@ var running = new java.util.concurrent.locks.ReentrantLock();
 // ---- settings and state -----------------------------------------------------------------------
 
 function loadSettings() {
-  return settingsLib.normalize(assi.files.readJson(DATA + '/settings.json', {}));
+  return settingsLib.normalize(axiko.files.readJson(DATA + '/settings.json', {}));
 }
 
 function loadState() {
-  return assi.files.readJson(DATA + '/state.json', {});
+  return axiko.files.readJson(DATA + '/state.json', {});
 }
 
 function saveState(state) {
-  assi.files.writeJson(DATA + '/state.json', state);
+  axiko.files.writeJson(DATA + '/state.json', state);
   return state;
 }
 
@@ -70,7 +70,7 @@ function keys() {
   var out = {};
   Object.keys(sources.KEYS).forEach(function (id) {
     var name = sources.KEYS[id].secret;
-    try { out[id] = assi.secret.has ? assi.secret.has(name) === true : Boolean(assi.secret.get(name)); } catch (error) { out[id] = false; }
+    try { out[id] = axiko.secret.has ? axiko.secret.has(name) === true : Boolean(axiko.secret.get(name)); } catch (error) { out[id] = false; }
   });
   return out;
 }
@@ -78,14 +78,14 @@ function keys() {
 /**
  * How a source's key goes into a request. The module does not hold the key: it names the secret
  * ('{{secret:name}}') and the shell puts the value in when it sends the request. A shell that cannot
- * do that yet (it has no assi.secret.has) gives the key itself, as before.
+ * do that yet (it has no axiko.secret.has) gives the key itself, as before.
  */
 function keyOf(id) {
   if (!sources.KEYS[id]) return null;
   var name = sources.KEYS[id].secret;
   try {
-    if (assi.secret.has) return assi.secret.has(name) === true ? '{{secret:' + name + '}}' : null;
-    return assi.secret.get(name);
+    if (axiko.secret.has) return axiko.secret.has(name) === true ? '{{secret:' + name + '}}' : null;
+    return axiko.secret.get(name);
   } catch (error) { return null; }
 }
 
@@ -288,9 +288,9 @@ function dayContext(settings, state, now, options, notes) {
  * («невыспавшийся») when it asks for calm pictures today, else null. No module — null.
  */
 function petCalm(settings, day, notes) {
-  if (settings.calmFromPet === 'off' || !assi.files.exists(PET)) return null;
+  if (settings.calmFromPet === 'off' || !axiko.files.exists(PET)) return null;
   try {
-    return ctx.petCalm(assi.files.readJson(PET_STATE, null), settings.calmFromPet, day);
+    return ctx.petCalm(axiko.files.readJson(PET_STATE, null), settings.calmFromPet, day);
   } catch (error) {
     notes.push('настроение Питомца: ' + phone.message(error));
     return null;
@@ -299,7 +299,7 @@ function petCalm(settings, day, notes) {
 
 /** Last night from the health module's day summary: short by settings.calmShortMin or more? No module, no data — no. */
 function lastNightBad(settings, notes) {
-  if (!assi.files.exists(HEALTH)) return false;
+  if (!axiko.files.exists(HEALTH)) return false;
   try {
     var health = require(HEALTH);
     var day = typeof health.today === 'function' ? health.today() : null;
@@ -493,7 +493,7 @@ function choose(settings, context, pool, notes) {
 function dirFor(day) {
   var dir = DATA + '/' + day;
   var n = 2;
-  while (assi.files.exists(dir + '/thumb.jpg')) dir = DATA + '/' + day + '-' + (n++);
+  while (axiko.files.exists(dir + '/thumb.jpg')) dir = DATA + '/' + day + '-' + (n++);
   return dir;
 }
 
@@ -516,7 +516,7 @@ function makeFiles(settings, item, focus, dir, coverItem, coverFocus) {
       phone.crop(original, rect, screen.width, screen.height, target, settings.jpegQuality, maxPixels);
       return rect;
     } finally {
-      assi.files.remove(original);
+      axiko.files.remove(original);
     }
   }
   var screens = select.targets(settings);
@@ -541,7 +541,7 @@ function makeFiles(settings, item, focus, dir, coverItem, coverFocus) {
       phone.crop(original, made.innerRect, innerScreen.width, innerScreen.height, dir + '/inner.jpg', settings.jpegQuality, maxPixels);
       phone.crop(original, made.coverRect, coverScreen.width, coverScreen.height, dir + '/cover.jpg', settings.jpegQuality, maxPixels);
     } finally {
-      assi.files.remove(original);
+      axiko.files.remove(original);
     }
   }
   // The thumbnail is also the widget's picture (widget.image takes JPEG too).
@@ -556,7 +556,7 @@ function filesOf(row) {
 }
 
 function hasFiles(row) {
-  return row && row.dir && assi.files.exists(row.dir + '/inner.jpg') && assi.files.exists(row.dir + '/cover.jpg');
+  return row && row.dir && axiko.files.exists(row.dir + '/inner.jpg') && axiko.files.exists(row.dir + '/cover.jpg');
 }
 
 /** Re-makes the crops of a picture whose full files were cleaned away, from its original link. */
@@ -586,7 +586,7 @@ function setOnPhone(settings, state, files) {
   if (!allowed.ok) {
     return {
       ok: false, mode: plan.mode, screens: [], denied: true,
-      error: !allowed.declared ? 'в Assi нет разрешения SET_WALLPAPER (нужна сборка с ним)' : !allowed.allowed ? 'установка обоев запрещена на этом телефоне' : 'обои не поддерживаются'
+      error: !allowed.declared ? 'в Axiko нет разрешения SET_WALLPAPER (нужна сборка с ним)' : !allowed.allowed ? 'установка обоев запрещена на этом телефоне' : 'обои не поддерживаются'
     };
   }
   var result = phone.setWallpaper(plan, files, want, settings);
@@ -616,12 +616,12 @@ function notifySet(settings, row, title) {
       { title: 'В избранное', call: MAIN, fn: 'favorite', args: { id: row.id, on: true } }
     ];
   }
-  try { assi.notify(options); } catch (error) { /* a notice is not worth a failure */ }
+  try { axiko.notify(options); } catch (error) { /* a notice is not worth a failure */ }
 }
 
 function changed(id) {
   try { emit('wallpapers.changed', { id: id }); } catch (ignored) { /* no screen */ }
-  try { assi.widget.refresh(ID); } catch (ignored) { /* no widget */ }
+  try { axiko.widget.refresh(ID); } catch (ignored) { /* no widget */ }
 }
 
 function insertRow(fields) {
@@ -634,7 +634,7 @@ function insertRow(fields) {
 // ---- the main run -----------------------------------------------------------------------------
 
 function cleanCache(dir) {
-  try { assi.files.remove(dir); } catch (ignored) { /* nothing there */ }
+  try { axiko.files.remove(dir); } catch (ignored) { /* nothing there */ }
 }
 
 /**
@@ -692,7 +692,7 @@ exports.run = function (options) {
     }
     if (!made) {
       // A half-made folder (inner cut, cover failed) belongs to no row: it goes.
-      try { assi.files.remove(dir); } catch (ignored) { /* nothing there */ }
+      try { axiko.files.remove(dir); } catch (ignored) { /* nothing there */ }
       throw new Error('ни одна из выбранных картинок не скачалась');
     }
     var reason = ctx.reason(context);
@@ -741,7 +741,7 @@ exports.run = function (options) {
     if (result.ok) notifySet(settings, saved);
     else if (settings.notifyErrors) {
       try {
-        assi.notify({ title: 'Обои подобраны, но не поставлены', text: result.error + '. Откройте «Обои дня» и нажмите «Поставить вручную».', open: SCREEN, silent: true, id: NOTICE_ID });
+        axiko.notify({ title: 'Обои подобраны, но не поставлены', text: result.error + '. Откройте «Обои дня» и нажмите «Поставить вручную».', open: SCREEN, silent: true, id: NOTICE_ID });
       } catch (ignored) { /* no notice */ }
     }
     changed(id);
@@ -974,7 +974,7 @@ exports.daily = function () {
   var outcome = exports.run({});
   if (!outcome.ok && !outcome.busy && settings.notifyErrors && outcome.id === undefined) {
     try {
-      assi.notify({ title: 'Обои не сменились', text: outcome.error || 'не получилось', open: SCREEN, silent: true, id: NOTICE_ID });
+      axiko.notify({ title: 'Обои не сменились', text: outcome.error || 'не получилось', open: SCREEN, silent: true, id: NOTICE_ID });
     } catch (ignored) { /* no notice */ }
   }
   return outcome;
@@ -1035,11 +1035,11 @@ exports.clean = function () {
     '(select dir from history where favorite = 1 and dir is not null) and dir not in (select dir from history where day >= ? and dir is not null)', [limit, limit]);
   old.forEach(function (row) {
     ['inner.jpg', 'cover.jpg'].forEach(function (name) {
-      try { assi.files.remove(row.dir + '/' + name); } catch (ignored) { /* gone */ }
+      try { axiko.files.remove(row.dir + '/' + name); } catch (ignored) { /* gone */ }
     });
     db.exec('update history set files = 0 where dir = ?', [row.dir]);
   });
-  try { assi.files.remove(DATA + '/cache'); } catch (ignored) { /* none */ }
+  try { axiko.files.remove(DATA + '/cache'); } catch (ignored) { /* none */ }
   return { cleaned: old.length };
 };
 
@@ -1049,7 +1049,7 @@ exports.clearDry = function (id) {
   rows.forEach(function (row) {
     var shared = db.query('select count(*) as n from history where dir = ? and id != ?', [row.dir, row.id])[0].n;
     if (row.dir && !shared) {
-      try { assi.files.remove(row.dir); } catch (ignored) { /* gone */ }
+      try { axiko.files.remove(row.dir); } catch (ignored) { /* gone */ }
     }
     db.exec('delete from history where id = ?', [row.id]);
   });
@@ -1105,7 +1105,7 @@ exports.get = function (id) { return rowUrls(getRow(id)); };
 exports.openOriginal = function (id) {
   var row = getRow(id || loadState().current);
   if (!row) throw new Error('Нет такой картинки');
-  assi.openUrl(row.page_url || row.original_url);
+  axiko.openUrl(row.page_url || row.original_url);
   return true;
 };
 
@@ -1116,7 +1116,7 @@ exports.applyManually = function (id) {
   if (!row) throw new Error('Нет такой картинки');
   var settings = loadSettings();
   if (!restoreFiles(settings, row)) throw new Error('Файлов этой картинки больше нет');
-  var opened = phone.openSetIntent(row.dir + '/inner.jpg', 'assi-wallpaper-' + row.day + '.jpg', state.mediaUri || null);
+  var opened = phone.openSetIntent(row.dir + '/inner.jpg', 'axiko-wallpaper-' + row.day + '.jpg', state.mediaUri || null);
   patchState({ mediaUri: opened.uri, manualNeeded: null });
   return opened;
 };
@@ -1149,7 +1149,7 @@ exports.saveSettings = function (values) {
   var merged = loadSettings();
   Object.keys(values || {}).forEach(function (key) { merged[key] = values[key]; });
   var normalized = settingsLib.normalize(merged);
-  assi.files.writeJson(DATA + '/settings.json', normalized);
+  axiko.files.writeJson(DATA + '/settings.json', normalized);
   exports.start();
   return exports.settings();
 };
@@ -1165,13 +1165,13 @@ exports.set = function (key, value) {
 exports.askKey = function (source) {
   var info = sources.KEYS[source];
   if (!info) throw new Error('Этому источнику ключ не нужен');
-  return assi.secret.ask(info.secret, info.title, 'Ключ берётся бесплатно: ' + info.site);
+  return axiko.secret.ask(info.secret, info.title, 'Ключ берётся бесплатно: ' + info.site);
 };
 
 exports.removeKey = function (source) {
   var info = sources.KEYS[source];
   if (!info) return false;
-  assi.secret.remove(info.secret);
+  axiko.secret.remove(info.secret);
   return true;
 };
 
@@ -1179,7 +1179,7 @@ exports.keys = keys;
 
 /** Asks for the coarse location (from the screen) and finds the place. */
 exports.askLocation = function () {
-  var granted = assi.permission(['ACCESS_COARSE_LOCATION']);
+  var granted = axiko.permission(['ACCESS_COARSE_LOCATION']);
   var state = loadState();
   var notes = [];
   var place = granted ? placeFor(loadSettings(), state, notes) : null;
@@ -1195,7 +1195,7 @@ exports.place = function () {
 /** The reflection probe of the Fold's screens; the raw lists go to data/wallpapers/fold-probe.json. */
 exports.probeFold = function () {
   var raw = phone.probeFold();
-  assi.files.writeJson(DATA + '/fold-probe.json', raw);
+  axiko.files.writeJson(DATA + '/fold-probe.json', raw);
   var summary = fold.summarize(raw);
   var state = loadState();
   var info = state.fold || {};
@@ -1266,7 +1266,7 @@ exports.widget = function () {
   var time = new Date(row.set_at);
   var clock = (time.getHours() < 10 ? '0' : '') + time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
   var out = { title: 'Обои дня', text: row.title + '\n' + (sources.NAMES[row.source] || row.source) + ' · ' + clock, open: SCREEN };
-  if (phone.has('widget.image') && row.dir && assi.files.exists(row.dir + '/thumb.jpg')) out.image = row.dir + '/thumb.jpg';
+  if (phone.has('widget.image') && row.dir && axiko.files.exists(row.dir + '/thumb.jpg')) out.image = row.dir + '/thumb.jpg';
   return out;
 };
 
@@ -1293,7 +1293,7 @@ var AWARDS = [
 
 /** Hands an achievement to the achievements module (grant), or leaves it in its outbox while the module is missing. */
 function handIn(item) {
-  if (assi.files.exists(ACHIEVEMENTS)) {
+  if (axiko.files.exists(ACHIEVEMENTS)) {
     try {
       require(ACHIEVEMENTS).grant(item);
       return true;
@@ -1303,13 +1303,13 @@ function handIn(item) {
     }
   }
   try {
-    var box = assi.files.readJson(OUTBOX, []);
+    var box = axiko.files.readJson(OUTBOX, []);
     var list = Array.isArray(box) ? box : (box && Array.isArray(box.items) ? box.items : []);
     if (!list.some(function (one) { return one && one.key === item.key; })) list.push(item);
-    if (Array.isArray(box) || !box) assi.files.writeJson(OUTBOX, list);
+    if (Array.isArray(box) || !box) axiko.files.writeJson(OUTBOX, list);
     else {
       box.items = list;
-      assi.files.writeJson(OUTBOX, box);
+      axiko.files.writeJson(OUTBOX, box);
     }
     return true;
   } catch (error) {

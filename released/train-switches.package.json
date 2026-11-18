@@ -8,8 +8,8 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
@@ -18,8 +18,8 @@
     },
     {
       "path": "code/checks.js",
-      "sha256": "f176dc4f66ed9157b085bf904d4dfabdebb705cfc819f346b7ebf5b9ce3ec32a",
-      "size": 5007
+      "sha256": "d26860fc6398071877346a380b5046a6bc8fd60b8c7a6228510033bb631091be",
+      "size": 5014
     },
     {
       "path": "code/config.json",
@@ -143,8 +143,8 @@
     },
     {
       "path": "code/tools/gen-levels.js",
-      "sha256": "fefba472db9e960e84e993da831bb73eb4b05e77581ae4a32cf9bf3e8bec493a",
-      "size": 9577
+      "sha256": "9ced1197eb46aa3f90c6b01412ac06f18395933e56492300004a81131a083f5f",
+      "size": 9578
     },
     {
       "path": "code/ui/art.js",
@@ -181,10 +181,10 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1,
+    "axikoApi": 1,
     "gamesEngine": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

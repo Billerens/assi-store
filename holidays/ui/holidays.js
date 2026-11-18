@@ -9,7 +9,7 @@
   const REMIND_DAYS = [0, 1, 2, 3, 5, 7, 14, 30];
   const h = ui.h;
   const $ = (id) => document.getElementById(id);
-  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
   const wide = window.matchMedia('(min-width: 600px)');
 
   const view = {
@@ -142,7 +142,7 @@
         note = 'Оформление выключено до конца повода.';
         action = h('button', { class: 'btn', onclick: () => act('decorOn', 'Оформление включено') }, 'Включить снова');
       } else if (s.ownerChose) {
-        note = 'Вы выбрали другую тему — до конца повода Assi её не трогает.';
+        note = 'Вы выбрали другую тему — до конца повода Axiko её не трогает.';
         action = h('button', { class: 'btn', onclick: () => act('decorOn', 'Праздник вернулся') }, 'Вернуть праздник');
       } else {
         if (s.mode === 'decor') note = 'Украшения лежат поверх вашей темы.';
@@ -237,7 +237,7 @@
 
   function ageLine(item) {
     if (!item.age) return null;
-    if (item.kind === 'install') return ui.t('Assi с вами {}', years(item.age));
+    if (item.kind === 'install') return ui.t('Axiko с вами {}', years(item.age));
     if (item.kind === 'birthday' || item.kind === 'owner') return ui.t('Исполнится {}', years(item.age));
     return ui.t('{} со дня первого раза', years(item.age));
   }
@@ -297,7 +297,7 @@
   function mockHtml() {
     const t = (text) => ui.esc(ui.t(text));
     return '<main class="page">' +
-      '<header class="topbar"><h1 class="grow">Assi</h1></header>' +
+      '<header class="topbar"><h1 class="grow">Axiko</h1></header>' +
       '<div class="hello"><h1>' + t('Добрый вечер') + '</h1><p class="muted">' + t('Так выглядит главный экран') + '</p></div>' +
       '<div class="card"><b>' + t('Карточка') + '</b><p class="muted small">' + t('Нажмите на неё') + '</p></div>' +
       '<div class="row"><button class="btn primary">' + t('Кнопка') + '</button><button class="btn">' + t('Ещё') + '</button></div>' +
@@ -376,7 +376,7 @@
     if (!data.permission.contacts) {
       main.push(h('div', { class: 'card section' },
         h('div', { class: 'title' }, 'Доступ к контактам'),
-        h('p', { class: 'muted' }, 'Чтобы знать дни рождения близких, Assi читает даты из контактов (а календарь «Дни рождения» — как запасной источник). Никому ничего не отправляется.'),
+        h('p', { class: 'muted' }, 'Чтобы знать дни рождения близких, Axiko читает даты из контактов (а календарь «Дни рождения» — как запасной источник). Никому ничего не отправляется.'),
         h('div', { class: 'actions' }, h('button', {
           class: 'btn primary',
           onclick: async () => {
@@ -387,7 +387,7 @@
     }
     if (data.source === 'calendar') main.push(h('p', { class: 'muted small' }, 'Контакты недоступны — дни рождения взяты из календаря.'));
     if (!data.people.length) {
-      main.push(h('div', { class: 'card empty' }, 'Дней рождения не найдено. Добавьте дату рождения в карточку контакта — Assi увидит её сам.'));
+      main.push(h('div', { class: 'card empty' }, 'Дней рождения не найдено. Добавьте дату рождения в карточку контакта — Axiko увидит её сам.'));
     } else {
       main.push(h('p', { class: 'muted small' }, ui.t('Переключатель — напоминать ли о дне рождения; рядом — за сколько дней. Напоминания приходят в {}.', data.remindTime)));
       main.push(h('div', { class: 'list' }, data.people.map(personRow)));
@@ -419,7 +419,7 @@
             h('div', { class: 'grow' }, h('div', { class: 'title' }, ui.raw(draft.name)), h('div', { class: 'sub' }, ui.ago(draft.at))),
             h('button', { class: 'icon-btn', 'aria-label': 'Скопировать', onclick: () => copyText(draft.text) }, ui.icon('copy'))),
           h('div', { class: 'draft-text' }, ui.raw(draft.text))))
-        : h('p', { class: 'muted small' }, 'Здесь появятся черновики. Отправляете вы сами — Assi никому не пишет.')));
+        : h('p', { class: 'muted small' }, 'Здесь появятся черновики. Отправляете вы сами — Axiko никому не пишет.')));
 
     $('peopleMain').replaceChildren(...main);
     $('peopleSide').replaceChildren(...side);
@@ -510,7 +510,7 @@
     $('ownForm').replaceChildren(
       h('div', { class: 'title' }, 'Новый повод'),
       field('Название', title),
-      field('Дата', date, 'Каждый год — достаточно дня и месяца. С годом Assi посчитает, какая это годовщина.'),
+      field('Дата', date, 'Каждый год — достаточно дня и месяца. С годом Axiko посчитает, какая это годовщина.'),
       h('label', { class: 'inline' }, h('span', { class: 'grow' }, 'Каждый год'), yearly),
       field('Напомнить', remind),
       field('Свой цвет на этот день', palette, null, 'div'),
@@ -649,7 +649,7 @@
       featureRow(f.decor, 'Слой украшений поверх темы', 'Ваша тема не меняется.', 'Праздник надевается отдельной темой «Праздник», после повода возвращается ваша.'),
       featureRow(f.actions, 'Кнопки в уведомлениях', 'Ответить можно прямо из шторки.', 'Нажатие на уведомление открывает этот экран.'),
       featureRow(f.once, 'Задачи на точное время', 'Конфетти и предпросмотр снимаются вовремя.', 'Конфетти и предпросмотр снимает ожидающий поток.'),
-      featureRow(f.visible, 'Знает, когда открыт Assi', 'Конфетти — при первом открытии за день.', 'Конфетти и поздравление — при первой разблокировке за день.'),
+      featureRow(f.visible, 'Знает, когда открыт Axiko', 'Конфетти — при первом открытии за день.', 'Конфетти и поздравление — при первой разблокировке за день.'),
       featureRow(p.contacts, 'Контакты', 'Дни рождения видны.', 'Нет доступа — дни рождения не видны.'),
       featureRow(p.calendar, 'Календарь', 'Запасной источник дней рождения.', 'Нет доступа.'),
       featureRow(p.location, 'Местоположение', 'Погода для первого снега — по месту.', 'Без него погода — по городу из настроек.'),
@@ -709,7 +709,7 @@
       view.closeSheet();
       return;
     }
-    if (window.assi && assi.back) assi.back();
+    if (window.axiko && axiko.back) axiko.back();
     else history.back();
   });
 
@@ -718,7 +718,7 @@
     refresh();
   });
 
-  assi.on('holidays.changed', debounce(() => {
+  axiko.on('holidays.changed', debounce(() => {
     loadStatus();
     if (view.tab === 'upcoming') loadUpcoming();
   }, 400));

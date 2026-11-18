@@ -1,5 +1,5 @@
-// A stand-in for the engine of Assi under node, so that main.js runs its whole way here: SQLite
-// (node:sqlite, with fts4), files in a temporary folder, the real lib/base.js of Assi when the Assi
+// A stand-in for the engine of Axiko under node, so that main.js runs its whole way here: SQLite
+// (node:sqlite, with fts4), files in a temporary folder, the real lib/base.js of Axiko when the Axiko
 // repository stands next to this one, and fake Android pieces (a lock, files). android.js is put
 // aside by `overrides` (a fake microphone and cutter from the test). spawn() puts work into a
 // queue that the test runs with drain(); sleep() moves the fake clock. It checks the module's own
@@ -13,10 +13,10 @@ var crypto = require('crypto');
 process.removeAllListeners('warning');
 var DatabaseSync = require('node:sqlite').DatabaseSync;
 
-var ASSI_LIB = path.resolve(__dirname, '../../../Assi/app/src/main/assets/factory/lib');
+var AXIKO_LIB = path.resolve(__dirname, '../../../Axiko/app/src/main/assets/factory/lib');
 
 function realBase() {
-  var file = path.join(ASSI_LIB, 'base.js');
+  var file = path.join(AXIKO_LIB, 'base.js');
   return fs.existsSync(file) ? file : null;
 }
 
@@ -48,7 +48,7 @@ function makeDb(file) {
  */
 function create(modules, overrides) {
   overrides = overrides || {};
-  var dir = fs.mkdtempSync(path.join(os.tmpdir(), 'assi-sim-'));
+  var dir = fs.mkdtempSync(path.join(os.tmpdir(), 'axiko-sim-'));
   var env = {
     dir: dir, notifications: [], cancelled: [], emitted: [], jobs: {}, handlers: {}, widget: 0, features: [], models: {},
     answer: function () { throw new Error('нет модели'); }, asked: [], sms: [], now: null, permission: true, installed: [],
@@ -68,7 +68,7 @@ function create(modules, overrides) {
     readJson: function (p, fallback) { return fs.existsSync(full(p)) ? JSON.parse(fs.readFileSync(full(p), 'utf8')) : fallback; },
     writeJson: function (p, value) { files.write(p, JSON.stringify(value, null, 1)); }
   };
-  var assi = {
+  var axiko = {
     files: files,
     db: function (name) { return dbs[name] || (dbs[name] = makeDb(full('data/' + name + '.db'))); },
     notify: function (options) { env.notifications.push(options); return 'n' + env.notifications.length; },
@@ -92,7 +92,7 @@ function create(modules, overrides) {
     },
     linux: function () { throw new Error('нет Linux'); }
   };
-  assi.notify.cancel = function (id) { env.cancelled.push(String(id)); return true; };
+  axiko.notify.cancel = function (id) { env.cancelled.push(String(id)); return true; };
   var ai = {
     ask: function (options) {
       if (typeof options === 'string') options = { prompt: options };
@@ -116,7 +116,7 @@ function create(modules, overrides) {
     recent: function () { return memory.items.slice(-10); }
   };
   env.memory = memory;
-  var mocks = { 'lib/assi': assi, 'lib/ai': ai, 'lib/usage': usage, 'lib/memory': memory };
+  var mocks = { 'lib/axiko': axiko, 'lib/ai': ai, 'lib/usage': usage, 'lib/memory': memory };
   var cache = {};
 
   function resolve(from, p) {
@@ -124,7 +124,7 @@ function create(modules, overrides) {
     if (overrides[p]) return p;
     if (p === 'lib/base') {
       var b = realBase();
-      if (!b) throw new Error('нужен lib/base.js из репозитория Assi рядом');
+      if (!b) throw new Error('нужен lib/base.js из репозитория Axiko рядом');
       return b;
     }
     var file;
@@ -203,7 +203,7 @@ function create(modules, overrides) {
     list: function (p) { return files.list(p); }
   };
   global.context = {
-    getPackageName: function () { return 'app.assi'; },
+    getPackageName: function () { return 'app.axiko'; },
     checkSelfPermission: function () { return env.permission ? 0 : -1; },
     getPackageManager: function () {
       return { getLaunchIntentForPackage: function (pkg) { return env.installed.indexOf(pkg) >= 0 ? {} : null; } };

@@ -107,4 +107,4 @@ node tests/browser.test.js   # Chromium без сети, движок Axiko и �
 
 Четыре изображения покрытия кэшируются; видимая сетка плиток, окружение и погода ограничены независимо от размера арены. Декорации вне кадра не рисуются. Дождь/листва останавливаются вместе со временем забега, reduced-motion убирает их движение. Фон не добавляет врагов, улучшений, наград или записей в сейв.
 
-Проверки: `node wave-survival/tests/scene.test.js`, `node menagerie/tests/scene-render.test.js`, `node wave-survival/tests/browser.test.js` из корня assi-store. Последний проверяет реальный забег на 344/760, WASD/стрелки, стик, выбор улучшений, паузу и возврат к сохранению в локальном Chromium.
+Проверки: `node wave-survival/tests/scene.test.js`, `node menagerie/tests/scene-render.test.js`, `node wave-survival/tests/browser.test.js` из корня axiko-store. Последний проверяет реальный забег на 344/760, WASD/стрелки, стик, выбор улучшений, паузу и возврат к сохранению в локальном Chromium.

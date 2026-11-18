@@ -13,6 +13,6 @@ exports.parameters = {
 };
 
 exports.run = function (args) {
-  if (!require('lib/assi').files.exists('modules/phone-night/main.js')) return 'Модуль «Тайная жизнь телефона» не установлен.';
+  if (!require('lib/axiko').files.exists('modules/phone-night/main.js')) return 'Модуль «Тайная жизнь телефона» не установлен.';
   return require('modules/phone-night/main.js').toolReport(args || {});
 };

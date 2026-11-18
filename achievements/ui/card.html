@@ -537,7 +537,7 @@
     }
 
     async function load() {
-      const card = await assi.call('modules/achievements/main.js', 'cardData');
+      const card = await axiko.call('modules/achievements/main.js', 'cardData');
       ring(card);
       week(card);
       badges(card);
@@ -547,7 +547,7 @@
     }
 
     load().catch(() => {});
-    if (window.assi && typeof assi.on === 'function') assi.on('achievements.changed', () => load().catch(() => {}));
+    if (window.axiko && typeof axiko.on === 'function') axiko.on('achievements.changed', () => load().catch(() => {}));
   })();
 </script>
 </body>

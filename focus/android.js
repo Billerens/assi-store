@@ -2,7 +2,7 @@
 // a session with its countdown and buttons, vibration, contacts, the accessibility service and the
 // usage events. Engine only. Every addition of the shell (docs/shell-changes.md) is checked
 // with native('shell.features') first, and each has its way without it.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var dnd = require('./logic/dnd.js');
 
 var G = typeof global !== 'undefined' ? global : {};
@@ -14,7 +14,7 @@ var SESSION_NUMBER = 41001;
 var END_NUMBER = 41002;
 var CHANNEL_SESSION = 'focus-session';
 var CHANNEL_END = 'focus-end';
-var ACTION = 'app.assi.focus.BUTTON';
+var ACTION = 'app.axiko.focus.BUTTON';
 
 function message(error) {
   var text = String(error && error.message ? error.message : error);
@@ -40,14 +40,14 @@ exports.has = function (feature) {
   return exports.features().indexOf(feature) >= 0;
 };
 
-/** The notification listener service of Assi, or null when notification access is off. */
+/** The notification listener service of Axiko, or null when notification access is off. */
 function service() {
   try {
-    var found = Packages.app.assi.sense.NoticeService.Companion.getInstance();
+    var found = Packages.app.axiko.sense.NoticeService.Companion.getInstance();
     if (found) return found;
   } catch (error) { /* try the field */ }
   try {
-    var field = Packages.app.assi.sense.NoticeService.instance;
+    var field = Packages.app.axiko.sense.NoticeService.instance;
     if (field) return field;
   } catch (error) { /* none */ }
   return null;
@@ -125,7 +125,7 @@ function put(way, name) {
   }
   if (way === 'shizuku') {
     if (!shizukuReady()) throw new Error('Shizuku не запущен');
-    var out = assi.shell('cmd notification set_dnd ' + dnd.shizukuArg(name), { privileged: true });
+    var out = axiko.shell('cmd notification set_dnd ' + dnd.shizukuArg(name), { privileged: true });
     if (out && out.code !== 0) throw new Error('Shizuku: ' + String(out.out || out.code).slice(0, 120));
     return;
   }
@@ -184,7 +184,7 @@ exports.unsilence = function (to, by, s) {
   return { ok: false, by: null, filter: exports.filter() };
 };
 
-/** The system screen that gives Assi access to "do not disturb". */
+/** The system screen that gives Axiko access to "do not disturb". */
 exports.askPolicy = function () {
   if (exports.has('dnd')) {
     try {
@@ -279,7 +279,7 @@ function actions(list) {
  */
 exports.showSession = function (options) {
   if (exports.has('notify.actions')) {
-    return assi.notify({
+    return axiko.notify({
       id: SESSION_ID, title: options.title, text: options.text, open: options.open, ongoing: true, silent: true,
       channel: 'quiet', when: options.when, countdown: Boolean(options.when), actions: actions(options.buttons)
     });
@@ -294,7 +294,7 @@ exports.showSession = function (options) {
 
 exports.hideSession = function () {
   if (exports.has('notify.actions')) {
-    try { assi.notify.cancel(SESSION_ID); } catch (error) { /* gone */ }
+    try { axiko.notify.cancel(SESSION_ID); } catch (error) { /* gone */ }
   }
   try { manager().cancel(SESSION_NUMBER); } catch (error) { /* gone */ }
 };
@@ -303,9 +303,9 @@ exports.hideSession = function () {
 exports.notifyEnd = function (options) {
   var buttons = options.buttons || [];
   if (exports.has('notify.actions')) {
-    return assi.notify({ id: 'focus:end', title: options.title, text: options.text, open: options.open, channel: 'normal', actions: actions(buttons) });
+    return axiko.notify({ id: 'focus:end', title: options.title, text: options.text, open: options.open, channel: 'normal', actions: actions(buttons) });
   }
-  if (!buttons.length) return assi.notify({ title: options.title, text: options.text, open: options.open });
+  if (!buttons.length) return axiko.notify({ title: options.title, text: options.text, open: options.open });
   channel(CHANNEL_END, 'Фокус: конец сессии', android.app.NotificationManager.IMPORTANCE_DEFAULT);
   manager().notify(END_NUMBER, build({
     title: options.title, text: options.text, open: options.open,
@@ -316,7 +316,7 @@ exports.notifyEnd = function (options) {
 
 exports.hideEnd = function () {
   if (exports.has('notify.actions')) {
-    try { assi.notify.cancel('focus:end'); } catch (error) { /* gone */ }
+    try { axiko.notify.cancel('focus:end'); } catch (error) { /* gone */ }
   }
   try { manager().cancel(END_NUMBER); } catch (error) { /* gone */ }
 };
@@ -328,7 +328,7 @@ exports.hideEnd = function () {
  */
 exports.notifyThrough = function (options) {
   if (exports.has('notify.actions')) {
-    return assi.notify({ title: options.title, text: options.text, open: options.open, channel: 'alarm' });
+    return axiko.notify({ title: options.title, text: options.text, open: options.open, channel: 'alarm' });
   }
   var made = new android.app.NotificationChannel('focus-through', 'Фокус: сквозь тишину', android.app.NotificationManager.IMPORTANCE_HIGH);
   try { made.setBypassDnd(true); } catch (error) { /* needs access to the policy */ }
@@ -341,7 +341,7 @@ exports.notifyThrough = function (options) {
 /** A vibration by a pattern [pause, buzz, pause, …]. */
 exports.vibrate = function (pattern) {
   if (exports.has('vibrate.pattern')) {
-    assi.vibrate(pattern);
+    axiko.vibrate(pattern);
     return;
   }
   var timings = java.lang.reflect.Array.newInstance(java.lang.Long.TYPE, pattern.length);
@@ -350,12 +350,12 @@ exports.vibrate = function (pattern) {
 };
 
 exports.toast = function (text) {
-  assi.toast(text);
+  axiko.toast(text);
 };
 
 // ---- other apps ----------------------------------------------------------------------------------
 
-/** Is the accessibility service of Assi on (on('screen.app') works, the home button can be pressed)? */
+/** Is the accessibility service of Axiko on (on('screen.app') works, the home button can be pressed)? */
 exports.screenOn = function () {
   try {
     var status = native('sense.status');
@@ -378,7 +378,7 @@ exports.home = function () {
   return native('screen.global', 'home');
 };
 
-/** Assi and the launcher: going there ends a permission to a distracting app. */
+/** Axiko and the launcher: going there ends a permission to a distracting app. */
 exports.ownPackages = function () {
   var list = [String(context.getPackageName())];
   if (!LIVE.launcher) {
@@ -423,7 +423,7 @@ exports.launchable = function () {
 
 /** The usage events of a period (lib/usage.js), or null when there is no such library or access. */
 exports.usageEvents = function (from, to) {
-  if (!exports.has('usage') && !assi.files.exists('lib/usage.js')) return null;
+  if (!exports.has('usage') && !axiko.files.exists('lib/usage.js')) return null;
   try {
     var usage = require('lib/usage');
     if (!usage.access()) return null;
@@ -447,7 +447,7 @@ exports.contactName = function (number) {
   if (!/^[+\d][\d\s()-]{4,}$/.test(value) || !canReadContacts()) return '';
   try {
     var uri = android.net.Uri.withAppendedPath(android.provider.ContactsContract.PhoneLookup.CONTENT_FILTER_URI, android.net.Uri.encode(value));
-    var rows = assi.rows(String(uri), ['display_name'], null, null, null, 1);
+    var rows = axiko.rows(String(uri), ['display_name'], null, null, null, 1);
     return rows.length && rows[0].display_name ? String(rows[0].display_name) : '';
   } catch (error) {
     return '';

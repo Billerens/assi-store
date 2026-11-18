@@ -99,7 +99,7 @@ test('alarm diff: wake-ups of the night, new apps, most first', function () {
   assert.strictEqual(by['com.google.android.gms'].wakeups, 19);
   assert.strictEqual(by['ru.marketplace.app'].wakeups, 9);
   assert.strictEqual(by['com.whatsapp'].wakeups, 4);
-  assert.strictEqual(by['app.assi'].wakeups, 2);
+  assert.strictEqual(by['app.axiko'].wakeups, 2);
   assert.strictEqual(diff.packages[0].pkg, 'android');
   assert.strictEqual(diff.total, 76 + 19 + 9 + 3 + 2 + 4);
 });
@@ -221,7 +221,7 @@ test('deviceidle: state and the lists exempt from Doze', function () {
   assert.ok(d.ok);
   assert.strictEqual(d.state, 'IDLE');
   assert.strictEqual(d.lightState, 'OVERRIDE');
-  assert.deepStrictEqual(d.user, ['app.assi', 'org.telegram.messenger']);
+  assert.deepStrictEqual(d.user, ['app.axiko', 'org.telegram.messenger']);
   assert.deepStrictEqual(d.system, ['com.google.android.gms', 'com.android.phone']);
 });
 

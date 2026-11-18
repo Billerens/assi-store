@@ -1,5 +1,5 @@
 // When occasions happen: pure date rules, no Android. The same file runs in node (tests/) and in
-// the Assi engine (Rhino), so it keeps to what both understand: no classes, no async, no Intl.
+// the Axiko engine (Rhino), so it keeps to what both understand: no classes, no async, no Intl.
 //
 // Days are ISO strings 'YYYY-MM-DD'. Arithmetic goes through day numbers counted in UTC, so a
 // time zone or a change of summer time never moves a date.
@@ -13,7 +13,7 @@
 //   { date: 'YYYY-MM-DD' }                   once
 //   { owner: 'birthday' }                    the owner's birthday (ctx.owner)
 //   { contact: 'id' | '*' }                  a close person's birthday ('*' = every close person)
-//   { install: true }                        the anniversary of installing Assi (ctx.installDay)
+//   { install: true }                        the anniversary of installing Axiko (ctx.installDay)
 //   { calendar: 'слово' }                    an event of the phone's calendar with the word (ctx.calendar)
 //   { weather: 'snow' }                      the day the weather first showed it (ctx.weather.snow)
 // `from` / `to` widen the window around the day (days, may be negative); `eggFrom` / `eggTo` is the

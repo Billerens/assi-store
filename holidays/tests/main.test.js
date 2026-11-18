@@ -221,7 +221,7 @@ t.test('повод дня для «Обоев дня», виджет, настр
   assert.ok(phone.main.settings().decors.some(function (item) { return item.id === 'confetti'; }));
 });
 
-t.test('годовщина Assi: итоги без выдумок, один раз', function () {
+t.test('годовщина Axiko: итоги без выдумок, один раз', function () {
   var phone = engine.make({ now: '2026-11-10T12:00:00', installed: '2025-11-10T10:00:00' });
   phone.main.check();
   phone.main.check();

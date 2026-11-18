@@ -7,7 +7,7 @@
 //   fullHeight (the original), bytes, mime, probe (size unknown — read the file's header),
 //   people (the source says people are in it), downloadLocation (Unsplash) }
 
-var USER_AGENT = 'AssiWallpapers/1.0 (personal wallpaper app on Android)';
+var USER_AGENT = 'AxikoWallpapers/1.0 (personal wallpaper app on Android)';
 
 // Wikimedia serves only standard thumbnail widths (checked 2026-11-14: 500 and 960 answer,
 // 400 does not), so thumbnails are asked at 500.
@@ -394,7 +394,7 @@ function aic(json, opts) {
 }
 
 function utm(url) {
-  return url ? exports.withParams(url, { utm_source: 'assi', utm_medium: 'referral' }) : '';
+  return url ? exports.withParams(url, { utm_source: 'axiko', utm_medium: 'referral' }) : '';
 }
 
 function unsplash(json, opts) {

@@ -1,4 +1,4 @@
-// Content and stock contracts through the Assi node harness.
+// Content and stock contracts through the Axiko node harness.
 'use strict';
 const assert = require('assert');
 const fs = require('fs');

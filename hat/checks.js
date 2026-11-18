@@ -90,7 +90,7 @@ exports['игра пишется в базу и убирается'] = function 
 };
 
 exports['инструмент агента tools/hat.js записан и ведёт в open'] = function (t) {
-  var files = require('lib/assi').files;
+  var files = require('lib/axiko').files;
   var main = hat();
   main.start();
   t.ok(files.exists('tools/hat.js'), 'инструмент агента не записан');
@@ -111,7 +111,7 @@ exports['отклик на имя: выключается на игру и во�
   } catch (error) {
     t.skip('нет wake.status: ' + error.message);
   }
-  var mark = require('lib/assi').files.readJson('data/hat/wake.json', null);
+  var mark = require('lib/axiko').files.readJson('data/hat/wake.json', null);
   if (mark && mark.pending) t.skip('идёт игра — отклик на имя уже выключен ею');
   var main = hat();
   var was = !!(status && status.on);

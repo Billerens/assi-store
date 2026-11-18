@@ -1,14 +1,14 @@
 // Шляпа — логика в движке: настройки, колоды (модель и запасной словарь), игры и ходы,
 // история слов («не повторять»), отклик на имя на время игры, общая база.
-// Экран зовёт эти функции через assi.call('modules/hat/main.js', имя, аргументы).
+// Экран зовёт эти функции через axiko.call('modules/hat/main.js', имя, аргументы).
 //
-// Для агента: «Assi, давай в шляпу, нас шестеро, тема — кино» —
+// Для агента: «Axiko, давай в шляпу, нас шестеро, тема — кино» —
 //   require('modules/hat/main.js').open({ players: 6, theme: 'кино' })
 // открывает экран подготовки с заполненными полями. Поля: players (число или массив имён),
 // theme, difficulty (1–5), mode ('pairs'|'teams'), teamCount, turnSeconds, rounds.
 // Агент узнаёт об этом из инструмента tools/hat.js (action open), который start() пишет при
-// каждом запуске Assi (module.json "autostart"); текст инструмента — в tool.js.
-var assi = require('lib/assi');
+// каждом запуске Axiko (module.json "autostart"); текст инструмента — в tool.js.
+var axiko = require('lib/axiko');
 var ai = require('lib/ai');
 var match = require('./match');
 var config = require('./config');
@@ -34,7 +34,7 @@ var DAY = 24 * HOUR;
 var prepared = false;
 
 function db() {
-  var handle = assi.db('hat');
+  var handle = axiko.db('hat');
   if (!prepared) {
     handle.exec('create table if not exists decks (id integer primary key autoincrement, created integer not null, theme text, ' +
       'difficulty integer, cards text not null, keep integer default 0, source text, played integer default 0)');
@@ -74,12 +74,12 @@ function merge(a, b) {
 // ---- настройки -----------------------------------------------------------------------------
 
 exports.settings = function () {
-  return config.normalize(assi.files.readJson(SETTINGS, {}));
+  return config.normalize(axiko.files.readJson(SETTINGS, {}));
 };
 
 exports.saveSettings = function (patch) {
   var next = config.normalize(merge(exports.settings(), patch));
-  assi.files.writeJson(SETTINGS, next);
+  axiko.files.writeJson(SETTINGS, next);
   return next;
 };
 
@@ -105,7 +105,7 @@ function has(feature) {
 // ---- открыть с заполненными полями (для агента) ---------------------------------------------
 
 exports.open = function (prefill) {
-  assi.files.writeJson(PREFILL, merge(prefill || {}, { at: Date.now() }));
+  axiko.files.writeJson(PREFILL, merge(prefill || {}, { at: Date.now() }));
   native('ui.open', SCREEN);
   return 'Открыта подготовка Шляпы';
 };
@@ -117,16 +117,16 @@ exports.tool = function (args) {
   return 'Неизвестное действие: ' + args.action;
 };
 
-/** Запуск Assi (module.json "autostart"): только записать инструмент агента — игры без экрана нет. */
+/** Запуск Axiko (module.json "autostart"): только записать инструмент агента — игры без экрана нет. */
 exports.start = function () {
-  agentTool.write(assi.files);
+  agentTool.write(axiko.files);
   return true;
 };
 
 function takePrefill() {
-  var found = assi.files.readJson(PREFILL, null);
+  var found = axiko.files.readJson(PREFILL, null);
   if (!found) return null;
-  assi.files.remove(PREFILL);
+  axiko.files.remove(PREFILL);
   return Date.now() - (found.at || 0) < 10 * 60000 ? found : null;
 }
 
@@ -137,7 +137,7 @@ function dictionary() {
 }
 
 function extraFile() {
-  var found = assi.files.readJson(EXTRA, null) || {};
+  var found = axiko.files.readJson(EXTRA, null) || {};
   return { pending: found.pending || {}, accepted: found.accepted || {} };
 }
 
@@ -169,7 +169,7 @@ exports.growOffline = function (level, count) {
   var answer = ai.ask({ role: ROLE, system: p.system, prompt: p.prompt, json: true });
   var cleaned = deck.clean(answer, { exclude: exclude, maxLetters: s.maxWordLetters, difficulty: level });
   extra.pending[level] = (extra.pending[level] || []).concat(cleaned.cards.map(function (card) { return card.word; }));
-  assi.files.writeJson(EXTRA, extra);
+  axiko.files.writeJson(EXTRA, extra);
   return extra.pending[level];
 };
 
@@ -181,7 +181,7 @@ exports.reviewOffline = function (level, accept) {
   var good = (extra.pending[level] || []).filter(function (word) { return keep[match.normalize(word)]; });
   extra.accepted[level] = (extra.accepted[level] || []).concat(good);
   extra.pending[level] = [];
-  assi.files.writeJson(EXTRA, extra);
+  axiko.files.writeJson(EXTRA, extra);
   return exports.offlineInfo();
 };
 
@@ -251,8 +251,8 @@ exports.removeDeck = function (id) {
 };
 
 function takeCarry() {
-  var carry = assi.files.readJson(CARRY, []);
-  if (carry.length) assi.files.remove(CARRY);
+  var carry = axiko.files.readJson(CARRY, []);
+  if (carry.length) axiko.files.remove(CARRY);
   return carry;
 }
 
@@ -345,16 +345,16 @@ exports.formsFor = function (cards) {
 // ---- сохранение игры после каждого действия ----------------------------------------------------
 
 exports.saveState = function (state) {
-  assi.files.writeJson(CURRENT, merge(state, { savedAt: Date.now() }));
+  axiko.files.writeJson(CURRENT, merge(state, { savedAt: Date.now() }));
   return true;
 };
 
 exports.loadState = function () {
-  return assi.files.readJson(CURRENT, null);
+  return axiko.files.readJson(CURRENT, null);
 };
 
 exports.clearState = function () {
-  if (assi.files.exists(CURRENT)) assi.files.remove(CURRENT);
+  if (axiko.files.exists(CURRENT)) axiko.files.remove(CURRENT);
   return true;
 };
 
@@ -364,7 +364,7 @@ var lastBeat = 0;
 var watching = false;
 
 function wakeMark() {
-  return assi.files.readJson(WAKE, null) || {};
+  return axiko.files.readJson(WAKE, null) || {};
 }
 
 /** Выключить отклик на имя (два слушателя микрофона одновременно не работают), запомнив, был ли он. */
@@ -373,7 +373,7 @@ exports.wakeOff = function () {
   var status = tryNative('wake.status');
   if (!mark.pending) {
     mark = { pending: true, was: !!(status && status.on), at: Date.now() };
-    assi.files.writeJson(WAKE, mark);
+    axiko.files.writeJson(WAKE, mark);
   }
   if (status && status.on) tryNative('wake.set', false);
   exports.beat();
@@ -386,11 +386,11 @@ exports.wakeRestore = function () {
   var mark = wakeMark();
   if (mark.stream) tryNative('speech.stream.stop');
   if (!mark.pending) {
-    if (mark.stream) assi.files.writeJson(WAKE, merge(mark, { stream: false }));
+    if (mark.stream) axiko.files.writeJson(WAKE, merge(mark, { stream: false }));
     return false;
   }
   if (mark.was) tryNative('wake.set', true);
-  assi.files.writeJson(WAKE, { pending: false, was: mark.was, restored: Date.now() });
+  axiko.files.writeJson(WAKE, { pending: false, was: mark.was, restored: Date.now() });
   return true;
 };
 
@@ -404,7 +404,7 @@ exports.beat = function () {
 exports.streamMark = function (on) {
   var mark = wakeMark();
   mark.stream = !!on;
-  assi.files.writeJson(WAKE, mark);
+  axiko.files.writeJson(WAKE, mark);
   return true;
 };
 
@@ -437,16 +437,16 @@ function watch() {
 exports.vibrate = function (pattern) {
   if (Array.isArray(pattern)) {
     if (has('vibrate.pattern')) {
-      assi.vibrate(pattern.map(Number));
+      axiko.vibrate(pattern.map(Number));
       return true;
     }
     var longest = 0;
     for (var i = 1; i < pattern.length; i += 2) longest = Math.max(longest, Number(pattern[i]) || 0);
-    if (longest > 0) assi.vibrate(longest);
+    if (longest > 0) axiko.vibrate(longest);
     return true;
   }
   var ms = Number(pattern) || 0;
-  if (ms > 0) assi.vibrate(ms);
+  if (ms > 0) axiko.vibrate(ms);
   return true;
 };
 
@@ -492,7 +492,7 @@ function telepath(results) {
   try {
     var s = exports.settings();
     if (!rules.telepath(results, s.telepathSeconds)) return null;
-    return achieve.give(assi.files, require, {
+    return achieve.give(axiko.files, require, {
       key: 'hat/telepath', source: 'hat', category: 'Игротека', title: 'Телепат', icon: 'bolt', rarity: 'uncommon', hidden: true,
       text: 'Слово в Шляпе угадано за ' + s.telepathSeconds + ' с или быстрее', at: Date.now()
     }, ACHIEVED);
@@ -549,7 +549,7 @@ exports.gameEnd = function (gameId, info) {
   db().exec('update games set ended = ?, scores = ?, summary = ? where id = ?',
     [Date.now(), JSON.stringify(info.scores || {}), JSON.stringify(summary), gameId]);
   if (s.carryUnguessed && !info.keep && info.unguessed && info.unguessed.length) {
-    assi.files.writeJson(CARRY, assi.files.readJson(CARRY, []).concat(info.unguessed).slice(0, 100));
+    axiko.files.writeJson(CARRY, axiko.files.readJson(CARRY, []).concat(info.unguessed).slice(0, 100));
   }
   var record = null;
   if (info.toBase !== false) {
@@ -604,12 +604,12 @@ exports.stats = function () {
 
 /** Старое — прочь: колоды старше срока (если не отмечены «сохранить»), история сверх предела. */
 function cleanup(force) {
-  var stamp = assi.files.readJson(CLEANED, { at: 0 });
+  var stamp = axiko.files.readJson(CLEANED, { at: 0 });
   if (!force && Date.now() - stamp.at < DAY) return;
   var s = exports.settings();
   db().exec('delete from decks where keep = 0 and created < ?', [Date.now() - s.deckDays * DAY]);
   db().exec('delete from word_history where id not in (select id from word_history order by played_at desc limit ?)', [Math.max(s.noRepeat, 1)]);
-  assi.files.writeJson(CLEANED, { at: Date.now() });
+  axiko.files.writeJson(CLEANED, { at: Date.now() });
 }
 
 // ---- открытие экрана --------------------------------------------------------------------------

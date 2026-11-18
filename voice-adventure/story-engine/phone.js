@@ -1,7 +1,7 @@
 // The phone around a story: network, charging, which shell operations exist, whether the owner
 // is on a trip («Пассажир» of the game hub), whether a model for a role can answer now.
 // Engine only (Rhino).
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 
 var cache = { features: null, at: 0 };
 
@@ -63,7 +63,7 @@ function charging() {
 /** The game hub's «Пассажир» sees a trip now (data/games/links/passenger.json). */
 function inTrip() {
   try {
-    var state = assi.files.readJson('data/games/links/passenger.json', null);
+    var state = axiko.files.readJson('data/games/links/passenger.json', null);
     return !!state && state.state === 'trip';
   } catch (error) {
     return false;

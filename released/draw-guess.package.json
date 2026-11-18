@@ -8,18 +8,18 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "090570128f75aec0d0297420c1ba6b161dad8c1fe688e6943cb52591d310f488",
-      "size": 19456
+      "sha256": "ba3f09c3f0e8cbc995533cb5e37b3bb84609fa902e34f0021346363287077da6",
+      "size": 19458
     },
     {
       "path": "code/awards.js",
-      "sha256": "3ef646cbbf9960906f17eb37ed7b9d61c34e3d69a5513f93f85921f604196764",
-      "size": 5198
+      "sha256": "609248c6207fea98081b4749d6efd5f22f978c2ee670822dab29051c79b9d04a",
+      "size": 5199
     },
     {
       "path": "code/canvas.js",
@@ -33,23 +33,23 @@
     },
     {
       "path": "code/checks.js",
-      "sha256": "2f0ec24577889f40f8367d8786fc057711babf74bd2298b9b6678e0618e0a39f",
-      "size": 17495
+      "sha256": "8cdae111ee73fa1f58a0221bccea6a2bd5a9d31abda2601a7482bebf58edb6d2",
+      "size": 17508
     },
     {
       "path": "code/config.js",
-      "sha256": "836c8e4e1a9793cdc1be2cb6f3682d2d57aa05af56e51aefa81cde97b722b49d",
-      "size": 11246
+      "sha256": "4839f7a1214da2d70683cc8499cb6821bee408cb58a45b1f3aac00cb8a7b4009",
+      "size": 11256
     },
     {
       "path": "code/guess.js",
-      "sha256": "1d9649d7543e77ee8f2a1ca4951f80502484b35b45ae385e815b4a78d6a8357d",
-      "size": 7485
+      "sha256": "72985b819c9f8e81b1a704c754407eeb6c21bb8a3397f91519c88846e98fa09b",
+      "size": 7486
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "7a1985cefde185460aba9916c07ef9f487bd61d112a86d63370874e189282d32",
-      "size": 23934
+      "sha256": "6348b47f1f72b9c59c2aed49ea365b15cf4ea01cb3de70071132f0d859164701",
+      "size": 23954
     },
     {
       "path": "code/icon.svg",
@@ -58,8 +58,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "bd7a4a2f8e21daf337937356f29484996d69b1517a2ff202a8c6f4cce7d2f895",
-      "size": 34740
+      "sha256": "0808b20c68bd53e82c2e964f9105daa0f94dd64d02b07ca1b0f266fd62526bc1",
+      "size": 34774
     },
     {
       "path": "code/match.js",
@@ -78,18 +78,18 @@
     },
     {
       "path": "code/tool.js",
-      "sha256": "73467a560ba09e8299204dedc5e3065d7491a025a0c4c9c677b116c84722ee78",
-      "size": 4402
+      "sha256": "7fa9ba8f01063ee6abdeeb76fa9f8e4a059023a24bc073d1150aa1387e6ca6b5",
+      "size": 4405
     },
     {
       "path": "code/ui/dg.css",
-      "sha256": "aed980546280d0e60e2413b82e164d9a09bef5b7b65bf7d2d5c4cc16faf50e8b",
-      "size": 11546
+      "sha256": "339fb71b24b910753c9bb179aab81c1d53dac1d7fcce999ddc70926c38fc709f",
+      "size": 11547
     },
     {
       "path": "code/ui/dg.js",
-      "sha256": "0718bde979088ac1665a211577fe4fc81721d86480891427eaa32a18d72fa28d",
-      "size": 90993
+      "sha256": "0bf6cabe14d627b5aa7662807b21c2bbf9e9f29278f4db36b76e24fece962a90",
+      "size": 91026
     },
     {
       "path": "code/ui/index.html",
@@ -111,14 +111,14 @@
   "optionalDependencies": [
     {
       "id": "hat",
-      "version": ">=0.1.2"
+      "version": ">=0.1.3"
     }
   ],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

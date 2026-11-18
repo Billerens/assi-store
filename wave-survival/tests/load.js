@@ -1,11 +1,11 @@
 // Loads «Выживание в волнах» in node from the store folder: the game's files require the engine
 // as '../engine/…' (as they do inside modules/games/ on the phone), so those requests go to the
-// engine of the Assi repository. Not a test itself; the *.test.js files use it.
+// engine of the Axiko repository. Not a test itself; the *.test.js files use it.
 'use strict';
 const fs = require('fs');
 const path = require('path');
 const Module = require('module');
-const H = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const H = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 
 const GAME = path.resolve(__dirname, '..');
 const ENGINE = path.join(H.HUB, 'engine');

@@ -51,7 +51,7 @@ var drawGuess = {
   }
 };
 
-// The hub's engine: does it take «daily/2026-11-14-2», a second game of a day (a newer Assi)?
+// The hub's engine: does it take «daily/2026-11-14-2», a second game of a day (a newer Axiko)?
 var hubTakesSlots = true;
 var core = {
   validId: function (id) {
@@ -367,7 +367,7 @@ test('расход дошёл до maxCostPerGame — «сдавай» по де
   var spent = 0.1;
   env.native['usage.summary'] = function () {
     spent += 0.3;
-    return { budget: 0, days: [{ day: DATE, cost: spent + 5, who: { gamesmith: { cost: spent }, assi: { cost: 5 } } }] };
+    return { budget: 0, days: [{ day: DATE, cost: spent + 5, who: { gamesmith: { cost: spent }, axiko: { cost: 5 } } }] };
   };
   var st = agent({ busy: 5 });
   var out = main.make('утро');
@@ -560,7 +560,7 @@ test('прижилась: три разных дня игры после «Ос�
   assert.strictEqual(main.status().offers.length, 1);
   main.discuss({ id: 'otrazhatel' });
   var sent = env.nativeCalls.filter(function (c) { return c.method === 'agent.send'; })[0];
-  assert.strictEqual(sent.args[0], 'assi');
+  assert.strictEqual(sent.args[0], 'axiko');
   assert.ok(/прижилась/.test(sent.args[1]) && /modules\/games\/otrazhatel\//.test(sent.args[1]) && /престиж/.test(sent.args[1]));
   assert.ok(env.cancelled.indexOf('daily-game-root-otrazhatel') >= 0);
   assert.strictEqual(main.status().offers.length, 0);

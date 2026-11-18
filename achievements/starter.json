@@ -175,7 +175,7 @@
    "rule": {"type": "records", "query": {"kinds": ["note", "event"], "source": "recorder"}, "count": 10}},
   {"id": "deep-dive", "title": "Глубокое погружение", "text": "3 часа Фокуса за день", "group": "Жизнь", "icon": "target", "rarity": "rare",
    "rule": {"type": "day", "when": {"metric": "focusMin", "op": ">=", "value": 180}}},
-  {"id": "year", "title": "Год с Assi", "text": "365 дней с данными", "group": "Жизнь", "icon": "calendar", "rarity": "legendary",
+  {"id": "year", "title": "Год с Axiko", "text": "365 дней с данными", "group": "Жизнь", "icon": "calendar", "rarity": "legendary",
    "item": {"id": "trophy", "slot": "shelf"},
    "rule": {"type": "total", "metric": "hasData", "value": 365}},
   {"id": "no-day-wasted", "title": "Ни дня зря", "text": "100 дней подряд с хотя бы одной отметкой", "group": "Жизнь", "icon": "check", "rarity": "epic", "hidden": true,

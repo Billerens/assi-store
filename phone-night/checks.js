@@ -2,7 +2,7 @@
 // the bundled sample (samples/*.txt through fixture.js), not the owner's: the parsers, the facts,
 // the honesty check and the store are exercised without waiting for a real night. Nothing is sent,
 // the model is not called (a stand-in answers), everything a check writes is removed after it.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var fixture = require('modules/phone-night/fixture.js');
 var settingsLib = require('modules/phone-night/settings.js');
 var nightLib = require('modules/phone-night/night.js');
@@ -18,7 +18,7 @@ function main() {
 function texts() {
   var out = {};
   fixture.FILES.forEach(function (name) {
-    out[name] = assi.files.read('modules/phone-night/samples/' + name + '.txt');
+    out[name] = axiko.files.read('modules/phone-night/samples/' + name + '.txt');
   });
   return out;
 }
@@ -84,7 +84,7 @@ exports['журнал: событие записывается, текст ув�
   }, { test: true });
   if (made.skipped) t.skip(made.skipped);
   try {
-    var rows = assi.db('phone-night').query('select kind, package, extra from events where id = ?', [made.id]);
+    var rows = axiko.db('phone-night').query('select kind, package, extra from events where id = ?', [made.id]);
     t.equal(rows.length, 1, 'запись есть');
     t.equal(rows[0].kind, 'notification');
     t.ok(String(rows[0].extra).indexOf('секретный') < 0, 'текст не сохранён');
@@ -106,7 +106,7 @@ exports['источники отвечают честно'] = function (t) {
 
 exports['настройки: сохраняются нормализованными и возвращаются'] = function (t) {
   var path = 'data/phone-night/settings.json';
-  var had = assi.files.exists(path);
+  var had = axiko.files.exists(path);
   var before = main().settings().values;
   try {
     var saved = main().saveSettings({ darkMinutes: 9999, style: 'стихи' });
@@ -114,7 +114,7 @@ exports['настройки: сохраняются нормализованны
     t.equal(saved.style, 'nature', 'неизвестный стиль заменён');
   } finally {
     main().saveSettings(before);
-    if (!had) assi.files.remove(path);
+    if (!had) axiko.files.remove(path);
   }
 };
 

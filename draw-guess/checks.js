@@ -3,7 +3,7 @@
 // моделей, слова без сети, инструмент агента tools/draw-guess.js, ачивки («Художник», grant модуля
 // ачивок), раунд и картинка в базе (убираются), отклик на имя, набор для сравнения,
 // экран: выбор режима, холст (штрихи настоящими событиями указателя, отмена, очистка, снимок JPEG,
-// судья по карточке) и «Assi рисует» (анимация, зачёт на слух). Модель не зовётся (экран открыт
+// судья по карточке) и «Axiko рисует» (анимация, зачёт на слух). Модель не зовётся (экран открыт
 // с ?test=1 — запас рисунков не готовится), микрофон не открывается; всё добавленное убирается.
 var SCREEN = 'modules/draw-guess/ui/index.html?test=1';
 
@@ -59,8 +59,8 @@ exports['сравнение слов: тот же match.js, что у Шляпы
   t.ok(talk.judge({ guess: 'башня', alternatives: ['свеча', 'маяк'] }, { word: 'маяк' }).ok, 'верное среди вариантов');
   t.ok(!talk.judge({ guess: 'кот', alternatives: [] }, { word: 'кошка', synonyms: ['кот'] }, { synonyms: false }).ok, 'синонимы выключены');
   t.ok(talk.judge({ guess: 'кот', alternatives: [] }, { word: 'кошка', synonyms: ['кот'] }, { synonyms: true }).ok, 'синонимы включены');
-  var assi = require('lib/assi');
-  if (!assi.files.exists('modules/hat/cases.js')) t.skip('Шляпа не установлена — общий набор примеров не с чем сравнить');
+  var axiko = require('lib/axiko');
+  if (!axiko.files.exists('modules/hat/cases.js')) t.skip('Шляпа не установлена — общий набор примеров не с чем сравнить');
   var outcome = require('modules/hat/cases.js').run(match);
   t.equal(outcome.failed.length, 0, 'набор Шляпы: ' + JSON.stringify(outcome.failed.slice(0, 5)));
 };
@@ -100,7 +100,7 @@ exports['слова без сети: карточка из запаса'] = func
 };
 
 exports['инструмент агента tools/draw-guess.js записан и ведёт в open'] = function (t) {
-  var files = require('lib/assi').files;
+  var files = require('lib/axiko').files;
   var main = dg();
   main.start();
   t.ok(files.exists('tools/draw-guess.js'), 'инструмент агента не записан');
@@ -120,7 +120,7 @@ exports['ачивки: «Художник» после серии, модуль 
   var run = [];
   for (var i = 0; i < s.artistStreak; i++) run.push('guessed');
   t.equal(awards.earned(run, { achievements: true, artistStreak: s.artistStreak }, 1).length, 1, 'серия по настройке');
-  if (!require('lib/assi').files.exists('modules/achievements/main.js')) t.skip('«Ачивки за жизнь» не установлены — ачивки ждут в data/games/achievements-outbox.json');
+  if (!require('lib/axiko').files.exists('modules/achievements/main.js')) t.skip('«Ачивки за жизнь» не установлены — ачивки ждут в data/games/achievements-outbox.json');
   t.ok(typeof require('modules/achievements/main.js').grant === 'function', 'у модуля ачивок нет grant()');
 };
 
@@ -151,16 +151,16 @@ exports['раунд и партия пишутся в базу и убирают
 
 exports['картинка рисунка сохраняется и убирается'] = function (t) {
   var main = dg();
-  var assi = require('lib/assi');
+  var axiko = require('lib/axiko');
   var png = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
   var path = main.saveArt('check-' + stamp, png);
   try {
     t.equal(path, 'data/draw-guess/art/check-' + stamp + '.png', 'путь');
-    t.ok(assi.files.exists(path), 'файл есть');
+    t.ok(axiko.files.exists(path), 'файл есть');
   } finally {
     main.removeArt(path);
   }
-  t.ok(!assi.files.exists(path), 'файл убран');
+  t.ok(!axiko.files.exists(path), 'файл убран');
   t.throws(function () { main.saveArt('x', 'не картинка'); }, 'не картинка');
 };
 
@@ -171,7 +171,7 @@ exports['отклик на имя: выключается на игру и во�
   } catch (error) {
     t.skip('нет wake.status: ' + error.message);
   }
-  var mark = require('lib/assi').files.readJson('data/draw-guess/wake.json', null);
+  var mark = require('lib/axiko').files.readJson('data/draw-guess/wake.json', null);
   if (mark && mark.pending) t.skip('идёт игра — отклик на имя уже выключен ею');
   var main = dg();
   var was = !!(status && status.on);
@@ -212,7 +212,7 @@ function openScreen(t) {
 exports['экран: два режима и «Начать»'] = function (t) {
   var page = openScreen(t);
   t.equal(page.count('#mode-human'), 1, 'карточка «Я рисую»');
-  t.equal(page.count('#mode-model'), 1, 'карточка «Assi рисует»');
+  t.equal(page.count('#mode-model'), 1, 'карточка «Axiko рисует»');
   t.equal(page.count('#start'), 1, 'кнопка «Начать»');
   t.ok(page.eval('document.documentElement.scrollWidth <= window.innerWidth + 1', 0), 'нет прокрутки вбок');
 };
@@ -263,7 +263,7 @@ exports['холст: штрихи пальцем, отмена, очистка, 
   }
 };
 
-exports['Assi рисует: штрихи появляются по расписанию, верное слово слышно'] = function (t) {
+exports['Axiko рисует: штрихи появляются по расписанию, верное слово слышно'] = function (t) {
   var page = openScreen(t);
   try {
     var started = page.eval('dgScreen.testPaint(3)', 800);

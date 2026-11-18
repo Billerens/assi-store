@@ -11,8 +11,8 @@ var checks = kit.standard(__dirname, {
 for (var name in checks) exports[name] = checks[name];
 function load() {
   var id = kit.idOf(__dirname);
-  var assi = require('lib/assi');
-  var game = JSON.parse(assi.files.read('modules/games/' + id + '/game.json'));
+  var axiko = require('lib/axiko');
+  var game = JSON.parse(axiko.files.read('modules/games/' + id + '/game.json'));
   return { game: game, cfg: kit.configOf(game, 'modules/games/' + id), sim: require('modules/games/' + id + '/sim.js') };
 }
 function ctx(x, now) { return bot.ctxOf(x.cfg, Rng.make(7), now || Date.UTC(2026, 10, 14, 8)); }

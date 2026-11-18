@@ -19,12 +19,12 @@ for (var name in checks) exports[name] = checks[name];
 
 function load() {
   var id = kit.idOf(__dirname);
-  var assi = require('lib/assi');
-  var game = JSON.parse(assi.files.read('modules/games/' + id + '/game.json'));
+  var axiko = require('lib/axiko');
+  var game = JSON.parse(axiko.files.read('modules/games/' + id + '/game.json'));
   game.id = id;
   var dir = 'modules/games/' + id;
   return {
-    id: id, dir: dir, assi: assi, game: game, sim: require(dir + '/sim.js'), rails: require(dir + '/rails.js'),
+    id: id, dir: dir, axiko: axiko, game: game, sim: require(dir + '/sim.js'), rails: require(dir + '/rails.js'),
     endless: require(dir + '/endless.js'), cfg: kit.configOf(game, dir)
   };
 }
@@ -35,7 +35,7 @@ exports['уровни глав решаются своим решением'] = 
   var x = load();
   var count = 0;
   for (var ch = 1; ch <= 10; ch++) {
-    var list = JSON.parse(x.assi.files.read(x.dir + '/content/levels-' + pad(ch) + '.json'));
+    var list = JSON.parse(x.axiko.files.read(x.dir + '/content/levels-' + pad(ch) + '.json'));
     t.equal(list.length, 15, 'уровней в главе ' + ch);
     for (var i = 0; i < list.length; i++) {
       var lv = list[i];
@@ -90,7 +90,7 @@ exports['сундук пассажира: жетоны и подсказка'] =
 
 exports['уровень дня одинаков у одного зерна'] = function (t) {
   var x = load();
-  var chapters = JSON.parse(x.assi.files.read(x.dir + '/content/chapters.json'));
+  var chapters = JSON.parse(x.axiko.files.read(x.dir + '/content/chapters.json'));
   var a = x.rails.seeded('daily:2026-11-14', chapters.daily, null, 120);
   var b = x.rails.seeded('daily:2026-11-14', chapters.daily, null, 120);
   t.ok(a && b, 'уровень дня не собрался');

@@ -2,7 +2,7 @@
 const path = require('node:path');
 // A drawing fault must not strand an interactive game. Stress large saved values and every room.
 const assert = require('assert/strict');
-const H = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const H = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const Menagerie = require('../ui/scene');
 const Tower = require('../../tower/ui/scene');
 const Dungeon = require('../../one-cell-dungeon/ui/scene');

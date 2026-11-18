@@ -7,7 +7,7 @@
   'use strict';
   // «2026-11-14» or, for a later game of that day, «2026-11-14-2».
   var match = /^\/modules\/games\/daily\/(\d{4}-\d{2}-\d{2}(?:-[2-9])?)\//.exec(location.pathname);
-  if (!match || !window.assi) return;
+  if (!match || !window.axiko) return;
   if (new URLSearchParams(location.search).get('preview') === '1') return;   // the preview frames of checks
   var DATE = match[1];
   var MAIN = 'modules/game-of-the-day/main.js';
@@ -21,7 +21,7 @@
   var reported = false;
 
   function load() {
-    return window.assi.call(MAIN, 'rateInfo', DATE).then(function (got) {
+    return window.axiko.call(MAIN, 'rateInfo', DATE).then(function (got) {
       info = got;
       return got;
     }).catch(function () {
@@ -52,7 +52,7 @@
     if (passing || decided || reported || !info || !info.ok || info.rated) return;
     if (played() < info.rateAfterSec * 1000) return;
     reported = true;
-    window.assi.call(MAIN, 'played', DATE, Math.round(played() / 1000)).catch(function () {});
+    window.axiko.call(MAIN, 'played', DATE, Math.round(played() / 1000)).catch(function () {});
   }
 
   document.addEventListener('visibilitychange', function () {
@@ -73,7 +73,7 @@
     passing = true;
     var exit = document.getElementById('g-exit');
     if (exit) exit.click();
-    else window.assi.back();
+    else window.axiko.back();
   }
 
   function style() {
@@ -159,7 +159,7 @@
     var voiceButton = h('button', { class: 'btn', onclick: function () {
       voiceButton.disabled = true;
       voiceLine.textContent = 'Слушаю…';
-      window.assi.call(MAIN, 'listen').then(function (text) {
+      window.axiko.call(MAIN, 'listen').then(function (text) {
         voiceText = String(text || '').trim();
         voiceLine.textContent = voiceText ? '«' + voiceText + '»' : 'Ничего не расслышал';
       }).catch(function () {
@@ -177,7 +177,7 @@
       actionButtons.forEach(function (button) { button.disabled = true; });
       var data = { stars: stars || null, reasons: picked, voice: voiceText, comment: comment.value, genrePreference: genre.value,
         playedSec: Math.round(played() / 1000), decision: decision };
-      window.assi.call(MAIN, 'decide', DATE, data).then(function () {
+      window.axiko.call(MAIN, 'decide', DATE, data).then(function () {
         decided = decision !== 'later' || stars > 0;
         if (close) close();
         leave();

@@ -514,7 +514,7 @@
   'use strict';
   const MAIN = 'modules/phone-night/main.js';
   const h = ui.h;
-  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
   const state = { viewing: null, report: null, tab: 'today', busy: false };
 
   const pad = (n) => (n < 10 ? '0' : '') + n;
@@ -710,12 +710,12 @@
       items.push(h('div', { class: 'bundle' },
         m.wallpaper.thumb ? h('img', { src: m.wallpaper.thumb, alt: '', class: 'thumb' }) : null,
         h('div', {}, h('b', {}, 'Обои дня: '), ui.raw(m.wallpaper.title), m.wallpaper.credit ? h('div', { class: 'small muted' }, ui.raw(m.wallpaper.credit)) : null),
-        h('button', { class: 'btn', onclick: () => assi.open(m.wallpaper.open) }, 'Открыть')));
+        h('button', { class: 'btn', onclick: () => axiko.open(m.wallpaper.open) }, 'Открыть')));
     }
     if (m.horoscope) {
       items.push(h('div', { class: 'bundle' },
         h('div', {}, h('b', {}, 'Гороскоп: '), ui.raw(m.horoscope.text)),
-        h('button', { class: 'btn', onclick: () => assi.open(m.horoscope.open) }, 'Открыть')));
+        h('button', { class: 'btn', onclick: () => axiko.open(m.horoscope.open) }, 'Открыть')));
     }
     return card('Утро', 'image', ...items);
   }
@@ -895,24 +895,24 @@
     const sh = status.shizuku || {};
     let shButton = null;
     if (sh.running && !sh.granted) {
-      shButton = h('button', { class: 'btn', onclick: () => assi.native('shizuku.request').then(refreshAll).catch((e) => ui.toast(String(e && e.message || e))) }, 'Разрешить');
+      shButton = h('button', { class: 'btn', onclick: () => axiko.native('shizuku.request').then(refreshAll).catch((e) => ui.toast(String(e && e.message || e))) }, 'Разрешить');
     }
     row('Shizuku', sh.ready, sh.ready ? 'работает: будильники, лента батареи, Doze и фоновые задания видны'
-      : (sh.note || 'не работает') + ' — без него нет будильников, ленты батареи и Doze. Запустите Shizuku и разрешите Assi в «Настройках» Assi.', shButton);
+      : (sh.note || 'не работает') + ' — без него нет будильников, ленты батареи и Doze. Запустите Shizuku и разрешите Axiko в «Настройках» Axiko.', shButton);
     row('Доступ к статистике использования', status.usage, status.usage ? 'включён: экраны, ваши сессии, трафик'
-      : 'выключен — нет ваших сессий, трафика и экранов, если Assi был закрыт',
+      : 'выключен — нет ваших сессий, трафика и экранов, если Axiko был закрыт',
     h('button', { class: 'btn', onclick: () => call('openUsageAccess') }, 'Открыть'));
     row('Доступ к уведомлениям', status.notices !== false, status.notices === false ? 'выключен — ночные уведомления не видны'
       : 'включён: ночные уведомления считаются (текст не хранится)',
     h('button', { class: 'btn', onclick: () => call('openNotices') }, 'Открыть'));
     const dozeButton = sh.ready
-      ? h('button', { class: 'btn', onclick: () => call('allowDoze').then((done) => { ui.toast(done.ok ? 'Assi в белом списке Doze' : 'Не вышло: ' + done.note); refreshAll(); }) }, 'Добавить')
+      ? h('button', { class: 'btn', onclick: () => call('allowDoze').then((done) => { ui.toast(done.ok ? 'Axiko в белом списке Doze' : 'Не вышло: ' + done.note); refreshAll(); }) }, 'Добавить')
       : h('button', { class: 'btn', onclick: () => call('openBatterySettings') }, 'Открыть');
-    row('Белый список Doze', status.doze === true, status.doze === true ? 'Assi освобождён от сна: подписки живут всю ночь'
-      : 'Assi может уснуть ночью, и журнал прервётся (тогда события берутся из статистики Android)', dozeButton);
+    row('Белый список Doze', status.doze === true, status.doze === true ? 'Axiko освобождён от сна: подписки живут всю ночь'
+      : 'Axiko может уснуть ночью, и журнал прервётся (тогда события берутся из статистики Android)', dozeButton);
     if (status.useModel) {
-      row('Модель рассказа', status.model, status.model ? 'назначена: роль «Рассказ о ночи» в настройках Assi'
-        : 'не назначена — будет шаблон. Роль «Рассказ о ночи» — в настройках Assi, «Кто на какой модели»');
+      row('Модель рассказа', status.model, status.model ? 'назначена: роль «Рассказ о ночи» в настройках Axiko'
+        : 'не назначена — будет шаблон. Роль «Рассказ о ночи» — в настройках Axiko, «Кто на какой модели»');
     }
     if (onlyMissing && !rows.length) return null;
     return card(onlyMissing ? 'Что включить для полного отчёта' : 'Доступы', 'lock', h('div', { class: 'access' }, ...rows));
@@ -1090,7 +1090,7 @@
     else if (state.tab === 'settings') loadSettings();
   }
 
-  document.getElementById('back').addEventListener('click', () => assi.back());
+  document.getElementById('back').addEventListener('click', () => axiko.back());
   document.getElementById('rebuild').addEventListener('click', rebuild);
   showTab = ui.tabs(document.getElementById('tabs'),
     [['today', 'Сегодня'], ['nights', 'Прошлые ночи'], ['trends', 'Тренды'], ['settings', 'Настройки']],
@@ -1099,7 +1099,7 @@
       document.getElementById('rebuild').hidden = id !== 'today';
       refreshAll();
     });
-  assi.on('phone-night.changed', (data) => {
+  axiko.on('phone-night.changed', (data) => {
     if (data && data.type === 'settings') return;
     if (state.tab === 'today' && (!state.viewing || (data && data.night === state.viewing))) loadToday(state.viewing);
     else if (state.tab === 'nights') loadNights();

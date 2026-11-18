@@ -8,18 +8,18 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "10a78d80c261f1ab1aa3ae14c92e82ec7ca260601df784a9ecad785f531f9d01",
-      "size": 22145
+      "sha256": "3b89b35377f926cfd97496fd4bf692c0ab3cb073d2f79a3fa12e36bc4181522e",
+      "size": 22146
     },
     {
       "path": "code/checks.js",
-      "sha256": "8a9cb232b559d3fb69c9b304bb0fd12c1ab3106a34c9f90cf6e50746309e786f",
-      "size": 4610
+      "sha256": "ffe105e3b487b0cb6f2e414c46010525b4ce574d99dea1b81452fb60935cad69",
+      "size": 4613
     },
     {
       "path": "code/config.json",
@@ -131,10 +131,10 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1,
+    "axikoApi": 1,
     "gamesEngine": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

@@ -412,7 +412,7 @@
 <body>
 <main class="page">
   <header class="topbar">
-    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <button class="icon-btn" onclick="axiko.back()" aria-label="Назад" data-icon="back"></button>
     <h1>Игра дня</h1>
     <button class="icon-btn" id="openSettings" aria-label="Настройки" data-icon="settings"></button>
   </header>
@@ -442,7 +442,7 @@
   // its events. Rating here is the same as the sheet inside the game (ui/rate.js).
   const h = ui.h;
   const MAIN = 'modules/game-of-the-day/main.js';
-  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
   const $ = id => document.getElementById(id);
   const MODES = {
     free: 'свободный выбор',
@@ -519,7 +519,7 @@
     const actions = [];
     if (!s.hub) {
       children.push(h('div', { class: 'day-title' }, 'Нужна Игротека'));
-      children.push(state('info', 'Игра дня делается на движке Игротеки (modules/games), она ставится вместе с Assi. Обновите Assi.'));
+      children.push(state('info', 'Игра дня делается на движке Игротеки (modules/games), она ставится вместе с Axiko. Обновите Axiko.'));
       return h('div', { class: 'card' }, children);
     }
     if (s.making) {
@@ -532,7 +532,7 @@
       if (e.rating) children.push(h('div', { class: 'state' }, starsLine(e.rating), h('span', { 'data-raw': '' }, (e.reasons || []).join(', '))));
       if (e.kept) children.push(state('check', 'Оставлена в Игротеке, раздел «На пробу»'));
       else if (e.pending) children.push(state('clock', e.pending === 'keep' ? 'Переносится в Игротеку…' : 'Удаляется…'));
-      actions.push(h('button', { class: 'btn primary', onclick: () => assi.open(e.open) }, ui.icon('play'), 'Играть'));
+      actions.push(h('button', { class: 'btn primary', onclick: () => axiko.open(e.open) }, ui.icon('play'), 'Играть'));
       if (!e.kept) {
         actions.push(h('button', { class: 'btn', onclick: () => rateSheet(e) }, ui.icon('star'), e.rating ? 'Изменить оценку' : 'Оценить'));
         actions.push(h('button', { class: 'btn', onclick: () => keep(e) }, ui.icon('check'), 'Оставить в Игротеке'));
@@ -548,7 +548,7 @@
       actions.push(h('button', { class: 'btn primary', onclick: makeNow }, ui.icon('refresh'), 'Сделать сейчас'));
     }
     children.push(scheduleLine());
-    if (s.schedule.blocked) children.push(state('info', 'Вторая игра за день заработает, когда Игротека начнёт её принимать (новая версия Assi). Пока делается только первая.'));
+    if (s.schedule.blocked) children.push(state('info', 'Вторая игра за день заработает, когда Игротека начнёт её принимать (новая версия Axiko). Пока делается только первая.'));
     actions.push(h('button', { class: 'btn', onclick: () => showTask(s.upcoming && s.upcoming.key) }, ui.icon('note'), 'Задание агенту'));
     children.push(h('div', { class: 'actions' }, actions));
     const other = otherGames(e);
@@ -676,7 +676,7 @@
     box.hidden = !d || !d.installed || !d.on;
     if (box.hidden) return;
     const actions = [];
-    if (d.ready && !d.played) actions.push(h('button', { class: 'btn primary', onclick: () => assi.open(d.open) }, ui.icon('play'), 'Угадать'));
+    if (d.ready && !d.played) actions.push(h('button', { class: 'btn primary', onclick: () => axiko.open(d.open) }, ui.icon('play'), 'Угадать'));
     if (!d.ready) actions.push(h('button', { class: 'btn', onclick: async () => {
       const out = await act('drawingNow');
       if (out && out.started) ui.toast('Модель рисует — это займёт до минуты');
@@ -707,7 +707,7 @@
       h('div', { class: 'grow' },
         h('div', { class: 'row-title', 'data-raw': '' }, t.title),
         h('div', { class: 'row-sub' }, ui.t('Сыграна в {} из {} разных дней — потом во «Все игры»', t.days, t.need))),
-      h('div', { class: 'row-actions' }, h('button', { class: 'icon-btn', 'aria-label': 'Играть', onclick: () => assi.open(t.open) }, ui.icon('play'))))));
+      h('div', { class: 'row-actions' }, h('button', { class: 'icon-btn', 'aria-label': 'Играть', onclick: () => axiko.open(t.open) }, ui.icon('play'))))));
   }
 
   function dayRow(e) {
@@ -719,7 +719,7 @@
     if (e.minutes !== null && e.made) sub.push(ui.t('{} мин работы', e.minutes) + (e.costUsd !== null ? ', $' + e.costUsd : ''));
     if (e.mode) sub.push(MODES[e.mode] || e.mode);
     const buttons = [];
-    if (e.open) buttons.push(h('button', { class: 'icon-btn', 'aria-label': 'Играть', onclick: () => assi.open(e.open) }, ui.icon('play')));
+    if (e.open) buttons.push(h('button', { class: 'icon-btn', 'aria-label': 'Играть', onclick: () => axiko.open(e.open) }, ui.icon('play')));
     if (e.canRate && !e.kept) {
       buttons.push(h('button', { class: 'icon-btn', 'aria-label': 'Оценить', onclick: () => rateSheet(e) }, ui.icon('star')));
       buttons.push(h('button', { class: 'icon-btn', 'aria-label': 'Оставить в Игротеке', onclick: () => keep(e) }, ui.icon('check')));
@@ -889,7 +889,7 @@
           parts.push(h('button', { class: 'btn wide gap-top', onclick: addSlot }, ui.icon('plus'), 'Ещё игра в день'));
         }
         parts.push(h('p', { class: 'small muted gap-top' }, ui.t('Агент начинает в «Начать», уведомление — в «Готова к». Без сети пробует ещё {} мин после этого.', sc.giveUpMin)));
-        if (sc.blocked) parts.push(state('info', 'Игротека этой версии Assi принимает только одну игру дня — вторая и следующие заработают после обновления.'));
+        if (sc.blocked) parts.push(state('info', 'Игротека этой версии Axiko принимает только одну игру дня — вторая и следующие заработают после обновления.'));
       }
       box.replaceChildren(...parts);
     }
@@ -936,7 +936,7 @@
     const journal = await call('log', 30);
     body.push(h('div', { class: 'set-group' }, 'Журнал'));
     body.push(h('div', { 'data-raw': '' }, journal.length ? journal.map(entry => h('div', { class: 'log-row' }, ui.raw(ui.ago(entry.at) + ' — ' + entry.text))) : h('div', { class: 'small muted' }, ui.t('Пока пусто'))));
-    body.push(h('p', { class: 'small muted' }, 'Модель агента «Мастер игр» выбирается в настройках Assi, в списке агентов; модель недельной сводки — роль «Игра дня: сводка вкуса». Расход виден в «Расход»: цена известна, если её сообщает провайдер.'));
+    body.push(h('p', { class: 'small muted' }, 'Модель агента «Мастер игр» выбирается в настройках Axiko, в списке агентов; модель недельной сводки — роль «Игра дня: сводка вкуса». Расход виден в «Расход»: цена известна, если её сообщает провайдер.'));
     ui.sheet(h('div', { class: 'sheet-scroll' }, body));
   }
 
@@ -954,11 +954,11 @@
     tasteBox();
   }
 
-  assi.on('daily-game.state', () => {
+  axiko.on('daily-game.state', () => {
     if (visible) refresh().catch(() => {});
   });
 
-  assi.on('app.visible', event => {
+  axiko.on('app.visible', event => {
     visible = !!(event && event.on);
     if (visible) refresh().catch(() => {});
   });

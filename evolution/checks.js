@@ -14,8 +14,8 @@ for (var checkName in standard) exports[checkName] = standard[checkName];
 
 function load() {
   var id = kit.idOf(__dirname);
-  var assi = require('lib/assi');
-  var game = JSON.parse(assi.files.read('modules/games/' + id + '/game.json'));
+  var axiko = require('lib/axiko');
+  var game = JSON.parse(axiko.files.read('modules/games/' + id + '/game.json'));
   game.id = id;
   return { game: game, sim: require('modules/games/' + id + '/sim.js'), cfg: kit.configOf(game, 'modules/games/' + id) };
 }

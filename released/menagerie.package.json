@@ -8,18 +8,18 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "31e68e4427b81fd0ed04fdb07f7decd0d1ad6f3970e50389c4296f6f596621cf",
-      "size": 15118
+      "sha256": "56a22cf3d03b15ffefc339174f178806a29d2e8cb3a43f27f998bda97decb6ab",
+      "size": 15120
     },
     {
       "path": "code/checks.js",
-      "sha256": "c7f8af90698793b822c9c2edf069550482b455d896f06043578b226da1678c85",
-      "size": 5995
+      "sha256": "609dafb69e82222cf36f8708e56a5449c7e2bbb7b12ff8d55fa65933162696d3",
+      "size": 5998
     },
     {
       "path": "code/combat.js",
@@ -126,10 +126,10 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1,
+    "axikoApi": 1,
     "gamesEngine": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

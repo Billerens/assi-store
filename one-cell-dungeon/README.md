@@ -85,4 +85,4 @@
 
 DOM сохраняет подписи, значения, выбор цели, длительное нажатие, жесты, руку даров и все междуэтажные решения. Canvas не перехватывает касания. Рисуется ровно девять клеток при любой глубине; сохранения, колода и баланс не меняются. Без Game.scene остаётся прежнее поле.
 
-Проверки: `node one-cell-dungeon/tests/scene.test.js`, `node menagerie/tests/scene-render.test.js`, `node menagerie/tests/visual.browser.test.js` из корня assi-store; настоящий клик по клетке, правильное перемещение/пополнение, 344/760 и reduced-motion.
+Проверки: `node one-cell-dungeon/tests/scene.test.js`, `node menagerie/tests/scene-render.test.js`, `node menagerie/tests/visual.browser.test.js` из корня axiko-store; настоящий клик по клетке, правильное перемещение/пополнение, 344/760 и reduced-motion.

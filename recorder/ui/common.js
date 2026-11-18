@@ -3,7 +3,7 @@
 // on the phone when the screen cannot play the file).
 (function () {
   const MAIN = 'modules/recorder/main.js';
-  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
   const KIND = { meeting: 'Встреча', note: 'Мысль', lecture: 'Лекция' };
   const KIND_ICON = { meeting: 'user', note: 'note', lecture: 'book' };
   const STATE = {
@@ -135,7 +135,7 @@
       if (index + 1 < parts.length) seek(parts[index + 1].offsetMs, true).catch(fail);
       else { playing = false; tellState(); }
     };
-    assi.on('recorder.player', (event) => {
+    axiko.on('recorder.player', (event) => {
       if (!phone || !event || !event.ended) return;
       if (index + 1 < parts.length) phonePlay(parts[index + 1].offsetMs).catch(fail);
       else { playing = false; clearInterval(poll); tellState(); }

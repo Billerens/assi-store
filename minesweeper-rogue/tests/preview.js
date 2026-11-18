@@ -1,11 +1,11 @@
 // Local, offline desktop preview. Run with Node, then open the printed loopback address.
-// It copies the real engine and kit to an isolated temporary workspace; Assi is a small stub.
+// It copies the real engine and kit to an isolated temporary workspace; Axiko is a small stub.
 'use strict';
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const http = require('http');
-const { FACTORY, HUB } = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const { FACTORY, HUB } = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'minesweeper-rogue-preview-'));
 const gameRoot = path.resolve(__dirname, '..');
 fs.cpSync(path.join(HUB, 'engine'), path.join(root, 'modules/games/engine'), {recursive: true});
@@ -15,7 +15,7 @@ const stub = `
 window.previewErrors=[];
 window.addEventListener('error',e=>window.previewErrors.push(e.message));
 window.addEventListener('unhandledrejection',e=>window.previewErrors.push(String(e.reason)));
-window.assi={
+window.axiko={
  on:()=>{},stage:async()=>{},back:()=>{},native:async()=>({language:'ru'}),
  call:async function(module,op,...a){
   if(op==='boot')return fetch('/__boot').then(r=>r.json());
@@ -32,7 +32,7 @@ window.assi={
 `;
 const page = `<!doctype html><html lang="ru"><meta charset="utf-8"><title>Сапёр-рогалик — проверка 344 и 760</title>
 <style>body{background:#101114;color:#ddd;font:16px system-ui;margin:16px}main{display:flex;gap:16px;align-items:start}iframe{border:1px solid #555;height:820px}pre{white-space:pre-wrap}button{min-height:44px;font:inherit}</style>
-<h1>Сапёр-рогалик · 344 / 760 px</h1><p>Настоящий движок, локальная заглушка Assi. Сохранения этого просмотра изолированы.</p>
+<h1>Сапёр-рогалик · 344 / 760 px</h1><p>Настоящий движок, локальная заглушка Axiko. Сохранения этого просмотра изолированы.</p>
 <button id="check">Проверить экран</button> <button id="start">Открыть первую клетку</button> <button id="rock">Проверить длинное поле</button>
 <pre id="report">Ожидание загрузки…</pre>
 <main><section>344 px<br><iframe title="344 px" width="344" src="/modules/games/minesweeper-rogue/ui/index.html?testwidth=344"></iframe></section><section>760 px<br><iframe title="760 px" width="760" src="/modules/games/minesweeper-rogue/ui/index.html?testwidth=760"></iframe></section></main>

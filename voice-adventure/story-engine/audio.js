@@ -7,7 +7,7 @@
 // request goes straight from here: POST {baseUrl}/audio/speech of the role "tts", raw PCM gets a
 // WAV header. Such calls pass by the shell's spending log, so they are written to our own journal.
 // Engine only (Rhino).
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var wav = require('./wav.js');
 var lines = require('./lines.js');
 var phone = require('./phone.js');
@@ -91,7 +91,7 @@ function renderDirect(text, base, options) {
   var style = options.style !== undefined && options.style !== null && options.style !== '' ? options.style : settings.style;
   if (style) setPath(body, settings.styleParam || (gemini ? GEMINI_STYLE : 'instructions'), String(style));
   var builder = new okhttp3.Request.Builder().url(String(target.baseUrl) + '/audio/speech')
-    .header('X-Title', 'Assi')
+    .header('X-Title', 'Axiko')
     .post(okhttp3.RequestBody.create(okhttp3.MediaType.parse('application/json; charset=utf-8'), JSON.stringify(body)));
   if (target.key) builder.header('Authorization', 'Bearer ' + target.key);
   var started = Date.now();
@@ -137,7 +137,7 @@ function render(dir, node, text, options) {
   if (phone.has('speech.render') && !options.style) {
     var got = native('speech.render', String(text), base + '.wav', 'cloud');
     journal({ at: Date.now(), chars: String(text).length, via: 'speech.render', node: String(node) });
-    return got ? String(got).replace(String(assi.files.path('')) + '/', '') : base + '.wav';
+    return got ? String(got).replace(String(axiko.files.path('')) + '/', '') : base + '.wav';
   }
   return renderDirect(text, base, options);
 }

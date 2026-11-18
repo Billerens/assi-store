@@ -8,13 +8,13 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "fbdf3676970212c8bcc1ea15a170b01a73e59f37573b0721063f19bbcc55a6d5",
-      "size": 18569
+      "sha256": "756de5e9891011b10f83e2d2bb0b256400fa6d33bc77316e12d7fd59926f181a",
+      "size": 18570
     },
     {
       "path": "code/board.js",
@@ -28,8 +28,8 @@
     },
     {
       "path": "code/checks.js",
-      "sha256": "ffe56e3354e83f060c3b3e389e7a598980c4f9cd426537c385159727c6f0b908",
-      "size": 4879
+      "sha256": "5ebe577d3152762f85bcfd0766bd09bb97e415c0a95ef192b57d223c009bf1d5",
+      "size": 4885
     },
     {
       "path": "code/config.json",
@@ -98,7 +98,7 @@
     },
     {
       "path": "code/tools/balance-report.json",
-      "sha256": "d1c0c4db78556cfcebddbe9032cb077bee3cb22149d45a1b5a2e1dffdaf69c4a",
+      "sha256": "0b5e0af22e1f070d1db7feb8330bf7f5aa44c4afdda409ec9aa98a03740554ba",
       "size": 3721
     },
     {
@@ -113,8 +113,8 @@
     },
     {
       "path": "code/tools/hub.js",
-      "sha256": "d12240934b8d754ecedd6ebb9d41d210114cda8a7c47ff058275495189809fc3",
-      "size": 1066
+      "sha256": "52bd8d0786df3abbfe52b77e88d37d0ae4c820a9a17e45bf0bfb4989adc17e07",
+      "size": 1070
     },
     {
       "path": "code/tools/levels-report.json",
@@ -123,8 +123,8 @@
     },
     {
       "path": "code/tools/preview-server.js",
-      "sha256": "cc30e8fbe90b463c70e21d5ee8246483b8fb2c3634b5223065908b4a67dc6bbd",
-      "size": 6530
+      "sha256": "979edeba91935478f66728fb281bd9ff48e35be8a9b2df03c391db540f14246c",
+      "size": 6533
     },
     {
       "path": "code/tools/verify-levels.js",
@@ -161,10 +161,10 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1,
+    "axikoApi": 1,
     "gamesEngine": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

@@ -1,7 +1,7 @@
 // What «Тайная жизнь телефона» asks of Android itself: the battery, the usage journal, traffic by
 // uid, app names, Shizuku and the dumpsys outputs, the system screens of access. Engine only
 // (Rhino). Every call is wrapped: a source that does not answer says why, it never throws.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var parse = require('./parse');
 
 var G = typeof global !== 'undefined' ? global : {};
@@ -26,7 +26,7 @@ exports.message = message;
 
 // ---- what the shell can do -------------------------------------------------------------------
 
-/** The shell's additions (docs/shell-changes.md in Assi) that are there; none when it cannot say. */
+/** The shell's additions (docs/shell-changes.md in Axiko) that are there; none when it cannot say. */
 exports.features = function () {
   if (LIVE.features && Date.now() - LIVE.featuresAt < 60000) return LIVE.features;
   var list = [];
@@ -164,7 +164,7 @@ exports.label = function (pkg) {
     var info = pm.getApplicationInfo(String(pkg), 0);
     var label = pm.getApplicationLabel(info);
     if (label) name = String(label);
-  } catch (error) { /* not installed or hidden from Assi */ }
+  } catch (error) { /* not installed or hidden from Axiko */ }
   LIVE.labels[pkg] = name;
   return name;
 };
@@ -216,7 +216,7 @@ exports.shizuku = function () {
   out.ready = out.running && out.granted;
   if (!out.installed) out.note = 'Shizuku не установлен';
   else if (!out.running) out.note = 'Shizuku не был запущен';
-  else if (!out.granted) out.note = 'Shizuku не дал Assi доступ';
+  else if (!out.granted) out.note = 'Shizuku не дал Axiko доступ';
   return out;
 };
 
@@ -254,23 +254,23 @@ function externalDir() {
 
 /**
  * Runs a dumpsys command and keeps its whole output in rawPath (data/phone-night/raw/…):
- * first as Assi itself (if empower gave it DUMP), then through Shizuku into the app's external
+ * first as Axiko itself (if empower gave it DUMP), then through Shizuku into the app's external
  * files folder, then through Shizuku with the output captured — the beginning and the end only
  * when it is longer than the shell lets through (marked with CUT).
  * -> { ok, note, via, path, truncated }
  */
 exports.dump = function (command, rawPath, s) {
-  var abs = assi.files.path(rawPath);
+  var abs = axiko.files.path(rawPath);
   new java.io.File(abs).getParentFile().mkdirs();
   var tried = [];
   var day = 864e5;
   if (LIVE.selfDump !== false || Date.now() - LIVE.selfDumpAt > day) {
     try {
-      assi.shell(command + ' > ' + quoted(abs) + ' 2>&1', { timeout: s.commandSeconds });
+      axiko.shell(command + ' > ' + quoted(abs) + ' 2>&1', { timeout: s.commandSeconds });
       var head = headOf(abs, 800);
       if (!parse.denied(head)) {
         LIVE.selfDump = true;
-        return { ok: true, note: '', via: 'Assi (DUMP)', path: rawPath, truncated: false };
+        return { ok: true, note: '', via: 'Axiko (DUMP)', path: rawPath, truncated: false };
       }
       LIVE.selfDump = false;
       LIVE.selfDumpAt = Date.now();
@@ -281,7 +281,7 @@ exports.dump = function (command, rawPath, s) {
   }
   var shizuku = exports.shizuku();
   if (!shizuku.ready) {
-    try { assi.files.remove(rawPath); } catch (error) { /* nothing there */ }
+    try { axiko.files.remove(rawPath); } catch (error) { /* nothing there */ }
     return { ok: false, note: shizuku.note || 'нет прав ADB', via: '', path: null, truncated: false, tried: tried };
   }
   var name = String(rawPath).split('/').pop();
@@ -289,7 +289,7 @@ exports.dump = function (command, rawPath, s) {
   if (ext) {
     var tmp = ext + '/phone-night-' + name;
     try {
-      assi.shell(command + ' > ' + quoted(tmp) + ' 2>&1', { privileged: true, timeout: s.commandSeconds });
+      axiko.shell(command + ' > ' + quoted(tmp) + ' 2>&1', { privileged: true, timeout: s.commandSeconds });
       var file = new java.io.File(tmp);
       if (file.exists() && file.canRead() && file.length() > 0) {
         java.nio.file.Files.copy(file.toPath(), new java.io.File(abs).toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
@@ -306,16 +306,16 @@ exports.dump = function (command, rawPath, s) {
   }
   try {
     var limit = s.historyHeadBytes + s.historyTailBytes;
-    var spare = '/data/local/tmp/assi-phone-night-' + name;
+    var spare = '/data/local/tmp/axiko-phone-night-' + name;
     var script = command + ' > ' + spare + ' 2>&1; n=$(wc -c < ' + spare + '); if [ "$n" -le ' + limit + ' ]; then cat ' + spare +
       '; else head -c ' + s.historyHeadBytes + ' ' + spare + '; echo; echo "' + CUT + '"; tail -c ' + s.historyTailBytes + ' ' + spare + '; fi; rm -f ' + spare;
-    var result = assi.shell(script, { privileged: true, timeout: s.commandSeconds });
+    var result = axiko.shell(script, { privileged: true, timeout: s.commandSeconds });
     var out = String(result && result.out !== undefined ? result.out : '');
     if (parse.denied(out)) {
       tried.push('Shizuku: ' + firstLine(out).slice(0, 120));
       return { ok: false, note: 'dumpsys не ответил: ' + tried.join('; '), via: '', path: null, truncated: false };
     }
-    assi.files.write(rawPath, out);
+    axiko.files.write(rawPath, out);
     return { ok: true, note: out.indexOf(CUT) >= 0 ? 'вывод длинный — взяты начало и конец' : '', via: 'Shizuku', path: rawPath, truncated: out.indexOf(CUT) >= 0 };
   } catch (error) {
     tried.push('Shizuku: ' + message(error));
@@ -328,7 +328,7 @@ exports.eachLine = function (path, fn) {
   var reader = null;
   var count = 0;
   try {
-    reader = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(assi.files.path(path)), 'UTF-8'), 65536);
+    reader = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(axiko.files.path(path)), 'UTF-8'), 65536);
     var line;
     while ((line = reader.readLine()) !== null) {
       fn(String(line));
@@ -342,7 +342,7 @@ exports.eachLine = function (path, fn) {
   }
 };
 
-/** Does dumpsys answer to Assi itself (DUMP given by empower)? null — not tried yet. */
+/** Does dumpsys answer to Axiko itself (DUMP given by empower)? null — not tried yet. */
 exports.selfDump = function () {
   return LIVE.selfDump;
 };
@@ -351,7 +351,7 @@ exports.selfDump = function () {
 exports.run = function (command, privileged, s) {
   try {
     if (privileged && !exports.shizuku().ready) return { ok: false, out: '', note: exports.shizuku().note };
-    var result = assi.shell(command, { privileged: Boolean(privileged), timeout: Math.min(30, s.commandSeconds) });
+    var result = axiko.shell(command, { privileged: Boolean(privileged), timeout: Math.min(30, s.commandSeconds) });
     return { ok: Number(result.code) === 0, out: String(result.out || ''), note: '' };
   } catch (error) {
     return { ok: false, out: '', note: message(error) };
@@ -370,7 +370,7 @@ exports.noticesOn = function () {
   }
 };
 
-/** Is Assi exempt from battery optimisation (Doze)? */
+/** Is Axiko exempt from battery optimisation (Doze)? */
 exports.dozeExempt = function () {
   try {
     var power = context.getSystemService('power');
@@ -409,7 +409,7 @@ exports.openNotices = function () {
   }
 };
 
-/** Puts Assi on the Doze white list through Shizuku, as the owner asked by the button. */
+/** Puts Axiko on the Doze white list through Shizuku, as the owner asked by the button. */
 exports.allowDoze = function (s) {
   var pkg = String(context.getPackageName());
   var result = exports.run('cmd deviceidle whitelist +' + pkg, true, s);

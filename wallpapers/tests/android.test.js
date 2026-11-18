@@ -17,7 +17,7 @@ const manager = {
 const scope = {
   exports: {}, context: {},
   require(id) {
-    if (id === 'lib/assi') return { files: { path: value => value } };
+    if (id === 'lib/axiko') return { files: { path: value => value } };
     return {};
   },
   java: { util: { concurrent: { TimeUnit: {} } }, lang: { Integer: { valueOf: Number } } },

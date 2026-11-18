@@ -1,5 +1,5 @@
 // The game's own device checks (checks.js: the engine's standard ones and the game's) run as
-// module_check runs them on the phone, in a node workspace of the Assi harness: the game is
+// module_check runs them on the phone, in a node workspace of the Axiko harness: the game is
 // copied to modules/games/<id>/ next to the hub's engine. The screen check needs the phone
 // (ui.openWait), so here it is expected to fail on that alone. node tests/checks.test.js
 'use strict';

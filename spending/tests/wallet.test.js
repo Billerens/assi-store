@@ -22,11 +22,11 @@ assert.strictEqual(parser.parse({ text: 'Mastercard Demo Bank. Оформите 
 const engine = sim.create({ spending: path.resolve(__dirname, '..') });
 try {
   const main = engine.require('modules/spending/main.js');
-  const assi = engine.require('lib/assi');
-  const db = assi.db('spending');
+  const axiko = engine.require('lib/axiko');
+  const db = axiko.db('spending');
   engine.env.now = Date.now();
   main.saveSettings({ currency: 'BYN' });
-  assi.files.writeJson('data/spending/state.json', { imported: engine.env.now, parserRevision: 1 });
+  axiko.files.writeJson('data/spending/state.json', { imported: engine.env.now, parserRevision: 1 });
   function pending(at) {
     db.exec('insert into unparsed (at, sender, app, source, text, shape, hash) values (?, ?, ?, ?, ?, ?, ?)',
       [at, sender, 'Samsung Wallet', 'wallet', text, parser.shape(text), main.sha1(text)]);

@@ -6,8 +6,8 @@
 //   links.gather({sources, since, day, now}) -> {events: [base records of kind 'event'], links: {holiday,
 //     sign, pet, inbox, drawn}, notes: ['что не прочиталось']}
 //   links.paint(subject) -> {word, strokes: ['M 0 0 L …']} | {error}   (the picture of an episode)
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 
 // Who wrote base records of kind 'event' that the series takes (details.EVENTS).
 var EVENT_SOURCES = ['hat', 'rpg', 'meetings', 'draw'];
@@ -101,7 +101,7 @@ function inbox(since, now) {
 /** Рисуй — угадаю: the words of today's rounds (its data/draw-guess.db, read only; not opened when absent). */
 function drawn(since) {
   if (!installed('draw-guess') || !files.exists('data/draw-guess.db')) return [];
-  var rows = assi.db('draw-guess').query('select word from rounds where at >= ? order by at limit 20', [since]) || [];
+  var rows = axiko.db('draw-guess').query('select word from rounds where at >= ? order by at limit 20', [since]) || [];
   return rows.map(function (row) { return row && row.word ? String(row.word) : ''; }).filter(Boolean);
 }
 

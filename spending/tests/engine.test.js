@@ -7,7 +7,7 @@ var path = require('path');
 var sim = require('./sim.js');
 
 if (!sim.realBase()) {
-  console.log('engine: пропущено — нужен репозиторий Assi рядом (lib/base.js)');
+  console.log('engine: пропущено — нужен репозиторий Axiko рядом (lib/base.js)');
   process.exit(0);
 }
 
@@ -51,7 +51,7 @@ function counted(spending) {
 check('start subscribes to pushes and SMS, sets jobs, puts the tool stub', function (spending, env, req) {
   assert.ok(env.handlers.notification && env.handlers.sms);
   assert.ok(env.jobs['spending:subs'] && env.jobs['spending:daily']);
-  var stub = req('lib/assi').files.read('tools/spending.js');
+  var stub = req('lib/axiko').files.read('tools/spending.js');
   assert.ok(stub.indexOf('modules/spending/tool.js') > 0);
 });
 
@@ -394,7 +394,7 @@ check('import of the SMS history: senders from the list, no repeats with the SMS
 
 check('an expense the agent wrote into the base shows in the feed as manual and counts', function (spending, env, req) {
   var base = req('lib/base');
-  base.add({ kind: 'expense', title: 'Кофе', amount: 250, unit: 'RUB', tags: ['кафе и рестораны'], source: 'assi', at: T0 - 30 * MIN });
+  base.add({ kind: 'expense', title: 'Кофе', amount: 250, unit: 'RUB', tags: ['кафе и рестораны'], source: 'axiko', at: T0 - 30 * MIN });
   var items = spending.feed({}).days[0].items;
   assert.strictEqual(items.length, 1);
   assert.strictEqual(items[0].source, 'manual');
@@ -456,7 +456,7 @@ check('achievements without «Ачивки»: «Неделя без достав
   spending.saveSettings({ budget: 50000 });
   var out = spending.daily();
   assert.deepStrictEqual(out.awards, ['spending/no-delivery-week', 'spending/month-in-budget']);
-  var files = req('lib/assi').files;
+  var files = req('lib/axiko').files;
   var box = files.readJson('data/games/achievements-outbox.json', []);
   assert.deepStrictEqual(box.map(function (i) { return i.key; }), ['spending/no-delivery-week', 'spending/month-in-budget']);
   assert.ok(/Октябрь: потрачено 1 800/.test(box[1].text), box[1].text);
@@ -468,21 +468,21 @@ check('no achievements: a delivery this week and no budget set', function (spend
   quietWeek(spending, env);
   spending.addManual({ amount: 600, title: 'Самокат', category: 'Доставка еды', at: new Date(2026, 10, 12, 20).getTime() });
   assert.deepStrictEqual(spending.daily().awards, []);
-  assert.strictEqual(req('lib/assi').files.exists('data/games/achievements-outbox.json'), false);
+  assert.strictEqual(req('lib/axiko').files.exists('data/games/achievements-outbox.json'), false);
 });
 
 (function () {
   // «Ачивки» installed: the items go to their grant(), nothing to the box.
   var os = require('os');
   var fs = require('fs');
-  var fake = fs.mkdtempSync(path.join(os.tmpdir(), 'assi-achievements-'));
+  var fake = fs.mkdtempSync(path.join(os.tmpdir(), 'axiko-achievements-'));
   fs.writeFileSync(path.join(fake, 'main.js'), 'exports.got = [];\nexports.grant = function (item) { exports.got.push(item); return { ok: true }; };\n');
   var engine = sim.create({ spending: ROOT, achievements: fake });
   engine.env.now = T0;
   try {
     var spending = engine.require('modules/spending/main.js');
     spending.start();
-    var files = engine.require('lib/assi').files;
+    var files = engine.require('lib/axiko').files;
     files.write('modules/achievements/main.js', '// installed');
     quietWeek(spending, engine.env);
     spending.daily();

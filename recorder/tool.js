@@ -59,7 +59,7 @@ exports.run = function (args) {
     var out = [];
     out.push(s.recording ? 'Идёт запись №' + s.recording.id + ': ' + text.length(s.recording.activeMs) + (s.recording.paused ? ', на паузе' : '') : 'Сейчас не записывается.');
     if (s.queue.waiting) out.push('В очереди на расшифровку отрезков: ' + s.queue.waiting + (s.transcribeWhen === 'charging' && !s.charging ? ' (ждут зарядки)' : '') + '.');
-    if (!s.speech.ready) out.push('Модель распознавания речи не скачана — её скачивают в настройках Assi.');
+    if (!s.speech.ready) out.push('Модель распознавания речи не скачана — её скачивают в настройках Axiko.');
     return out.join(' ');
   }
   if (a === 'search') {

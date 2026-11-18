@@ -104,10 +104,10 @@ t.test('дни рождения близких: шаблон раскрывае�
   assert.strictEqual(item.title, 'День рождения: Аня');
 });
 
-t.test('годовщина Assi — с первого года после установки', function () {
+t.test('годовщина Axiko — с первого года после установки', function () {
   var ctx = { installDay: '2026-11-10' };
-  assert.deepStrictEqual(calendar.anchors(byId('assi-anniversary'), 2026, ctx), []);
-  assert.deepStrictEqual(calendar.anchors(byId('assi-anniversary'), 2027, ctx), ['2027-11-10']);
+  assert.deepStrictEqual(calendar.anchors(byId('axiko-anniversary'), 2026, ctx), []);
+  assert.deepStrictEqual(calendar.anchors(byId('axiko-anniversary'), 2027, ctx), ['2027-11-10']);
 });
 
 t.test('событие календаря со словом', function () {

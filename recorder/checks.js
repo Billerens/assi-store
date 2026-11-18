@@ -8,8 +8,8 @@ var SCREEN = 'modules/recorder/ui/index.html';
 var ITEM = 'modules/recorder/ui/item.html';
 var SETTINGS = 'data/recorder/settings.json';
 
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 
 function recorder() {
   return require('modules/recorder/main.js');
@@ -104,7 +104,7 @@ exports['файл: голос телефона → отрезок → текст
   var sp = native('speech.status') || {};
   if (sp.ready === false) t.skip('модель распознавания речи не скачана');
   var rel = 'data/recorder/check-' + stamp + '.wav';
-  var made = String(assi.speech.render('Проверка диктофона. Завтра купить хлеб и молоко, а потом позвонить Олегу.', files.path(rel), 'local'));
+  var made = String(axiko.speech.render('Проверка диктофона. Завтра купить хлеб и молоко, а потом позвонить Олегу.', files.path(rel), 'local'));
   var root = String(files.path('')).replace(/\/+$/, '');
   var path = made.indexOf(root) === 0 ? made.slice(root.length).replace(/^\/+/, '') : rel;
   var id = null;
@@ -141,7 +141,7 @@ exports['файл: голос телефона → отрезок → текст
 };
 
 exports['микрофон: 3 секунды записи, имя на это время не слушается'] = function (t) {
-  if (!granted('RECORD_AUDIO')) t.skip('нет доступа к микрофону — Assi спросит его при первой записи');
+  if (!granted('RECORD_AUDIO')) t.skip('нет доступа к микрофону — Axiko спросит его при первой записи');
   var st = recorder().status();
   if (st.recording) t.skip('идёт запись владельца');
   if (st.speech.live) t.skip('идёт живой разговор — микрофон занят');

@@ -7,8 +7,8 @@ for (var checkName in checks) exports[checkName] = checks[checkName];
 
 function load() {
   var id = kit.idOf(__dirname);
-  var assi = require('lib/assi');
-  var game = JSON.parse(assi.files.read('modules/games/' + id + '/game.json'));
+  var axiko = require('lib/axiko');
+  var game = JSON.parse(axiko.files.read('modules/games/' + id + '/game.json'));
   var sim = require('modules/games/' + id + '/sim.js');
   var cfg = kit.configOf(game, 'modules/games/' + id);
   var ctx = {now: 1794657600000, config: cfg, rng: Rng.make(73), mult: 1, links: {}, stock: {}};

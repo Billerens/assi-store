@@ -1,7 +1,7 @@
 {
   "id": "recorder",
   "kind": "module",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "title": "Recorder",
   "summary": "Record meetings, lectures and thoughts out loud: on-phone transcription as you record, a summary with decisions and tasks, search by words and by meaning",
   "tags": ["voice", "notes", "productivity"],

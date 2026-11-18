@@ -1,7 +1,7 @@
 // What the inbox does with Android itself: reading a notification fully from the live listener
 // service (until the shell describes it fully), app icons, "do not disturb", contacts, opening a
 // conversation in its messenger and an own notification with a reply button. Engine only.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 
 var G = typeof global !== 'undefined' ? global : {};
 // Kept as long as the process lives: a notification's contentIntent (to open the conversation
@@ -32,15 +32,15 @@ exports.has = function (feature) {
   return exports.features().indexOf(feature) >= 0;
 };
 
-/** The notification listener service of Assi, or null when notification access is off. */
+/** The notification listener service of Axiko, or null when notification access is off. */
 function service() {
   try {
-    var type = Packages.app.assi.sense.NoticeService;
+    var type = Packages.app.axiko.sense.NoticeService;
     var found = type.Companion.getInstance();
     if (found) return found;
   } catch (error) { /* try the field */ }
   try {
-    var field = Packages.app.assi.sense.NoticeService.instance;
+    var field = Packages.app.axiko.sense.NoticeService.instance;
     if (field) return field;
   } catch (error) { /* none */ }
   return null;
@@ -160,7 +160,7 @@ exports.label = function (pkg) {
 /** The app's icon as a PNG in data/inbox/icons/, for the screen: '/data/inbox/icons/<pkg>.png' or null. */
 exports.icon = function (pkg) {
   var path = 'data/inbox/icons/' + String(pkg).replace(/[^\w.-]/g, '_') + '.png';
-  if (assi.files.exists(path)) return '/' + path;
+  if (axiko.files.exists(path)) return '/' + path;
   try {
     var drawable = context.getPackageManager().getApplicationIcon(String(pkg));
     var size = 96;
@@ -168,7 +168,7 @@ exports.icon = function (pkg) {
     var canvas = new android.graphics.Canvas(bitmap);
     drawable.setBounds(0, 0, size, size);
     drawable.draw(canvas);
-    var file = new java.io.File(assi.files.path(path));
+    var file = new java.io.File(axiko.files.path(path));
     file.getParentFile().mkdirs();
     var out = new java.io.FileOutputStream(file);
     try {
@@ -212,7 +212,7 @@ exports.contactName = function (number) {
   if (!/^[+\d][\d\s()-]{4,}$/.test(value) || !canReadContacts()) return '';
   try {
     var uri = android.net.Uri.withAppendedPath(android.provider.ContactsContract.PhoneLookup.CONTENT_FILTER_URI, android.net.Uri.encode(value));
-    var rows = assi.rows(String(uri), ['display_name'], null, null, null, 1);
+    var rows = axiko.rows(String(uri), ['display_name'], null, null, null, 1);
     return rows.length && rows[0].display_name ? String(rows[0].display_name) : '';
   } catch (error) {
     return '';
@@ -223,15 +223,15 @@ exports.contactName = function (number) {
 exports.ownerName = function () {
   if (!canReadContacts()) return '';
   try {
-    var rows = assi.rows('content://com.android.contacts/profile', ['display_name'], null, null, null, 1);
+    var rows = axiko.rows('content://com.android.contacts/profile', ['display_name'], null, null, null, 1);
     return rows.length && rows[0].display_name ? String(rows[0].display_name) : '';
   } catch (error) {
     return '';
   }
 };
 
-var REPLY = 'app.assi.inbox.REPLY';
-var READ = 'app.assi.inbox.READ';
+var REPLY = 'app.axiko.inbox.REPLY';
+var READ = 'app.axiko.inbox.READ';
 var REPLY_KEY = 'inbox.reply';
 
 /** The receiver of our notification's buttons: registered once per process. */
@@ -278,7 +278,7 @@ exports.notifyImportant = function (options) {
   if (exports.has('notify.actions')) {
     var actions = [{ title: 'Прочитано', call: 'modules/inbox/main.js', fn: 'readFromNotice', args: { chatId: options.chatId } }];
     if (options.canReply) actions.unshift({ title: 'Ответить', reply: true, call: 'modules/inbox/main.js', fn: 'replyFromNotice', args: { chatId: options.chatId } });
-    return assi.notify({ id: 'inbox:' + options.chatId, title: options.title, text: options.text, open: open, channel: 'alarm', actions: actions });
+    return axiko.notify({ id: 'inbox:' + options.chatId, title: options.title, text: options.text, open: open, channel: 'alarm', actions: actions });
   }
   var manager = context.getSystemService('notification');
   var channel = new android.app.NotificationChannel('inbox-important', 'Входящие: важное', android.app.NotificationManager.IMPORTANCE_HIGH);

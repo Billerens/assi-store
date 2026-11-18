@@ -1,8 +1,8 @@
 // Ачивки за жизнь: achievements for real life, checked by themselves from the day summaries of
 // «Здоровье», the shared base and hook events; games of the game hub hand theirs in with grant().
 // The list is data (data/achievements/list.json, format — AGENT.md); rules.js reads it.
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 var source = require('./source.js');
 var rules = require('./rules.js');
 var custom = require('./custom.js');
@@ -114,7 +114,7 @@ function seed() {
 
 function baseDb() {
   require('lib/base');
-  return assi.db('base');
+  return axiko.db('base');
 }
 
 function rows(kind) {
@@ -306,14 +306,14 @@ function notify(granted, s) {
     text = shown.map(function (g) { return g.title; }).join(', ');
   }
   try {
-    assi.notify({ title: title, text: text, open: SCREEN, silent: silent });
+    axiko.notify({ title: title, text: text, open: SCREEN, silent: silent });
   } catch (error) {
     console.warn('achievements: notify: ' + error);
   }
 }
 
 function changed() {
-  try { assi.widget.refresh('achievements'); } catch (error) { /* no widget */ }
+  try { axiko.widget.refresh('achievements'); } catch (error) { /* no widget */ }
   try { emit('achievements.changed', {}); } catch (error) { /* no screens */ }
 }
 
@@ -846,7 +846,7 @@ var TOOL = [
   "  settings: { type: 'object', description: 'для settings: что поменять, например { tease: false }' }",
   "}, required: ['action'] };",
   'exports.run = function (args) {',
-  "  if (!require('lib/assi').files.exists('modules/achievements/main.js')) return 'Модуль «Ачивки» не установлен';",
+  "  if (!require('lib/axiko').files.exists('modules/achievements/main.js')) return 'Модуль «Ачивки» не установлен';",
   "  return require('modules/achievements/main.js').tool(args || {});",
   '};',
   ''

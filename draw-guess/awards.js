@@ -62,7 +62,7 @@ function boxItems(box) {
 }
 
 /**
- * Отдать ачивки. files — assi.files; load(path) — require другого модуля.
+ * Отдать ачивки. files — axiko.files; load(path) — require другого модуля.
  * → [{ key, how: 'granted' | 'queued' | 'sent' }] ('sent' — уже отдавали раньше).
  */
 exports.deliver = function (items, files, load) {

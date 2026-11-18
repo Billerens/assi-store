@@ -1,4 +1,4 @@
-// The tests of one store game: a workspace of the Assi harness with this game installed as
+// The tests of one store game: a workspace of the Axiko harness with this game installed as
 // modules/games/<id> (what install.ps1 copies: everything but store.json, README.md, tests, _data).
 //   const { open, test, done } = require('./env');
 //   const x = open();   // {env, Core, Big, Rng, Fmt, sim, game, cfg, kit, check}
@@ -8,7 +8,7 @@ const path = require('path');
 
 const GAME = path.resolve(__dirname, '..');
 const ID = JSON.parse(fs.readFileSync(path.join(GAME, 'store.json'), 'utf8')).id;
-const HARNESS = path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js');
+const HARNESS = path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js');
 const H = require(HARNESS);
 const SKIP = ['store.json', 'README.md', 'tests', '_data'];
 

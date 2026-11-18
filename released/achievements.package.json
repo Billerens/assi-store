@@ -8,13 +8,13 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "20ef9e941e1bb87271376f16fab49ba36a6fa1358f577ecf238923ca61bbad3e",
-      "size": 6069
+      "sha256": "dd41547efd4dfa6978feb10d14d1ca050b1a20f962dc26f14f1f778c0475e643",
+      "size": 6070
     },
     {
       "path": "code/AGENT.md",
@@ -23,8 +23,8 @@
     },
     {
       "path": "code/checks.js",
-      "sha256": "c74d16cc0905061793616557197123f373d3fc25b6b35ecebdb1170f0b75c027",
-      "size": 9133
+      "sha256": "3fed528499b443e383a1c1c2106979f0cd75ecc5718669caa4a27df0ae04d204",
+      "size": 9137
     },
     {
       "path": "code/custom.js",
@@ -43,8 +43,8 @@
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "2b64ca68917c7a04d25a48d8ec6d63b7916de2582305d6bb5e26d1e691ecf768",
-      "size": 30458
+      "sha256": "676b0fb6294e72a54fd19f29f7d2b725ed8e9ffd6dcdde363819d8663216abea",
+      "size": 30460
     },
     {
       "path": "code/icon.svg",
@@ -53,8 +53,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "a73556373318edad8d4f3d2ccc323ee032958f20bf0b92beefd82d634bcd56ca",
-      "size": 38771
+      "sha256": "6e5023e3f0211906085585b73c27bcbbbd56e4995a73f149e3add836bfcda741",
+      "size": 38778
     },
     {
       "path": "code/module.json",
@@ -68,13 +68,13 @@
     },
     {
       "path": "code/source.js",
-      "sha256": "e5358b2c3f382f1f31b46d1a16218a5207188f623d587e724b68b80748cd6c23",
-      "size": 7626
+      "sha256": "8f7a8777875f66dc496669d324a6bedbad51e729b477aeddb9b73a1d8c09ca68",
+      "size": 7638
     },
     {
       "path": "code/starter.json",
-      "sha256": "b9e242674ed0b45aab8315e5ddeba65d624536cf5d381037f718abdd97b1c64a",
-      "size": 30512
+      "sha256": "ab9761896b315ea4149ac6ddba44d67bd6e7c9af517b29893f267075974ea410",
+      "size": 30513
     },
     {
       "path": "code/ui/badge.js",
@@ -83,13 +83,13 @@
     },
     {
       "path": "code/ui/card.html",
-      "sha256": "4f86b93cf83eb79f6b367724931c6bac806c339d1f4d12a95c964cc6376365ab",
-      "size": 13697
+      "sha256": "32f599c83fcf4b5ab91d6ecde63058b1a7d0766f9e221d519349541dfa0c81c4",
+      "size": 13701
     },
     {
       "path": "code/ui/index.html",
-      "sha256": "e92dd744b1a91c70291c7eed45a831f9708ee5a3eaaf34953a0029cdc9bc799d",
-      "size": 20797
+      "sha256": "5ef85000b0aa43912c05f840e65d41b74df02e27db3348b1c28fc766130c4ed6",
+      "size": 20800
     }
   ],
   "id": "achievements",
@@ -101,22 +101,22 @@
   "optionalDependencies": [
     {
       "id": "health",
-      "version": ">=0.1.2"
-    },
-    {
-      "id": "pet",
       "version": ">=0.1.3"
     },
     {
+      "id": "pet",
+      "version": ">=0.1.4"
+    },
+    {
       "id": "spending",
-      "version": ">=0.1.2"
+      "version": ">=0.1.3"
     }
   ],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

@@ -19,8 +19,8 @@ var HOUR = 3600000;
 
 function load() {
   var id = kit.idOf(__dirname);
-  var assi = require('lib/assi');
-  var game = JSON.parse(assi.files.read('modules/games/' + id + '/game.json'));
+  var axiko = require('lib/axiko');
+  var game = JSON.parse(axiko.files.read('modules/games/' + id + '/game.json'));
   game.id = id;
   game.currencies = game.currencies || [];
   game.prestige = game.prestige || [];

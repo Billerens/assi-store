@@ -15,11 +15,11 @@ function plain(value) {
   return JSON.parse(JSON.stringify(value));
 }
 
-/** tools/holidays.js с диска поддельного телефона, каким его загрузит движок Assi. */
+/** tools/holidays.js с диска поддельного телефона, каким его загрузит движок Axiko. */
 function loadTool(phone, installed) {
   var sandbox = { exports: {} };
   sandbox.require = function (name) {
-    if (name === 'lib/assi') return { files: { exists: function (p) { return installed && p === 'modules/holidays/main.js'; } } };
+    if (name === 'lib/axiko') return { files: { exists: function (p) { return installed && p === 'modules/holidays/main.js'; } } };
     if (name === 'modules/holidays/main.js') return phone.main;
     throw new Error('нет модуля ' + name);
   };

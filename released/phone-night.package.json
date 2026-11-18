@@ -8,33 +8,33 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "352dbc1c2bdb0b8c7682a14af7f5ff9d67549e2162641a6708b6611f8461c809",
-      "size": 19062
+      "sha256": "be78a48b7c701b9ec314ce3e9e97227a0e641a4ac3b5e749eeccdcb45f4c67d4",
+      "size": 19063
     },
     {
       "path": "code/android.js",
-      "sha256": "0dadcb80279747a5a6acd2fed9c5c62ca6542cde0d8b8b48ae5c3c27f1b06102",
-      "size": 17466
+      "sha256": "4d95ba1094d9e34731538a39f27b00d69fdcc0872e5e343a7ec1e3d3d52f9cc9",
+      "size": 17485
     },
     {
       "path": "code/checks.js",
-      "sha256": "f5a9679edc466e31d3e0042323ee5af52ba67ceac7a936c584c389409012ab37",
-      "size": 6952
+      "sha256": "e101eb7660e50f7129916f7770188db0df7f74f2a52963b3cf625462b3e87f45",
+      "size": 6958
     },
     {
       "path": "code/fixture.js",
-      "sha256": "8b49e24dd4424df4778e20dedc9854f89b7401db83183fc5f541cd3607cc5378",
-      "size": 6970
+      "sha256": "a885c7c7f9749c4574a674dce2424904fdcb55dcc6ad6e0c0e91d02e042c38b0",
+      "size": 6975
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "517dd825c129beec6b16e2c1c1b0df9f156d7f2ed4c4b59d5c8f9abf1bb94a92",
-      "size": 41606
+      "sha256": "fba7aee5d618d960c5956b9b94d0810874b8c7b770db65539cad4d1e99f3a6fc",
+      "size": 41623
     },
     {
       "path": "code/icon.svg",
@@ -43,8 +43,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "649131bbd50776e320ed05b022ed092f4357d88917381816d932d492d9d249ed",
-      "size": 53773
+      "sha256": "de8e5138f42701e1326d758c1a89ed9f96c66767aa944bffdf764e863c2b5be0",
+      "size": 53804
     },
     {
       "path": "code/module.json",
@@ -53,8 +53,8 @@
     },
     {
       "path": "code/night.js",
-      "sha256": "197344954d5d2264e830251db565ac9f7539891b9886503b5ab48e5d14e4b746",
-      "size": 75919
+      "sha256": "d5d601da011c999753f8ed6b9bdf35a24993f8ae4a000329f55c323b70f61994",
+      "size": 75927
     },
     {
       "path": "code/parse.js",
@@ -63,28 +63,28 @@
     },
     {
       "path": "code/samples/alarm-evening.txt",
-      "sha256": "65fb2a64c27cc799aaab70b32cae80ec0325ac9a5468345c7c113a00d1eb6400",
-      "size": 2197
+      "sha256": "832eec20c45f26ffdacdb0d39d87b6e22e155de92e696f457266a072c12eb4e6",
+      "size": 2199
     },
     {
       "path": "code/samples/alarm-morning.txt",
-      "sha256": "5a9c6666cdd140b10767ca6cbb3fd5f2fb93dd4b466a7a59cd2814b264037b22",
-      "size": 1745
+      "sha256": "c1a67fce7d516b05f580406f07d095e702cc46fab84a62008acac15991220b63",
+      "size": 1747
     },
     {
       "path": "code/samples/checkin-evening.txt",
-      "sha256": "08e519cb592252dfcc941dfa5c61a9ccea9f678f7e65fa9861157bc64ae66af2",
-      "size": 1268
+      "sha256": "a9fc92a1934ba48d3e40e9182e5595420c72b436d257437c1a68bbca3917b1e6",
+      "size": 1270
     },
     {
       "path": "code/samples/checkin-morning.txt",
-      "sha256": "0a4ff9f3123c5e80eaadfae49d7d67da74e2f4e728772066386be6517a0e7c9d",
-      "size": 1492
+      "sha256": "5a625fb0efdfc85162e38c4acc4d68e4b29ebbc3f5bf22146207bf731173a2dc",
+      "size": 1494
     },
     {
       "path": "code/samples/deviceidle.txt",
-      "sha256": "a718e41395ee948f3ab2a00a49718a42e344650366e9371b5e4c9e02fe5022d3",
-      "size": 757
+      "sha256": "b2b07feff2ec14eb1e01db04a8a916f6317380527b9812a52fb2efbbfd2a3c3d",
+      "size": 758
     },
     {
       "path": "code/samples/history.txt",
@@ -98,18 +98,18 @@
     },
     {
       "path": "code/settings.js",
-      "sha256": "9c2c6da0bb8ba5820143c95fe512cf27890283770c79fe3e85a8f151ab3108a8",
-      "size": 14033
+      "sha256": "48dff1bf94d6aaf9da6b9edfb0c2a85b5d541fcd0ac98a69304ddb8116710198",
+      "size": 14034
     },
     {
       "path": "code/tools/phone_night.js",
-      "sha256": "03b5b87bfaabe0666fea89e7afc95667c3b3705c7309933d0933b63f7ffc8fdf",
-      "size": 1381
+      "sha256": "9754595fa3e2fa76cbeb75429f6ded034957996f608b9373c50cd356f3552fac",
+      "size": 1382
     },
     {
       "path": "code/ui/index.html",
-      "sha256": "4f22ea9245379f5c24dac7879e43bb16b07dcb1f914fe34fe6d134d17fc76c96",
-      "size": 45211
+      "sha256": "79c1e097027c59f42849ab9c16500aa8314435e1f8c2c249cf84dbecdde1790d",
+      "size": 45225
     }
   ],
   "id": "phone-night",
@@ -119,9 +119,9 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

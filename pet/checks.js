@@ -1,5 +1,5 @@
 // Checks of the pet on the phone (module_check). Every check puts back what it changes.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var MAIN = 'modules/pet/main.js';
 var SCREEN = 'modules/pet/ui/index.html';
 
@@ -26,16 +26,16 @@ function keeping(names, fn) {
   var saved = {};
   names.forEach(function (name) {
     var path = 'data/pet/' + name;
-    saved[path] = assi.files.exists(path) ? assi.files.read(path) : null;
+    saved[path] = axiko.files.exists(path) ? axiko.files.read(path) : null;
   });
   try {
     return fn();
   } finally {
     Object.keys(saved).forEach(function (path) {
       if (saved[path] === null) {
-        if (assi.files.exists(path)) assi.files.remove(path);
+        if (axiko.files.exists(path)) axiko.files.remove(path);
       } else {
-        assi.files.write(path, saved[path]);
+        axiko.files.write(path, saved[path]);
       }
     });
   }
@@ -63,8 +63,8 @@ exports['настроение: пауза, ночь, мало данных'] = f
 exports['фразы: все шаблоны проходят фильтр слов'] = function (t) {
   var Phrases = require('modules/pet/phrases.js');
   var banned = pet().settings().banned;
-  var book = assi.files.readJson('modules/pet/phrases.json', {});
-  var own = assi.files.readJson('data/pet/phrases.json', null);
+  var book = axiko.files.readJson('modules/pet/phrases.json', {});
+  var own = axiko.files.readJson('data/pet/phrases.json', null);
   [book, own || {}].forEach(function (b, i) {
     Object.keys(b).forEach(function (kind) {
       (b[kind] || []).forEach(function (text) {
@@ -82,10 +82,10 @@ exports['состояние: пересчёт пишет state.json и стро�
   var st = pet().recompute();
   t.ok(require('modules/pet/mood.js').STATES.some(function (s) { return s.id === st.state; }), 'неизвестное состояние ' + st.state);
   t.ok(typeof st.phrase === 'string' && st.phrase.length > 0, 'нет фразы');
-  t.ok(assi.files.exists('data/pet/state.json'), 'нет state.json');
-  var history = assi.files.readJson('data/pet/history.json', []);
+  t.ok(axiko.files.exists('data/pet/state.json'), 'нет state.json');
+  var history = axiko.files.readJson('data/pet/history.json', []);
   t.ok(history.length > 0 && history[history.length - 1].date === st.date, 'нет строки истории за ' + st.date);
-  var settings = assi.files.readJson('data/pet/settings.json', {});
+  var settings = axiko.files.readJson('data/pet/settings.json', {});
   t.ok(typeof settings.name === 'string' && settings.palette && Array.isArray(settings.stages), 'Жизнь-RPG не найдёт имя, палитру и пороги');
 };
 
@@ -100,19 +100,19 @@ exports['рисунок: все 12 состояний в SVG и в Canvas'] = fu
 };
 
 exports['виджет: две строки и картинка'] = function (t) {
-  var had = assi.files.exists('data/pet/widget.png');
+  var had = axiko.files.exists('data/pet/widget.png');
   try {
     var w = pet().widget();
     t.ok(w.title.indexOf(' · ') > 0, 'заголовок: ' + w.title);
     t.ok(/^Энергия /.test(w.text), 'текст: ' + w.text);
     t.ok(w.open === SCREEN, 'открывает не комнату');
     var path = pet().drawWidget();
-    t.ok(assi.files.exists(path), 'картинка не нарисовалась');
-    var size = new java.io.File(assi.files.path(path)).length();
+    t.ok(axiko.files.exists(path), 'картинка не нарисовалась');
+    var size = new java.io.File(axiko.files.path(path)).length();
     t.ok(size > 1000, 'картинка подозрительно мала: ' + size);
   } finally {
     // The picture is drawn again from the state in force, or taken away when there was none.
-    if (!had && assi.files.exists('data/pet/widget.png')) assi.files.remove('data/pet/widget.png');
+    if (!had && axiko.files.exists('data/pet/widget.png')) axiko.files.remove('data/pet/widget.png');
   }
 };
 
@@ -161,16 +161,16 @@ exports['праздники: уровень и ачивка'] = function (t) {
 exports['соседи: Фокус, Тайная жизнь телефона, Игротека — с ними и без них'] = function (t) {
   var p = pet();
   var st = p.recompute();
-  var focus = assi.files.exists('modules/focus/main.js') ? require('modules/focus/main.js').left() : null;
+  var focus = axiko.files.exists('modules/focus/main.js') ? require('modules/focus/main.js').left() : null;
   if (focus && focus.running && focus.kind !== 'break' && p.settings().focusOn) t.equal(st.state, 'calm', 'идёт Фокус, а он не спокоен');
   else t.ok(!st.focus, 'Фокуса нет, а он «на сессии»');
-  if (!assi.files.exists('modules/phone-night/main.js')) t.ok(st.lateSource !== 'phone-night', 'ночь из модуля, которого нет');
-  if (!assi.files.exists('modules/games/main.js')) t.equal(st.playMin || 0, 0, 'игры без Игротеки');
-  t.ok(p.status().phoneNight === assi.files.exists('modules/phone-night/main.js'), 'status() не знает о Тайной жизни телефона');
+  if (!axiko.files.exists('modules/phone-night/main.js')) t.ok(st.lateSource !== 'phone-night', 'ночь из модуля, которого нет');
+  if (!axiko.files.exists('modules/games/main.js')) t.equal(st.playMin || 0, 0, 'игры без Игротеки');
+  t.ok(p.status().phoneNight === axiko.files.exists('modules/phone-night/main.js'), 'status() не знает о Тайной жизни телефона');
 };
 
 exports['крючки: life.mark, life.place и life.day подключены'] = function (t) {
-  if (!assi.files.exists('modules/health/main.js')) t.skip('модуля «Здоровье» нет');
+  if (!axiko.files.exists('modules/health/main.js')) t.skip('модуля «Здоровье» нет');
   var hooks = require('modules/health/main.js').hooks();
   ['life.mark', 'life.place', 'life.day'].forEach(function (event) {
     t.ok(hooks.some(function (x) { return x.event === event && x.path === MAIN; }), 'нет крючка ' + event);
@@ -183,7 +183,7 @@ exports['крючки: life.mark, life.place и life.day подключены'] 
 };
 
 exports['инструмент pet_state на месте и отвечает'] = function (t) {
-  t.ok(assi.files.exists('tools/pet_state.js'), 'нет tools/pet_state.js');
+  t.ok(axiko.files.exists('tools/pet_state.js'), 'нет tools/pet_state.js');
   var text = pet().tool();
   t.ok(text.indexOf(pet().settings().name) === 0, 'ответ без имени: ' + text);
 };

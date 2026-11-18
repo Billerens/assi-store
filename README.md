@@ -9,7 +9,7 @@
 В совместимой сборке приложения откройте **Магазин → Источники → Добавить** и укажите:
 
 ```text
-https://github.com/Billerens/assi-store
+https://github.com/Billerens/axiko-store
 ```
 
 Можно указать прямой HTTPS-адрес `index.json`. Клиент читает обязательный индекс, показывает каталог, затем подготавливает план установки или обновления. Репозитории не добавляются автоматически.
@@ -99,18 +99,18 @@ python -m pip install -r tools/store/requirements.txt
 python -m unittest discover -s tools/store/tests -p 'test_*.py' -v
 python tools/store/build_catalog.py `
   --store . `
-  --out ../assi-store-dist `
-  --download-url-template 'https://github.com/Billerens/assi-store/releases/download/{id}-v{version}' `
+  --out ../axiko-store-dist `
+  --download-url-template 'https://github.com/Billerens/axiko-store/releases/download/{id}-v{version}' `
   --publisher billerens `
   --licensefile LICENSE `
   --exclude sparks-ring
-python tools/store/validate_metadata.py --index ../assi-store-dist/index.json
+python tools/store/validate_metadata.py --index ../axiko-store-dist/index.json
 ```
 
 Сборка кладёт в выходную папку архивы и манифесты только тех пакетов, чья версия выросла; их список с адресами — в `build-report.json`, поле `toPublish`. У каждого выпуска свой тег `<id>-v<версия>`. После того как файлы выложены в Releases, новые `index.json` и папка `catalog/` копируются в корень репозитория, а выпуск записывается:
 
 ```powershell
-python tools/store/versions.py record --store . --built ../assi-store-dist
+python tools/store/versions.py record --store . --built ../axiko-store-dist
 ```
 
 Для своего источника замените владельца, URL загрузки и параметры `--repository-id`, `--repository-title`, `--repository-homepage`; выберите собственную лицензию. [Инструкция сборщика](tools/store/README.md) описывает отчёт и публикацию. ZIP дополнительно проверяют настоящим установщиком в тестовой среде. Уже опубликованную версию нельзя подменять другим архивом — выпускайте новую SemVer.

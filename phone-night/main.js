@@ -1,17 +1,17 @@
 // Тайная жизнь телефона: a morning report of what the phone did at night while its owner slept —
 // who woke it, who went online, where the battery went. Told with a smile, every number real.
-// The description: docs/modules/phone-night.md in Assi.
+// The description: docs/modules/phone-night.md in Axiko.
 //
-// Sources: the live journal of Assi (on screen / notification / power / network, written only
+// Sources: the live journal of Axiko (on screen / notification / power / network, written only
 // in the night's window), UsageStatsManager, NetworkStatsManager, the battery, and through
-// Shizuku (or as Assi itself, if empower gave it DUMP) dumpsys alarm, batterystats --history and
+// Shizuku (or as Axiko itself, if empower gave it DUMP) dumpsys alarm, batterystats --history and
 // --checkin, deviceidle, jobscheduler — an evening and a morning snapshot. The pure logic is in
 // night.js (facts, template, honesty check, trends) and parse.js (dumpsys formats).
 //
 // Storage: data/phone-night.db (events, snapshots, reports), raw outputs in
 // data/phone-night/raw/<day>/, settings in data/phone-night/settings.json; the night's summary
 // and the owner's night sessions go to lib/base.js.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var parse = require('./parse');
 var night = require('./night');
 var settingsLib = require('./settings');
@@ -59,12 +59,12 @@ function changed(type, key) {
 }
 
 function refreshWidget() {
-  try { assi.widget.refresh(ID); } catch (error) { /* no widget */ }
+  try { axiko.widget.refresh(ID); } catch (error) { /* no widget */ }
 }
 
 // ---- storage -----------------------------------------------------------------------------------
 
-var db = assi.db('phone-night');
+var db = axiko.db('phone-night');
 db.exec('create table if not exists events (id integer primary key autoincrement, at integer not null, kind text not null, package text, extra text)');
 db.exec('create index if not exists events_at on events (at)');
 db.exec('create table if not exists snapshots (id integer primary key autoincrement, night text not null, phase text not null, at integer, ' +
@@ -86,7 +86,7 @@ function json(text, fallback) {
 
 function values() {
   try {
-    return settingsLib.normalize(assi.files.readJson(SETTINGS_PATH, {}));
+    return settingsLib.normalize(axiko.files.readJson(SETTINGS_PATH, {}));
   } catch (error) {
     return settingsLib.defaults();
   }
@@ -102,7 +102,7 @@ exports.saveSettings = function (input) {
   var merged = values();
   Object.keys(input || {}).forEach(function (key) { merged[key] = input[key]; });
   var next = settingsLib.normalize(merged);
-  assi.files.writeJson(SETTINGS_PATH, next);
+  axiko.files.writeJson(SETTINGS_PATH, next);
   register(next);
   changed('settings');
   return next;
@@ -208,7 +208,7 @@ function rawDir(key) {
 
 function readRaw(path) {
   try {
-    return assi.files.read(path);
+    return axiko.files.read(path);
   } catch (error) {
     return '';
   }
@@ -337,7 +337,7 @@ exports.snapshotMorning = function (key) {
 // ---- gathering a night ---------------------------------------------------------------------------------
 
 var SOURCE_LABELS = {
-  live: 'Журнал Assi', usage: 'Статистика Android (UsageStatsManager)', netstats: 'Трафик (NetworkStatsManager)',
+  live: 'Журнал Axiko', usage: 'Статистика Android (UsageStatsManager)', netstats: 'Трафик (NetworkStatsManager)',
   battery: 'Батарея', alarm: 'Будильники приложений (dumpsys alarm)', history: 'Лента батареи (batterystats --history)',
   checkin: 'Wakelock и процессор (batterystats --checkin)', deviceidle: 'Белый список Doze (dumpsys deviceidle)',
   jobscheduler: 'Фоновые задания (dumpsys jobscheduler)', boot: 'Причина загрузки'
@@ -398,12 +398,12 @@ function gather(key, s, now) {
   var apps = phone.apps(unique(pkgs), unique(uids), names);
 
   var notices = phone.noticesOn();
-  var liveCount = live.filter(function (event) { return event.kind !== 'assi_start'; }).length;
+  var liveCount = live.filter(function (event) { return event.kind !== 'axiko_start'; }).length;
   var liveNote = !s.enabled ? 'журнал выключен в настройках'
     : notices === false ? 'нет доступа к уведомлениям — журнал видит только экран, зарядку и сеть'
-      : liveCount ? '' : 'журнал за эту ночь пуст: Assi не работал или был выключен';
+      : liveCount ? '' : 'журнал за эту ночь пуст: Axiko не работал или был выключен';
   var sources = [
-    sourceOf('live', s.enabled && liveCount > 0, 'подписки Assi', liveNote),
+    sourceOf('live', s.enabled && liveCount > 0, 'подписки Axiko', liveNote),
     sourceOf('usage', usage.ok, 'статистика Android', usage.note),
     sourceOf('netstats', traffic.ok, 'статистика Android', traffic.ok ? '' : traffic.note),
     sourceOf('battery', Boolean((evening && evening.battery !== null) || history), history ? 'лента батареи' : 'снимки',
@@ -448,7 +448,7 @@ var LINK_SCREENS = { wallpapers: 'modules/wallpapers/ui/index.html', horoscope: 
 /** A neighbour's main.js, or null when it is not installed or does not load. */
 function neighbour(id) {
   try {
-    if (!assi.files.exists(LINKS[id])) return null;
+    if (!axiko.files.exists(LINKS[id])) return null;
     return require(LINKS[id]);
   } catch (error) {
     return null;
@@ -836,7 +836,7 @@ function notifyReport(made, s) {
     options.channel = s.quietNotice ? 'quiet' : 'normal';
   }
   try {
-    assi.notify(options);
+    axiko.notify(options);
   } catch (error) {
     console.warn('phone-night: уведомление: ' + message(error));
   }
@@ -991,7 +991,7 @@ exports.openUsageAccess = function () { return phone.openUsageAccess(); };
 exports.openNotices = function () { return phone.openNotices(); };
 exports.openBatterySettings = function () { return phone.openBatterySettings(); };
 
-/** Puts Assi on the Doze white list (Shizuku), by the owner's button. */
+/** Puts Axiko on the Doze white list (Shizuku), by the owner's button. */
 exports.allowDoze = function () {
   var done = phone.allowDoze(values());
   changed('status');
@@ -1018,7 +1018,7 @@ exports.forget = function (key) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(String(key))) throw new Error('Не дата ночи: ' + key);
   db.exec('delete from reports where night = ?', [key]);
   db.exec('delete from snapshots where night = ?', [key]);
-  try { assi.files.remove(rawDir(key)); } catch (error) { /* none */ }
+  try { axiko.files.remove(rawDir(key)); } catch (error) { /* none */ }
   try {
     var base = require('lib/base');
     baseOf(key, ['phone_night', 'screen_time']).forEach(function (row) { base.remove(row.id); });
@@ -1030,12 +1030,12 @@ exports.forget = function (key) {
 function cleanRaw(s) {
   var dirs = [];
   try {
-    dirs = assi.files.list(RAW).map(String).filter(function (name) { return /^\d{4}-\d{2}-\d{2}\/$/.test(name); }).sort().reverse();
+    dirs = axiko.files.list(RAW).map(String).filter(function (name) { return /^\d{4}-\d{2}-\d{2}\/$/.test(name); }).sort().reverse();
   } catch (error) {
     return;
   }
   dirs.slice(s.rawNights).forEach(function (name) {
-    try { assi.files.remove(RAW + '/' + name.replace(/\/$/, '')); } catch (error) { /* left */ }
+    try { axiko.files.remove(RAW + '/' + name.replace(/\/$/, '')); } catch (error) { /* left */ }
   });
 }
 
@@ -1075,16 +1075,16 @@ function installTool() {
   var stub = TOOL_MARK + ' (modules/phone-night/tools/phone_night.js). Файл ставит сам модуль при запуске;\n' +
     '// удалите модуль — заглушка молча выключится.\n' +
     "try {\n  module.exports = require('modules/phone-night/tools/phone_night.js');\n} catch (error) {\n  exports.name = null;\n}\n";
-  var there = assi.files.exists(TOOL_PATH) ? assi.files.read(TOOL_PATH) : null;
+  var there = axiko.files.exists(TOOL_PATH) ? axiko.files.read(TOOL_PATH) : null;
   if (there === stub) return;
   if (there !== null && there.indexOf(TOOL_MARK) !== 0) return;   // the owner's own tool: not ours to replace
-  assi.files.write(TOOL_PATH, stub);
+  axiko.files.write(TOOL_PATH, stub);
 }
 
 // ---- start --------------------------------------------------------------------------------------------------------------
 
 /**
- * A reboot into the journal: Assi is not running while the phone restarts, so the event is written
+ * A reboot into the journal: Axiko is not running while the phone restarts, so the event is written
  * at the first start after it — with the moment of the boot (now minus the uptime), when that
  * moment falls in the night's window. data/phone-night/boot.json keeps the last boot seen.
  * -> the event's id or null
@@ -1093,10 +1093,10 @@ function noteBoot(now, s) {
   var uptime = phone.uptime();
   if (!(uptime >= 0)) return null;
   var bootAt = now - uptime;
-  var last = assi.files.readJson(BOOT_PATH, null);
-  // The same boot, give or take the clock's drift: a restart of Assi, not of the phone.
+  var last = axiko.files.readJson(BOOT_PATH, null);
+  // The same boot, give or take the clock's drift: a restart of Axiko, not of the phone.
   if (last && Math.abs(bootAt - last.bootAt) < s.mergeSeconds * 1000 + 60000) return null;
-  assi.files.writeJson(BOOT_PATH, { bootAt: bootAt, seen: now });
+  axiko.files.writeJson(BOOT_PATH, { bootAt: bootAt, seen: now });
   if (!last || !s.enabled || !night.logging(bootAt, s)) return null;
   return record('reboot', null, { previousBoot: last.bootAt, uptimeMs: uptime }, bootAt);
 }
@@ -1104,7 +1104,7 @@ function noteBoot(now, s) {
 /** Runs at every start of the app (module.json "autostart"): subscriptions, jobs, catching up. */
 exports.start = function () {
   var s = values();
-  if (!assi.files.exists(SETTINGS_PATH)) assi.files.writeJson(SETTINGS_PATH, s);
+  if (!axiko.files.exists(SETTINGS_PATH)) axiko.files.writeJson(SETTINGS_PATH, s);
   register(s);
   ['screen', 'notification', 'power', 'network'].forEach(function (name) {
     on(name, function (data) {
@@ -1119,8 +1119,8 @@ exports.start = function () {
   var now = Date.now();
   try { noteBoot(now, s); } catch (error) { console.warn('phone-night: перезагрузка: ' + message(error)); }
   if (s.enabled && night.logging(now, s)) {
-    // A restart of Assi during the night: the journal may have a gap before this moment.
-    record('assi_start', null, null, now);
+    // A restart of Axiko during the night: the journal may have a gap before this moment.
+    record('axiko_start', null, null, now);
     var key = night.nightKey(now, s.dayBoundary);
     var eveningFrom = night.at(key, s.nightStart, s.dayBoundary);
     if (now >= eveningFrom && now < night.morningFrom(key, s) && !snapshotOf(key, 'evening')) {

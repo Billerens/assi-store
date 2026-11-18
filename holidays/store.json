@@ -1,14 +1,14 @@
 {
   "id": "holidays",
   "kind": "module",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "title": "Holiday Easter Eggs",
   "summary": "Occasions of the year on Axiko’s screens: quiet snow for New Year, a star for Christmas, pancakes for Maslenitsa; reminders about loved ones' birthdays with a greeting draft",
   "tags": ["appearance", "holidays"],
   "locales": {
     "ru": {
       "title": "Праздничные пасхалки",
-      "summary": "Поводы года на экранах Assi: тихий снег под Новый год, звезда на Рождество, блины на Масленицу; напоминания о днях рождения близких с черновиком поздравления",
+      "summary": "Поводы года на экранах Axiko: тихий снег под Новый год, звезда на Рождество, блины на Масленицу; напоминания о днях рождения близких с черновиком поздравления",
       "tags": ["оформление", "праздники"]
     }
   },

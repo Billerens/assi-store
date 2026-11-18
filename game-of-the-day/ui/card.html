@@ -481,7 +481,7 @@
 
   async function makeNow() {
     try {
-      const out = await assi.call(MAIN, 'makeNow');
+      const out = await axiko.call(MAIN, 'makeNow');
       if (out && out.skipped && ui.toast) ui.toast(out.skipped);
     } catch (error) {
       if (ui.toast) ui.toast(error.message);
@@ -499,7 +499,7 @@
     box.classList.toggle('gc-error', card.state === 'error');
 
     if (card.state === 'game') {
-      act = button('play wide', 'play', 'Играть', () => assi.open(card.open));
+      act = button('play wide', 'play', 'Играть', () => axiko.open(card.open));
       if (card.making && p) {
         foot.push(line('spark', ui.t('Делается следующая · {} мин', p.minutes)));
         foot.push(progress(p));
@@ -538,7 +538,7 @@
         h('span', { class: 'grow', 'data-raw': '' }, d.ready ? (d.played ? 'Рисунок дня разгадан' : 'Рисунок дня ждёт отгадки') : ui.t('Рисунок дня: {}', d.text)),
         d.ready && !d.played ? h('button', { class: 'btn', onclick: event => {
           event.stopPropagation();
-          assi.open(d.open);
+          axiko.open(d.open);
         } }, 'Угадать') : null));
     }
 
@@ -561,10 +561,10 @@
   }
 
   async function draw() {
-    render(await assi.call(MAIN, 'homeCard'));
+    render(await axiko.call(MAIN, 'homeCard'));
   }
 
-  assi.on('daily-game.state', () => draw().catch(() => {}));
+  axiko.on('daily-game.state', () => draw().catch(() => {}));
   draw().catch(() => {
     render({ state: 'nohub', title: 'Игра дня', text: 'Не открылась — нажмите, чтобы открыть модуль', open: SCREEN });
   });

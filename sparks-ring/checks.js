@@ -15,11 +15,11 @@ for (var name in checks) exports[name] = checks[name];
 
 function load() {
   var id = kit.idOf(__dirname);
-  var assi = require('lib/assi');
-  var game = JSON.parse(assi.files.read('modules/games/' + id + '/game.json'));
+  var axiko = require('lib/axiko');
+  var game = JSON.parse(axiko.files.read('modules/games/' + id + '/game.json'));
   game.id = id;
   var dir = 'modules/games/' + id;
-  return { id: id, game: game, sim: require(dir + '/sim.js'), cfg: kit.configOf(game, dir), assi: assi };
+  return { id: id, game: game, sim: require(dir + '/sim.js'), cfg: kit.configOf(game, dir), axiko: axiko };
 }
 
 exports['тап по встречной искре в полосе отражает её'] = function (t) {

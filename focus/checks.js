@@ -2,7 +2,7 @@
 // ({ test: true }): "do not disturb" is not touched, no notifications, nothing in the shared base.
 // A check never runs over a real session; what it changes (state, settings, the inbox's chats,
 // the sessions' rows) it puts back.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 
 var SCREEN = 'modules/focus/ui/index.html';
 var STATE_PATH = 'data/focus/state.json';
@@ -13,33 +13,33 @@ function focus() {
 }
 
 function read(path) {
-  return assi.files.exists(path) ? assi.files.read(path) : null;
+  return axiko.files.exists(path) ? axiko.files.read(path) : null;
 }
 
 function put(path, text) {
   if (text === null) {
-    if (assi.files.exists(path)) assi.files.remove(path);
+    if (axiko.files.exists(path)) axiko.files.remove(path);
   } else {
-    assi.files.write(path, text);
+    axiko.files.write(path, text);
   }
 }
 
 /** Runs fn with the state (and the settings, patched) as they were before, put back after. */
 function quietly(t, patch, fn) {
-  var state = assi.files.readJson(STATE_PATH, {}) || {};
+  var state = axiko.files.readJson(STATE_PATH, {}) || {};
   if (state.id && !state.test) t.skip('идёт настоящая сессия фокуса');
   var savedState = read(STATE_PATH);
   var savedSettings = read(SETTINGS_PATH);
   if (patch) {
-    var current = assi.files.readJson(SETTINGS_PATH, {}) || {};
+    var current = axiko.files.readJson(SETTINGS_PATH, {}) || {};
     Object.keys(patch).forEach(function (key) { current[key] = patch[key]; });
-    assi.files.writeJson(SETTINGS_PATH, current);
+    axiko.files.writeJson(SETTINGS_PATH, current);
   }
   var made = [];
   try {
     fn(made);
   } finally {
-    var left = assi.files.readJson(STATE_PATH, {}) || {};
+    var left = axiko.files.readJson(STATE_PATH, {}) || {};
     if (left.id && left.test) {
       try { focus().end('owner'); } catch (error) { /* gone */ }
     }
@@ -83,13 +83,13 @@ exports['восстановление: прошедшая сессия зака�
     var now = Date.now();
     var id = 'fcheck' + now.toString(36);
     made.push(id);
-    assi.files.writeJson(STATE_PATH, {
+    axiko.files.writeJson(STATE_PATH, {
       id: id, kind: 'work', startAt: now - 40 * 60000, endAt: now - 15 * 60000, plannedMin: 25, extendedMin: 0,
       pausedAt: null, pausedMs: 0, task: 'Проверка восстановления', mode: 'priority', attempts: 0, blockedApps: {}, calls: [],
       dndWanted: false, dndOk: false, dndBy: null, test: true
     });
     t.equal(focus().restore(), 'restore');
-    t.ok(!(assi.files.readJson(STATE_PATH, {}) || {}).id, 'сессии больше нет');
+    t.ok(!(axiko.files.readJson(STATE_PATH, {}) || {}).id, 'сессии больше нет');
     var row = focus().summary(id);
     t.equal(row.session.endedBy, 'restore');
     t.equal(row.session.actualMin, 25, 'засчитано до конца по плану, а не до перезапуска');
@@ -141,7 +141,7 @@ exports['звонок с настройкой «пауза»: время сто�
 };
 
 exports['сводка со Входящими: сообщение за сессию'] = function (t) {
-  if (!assi.files.exists('modules/inbox/main.js')) t.skip('модуль «Входящие» не установлен — сводка из уведомлений');
+  if (!axiko.files.exists('modules/inbox/main.js')) t.skip('модуль «Входящие» не установлен — сводка из уведомлений');
   var inbox = require('modules/inbox/main.js');
   var chatId = null;
   quietly(t, null, function (made) {

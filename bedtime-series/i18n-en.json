@@ -96,7 +96,7 @@
   "Сохранено. Спокойной ночи.": "Saved. Good night.",
   "Сначала начните сезон": "Start a season first",
   "Живому режиму нужна сеть": "Live mode needs a network",
-  "Распознавание речи на телефоне не готово — скачайте его в настройках голоса Assi": "On-device speech recognition isn’t ready — download it in Axiko’s voice settings",
+  "Распознавание речи на телефоне не готово — скачайте его в настройках голоса Axiko": "On-device speech recognition isn’t ready — download it in Axiko’s voice settings",
   "Живой режим. Скажите «начинай», и рассказчик начнёт серию {}. Перебить его можно голосом.": "Live mode. Say “begin” and the storyteller will start episode {}. You can interrupt by voice.",
   "Живой разговор не начался: {}": "The live conversation didn’t start: {}",
   "Живой разговор не начался": "The live conversation didn’t start",
@@ -218,7 +218,7 @@
   "Продолжить": "Continue",
   "Написать серию сейчас": "Write the episode now",
   "Пересказ прошлых серий": "Recap of past episodes",
-  "Распознавание речи на телефоне не скачано. Его ставят в настройках голоса Assi — без него рассказчик не услышит ваш выбор.": "On-device speech recognition isn’t downloaded. It’s installed in Axiko’s voice settings — without it the storyteller can’t hear your choice.",
+  "Распознавание речи на телефоне не скачано. Его ставят в настройках голоса Axiko — без него рассказчик не услышит ваш выбор.": "On-device speech recognition isn’t downloaded. It’s installed in Axiko’s voice settings — without it the storyteller can’t hear your choice.",
   "На развилках отвечают голосом — нужен микрофон.": "You answer at the forks by voice — a microphone is needed.",
   "Разрешить микрофон": "Allow the microphone",
   "Серии пишет модель «Сериал на ночь: серии». Сейчас она недоступна: {}.": "Episodes are written by the “Bedtime Series: episodes” model. It’s unavailable now: {}.",
@@ -277,7 +277,7 @@
   "Показать напоминание": "Show the reminder",
   "Журнал": "Log",
   "Пока пусто": "Empty for now",
-  "Модель, которая пишет серии, выбирается в Настройках Assi, раздел «Кто на какой модели»: «Сериал на ночь: серии». Облачный голос — роль «tts».": "The model that writes episodes is chosen in Axiko’s Settings, “Which model for which role”: “Bedtime Series: episodes”. The cloud voice is the “tts” role.",
+  "Модель, которая пишет серии, выбирается в Настройках Axiko, раздел «Кто на какой модели»: «Сериал на ночь: серии». Облачный голос — роль «tts».": "The model that writes episodes is chosen in Axiko’s Settings, “Which model for which role”: “Bedtime Series: episodes”. The cloud voice is the “tts” role.",
   "Первая серия готова": "First episode is ready",
   "Серия не написана: {}": "Episode not written: {}"
 }

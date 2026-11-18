@@ -1,5 +1,5 @@
 // The logic of «Библиотека» against its spec (docs/games/library.md, «Темп» and «Как проверить»),
-// in a node workspace of the Assi harness. Prints the numbers of the pace.  node tests/library.test.js
+// in a node workspace of the Axiko harness. Prints the numbers of the pace.  node tests/library.test.js
 'use strict';
 const assert = require('assert');
 const { H, open, ctx } = require('./env');

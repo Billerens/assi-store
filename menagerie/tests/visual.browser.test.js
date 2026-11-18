@@ -1,7 +1,7 @@
 // Menagerie, Tower and One-cell dungeon: the real engine/bridge, synthetic saves only.
 // Run: node menagerie/tests/visual.browser.test.js from the store repository.
-// The screen in a desktop Chromium (headless, no network): the real engine of Assi in a harness
-// workspace, the games module's own main.js as the bridge (window.assi.call goes to it over a
+// The screen in a desktop Chromium (headless, no network): the real engine of Axiko in a harness
+// workspace, the games module's own main.js as the bridge (window.axiko.call goes to it over a
 // local server), the game copied to modules/games/wave-survival. At 344 and 760 points wide:
 // the hub and its tabs, a run (the stick moves the hero), the level-up cards (a touch in the
 // first pickLockMs does not pick), the pause, putting a run aside and coming back, the end of a
@@ -14,7 +14,7 @@ const path = require('path');
 const http = require('http');
 const assert = require('assert');
 const { spawn } = require('child_process');
-const H = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const H = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 
 const GAME = path.resolve(__dirname, '..', '..');
 const IDS = ['menagerie','tower','one-cell-dungeon'];
@@ -28,7 +28,7 @@ async function run() {
   const scratch = fs.mkdtempSync(path.join(os.tmpdir(), 'combat-visual-browser-'));
   const faults = [];
   let dictionary = '';
-  const stub = '<script>window.__stageCalls=[];window.assi={platform:"web",call:async function(module,fn){var args=Array.prototype.slice.call(arguments,2);var r=await fetch("/__call",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({fn:fn,args:args})});var out=await r.json();if(out.error)throw new Error(out.error);return out.value;},native:async function(){return {};},stage:async function(on){window.__stageCalls.push(on);return true;},on:function(){return function(){};},back:function(){},open:async function(){return true;}};</script>';
+  const stub = '<script>window.__stageCalls=[];window.axiko={platform:"web",call:async function(module,fn){var args=Array.prototype.slice.call(arguments,2);var r=await fetch("/__call",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({fn:fn,args:args})});var out=await r.json();if(out.error)throw new Error(out.error);return out.value;},native:async function(){return {};},stage:async function(on){window.__stageCalls.push(on);return true;},on:function(){return function(){};},back:function(){},open:async function(){return true;}};</script>';
   const server = http.createServer(async (req, res) => {
     try {
       if (req.url === '/__call') {

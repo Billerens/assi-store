@@ -68,7 +68,7 @@
 | Правка | Есть | Нет |
 |---|---|---|
 | `dnd` | `native('dnd.get' / 'dnd.set' / 'dnd.request')` | способы A, B, C из движка по порядку; фильтр — `getCurrentInterruptionFilter()` |
-| `notify.actions` | `assi.notify` с кнопками, отсчётом, каналами `quiet` / `alarm` | своё `Notification.Builder` + приёмник в движке (пока жив процесс); свой канал с `setBypassDnd` |
+| `notify.actions` | `axiko.notify` с кнопками, отсчётом, каналами `quiet` / `alarm` | своё `Notification.Builder` + приёмник в движке (пока жив процесс); свой канал с `setBypassDnd` |
 | `off` | `off(name, 'focus')` | функция, которую вернул `on`, или пустой обработчик под тем же ключом |
 | `job.once` | разовый точный будильник на конец | ежедневный `{ at: 'ЧЧ:ММ' }`, снимается в конце сессии |
 | `vibrate.pattern` | узор вибрации из настроек | `VibrationEffect.createWaveform` |
@@ -90,7 +90,7 @@
 - `dictate(sessionId)` → `{ ok, recordingId, screen }` или `{ ok: false, why }` — «Надиктовать
   итог»: `require('modules/recorder/main.js').startRecording({ title, tags, link: { module: 'focus',
   id } })`, id записи — в `sessions.recordingId`, в `summary()` — `session.recordingId` и `recorder`
-  (стоит ли Диктофон: `assi.files.exists('modules/recorder/main.js')`);
+  (стоит ли Диктофон: `axiko.files.exists('modules/recorder/main.js')`);
 - события `focus.changed`, `focus.ended`, `focus.summary`; в общей базе — `kind: 'focus'`.
 
 ## Проверки
@@ -122,7 +122,7 @@
   телефон — по заданию adb и эмулятор не использовались. Логика каждого пункта проверена
   тестами и прогоном проверок в подобии движка под node.
 - **Способ A: видит ли движок компаньон `NoticeService`**
-  (`Packages.app.assi.sense.NoticeService.Companion.getInstance()`). Без правки `dnd` от этого
+  (`Packages.app.axiko.sense.NoticeService.Companion.getInstance()`). Без правки `dnd` от этого
   зависит включение тишины без доступа к политике. Проверить можно только на телефоне.
 - **Синтаксис `cmd notification set_dnd`** (путь C) на Android 16 / One UI 8: аргументы
   `priority`, `alarms`, `on`, `off` взяты из AOSP, не сверены с телефоном.

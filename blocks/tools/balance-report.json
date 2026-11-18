@@ -173,6 +173,6 @@
     "sim.js": "e7e962b8aec72d0f8e8d25d2c32516acf3333aa3950ef5a83beb4f9fb3f7f75a",
     "bot.js": "a031b5f384d68585135a50be390b25fb4522c0201cae24147dac78d3773d8cae",
     "config.json": "a89a11d65870df790e79c34eae17fe2eaba98cdf23b73a470dfbc569ffb60a0f",
-    "tests/balance.test.js": "9293b53ddef08ba3c1caaa2e94350b8e6a824981d5d2501f4bbbb6f834ad7df5"
+    "tests/balance.test.js": "1e1e28535d34c153f4292cfa5838c6c10b402c7da826a7e6e76dc4bb5add0490"
   }
 }

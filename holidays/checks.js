@@ -1,7 +1,7 @@
 // Checks of the holidays module on the phone (module_check holidays). The date checks are pure; the
 // look checks put the New Year on for a made-up day and take it off again, and then give back the
 // settings, the state and today's look exactly as they were. Nothing is sent, the model is not called.
-var files = require('lib/assi').files;
+var files = require('lib/axiko').files;
 var DIR = 'modules/holidays';
 var SCREEN = DIR + '/ui/index.html';
 var SETTINGS = 'data/holidays/settings.json';
@@ -166,7 +166,7 @@ exports['повод дня для «Обоев дня»'] = function (t) {
 };
 
 exports['инструмент агента tools/holidays.js записан и отвечает'] = function (t) {
-  t.ok(files.exists('tools/holidays.js'), 'инструмент агента не записан (start() при запуске Assi)');
+  t.ok(files.exists('tools/holidays.js'), 'инструмент агента не записан (start() при запуске Axiko)');
   var tool = require('tools/holidays.js');
   t.equal(tool.name, 'holidays', 'имя инструмента');
   t.ok(typeof tool.run === 'function', 'у инструмента нет run');

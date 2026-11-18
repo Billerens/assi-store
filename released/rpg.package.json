@@ -8,18 +8,18 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "8f92e3364de4541c69384995006f30a492393d8f8f329322ff93c9d47f482c5e",
-      "size": 9607
+      "sha256": "d516cc6dd98cdfaa81fc64d5cb605b66eedc1ee372299276e4fbbfa08d482324",
+      "size": 9608
     },
     {
       "path": "code/checks.js",
-      "sha256": "20b41e94ddf4588b9f39676bdfac1c902b55f1dabd02e7b453c91a327746e797",
-      "size": 6218
+      "sha256": "b110d19674f1b03b549769f5b54de46839414552f128b97cfdd5a8a32152f062",
+      "size": 6222
     },
     {
       "path": "code/chronicle.js",
@@ -53,8 +53,8 @@
     },
     {
       "path": "code/main.js",
-      "sha256": "55d2151b735bd03edccf5653d86ec363e5b8eeff2d3c014533f40d85d33d8ef6",
-      "size": 44061
+      "sha256": "1b339c24b031bfa94377b9002e17ad57d9afbc973e1e87f2a21aca1789dc8f91",
+      "size": 44071
     },
     {
       "path": "code/module.json",
@@ -73,8 +73,8 @@
     },
     {
       "path": "code/source.js",
-      "sha256": "e5358b2c3f382f1f31b46d1a16218a5207188f623d587e724b68b80748cd6c23",
-      "size": 7626
+      "sha256": "8f7a8777875f66dc496669d324a6bedbad51e729b477aeddb9b73a1d8c09ca68",
+      "size": 7638
     },
     {
       "path": "code/ui/creature.js",
@@ -83,8 +83,8 @@
     },
     {
       "path": "code/ui/index.html",
-      "sha256": "96ab9c61468fe34936b3c014954f82b0fc1c9682652139c71c090ecfe7703e19",
-      "size": 34968
+      "sha256": "f9841c07827b24a3aad9b767a2f70211cdcabe52e8acade40f7190414748c226",
+      "size": 34971
     },
     {
       "path": "code/ui/map.js",
@@ -108,26 +108,26 @@
   "optionalDependencies": [
     {
       "id": "achievements",
-      "version": ">=0.1.2"
-    },
-    {
-      "id": "health",
-      "version": ">=0.1.2"
-    },
-    {
-      "id": "pet",
       "version": ">=0.1.3"
     },
     {
+      "id": "health",
+      "version": ">=0.1.3"
+    },
+    {
+      "id": "pet",
+      "version": ">=0.1.4"
+    },
+    {
       "id": "spending",
-      "version": ">=0.1.2"
+      "version": ">=0.1.3"
     }
   ],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1
+    "axikoApi": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

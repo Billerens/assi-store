@@ -1,8 +1,8 @@
 // Checks of «Жизнь-RPG» on the phone (module_check). They use a day far in the past (2000-01-03)
 // with a made-up summary and clean up after themselves: the journal rows of that day, the state
 // and the other files of data/rpg/ are put back as they were.
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 var MAIN = 'modules/rpg/main.js';
 var DAY = '2000-01-03';
 var PATHS = ['data/rpg/state.json', 'data/rpg/settings.json', 'data/rpg/active.json', 'data/rpg/chronicle.json', 'data/rpg/cells.json', 'data/rpg/locations.json'];
@@ -21,7 +21,7 @@ function restore(path, text) {
 }
 
 function journal() {
-  return assi.db('rpg/xp');
+  return axiko.db('rpg/xp');
 }
 
 /** Default formulas, no notifications; everything put back afterwards. */

@@ -12,7 +12,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const ENGINE = [
-  path.resolve(ROOT, '..', '..', 'Assi', 'app', 'src', 'main', 'assets', 'factory', 'modules', 'games', 'engine'),
+  path.resolve(ROOT, '..', '..', 'Axiko', 'app', 'src', 'main', 'assets', 'factory', 'modules', 'games', 'engine'),
   path.resolve(ROOT, '..', 'engine')
 ].find((d) => fs.existsSync(path.join(d, 'rng.js')));
 const Rng = require(path.join(ENGINE, 'rng.js'));

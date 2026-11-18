@@ -1,5 +1,5 @@
 // Text and money of bank messages: spaces, amounts, currencies, cards. Pure: no Android, no native.
-// Works the same under node (tests) and in the Rhino engine of Assi.
+// Works the same under node (tests) and in the Rhino engine of Axiko.
 
 // A number as banks write it: "350", "1 299", "12 345,67", "12345.67". Thousands go in groups of
 // three after a space, so "*1234 350" stays two numbers, not one.

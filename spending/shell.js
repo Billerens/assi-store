@@ -1,6 +1,6 @@
-// What the shell of Assi can do beyond the first version (docs/shell-changes.md in Assi), and the
+// What the shell of Axiko can do beyond the first version (docs/shell-changes.md in Axiko), and the
 // way round when it cannot: notifications with buttons, screen time of apps. Engine code.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 
 var known = null;
 var knownAt = 0;
@@ -31,9 +31,9 @@ function notify(options) {
   if (has('notify.actions')) {
     if (options.id !== undefined) plain.id = String(options.id);
     if (options.actions && options.actions.length) plain.actions = options.actions.slice(0, 3);
-    return assi.notify(plain);
+    return axiko.notify(plain);
   }
-  return assi.notify(plain);
+  return axiko.notify(plain);
 }
 
 /**

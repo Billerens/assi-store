@@ -5,7 +5,7 @@ const path = require('node:path');
 const assert = require('node:assert/strict');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const moduleRoot = path.resolve(__dirname, '..');
-const factory = path.resolve(moduleRoot, '../../Assi/app/src/main/assets/factory');
+const factory = path.resolve(moduleRoot, '../../Axiko/app/src/main/assets/factory');
 const defaults = require('../logic/settings.js').normalize({ currency: 'RUB', budget: null, importDays: 0 });
 
 (async () => {
@@ -15,7 +15,7 @@ const defaults = require('../logic/settings.js').normalize({ currency: 'RUB', bu
       const page = await browser.newPage({ viewport: { width: 1000, height: 850 } });
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
-      await page.route('http://assi.test/**', route => {
+      await page.route('http://axiko.test/**', route => {
         const pathname = new URL(route.request().url()).pathname;
         const file = pathname.startsWith('/ui/') ? path.join(factory, pathname) : path.join(moduleRoot, pathname.replace('/modules/spending/', ''));
         if (!fs.existsSync(file) || !fs.statSync(file).isFile()) return route.fulfill({ status: 404, body: '' });
@@ -51,7 +51,7 @@ const defaults = require('../logic/settings.js').normalize({ currency: 'RUB', bu
           handlers['spending.changed']?.({ type: 'settings' });
           return configured();
         }
-        window.assi = {
+        window.axiko = {
           on(name, callback) { handlers[name] = callback; }, native: async () => ({}), back() {}, read: async () => '',
           call: async (module, fn, arg) => {
             window.calls.push(fn);
@@ -78,7 +78,7 @@ const defaults = require('../logic/settings.js').normalize({ currency: 'RUB', bu
           }
         };
       }, { defaults, options });
-      await page.goto('http://assi.test/modules/spending/ui/index.html?tab=settings');
+      await page.goto('http://axiko.test/modules/spending/ui/index.html?tab=settings');
       await page.locator('#budgetCurrency').waitFor();
       await page.evaluate(() => {
         window.toastLog = [];

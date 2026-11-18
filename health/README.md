@@ -98,7 +98,7 @@
 Записаться можно через `hook(event, path, fn, order?)` (повтор ничего не меняет), снять —
 `unhook(path, event?, fn?)`, посмотреть — `hooks()`; дописывать файл руками тоже можно — формат
 тот же. `fire(event, arg)` вызывает крючки и возвращает `[{ path, fn, ok, error? }]`. Те же события
-приходят открытым экранам через `emit` (`assi.on('life.mark', …)`), плюс `health.changed`.
+приходят открытым экранам через `emit` (`axiko.on('life.mark', …)`), плюс `health.changed`.
 
 ### Остальное
 
@@ -169,7 +169,7 @@
   поддельном движке под node.
 - **Health Connect на деле.** Код написан по платформенному API Android 14 (`HealthConnectManager`,
   `aggregateGroupByDuration`, `readRecords`, `insertRecords`) без Jetpack; не проверено, выдаются
-  ли разрешения через обычный `requestPermissions` (`assi.permission`) и пишет ли Samsung Health
+  ли разрешения через обычный `requestPermissions` (`axiko.permission`) и пишет ли Samsung Health
   сон без часов. Если разрешения так не выдаются — нужна операция оболочки, открывающая экран
   разрешений Health Connect.
 - **Кнопки в виджете** («плюс стакан», отметка привычки, этап 8): у виджета нет механизма `call`

@@ -1,4 +1,4 @@
-// A stand-in for the Assi engine under node, so that main.js files can be tested on the computer:
+// A stand-in for the Axiko engine under node, so that main.js files can be tested on the computer:
 // the workspace is kept in memory, the phone (network, voice, models) is played by the test.
 // Not installed on the phone. Used by the tests of voice-adventure, bedtime-series and game-of-the-day.
 //
@@ -129,7 +129,7 @@ function install(options) {
     };
   }
 
-  var assi = {
+  var axiko = {
     files: files, notify: notify, db: fakeDb,
     permission: function () { return true; },
     toast: function (text) { env.toasts.push(text); },
@@ -311,7 +311,7 @@ function install(options) {
 
   var controls = { notice: function () {}, headset: function () {}, release: function () {}, buttons: function () { return []; } };
 
-  var fakes = { 'lib/assi': assi, 'lib/assi.js': assi, 'lib/base': base, 'lib/base.js': base, 'lib/ai': ai, 'lib/ai.js': ai, 'lib/memory': memory, 'lib/memory.js': memory };
+  var fakes = { 'lib/axiko': axiko, 'lib/axiko.js': axiko, 'lib/base': base, 'lib/base.js': base, 'lib/ai': ai, 'lib/ai.js': ai, 'lib/memory': memory, 'lib/memory.js': memory };
   var byFile = {};
   byFile[path.join(ENGINE_DIR, 'store.js')] = store;
   byFile[path.join(ENGINE_DIR, 'phone.js')] = phone;

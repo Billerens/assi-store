@@ -5,13 +5,13 @@
 // The notification uses the shell's buttons (`notify.actions`, docs/shell-changes.md) when the
 // shell has them; otherwise it is posted here with its own broadcast receiver, which lives as
 // long as the story does.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var phone = require('./phone.js');
 
 var SELF = 'modules/voice-adventure/story-engine/voice.js';
 var NOTICE_ID = 'story-voice';
 var NOTICE_NUMBER = 7301;
-var ACTION = 'app.assi.STORY_VOICE';
+var ACTION = 'app.axiko.STORY_VOICE';
 
 function buttons(phase) {
   return [
@@ -24,13 +24,13 @@ function buttons(phase) {
 function ownNotice(handle, title, text, phase) {
   var manager = context.getSystemService('notification');
   var low = android.app.NotificationManager.IMPORTANCE_LOW;
-  manager.createNotificationChannel(new android.app.NotificationChannel('assi-quiet', 'Assi: тихие', low));
+  manager.createNotificationChannel(new android.app.NotificationChannel('axiko-quiet', 'Axiko: тихие', low));
   var flags = android.app.PendingIntent.FLAG_IMMUTABLE | android.app.PendingIntent.FLAG_UPDATE_CURRENT;
   var launch = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
   if (handle.screen) launch.putExtra('open', String(handle.screen));
   var content = android.app.PendingIntent.getActivity(context, NOTICE_NUMBER, launch, flags);
   var iconId = context.getResources().getIdentifier('ic_spark', 'drawable', context.getPackageName());
-  var builder = new android.app.Notification.Builder(context, 'assi-quiet')
+  var builder = new android.app.Notification.Builder(context, 'axiko-quiet')
     .setSmallIcon(iconId)
     .setContentTitle(String(title))
     .setContentText(String(text))
@@ -63,7 +63,7 @@ function listenButtons(handle, command) {
 function notice(handle, title, text, phase) {
   try {
     if (phone.has('notify.actions')) {
-      assi.notify({
+      axiko.notify({
         id: NOTICE_ID, title: title, text: text, ongoing: true, silent: true, channel: 'quiet', open: handle.screen,
         actions: buttons(phase).map(function (button) {
           return { title: button.title, call: SELF, fn: 'action', args: { cmd: button.cmd } };
@@ -102,7 +102,7 @@ function headset(handle, doubleMs) {
   };
   try {
     handle.media = ui(function () {
-      var session = new android.media.session.MediaSession(context, 'assi-story');
+      var session = new android.media.session.MediaSession(context, 'axiko-story');
       var callback = extend(android.media.session.MediaSession.Callback, {
         onMediaButtonEvent: function (intent) {
           var event = intent.getParcelableExtra(android.content.Intent.EXTRA_KEY_EVENT);

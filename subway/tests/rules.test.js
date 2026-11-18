@@ -6,7 +6,7 @@ const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 const { setup, ctxOf, GAME } = require('./env');
-const { test, done } = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const { test, done } = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 
 const x = setup();
 const { Core, Big, Rng, sim, game, cfg } = x;

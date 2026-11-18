@@ -259,14 +259,14 @@ test('custom: comeback, phoenix, cells, regular, night place, dawn', function ()
 test('records rules count what modules really write: kind (and source) is in the code of the writer', function () {
   var fs = require('fs');
   var path = require('path');
-  // Who writes what: kind → [folder of the store, source]; the games hub lives in Assi itself.
+  // Who writes what: kind → [folder of the store, source]; the games hub lives in Axiko itself.
   var writers = {
     'story/series': 'bedtime-series', 'play/stories': 'voice-adventure', 'rating/games': 'game-of-the-day',
     'event/draw-guess': 'draw-guess', 'event/hat': 'hat', 'event/rpg': 'life-rpg', 'event/spending': 'spending',
     'expense/recorder': 'recorder', 'note/recorder': 'recorder', 'event/recorder': 'recorder', 'focus/': 'focus',
     'workout/': 'health', 'mood/': 'health', 'achievement/': 'achievements'
   };
-  var hub = path.join(__dirname, '..', '..', '..', 'Assi', 'app', 'src', 'main', 'assets', 'factory', 'modules', 'games');
+  var hub = path.join(__dirname, '..', '..', '..', 'Axiko', 'app', 'src', 'main', 'assets', 'factory', 'modules', 'games');
   var code = function (dir) {
     var out = [];
     if (!fs.existsSync(dir)) return null;

@@ -2,7 +2,7 @@
 // paused, today) when it is installed; otherwise a summary built from the shared base by
 // fallback.js — honestly poorer: no schedules of habits, no budget, no cells.
 // Engine code (Rhino). The same file is in achievements, rpg and horoscope.
-var assi = require('lib/assi');
+var axiko = require('lib/axiko');
 var dates = require('./dates.js');
 var fallback = require('./fallback.js');
 
@@ -11,7 +11,7 @@ var KINDS = ['sleep', 'steps', 'water', 'med', 'habit', 'workout', 'screen', 'pl
 
 /** The health module, or null when it is not installed or does not load. */
 exports.health = function () {
-  if (!assi.files.exists(HEALTH)) return null;
+  if (!axiko.files.exists(HEALTH)) return null;
   try {
     var module = require(HEALTH);
     return module && typeof module.day === 'function' ? module : null;
@@ -33,7 +33,7 @@ exports.goals = function () {
   if (health && typeof health.goals === 'function') {
     try { given = health.goals() || {}; } catch (error) { console.warn('source: goals: ' + error); }
   } else {
-    given = assi.files.readJson('data/health/settings.json', {}) || {};
+    given = axiko.files.readJson('data/health/settings.json', {}) || {};
   }
   return fallback.goals(given);
 };
@@ -134,7 +134,7 @@ exports.paused = function (date) {
 /** Registers the module's hooks in data/health/hooks.json, keeping the order achievements → rpg → pet. */
 exports.hooks = function (mine) {
   var path = 'data/health/hooks.json';
-  var current = assi.files.readJson(path, []);
+  var current = axiko.files.readJson(path, []);
   var wrapped = !Array.isArray(current);
   var hooks = wrapped ? (current && Array.isArray(current.hooks) ? current.hooks : []) : current;
   var order = ['modules/achievements/', 'modules/rpg/', 'modules/pet/'];
@@ -153,16 +153,16 @@ exports.hooks = function (mine) {
     hooks.splice(at, 0, { event: hook.event, path: hook.path, fn: hook.fn });
     changed = true;
   });
-  if (changed) assi.files.writeJson(path, wrapped ? Object.assign({}, current, { hooks: hooks }) : hooks);
+  if (changed) axiko.files.writeJson(path, wrapped ? Object.assign({}, current, { hooks: hooks }) : hooks);
   return changed;
 };
 
 /** Removes the module's hooks (used by checks, never by the module itself). */
 exports.unhook = function (prefix) {
   var path = 'data/health/hooks.json';
-  var hooks = assi.files.readJson(path, []);
+  var hooks = axiko.files.readJson(path, []);
   if (!Array.isArray(hooks)) return;
-  assi.files.writeJson(path, hooks.filter(function (hook) { return String(hook.path).indexOf(prefix) !== 0; }));
+  axiko.files.writeJson(path, hooks.filter(function (hook) { return String(hook.path).indexOf(prefix) !== 0; }));
 };
 
 /** The shell's new operations (docs/shell-changes.md), or [] on a shell without them. */
@@ -179,7 +179,7 @@ exports.features = function () {
 exports.tool = function (file, source) {
   var path = 'tools/' + file;
   try {
-    if (!assi.files.exists(path) || assi.files.read(path) !== source) assi.files.write(path, source);
+    if (!axiko.files.exists(path) || axiko.files.read(path) !== source) axiko.files.write(path, source);
   } catch (error) {
     console.warn('source: tool ' + file + ': ' + error);
   }
@@ -188,6 +188,6 @@ exports.tool = function (file, source) {
 /** Another store module's main.js, or null. */
 exports.module = function (id) {
   var path = 'modules/' + id + '/main.js';
-  if (!assi.files.exists(path)) return null;
+  if (!axiko.files.exists(path)) return null;
   try { return require(path); } catch (error) { console.warn('source: ' + path + ': ' + error); return null; }
 };

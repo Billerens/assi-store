@@ -1,4 +1,4 @@
-// The code checks of this game, the same rules as Assi's scripts/games/lint-shared.js applies to
+// The code checks of this game, the same rules as Axiko's scripts/games/lint-shared.js applies to
 // the hub: node tests/lint.test.js
 //   1. node --check of every .js; inline <script>s of the pages compiled.
 //   2. The shared subset (Core.lint): sim.js and the files it requires — not strict (no class,
@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 const { execFileSync } = require('child_process');
-const { test, done, HUB } = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const { test, done, HUB } = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const Core = require(path.join(HUB, 'engine', 'core.js'));
 
 const DIR = path.resolve(__dirname, '..');

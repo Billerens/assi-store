@@ -1,5 +1,5 @@
 'use strict';
-// Local Chromium check with the real Assi engine, a temporary harness workspace and local bridge.
+// Local Chromium check with the real Axiko engine, a temporary harness workspace and local bridge.
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -7,7 +7,7 @@ const http = require('http');
 const assert = require('assert');
 const { spawn } = require('child_process');
 const { load } = require('./support');
-const { FACTORY } = require(path.join(process.env.ASSI_ROOT || path.resolve(__dirname, '../../../Assi'), 'scripts/games/harness.js'));
+const { FACTORY } = require(path.join(process.env.AXIKO_ROOT || path.resolve(__dirname, '../../../Axiko'), 'scripts/games/harness.js'));
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function run() {
   const x = load();
@@ -16,7 +16,7 @@ async function run() {
   fs.cpSync(path.join(FACTORY, 'ui', 'kit'), path.join(x.env.root, 'ui', 'kit'), { recursive: true });
   const faults = [];
   const english = Object.assign({}, JSON.parse(fs.readFileSync(path.join(FACTORY, 'ui', 'i18n', 'en.json'), 'utf8')), JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'i18n-en.json'), 'utf8')));
-  const stub = `<script>window.assi={call:async function(module,fn,...args){const r=await fetch('/__call',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({fn,args})}); const out=await r.json();if(out.error)throw new Error(out.error);return out.value;},native:async()=>({}),stage:async()=>true,on:()=>()=>{},back:()=>{},open:async()=>true};</script>`;
+  const stub = `<script>window.axiko={call:async function(module,fn,...args){const r=await fetch('/__call',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({fn,args})}); const out=await r.json();if(out.error)throw new Error(out.error);return out.value;},native:async()=>({}),stage:async()=>true,on:()=>()=>{},back:()=>{},open:async()=>true};</script>`;
   const server = http.createServer(async (req, res) => {
     try {
       if (req.url === '/__call') {

@@ -8,18 +8,18 @@
   "files": [
     {
       "path": "LICENSE",
-      "sha256": "eaa7a110ce46e3aa7c0e22d93f7340d96ec4feba4684cb494dbeace09caabfd4",
-      "size": 497
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
     },
     {
       "path": "README.md",
-      "sha256": "1290e8fabd4c6302d9e1f903f859e7aa5fd69d206afd52748daa8c39807f5c21",
-      "size": 17096
+      "sha256": "4bd0761c20dbd6392d10b92fab0261959e5946d52dcfbe5412cd5f51fb24398d",
+      "size": 17097
     },
     {
       "path": "code/checks.js",
-      "sha256": "f8375484eb9b1c4552e67bcae5dbbd3109dbcbba9e03c4b0029708d9186dc04e",
-      "size": 5870
+      "sha256": "852bf56691b7ff23c0ea384757a37cc23aa97467facbccb38ee0544cf2728d7e",
+      "size": 5873
     },
     {
       "path": "code/config.json",
@@ -98,8 +98,8 @@
     },
     {
       "path": "code/ui/game.js",
-      "sha256": "f7d6d40b86a28a3d89cb0941b49aeb7b6ba89efaf2a4ccb2dd3f15d28430d73c",
-      "size": 63784
+      "sha256": "dc2be91577b5119a3e28cd2644a605e5145b2c4968c32b4df400a79ba4613e9c",
+      "size": 63785
     },
     {
       "path": "code/ui/index.html",
@@ -119,10 +119,10 @@
   "optionalDependencies": [],
   "publisher": "billerens",
   "runtime": {
-    "assiApi": 1,
+    "axikoApi": 1,
     "gamesEngine": 1
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

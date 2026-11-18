@@ -10,7 +10,7 @@ var MIN = 60000;
 var START = new Date(2026, 10, 14, 10, 0, 0).getTime();
 var END = START + 50 * MIN;
 var s = settingsLib.normalize({ people: ['Петя'], distractApps: ['com.instagram.android', 'com.vk.'], strictness: 'home' });
-var OWN = ['app.assi', 'com.sec.android.app.launcher'];
+var OWN = ['app.axiko', 'com.sec.android.app.launcher'];
 
 t.test('distracting apps: back home, the second attempt soon after is let through', function () {
   var first = distract.decide('com.instagram.android', START, {}, s, OWN);
@@ -81,10 +81,10 @@ t.test('the summary without the inbox: from the recent notifications', function 
     { time: START + MIN + 10, package: 'org.telegram.messenger', app: 'Telegram', title: 'Петя', text: 'Во сколько встреча?', key: 'a' },
     { time: START + 2 * MIN, package: 'com.whatsapp', app: 'WhatsApp', title: 'Семья', text: 'Суббота?', key: 'b' },
     { time: START + 3 * MIN, package: 'com.whatsapp', app: 'WhatsApp', title: 'Семья', text: 'Да', key: 'b' },
-    { time: START + 4 * MIN, package: 'app.assi', app: 'Assi', title: 'Фокус', text: 'идёт', key: 'c' },
+    { time: START + 4 * MIN, package: 'app.axiko', app: 'Axiko', title: 'Фокус', text: 'идёт', key: 'c' },
     { time: START + 5 * MIN, package: 'com.spotify.music', app: 'Spotify', title: 'Сейчас играет', text: '', ongoing: true, key: 'd' }
   ];
-  var made = summary.fromNotices(notices, START, END, s, 'app.assi');
+  var made = summary.fromNotices(notices, START, END, s, 'app.axiko');
   assert.strictEqual(made.total, 3, 'repeats, own and ongoing ones are left out');
   assert.strictEqual(made.important.length, 1, 'Петя is in the list of people');
   assert.strictEqual(made.important[0].key, 'a');

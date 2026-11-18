@@ -13,7 +13,7 @@ var DICT = 'data/games/word-weaver/assets/dict.txt';
 var LEX = null;
 
 function lexicon() {
-  if (!LEX) LEX = Lex.parse(Dictionary.read(require('lib/assi').files));
+  if (!LEX) LEX = Lex.parse(Dictionary.read(require('lib/axiko').files));
   return LEX;
 }
 
@@ -31,8 +31,8 @@ for (var name in checks) exports[name] = checks[name];
 
 function load() {
   var id = kit.idOf(__dirname);
-  var assi = require('lib/assi');
-  var game = JSON.parse(assi.files.read('modules/games/' + id + '/game.json'));
+  var axiko = require('lib/axiko');
+  var game = JSON.parse(axiko.files.read('modules/games/' + id + '/game.json'));
   game.id = id;
   var sim = require('modules/games/' + id + '/sim.js');
   return { game: game, sim: sim, cfg: kit.configOf(game, 'modules/games/' + id) };
@@ -45,10 +45,10 @@ function ctxOf(cfg, rng, now) {
 exports['словарь на месте и без имён из контрольного списка'] = function (t) {
   var lex = lexicon();
   t.ok(lex.size > 20000, 'слов в словаре: ' + lex.size);
-  var assi = require('lib/assi');
+  var axiko = require('lib/axiko');
   var list = [];
   try {
-    list = assi.files.read('modules/games/' + kit.idOf(__dirname) + '/tools/control.txt').split('\n');
+    list = axiko.files.read('modules/games/' + kit.idOf(__dirname) + '/tools/control.txt').split('\n');
   } catch (ignored) { list = ['иван', 'москва', 'россия', 'сбербанк']; }
   var leaked = list.map(function (w) { return Lex.key(w.replace(/#.*/, '').trim()); }).filter(function (k) { return k && Lex.has(lex, k); });
   t.equal(leaked.join(', '), '', 'имена и города в словаре');

@@ -234,7 +234,7 @@
 <body>
 <main class="page wide">
   <header class="topbar">
-    <button class="icon-btn" onclick="assi.back()" aria-label="Назад" data-icon="back"></button>
+    <button class="icon-btn" onclick="axiko.back()" aria-label="Назад" data-icon="back"></button>
     <h1>Гороскоп</h1>
     <button class="icon-btn" id="open-settings" aria-label="Настройки" data-icon="settings"></button>
   </header>
@@ -248,7 +248,7 @@
 <script>
   const h = ui.h;
   const MAIN = 'modules/horoscope/main.js';
-  const call = (fn, ...args) => assi.call(MAIN, fn, ...args);
+  const call = (fn, ...args) => axiko.call(MAIN, fn, ...args);
   const WEEKDAYS_ACC = ['воскресенье', 'понедельник', 'вторник', 'среду', 'четверг', 'пятницу', 'субботу'];
   let view = null;
 
@@ -288,8 +288,8 @@
   async function speak() {
     try {
       const said = await call('speech');
-      if (said.voice) await assi.native('speech.say', said.text, said.voice);
-      else await assi.native('speech.say', said.text);
+      if (said.voice) await axiko.native('speech.say', said.text, said.voice);
+      else await axiko.native('speech.say', said.text);
     } catch (error) {
       ui.toast(error.message);
     }
@@ -321,7 +321,7 @@
   function wallpaperCard() {
     const w = view.wallpaper;
     if (!w) return null;
-    return h('button', { class: 'card wallpaper', onclick: () => assi.open(w.open), 'aria-label': ui.t('Обои дня: {}', w.title) },
+    return h('button', { class: 'card wallpaper', onclick: () => axiko.open(w.open), 'aria-label': ui.t('Обои дня: {}', w.title) },
       h('img', { src: w.thumbUrl, alt: '' }),
       h('div', { class: 'grow' },
         h('div', { class: 'small muted' }, 'Обои дня'),
@@ -494,7 +494,7 @@
   }
 
   document.getElementById('open-settings').onclick = () => view && settings();
-  assi.on('horoscope.changed', load);
+  axiko.on('horoscope.changed', load);
   load();
 </script>
 </body>

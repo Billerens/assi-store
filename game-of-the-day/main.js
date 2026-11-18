@@ -1,12 +1,12 @@
 // «Игра дня»: every morning the agent gamesmith makes a new mini game from scratch on the engine of
 // «Игротека» (modules/games/daily/<date>/); the owner plays and rates it; what he keeps moves into
 // the catalog «На пробу», the rest goes away after keepDays; the ratings become a readable taste
-// model that steers the next tasks. Description: docs/modules/game-of-the-day.md in Assi.
+// model that steers the next tasks. Description: docs/modules/game-of-the-day.md in Axiko.
 //
 // Data in data/games/daily/: log.json (a line per day), taste.json (the tag table), taste-week.json
 // (the weekly summary), settings.json, journal.json, state.json.
-var assi = require('lib/assi');
-var files = assi.files;
+var axiko = require('lib/axiko');
+var files = axiko.files;
 var days = require('./days.js');
 var schema = require('./schema.js');
 var taste = require('./taste.js');
@@ -86,7 +86,7 @@ function emitState(phase, extra) {
 
 function notify(options) {
   try {
-    return assi.notify(options);
+    return axiko.notify(options);
   } catch (error) {
     journal('Уведомление не ушло: ' + msg(error));
     return null;
@@ -349,7 +349,7 @@ function moveFolder(from, to) {
 }
 
 function gamesDb() {
-  return assi.db('games');
+  return axiko.db('games');
 }
 
 /** Saves of the daily id go to the kept id (rows that came in after the move too). Returns how many. */
@@ -883,7 +883,7 @@ exports.make = function (reason, force, slot) {
   var i = typeof slot === 'number' && slot >= 0 ? slot : force ? buttonSlot(t, s) : days.slotAt(t, activeSlots(s), s.giveUpMin);
   if (force && i < 0) return { skipped: activeSlots(s).length > 1 ? 'все игры на сегодня уже есть' : 'игра дня уже есть', date: today };
   if (i < 0) return { skipped: notNowText(s, t) };
-  if (i >= activeSlots(s).length) return { skipped: i < s.slots.length ? 'Игротека пока не принимает вторую игру за день — нужна новая версия Assi' : 'такой игры в расписании нет' };
+  if (i >= activeSlots(s).length) return { skipped: i < s.slots.length ? 'Игротека пока не принимает вторую игру за день — нужна новая версия Axiko' : 'такой игры в расписании нет' };
   var date = days.gameKey(today, i);
   if (!force && !inKeyWindow(date, t, s)) return { skipped: notNowText(s, t) };
   var entry = entryOf(date);
@@ -1347,9 +1347,9 @@ exports.discuss = function (args) {
   var entry = readLog().filter(function (e) { return e.slug === id; })[0];
   if (!entry) throw new Error('Нет такой оставленной игры: ' + id);
   try {
-    assi.notify.cancel(NOTICE + '-root-' + id);
+    axiko.notify.cancel(NOTICE + '-root-' + id);
   } catch (error) { /* already gone */ }
-  native('agent.send', 'assi', 'Игра «' + entry.title + '» из «Игры дня» прижилась: она в Игротеке, modules/games/' + id +
+  native('agent.send', 'axiko', 'Игра «' + entry.title + '» из «Игры дня» прижилась: она в Игротеке, modules/games/' + id +
     '/ (сыграна в ' + (entry.playDays || []).length + ' разных дня). Предложи мне добавить ей престиж и связки с поездкой — по движку Игротеки — и спроси, хочу ли я.');
   updateEntry(entry.date, function (e) {
     e.offer = false;

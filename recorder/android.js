@@ -8,8 +8,8 @@ var parts = require('./logic/parts.js');
 
 var G = typeof global !== 'undefined' ? global : (function () { return this; })();
 var LIVE = G.__recorderAndroid || (G.__recorderAndroid = { receiver: null, player: null, playerPath: null });
-var ACTION = 'app.assi.recorder.ACTION';
-var CHANNEL = 'assi-recorder';
+var ACTION = 'app.axiko.recorder.ACTION';
+var CHANNEL = 'axiko-recorder';
 var INFO_APPROACHING = 802;
 var INFO_NEXT_STARTED = 803;
 var INFO_REACHED = 801;
@@ -250,27 +250,27 @@ function cut(src, partMs, name) {
 }
 
 /**
- * The last way to cut: ffmpeg in the Linux environment (data/ is /assi there), into 16 kHz mono WAV.
+ * The last way to cut: ffmpeg in the Linux environment (data/ is /axiko there), into 16 kHz mono WAV.
  * → [{ n, path, offsetMs, durationMs }] or null when there is no Linux or no ffmpeg.
  */
-function ffmpeg(assi, src, dir, partSec, timeoutSec) {
-  var dataRoot = String(assi.files.path('data')).replace(/\/+$/, '');
+function ffmpeg(axiko, src, dir, partSec, timeoutSec) {
+  var dataRoot = String(axiko.files.path('data')).replace(/\/+$/, '');
   var inside = function (p) {
     var s = String(p);
-    return s.indexOf(dataRoot) === 0 ? '/assi' + s.slice(dataRoot.length) : null;
+    return s.indexOf(dataRoot) === 0 ? '/axiko' + s.slice(dataRoot.length) : null;
   };
   var a = inside(src);
   var b = inside(dir);
   if (!a || !b) return null;
   var have;
   try {
-    have = assi.linux('command -v ffmpeg', { timeout: 20 });
+    have = axiko.linux('command -v ffmpeg', { timeout: 20 });
   } catch (error) {
     return null;
   }
   if (!have || have.code !== 0) return null;
   var q = function (s) { return "'" + String(s).replace(/'/g, "'\\''") + "'"; };
-  var r = assi.linux('ffmpeg -nostdin -loglevel error -y -i ' + q(a) + ' -f segment -segment_time ' + partSec +
+  var r = axiko.linux('ffmpeg -nostdin -loglevel error -y -i ' + q(a) + ' -f segment -segment_time ' + partSec +
     ' -ac 1 -ar 16000 ' + q(b + '/cut-%03d.wav'), { timeout: timeoutSec || 1800 });
   if (r.code !== 0) throw new Error('ffmpeg не разрезал файл: ' + String(r.out || '').slice(-300));
   var names = js(new java.io.File(String(dir)).list()).map(String).filter(function (n) { return /^cut-\d{3}\.wav$/.test(n); }).sort();

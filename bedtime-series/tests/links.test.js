@@ -10,7 +10,7 @@ var env = require(path.join(ADVENTURE, 'tests', 'engine-stub.js')).install({
   mounts: { 'modules/voice-adventure': ADVENTURE, 'modules/bedtime-series': ROOT }
 });
 var sample = JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'sample.json'), 'utf8'));
-var fakeAssi = require('lib/assi');
+var fakeAxiko = require('lib/axiko');
 var main = env.require('modules/bedtime-series/main.js');
 var plan = env.require('modules/bedtime-series/plan.js');
 
@@ -46,7 +46,7 @@ function test(name, fn) {
   NEIGHBOURS.forEach(function (id) { delete env.mounts['modules/' + id]; });
   global.__fake = {};
   env.query = null;
-  fakeAssi.rows = function () { return []; };
+  fakeAxiko.rows = function () { return []; };
   try {
     fn();
     passed++;
