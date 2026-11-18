@@ -1,8 +1,12 @@
 'use strict';
 const assert = require('assert');
+// The numbers of these tests (how many blades a double forging makes) were chosen with these
+// milestone settings; what is tested here is the overflow, not the milestones.
+const MILESTONES = { 'milestone.per10': 0.02, 'milestone.per50': 0.025, 'milestone.per100': 0.05, 'milestone.cap': 0.5 };
 const { open, ctxOf, test, done } = require('./env');
 
 const x = open();
+Object.assign(x.cfg, MILESTONES);
 const NOW = Date.UTC(2026, 10, 16, 9);
 function fresh(seed) {
   const rng = x.Rng.make(seed || 512);

@@ -13,8 +13,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "eff524e958a517d150b012ae35bdffd2ae1c64f51cc85ec40e1969a4cca1f1e8",
-      "size": 34780
+      "sha256": "84a9fe31dde4fce102d7c3f779d4d1420a328fad023480d1c78315aa743aab9b",
+      "size": 36071
     },
     {
       "path": "code/adventures.js",
@@ -28,13 +28,13 @@
     },
     {
       "path": "code/checks.js",
-      "sha256": "fa267637b163d8f7d0113f559599abbc64c474384d65ebc84643e71a89662d78",
-      "size": 22042
+      "sha256": "f4025b351c4bf4917c8765d2394664f6348480cd0f52d98be40322623a9bface",
+      "size": 22339
     },
     {
       "path": "code/config.json",
-      "sha256": "45ddd08119ab106999018fcb2c97cfa4a1544c06b1fdfee5043d5054123d5d77",
-      "size": 64069
+      "sha256": "f1131459a33269781cc2a216cc08a53a420b9621acb52d619d95c4ad1c9dc0c1",
+      "size": 68047
     },
     {
       "path": "code/content/blades.json",
@@ -73,13 +73,13 @@
     },
     {
       "path": "code/guide.md",
-      "sha256": "6399786a579e80584198a2e2a68348b33d2abd365eac8a7acfc64c8c40e4bbc4",
-      "size": 49062
+      "sha256": "3858f2e39ed1afd80b82d16d68beaffc830283eb64bbe36c89a076f6b44d79cc",
+      "size": 50459
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "0ae59d9d6598c1edc8aedc38d7b6829db868b2592cc4accf96f999863cdb330a",
-      "size": 131085
+      "sha256": "96b902bf407a645012ff15d444759296e542df23071c0a3de5fabb340ce2943f",
+      "size": 134298
     },
     {
       "path": "code/icon.svg",
@@ -108,8 +108,8 @@
     },
     {
       "path": "code/sim.js",
-      "sha256": "9cb0d881e30a32fc9d7cd8d13a6f08512baddd7017b812075f843ff1ff311a2c",
-      "size": 76765
+      "sha256": "69e537ee658f7898f254afa52f6c049054f50e25961cb02bb1d482dd4511e962",
+      "size": 79551
     },
     {
       "path": "code/ui/adventures.css",
@@ -123,8 +123,8 @@
     },
     {
       "path": "code/ui/art.js",
-      "sha256": "b2dbd5c09c8827c0639a869e18d2316dd9f04c92e83eed09e2463433b643bd1d",
-      "size": 23162
+      "sha256": "38210d226e4fc0de8b868c4a8e7ffbf78db3c6796ad2fa6d4d9e0cf2945a5274",
+      "size": 23833
     },
     {
       "path": "code/ui/artifacts.css",
@@ -138,13 +138,13 @@
     },
     {
       "path": "code/ui/game.css",
-      "sha256": "d2431cbc3c7fb0be9d85e3c3ed650734f035c86ae0ea5a48ef275f1ecd2801bb",
-      "size": 15460
+      "sha256": "8ca78e0355952a425553e0bcb2ebc4de12b6afcfd84e6caabd92f80bdc3eb540",
+      "size": 15744
     },
     {
       "path": "code/ui/game.js",
-      "sha256": "ac2b0190ab41c27572ad080fecb921f30091aa25de998e8ae812e0c2b138d143",
-      "size": 72411
+      "sha256": "b91e2e392c87074edc02d47d540be0bd00befd992c6fbce3999db6a83a9d5cb0",
+      "size": 73668
     },
     {
       "path": "code/ui/index.html",
@@ -168,8 +168,8 @@
     },
     {
       "path": "code/upgrade-progress.js",
-      "sha256": "0a5ba2d78bd4943591ff2a533a58763eb7beb8601e8aa4803f76329ec959a447",
-      "size": 2470
+      "sha256": "b726ccacfc9ecb50b1a62d0f616451e44abe8d8b5fdea4bd1361055c84ae0bc0",
+      "size": 3039
     }
   ],
   "id": "merge-forge",
@@ -186,5 +186,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.1.2"
+  "version": "0.2.0"
 }

@@ -2,6 +2,11 @@
   "changes": [
     {
       "date": "2026-11-18",
+      "notes": "- Forge heat: taps on the forge heat it, and while it is hot the blades strike more often. Left alone, it cools in a few seconds. A strip on the forge button shows the heat.\n- Two new upgrades: “Hot embers” makes full heat stronger, “Undying fire” keeps part of the heat for good, offline included.\n- Damage per second is shown at the top, next to the farm rate.\n- Upgrade milestones are worth reaching: every 10th level now adds about 10% instead of 2%, the 100th about 130% in all. Their size is a setting of the game.\n- The boss timer and the hourglass upgrade no longer show numbers with a dozen decimals.",
+      "version": "0.2.0"
+    },
+    {
+      "date": "2026-11-18",
       "notes": "- Interface texts are translated into English.\n- The store listing is in English and Russian.",
       "version": "0.1.2"
     },
@@ -22,7 +27,8 @@
       "changes": {
         "0.1.0": "- Первый выпуск.",
         "0.1.1": "- Дракону можно отдать только клинок не выше лучшего уровня этого забега минус 3 (настройка «Дракон: клинки ниже лучшего в забеге на уровней»).\n- Не больше 6 кормлений за забег (настройка «Дракон: кормлений за забег»); перековка начинает счёт заново.\n- Новая реликвия «Ненасытный зоб» (третья ступень): дополнительные кормления за забег, до +5.\n- На экране дракона видно, сколько кормлений осталось и до какого уровня он берёт клинки.",
-        "0.1.2": "- Тексты интерфейса переведены на английский.\n- Описание в магазине — на английском и русском."
+        "0.1.2": "- Тексты интерфейса переведены на английский.\n- Описание в магазине — на английском и русском.",
+        "0.2.0": "- Жар горна: тапы по горну раздувают жар, и пока горн горяч, клинки бьют чаще. Без тапов он остывает за несколько секунд. Жар показывает полоска на кнопке горна.\n- Два новых улучшения: «Жаркие угли» усиливают полный жар, «Негаснущий огонь» оставляет часть жара навсегда, в том числе офлайн.\n- Урон в секунду показан наверху, рядом с фармом.\n- Рубежи улучшений стали заметными: каждый 10-й уровень даёт около 10% вместо 2%, сотый — около 130% в сумме. Их размер — настройка игры.\n- Таймер босса и «Песочные часы» больше не показывают числа с десятком знаков после запятой."
       }
     }
   },
@@ -37,5 +43,5 @@
       "width": 720
     }
   ],
-  "version": "0.1.2"
+  "version": "0.2.0"
 }

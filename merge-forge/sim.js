@@ -40,7 +40,8 @@
     { id: 'temper', title: 'Закалка' }, { id: 'runeMason', title: 'Рунная кладка', rune: true }, { id: 'runePower', title: 'Сила руны', rune: true },
     { id: 'caravan', title: 'Караванщик' }, { id: 'night', title: 'Ночная смена' }, { id: 'cry', title: 'Боевой клич' },
     { id: 'remelt', title: 'Переплавка' }, { id: 'banner', title: 'Знамя' },
-    { id: 'hammer', title: 'Удар молота' }, { id: 'stall', title: 'Лавка кузнеца' }
+    { id: 'hammer', title: 'Удар молота' }, { id: 'stall', title: 'Лавка кузнеца' },
+    { id: 'ember', title: 'Жаркие угли' }, { id: 'pilot', title: 'Негаснущий огонь' }
   ];
 
   // The tree of «Горн мастера»: bought with coals, kept in layers.forge.state.mf (the star reset clears it).
@@ -126,6 +127,7 @@
     r.stats = r.stats || { forged: 0, merged: 0, sold: 0, kills: 0, bosses: 0 };
     r.crits = r.crits || [];
     r.walkT = num(r.walkT, 0);
+    r.heat = Math.max(0, Math.min(1, num(r.heat, 0)));
     state.meta.album = state.meta.album || {};
     state.meta.feats = state.meta.feats || {};
     state.meta.names = state.meta.names || {};
@@ -340,12 +342,41 @@
     return power;
   }
 
-  /** Damage a second with crits on average (a Big); `now` 0 leaves out the timed bonuses. */
+  // ---- the heat of the forge --------------------------------------------------------------------------
+  // Taps on the forge heat it; a hot forge makes the blades strike more often; left alone it cools.
+  // «Жаркие угли» make full heat stronger, «Негаснущий огонь» keeps a part of it for good.
+
+  /** The heat the forge never falls below (0…heat.maxFloor): the levels of «Негаснущий огонь». */
+  function heatFloor(state, cfg) {
+    return Math.max(0, Math.min(num(cfg['heat.maxFloor'], 0), lvl(state, 'pilot') * num(cfg['up.pilot.step'], 0)));
+  }
+
+  /** The heat now, 0…1. */
+  function heat(state, cfg) { return Math.max(heatFloor(state, cfg), Math.min(1, num(state.run.heat, 0))); }
+
+  /** How much more often the blades strike at full heat: heat.speed plus «Жаркие угли» (past up.ember.soft a level adds less). */
+  function heatPower(state, cfg) {
+    return Math.max(0, num(cfg['heat.speed'], 0) + soft(lvl(state, 'ember'), cfg['up.ember.soft']) * num(cfg['up.ember.step'], 0));
+  }
+
+  /** How many times faster the volleys come; `passive` counts only the heat that stays without taps. */
+  function volleySpeed(state, cfg, passive) { return 1 + (passive ? heatFloor(state, cfg) : heat(state, cfg)) * heatPower(state, cfg); }
+
+  /** Seconds between two volleys. */
+  function volleySec(state, cfg, passive) { return cfg['combat.hitSec'] / volleySpeed(state, cfg, passive); }
+
+  /** The forge cools for dt seconds: from full to cold in heat.coolSec, never below the floor. */
+  function coolHeat(state, cfg, dt) {
+    var sec = num(cfg['heat.coolSec'], 0);
+    state.run.heat = Math.max(heatFloor(state, cfg), sec > 0 ? heat(state, cfg) - dt / sec : 0);
+  }
+
+  /** Damage a second with crits on average (a Big); `now` 0 leaves out the timed bonuses and the heat of taps. */
   function dps(state, cfg, now) {
     var options = { passiveOnly: now === 0 };
     var crit = 1 + critChance(state, cfg, options) * (critMult(state, cfg, options) - 1);
     var power = Big.add(Big.mul(fieldPower(state, cfg), crit), Outpost.passivePower(state, cfg, options));
-    return Big.div(Big.mul(dmgMult(state, cfg, now), power), cfg['combat.hitSec']);
+    return Big.div(Big.mul(dmgMult(state, cfg, now), power), volleySec(state, cfg, now === 0));
   }
 
   /** Gold multiplier at wave w (a Number): Кошель, угли, слитки, жадность, ранний ход. No links. */
@@ -370,10 +401,12 @@
     var r = state.run;
     var w = r.farm ? r.wave : r.wave - 1;
     if (w < 1) return Big.ZERO;
-    var hit = Big.mul(dps(state, cfg, 0), cfg['combat.hitSec']);
+    // Without taps the volleys come as often as the heat that stays allows.
+    var sec = volleySec(state, cfg, true);
+    var hit = Big.mul(dps(state, cfg, 0), sec);
     if (Big.isZero(hit)) return Big.ZERO;
     var hits = Math.max(1, Big.toNumber(Big.ceil(Big.div(hpOf(cfg, w), hit))));
-    return Big.div(Big.mul(goldOf(cfg, w), goldMult(state, cfg, w)), hits * cfg['combat.hitSec'] + cfg['wave.walkSec'] / (1 + Artifacts.modifiers(state, cfg).walkSpeed));
+    return Big.div(Big.mul(goldOf(cfg, w), goldMult(state, cfg, w)), hits * sec + cfg['wave.walkSec'] / (1 + Artifacts.modifiers(state, cfg).walkSpeed));
   }
 
   function offlineShare(state, cfg) { return Math.min(1, cfg['offline.share'] + lvl(state, 'night') * cfg['up.night.step']); }
@@ -653,6 +686,8 @@
     r.tapBudget -= 1;
     r.forgeT = Math.max(0, r.forgeT - tapSeconds(state, cfg, now) - Outpost.onTap(state, cfg));
     r.taps++;
+    // The same strike fans the fire: the blades at the gate strike more often while the forge is hot.
+    r.heat = Math.min(1, heat(state, cfg) + num(cfg['heat.perTap'], 0));
     var proc = Artifacts.onTap(state, cfg, rng, { manual: true, accepted: true, can: artifactTargets(state, cfg, now || 0) });
     applyArtifactCommands(state, cfg, proc.commands, now || 0);
     if (rng && r.forgeT <= 0) {
@@ -974,13 +1009,16 @@
         var w = Math.min(dt - t, r.walkT);
         battleTimers(state, w, cfg);
         r.walkT = Math.max(0, r.walkT - w);
+        coolHeat(state, cfg, w);
         t += w;
         continue;
       }
       var e = encounterOf(state, cfg);
       var slow = iceSlow(state, cfg) + coldStrength(state, cfg, e) + Artifacts.modifiers(state, cfg).bossSlow;
       var boss = r.bossT > 0;
-      var toHit = Math.max(0, r.volleyT);
+      // A hot forge runs the volley's clock faster; the heat is read once a step and cools as the step goes.
+      var speed = volleySpeed(state, cfg, false);
+      var toHit = Math.max(0, r.volleyT) / speed;
       var toFail = boss ? r.bossT * slow : Infinity;
       var castSlow = 1 + coldStrength(state, cfg, e);
       var step = Math.min(dt - t, toHit, toFail, e.kind === 'channeler' ? Math.max(0, e.castT) * castSlow : Infinity,
@@ -988,7 +1026,8 @@
       t += step;
       battleTimers(state, step, cfg);
       enemyStep(state, cfg, step, (ctx.now || 0) - (dt - t) * 1000);
-      r.volleyT -= step;
+      r.volleyT -= step * speed;
+      coolHeat(state, cfg, step);
       if (boss) r.bossT = Math.max(0, r.bossT - step / slow);
       if (r.volleyT <= 1e-9) {
         r.volleyT += hitSec;
@@ -1127,6 +1166,7 @@
     if (id === 'night') max = Math.min(max, room(cfg['offline.share'], 1, cfg['up.night.step']));
     if (id === 'remelt') max = Math.min(max, room(cfg['sell.share'], 1, cfg['up.remelt.step']));
     if (id === 'runeMason') max = Math.min(max, room(cfg['rune.base'] + mfLevel(state, 'rune'), SOCKETS.length, cfg['up.runeMason.step']));
+    if (id === 'pilot') max = Math.min(max, room(0, cfg['heat.maxFloor'], cfg['up.pilot.step']));
     return Math.max(0, max);
   }
 
@@ -1135,6 +1175,7 @@
   /** Can the upgrade be bought at all now (not at its cap, open)? */
   function upUnlocked(state, cfg, id) {
     if (id === 'hammer') return state.run.maxWave >= cfg['up.hammer.fromWave'];
+    if (id === 'ember' || id === 'pilot') return state.run.maxWave >= cfg['up.' + id + '.fromWave'];
     if (id === 'stall') return state.run.maxWave >= cfg['up.stall.fromWave'] || state.run.stats.sold >= cfg['up.stall.fromSold'];
     return !((id === 'runeMason' || id === 'runePower') && !runesOpen(state, cfg));
   }
@@ -1206,7 +1247,7 @@
       wave: 1, hp: '0e0', hpMax: '0e0', bossT: 0, farm: false, maxWave: 1, volleyT: cfg['combat.hitSec'], volleys: 0, crits: [],
       walkT: cfg['wave.walkSec'], lastHit: '0e0', lastGold: '0e0', lastBoss: null, farmRate: '0e0',
       eventT: rng ? rng.range(cfg['event.minSec'], cfg['event.maxSec']) : cfg['event.minSec'], event: null, stormLeft: 0,
-      starfallUntil: 0, cryUntil: 0, cryReadyAt: 0, bellowsUntil: 0, orderPaid: null,
+      starfallUntil: 0, cryUntil: 0, cryReadyAt: 0, bellowsUntil: 0, orderPaid: null, heat: 0,
       stats: { forged: 0, merged: 0, sold: 0, kills: 0, bosses: 0, fails: 0, events: 0 }
     };
     // The first blades lie on the anvil already (the start of the 4×5 block).
@@ -1251,6 +1292,7 @@
     Adventures.tick(state, dt, cfg);
     if (!ctx.offline) encounterOf(state, cfg);
     if (ctx.offline) {
+      coolHeat(state, cfg, dt);
       Outpost.tick(state, dt, cfg, { offline: true });
       r.meetCooldown = Math.max(0, num(r.meetCooldown, 0) - dt);
     }
@@ -1642,6 +1684,7 @@
     isBoss: isBoss, hpOf: hpOf, goldOf: goldOf, bladeDmg: bladeDmg, bladePrice: bladePrice, sellPrice: sellPrice, sellShare: sellShare,
     cellPower: cellPower, fieldPower: fieldPower, saleMult: saleMult, tapSeconds: tapSeconds, upUnlocked: upUnlocked,
     dmgMult: dmgMult, cellDmg: cellDmg, rawSum: rawSum, dps: dps, goldMult: goldMult, bossTimer: bossTimer, iceSlow: iceSlow,
+    heat: heat, heatFloor: heatFloor, heatPower: heatPower, volleySpeed: volleySpeed, volleySec: volleySec,
     farmRateNow: farmRateNow, offlineShare: offlineShare, coalBonus: coalBonus, starMult: starMult, ingots: ingots,
     critChance: critChance, critMult: critMult, criticalStats: criticalStats, cryOn: cryOn, starfallOn: starfallOn,
     forgeLevel: forgeLevel, forgeInterval: forgeInterval, forgeSpeed: forgeSpeed, apprenticeInterval: apprenticeInterval, apprenticeSpeed: apprenticeSpeed,

@@ -262,7 +262,9 @@ exports['улучшения кузни: потолок только там, гд
   r.forgeT = 0;
   x.sim.workshop(state, 0.001, cfg, Rng.make(3), 1000);
   var made = g.filter(function (n) { return n > 0; });
-  t.ok(made.length === 4 || made.length === 5, 'двойная поковка с вехой 100: 4 клинка и шанс пятого, получено ' + made.length);
+  var twins = 1 + Math.floor(x.sim.upgradeEffective(state, cfg, 'twin') * cfg['up.twin.step']);
+  t.ok(twins >= 4, 'двойная поковка с рубежом сотого уровня даёт не меньше 4 клинков, получено ' + twins);
+  t.ok(made.length === twins || made.length === twins + 1, 'двойная поковка с рубежом: ' + twins + ' клинков и шанс ещё одного, получено ' + made.length);
   t.ok(made.every(function (n) { return n === 3; }), 'удачная плавка 200 %: уровни ' + made.join(','));
   // Караванщик retains logarithmic softening between the bounded milestone bonuses.
   var soft = cfg['up.caravan.soft'];
