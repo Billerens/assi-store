@@ -13,13 +13,843 @@
     },
     {
       "path": "README.md",
-      "sha256": "07cb5c3d684a79e62247ac5b1fb0dec0c0e935e1d484728806a73cf896a1a6fc",
-      "size": 36072
+      "sha256": "a9dd5d86f60e187ea59e429221e29ac7ee27ce36fb9baaa9bd789996d099588a",
+      "size": 38311
     },
     {
       "path": "code/adventures.js",
       "sha256": "90a18a96abf077f7003c6ac09684c0567a88efb7cb43b16c0b8d6b77bf4c65c7",
       "size": 25079
+    },
+    {
+      "path": "code/art/ability/breath.webp",
+      "sha256": "9768c07f925f207fecd4f2c613092a6bd733ea5bf76c7619541b96064afd1036",
+      "size": 14340
+    },
+    {
+      "path": "code/art/ability/mark.webp",
+      "sha256": "e5c6d2287637dc3b2e05e8f0bbe7f39926600c8b23b5d368893053f03d7b085f",
+      "size": 14136
+    },
+    {
+      "path": "code/art/ability/riposte.webp",
+      "sha256": "f9e44aee7d5fc34d8fd17fa61f1303ea3a7306c6866c7f9d1a5dc51041ec7595",
+      "size": 15384
+    },
+    {
+      "path": "code/art/ability/seal.webp",
+      "sha256": "49d3968403d1777d862837bc459c0a6221dd08105610cbf4d8ef97ef3e090a47",
+      "size": 12170
+    },
+    {
+      "path": "code/art/ability/split.webp",
+      "sha256": "3a95c9af8bf068f5e3667834f815eb3a37e3b0faf9bbf365a61599ee393adf4e",
+      "size": 13494
+    },
+    {
+      "path": "code/art/artifact/apprenticeGear.webp",
+      "sha256": "226ab1e6eecc6d742bf9693adbcaf75fc917ddebf8c94b7d6cabce5b8c1b36a4",
+      "size": 14024
+    },
+    {
+      "path": "code/art/artifact/apprenticeSpring.webp",
+      "sha256": "eede440f81a75a976db40c29356147e4bb0074e457d61daf872768ada52c1a7e",
+      "size": 11100
+    },
+    {
+      "path": "code/art/artifact/coinDie.webp",
+      "sha256": "03a2f523253cbc80399df40df69cfc951fcbaf592be340998ad45aeaba191655",
+      "size": 11724
+    },
+    {
+      "path": "code/art/artifact/crySpark.webp",
+      "sha256": "37507412916df4b359a94449c8b746a9f4eec3bedd53241536915a039c44866f",
+      "size": 9644
+    },
+    {
+      "path": "code/art/artifact/digestiveCoal.webp",
+      "sha256": "2e33b7690afa0233d778ce8ef02e6ee5e1ff5c2320803fdee1f160bf2312a632",
+      "size": 6412
+    },
+    {
+      "path": "code/art/artifact/dragonChime.webp",
+      "sha256": "34d48efad2a5e27572bce8901d85f0ef506391f61ba3c25df513c9a7f90c26b0",
+      "size": 10514
+    },
+    {
+      "path": "code/art/artifact/dragonCradle.webp",
+      "sha256": "bed5b7eea56d66e98fa99546825ae7e81d1ce5c52afd6529a277fe6e3fed45a9",
+      "size": 12142
+    },
+    {
+      "path": "code/art/artifact/emberSpark.webp",
+      "sha256": "89b1212d03916835665c869002ed9d53193e6093cd9381a1b7ff549288129c13",
+      "size": 9868
+    },
+    {
+      "path": "code/art/artifact/emberVein.webp",
+      "sha256": "9f181b7f720cff0e3f85b1ead54c6341340ed1f21f05bb4d15e47d546be4566d",
+      "size": 9262
+    },
+    {
+      "path": "code/art/artifact/feedingBowl.webp",
+      "sha256": "bbe9b8d36e61a05287b485389c11b5ec705c1265eb06bed5987d8dcb00b1f8a2",
+      "size": 7452
+    },
+    {
+      "path": "code/art/artifact/focusCrystal.webp",
+      "sha256": "36989bd71dfa0df05a05fc37b611edf20e7045804284a7f406241c6fe7f46640",
+      "size": 6444
+    },
+    {
+      "path": "code/art/artifact/forgeHeart.webp",
+      "sha256": "10e6e403951799257458ada2ea1d06d24aa3b476f163af7ab67d8bbc4223885f",
+      "size": 11840
+    },
+    {
+      "path": "code/art/artifact/frozenClock.webp",
+      "sha256": "843c8d6c74934cb68d717f0b2246198dcb98b97614ea2a5b6b34427b6c351424",
+      "size": 10996
+    },
+    {
+      "path": "code/art/artifact/goldenSeal.webp",
+      "sha256": "e6600a2bcd557763b080846017fd0e6155c3c2bd70fe99ee9f898f45ee437816",
+      "size": 9512
+    },
+    {
+      "path": "code/art/artifact/heavyPommel.webp",
+      "sha256": "59fe128e0c74dc6cf90bf3bbe1fa9b38d78b1e163229e66dec2f3f7e40d1ccdf",
+      "size": 10706
+    },
+    {
+      "path": "code/art/artifact/hotBellows.webp",
+      "sha256": "4b408bb93b6c1bb82b2392c6b1b598ca5051499eeec1ea51f3173a17b3dc6e36",
+      "size": 10900
+    },
+    {
+      "path": "code/art/artifact/hourNeedle.webp",
+      "sha256": "36c4e8b4b1ce6f7ada14a22f3abcd7a7882760f1a6f2bf81cc5a58b5d78328e4",
+      "size": 5678
+    },
+    {
+      "path": "code/art/artifact/hungryCrop.webp",
+      "sha256": "80f1e33f35f9ccd5810422d04fe38aec4772c82005c281aca1e5a331dacb5215",
+      "size": 9608
+    },
+    {
+      "path": "code/art/artifact/keenLens.webp",
+      "sha256": "2880f72403c483f20ff80894fec0224dc369fd989a38027f4a43b7591f4a0f7f",
+      "size": 8056
+    },
+    {
+      "path": "code/art/artifact/keeperSand.webp",
+      "sha256": "249646dc02fdf9b6dd009df3377ec43b65de15cdd25dfd59f673a809cef744ff",
+      "size": 13108
+    },
+    {
+      "path": "code/art/artifact/marchingBoot.webp",
+      "sha256": "85398ef24fb8219b8b015d1fdf2db1af34833164d8d4b00f25e9cd0124d73170",
+      "size": 8914
+    },
+    {
+      "path": "code/art/artifact/marketBell.webp",
+      "sha256": "fa9bf44bec802a87b5dee0719a615a55b3a249828cf40c114924c4b22b2addbb",
+      "size": 7236
+    },
+    {
+      "path": "code/art/artifact/mentorBook.webp",
+      "sha256": "0e47aa11f51b1bd69fe2ebba384cafffc86f52bcc68fb7a7c5eef4c079ef88c8",
+      "size": 9800
+    },
+    {
+      "path": "code/art/artifact/mossVial.webp",
+      "sha256": "3204ea4253ca34a2dad148fd314280d3b21a3903bb4d87b48100b80c049a70e3",
+      "size": 9734
+    },
+    {
+      "path": "code/art/artifact/nightLantern.webp",
+      "sha256": "17793ded9f211bb161831206a40ae41640fd5d7197e04aa4f75a26178ae8a7ce",
+      "size": 8928
+    },
+    {
+      "path": "code/art/artifact/pairHammer.webp",
+      "sha256": "a216dac6f6c088ae43d8b99615ab71c5c7cf5fd35259da978d394d53f37935fb",
+      "size": 9992
+    },
+    {
+      "path": "code/art/artifact/petTalisman.webp",
+      "sha256": "53fbd9806a8ab78c60c5b3cea57c2f960852a60aae2593e027963836a4d3fc3e",
+      "size": 9650
+    },
+    {
+      "path": "code/art/artifact/petTreat.webp",
+      "sha256": "e33f2ae7380ae122ba8c4ca35bdecbc4117ce40b8be25f90d4937e30d24f44d8",
+      "size": 10978
+    },
+    {
+      "path": "code/art/artifact/rallyCrest.webp",
+      "sha256": "9106a8df8dbffa94191ef74054ddb1641ec86d7dc1becae06776ffaa7882b861",
+      "size": 11024
+    },
+    {
+      "path": "code/art/artifact/rallyHorn.webp",
+      "sha256": "0714b42512b819ad41d76edd08ee1bd5ee8aa8f3bea25a1f40900d15ffc2d1ad",
+      "size": 10220
+    },
+    {
+      "path": "code/art/artifact/runePrism.webp",
+      "sha256": "cfc7e73c81239a6b7d45833c8fa0d15c033e223cf17058155660a0c928f24042",
+      "size": 10548
+    },
+    {
+      "path": "code/art/artifact/sandPin.webp",
+      "sha256": "d15c68deab2cafacd47c1cd9cc9e33beb21c6dfadedcac64079d1e8c49f7fc94",
+      "size": 10786
+    },
+    {
+      "path": "code/art/artifact/shieldAwl.webp",
+      "sha256": "e7d4b56bfe318d653d530cc47603c8cd7d64ec50f33b7a42fee7f5762f89b0a1",
+      "size": 5524
+    },
+    {
+      "path": "code/art/artifact/tradeScale.webp",
+      "sha256": "0490f235ac1bcccf9ed0e534f28c54ba7a0f28218cdd3b79c112dffe7932f260",
+      "size": 13298
+    },
+    {
+      "path": "code/art/artifact/twinLever.webp",
+      "sha256": "f37fe67f348364bfe1b1201a52c204ff1ab11fbd2b7fd071327129131cc057cd",
+      "size": 10338
+    },
+    {
+      "path": "code/art/artifact/warStandard.webp",
+      "sha256": "c62352589bcecaa9de8a61fc8ea8fec2263ec6c25bdffba54954a5c086f447ba",
+      "size": 10614
+    },
+    {
+      "path": "code/art/artifact/whetstone.webp",
+      "sha256": "212e0e6fdf560dd355ee92156dd36b1ef3f29bb23be358cb35e59d6f62065759",
+      "size": 11480
+    },
+    {
+      "path": "code/art/bg/candy.webp",
+      "sha256": "2f2fdbd8f7b77a84b9425a008067f1a27f482eb6268fbe4d7812ad804a4d9a86",
+      "size": 39016
+    },
+    {
+      "path": "code/art/bg/desert.webp",
+      "sha256": "4aa4b3257cf5baf01f16fbaa0230fceadfe1d0ea4949b915b5bad96edf598698",
+      "size": 35088
+    },
+    {
+      "path": "code/art/bg/kitchen.webp",
+      "sha256": "054540bee605b441f7c1c58aa7e791534b8b7ba41b00a6ab545e1fd318e6f4c5",
+      "size": 57008
+    },
+    {
+      "path": "code/art/bg/neon.webp",
+      "sha256": "c5d417d2fc3d47e1e32ee15ab9b794ee406f7c815bcd90d26880715c5be8d495",
+      "size": 49256
+    },
+    {
+      "path": "code/art/bg/road.webp",
+      "sha256": "8a2f4acaddc7b816dd76a52f23b8c0968c2657bea03228a082cd5831013170ee",
+      "size": 35558
+    },
+    {
+      "path": "code/art/bg/sea.webp",
+      "sha256": "bdc921ed736618c6c62e886c99ab835f97e3c3b2cd3c9fb59739008263296f67",
+      "size": 47674
+    },
+    {
+      "path": "code/art/bg/space.webp",
+      "sha256": "2e228aa18724da7df384ee48baf540731544f36399094e56a64badd28384bef3",
+      "size": 40414
+    },
+    {
+      "path": "code/art/bg/swamp.webp",
+      "sha256": "7e5cf32fbbb05bb6488234d919ce1fb8716c55d2cc4c5df3371c662dc4f73c45",
+      "size": 41324
+    },
+    {
+      "path": "code/art/bg/toys.webp",
+      "sha256": "da0a4603f11cba0e59b1abcd83192540be93adbf653b80f07c1dbe9e3834cae8",
+      "size": 31778
+    },
+    {
+      "path": "code/art/bg/volcano.webp",
+      "sha256": "4afe64135084d7d6a2ec7f3c6f7f9704c2756ea67b4c71e68697d08ae9835b6e",
+      "size": 37590
+    },
+    {
+      "path": "code/art/dragon/ash.webp",
+      "sha256": "a0005f649aad77e311674575205898d03e2954d90dfb64895e098985ca81c9a1",
+      "size": 32504
+    },
+    {
+      "path": "code/art/dragon/egg.webp",
+      "sha256": "da931b203ba0a2e7c45dd67f5d625dda0d0b929058ea7b064222cd296dac0ab2",
+      "size": 23128
+    },
+    {
+      "path": "code/art/dragon/frost.webp",
+      "sha256": "005d25542017567ef00fe754927b97ef2e7129f33fb4c670b0021c89b0fd91cf",
+      "size": 29046
+    },
+    {
+      "path": "code/art/dragon/storm.webp",
+      "sha256": "ffce1dfb94e21721344c738c4404c72deee9b29cc6c32f819fdfb4444a9d599f",
+      "size": 29472
+    },
+    {
+      "path": "code/art/dragon/young.webp",
+      "sha256": "137ba7767b489e5f2f5a3908f2bb0d5da8ef1a62d60fd1495f39c25890111750",
+      "size": 29478
+    },
+    {
+      "path": "code/art/ev/caravan.webp",
+      "sha256": "934be2e6dbdf45e1f7f4874a5c3498abb3beadcd65ad8fadb6672bdb25a97806",
+      "size": 13894
+    },
+    {
+      "path": "code/art/ev/order.webp",
+      "sha256": "e6a961faddc900023a3101daabfaabdf9203558d99ad571d10ca867066ca4d27",
+      "size": 14514
+    },
+    {
+      "path": "code/art/ev/starfall.webp",
+      "sha256": "9358d862df8cb3db07c0839edb5fba28fb896094ecc17753650568733f605c38",
+      "size": 16030
+    },
+    {
+      "path": "code/art/ev/storm.webp",
+      "sha256": "2c67022e1fc705986e5af0871e0ef31209ad86283d947e435cdf6c8c74035968",
+      "size": 9470
+    },
+    {
+      "path": "code/art/ev/wanderer.webp",
+      "sha256": "a56ac4a9d449af8a401a546d2282ba4a11c5999a61bd2cc1e1b5b5194bdf2179",
+      "size": 13058
+    },
+    {
+      "path": "code/art/hero/bran.webp",
+      "sha256": "bc88b9d4062dd1d7e65fe2f454fc28c4320e0ab6746b21587f4f75ee3f837654",
+      "size": 24680
+    },
+    {
+      "path": "code/art/hero/corvin.webp",
+      "sha256": "494330cce5c34339eedadc605acf3c24f937c350f1d405b1eab1e685e5d164ea",
+      "size": 21280
+    },
+    {
+      "path": "code/art/hero/eira.webp",
+      "sha256": "37902caed43a238d0adb488dbebe76753472e1746f7612afe802774454006117",
+      "size": 22242
+    },
+    {
+      "path": "code/art/hero/veya.webp",
+      "sha256": "685a0b20f5ed6f6c19d00eb47e457a7af41f4287beeb0b7cd7fa2af92b2630df",
+      "size": 21644
+    },
+    {
+      "path": "code/art/mf/auto.webp",
+      "sha256": "b086c6de9be1b09df0328a1c69a996482d353e4594efe82cc5106133d201528d",
+      "size": 11012
+    },
+    {
+      "path": "code/art/mf/command.webp",
+      "sha256": "2a20a82777540f61356bc24b1054b24678e52f37a07cdbfadfcccd06ed9cab1e",
+      "size": 10398
+    },
+    {
+      "path": "code/art/mf/dragonCare.webp",
+      "sha256": "0ca92eb0e12e199ee456b8e21808c5680243c148bb9ae0f64b475225b79830c0",
+      "size": 12366
+    },
+    {
+      "path": "code/art/mf/memory.webp",
+      "sha256": "f77acb9f1c73df149d2d2e130db18433f3262385dd92078bb09e9a9b25d97848",
+      "size": 9902
+    },
+    {
+      "path": "code/art/mf/rhythm.webp",
+      "sha256": "7aada6777aa1fd1f0f213f37c92e6aad4e630947292734e9de743de97bb5d730",
+      "size": 9120
+    },
+    {
+      "path": "code/art/mf/rune.webp",
+      "sha256": "70f4cd27a4b06e1c4372b35fc0a366873ea6b6189a5a21f289982d2d373af977",
+      "size": 10914
+    },
+    {
+      "path": "code/art/mf/rush.webp",
+      "sha256": "c09236e26851c008f8d6338989db2c402102776cf2d5a07a2f42da62bae106ec",
+      "size": 13636
+    },
+    {
+      "path": "code/art/mf/startGold.webp",
+      "sha256": "412c64983b5ce2650c971be8243a2b85bd6f693007dc90870b9e3a80d9bb8686",
+      "size": 11860
+    },
+    {
+      "path": "code/art/mf/startLevel.webp",
+      "sha256": "6437484d67cf6666a33fc473ae4eeee4b1f43186fa61a1050de60ef16b33f357",
+      "size": 11226
+    },
+    {
+      "path": "code/art/mf/team.webp",
+      "sha256": "a39057628f38a5640c2df3b398b6d80a4374829a5866def6f7652ff66975d171",
+      "size": 14456
+    },
+    {
+      "path": "code/art/mf/trade.webp",
+      "sha256": "7901fd9ba8e4410fae685813c36f0165b3a76d8ba22724f04019355bdf3477aa",
+      "size": 15702
+    },
+    {
+      "path": "code/art/monster/alien.webp",
+      "sha256": "4167ac3a45f2c5b923611af8667e5c07ea99ac17d1da3af7fa000b135384e071",
+      "size": 24170
+    },
+    {
+      "path": "code/art/monster/angler.webp",
+      "sha256": "f9b7d3f64bc26ee19c87794d3315892d7d55a87ff4f3c238811f1e522b82826e",
+      "size": 20528
+    },
+    {
+      "path": "code/art/monster/ashwolf.webp",
+      "sha256": "ad0e852913943134de18fe25df980e2688bc142b953701d77474b29ae66ed87a",
+      "size": 24774
+    },
+    {
+      "path": "code/art/monster/bat.webp",
+      "sha256": "6a37fb10ee9ec76d289357cbba9829c2b7a31c956eb1797a9fa4dd48bf787647",
+      "size": 14030
+    },
+    {
+      "path": "code/art/monster/cabbage.webp",
+      "sha256": "c7f026cc9e3577a47f897e576cd5e20b43e9ed87afd338badea57457313e141d",
+      "size": 22056
+    },
+    {
+      "path": "code/art/monster/cactus.webp",
+      "sha256": "d5ed0097e0f130aa08080d8ee66d817fc483e1215a5c83d9a55530fedc095ee9",
+      "size": 33094
+    },
+    {
+      "path": "code/art/monster/cheese.webp",
+      "sha256": "aa130379e56660187865b9009bebe6f8414cff5e6bce3b01e9b306cdcd1600e2",
+      "size": 17360
+    },
+    {
+      "path": "code/art/monster/crab.webp",
+      "sha256": "eb778e09ea56216dfb74c3d14dd8888da95c3356c53630181f8d531c178eeb00",
+      "size": 21818
+    },
+    {
+      "path": "code/art/monster/crystalbug.webp",
+      "sha256": "84920a50b40f0c17828a22b720a42ff6c3d3565d190abd2e7be749116afc4db5",
+      "size": 23000
+    },
+    {
+      "path": "code/art/monster/cupcake.webp",
+      "sha256": "098de3d0dcbc295c33e0b6810684ccc208266a8e1211d02dec8eae555e3e99e0",
+      "size": 21058
+    },
+    {
+      "path": "code/art/monster/cyberdog.webp",
+      "sha256": "494d4a9e1325b0adccc89cd64c4daa40972155c2dd38271f0838e386b12f521d",
+      "size": 23920
+    },
+    {
+      "path": "code/art/monster/drake.webp",
+      "sha256": "7e822336a7c651003232ef816c40484be64facf6d8ab7c94da3c97a6506e89f6",
+      "size": 27816
+    },
+    {
+      "path": "code/art/monster/drone.webp",
+      "sha256": "56861827afc57a97c14d0a1431da35703413fab0ffafeea1008ba1635de5f2ae",
+      "size": 20680
+    },
+    {
+      "path": "code/art/monster/duck.webp",
+      "sha256": "c83edae94bdc912f035a29d6058cd421ffe0bd5da3a7bc568fe0551d4ae64f3c",
+      "size": 19360
+    },
+    {
+      "path": "code/art/monster/forkspider.webp",
+      "sha256": "22c8f455e22132f2a0ce99290c361e3eb9e8fa239cd73a567f3dc04ae1a8804b",
+      "size": 27172
+    },
+    {
+      "path": "code/art/monster/ghostneon.webp",
+      "sha256": "d0ca0c234a08845e9e06e06d449e80df19da2217cd859c48808c3296abd63f13",
+      "size": 27198
+    },
+    {
+      "path": "code/art/monster/gingerbread.webp",
+      "sha256": "262bb7b0bd4b720fa7fc8533b502466b7c9f688f5aa4aca59119fe288a8295fe",
+      "size": 22042
+    },
+    {
+      "path": "code/art/monster/goblin.webp",
+      "sha256": "8732e77985a172e491a4491c893990d980ccacfa49c7e49900c78e84cf043f23",
+      "size": 24874
+    },
+    {
+      "path": "code/art/monster/gremlin.webp",
+      "sha256": "e597271f0edafe095b1085dfb0624c1603215221a2270361ef5aa01c6fe0b474",
+      "size": 31772
+    },
+    {
+      "path": "code/art/monster/gummy.webp",
+      "sha256": "98a8a85f975cdf423a4c9f911f2c02665bf3befc91f581104aae5174ea8545f4",
+      "size": 23204
+    },
+    {
+      "path": "code/art/monster/jackal.webp",
+      "sha256": "aa3de4f47cf54fa6c35086058e76d03404f3fb4f1e5d0ea69fedbafaaa3fbc3e",
+      "size": 29942
+    },
+    {
+      "path": "code/art/monster/jackbox.webp",
+      "sha256": "9bcb159d2a58d36a9660b669e7770a04c2ca2c8869a2db5a68a2b3797a3e88ab",
+      "size": 27254
+    },
+    {
+      "path": "code/art/monster/jelly.webp",
+      "sha256": "79fd931de0bbaf90db88fc718be775b8b9cedbb04b6d844c2670c49610f1c165",
+      "size": 24164
+    },
+    {
+      "path": "code/art/monster/kettle.webp",
+      "sha256": "24a7c3c580ec68aa63f41cb47fb6fe3960ed8b2e14a3038477325ab8e6cddc16",
+      "size": 26042
+    },
+    {
+      "path": "code/art/monster/lavagolem.webp",
+      "sha256": "18968b6fe346d7a81d8f335e81c232f6520ed292d39fb12491b8f2855975ec5b",
+      "size": 33024
+    },
+    {
+      "path": "code/art/monster/lollisnake.webp",
+      "sha256": "a205e9ccf65994158297b01bfa6920c060b86a25e99a233b6e401d82c82414ff",
+      "size": 19168
+    },
+    {
+      "path": "code/art/monster/marshmallow.webp",
+      "sha256": "df9180f10061c9db743a87bc2d7d4f968ca9347d11d4366500f8360cd79f3eb8",
+      "size": 17790
+    },
+    {
+      "path": "code/art/monster/mech.webp",
+      "sha256": "22b4410c1125414254df795d02826aab024a0845828daa330074afe9791f463b",
+      "size": 26944
+    },
+    {
+      "path": "code/art/monster/mosquito.webp",
+      "sha256": "674ebb4e9a360d11a3e17ea4cb8bfe565c6b7a3bb5daa4adf6e764e65d0e6ea9",
+      "size": 25240
+    },
+    {
+      "path": "code/art/monster/mummy.webp",
+      "sha256": "04b61416ec69c744cb462ab8ba73d09af004cacfb04ed3a8954e0e9028071e52",
+      "size": 33072
+    },
+    {
+      "path": "code/art/monster/obsidianbug.webp",
+      "sha256": "b32b95e60f1ef935d572e6177472948105f6eef6b481fc3a04e8d5b6d17ee61e",
+      "size": 24454
+    },
+    {
+      "path": "code/art/monster/octopus.webp",
+      "sha256": "67ac6f36fdf2fbce5af89cd04945d1c1e4ce1caf8dbc5c93203a0fa7bd5d402a",
+      "size": 22740
+    },
+    {
+      "path": "code/art/monster/puffer.webp",
+      "sha256": "94792c26696eba5ae098eb299adfb90ab8856cd16918eae5097df1be29661b4c",
+      "size": 22262
+    },
+    {
+      "path": "code/art/monster/rat.webp",
+      "sha256": "90aace37dc3351fb42ea1fa1c922ee878b938a44c7335dbe63a99a1487d59ddd",
+      "size": 17360
+    },
+    {
+      "path": "code/art/monster/salamanderfoe.webp",
+      "sha256": "52d0223dee13a64af8d8f00439d54bf04b326a02859982f7e7cde088c49d885a",
+      "size": 21760
+    },
+    {
+      "path": "code/art/monster/saucer.webp",
+      "sha256": "913d11f9dcdf32cfca5619f8c779a630788e097f32604db80803537dd2b65944",
+      "size": 23666
+    },
+    {
+      "path": "code/art/monster/scorpion.webp",
+      "sha256": "558f00e13a71b5ec9016d14dcdb7d2b114a5c6884c98f2b2bc6bf479a94e6b61",
+      "size": 27060
+    },
+    {
+      "path": "code/art/monster/shroom.webp",
+      "sha256": "0bbd95cfbb5763fe24c8ff2ae256acb948de796d10a3fb4c5f0d7ea76eed4999",
+      "size": 23982
+    },
+    {
+      "path": "code/art/monster/slime.webp",
+      "sha256": "1e7e248669c4bbc71ab5e0eb62c4ad4cbe70e380fe349cabe9f395575dec39e3",
+      "size": 19076
+    },
+    {
+      "path": "code/art/monster/snail.webp",
+      "sha256": "cda252ea0c77049a84e97298e61e09fee7105101a8a8ce923417d4a34e6ef05b",
+      "size": 23734
+    },
+    {
+      "path": "code/art/monster/soldier.webp",
+      "sha256": "320b691d4e0d6b811f2077125170e002569a2f1c209d2de7adfabd7650c63a06",
+      "size": 20328
+    },
+    {
+      "path": "code/art/monster/spacesquid.webp",
+      "sha256": "d4fd15774f22ade72de8801c918d66463a84b851fb9d5ec311c9205e0e895978",
+      "size": 25262
+    },
+    {
+      "path": "code/art/monster/stump.webp",
+      "sha256": "ce4f9eb00771405c08bc1706ead5ec4a748fb998adbb99f6db9c4fb6d80db9f9",
+      "size": 26660
+    },
+    {
+      "path": "code/art/monster/teddy.webp",
+      "sha256": "e651837f7ba65d49d56bad520ad2ac97bc1daff3168f7bb081e2302663f5480c",
+      "size": 21732
+    },
+    {
+      "path": "code/art/monster/toad.webp",
+      "sha256": "f3fd3142d7b0c3e9c3c53007bfd8377e92acd0899944321f73a83a80d658edc9",
+      "size": 23776
+    },
+    {
+      "path": "code/art/monster/toaster.webp",
+      "sha256": "3c542098ee4dfec79e0dafd27f91d4c4e234d53e991d937246a22f25ccd4a42d",
+      "size": 22358
+    },
+    {
+      "path": "code/art/monster/trashgolem.webp",
+      "sha256": "f9e36f6df2d6bcfde6551c2b3f461be7b186476aecd71bd670a6de9b29b32764",
+      "size": 31180
+    },
+    {
+      "path": "code/art/monster/troll.webp",
+      "sha256": "b624bb978e089b7177c220aac95b8ad8706d9e8a02193909970a1ef075193d27",
+      "size": 29088
+    },
+    {
+      "path": "code/art/monster/windup.webp",
+      "sha256": "7f4749d5aae95fe1146f02915620099e5b2a2b8ed4fea4623b6b573b4987344e",
+      "size": 23952
+    },
+    {
+      "path": "code/art/monster/worm.webp",
+      "sha256": "83900a540460855b67a083ff6d469352bf582c6d84c6467d5c9b2afbab54bce0",
+      "size": 24406
+    },
+    {
+      "path": "code/art/pet/fox.webp",
+      "sha256": "0803c0e98673c5b0594a956c506b337618c3109645c12d37328a9efdbdac45fc",
+      "size": 27234
+    },
+    {
+      "path": "code/art/pet/raven.webp",
+      "sha256": "bef6ee9a6df59adb7947dd8999c4676d293a6b77603d268469ade8bd62c7e139",
+      "size": 23098
+    },
+    {
+      "path": "code/art/pet/salamander.webp",
+      "sha256": "336774cdab623983bdaa0cdda1dc01d785c44ce73a188d4f08b76ce240296da5",
+      "size": 17710
+    },
+    {
+      "path": "code/art/pet/turtle.webp",
+      "sha256": "7aea894583e779f61fa2ee7d908ec1811460034b1912010efec20f5d8bc08928",
+      "size": 21016
+    },
+    {
+      "path": "code/art/rune/fire.webp",
+      "sha256": "1a121789720babbbfa2cba7ac1fe8e5a204ab6fa38548834929b19f893dfd366",
+      "size": 11144
+    },
+    {
+      "path": "code/art/rune/greed.webp",
+      "sha256": "02b09d128b68c151bb770ed29c58b14a56d63e7bbe08ce6fc4932fa7410dcbe3",
+      "size": 9990
+    },
+    {
+      "path": "code/art/rune/ice.webp",
+      "sha256": "c4b27051c7429117456835fc0a6486c3a84512736c584afa0e525590235e6fa7",
+      "size": 11762
+    },
+    {
+      "path": "code/art/rune/resonant.webp",
+      "sha256": "e912e69624465d1ab41e4477e56bbd546c4861e0fd39895be686150533995d5e",
+      "size": 10016
+    },
+    {
+      "path": "code/art/ui/blow.webp",
+      "sha256": "20495063ae25be1f15f68ba8071a164d931bcd6f6b903e8c66e243e1798d1362",
+      "size": 16040
+    },
+    {
+      "path": "code/art/ui/boss.webp",
+      "sha256": "fb330f6a4d6947d30010850c0514f757cd13e41c64ba70ddf9e7e2148dae6b4a",
+      "size": 13388
+    },
+    {
+      "path": "code/art/ui/chest.webp",
+      "sha256": "014be078c7634774929df3e22863445555d68be66df786d4ee63674eacb4e301",
+      "size": 12290
+    },
+    {
+      "path": "code/art/ui/coal.webp",
+      "sha256": "091e3b1bac9573bf0c2e7f78eab8a20831aa95050fa57964b910fa3506984273",
+      "size": 9022
+    },
+    {
+      "path": "code/art/ui/forge.webp",
+      "sha256": "1c6c9abfbbea3da0e82ebb95bfacb41b57827fe25bb4fc0da8a035aca06d0573",
+      "size": 10548
+    },
+    {
+      "path": "code/art/ui/master.webp",
+      "sha256": "719524602c5e9e669ff15a355c8c417ed995d9b3e70a6d9f7aeb7f7dd3baba94",
+      "size": 11624
+    },
+    {
+      "path": "code/art/ui/upgrades.webp",
+      "sha256": "ffd66587e2997ca83a3bf707b4e29f91ffa651d1e6454f67c5bee7a3b5314eb4",
+      "size": 11330
+    },
+    {
+      "path": "code/art/up/apprentice.webp",
+      "sha256": "9cb964aa1632f81f388f2d5bcd2f753b652dded50602d574c376586fbdc5a2be",
+      "size": 11834
+    },
+    {
+      "path": "code/art/up/banner.webp",
+      "sha256": "bd2600574f6730d448783997b5850bca7ab449b8d57a29886a031d45e41911dc",
+      "size": 9690
+    },
+    {
+      "path": "code/art/up/bellows.webp",
+      "sha256": "a447edfa49172850ebddccbf59cfa5f69cd2f062526066824bc5df75b603d182",
+      "size": 12002
+    },
+    {
+      "path": "code/art/up/caravan.webp",
+      "sha256": "6f7b563806b5902ea64bb813399ddd85c35e9af02b95b9e49a979894513f5f1f",
+      "size": 12770
+    },
+    {
+      "path": "code/art/up/cry.webp",
+      "sha256": "80c643a9eacc5028c2f1836cc4582d979dd5ddc4e26ee1d6aa3b2ab1bbdbed26",
+      "size": 10006
+    },
+    {
+      "path": "code/art/up/ember.webp",
+      "sha256": "4fc8186103aee344f60d8a0f9a8d124407c4c433694c41d956c682e7c3ade93a",
+      "size": 9494
+    },
+    {
+      "path": "code/art/up/eye.webp",
+      "sha256": "2b6929292402188bf29b5e24164c4c976191b9a8ccabf6da011e0b6b72aed9b4",
+      "size": 16344
+    },
+    {
+      "path": "code/art/up/hammer.webp",
+      "sha256": "9bbb8a5339764dcdcba6f469788311b313a0e51d3b7aab6754b12acf931a8a10",
+      "size": 11356
+    },
+    {
+      "path": "code/art/up/hand.webp",
+      "sha256": "1f3a9657a53a8aa144ede75bf1ad7538d95b63f7c7b1aea73cc23fdcd85fca0d",
+      "size": 12848
+    },
+    {
+      "path": "code/art/up/hourglass.webp",
+      "sha256": "fdec272a89be8f0e8ff5d88c27358da35559d190fd2da2be63e788920d78561e",
+      "size": 11430
+    },
+    {
+      "path": "code/art/up/hunter.webp",
+      "sha256": "18f6fd34bcb73b9db30f343c1b26392878c7127c026c6517e15efbfb79c8ef14",
+      "size": 10518
+    },
+    {
+      "path": "code/art/up/melt.webp",
+      "sha256": "df6dbc843cc0d0bed104249050d6e6510514b8bf4f88854cee1b642a70637138",
+      "size": 10024
+    },
+    {
+      "path": "code/art/up/night.webp",
+      "sha256": "ab760bee57f6d7348304847aa625b30726fd56d25817826d1e4079741ed903d9",
+      "size": 11032
+    },
+    {
+      "path": "code/art/up/pilot.webp",
+      "sha256": "b3eb3d6e0975d115df522ebd7d1db97cea381e6d1974b08181c1b13351a1e563",
+      "size": 8056
+    },
+    {
+      "path": "code/art/up/purse.webp",
+      "sha256": "bc8329484f92c6b11539fac95c36cfb9f484a3123e15392460efc2802a23252a",
+      "size": 15338
+    },
+    {
+      "path": "code/art/up/remelt.webp",
+      "sha256": "27f328412c07d454b2e456594a4a044092b315c36307f7ead201e4a87b5a80a9",
+      "size": 10368
+    },
+    {
+      "path": "code/art/up/runeMason.webp",
+      "sha256": "0aaf69e639ba3f62800c3c432ddc1f5716b02b6f616112e44c03fb99e3db7157",
+      "size": 10148
+    },
+    {
+      "path": "code/art/up/runePower.webp",
+      "sha256": "6c80a6add14580a8221d07fd4a5290f79befc67bd8db114aa75c34d74b1540a5",
+      "size": 8836
+    },
+    {
+      "path": "code/art/up/sharp.webp",
+      "sha256": "9ab133a916b0cfa5ae74d4a4cde5ac3b22acfecb0e28dbb8a52593ad2f28d27c",
+      "size": 12160
+    },
+    {
+      "path": "code/art/up/stall.webp",
+      "sha256": "59872c35a1efad87b09172460891234d3317a6bd59d7bf1147ecb14631c2c520",
+      "size": 12778
+    },
+    {
+      "path": "code/art/up/steel.webp",
+      "sha256": "0f7a160900b82adeef5a3cf1bc631c714d46b737e515c9b91f7ed71c9a9eb0da",
+      "size": 10558
+    },
+    {
+      "path": "code/art/up/temper.webp",
+      "sha256": "c83c2e5b8a6640215838537852de5274214293357fc7ebe7f2254aa04e962ed0",
+      "size": 10914
+    },
+    {
+      "path": "code/art/up/twin.webp",
+      "sha256": "fce2d966dde7a31ca5f2d395ea9e1131eccbd546327bc7d26144e5467d28b6f2",
+      "size": 15276
+    },
+    {
+      "path": "code/art/up/wide.webp",
+      "sha256": "5b445308b853a9fc465c42123a077651d459451fc89f0632ca4ab593ca6db6c7",
+      "size": 14676
     },
     {
       "path": "code/artifacts.js",
@@ -28,23 +858,18 @@
     },
     {
       "path": "code/checks.js",
-      "sha256": "7e7994987c75e3c5cffaad37a109a2117bede517a3ec757551ddc9c40e426aec",
-      "size": 22342
+      "sha256": "2c42331f2b7eb5f53b622cacb5182527ac332d7f6876d1096823e54ebb4173f2",
+      "size": 22504
     },
     {
       "path": "code/config.json",
-      "sha256": "f1131459a33269781cc2a216cc08a53a420b9621acb52d619d95c4ad1c9dc0c1",
-      "size": 68047
+      "sha256": "65f7ebb1694c6dc681e0d5f0ae48c8eaef6eec9587be8637700d40b99545072e",
+      "size": 94792
     },
     {
       "path": "code/content/blades.json",
       "sha256": "6115b7b47135f89e24b0ce2b099c8c9a6ae19d02620609aad031e0138aaf12c9",
       "size": 4727
-    },
-    {
-      "path": "code/content/bosses.json",
-      "sha256": "ddef74bbe54fcd41e3f2f82385d9bab2b28bdecc75099fef54910c4c17e7f10b",
-      "size": 2255
     },
     {
       "path": "code/content/events.json",
@@ -53,8 +878,8 @@
     },
     {
       "path": "code/content/monsters.json",
-      "sha256": "f9c369c237ea16b8fc1e85e769fc6705a8cf4eec0a04350cb8c6c0990a29428f",
-      "size": 2170
+      "sha256": "b6825a8aaf3a2369977e81b3e295b616fb9103c011b449f9db8cd4693c11a86f",
+      "size": 18585
     },
     {
       "path": "code/fixtures/v1.json",
@@ -73,13 +898,13 @@
     },
     {
       "path": "code/guide.md",
-      "sha256": "3858f2e39ed1afd80b82d16d68beaffc830283eb64bbe36c89a076f6b44d79cc",
-      "size": 50459
+      "sha256": "19e04e4fa1f9e54b8b6b3089be3fe81d3651e17bb0153d352c425f6ef64cfd2e",
+      "size": 55150
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "96b902bf407a645012ff15d444759296e542df23071c0a3de5fabb340ce2943f",
-      "size": 134298
+      "sha256": "b097725706f38c76bd5505e12c877a11e3e6c5ccfa1dcb2254dce6619658970d",
+      "size": 168648
     },
     {
       "path": "code/icon.svg",
@@ -88,8 +913,8 @@
     },
     {
       "path": "code/outpost.js",
-      "sha256": "db3d6aebbb970f1885c7555fdc864cbb659cf894088dcb207cdaee61692193b5",
-      "size": 53067
+      "sha256": "701fd6e98fe048b4687cf6df145c773c50e2b616a15187578e090d04fc7cc721",
+      "size": 53263
     },
     {
       "path": "code/prompts/blades.md",
@@ -103,13 +928,13 @@
     },
     {
       "path": "code/prompts/monsters.md",
-      "sha256": "4919d742459a3d48e8f6de6b9a6fd2aa0e8454159f36b2436ea093f6a073c0af",
-      "size": 1961
+      "sha256": "d063f6a0037479c56993150aa908cafe1bf7d41b84942bb1eda025ba2f86b91c",
+      "size": 2234
     },
     {
       "path": "code/sim.js",
-      "sha256": "69e537ee658f7898f254afa52f6c049054f50e25961cb02bb1d482dd4511e962",
-      "size": 79551
+      "sha256": "fc061b55e2984807abc42e575e57c9471661fe418d5bb2e58940c023d37953ae",
+      "size": 89481
     },
     {
       "path": "code/ui/adventures.css",
@@ -123,8 +948,8 @@
     },
     {
       "path": "code/ui/art.js",
-      "sha256": "38210d226e4fc0de8b868c4a8e7ffbf78db3c6796ad2fa6d4d9e0cf2945a5274",
-      "size": 23833
+      "sha256": "994a970d7bea78e6b0895dc3dc04ad1356a85ef985d8c6f9f6aa309cbd563a59",
+      "size": 28466
     },
     {
       "path": "code/ui/artifacts.css",
@@ -133,18 +958,18 @@
     },
     {
       "path": "code/ui/artifacts.js",
-      "sha256": "fc61ba2ed54b8adc91809dce5e6c4b855307dde03c43f0bd127044dfa368793f",
-      "size": 16806
+      "sha256": "8f16e97b25589a879f69164fa49b36aefdc5259a29cb5e608c67a0a6642953bd",
+      "size": 16906
     },
     {
       "path": "code/ui/game.css",
-      "sha256": "8ca78e0355952a425553e0bcb2ebc4de12b6afcfd84e6caabd92f80bdc3eb540",
-      "size": 15744
+      "sha256": "36bd7ed3ff709ad0e025a5c5fcc88b5206ea5b30a7e1d7aeff7c2a53f4de2297",
+      "size": 24850
     },
     {
       "path": "code/ui/game.js",
-      "sha256": "3406e8b60657ce3ba616a92a9eaef0086e523e3934937b74551ec39f81cba962",
-      "size": 73669
+      "sha256": "7b7f0e23b86902aba6e1e786685d72dffa0f8a7d1a959b80001e02e8be18f127",
+      "size": 92286
     },
     {
       "path": "code/ui/index.html",
@@ -153,8 +978,8 @@
     },
     {
       "path": "code/ui/monsters.js",
-      "sha256": "fcdfa5e6b0eb65a8eb4f315250a6df57acfaab2f1942d6e84ec80d66e7b0ca4e",
-      "size": 33181
+      "sha256": "6f5e9e076436695dba8093c8b78dd17a2d65037fae7664cfb70e339ae8e6c8c6",
+      "size": 41066
     },
     {
       "path": "code/ui/outpost.css",
@@ -163,13 +988,13 @@
     },
     {
       "path": "code/ui/outpost.js",
-      "sha256": "b9e1e72dd7ff91b2a793f6ce60ed7937a0438d3cced5ef140059ce6fa5c54dea",
-      "size": 63429
+      "sha256": "d42e4e29f75c8b9084bca5b2674ec5a979fa5283c9701f6606f0617c65037899",
+      "size": 67529
     },
     {
       "path": "code/upgrade-progress.js",
-      "sha256": "b726ccacfc9ecb50b1a62d0f616451e44abe8d8b5fdea4bd1361055c84ae0bc0",
-      "size": 3039
+      "sha256": "3eb038225aa4f9ee1143fa9f2940fe1f451a0d95b6cf1a8e7be1064abcc83665",
+      "size": 7394
     }
   ],
   "id": "merge-forge",
@@ -186,5 +1011,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.2.1"
+  "version": "0.3.0"
 }

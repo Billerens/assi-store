@@ -1087,11 +1087,11 @@
     },
     {
       "archive": {
-        "fileCount": 34,
-        "sha256": "b92e811eec109f912e2236c51d70b579767a6fe1c192073c9130452c17bc3d10",
-        "size": 223827,
-        "unpackedSize": 810823,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.2.1/merge-forge-0.2.1.zip"
+        "fileCount": 199,
+        "sha256": "9b99ee2afb48eee95cf8e016fb6070f255ea2b7885e687256bba4fd4af443465",
+        "size": 3272509,
+        "unpackedSize": 3964483,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.3.0/merge-forge-0.3.0.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1099,8 +1099,8 @@
       },
       "details": {
         "path": "catalog/details/merge-forge.json",
-        "sha256": "b2fc24c3e9838f857ffc6f0085a22946a6eda7b39fbb1a3c34905bc2bbb0eb9f",
-        "size": 4326
+        "sha256": "1bea5ae148fae4458f01ef36d3f8cff7489ce2cc310a79f1beb8decd215ce538",
+        "size": 12187
       },
       "icon": {
         "path": "merge-forge/icon.svg",
@@ -1122,7 +1122,7 @@
           "title": "Кузница слияний"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.2.1/merge-forge-0.2.1.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.3.0/merge-forge-0.3.0.package.json",
       "publisher": "billerens",
       "summary": "The forge makes blades, two alike merge into a stronger one, and the blades cut down the monsters at the gate",
       "tags": [
@@ -1131,8 +1131,8 @@
         "fantasy"
       ],
       "title": "Merge Forge",
-      "updated": "2026-11-18",
-      "version": "0.2.1"
+      "updated": "2026-11-19",
+      "version": "0.3.0"
     },
     {
       "archive": {
