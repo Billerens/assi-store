@@ -46,12 +46,19 @@
   border: 1px solid var(--line);
   background: var(--surface-2);
 }
-.mf-ic > svg {
+.mf-ic > svg,
+.mf-ic > img {
   display: block;
   width: 100%;
   height: 100%;
   padding: 3px;
   box-sizing: border-box;
+}
+.mf-ic > img {
+  object-fit: contain;
+  padding: 2px;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 .mf-ic.mf-chip-ic,
 .mf-ic.mf-btn-ic,
@@ -66,7 +73,9 @@
 .mf-ic.mf-btn-ic > svg,
 .mf-ic.mf-mark-ic > svg,
 .mf-ic.mf-ic-lock > svg,
-.mf-ic.mf-cell-lock > svg {
+.mf-ic.mf-cell-lock > svg,
+.mf-ic.mf-chip-ic > img,
+.mf-ic.mf-btn-ic > img {
   padding: 0;
 }
 .mf-ic-lvl {
@@ -278,9 +287,20 @@
 .mf-anvil-wrap {
   flex: 1 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 7px 0;
+  gap: 2px;
+  padding: 2px 0 7px;
+}
+/* The hint and «Порядок» ride on the top edge of the anvil, as wide as it. */
+.mf-anvil-wrap > .mf-anvil-tools {
+  align-self: stretch;
+  min-height: 38px;
+  padding: 0 2px;
+}
+.mf-anvil-wrap > .mf-anvil-tools .g-btn {
+  min-height: 38px;
 }
 .mf-anvil {
   --cell: 64px;
@@ -395,13 +415,120 @@
 /* a rune socket: the stone of its rune in the corner, the frame in its colour */
 .mf-rune-mark {
   position: absolute;
-  left: 1px;
-  bottom: 1px;
-  width: 34%;
-  height: 34%;
-  min-width: 16px;
-  min-height: 16px;
-  pointer-events: none;
+  left: 0;
+  bottom: 0;
+  width: 40%;
+  height: 40%;
+  min-width: 24px;
+  min-height: 24px;
+  cursor: grab;
+  touch-action: none;
+}
+.mf-cell.rune-target {
+  outline: 2px dashed var(--mf-gold);
+  outline-offset: -3px;
+}
+.mf-rune-ghost {
+  border-radius: 50%;
+}
+.mf-rune-ghost img,
+.mf-rune-ghost svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.mf-anvil-wrap {
+  position: relative;
+}
+.mf-rune-picker {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  border: 1px solid var(--mf-bronze);
+  background: var(--surface);
+}
+.mf-rp-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  font-size: 14px;
+}
+.mf-rp-hint {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.mf-rp-row {
+  display: flex;
+  gap: 6px;
+}
+.mf-rp-btn {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: 64px;
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+}
+.mf-rp-btn.on {
+  border-color: var(--mf-gold);
+}
+.mf-rp-btn .mf-ic.mf-rp-ic,
+.mf-rp-all .mf-ic.mf-rp-ic {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: none;
+}
+.mf-rp-allrow {
+  align-items: center;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.mf-rp-allrow > span {
+  flex: 1 1 auto;
+}
+.mf-rp-all {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 2px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.mf-rp-auto {
+  min-height: 40px;
+  padding: 4px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+}
+.mf-rp-auto.on {
+  border-color: var(--mf-gold);
+  color: var(--ink);
+}
+.mf-rune-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .mf-rune-mark svg {
   display: block;
@@ -434,15 +561,260 @@
 }
 
 /* the actions */
+/* the layer over the scene: the event, the retry, the preparation, the abilities, the outpost */
+.mf-gate-ui {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.mf-gate-ui > * {
+  pointer-events: auto;
+}
+.mf-gate-ui [hidden] {
+  display: none;
+}
 .mf-event {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: var(--mf-under-head, 56px);
+  z-index: 3;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 10px;
-  padding: 8px 10px;
-  border-radius: var(--radius);
+  gap: 6px 10px;
+  padding: 6px 8px;
+  border-radius: 12px;
   border: 1px solid var(--mf-bronze);
-  background: var(--surface);
+  background: rgba(20, 21, 26, 0.88);
+}
+.mf-event .mf-ev-fold {
+  display: none;
+}
+.mf-event.folded {
+  left: auto;
+  right: 8px;
+  padding: 0;
+  border-radius: 999px;
+  gap: 0;
+}
+.mf-event.folded > * {
+  display: none;
+}
+.mf-event.folded > .mf-ev-fold {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 2px 12px 2px 4px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--mf-gold);
+  font: inherit;
+  font-size: 14px;
+}
+.mf-ev-fold::before {
+  content: "";
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--mf-ev-pic, var(--surface-2)) center / cover;
+}
+.mf-event .mf-ev-pic {
+  width: 36px;
+  height: 36px;
+}
+.mf-event .mf-ev-d {
+  display: none;
+}
+.mf-event .g-btn.mf-ev-go {
+  order: 0;
+  flex: none;
+  width: auto;
+  min-height: 38px;
+  padding: 4px 10px;
+  gap: 6px;
+}
+.mf-gate-ui .mf-event {
+  flex-wrap: nowrap;
+}
+.mf-gate-ui .mf-event .grow {
+  min-width: 0;
+}
+.mf-gate-ui .mf-event .mf-ev-t {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mf-event .mf-ev-x {
+  width: 38px;
+  height: 38px;
+}
+.mf-event .mf-ev-t {
+  font-size: 15px;
+  line-height: 19px;
+}
+.mf-gate-pill {
+  position: absolute;
+  right: 8px;
+  top: var(--mf-under-head, 56px);
+  z-index: 2;
+  min-height: 40px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+}
+.mf-gate-ui .mf-preparation {
+  position: absolute;
+  left: 8px;
+  top: var(--mf-under-head, 56px);
+  z-index: 2;
+  flex-wrap: nowrap;
+}
+.mf-gate-ui .mf-preparation .g-btn {
+  min-height: 36px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(20, 21, 26, 0.85);
+  white-space: nowrap;
+}
+.mf-abilities {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 2;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
+  gap: 6px;
+  max-width: 60%;
+}
+.mf-abilities .mfo-skills {
+  display: contents;
+}
+.mf-abilities .mf-ab.mfo-skill {
+  flex: none;
+  width: 46px;
+  min-width: 0;
+  overflow: visible;
+  border: 0;
+  color: var(--ink);
+}
+.mf-ab {
+  --p: 1;
+  position: relative;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: conic-gradient(var(--mf-gold) calc(var(--p) * 360deg), rgba(255, 255, 255, 0.14) 0);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+.mf-ab::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: rgba(16, 17, 21, 0.9);
+}
+.mf-ab .mf-ic.mf-ab-ic,
+.mf-ab > .mf-ic {
+  position: absolute;
+  inset: 5px;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+}
+.mf-ab:disabled .mf-ic {
+  opacity: 0.55;
+}
+.mf-ab.ready::before {
+  background: rgba(60, 46, 20, 0.92);
+}
+.mf-ab.on {
+  background: conic-gradient(var(--ok) calc(var(--p) * 360deg), rgba(255, 255, 255, 0.14) 0);
+}
+.mf-ab .mf-ab-t {
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transform: translateX(-50%);
+  padding: 0 4px;
+  border-radius: 6px;
+  background: rgba(16, 17, 21, 0.9);
+  font-size: 11px;
+  line-height: 15px;
+  white-space: nowrap;
+}
+.mf-ab .mf-ab-t:empty,
+.mf-ab .mfo-skill-title,
+.mf-ab .mfa-quick-copy > span:first-child {
+  display: none;
+}
+.mf-ab.mfa-quick {
+  display: block;
+  min-height: 0;
+  width: 46px;
+}
+.mf-ab.mfa-quick .mfa-quick-copy {
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  font-size: 11px;
+}
+.mf-ab.mfa-quick[hidden],
+.mf-ab[hidden] {
+  display: none;
+}
+.mf-outpost-hit {
+  position: absolute;
+  z-index: 1;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.mf-outpost-hit.empty {
+  width: auto !important;
+  height: auto !important;
+  top: auto !important;
+  bottom: 8px !important;
+  left: 8px !important;
+  min-height: 36px;
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(20, 21, 26, 0.85);
+  color: var(--ink-2);
+  font: inherit;
+  font-size: 13px;
+}
+.mf-outpost-chip:empty {
+  display: none;
+}
+.mf-outpost-badge {
+  position: absolute;
+  right: 2px;
+  bottom: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--mf-gold);
+  color: #1c1d20;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+}
+.mf-outpost-badge[hidden] {
+  display: none;
 }
 .mf-event[hidden],
 .mf-context[hidden],
@@ -482,11 +854,6 @@
 }
 .mf-ev-left {
   color: var(--mf-gold);
-}
-.mf-event .g-btn.mf-ev-go {
-  order: 9;
-  flex: 1 1 100%;
-  gap: 8px;
 }
 .mf-event .g-sub,
 .mf-bottom .g-sub {
@@ -537,6 +904,30 @@
 .mf-sheet-content .mf-up-tabs {
   top: 56px;
 }
+/* The list of the upgrades scrolls by itself: its tabs stick to its own top. */
+.mf-sheet-content .mf-uplist .mf-up-tabs,
+.mf-panel .mf-up-tabs {
+  top: 0;
+}
+.mf-amount {
+  flex: 1 1 100%;
+  display: flex;
+  gap: 6px;
+}
+.mf-amount > button {
+  flex: 1 1 0;
+  min-height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font: inherit;
+  font-size: 14px;
+}
+.mf-amount > button.on {
+  border-color: var(--mf-gold);
+  color: var(--ink);
+}
 .mf-up-tabs .g-btn {
   flex: 1 1 0;
   min-width: min-content;
@@ -547,6 +938,9 @@
 .mf-up-tabs .selected {
   border-color: var(--accent);
   color: var(--accent);
+}
+.mf-mname.rare {
+  color: var(--mf-gold);
 }
 .mf-milestone {
   display: flex;
@@ -580,6 +974,65 @@
 .mf-milestone.near .mf-milestone-track > i {
   background: var(--mf-gold);
 }
+.mf-milestone.big .mf-milestone-copy strong {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.mf-milestone-now {
+  color: var(--mf-gold);
+}
+.mf-milestone.fresh {
+  border-radius: 6px;
+  animation: mf-milestone-glow 1.2s ease-out 2;
+}
+@keyframes mf-milestone-glow {
+  0% {
+    background-color: transparent;
+  }
+  30% {
+    background-color: rgba(230, 200, 112, 0.22);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+.mf-perks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+}
+.mf-perk {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 7px 1px 2px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--ink-3, var(--ink-2));
+  opacity: 0.75;
+}
+.mf-perk > b {
+  flex: none;
+  white-space: nowrap;
+  min-width: 26px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+.mf-perk.on {
+  color: var(--ink);
+  opacity: 1;
+  border-color: var(--mf-gold);
+}
+.mf-perk.on > b {
+  background: var(--mf-gold);
+  color: #1c1d20;
+}
 @media (min-width: 800px) {
   .sheet-back.mf-workshop-backdrop {
     align-items: center;
@@ -612,17 +1065,51 @@
   height: 44px;
 }
 .mf-bottom {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  display: flex;
+  gap: 6px;
 }
 .mf-bottom .g-btn {
-  min-height: 60px;
+  flex: 1 1 0;
+  position: relative;
+  min-height: 64px;
   flex-direction: column;
   justify-content: center;
+  gap: 1px;
+  padding: 6px 4px;
+  font-size: 14px;
+  min-width: 0;
+}
+.mf-bottom .mf-btn-head {
+  flex-direction: column;
   gap: 2px;
-  padding: 6px 8px;
-  font-size: 15px;
+}
+.mf-bottom .mf-btn-t {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  line-height: 1.15;
+}
+.mf-bottom .g-sub {
+  font-size: 12px;
+  line-height: 1.2;
+}
+.mf-badge {
+  position: absolute;
+  right: 6px;
+  top: 5px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background: var(--mf-gold);
+  color: #1c1d20;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+}
+.mf-badge[hidden] {
+  display: none;
 }
 /* The title and the line under it wrap inside a narrow button instead of being cut by it. */
 .mf-btn-head {
@@ -648,6 +1135,9 @@
 .mf-forge {
   position: relative;
   overflow: hidden;
+}
+.mf-bottom .g-btn.mf-forge {
+  flex-grow: 1.35;
 }
 .mf-forge.blow {
   outline: 2px solid var(--ok);

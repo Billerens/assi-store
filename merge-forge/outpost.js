@@ -392,8 +392,10 @@
     if (gear.level >= finite(cfg['temper.fromLevel'], Infinity)) local *= 1 + finite(cfg['up.temper.step'], 0) * UpgradeProgress.effective('temper', finite(upgrades.temper, 0), cfg);
     // Equipment keeps bought blade bonuses. Expected crit avoids additional RNG draws and
     // applies here once; the battle only rolls per-cell crits for weapons still on the field.
-    var chance = Math.min(finite(cfg['crit.maxChance'], 1), finite(cfg['crit.chance'], 0) + finite(upgrades.eye, 0) * finite(cfg['up.eye.step'], 0));
-    var critical = finite(cfg['crit.mult'], 1) + UpgradeProgress.effective('hand', finite(upgrades.hand, 0), cfg) * finite(cfg['up.hand.step'], 0);
+    // The perks of the 50th and 100th upgrade levels count as they do for a blade on the field.
+    var perks = UpgradeProgress.perkTotals(upgrades, cfg);
+    var chance = Math.min(finite(cfg['crit.maxChance'], 1), finite(cfg['crit.chance'], 0) + finite(upgrades.eye, 0) * finite(cfg['up.eye.step'], 0) + perks.critChance);
+    var critical = (finite(cfg['crit.mult'], 1) + UpgradeProgress.effective('hand', finite(upgrades.hand, 0), cfg) * finite(cfg['up.hand.step'], 0)) * perks.critMult;
     var crit = Artifacts.criticalStats(state, cfg, chance, critical, options);
     local *= 1 + crit.chance * (crit.multiplier - 1);
     return Big.mul(basePower(cfg, gear.level), mastery * local);

@@ -2,7 +2,7 @@
 const assert = require('assert');
 // The numbers of these tests (how many blades a double forging makes) were chosen with these
 // milestone settings; what is tested here is the overflow, not the milestones.
-const MILESTONES = { 'milestone.per10': 0.02, 'milestone.per50': 0.025, 'milestone.per100': 0.05, 'milestone.cap': 0.5 };
+const MILESTONES = { 'milestone.mechMult': 1, 'milestone.mechBigMult': 1.184, 'perk.twin.50': 1, 'perk.twin.100': 0 };
 const { open, ctxOf, test, done } = require('./env');
 
 const x = open();

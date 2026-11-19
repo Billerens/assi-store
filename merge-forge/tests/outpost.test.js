@@ -105,8 +105,12 @@ test('экипировка сохраняет купленную закалку 
   readyHero(state,'bran',15);
   equalBig(O.heroPower(state,cfg,'bran'),expected);
   const power=O.heroPower(state,cfg,'bran');
-  x.sim.forgeLayer(state).currency='1e6';state.run.up.sharp=100;
+  // Угли и Острота — общий множитель боя, он не входит в силу оружия; только особое свойство
+  // 50-го уровня Остроты (шанс крита) меняет средний крит, как у клинка на поле.
+  x.sim.forgeLayer(state).currency='1e6';state.run.up.sharp=49;
   equalBig(O.heroPower(state,cfg,'bran'),power);
+  state.run.up.sharp=100;
+  equalBig(O.heroPower(state,cfg,'bran'),x.Big.mul(x.Big.div(expected,crit),1+x.sim.critChance(state,cfg)*(x.sim.critMult(state,cfg)-1)));
 });
 
 test('недостаток золота и неверные адреса не расходуют предметы', () => {

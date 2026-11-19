@@ -269,9 +269,10 @@ exports['улучшения кузни: потолок только там, гд
   // Караванщик retains logarithmic softening between the bounded milestone bonuses.
   var soft = cfg['up.caravan.soft'];
   r.up.caravan = soft;
-  var a = x.sim.eventSpeed(state, cfg);
+  // The perk of the 50th level makes events more frequent on its own: it is left out here.
+  var a = x.sim.eventSpeed(state, cfg) / x.sim.perk(state, cfg, 'events');
   r.up.caravan = soft * 5;
-  var b = x.sim.eventSpeed(state, cfg);
+  var b = x.sim.eventSpeed(state, cfg) / x.sim.perk(state, cfg, 'events');
   var aBase = (a - 1) / x.sim.upgradeProgress(state, cfg, 'caravan', soft).factor;
   var bBase = (b - 1) / x.sim.upgradeProgress(state, cfg, 'caravan', soft * 5).factor;
   t.ok(b > a && bBase < aBase * 3, 'караванщик: после отделения бонуса вех сохраняется замедленный рост');

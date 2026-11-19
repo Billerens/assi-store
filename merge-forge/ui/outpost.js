@@ -32,7 +32,38 @@
     if (weapon.temper) ellipse(ctx, 0, -3, 1.6, 1.6, tint);
     ctx.restore();
   }
+  /**
+   * A painted figure (art/hero, art/pet, art/dragon) where a drawn one stands: its feet in (x, y), `tall`
+   * units high at this scale, swaying a little; null while the picture loads (the drawn one stays).
+   */
+  function painted(ctx, folder, id, x, y, scale, t, tall, phase, lunge) {
+    const im = window.MFArt && window.MFArt.img(folder, id);
+    if (!im) return null;
+    const h = tall * scale;
+    const w = h * im.naturalWidth / im.naturalHeight;
+    const bob = Math.sin(t * 2.3 + (phase || 0)) * 0.65 * scale;
+    ctx.save();
+    ctx.globalAlpha = 0.3;
+    ellipse(ctx, x, y + 1, w * 0.34, Math.max(1.5, h * 0.05), '#0c1018');
+    ctx.globalAlpha = 1;
+    ctx.translate(x + (lunge || 0) * 5 * scale, y + bob);
+    ctx.drawImage(im, -w / 2, -h, w, h);
+    ctx.restore();
+    return { w, h };
+  }
   function hero(ctx, item, x, y, scale, t, action) {
+    const shown = painted(ctx, 'hero', item.id, x, y, scale, t, 54, item.id === 'bran' ? 0 : 2, action);
+    if (shown) {
+      // The blade it carries, small by its side: its temper shows in its colour.
+      if (item.equipment) {
+        ctx.save();
+        ctx.translate(x + shown.w * 0.42 + (action || 0) * 5 * scale, y - shown.h * 0.3);
+        ctx.scale(scale * 0.5, scale * 0.5);
+        blade(ctx, item.equipment, 0, 0, 0.5 - (action || 0) * 0.65);
+        ctx.restore();
+      }
+      return;
+    }
     const bran = item.id === 'bran', eira = item.id === 'eira', corvin = item.id === 'corvin';
     const color = bran ? '#7f9aad' : eira ? '#9e94be' : corvin ? '#6f8970' : '#805474';
     const cloak = bran ? '#476879' : eira ? '#55557f' : corvin ? '#3f5c51' : '#805474';
@@ -72,6 +103,21 @@
     ctx.restore();
   }
   function pet(ctx, item, x, y, scale, t, action) {
+    const shown = painted(ctx, 'pet', item.id, x, y, scale, t * 1.3, 27, 1, 0);
+    if (shown) {
+      if (item.id === 'turtle' && action > 0) {
+        // its ward over the volley
+        ctx.save();
+        ctx.globalAlpha = action;
+        ctx.strokeStyle = COLORS.ice;
+        ctx.lineWidth = 2 * scale;
+        ctx.beginPath();
+        ctx.ellipse(x, y, shown.w * 0.62, shown.h * 1.15, 0, Math.PI, 0);
+        ctx.stroke();
+        ctx.restore();
+      }
+      return;
+    }
     ctx.save(); ctx.translate(x, y); ctx.scale(scale, scale);
     const bob = Math.sin(t * 3) * 0.6;
     if (item.id === 'raven') {
@@ -118,6 +164,22 @@
     ctx.restore();
   }
   function dragon(ctx, item, x, y, scale, t, action) {
+    const pic = item.stage === 'egg' ? 'egg' : item.stage === 'young' ? 'young' : (item.form || 'ash');
+    const shown = painted(ctx, 'dragon', pic, x, y, scale, t * 0.8, item.stage === 'egg' ? 38 : item.stage === 'young' ? 36 : 48, 0.5, 0);
+    if (shown) {
+      if (item.stage !== 'egg' && (item.ready || action > 0)) {
+        // its breath, out of the mouth on the right
+        const form = item.form || 'ash';
+        const mx = x + shown.w * 0.4, my = y - shown.h * 0.66, reach = shown.w * (0.35 + (action || 0) * 0.35);
+        ctx.save();
+        ctx.globalAlpha = 0.55 + 0.45 * (action || 0.4);
+        if (form === 'storm') line(ctx, [[mx, my], [mx + reach * 0.4, my - 4 * scale], [mx + reach * 0.6, my + 2 * scale], [mx + reach, my - 2 * scale]], '#d1c4f3', 1.8 * scale);
+        else if (form === 'frost') line(ctx, [[mx, my], [mx + reach, my + scale]], '#d4eef0', 2.2 * scale);
+        else path(ctx, [[mx, my - 2 * scale], [mx + reach, my - 4 * scale], [mx + reach * 0.85, my + 2 * scale], [mx + reach, my + 5 * scale], [mx, my + 2 * scale]], '#e9aa61');
+        ctx.restore();
+      }
+      return;
+    }
     ctx.save(); ctx.translate(x, y); ctx.scale(scale, scale); ctx.lineWidth = 1.4;
     const bob = Math.sin(t * 1.8) * 0.8, form = item.form || 'ash', frost = form === 'frost', storm = form === 'storm';
     const skin = frost ? '#89a9b8' : storm ? '#8f87b5' : '#aa7460';
@@ -172,7 +234,9 @@
   function create(options) {
     const g = options.g, sim = options.sim, core = sim.outpost || window.MFOutpost, h = window.ui.h;
     let model = null, closeSheet = null, sheetBody = null, notice = null, tab = 'heroes', picker = null, sheetKey = '', stripKey = '', avatarKey = '', disposed = false;
-    const controls = {}, cooldowns = {}, expandedTalents = {};
+    const controls = {}, cooldowns = {}, expandedTalents = {}, longest = {};
+    // The pictures of the abilities (art/ability).
+    const ABILITY_ART = { bran: 'split', veya: 'riposte', eira: 'seal', corvin: 'mark', dragon: 'breath' };
     let adventures = null, hitEvent = null, selectedHero = '', bladeIntent = null;
     const expanded = {};
     const launchTitle = h('span', { class: 'mfo-launch-title' }, tr('Форпост'));
@@ -182,6 +246,8 @@
     const skillbar = h('div', { class: 'mfo-skills', role: 'group', 'aria-label': tr('Умения отряда') });
     const element = h('div', { class: 'mfo-bar' }, launch, skillbar);
     const cfg = () => g.config;
+    // A painted figure that has just loaded takes the place of the drawn one on the button.
+    if (window.MFArt && window.MFArt.onLoad) window.MFArt.onLoad(() => { avatarKey = ''; });
     const unlockWave = key => cfg()['outpost.' + ({ heroes: 'hero', pets: 'pet', tempers: 'temper', dragon: 'dragon' })[key] + '.wave'] || core.defaults['outpost.' + ({ heroes: 'hero', pets: 'pet', tempers: 'temper', dragon: 'dragon' })[key] + '.wave'];
     const fmt = value => g.fmt(value);
     const xpFmt = value => g.fmt(value, { digits: 2 });
@@ -703,8 +769,10 @@
         Object.keys(controls).forEach(id => { delete controls[id]; delete cooldowns[id]; });
         skills.forEach(item => {
           const name = h('span', { class: 'mfo-skill-title' }, tr(item.title));
-          const sub = h('span', { class: 'mfo-skill-sub' }); cooldowns[item.id] = sub;
-          controls[item.id] = button('', () => skill(item.id), false, { class: 'g-btn mfo-skill', 'data-ability': item.id });
+          const sub = h('span', { class: 'mfo-skill-sub mf-ab-t g-num' }); cooldowns[item.id] = sub;
+          const pic = window.MFArt ? window.MFArt.el('ability', ABILITY_ART[item.id] || 'split', 'mf-ab-ic') : null;
+          controls[item.id] = button('', () => skill(item.id), false, { class: 'mf-ab mfo-skill', 'data-ability': item.id, 'aria-label': tr(item.title), title: tr(item.title) });
+          if (pic) controls[item.id].append(pic);
           controls[item.id].append(name, sub); skillbar.append(controls[item.id]);
         });
         if (options.onLayout) options.onLayout();
@@ -712,7 +780,12 @@
       skills.forEach(item => {
         const btn = controls[item.id]; btn.disabled = !item.ready;
         btn.classList.toggle('ready', !!item.ready);
-        cooldowns[item.id].textContent = item.cooldown > 0 ? tr('{} с', Math.ceil(item.cooldown)) : item.ready ? tr('Готово') : tr('Нужен заряд');
+        // The ring fills as the ability comes back: the longest wait seen is its whole.
+        const wait = Math.max(0, item.cooldown || 0);
+        longest[item.id] = wait > (longest[item.id] || 0) ? wait : wait > 0 ? longest[item.id] : 0;
+        btn.style.setProperty('--p', wait > 0 && longest[item.id] > 0 ? String(1 - wait / longest[item.id]) : item.ready ? '1' : '0');
+        cooldowns[item.id].textContent = wait > 0 ? tr('{} с', Math.ceil(wait)) : item.ready ? '' : tr('заряд');
+        btn.setAttribute('aria-label', tr(item.title) + (wait > 0 ? ' · ' + tr('{} с', Math.ceil(wait)) : item.ready ? '' : ' · ' + tr('Нужен заряд')));
       });
       skillbar.hidden = !skills.length;
       element.classList.toggle('has-skills', !!skills.length);
@@ -778,7 +851,7 @@
     }
     function dispose() { disposed = true; if (closeSheet) closeSheet(); if (adventures) adventures.dispose(); element.remove(); }
     render(g.state);
-    return { element, render, open, draw, dispose, inspect: () => ({ model, sheetOpen: !!sheetBody, picker, skills: Object.keys(controls) }) };
+    return { element, skillbar, render, open, draw, dispose, inspect: () => ({ model, sheetOpen: !!sheetBody, picker, skills: Object.keys(controls) }) };
   }
   window.MFOutpostUI = { create, portrait, drawHero: hero, drawPet: pet, drawDragon: dragon };
 })();

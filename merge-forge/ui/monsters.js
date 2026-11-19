@@ -628,6 +628,191 @@
     ctx.restore();
   }
 
+  // ---- painted monsters (art/monster/<art>.webp) and the looks of their modifiers -------------------------
+
+  /** How a modifier shows: a tint over the picture, how solid it is, what flies around it, the boss's aura. */
+  const LOOK = {
+    golden: { tint: '#ffd34d', tintA: 0.42, sparkle: '#fff0b0' },
+    giant: {},
+    feeble: { filter: 'grayscale(0.55) brightness(1.06)', wobble: 3 },
+    swift: { lean: -8, lines: true },
+    ghostly: { tint: '#d6ecff', tintA: 0.32, alpha: 0.55, float: true },
+    enraged: { tint: '#ff3b30', tintA: 0.24, pulse: true, shake: 1.2 },
+    frosty: { tint: '#9ad8ff', tintA: 0.38, snow: true },
+    burning: { tint: '#ff7a2e', tintA: 0.26, embers: true },
+    treasure: { chest: true },
+    rainbow: { rainbow: true, sparkle: '#ffffff' },
+    regal: {},
+    colossal: {},
+    frenzied: { tint: '#ff5a3c', tintA: 0.16, pulse: true, shake: 0.8, aura: '#ff5a3c' },
+    hoarder: { tint: '#ffd34d', tintA: 0.3, sparkle: '#fff0b0', aura: '#ffd34d' },
+    shadow: { tint: '#24182f', tintA: 0.42, alpha: 0.9, aura: '#9a7ae0' },
+    enduring: { aura: '#6fd08a' }
+  };
+
+  /** A four-point star with its middle in (x, y). */
+  function star(ctx, x, y, r) {
+    ctx.beginPath();
+    ctx.moveTo(x, y - r);
+    ctx.lineTo(x + r * 0.28, y - r * 0.28);
+    ctx.lineTo(x + r, y);
+    ctx.lineTo(x + r * 0.28, y + r * 0.28);
+    ctx.lineTo(x, y + r);
+    ctx.lineTo(x - r * 0.28, y + r * 0.28);
+    ctx.lineTo(x - r, y);
+    ctx.lineTo(x - r * 0.28, y - r * 0.28);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Fixed places around the figure for what flies about it (0…1 across and down its box).
+  const SPOTS = [[0.12, 0.2], [0.86, 0.32], [0.3, 0.72], [0.7, 0.08], [0.95, 0.75], [0.05, 0.55], [0.55, 0.45]];
+
+  /** What flies around a figure (x — its middle, top — its top, w × h its box). */
+  function around(ctx, look, x, top, w, h, ground, t, alpha, walking, s) {
+    ctx.save();
+    if (look.sparkle) {
+      ctx.fillStyle = look.sparkle;
+      SPOTS.forEach((p, i) => {
+        const tw = 0.5 + 0.5 * wave(t, 210 + i * 37, i * 1.7);
+        ctx.globalAlpha = alpha * tw;
+        star(ctx, x - w / 2 + p[0] * w, top + p[1] * h, Math.max(1.5, s * 0.035) * (0.6 + tw));
+      });
+    }
+    if (look.snow) {
+      ctx.fillStyle = '#ffffff';
+      for (let i = 0; i < 7; i++) {
+        const fall = ((t / 22 + i * 41) % (h * 1.1));
+        ctx.globalAlpha = alpha * 0.8 * (1 - fall / (h * 1.1));
+        ctx.beginPath();
+        ctx.arc(x - w / 2 + SPOTS[i][0] * w + wave(t, 400, i) * 3, top + fall, Math.max(1, s * 0.012), 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    if (look.embers) {
+      for (let i = 0; i < 7; i++) {
+        const rise = ((t / 16 + i * 53) % (h * 1.15));
+        ctx.globalAlpha = alpha * (1 - rise / (h * 1.15));
+        ctx.fillStyle = i % 2 ? '#ffb347' : '#ff6a2a';
+        ctx.beginPath();
+        ctx.arc(x - w / 2 + SPOTS[i][0] * w + wave(t, 260, i) * 4, ground - rise, Math.max(1, s * 0.014), 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    if (look.lines && walking) {
+      ctx.strokeStyle = '#f2f2f2';
+      ctx.lineCap = 'round';
+      ctx.lineWidth = Math.max(1, s * 0.012);
+      for (let i = 0; i < 3; i++) {
+        const y = top + h * (0.3 + i * 0.22);
+        const from = x + w * 0.42 + i * 4;
+        ctx.globalAlpha = alpha * (0.35 + 0.25 * wave(t, 90, i));
+        ctx.beginPath();
+        ctx.moveTo(from, y);
+        ctx.lineTo(from + s * 0.16, y);
+        ctx.stroke();
+      }
+    }
+    if (look.chest) {
+      const chest = window.MFArt && MFArt.img('ui', 'chest');
+      const side = Math.max(14, s * 0.24);
+      const bob = wave(t, 300) * 2;
+      ctx.globalAlpha = alpha;
+      if (chest) ctx.drawImage(chest, x - side / 2, top - side * 0.85 + bob, side, side);
+    }
+    ctx.restore();
+  }
+
+  let sbuf = null;
+
+  /**
+   * A painted monster with its feet at (x, ground) in a box s wide and high, as draw() does with a
+   * drawn one; m.mod — its modifier, m.size — how much bigger or smaller it is, m.hue — the turn of
+   * its colours for the older rounds. o.room — the height it may take at most.
+   */
+  function sprite(ctx, im, m, x, ground, s, t, o) {
+    const look = LOOK[m.mod] || {};
+    const boss = !!m.boss;
+    const hit = Math.max(0, Math.min(1, o.hit || 0));
+    const alpha = o.alpha == null ? 1 : Math.max(0, Math.min(1, o.alpha));
+    if (alpha <= 0 || s <= 0) return;
+    let box = s * (boss ? 0.86 : 1) * (m.size > 0 ? m.size : 1);
+    if (o.room > 0) box = Math.min(box, o.room * (boss ? 0.86 : 1));
+    const k = box / Math.max(im.naturalWidth, im.naturalHeight);
+    const dw = im.naturalWidth * k;
+    const dh = im.naturalHeight * k;
+    const pulse = 0.5 + 0.5 * wave(t, 260);
+    if (boss) aura(ctx, x, ground, Math.max(s, box), t, look.aura || o.accent || EM, alpha);
+    // its shadow on the road
+    ctx.save();
+    ctx.globalAlpha = alpha * 0.28 * (look.alpha || 1);
+    ctx.fillStyle = '#000000';
+    ctx.beginPath();
+    ctx.ellipse(x, ground - 1, dw * 0.36, Math.max(2, dh * 0.05), 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    // into the buffer: the picture, its tint, the flash of a strike
+    const tr = ctx.getTransform ? ctx.getTransform() : { a: 1 };
+    const dpr = tr.a || 1;
+    const bw = Math.max(1, Math.ceil(dw * dpr));
+    const bh = Math.max(1, Math.ceil(dh * dpr));
+    if (!sbuf) sbuf = document.createElement('canvas');
+    if (sbuf.width !== bw || sbuf.height !== bh) {
+      sbuf.width = bw;
+      sbuf.height = bh;
+    }
+    const c = sbuf.getContext('2d');
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    c.globalCompositeOperation = 'source-over';
+    c.globalAlpha = 1;
+    c.clearRect(0, 0, bw, bh);
+    if (look.filter) c.filter = look.filter;
+    c.drawImage(im, 0, 0, bw, bh);
+    c.filter = 'none';
+    const tint = (look.tintA || 0) * (look.pulse ? 0.55 + 0.45 * pulse : 1);
+    if (look.tint && tint > 0) {
+      c.globalCompositeOperation = 'source-atop';
+      c.globalAlpha = tint;
+      c.fillStyle = look.tint;
+      c.fillRect(0, 0, bw, bh);
+    }
+    if (hit >= 0.02) {
+      c.globalCompositeOperation = 'source-atop';
+      c.globalAlpha = hit * 0.7;
+      c.fillStyle = '#ffffff';
+      c.fillRect(0, 0, bw, bh);
+    }
+    c.globalCompositeOperation = 'source-over';
+    c.globalAlpha = 1;
+    // onto the gate: it breathes, hops as it walks, recoils from a strike
+    const breath = 1 + 0.016 * wave(t, 520);
+    const hop = o.walk ? -Math.abs(wave(t, 150)) * 3 * s / 100 : 0;
+    const float = look.float ? wave(t, 700) * s * 0.03 - s * 0.03 : 0;
+    const shake = look.shake ? wave(t, 23) * look.shake : 0;
+    const lean = ((o.walk ? -3 : 0) + (look.lean && o.walk ? look.lean : 0) + hit * 5 + (look.wobble ? wave(t, 380) * look.wobble : 0)) * Math.PI / 180;
+    ctx.save();
+    ctx.globalAlpha = alpha * (look.alpha || 1) * (look.float ? 0.85 + 0.15 * wave(t, 400) : 1);
+    if (look.rainbow) ctx.filter = 'hue-rotate(' + Math.round(t / 6 % 360) + 'deg) saturate(1.5)';
+    else if (m.hue) ctx.filter = 'hue-rotate(' + Math.round(m.hue) + 'deg)';
+    ctx.translate(x + hit * s * 0.05 + shake, ground + hop + float);
+    ctx.rotate(lean);
+    ctx.scale((2 - breath) * (1 + hit * 0.04), breath * (1 - hit * 0.05));
+    ctx.drawImage(sbuf, -dw / 2, -dh, dw, dh);
+    ctx.restore();
+    const top = ground - dh + hop + float;
+    around(ctx, look, x, top, dw, dh, ground, t, alpha, !!o.walk, s);
+    if (boss) {
+      // the crown of a boss over its head (the heads look left, to the gate)
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(x - dw * 0.12, top + dh * 0.04);
+      const q = Math.max(0.2, s / 100) * 0.95;
+      ctx.scale(q, q);
+      crown(brush(ctx), t);
+      ctx.restore();
+    }
+  }
+
   let buffer = null;
 
   /**
@@ -640,6 +825,11 @@
    */
   function draw(ctx, m, x, ground, s, t, o) {
     o = o || {};
+    const im = m.art && window.MFArt ? MFArt.img('monster', m.art) : null;
+    if (im) {
+      sprite(ctx, im, m, x, ground, s, t, o);
+      return;
+    }
     const kind = shapeOf(m.shape, m.title);
     const p = tones(m.color);
     const hit = Math.max(0, Math.min(1, o.hit || 0));
@@ -706,5 +896,5 @@
     ctx.restore();
   }
 
-  window.MFMonsters = { draw: draw, shapeOf: shapeOf, shapes: SHAPES };
+  window.MFMonsters = { draw: draw, shapeOf: shapeOf, shapes: SHAPES, looks: LOOK };
 })();

@@ -39,7 +39,8 @@
     function picture(item) {
       const set = item.iconSet || 'up';
       const known = window.MFArt.sets[set] && window.MFArt.sets[set][item.icon];
-      const art = window.MFArt.el(known ? set : 'up', known ? item.icon : PICTURES[item.index % PICTURES.length] || PICTURES[0], 'mfa-icon');
+      const art = window.MFArt.has('artifact', item.id) ? window.MFArt.el('artifact', item.id, 'mfa-icon')
+        : window.MFArt.el(known ? set : 'up', known ? item.icon : PICTURES[item.index % PICTURES.length] || PICTURES[0], 'mfa-icon');
       art.setAttribute('aria-hidden', 'true'); return art;
     }
     function status(text) { notice.textContent = text; notice.hidden = !text; }

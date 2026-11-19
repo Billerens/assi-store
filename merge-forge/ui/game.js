@@ -14,7 +14,7 @@
   const view = {
     cells: {}, cellKey: {}, shapeKey: '', drag: null, lastTap: null, info: null, selected: null,
     slashes: [], floats: [], critUntil: {}, lastVolleys: -1, lastBest: 0, lastWave: 0, lastEvent: '',
-    sheet: null, sheetKind: '', blades: null, monsters: null, bosses: null, events: null,
+    sheet: null, sheetKind: '', blades: null, monsters: null, events: null, worldIndex: -1, modSerial: -1, modKill: '',
     caravan: null, caravanFor: 0, asked: {}, panelKey: '', masterKey: '', w: 0, h: 0, dpr: 1, t: 0,
     art: {}, artOn: false, artAnimate: true, artKey: '', artBusy: false, hitAt: 0,
     still: !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
@@ -56,33 +56,85 @@
     return '#' + out.map((x) => ('0' + x.toString(16)).slice(-2)).join('');
   }
 
-  /** The monster of wave w: {title, text, shape, color, boss}. */
+  /**
+   * The world of wave w: {world, round, index, per} — content/monsters.json, twenty waves a world, one
+   * after another; after the last the first comes again, its monsters older (round 1, 2, …).
+   */
+  function worldOf(w) {
+    const M = view.monsters;
+    if (!M || !M.worlds || !M.worlds.length) return null;
+    const per = M.perWorld || 20;
+    const index = Math.floor((Math.max(1, w) - 1) / per);
+    return { world: M.worlds[index % M.worlds.length], round: Math.floor(index / M.worlds.length), index, per };
+  }
+
+  // The pictures for the forms of the monsters named by the stock (prompts/monsters.md).
+  const SHAPE_ART = { rat: 'rat', blob: 'slime', bones: 'mummy', golem: 'lavagolem', wolf: 'ashwolf', rider: 'jackal', serpent: 'lollisnake', ghost: 'ghostneon', dragon: 'drake', beast: 'troll' };
+  const lowerFirst = (s) => s.charAt(0).toLocaleLowerCase() + s.slice(1);
+
+  /** A monster's name with its age and its modifier: «Золотая серая крыса», «Древний крысиный король». */
+  function nameOf(title, gender, mod, round) {
+    const M = view.monsters;
+    const form = (M.forms || {})[gender] || 0;
+    let name = tx(title);
+    const old = round > 0 && M.old ? M.old[Math.min(round, M.old.length) - 1] : null;
+    if (old) name = tx(old[form]) + ' ' + lowerFirst(name);
+    const d = mod && M.mods ? M.mods[mod] : null;
+    if (d && d.adj) name = tx(d.adj[form]) + ' ' + lowerFirst(name);
+    else if (d && d.pattern) name = tx(d.pattern, name);
+    return name;
+  }
+
+  /** The monster of wave w: {title, text, art, shape, color, boss, mod, size, hue, world}. */
   function monsterOf(state, w) {
-    const boss = sim.isBoss(cfg(), w) && !state.run.farm;
+    const c = cfg();
+    const boss = sim.isBoss(c, w) && !state.run.farm;
+    const current = w === state.run.wave && view.encounter ? view.encounter : null;
+    const mod = current ? current.mod || '' : '';
+    const size = current && current.size > 0 ? current.size : 1;
+    const here = worldOf(w);
+    if (!here) return { title: boss ? 'Босс' : 'Чудище', text: '', shape: 'blob', color: '#7a7f86', boss, mod, size };
+    const world = here.world;
+    const within = (w - 1) % here.per;
+    let kind;
+    if (boss) {
+      const order = world.bosses && world.bosses.length ? world.bosses : [0];
+      const k = Math.floor(within / c['boss.every']);
+      kind = world.kinds[(order[k % order.length] + here.round) % world.kinds.length];
+    } else kind = world.kinds[(w * 3) % world.kinds.length];
+    const look = { art: kind.art, color: kind.color, boss, mod, size, hue: here.round ? (here.round * (view.monsters.oldShift || 40)) % 360 : 0, world: world.bg || world.id };
     const block = Math.floor((w - 1) / 10);
     const named = state.meta.names && state.meta.names[(boss ? 'b' : 'm') + block];
-    if (named) return { title: named.title, text: named.text, shape: MFMonsters.shapeOf(named.shape, named.title), color: named.color || '#8a8a8a', boss };
-    if (boss && view.bosses) {
-      const k = Math.floor(w / cfg()['boss.every']) - 1;
-      const b = view.bosses[((k % view.bosses.length) + view.bosses.length) % view.bosses.length];
-      const round = Math.floor(k / view.bosses.length);
-      return { title: round ? b.old : b.title, text: b.text, shape: b.shape, mark: b.mark, color: round ? shift(b.color, round * 20) : b.color, boss: true };
+    if (named) {
+      // Past the worlds' first round the stock names them: its name, the picture of its form.
+      const art = MFArt.has('monster', named.shape) ? named.shape : SHAPE_ART[MFMonsters.shapeOf(named.shape, named.title)] || kind.art;
+      return Object.assign(look, { title: nameOf(named.title, 'm', '', 0), text: named.text, art, shape: MFMonsters.shapeOf(named.shape, named.title), color: named.color || kind.color, hue: 0 });
     }
-    if (!view.monsters) return { title: boss ? 'Босс' : 'Чудище', text: '', shape: 'blob', color: '#7a7f86', boss };
-    const bands = view.monsters.bands;
-    const last = bands[bands.length - 1].to;
-    const round = Math.floor((w - 1) / last);
-    const ww = ((w - 1) % last) + 1;
-    let band = bands[0];
-    for (let i = 0; i < bands.length; i++) if (ww >= bands[i].from && ww <= bands[i].to) band = bands[i];
-    const kind = band.kinds[w % band.kinds.length];
-    return { title: round ? kind.old : kind.title, text: kind.text, shape: kind.shape, color: round ? shift(kind.color, view.monsters.oldShift * round) : kind.color, boss };
+    const title = boss ? kind.boss : kind.title;
+    return Object.assign(look, { title: nameOf(title, boss ? kind.bg : kind.g, mod, here.round), text: kind.text, shape: MFMonsters.shapeOf('', title) });
+  }
+
+  /** What a modifier changes, in a few words: «золото ×5 · здоровье ×3». */
+  function modEffect(state, m) {
+    if (!m.mod) return '';
+    const v = sim.modOf(cfg(), m.mod, m.boss);
+    const x = (n) => g.fmt(n, { digits: 2 });
+    const parts = [];
+    if (v.gold !== 1) parts.push(tx('золото ×{}', x(v.gold)));
+    if (v.hp !== 1) parts.push(tx('здоровье ×{}', x(v.hp)));
+    if (v.timer !== 1) parts.push(tx('время ×{}', x(v.timer)));
+    if (v.walk !== 1 && !m.boss) parts.push(tx(v.walk < 1 ? 'быстрее' : 'медленнее'));
+    if (m.mod === 'treasure') parts.push(tx('+{} клинка', v.blades || 0));
+    if (m.mod === 'burning') parts.push(tx('разжигает горн'));
+    if (m.mod === 'frosty') parts.push(tx('остужает горн'));
+    return parts.join(' · ');
   }
 
   /** Waves past the named bands take their names from the stock (the model), once per ten. */
   function askNames(state) {
     const w = state.run.wave;
-    const last = view.monsters ? view.monsters.bands[view.monsters.bands.length - 1].to : 200;
+    const M = view.monsters;
+    const last = M && M.worlds ? M.worlds.length * (M.perWorld || 20) : 200;
     if (w <= last) return;
     const boss = sim.isBoss(cfg(), w) && !state.run.farm;
     const key = (boss ? 'b' : 'm') + Math.floor((w - 1) / 10);
@@ -204,20 +256,31 @@
     view.bladeActions = h('div', { class: 'mf-blade-actions', hidden: true, role: 'group', 'aria-label': tx('Действия с клинком') }, view.selectionBadge, view.equipBlade, view.feedBlade, view.sellBlade);
     view.anvilTools = h('div', { class: 'mf-anvil-tools' }, view.info, view.bladeActions);
     view.anvil = h('div', { class: 'mf-anvil', id: 'anvil' });
-    view.anvilWrap = h('div', { class: 'mf-anvil-wrap' }, view.anvil);
-    g.el.field.append(view.gate, view.anvilTools, view.anvilWrap);
+    view.anvilWrap = h('div', { class: 'mf-anvil-wrap' }, view.anvilTools, view.anvil);
+    g.el.field.append(view.gate, view.anvilWrap);
 
     view.event = h('div', { class: 'mf-event', id: 'event', hidden: true });
-    view.retry = h('button', { class: 'g-btn primary', id: 'retry', hidden: true, onclick: retry });
-    view.cry = h('button', { class: 'g-btn', id: 'cry', hidden: true, onclick: cry });
+    view.retry = h('button', { class: 'g-btn primary mf-gate-pill mf-retry', id: 'retry', hidden: true, onclick: retry });
+    view.cryTime = h('span', { class: 'mf-ab-t g-num' });
+    view.cry = h('button', { class: 'mf-ab', id: 'cry', hidden: true, onclick: cry, 'aria-label': tx('Боевой клич'), title: tx('Боевой клич') }, MFArt.el('up', 'cry', 'mf-ab-ic'), view.cryTime);
     view.sort = h('button', { class: 'g-btn small mf-sort', id: 'sort', 'aria-label': tx('Сортировать'), title: tx('По уровню: сильные первыми. Клинки на рунах остаются на месте.'), onclick: sortAnvil }, 'Порядок');
-    view.context = h('div', { class: 'g-btns mf-context' }, view.retry, view.cry);
     view.meet = h('button', { class: 'g-btn small', id: 'meet', onclick: () => prepareFight('meet') }, 'Встретить');
     view.aim = h('button', { class: 'g-btn small', id: 'aim', onclick: () => prepareFight('aim') }, 'Прицелиться');
     view.preparation = h('div', { class: 'mf-preparation', hidden: true }, view.meet, view.aim);
     view.outpost = MFOutpostUI.create({ g, sim, onLayout: size, putBlade });
     view.artifacts = window.MFArtifactsUI ? MFArtifactsUI.create({ g, sim, onOpen: () => openMaster('artifacts') }) : null;
     view.anvilTools.append(view.sort);
+    // On the scene: the event as a banner, the abilities as round buttons, the heroes open the outpost.
+    view.abilities = h('div', { class: 'mf-abilities', role: 'group', 'aria-label': tx('Приёмы') }, view.cry, view.outpost.skillbar);
+    if (view.artifacts) {
+      view.artifacts.quickElement.classList.add('mf-ab', 'mf-ab-relic');
+      view.abilities.append(view.artifacts.quickElement);
+    }
+    view.outpostBadge = h('span', { class: 'mf-outpost-badge', hidden: true }, '!');
+    view.outpostChip = h('span', { class: 'mf-outpost-chip' });
+    view.outpostHit = h('button', { class: 'mf-outpost-hit', id: 'outpost', 'aria-label': tx('Форпост'), title: tx('Форпост'), onclick: () => view.outpost.open() }, view.outpostChip, view.outpostBadge);
+    view.gateUi = h('div', { class: 'mf-gate-ui' }, view.outpostHit, view.event, view.retry, view.preparation, view.abilities);
+    view.gate.append(view.gateUi);
 
     view.forgeFill = h('i', { class: 'mf-forge-fill' });
     view.heatFill = h('i', { class: 'mf-heat-fill' });
@@ -225,13 +288,15 @@
     view.forge = h('button', { class: 'g-btn primary mf-forge', id: 'forge', onclick: tapForge }, view.heatFill, view.forgeFill, head('forge', 'Горн'), view.forgeSub);
     view.chestSub = h('span', { class: 'g-sub', role: 'status', 'aria-live': 'polite' }, 'продать');
     view.chest = h('button', { class: 'g-btn mf-chest', id: 'chest', onclick: () => g.flash('chest', 'Сундук продажи', 'Перетащите сюда клинок, чтобы продать его за золото') }, head('chest', 'Сундук'), view.chestSub);
-    view.upBtn = h('button', { class: 'g-btn mf-up-btn', id: 'upgrades', onclick: openUpgrades }, head('upgrades', 'Улучшения'), h('span', { class: 'g-sub' }, 'кузня и руны'));
+    view.upBadge = h('span', { class: 'mf-badge g-num', hidden: true });
+    view.upSub = h('span', { class: 'g-sub' }, tx('кузня'));
+    view.upBtn = h('button', { class: 'g-btn mf-up-btn', id: 'upgrades', onclick: openUpgrades }, head('upgrades', 'Улучшения'), view.upSub, view.upBadge);
     view.masterSub = h('span', { class: 'g-sub g-num' });
-    view.masterBtn = h('button', { class: 'g-btn mf-master-btn', id: 'master', onclick: openMaster }, head('master', 'Горн мастера'), view.masterSub);
+    view.masterBtn = h('button', { class: 'g-btn mf-master-btn', id: 'master', onclick: openMaster, 'aria-label': tx('Горн мастера') }, head('master', 'Мастер'), view.masterSub);
     view.panel = h('div', { class: 'mf-panel', id: 'panel' });
-    view.bottom = h('div', { class: 'mf-bottom' }, view.forge, view.chest, view.upBtn, view.masterBtn);
-    g.el.actions.append(view.event, view.outpost.element, view.preparation, view.context, view.panel, view.bottom);
-    if (view.artifacts) view.outpost.element.after(view.artifacts.quickElement);
+    // One row along the bottom: the chest, the forge in the middle, the upgrades, the master.
+    view.bottom = h('div', { class: 'mf-bottom' }, view.chest, view.forge, view.upBtn, view.masterBtn);
+    g.el.actions.append(view.panel, view.bottom);
 
     gestures();
     placePanel();
@@ -253,7 +318,6 @@
     window.axiko.on('games.stock', (e) => { if (e && e.game === 'merge-forge' && e.kind === 'blades') syncArt(true); });
     g.on('visible', () => syncArt(true));
     load('monsters', (v) => { view.monsters = v; });
-    load('bosses', (v) => { view.bosses = v; });
     // The event card may already show by now: draw it again with the titles and texts.
     load('events', (v) => { view.events = v; view.lastEvent = ''; });
     view.lastBest = g.state.meta.bestLevel || 0;
@@ -294,7 +358,8 @@
     // and the padding under the field.
     const PLATE = 18;
     const rest = gap * (shape.rows - 1) + INFO + 12 + PLATE;
-    const prefer = Math.min(wide ? 230 : 200, Math.round(field.clientHeight * (shape.rows > 5 ? 0.24 : 0.31)));
+    // The scene takes more of the screen now that the bottom is one row: the worlds are to be seen.
+    const prefer = Math.min(wide ? 320 : 280, Math.round(field.clientHeight * (shape.rows > 5 ? 0.3 : 0.4)));
     let gateH = Math.max(100, Math.min(prefer, field.clientHeight - shape.rows * want - rest));
     const roomAtMin = field.clientHeight - shape.rows * MIN - rest;
     const folded = roomAtMin < gateH;
@@ -383,11 +448,12 @@
       const target = view.drag && view.drag.target === i;
       const foxHint = hint.indexOf(i) >= 0;
       const selected = !!view.selected && view.selected.cell === i && view.selected.level === n;
-      const key = n + '|' + (s ? s.rune : '') + '|' + crit + '|' + lifted + '|' + target + '|' + foxHint + '|' + selected;
+      const runeTarget = !!view.runeDrag && view.runeDrag.moving && view.runeDrag.target === i;
+      const key = n + '|' + (s ? s.rune + s.index : '') + '|' + crit + '|' + lifted + '|' + target + '|' + foxHint + '|' + selected + '|' + runeTarget;
       if (view.cellKey[i] === key) continue;
       view.cellKey[i] = key;
       const el = view.cells[i];
-      el.className = 'mf-cell' + (n ? ' full tier-' + tier(n) : '') + (s ? ' rune rune-' + s.rune : '') + (crit ? ' crit' : '') + (lifted ? ' lifted' : '') + (target ? ' target' : '') + (foxHint ? ' fox-hint' : '') + (selected ? ' selected' : '');
+      el.className = 'mf-cell' + (n ? ' full tier-' + tier(n) : '') + (s ? ' rune rune-' + s.rune : '') + (crit ? ' crit' : '') + (lifted ? ' lifted' : '') + (target ? ' target' : '') + (foxHint ? ' fox-hint' : '') + (selected ? ' selected' : '') + (runeTarget ? ' rune-target' : '');
       el.setAttribute('aria-pressed', String(selected));
       el.setAttribute('aria-label', n ? tx('Клинок ур. {} · выбрать действия', n) : tx('Пустая клетка'));
       el.title = foxHint ? tx('Лиса заметила пару для слияния') : '';
@@ -397,8 +463,96 @@
         putBlade(art, n);
         el.append(art, h('span', { class: 'mf-lvl g-num' }, String(n)));
       }
-      if (s) el.append(h('span', { class: 'mf-rune-mark', 'aria-label': RUNE_LABEL[s.rune], html: MFArt.svg('rune', s.rune) }));
+      if (s) el.append(h('span', { class: 'mf-rune-mark', role: 'button', tabindex: 0, 'data-socket': String(s.index), 'aria-label': tx(RUNE_LABEL[s.rune]) + ' · ' + tx('сменить или перенести'), title: tx('Тап — сменить руну, перетащить — перенести гнездо'), html: MFArt.html('rune', s.rune) }));
     }
+  }
+
+  // ---- the runes on the anvil: a tap on a stone picks its rune, a drag moves its socket ----
+
+  function closeRunePicker() {
+    if (view.runePicker) view.runePicker.remove();
+    view.runePicker = null;
+  }
+
+  /** The small picker by the stone of socket `index`: its rune, the same in every socket, «Авто». */
+  function openRunePicker(index, anchor) {
+    closeRunePicker();
+    const state = g.state;
+    const c = cfg();
+    const socket = sim.sockets(state, c).find((s) => s.index === index);
+    if (!socket) return;
+    const auto = !!state.run.runeAuto;
+    const set = (fn) => { g.act(fn); view.cellKey = {}; g.sfx('tap'); closeRunePicker(); };
+    const one = sim.RUNES.map((rune) => h('button', { class: 'mf-rp-btn' + (!auto && socket.rune === rune ? ' on' : ''), 'data-rune': rune, onclick: () => set((s) => sim.setRune(s, cfg(), index, rune)) },
+      MFArt.el('rune', rune, 'mf-rp-ic'), h('span', {}, tx(RUNE_TITLE[rune]))));
+    const all = sim.RUNES.map((rune) => h('button', { class: 'mf-rp-all', 'data-rune-all': rune, 'aria-label': tx('Во все гнёзда: {}', tx(RUNE_TITLE[rune])), title: tx('Во все гнёзда: {}', tx(RUNE_TITLE[rune])), onclick: () => set((s) => sim.setRuneAll(s, cfg(), rune)) },
+      MFArt.el('rune', rune, 'mf-rp-ic')));
+    const autoBtn = h('button', { class: 'mf-rp-auto' + (auto ? ' on' : ''), 'data-rune-auto': '', 'aria-pressed': String(auto), onclick: () => set((s) => sim.setRuneAuto(s, cfg(), !auto)) },
+      tx('Авто: на боссе лёд, иначе жадность'));
+    const box = h('div', { class: 'mf-rune-picker', role: 'dialog', 'aria-label': tx('Гнездо {}', index + 1) },
+      h('div', { class: 'mf-rp-head' }, h('strong', {}, tx('Гнездо {}', index + 1)), h('span', { class: 'mf-rp-hint' }, tx('перетащите камень, чтобы перенести'))),
+      h('div', { class: 'mf-rp-row' }, ...one),
+      h('div', { class: 'mf-rp-row mf-rp-allrow' }, h('span', {}, tx('Во все гнёзда')), ...all),
+      autoBtn);
+    view.anvilWrap.append(box);
+    view.runePicker = box;
+    // By the stone, inside the frame of the anvil.
+    const wrap = view.anvilWrap.getBoundingClientRect();
+    const a = anchor.getBoundingClientRect();
+    const w = Math.min(300, wrap.width - 8);
+    box.style.width = w + 'px';
+    box.style.left = Math.round(Math.max(4, Math.min(wrap.width - w - 4, a.left - wrap.left - w / 2 + a.width / 2))) + 'px';
+    const below = a.bottom - wrap.top + 6;
+    const height = box.offsetHeight || 170;
+    box.style.top = Math.round(below + height > wrap.height ? Math.max(4, a.top - wrap.top - height - 6) : below) + 'px';
+    const first = box.querySelector('.mf-rp-btn.on') || box.querySelector('button');
+    if (first) first.focus({ preventScroll: true });
+  }
+
+  function startRuneDrag(e, mark) {
+    e.preventDefault();
+    e.stopPropagation();
+    const cell = Number(mark.closest('.mf-cell').dataset.cell);
+    try { view.anvil.setPointerCapture(e.pointerId); } catch (ignored) { /* the pointer is gone */ }
+    view.runeDrag = { index: Number(mark.dataset.socket), from: cell, mark, x: e.clientX, y: e.clientY, id: e.pointerId, moving: false, target: -1, ghost: null };
+  }
+
+  function moveRuneDrag(e) {
+    const d = view.runeDrag;
+    if (!d || d.id !== e.pointerId) return false;
+    if (!d.moving && Math.hypot(e.clientX - d.x, e.clientY - d.y) > 8) {
+      d.moving = true;
+      closeRunePicker();
+      d.ghost = h('div', { class: 'mf-ghost mf-rune-ghost', html: d.mark.innerHTML });
+      document.body.append(d.ghost);
+    }
+    if (!d.moving) return true;
+    const side = Math.max(28, (view.cell || 64) * 0.5);
+    d.ghost.style.width = side + 'px';
+    d.ghost.style.height = side + 'px';
+    d.ghost.style.left = (e.clientX - side / 2) + 'px';
+    d.ghost.style.top = (e.clientY - side / 2) + 'px';
+    const to = cellAt(e.clientX, e.clientY);
+    d.target = to >= 0 && sim.isOpen(g.state, cfg(), to) ? to : -1;
+    renderAnvil(g.state);
+    return true;
+  }
+
+  function endRuneDrag(e, cancel) {
+    const d = view.runeDrag;
+    if (!d || d.id !== e.pointerId) return false;
+    view.runeDrag = null;
+    if (d.ghost) d.ghost.remove();
+    view.cellKey = {};
+    if (cancel) { g.redraw(); return true; }
+    if (!d.moving) { openRunePicker(d.index, d.mark); return true; }
+    if (d.target >= 0 && d.target !== d.from && g.act((s) => sim.moveSocket(s, cfg(), d.index, d.target))) {
+      g.sfx('merge');
+      view.info.textContent = tx('Гнездо перенесено');
+      view.infoUntil = now() + 1600;
+    }
+    g.redraw();
+    return true;
   }
 
   function cellAt(x, y) {
@@ -435,13 +589,17 @@
 
   function gestures() {
     view.anvil.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') { clearSelection(); return; }
+      if (e.key === 'Escape') { closeRunePicker(); clearSelection(); return; }
       if (e.key !== 'Enter' && e.key !== ' ') return;
+      const mark = e.target.closest && e.target.closest('.mf-rune-mark');
+      if (mark) { e.preventDefault(); openRunePicker(Number(mark.dataset.socket), mark); return; }
       const cell = e.target.closest('[data-cell]');
       if (!cell || cell.classList.contains('shut')) return;
       e.preventDefault(); tapCell(Number(cell.dataset.cell));
     });
     view.anvil.addEventListener('pointerdown', (e) => {
+      const mark = e.target.closest('.mf-rune-mark');
+      if (mark) { startRuneDrag(e, mark); return; }
       const el = e.target.closest('.mf-cell');
       if (!el || el.classList.contains('shut')) return;
       const cell = Number(el.dataset.cell);
@@ -451,6 +609,7 @@
       view.drag = { from: cell, x: e.clientX, y: e.clientY, id: e.pointerId, moving: false, target: -1, ghost: null };
     });
     view.anvil.addEventListener('pointermove', (e) => {
+      if (moveRuneDrag(e)) return;
       const d = view.drag;
       if (!d || d.id !== e.pointerId) return;
       if (!d.moving && Math.hypot(e.clientX - d.x, e.clientY - d.y) > 8) {
@@ -470,6 +629,7 @@
       renderAnvil(g.state);
     });
     const end = (e, cancel) => {
+      if (endRuneDrag(e, cancel)) return;
       const d = view.drag;
       if (!d || d.id !== e.pointerId) return;
       view.drag = null;
@@ -485,6 +645,9 @@
     };
     view.anvil.addEventListener('pointerup', (e) => end(e, false));
     view.anvil.addEventListener('pointercancel', (e) => end(e, true));
+    // A tap anywhere else closes the picker of the runes.
+    document.addEventListener('pointerdown', (e) => { if (view.runePicker && !view.runePicker.contains(e.target) && !e.target.closest('.mf-rune-mark')) closeRunePicker(); }, true);
+    view.anvilWrap.addEventListener('keydown', (e) => { if (e.key === 'Escape' && view.runePicker) { closeRunePicker(); } });
   }
 
   function tapCell(cell) {
@@ -636,14 +799,46 @@
     if (r.id === 'wanderer') g.flash('sword', 'Странник обменял клинки', bladeInfo(r.level).title);
   }
 
-  function buyUp(id) {
-    const before = sim.upgradeProgress(g.state, cfg(), id);
-    const ok = g.act((s) => sim.buyUp(s, cfg(), id));
+  /** What a perk of the 50th or 100th level gives, in a few words. */
+  function perkText(p) {
+    const x = (v) => g.fmt(v, { digits: 2 });
+    switch (p.kind) {
+      case 'critChance': return tx('шанс крита +{} п.п.', x(p.value * 100));
+      case 'bossDmg': return tx('урон по боссам ×{}', x(p.value));
+      case 'gold': return tx('золото за врагов ×{}', x(p.value));
+      case 'bossGold': return tx('золото с боссов ×{}', x(p.value));
+      case 'critMult': return tx('сила критов ×{}', x(p.value));
+      case 'bossTime': return tx('время босса +{} с', x(p.value));
+      case 'forgeSpeed': return tx('горн быстрее ×{}', x(p.value));
+      case 'sale': return tx('выручка продаж ×{}', x(p.value));
+      case 'offline': return tx('офлайн-доход ×{}', x(p.value));
+      case 'events': return tx('события чаще ×{}', x(p.value));
+      case 'tap': return tx('ручной удар ×{}', x(p.value));
+      case 'dmg': return tx('весь урон ×{}', x(p.value));
+      case 'twin': return tx('лишний клинок из горна +{}', pct(p.value));
+      default: return '';
+    }
+  }
+
+  /** Buys `times` levels of an upgrade (Infinity — as many as the gold pays for); a milestone passed is shown. */
+  function buyUp(id, times) {
+    const from = lvl(g.state, id);
+    let bought = 0;
+    const want = times || 1;
+    g.act((s) => { while (bought < want && sim.buyUp(s, cfg(), id)) bought++; return bought > 0; });
+    const ok = bought > 0;
     g.sfx(ok ? 'buy' : 'deny');
     if (ok) g.buzz('buy');
-    if (ok && before.supported && before.nextAt === before.level + 1) {
-      const p = sim.upgradeProgress(g.state, cfg(), id);
-      g.flash('sparkle', tx('Рубеж {} достигнут', p.level), tx('Бонус к эффекту улучшения: {}', pct(p.factor - 1)));
+    const passed = ok ? MFUpgradeProgress.crossed(id, from, lvl(g.state, id), cfg()) : [];
+    if (passed.length) {
+      const last = passed[passed.length - 1];
+      const title = (sim.UP.find((u) => u.id === id) || {}).title || '';
+      const mult = passed.reduce((m, p) => m * p.mult, 1);
+      const perks = passed.filter((p) => p.perk).map((p) => perkText(p.perk));
+      g.flash('sparkle', tx('{}: рубеж {}', tx(title), last.at),
+        tx('Эффект ×{}', g.fmt(mult, { digits: 2 })) + (perks.length ? ' · ' + tx('особое свойство: {}', perks.join(', ')) : ''));
+      g.sfx('clang');
+      view.milestoneAt = { id, at: now() };
     }
     if (ok && id === 'wide') view.shapeKey = '';
     view.panelKey = '';
@@ -729,10 +924,22 @@
     return el;
   }
 
-  /** The button of a purchase: the price and, under it, the level it buys. */
-  function buyButton(can, price, level, onclick) {
+  /** The button of a purchase: the price and, under it, the level it buys (or the levels: «ур. 51–60»). */
+  function buyButton(can, price, level, onclick, last) {
     return h('button', { class: 'g-btn small mf-buy' + (can ? ' primary' : ''), disabled: !can, onclick },
-      h('span', { class: 'g-num' }, price), h('span', { class: 'g-sub g-num' }, tx('ур. {}', level)));
+      h('span', { class: 'g-num' }, price), h('span', { class: 'g-sub g-num' }, last > level ? tx('ур. {}–{}', level, last) : tx('ур. {}', level)));
+  }
+
+  /** How many levels of upgrade id the chosen amount buys now (×1, ×10, as many as the gold pays for) and their price. */
+  function bulk(state, c, id) {
+    const n = lvl(state, id);
+    const room = Math.max(1, sim.upMax(state, c, id) - n);
+    const base = c['up.' + id + '.base'];
+    const growth = c['up.' + id + '.growth'];
+    const amount = view.buyAmount || 1;
+    let count = amount === 'max' ? Big.maxBuy(state.run.gold, base, growth, n) : amount;
+    count = Math.max(1, Math.min(room, Math.floor(Number(count) || 1), 10000));
+    return { count, price: Big.costGeom(base, growth, n, count) };
   }
 
   /** The mark in place of the button: bought once («есть») or at the limit other numbers set («предел»). */
@@ -810,7 +1017,10 @@
     const artifacts = state.meta.artifacts && state.meta.artifacts.items || {};
     const effects = state.run.artifacts && state.run.artifacts.effects || {};
     const artifactKey = JSON.stringify([Object.keys(artifacts).map(id => [id, artifacts[id].level, artifacts[id].enabled]), Object.keys(effects).filter(id => effects[id].left > 0).map(id => [id, effects[id].power])]);
-    const key = view.upTab + ':' + rows.map((u) => lvl(state, u.id) + (sim.upUnlocked(state, c, u.id) ? 'o' : 'l') + (sim.upOpen(state, c, u.id) && Big.gte(state.run.gold, sim.upCost(state, c, u.id)) ? 'y' : 'n')).join(',') +
+    const key = view.upTab + ':' + (view.buyAmount || 1) + ':' + rows.map((u) => {
+      const b = sim.upOpen(state, c, u.id) ? bulk(state, c, u.id) : null;
+      return lvl(state, u.id) + (sim.upUnlocked(state, c, u.id) ? 'o' : 'l') + (b && Big.gte(state.run.gold, b.price) ? 'y' : 'n') + (b && view.buyAmount === 'max' ? '#' + b.count : '');
+    }).join(',') +
       '|' + sim.socketCount(state, c) + '|' + (state.run.runes || []).join(',') + '|' + (state.run.bellowsUntil > now()) + '|' + Math.floor(state.run.maxWave / 10) + '|' + JSON.stringify(sim.forgeLayer(state).state.mf) + '|' + artifactKey;
     if (!force && key === view.panelKey && box.childNodes.length) return;
     view.panelKey = key;
@@ -827,22 +1037,18 @@
       const next = event.key === 'Home' ? 0 : event.key === 'End' ? list.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : list.length - 1)) % list.length;
       list[next].click();
     });
+    // How many levels one press buys.
+    const amounts = h('div', { class: 'mf-seg mf-amount', role: 'group', 'aria-label': tx('Сколько покупать') },
+      [[1, '×1'], [10, '×10'], ['max', tx('Макс')]].map(([v, label]) => h('button', { class: (view.buyAmount || 1) === v ? 'on' : '', 'data-amount': String(v), 'aria-pressed': String((view.buyAmount || 1) === v),
+        onclick: () => { view.buyAmount = v; fillUpgrades(box, true); } }, label)));
+    tabs.append(amounts);
     box.append(tabs);
     const blowing = state.run.bellowsUntil > now();
     if (group.id === 'forge') box.append(row({ set: 'ui', id: 'blow', cls: 'mf-blow', title: 'Раздуть горн',
       text: blowing ? tx('Горн раздут ещё {}', g.fmt.time(Math.ceil((state.run.bellowsUntil - now()) / 1000))) : tx('{} мин горн вдвое быстрее, за 1 энергию шагов', cfg()['bellows.minutes']),
       side: h('button', { class: 'g-btn small', id: 'blow', onclick: blow }, GameIcons.el('energy'), 'Раздуть') }));
-    const sockets = sim.sockets(state, c);
-    if (group.id === 'battle' && sockets.length) {
-      box.append(h('div', { class: 'mf-sec' }, 'Руны'));
-      sockets.forEach((s, k) => {
-        box.append(h('div', { class: 'mf-row mf-rune-row' }, MFArt.el('rune', s.rune), h('div', { class: 'mf-row-t' }, tx('Гнездо {}', k + 1)),
-          h('div', { class: 'mf-seg mf-pick' }, sim.RUNES.map((rune) => h('button', {
-            class: s.rune === rune ? 'on' : '', 'data-rune': rune,
-            onclick: () => { g.act((st) => sim.setRune(st, cfg(), s.index, rune)); view.panelKey = ''; view.cellKey = {}; g.sfx('tap'); }
-          }, RUNE_TITLE[rune])))));
-      });
-    }
+    // The runes are chosen on the anvil, by a tap on their stones.
+    if (group.id === 'battle' && sim.sockets(state, c).length) box.append(h('p', { class: 'g-note mf-rune-note' }, tx('Руны меняются на наковальне: тап по камню руны в клетке.')));
     rows.forEach((u) => {
       const open = sim.upOpen(state, c, u.id);
       const price = sim.upCost(state, c, u.id);
@@ -852,7 +1058,8 @@
       const requirement = ['hammer', 'ember', 'pilot'].includes(u.id) ? tx('Откроется с волны {}', c['up.' + u.id + '.fromWave']) : tx('Откроется с волны {} или после {} продаж', c['up.stall.fromWave'], c['up.stall.fromSold']);
       let side;
       if (open) {
-        side = buyButton(can, g.fmt.price(price), n + 1, () => buyUp(u.id));
+        const b = bulk(state, c, u.id);
+        side = buyButton(Big.gte(state.run.gold, b.price), g.fmt.price(b.price), n + 1, () => buyUp(u.id, bulk(g.state, cfg(), u.id).count), n + b.count);
         side.dataset.buy = u.id;
       } else side = mark(tx(unlocked ? 'предел' : 'закрыто'), false);
       const progression = sim.upgradeProgress(state, c, u.id);
@@ -864,13 +1071,18 @@
       }
       let progress;
       if (unlocked && progression.supported && progression.nextAt) {
-        const at = sim.upgradeProgress(state, c, u.id, progression.nextAt);
-        const jump = progression.nextMilestoneJump / (at.factor - progression.nextMilestoneJump);
-        const done = n % 10;
-        progress = h('div', { class: 'mf-milestone' + (done === 9 ? ' near' : ''), 'data-milestone': u.id, 'data-next-level': progression.nextAt },
-          h('div', { class: 'mf-milestone-copy' }, h('strong', {}, tx('Рубеж {}', progression.nextAt)), h('span', {}, tx('эффект +{}', g.fmt.pct(jump, { digits: 2 })))),
-          h('div', { class: 'mf-milestone-track', role: 'progressbar', 'aria-label': tx('До рубежа {}', progression.nextAt), 'aria-valuemin': 0, 'aria-valuemax': 10, 'aria-valuenow': done }, h('i', { style: 'width:' + done * 10 + '%' })));
-        progress.title = tx('Развитие усиливает вклад этого улучшения. Текущий бонус: {}. Рубежи повторяются каждые 10 уровней; на 50 и 100 прибавка больше.', g.fmt.pct(progression.factor - 1, { digits: 2 }));
+        const every = progression.every;
+        const done = n % every;
+        const perkNow = progression.nextPerk && progression.nextPerk.at === progression.nextAt ? progression.nextPerk : null;
+        const fresh = view.milestoneAt && view.milestoneAt.id === u.id && now() - view.milestoneAt.at < 2500;
+        progress = h('div', { class: 'mf-milestone' + (every - done <= 3 ? ' near' : '') + (progression.nextBig ? ' big' : '') + (fresh ? ' fresh' : ''), 'data-milestone': u.id, 'data-next-level': progression.nextAt },
+          h('div', { class: 'mf-milestone-copy' }, h('strong', {}, tx('Рубеж {}', progression.nextAt)),
+            h('span', {}, tx('эффект ×{}', g.fmt(progression.nextMult, { digits: 2 })) + (perkNow ? ' + ' + perkText(perkNow) : '')),
+            progression.milestone > 1 ? h('span', { class: 'mf-milestone-now' }, tx('сейчас ×{}', g.fmt(progression.milestone, { digits: 2 }))) : null),
+          h('div', { class: 'mf-milestone-track', role: 'progressbar', 'aria-label': tx('До рубежа {}', progression.nextAt), 'aria-valuemin': 0, 'aria-valuemax': every, 'aria-valuenow': done }, h('i', { style: 'width:' + (done / every * 100) + '%' })),
+          h('div', { class: 'mf-perks' }, progression.perks.map((p) => h('span', { class: 'mf-perk' + (p.on ? ' on' : ''), title: tx('Особое свойство {}-го уровня', p.at) },
+            h('b', { class: 'g-num' }, String(p.at)), perkText(p)))));
+        progress.title = tx('Каждые {} уровней эффект улучшения умножается, на сотых — сильнее. На 50-м и 100-м уровнях открываются особые свойства.', every);
       }
       box.append(row({ set: 'up', id: u.id, attr: 'data-up', level: n, title: u.title, locked: !unlocked, cls: unlocked ? '' : 'locked', text: unlocked ? description : requirement, now: unlocked ? nowText(state, u.id) : '', progress, side }));
     });
@@ -1023,13 +1235,21 @@
       // The king's order and the wanderer show the blade they are about, with its level.
       let pic = MFArt.el('ev', MFArt.sets.ev[id] ? id : 'order', 'mf-ev-pic');
       if ((id === 'order' || id === 'wanderer') && e && e.level) pic = bladePic(e.level);
-      view.event.append(pic, body, ...btns);
+      view.eventChip = h('span', { class: 'mf-ev-chip g-num' });
+      const fold = h('button', { class: 'mf-ev-fold', 'aria-label': tx('Развернуть событие'), onclick: () => { view.eventOpenAt = now(); view.event.classList.remove('folded'); } }, view.eventChip);
+      view.event.append(fold, pic, body, ...btns);
+      view.event.classList.remove('folded');
+      view.event.style.setProperty('--mf-ev-pic', MFArt.has('ev', id) ? 'url(' + MFArt.url('ev', id) + ')' : 'none');
+      view.eventOpenAt = t;
     }
+    // Left open for a few seconds, it folds to its picture and the time left; a tap opens it again.
+    if (key && !view.event.classList.contains('folded') && t - (view.eventOpenAt || t) > 6000) view.event.classList.add('folded');
     if (view.eventLeft) {
       if (key === 'starfall-left' || (e && e.id === 'starfall')) view.eventLeft.textContent = tx('{} с', Math.max(0, Math.ceil((state.run.starfallUntil - t) / 1000)));
       else if (key === 'storm-left' || (e && e.id === 'storm')) view.eventLeft.textContent = tx('ещё {}', state.run.stormLeft);
       else if (e && e.id === 'order') view.eventLeft.textContent = tx('осталось {} · награда {}', g.fmt.time(left), g.fmt(e.reward));
       else view.eventLeft.textContent = tx('{} с', left);
+      if (view.eventChip) view.eventChip.textContent = view.eventLeft.textContent.replace(/ · .*$/, '');
     }
   }
 
@@ -1056,6 +1276,34 @@
     view.waveLabel.textContent = tx(r.farm ? 'Фарм · волна {}' : boss ? 'Волна {} · босс' : 'Волна {}', r.wave);
     const behavior = { armored: 'Панцирный', regenerator: 'Восстанавливается', channeler: 'Заклинатель' }[encounter.kind];
     view.monsterName.textContent = tx(m.title) + (behavior ? ' · ' + tx(behavior) : '');
+    const effect = modEffect(state, m);
+    view.monsterName.classList.toggle('rare', !!m.mod && m.mod !== 'regal');
+    view.monsterName.title = m.mod && view.monsters && view.monsters.mods[m.mod] ? tx(view.monsters.mods[m.mod].text || '') + (effect ? ' (' + effect + ')' : '') : tx(m.text || '');
+    // A new world: its name once, as the road leads there.
+    const here = worldOf(r.wave);
+    if (here && !r.farm) {
+      if (view.worldIndex >= 0 && here.index > view.worldIndex) g.flash('sparkle', tx('Новые земли'), tx(here.world.title));
+      view.worldIndex = here.index;
+    }
+    // A rare monster at the gate, and what one left when beaten.
+    const serial = state.run.encounter ? state.run.encounter.serial : 0;
+    if (serial !== view.modSerial) {
+      if (view.modSerial >= 0 && m.mod && m.mod !== 'regal') {
+        view.info.textContent = tx('Редкий враг: {}', m.title) + (effect ? ' — ' + effect : '');
+        view.infoUntil = t + 3200;
+        g.sfx('clang');
+      }
+      view.modSerial = serial;
+    }
+    const lastMod = r.lastMod;
+    const modKey = lastMod ? lastMod.serial + ':' + lastMod.id : '';
+    if (modKey && modKey !== view.modKill) {
+      if (view.modKill && t - (lastMod.at || 0) < 4000) {
+        view.floats.push({ x: view.w * 0.62, y: (view.floatTop || 40) + 30, text: '+' + g.fmt(Big.of(lastMod.gold)) + (lastMod.blades ? ' · ' + tx('+{} клинка', lastMod.blades) : ''), crit: true, at: t });
+        g.sfx('coin');
+      }
+      view.modKill = modKey;
+    }
     const hpShare = Big.isZero(Big.of(r.hpMax)) ? 0 : Math.max(0, Math.min(1, Big.toNumber(Big.div(r.hp, r.hpMax))));
     view.hpFill.style.width = (hpShare * 100) + '%';
     view.hpText.textContent = g.fmt(r.hp) + ' / ' + g.fmt(r.hpMax);
@@ -1107,7 +1355,7 @@
     view.meet.disabled = !encounter.canPrepare || encounter.meetCooldown > 0 || encounter.remaining <= c['encounter.meet.minSec'];
     view.meet.textContent = encounter.prepared === 'meet' ? tx('Выходим навстречу') : encounter.meetCooldown > 0 ? tx('Встретить · {} с', Math.ceil(encounter.meetCooldown)) : tx('Встретить · −{} с', c['encounter.meet.cutSec']);
     view.aim.disabled = !encounter.canPrepare;
-    view.aim.textContent = encounter.prepared === 'aim' ? tx('Первый залп усилен') : tx('Прицелиться · +{}', pct(c['encounter.aim.bonus']));
+    view.aim.textContent = encounter.prepared === 'aim' ? tx('Первый залп усилен') : tx('Прицел · +{}', pct(c['encounter.aim.bonus']));
     if (changedPreparation) size();
 
     // the context buttons
@@ -1120,10 +1368,16 @@
       const on = sim.cryOn(state, t);
       const wait = Math.max(0, Math.ceil((r.cryReadyAt - t) / 1000));
       view.cry.disabled = on || wait > 0;
-      view.cry.textContent = on ? tx('Клич звучит') : wait > 0 ? tx('Боевой клич · {}', g.fmt.time(wait)) : tx('Боевой клич');
+      const full = Math.max(1, c['cry.cooldownSec']);
+      view.cry.style.setProperty('--p', on ? 1 : wait > 0 ? String(Math.max(0, Math.min(1, 1 - wait / full))) : 1);
+      view.cry.classList.toggle('ready', !on && wait <= 0);
+      view.cry.classList.toggle('on', on);
+      view.cryTime.textContent = on ? tx('{} с', Math.max(0, Math.ceil((r.cryUntil - t) / 1000))) : wait > 0 ? g.fmt.time(wait) : '';
+      view.cry.setAttribute('aria-label', on ? tx('Клич звучит') : wait > 0 ? tx('Боевой клич · {}', g.fmt.time(wait)) : tx('Боевой клич'));
     }
-    view.context.hidden = view.retry.hidden && view.cry.hidden;
+    view.abilities.hidden = view.cry.hidden && view.outpost.skillbar.hidden && !(view.artifacts && !view.artifacts.quickElement.hidden);
     renderEvent(state);
+    renderOutpostHit();
 
     // the forge
     const full = !sim.freeCells(state, c).length;
@@ -1153,6 +1407,10 @@
     if (view.chestSub.textContent !== receipt) view.chestSub.textContent = receipt;
     view.chest.classList.toggle('proceeds', view.saleUntil > t);
     view.masterSub.textContent = coals ? tx('угли {}', g.fmt(Big.of(sim.forgeLayer(state).currency, 0))) : tx('с волны {}', c['coals.fromWave']);
+    const affordable = sim.UP.filter((u) => (!u.rune || sim.runesOpen(state, c)) && sim.upOpen(state, c, u.id) && Big.gte(r.gold, sim.upCost(state, c, u.id))).length;
+    view.upBadge.hidden = !affordable;
+    if (affordable) view.upBadge.textContent = affordable > 9 ? '9+' : String(affordable);
+    view.upBtn.setAttribute('aria-label', affordable ? tx('Улучшения, доступно {}', affordable) : tx('Улучшения'));
 
     if (g.layout === 'wide') fillUpgrades(view.panel, false);
     else if (view.sheetKind === 'up' && view.upList) fillUpgrades(view.upList, false);
@@ -1189,6 +1447,18 @@
     if (state.meta.feats && state.meta.feats.lastSecond) g.achieve('last-second');
   }
 
+  /** The button over the heroes at the gate: a «!» when a hero waits for recruiting or a blade, a chip before the first one. */
+  function renderOutpostHit() {
+    const model = view.outpost.inspect().model;
+    if (!model) return;
+    const someone = model.heroes.some((x) => x.active) || model.pets.some((x) => x.selected) || model.dragon.unlocked;
+    const waiting = model.heroes.some((x) => (x.available && !x.unlocked) || (x.active && !x.equipment)) || (model.unlocks.pets && !model.pets.some((x) => x.selected) && model.pets.some((x) => x.available));
+    view.outpostHit.classList.toggle('empty', !someone);
+    view.outpostBadge.hidden = !waiting;
+    const chip = someone ? '' : model.nextUnlock ? tx('Форпост · волна {}', model.nextUnlock.wave) : tx('Форпост');
+    if (view.outpostChip.textContent !== chip) view.outpostChip.textContent = chip;
+  }
+
   // ---- the gate on the canvas: the monster walks up, strikes flash as short lines ----
 
   function animate(state, game, dt) {
@@ -1208,7 +1478,7 @@
     // archway on the left, the road and the hills behind.
     const top = view.bars.offsetTop + view.bars.offsetHeight + view.bars.offsetParent.offsetTop + 6;
     const gx = Math.max(30, W * 0.12);
-    MFArt.gate(ctx, W, H, gx, top, t);
+    const floor = MFArt.gate(ctx, W, H, gx, top, t, view.monster && view.monster.world);
     // the monster
     const walkTotal = (view.encounter && view.encounter.total) || c['wave.walkSec'];
     const walk = walkTotal > 0 ? Math.max(0, Math.min(1, r.walkT / walkTotal)) : 0;
@@ -1221,19 +1491,30 @@
     // The monster stands on the road in front of the gate, whole in the frame at any width: a
     // boss fills the room under the bars, the others are a size smaller. It comes from the far
     // end of the road (never from behind the edge), fading in on its first steps.
-    const ground = H - 8;
+    // On the road of the backdrop, never lower than the old line at the bottom.
+    const ground = Math.max(top + 24, Math.min(H - 8, floor || H - 8));
     const room = ground - top - 2;
     // In a low gate it stands in its column on the right and grows as it comes nearer.
     const full = view.tight ? view.monSize : Math.max(18, Math.min(room, W * 0.3, 190));
     const size = full * (m.boss ? 1 : 0.86) * (view.tight ? 1 - 0.3 * walk : 1);
-    const stand = view.tight ? W - 8 - view.monSize * 0.5 : Math.min(gx + 38 + size * 0.56, W - size * 0.56);
+    // It stops in the middle of the road: the gate and the squad keep the left of the scene.
+    const stand = view.tight ? W - 8 - view.monSize * 0.5 : Math.min(Math.max(gx + 38 + size * 0.56, W * 0.58), W - size * 0.56);
     const far = Math.max(stand, W - size * 0.56);
     const mx = view.tight ? stand : stand + walk * (far - stand);
     const my = ground - size * 0.5;
     view.floatTop = top + 14;
     const hit = view.hitAt ? Math.max(0, 1 - (t - view.hitAt) / 160) : 0;
-    MFMonsters.draw(ctx, m, mx, ground + 2, size, view.still ? 0 : t, { walk: walk > 0 && !view.still, hit: walk > 0 ? 0 : hit, alpha: walk > 0 ? Math.min(1, (1 - walk) / 0.12) : 1, accent });
-    if (!view.tight) view.outpost.draw(ctx, { x: 4, y: top, width: Math.max(70, Math.min(W * 0.30, mx - size * 0.5 - 8)), height: Math.max(0, ground - top) }, t / 1000, view.still);
+    MFMonsters.draw(ctx, m, mx, ground + 2, size, view.still ? 0 : t, { walk: walk > 0 && !view.still, hit: walk > 0 ? 0 : hit, alpha: walk > 0 ? Math.min(1, (1 - walk) / 0.12) : 1, accent, room: Math.max(18, room) });
+    if (top !== view.headTop) { view.headTop = top; view.gate.style.setProperty('--mf-under-head', Math.round(top) + 'px'); }
+    const outpostBox = { x: 4, y: top, width: Math.max(70, Math.min(W * 0.42, mx - size * 0.5 - 8)), height: Math.max(0, ground - top) };
+    if (!view.tight) view.outpost.draw(ctx, outpostBox, t / 1000, view.still);
+    const boxKey = view.tight ? 'tight' : [outpostBox.x, outpostBox.y, outpostBox.width, outpostBox.height].map(Math.round).join(',');
+    if (boxKey !== view.outpostBoxKey) {
+      view.outpostBoxKey = boxKey;
+      const st = view.outpostHit.style;
+      if (view.tight) { st.left = '4px'; st.top = ''; st.bottom = '4px'; st.width = '72px'; st.height = '40px'; }
+      else { st.left = Math.round(outpostBox.x) + 'px'; st.top = Math.round(outpostBox.y) + 'px'; st.bottom = ''; st.width = Math.round(outpostBox.width) + 'px'; st.height = Math.round(outpostBox.height) + 'px'; }
+    }
     if (view.encounter && view.encounter.kind !== 'plain') {
       ctx.strokeStyle = view.encounter.kind === 'armored' ? '#b9c8dc' : view.encounter.kind === 'regenerator' ? '#8cc7a8' : '#b3a0dc';
       ctx.lineWidth = 2;
@@ -1300,6 +1581,8 @@
     master: openMaster,
     close: closeSheet,
     state: () => g.state,
+    config: () => cfg(),
+    act: (fn) => g.act(fn),
     cellOf: (i) => view.cells[i] || null
   };
 

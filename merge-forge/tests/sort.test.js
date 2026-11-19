@@ -22,7 +22,7 @@ function sameContents(a, b) {
   assert.deepStrictEqual(a.slice().sort((p, q) => p - q), b.slice().sort((p, q) => p - q));
 }
 
-test('20 клеток: уровни убывают в порядке открытия, одинаковые клинки не сливаются', () => {
+test('начальная наковальня: уровни убывают в порядке открытия, одинаковые клинки не сливаются', () => {
   const state = fresh();
   put(state, x.cfg, [0, 4, 2, 4, 10, 1, 0, 3]);
   state.run.pending = [30, 31];
@@ -31,7 +31,7 @@ test('20 клеток: уровни убывают в порядке откры�
   const grid = state.run.grid;
   assert.strictEqual(x.sim.sortGrid(state, x.cfg), true);
   assert.strictEqual(state.run.grid, grid, 'сохраняется сам массив поля');
-  assert.deepStrictEqual(values(state, x.cfg), [10, 4, 4, 3, 2, 1].concat(Array(14).fill(0)));
+  assert.deepStrictEqual(values(state, x.cfg), [10, 4, 4, 3, 2, 1].concat(Array(x.sim.openCells(state, x.cfg).length - 6).fill(0)));
   sameContents(before, values(state, x.cfg));
   assert.strictEqual(withoutGrid(state), other);
   assert.strictEqual(x.sim.sortGrid(state, x.cfg), false);
@@ -81,10 +81,12 @@ test('до открытия рун будущие гнёзда сортирую�
   const state = fresh();
   state.run.maxWave = x.cfg['rune.fromWave'] - 1;
   put(state, x.cfg, []);
-  state.run.grid[x.sim.SOCKETS[0]] = 9;
+  const socket = x.sim.socketCells(state, x.cfg)[0];
+  assert.ok(x.sim.isOpen(state, x.cfg, socket), 'the first socket is on the anvil a run starts with');
+  state.run.grid[socket] = 9;
   assert.strictEqual(x.sim.sortGrid(state, x.cfg), true);
   assert.strictEqual(state.run.grid[x.sim.openCells(state, x.cfg)[0]], 9);
-  assert.strictEqual(state.run.grid[x.sim.SOCKETS[0]], 0);
+  assert.strictEqual(state.run.grid[socket], 0);
 });
 
 test('закрытая клетка со старым содержимым и неизвестные поля сохранения не меняются', () => {

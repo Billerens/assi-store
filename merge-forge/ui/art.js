@@ -179,26 +179,102 @@
 
   const SETS = { up: UP, mf: MF, ev: EV, rune: RUNE, ui: UI };
 
+  // ---- the painted pictures: art/<folder>/<id>.webp ---------------------------------------------------
+  // Low-poly pictures for the icons, the heroes, the monsters and the backdrops of the worlds. The SVG
+  // ones above stay for what has none (the lock, the check) and for the canvas while one loads.
+  const RASTER = {
+    ability: ["breath", "mark", "riposte", "seal", "split"],
+    artifact: ["apprenticeGear", "apprenticeSpring", "coinDie", "crySpark", "digestiveCoal", "dragonChime", "dragonCradle", "emberSpark", "emberVein", "feedingBowl", "focusCrystal", "forgeHeart", "frozenClock", "goldenSeal", "heavyPommel", "hotBellows", "hourNeedle", "hungryCrop", "keenLens", "keeperSand", "marchingBoot", "marketBell", "mentorBook", "mossVial", "nightLantern", "pairHammer", "petTalisman", "petTreat", "rallyCrest", "rallyHorn", "runePrism", "sandPin", "shieldAwl", "tradeScale", "twinLever", "warStandard", "whetstone"],
+    bg: ["candy", "desert", "kitchen", "neon", "road", "sea", "space", "swamp", "toys", "volcano"],
+    dragon: ["ash", "egg", "frost", "storm", "young"],
+    ev: ["caravan", "order", "starfall", "storm", "wanderer"],
+    hero: ["bran", "corvin", "eira", "veya"],
+    mf: ["auto", "command", "dragonCare", "memory", "rhythm", "rune", "rush", "startGold", "startLevel", "team", "trade"],
+    monster: ["alien", "angler", "ashwolf", "bat", "cabbage", "cactus", "cheese", "crab", "crystalbug", "cupcake", "cyberdog", "drake", "drone", "duck", "forkspider", "ghostneon", "gingerbread", "goblin", "gremlin", "gummy", "jackal", "jackbox", "jelly", "kettle", "lavagolem", "lollisnake", "marshmallow", "mech", "mosquito", "mummy", "obsidianbug", "octopus", "puffer", "rat", "salamanderfoe", "saucer", "scorpion", "shroom", "slime", "snail", "soldier", "spacesquid", "stump", "teddy", "toad", "toaster", "trashgolem", "troll", "windup", "worm"],
+    pet: ["fox", "raven", "salamander", "turtle"],
+    rune: ["fire", "greed", "ice", "resonant"],
+    ui: ["blow", "boss", "chest", "coal", "forge", "master", "upgrades"],
+    up: ["apprentice", "banner", "bellows", "caravan", "cry", "ember", "eye", "hammer", "hand", "hourglass", "hunter", "melt", "night", "pilot", "purse", "remelt", "runeMason", "runePower", "sharp", "stall", "steel", "temper", "twin", "wide"]
+  };;
+  const BASE = '../art/';
+
+  function has(folder, id) { return !!(RASTER[folder] && RASTER[folder].indexOf(id) >= 0); }
+  function url(folder, id) { return BASE + folder + '/' + id + '.webp'; }
+
+  const images = {};
+  const listeners = [];
+  /** fn(key) runs whenever a picture for the canvas has loaded (to draw it anew). */
+  function onLoad(fn) { listeners.push(fn); }
+
+  /** The loaded image of a picture for the canvas, or null while it loads or when there is none. */
+  function img(folder, id) {
+    if (!has(folder, id)) return null;
+    const key = folder + '/' + id;
+    let im = images[key];
+    if (!im) {
+      im = images[key] = new Image();
+      im.decoding = 'async';
+      im.onload = () => listeners.forEach((fn) => { try { fn(key); } catch (e) { /* a listener's own trouble */ } });
+      im.src = url(folder, id);
+    }
+    return im.complete && im.naturalWidth > 0 ? im : null;
+  }
+
   /** The markup of a picture: MFArt.svg('up', 'bellows'); '' when there is no such one. */
   function svg(set, id) {
     const body = SETS[set] && SETS[set][id];
     return body ? '<svg viewBox="0 0 40 40" aria-hidden="true">' + body + '</svg>' : '';
   }
 
+  /** The painted picture when there is one, else the SVG one. */
+  function html(set, id) {
+    if (has(set, id)) return '<img src="' + url(set, id) + '" alt="" draggable="false" decoding="async">';
+    return svg(set, id);
+  }
+
   /** A <span class="mf-ic …"> with the picture inside (cls — extra classes). */
   function el(set, id, cls) {
     const span = document.createElement('span');
-    span.className = 'mf-ic' + (cls ? ' ' + cls : '');
-    span.innerHTML = svg(set, id);
+    span.className = 'mf-ic' + (has(set, id) ? ' mf-ic-img' : '') + (cls ? ' ' + cls : '');
+    span.innerHTML = html(set, id);
     return span;
   }
 
   /**
-   * The still backdrop of the gate on the canvas: far hills, the road, the wall with the tower,
+   * The backdrop of a world on the canvas: the picture covers the box, its bottom (the road) and its
+   * left side (the gate) always in sight; a shade at the top keeps the wave's name and the bars
+   * readable. False while the picture loads.
+   */
+  // Where the feet stand on each backdrop: a share of its height, on its road (the rest: FLOOR_ANY).
+  const FLOOR = { road: 0.8, neon: 0.84, sea: 0.85, toys: 0.85, desert: 0.88 };
+  const FLOOR_ANY = 0.86;
+
+  function backdrop(ctx, W, H, id, top) {
+    const im = img('bg', id);
+    if (!im) return 0;
+    const scale = Math.max(W / im.naturalWidth, H / im.naturalHeight);
+    const dw = im.naturalWidth * scale;
+    const dh = im.naturalHeight * scale;
+    ctx.drawImage(im, 0, H - dh, dw, dh);
+    const shade = Math.min(H, Math.max(top + 24, H * 0.45));
+    const grad = ctx.createLinearGradient(0, 0, 0, shade);
+    grad.addColorStop(0, 'rgba(10, 11, 14, 0.62)');
+    grad.addColorStop(1, 'rgba(10, 11, 14, 0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, shade);
+    return H - dh + dh * (FLOOR[id] || FLOOR_ANY);
+  }
+
+  /**
+   * The still backdrop of the gate on the canvas — the painted one of a world when it has loaded,
+   * else the drawn one: far hills, the road, the wall with the tower,
    * the dark archway with its grate and two torches (they flicker with t, in ms). `gx` is the
    * middle of the archway, `top` the room the bars take above.
    */
-  function gate(ctx, W, H, gx, top, t) {
+  function gate(ctx, W, H, gx, top, t, world) {
+    // The line the monster and the heroes stand on: the road of the painting, or the bottom.
+    const floor = world ? backdrop(ctx, W, H, world, top) : 0;
+    if (floor) return floor;
     const ground = H - 8;
     // far hills
     ctx.fillStyle = '#1e2025';
@@ -218,7 +294,7 @@
     for (let x = 14; x < W; x += 46) ctx.fillRect(x + (x % 3) * 5, ground + 4, 9, 2);
     const wallTop = Math.max(top, ground - Math.max(30, Math.min(84, (ground - top) * 0.92)));
     const wallH = ground - wallTop;
-    if (wallH < 16) return;
+    if (wallH < 16) return ground;
     const right = gx + 26;
     // the wall and its battlements
     ctx.fillStyle = '#3b3e45';
@@ -282,7 +358,8 @@
       ctx.ellipse(x, y - 1, 1.5, 2.2, 0, 0, Math.PI * 2);
       ctx.fill();
     });
+    return ground;
   }
 
-  window.MFArt = { svg: svg, el: el, gate: gate, sets: SETS };
+  window.MFArt = { svg: svg, html: html, el: el, gate: gate, sets: SETS, raster: RASTER, has: has, img: img, url: url, onLoad: onLoad };
 })();
