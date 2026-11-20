@@ -209,4 +209,53 @@ test('звёздный металл: каждый слиток умножает 
   assert.strictEqual(S.coalsGain(state, cfg, 100), Math.floor(plain * cfg['star.coalMult'] * cfg['star.coalMult']));
 });
 
+test('длительность: открывается с приёмом, база × (1 + шаг × уровень), у удара её нет', () => {
+  const { state } = fresh();
+  assert.ok(!S.UP.some((u) => u.id === 'strikeDur'), 'мгновенный удар не длится');
+  for (const id of ['cry', 'midas', 'fury']) {
+    const dur = id + 'Dur', sec = cfg[S.SKILLS[id].sec];
+    assert.strictEqual(S.upUnlocked(state, cfg, dur), false, dur + ' без приёма');
+    state.run.up[id] = 1;
+    assert.strictEqual(S.upUnlocked(state, cfg, dur), true, dur + ' с приёмом');
+    close(S.skillDuration(state, cfg, id), sec);
+    state.run.up[dur] = 7;
+    close(S.skillDuration(state, cfg, id), sec * (1 + 7 * cfg['up.' + dur + '.step']));
+  }
+});
+
+test('длительность: предел — длина отката, дальше приём не прерывается; откат короче — предел ниже', () => {
+  const { state } = fresh();
+  state.run.up.midas = 1;
+  const step = cfg['up.midasDur.step'], base = cfg['skill.midas.sec'], cd = cfg['skill.midas.cooldownSec'];
+  const max = S.upMax(state, cfg, 'midasDur');
+  assert.strictEqual(max, Math.ceil((cd / base - 1) / step - 1e-9), 'уровней до длины отката: ' + max);
+  state.run.up.midasDur = max - 1;
+  assert.ok(!S.skillEndless(state, cfg, 'midas'), 'за уровень до предела приём ещё прерывается');
+  state.run.up.midasDur = max;
+  assert.ok(S.skillEndless(state, cfg, 'midas'), 'на пределе длится весь откат');
+  assert.ok(!S.upOpen(state, cfg, 'midasDur'), 'дальше не продаётся');
+  // Used again as soon as it is ready, it never stops.
+  state.run.gold = '1e300';
+  atGate(state);
+  assert.ok(S.useSkill(state, cfg, 'midas', NOW));
+  const ready = NOW + S.skillCooldown(state, cfg, 'midas') * 1000;
+  assert.ok(S.skillOn(state, 'midas', ready - 1), 'ещё действует, когда откат кончается');
+  assert.ok(S.useSkill(state, cfg, 'midas', ready));
+  assert.ok(S.skillOn(state, 'midas', ready + 1000));
+  // A shorter cooldown lowers the limit.
+  state.run.up.midasCd = 10;
+  assert.ok(S.upMax(state, cfg, 'midasDur') < max);
+});
+
+test('«Сапог дозорного»: все длящиеся приёмы дольше; это его собственный эффект', () => {
+  const { state } = fresh();
+  const plain = { cry: S.skillDuration(state, cfg, 'cry'), midas: S.skillDuration(state, cfg, 'midas'), fury: S.skillDuration(state, cfg, 'fury') };
+  own(state, 'marchingBoot', 20);
+  const m = A.modifiers(state, cfg).skillDuration;
+  assert.ok(m > 0 && m <= A.LIMITS.skillDuration);
+  for (const id of ['cry', 'midas', 'fury']) close(S.skillDuration(state, cfg, id), plain[id] * (1 + m), id);
+  assert.strictEqual(S.skillDuration(state, cfg, 'strike'), 0);
+  assert.strictEqual(A.CATALOG.filter((d) => d.effect === 'skillDuration').length, 1);
+});
+
 done('skills');

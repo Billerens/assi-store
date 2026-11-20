@@ -50,7 +50,10 @@
     { id: 'cryCd', title: 'Боевой клич: откат', skill: 'cry', cd: true },
     { id: 'midas', title: 'Золотое касание', skill: 'midas' }, { id: 'midasCd', title: 'Золотое касание: откат', skill: 'midas', cd: true },
     { id: 'strike', title: 'Мощный удар', skill: 'strike' }, { id: 'strikeCd', title: 'Мощный удар: откат', skill: 'strike', cd: true },
-    { id: 'fury', title: 'Ярость кузни', skill: 'fury' }, { id: 'furyCd', title: 'Ярость кузни: откат', skill: 'fury', cd: true }
+    { id: 'fury', title: 'Ярость кузни', skill: 'fury' }, { id: 'furyCd', title: 'Ярость кузни: откат', skill: 'fury', cd: true },
+    { id: 'cryDur', title: 'Боевой клич: длительность', skill: 'cry', dur: true },
+    { id: 'midasDur', title: 'Золотое касание: длительность', skill: 'midas', dur: true },
+    { id: 'furyDur', title: 'Ярость кузни: длительность', skill: 'fury', dur: true }
   ];
   var UP_BY = {};
   UP.forEach(function (u) { UP_BY[u.id] = u; });
@@ -61,7 +64,9 @@
     { id: 'startGold', title: 'Стартовое золото', needs: null },
     { id: 'rush', title: 'Ускоренный ранний ход', needs: null },
     { id: 'startLevel', title: 'Стартовый уровень клинка', needs: 'startGold' },
+    { id: 'thrift', title: 'Бережливость', needs: 'startGold' },
     { id: 'auto', title: 'Автоклик горна', needs: 'rush' },
+    { id: 'kiln', title: 'Глубокая топка', needs: 'rush' },
     { id: 'rune', title: 'Руны мастера', needs: 'startLevel' },
     { id: 'memory', title: 'Память наковальни', needs: 'auto' },
     { id: 'rhythm', title: 'Ритм мастерской', needs: 'auto', outpost: true },
@@ -470,9 +475,11 @@
   function mw(state, cfg) { return Masterworks.modifiers(state, cfg); }
 
   // ---- the skills: «Боевой клич», «Золотое касание», «Мощный удар», «Ярость кузни» ----------------
-  // Each has two upgrades with no last level: its strength (<id>) and its cooldown (<id>Cd: the base
-  // cooldown divided by 1 + step × level). They are used by a tap on the scene, or by themselves
-  // with «Авто» (meta.autoSkills) as soon as they are ready and a foe stands at the gate.
+  // Each has upgrades with no last level: its strength (<id>) and its cooldown (<id>Cd: the base
+  // cooldown divided by 1 + step × level); one that lasts has its duration too (<id>Dur: the base
+  // seconds times 1 + step × level, up to the length of its cooldown — then it never stops). They are
+  // used by a tap on the scene, or by themselves with «Авто» (meta.autoSkills) as soon as they are
+  // ready and a foe stands at the gate.
   var SKILLS = {
     cry: { cd: 'cryCd', sec: 'cry.sec', cooldown: 'cry.cooldownSec' },
     midas: { cd: 'midasCd', sec: 'skill.midas.sec', cooldown: 'skill.midas.cooldownSec' },
@@ -503,16 +510,25 @@
     if (id === 'cry') sec /= 1 + mods.cryRecovery;
     return Math.max(num(cfg['skill.minCooldownSec'], 1), sec);
   }
-  /** Seconds a skill works (0 for the strike, which is one blow). */
-  function skillDuration(state, cfg, id) {
+  /** Seconds a skill works (0 for the strike, which is one blow); `durLevel` in place of its <id>Dur level. */
+  function skillDuration(state, cfg, id, durLevel) {
     var d = SKILLS[id];
     if (!d || !d.sec) return 0;
     var mods = Artifacts.modifiers(state, cfg);
-    var sec = num(cfg[d.sec], 0);
+    var sec = num(cfg[d.sec], 0) * (1 + num(cfg['up.' + id + 'Dur.step'], 0) * (durLevel === undefined ? lvl(state, id + 'Dur') : durLevel));
     if (id === 'fury') sec *= 1 + mods.furyTime;
     if (id === 'cry') sec *= 1 + mods.cryDuration;
+    // «Сапог дозорного»: every skill that lasts, longer.
+    sec *= 1 + num(mods.skillDuration, 0);
     return sec;
   }
+  /** The levels of <id>Dur that still add something: until the skill lasts as long as its cooldown. */
+  function durationRoom(state, cfg, id) {
+    var base = skillDuration(state, cfg, id, 0);
+    return base > 0 ? room(1, skillCooldown(state, cfg, id) / base, num(cfg['up.' + id + 'Dur.step'], 0)) : 0;
+  }
+  /** Whether a skill lasts its whole cooldown: used again as soon as it is ready, it never stops. */
+  function skillEndless(state, cfg, id) { var dur = skillDuration(state, cfg, id); return dur > 0 && dur >= skillCooldown(state, cfg, id) - 1e-9; }
   function skillOn(state, id, now) { return now > 0 && skillTimes(state, id).until > now; }
   function skillReady(state, cfg, id, now) { return !!SKILLS[id] && lvl(state, id) > 0 && now >= skillTimes(state, id).readyAt; }
 
@@ -1715,21 +1731,25 @@
     if (id === 'apprentice') max = Math.min(max, 1 + room(cfg['apprentice.minInterval'], cfg['apprentice.interval'], cfg['up.apprentice.step']));
     if (id === 'night') max = Math.min(max, room(cfg['offline.share'], 1, cfg['up.night.step']));
     if (id === 'runeMason') max = Math.min(max, room(cfg['rune.base'] + mfLevel(state, 'rune'), SOCKETS.length, cfg['up.runeMason.step']));
+    // A skill's duration: up to its cooldown, past which it would not work longer.
+    if (UP_BY[id] && UP_BY[id].dur) max = Math.min(max, durationRoom(state, cfg, UP_BY[id].skill));
     return Math.max(0, max);
   }
 
-  function upCost(state, cfg, id) { return Big.costGeom(cfg['up.' + id + '.base'], cfg['up.' + id + '.growth'], lvl(state, id), 1); }
+  /** «Бережливость»: the share of their price the upgrades for gold cost (1 / (1 + step × level)). */
+  function upDiscount(state, cfg) { return 1 / (1 + mfLevel(state, 'thrift') * num(cfg['mf.thrift.step'], 0)); }
+  /** The price of the first level of an upgrade, with «Бережливость» (a Big). */
+  function upBase(state, cfg, id) { return Big.mul(cfg['up.' + id + '.base'], upDiscount(state, cfg)); }
+  function upCost(state, cfg, id) { return Big.costGeom(upBase(state, cfg, id), cfg['up.' + id + '.growth'], lvl(state, id), 1); }
 
   /** Can the upgrade be bought at all now (not at its cap, open)? */
   function upUnlocked(state, cfg, id) {
     if (id === 'hammer') return state.run.maxWave >= cfg['up.hammer.fromWave'];
     // A skill opens at its wave; its cooldown, once the skill is bought.
     var up = UP_BY[id];
-    if (up && up.skill && up.skill !== 'cry') {
-      if (state.run.maxWave < num(cfg['up.' + up.skill + '.fromWave'], 0)) return false;
-      if (up.cd && !lvl(state, up.skill)) return false;
-    }
-    if (id === 'cryCd' && !lvl(state, 'cry')) return false;
+    if (up && up.skill && up.skill !== 'cry' && state.run.maxWave < num(cfg['up.' + up.skill + '.fromWave'], 0)) return false;
+    // Its cooldown and its duration, once the skill is bought.
+    if (up && (up.cd || up.dur) && !lvl(state, up.skill)) return false;
     if (id === 'ember' || id === 'pilot') return state.run.maxWave >= cfg['up.' + id + '.fromWave'];
     return !((id === 'runeMason' || id === 'runePower') && !runesOpen(state, cfg));
   }
@@ -1934,10 +1954,16 @@
    */
   function starCoals(state, cfg) { return Math.pow(Math.max(1, num(cfg['star.coalMult'], 1)), ingots(state)); }
 
+  /** «Глубокая топка»: the coals of a reset × (1 + step × level). */
+  function kilnCoals(state, cfg) { return 1 + mfLevel(state, 'kiln') * num(cfg['mf.kiln.step'], 0); }
+
+  /** All that multiplies the coals of a reset: the star ingots, the masterworks, «Глубокая топка». */
+  function coalMult(state, cfg) { return starCoals(state, cfg) * (1 + mw(state, cfg).coals) * kilnCoals(state, cfg); }
+
   /** What a reset of a run that reached wave `wave` would give now. */
   function coalsGain(state, cfg, wave) {
     ensure(state);
-    return Math.floor(coalsPay(cfg, coalsFor(cfg, wave), forgeLayer(state).state.paid) * starCoals(state, cfg) * (1 + mw(state, cfg).coals) + 1e-9);
+    return Math.floor(coalsPay(cfg, coalsFor(cfg, wave), forgeLayer(state).state.paid) * coalMult(state, cfg) + 1e-9);
   }
 
   function prestigeGain(state, layerId, cfg) {
@@ -1974,7 +2000,7 @@
     var l = forgeLayer(state);
     if (layerId === L1) {
       var f = coalsFor(cfg, before.run.maxWave);
-      var gain = Math.floor(coalsPay(cfg, f, before.layers[L1] && before.layers[L1].state && before.layers[L1].state.paid) * starCoals(before, cfg) * (1 + mw(before, cfg).coals) + 1e-9);
+      var gain = Math.floor(coalsPay(cfg, f, before.layers[L1] && before.layers[L1].state && before.layers[L1].state.paid) * coalMult(before, cfg) + 1e-9);
       l.state.paid = Math.max(l.state.paid, f);
       l.state.total += gain;
       l.state.record = Math.max(l.state.record, before.run.maxWave);
@@ -2287,7 +2313,7 @@
     buyArtifact: buyArtifact, setArtifactEnabled: setArtifactEnabled, activateArtifact: activateArtifact,
     acceptContract: acceptContract, previewContractDelivery: previewContractDelivery, deliverContract: deliverContract, claimContract: claimContract,
     init: init, tick: tick, offline: offline, prestigeGain: prestigeGain, prestigeHint: prestigeHint, bonus: bonus, onPrestige: onPrestige,
-    SKILLS: SKILLS, SKILL_IDS: SKILL_IDS, skillTimes: skillTimes, skillCooldown: skillCooldown, skillDuration: skillDuration, skillOn: skillOn,
+    SKILLS: SKILLS, SKILL_IDS: SKILL_IDS, skillTimes: skillTimes, skillCooldown: skillCooldown, skillDuration: skillDuration, durationRoom: durationRoom, skillEndless: skillEndless, skillOn: skillOn,
     skillReady: skillReady, useSkill: useSkill, autoSkills: autoSkills, setAutoSkills: setAutoSkills, midasShare: midasShare, foeReward: foeReward,
     strikeSeconds: strikeSeconds, furyBonus: furyBonus,
     migrate: migrate, validate: validate, summary: summary, next: next, chest: chest,
@@ -2306,12 +2332,12 @@
     forgeLevel: forgeLevel, forgeInterval: forgeInterval, forgeSpeed: forgeSpeed, apprenticeInterval: apprenticeInterval, apprenticeSpeed: apprenticeSpeed,
     move: move, mergeNearest: mergeNearest, nearestTwin: nearestTwin, autoMerge: autoMerge, sell: sell, tap: tap,
     workshop: workshop, retry: retry, acceptEvent: acceptEvent, dismissEvent: dismissEvent, maxOnGrid: maxOnGrid, pairLevel: pairLevel,
-    upMax: upMax, upCost: upCost, upOpen: upOpen, buyUp: buyUp, lvl: lvl, upgradeEffective: upgradeEffective, upgradeProgress: upgradeProgress, perk: perk,
+    upMax: upMax, upCost: upCost, upBase: upBase, upDiscount: upDiscount, upOpen: upOpen, buyUp: buyUp, lvl: lvl, upgradeEffective: upgradeEffective, upgradeProgress: upgradeProgress, perk: perk,
     MODS: MODS, BOSS_MODS: BOSS_MODS, modOf: modOf, pickMod: pickMod, currentMod: currentMod, hash01: hash01,
     runupWalk: runupWalk, canMeet: canMeet, setAutoMeet: setAutoMeet,
     overcrit: overcrit, resonance: resonance, resonates: resonates, overheatLevels: overheatLevels, burstMult: burstMult, room: room,
     spawn: spawn, kill: kill, newEncounter: newEncounter,
-    mfLevel: mfLevel, mfMax: mfMax, mfCost: mfCost, mfOpen: mfOpen, buyMf: buyMf, startGold: startGold, startGoldAt: startGoldAt, rushWaves: rushWaves, memoryCap: memoryCap, coalsFor: coalsFor, coalsGain: coalsGain, coalsPay: coalsPay, starCoals: starCoals,
+    mfLevel: mfLevel, mfMax: mfMax, mfCost: mfCost, mfOpen: mfOpen, buyMf: buyMf, startGold: startGold, startGoldAt: startGoldAt, rushWaves: rushWaves, memoryCap: memoryCap, coalsFor: coalsFor, coalsGain: coalsGain, coalsPay: coalsPay, coalMult: coalMult, kilnCoals: kilnCoals, starCoals: starCoals,
     soft: soft, autoTaps: autoTaps, eventSpeed: eventSpeed, runePower: runePower,
     forgeLayer: forgeLayer, starLayer: starLayer, coalsAll: coalsAll,
     cheapest: cheapest, botPlay: botPlay, cry: cry, bellows: bellows, startEvent: startEvent,

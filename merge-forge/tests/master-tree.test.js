@@ -68,4 +68,38 @@ test('Командный строй: третье и четвёртое мест
   assert.ok(Math.abs(more / base - (1 + 3 * cfg['mf.command.power'])) < 1e-9);
 });
 
+test('Бережливость: каждое улучшение за золото дешевле в 1 + шаг × уровень раз, без последнего уровня', () => {
+  const { state } = fresh();
+  const plain = x.Big.toNumber(S.upCost(state, cfg, 'sharp'));
+  assert.ok(!S.mfOpen(state, cfg, 'thrift'), 'сначала «Стартовое золото»');
+  assert.ok(S.buyMf(state, cfg, 'startGold'));
+  for (let i = 0; i < 4; i++) assert.ok(S.buyMf(state, cfg, 'thrift'));
+  const k = 1 + 4 * cfg['mf.thrift.step'];
+  assert.ok(Math.abs(x.Big.toNumber(S.upCost(state, cfg, 'sharp')) * k / plain - 1) < 1e-9);
+  assert.ok(S.mfOpen(state, cfg, 'thrift'), 'у узла нет последнего уровня');
+  // Buying spends exactly the cheaper price.
+  const price = x.Big.toNumber(S.upCost(state, cfg, 'sharp'));
+  state.run.gold = x.Big.str(S.upCost(state, cfg, 'sharp'));
+  assert.ok(S.buyUp(state, cfg, 'sharp'));
+  assert.ok(x.Big.toNumber(x.Big.of(state.run.gold)) <= price * 1e-9, 'осталось ' + state.run.gold + ' из ' + price);
+  // The first level's price the screen counts bulk purchases from.
+  assert.ok(Math.abs(x.Big.toNumber(S.upBase(state, cfg, 'eye')) * k / Number(cfg['up.eye.base']) - 1) < 1e-9);
+});
+
+test('Глубокая топка: углей за перековку больше на шаг за уровень, и перековка даёт ровно обещанное', () => {
+  const { state, rng } = fresh();
+  state.run.maxWave = 120;
+  const plain = S.coalsGain(state, cfg, 120);
+  assert.ok(plain > 0);
+  assert.ok(!S.mfOpen(state, cfg, 'kiln'), 'сначала «Ускоренный ранний ход»');
+  assert.ok(S.buyMf(state, cfg, 'rush'));
+  for (let i = 0; i < 3; i++) assert.ok(S.buyMf(state, cfg, 'kiln'));
+  const want = S.coalsGain(state, cfg, 120);
+  assert.strictEqual(want, Math.floor(S.coalsPay(cfg, S.coalsFor(cfg, 120), S.forgeLayer(state).state.paid) * (1 + 3 * cfg['mf.kiln.step']) + 1e-9));
+  assert.ok(want > plain);
+  const before = x.Big.toNumber(x.Big.of(S.forgeLayer(state).currency));
+  assert.ok(x.Core.prestige(S, x.game, state, 'forge', ctxOf(x, NOW, rng)).ok);
+  assert.strictEqual(x.Big.toNumber(x.Big.of(S.forgeLayer(state).currency)) - before, want, 'перековка дала не то, что обещал экран');
+});
+
 done('master tree');

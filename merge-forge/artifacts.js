@@ -10,7 +10,7 @@
     bossSeconds: 14, apprenticeSpeed: 0.5, offlineIncome: 0.15, runePower: 0.5, petXp: 0.75, heroXp: 0.75,
     dragonDigest: 0.6, dragonCharge: 0.5, cryRecovery: 0.5, walkSpeed: 0.4, bossSlow: 0.6, dragonMeals: 8,
     enemyHp: 0.4, bossDamage: 1.5, bossGold: 1.5, waveSkip: 0.25, rareChance: 1.5, midasPower: 1.5, strikePower: 1.5,
-    furyTime: 1, cryDuration: 1, skillCooldown: 0.4, tapChance: 1 };
+    furyTime: 1, cryDuration: 1, skillCooldown: 0.4, tapChance: 1, skillDuration: 0.5 };
   var LABELS = { damage: 'Урон всех клинков: +{}%', gold: 'Золото за врагов: +{}%', forgeSpeed: 'Скорость ковки: +{}%',
     sale: 'Выручка продажи: +{}%', critChance: 'Шанс крита: +{} п.п.', critMult: 'Сила критов: +{}%', bossSeconds: 'Время босса: +{} с',
     apprenticeSpeed: 'Скорость подмастерья: +{}%', offlineIncome: 'Офлайн-золото: +{}%', runePower: 'Сила рун: +{}%',
@@ -19,7 +19,7 @@
     dragonMeals: 'Кормлений дракона за забег: +{}', enemyHp: 'Здоровье врагов: −{}%', bossDamage: 'Урон по боссам: +{}%',
     bossGold: 'Золото с боссов: +{}%', waveSkip: 'Шанс перескочить волну: {}%', rareChance: 'Редкие враги чаще на {}%',
     midasPower: 'Золотое касание: +{}%', strikePower: 'Мощный удар: +{}%', furyTime: 'Ярость кузни дольше на {}%',
-    cryDuration: 'Боевой клич дольше на {}%', skillCooldown: 'Приёмы восстанавливаются быстрее на {}%', tapChance: 'Шанс артефактов ручного удара: +{}%' };
+    cryDuration: 'Боевой клич дольше на {}%', skillCooldown: 'Приёмы восстанавливаются быстрее на {}%', tapChance: 'Шанс артефактов ручного удара: +{}%', skillDuration: 'Приёмы длятся дольше на {}%' };
   function relic(id, title, kind, stage, icon, description, effect, maximum, options) {
     var r = { id: id, title: title, kind: kind, stage: stage, wave: WAVES[stage], icon: icon, description: description,
       effect: effect, maximum: maximum, baseCost: [2, 3, 4, 6, 9, 14][stage] };
@@ -60,7 +60,7 @@
     relic('focusCrystal', 'Кристалл точного удара', 'active', 4, 'eye', 'Временно повышает шанс крита. После предела шанса излишек усиливает криты с той же средней отдачей.', 'critChance', 0.08, { duration: 12, recharge: 100 }),
     relic('crySpark', 'Искра боевого рога', 'click', 5, 'cry', 'Ручной удар иногда сокращает оставшееся восстановление боевого клича.', 'crySeconds', 1),
     relic('digestiveCoal', 'Уголь долгого жара', 'click', 5, 'temper', 'Ручной удар иногда помогает переварить уже отданный клинок; сам не выбирает корм.', 'digestSeconds', 1.5),
-    relic('marchingBoot', 'Сапог дозорного', 'passive', 5, 'hunter', 'Сокращает ожидание подходящего врага, оставляя время на подготовку.', 'walkSpeed', 0.25),
+    relic('marchingBoot', 'Сапог дозорного', 'passive', 5, 'hunter', 'Дозорный выигрывает время: клич, касание и ярость действуют дольше.', 'skillDuration', 0.3),
     relic('rallyHorn', 'Рог сбора', 'active', 5, 'cry', 'По нажатию сокращает оставшееся восстановление всех приёмов героев. Подготовленный удар не дублируется.', 'heroCooldown', 8, { recharge: 120 }),
     relic('feedingBowl', 'Чаша тёплого пепла', 'active', 5, 'temper', 'По нажатию продвигает переваривание существующей очереди дракона. Новые клинки не расходуются.', 'digestSeconds', 8, { recharge: 90 }),
     relic('twinLever', 'Рычаг близнецов', 'active', 5, 'apprentice', 'По нажатию выполняет одно обычное слияние подходящей пары. Улучшения сокращают собственный откат.', 'merge', 1, { recharge: 120 }),

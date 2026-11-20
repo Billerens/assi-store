@@ -189,13 +189,13 @@
     dragon: ["ash", "egg", "frost", "storm", "young"],
     ev: ["caravan", "order", "starfall", "storm", "wanderer"],
     hero: ["bran", "corvin", "eira", "veya"],
-    mf: ["auto", "command", "dragonCare", "memory", "rhythm", "rune", "rush", "startGold", "startLevel", "team", "trade"],
+    mf: ["auto", "command", "dragonCare", "kiln", "memory", "rhythm", "rune", "rush", "startGold", "startLevel", "team", "thrift", "trade"],
     mw: ["mwBoots", "mwChest", "mwHelmet", "mwLegs", "mwRing", "mwShield", "mwSword"],
     monster: ["alien", "angler", "ashwolf", "bat", "cabbage", "cactus", "cheese", "crab", "crystalbug", "cupcake", "cyberdog", "drake", "drone", "duck", "forkspider", "ghostneon", "gingerbread", "goblin", "gremlin", "gummy", "jackal", "jackbox", "jelly", "kettle", "lavagolem", "lollisnake", "marshmallow", "mech", "mosquito", "mummy", "obsidianbug", "octopus", "puffer", "rat", "salamanderfoe", "saucer", "scorpion", "shroom", "slime", "snail", "soldier", "spacesquid", "stump", "teddy", "toad", "toaster", "trashgolem", "troll", "windup", "worm"],
     pet: ["fox", "raven", "salamander", "turtle"],
     rune: ["fire", "greed", "ice", "resonant"],
     ui: ["blow", "boss", "chest", "coal", "forge", "master", "upgrades"],
-    up: ["apprentice", "banner", "bellows", "caravan", "cry", "cryCd", "ember", "eye", "fury", "furyCd", "hammer", "hand", "hourglass", "hunter", "melt", "midas", "midasCd", "night", "pilot", "purse", "remelt", "runeMason", "runePower", "sharp", "stall", "steel", "strike", "strikeCd", "temper", "twin", "wide"]
+    up: ["apprentice", "banner", "bellows", "caravan", "cry", "cryCd", "cryDur", "ember", "eye", "fury", "furyCd", "furyDur", "hammer", "hand", "hourglass", "hunter", "melt", "midas", "midasCd", "midasDur", "night", "pilot", "purse", "remelt", "runeMason", "runePower", "sharp", "stall", "steel", "strike", "strikeCd", "temper", "twin", "wide"]
   };;
   const BASE = '../art/';
 

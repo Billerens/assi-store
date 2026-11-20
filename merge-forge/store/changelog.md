@@ -1,5 +1,13 @@
 # Merge Forge: what’s new
 
+## 0.8.0 — 2026-11-21
+
+- **No waiting at the gate.** A foe no longer walks to the gate: the next one stands there at once and the blades strike it without a pause. The preparations for the approach — Aim, Meet and the run-up — are no longer shown.
+- **Skill duration.** The Battle cry, the Golden touch and the Forge fury get a new upgrade, duration: +10% a level, until the skill lasts its whole cooldown. Then it never stops, and the line goes to Mastered.
+- **Thrift**, a new node of the Master's forge (after Starting gold): every upgrade for gold is cheaper, its price divided by 1 + 0.1 a level, without a limit.
+- **Deep firebox**, a new node of the Master's forge (after Quick early run): 10% more coals for a reforge a level, without a limit.
+- **The Sentry’s Boot**, instead of the approach speed that is of no use now, makes the lasting skills last longer.
+
 ## 0.7.1 — 2026-11-21
 
 - The package carries the Apache-2.0 license, as the whole store does; nothing in the game changed.

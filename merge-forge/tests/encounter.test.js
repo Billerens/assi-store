@@ -6,8 +6,10 @@ function near(actual,expected,message){
  const a=B.of(actual),b=B.of(expected),den=B.max(1,B.max(B.abs(a),B.abs(b)));
  assert.ok(B.toNumber(B.div(B.abs(B.sub(a,b)),den))<1e-10,message||B.str(a)+' != '+B.str(b));
 }
+// These tests are about the approach to the gate, which a config may still set (wave.walkSec);
+// the game's own has none since 0.8.0: see «без подхода» below.
 function world(wave,hero){
- const cfg={...x.cfg,'crit.chance':0,'crit.maxChance':0};const rng=x.Rng.make(724);
+ const cfg={...x.cfg,'crit.chance':0,'crit.maxChance':0,'wave.walkSec':5};const rng=x.Rng.make(724);
  const state=x.Core.newState(x.game,S,{...ctxOf(x,NOW,rng),config:cfg});S.ensure(state);
  const r=state.run;r.grid.fill(0);r.wave=wave||21;r.maxWave=Math.max(30,r.wave);r.farm=false;
  r.hp='1e4';r.hpMax='1e4';r.walkT=0;r.volleyT=cfg['combat.hitSec'];r.bossT=0;r.forgeT=1e9;r.eventT=1e9;
@@ -156,6 +158,17 @@ test('«Авто»: кузня сама встречает врага, когд�
  near(S.runupWalk(c,full,0),full);near(S.runupWalk(c,full,1),full*c['runup.factor']);
  near(S.runupWalk(c,full,50),c['runup.minSec']);
  near(S.runupWalk({...c,'runup.factor':1},full,Infinity),full,'доля 1 — разбега нет');near(S.runupWalk(c,full,Infinity),c['runup.minSec']);
+});
+
+test('без подхода: следующий враг сразу у ворот, клинки бьют без паузы, готовиться не к чему',()=>{
+ const cfg={...x.cfg,'crit.chance':0,'crit.maxChance':0};assert.equal(cfg['wave.walkSec'],0,'у игры нет подхода');
+ const rng=x.Rng.make(725);const state=x.Core.newState(x.game,S,{...ctxOf(x,NOW,rng),config:cfg});S.ensure(state);
+ const r=state.run;r.grid.fill(0);r.grid[S.openCells(state,cfg)[0]]=60;r.wave=21;r.maxWave=40;r.farm=false;r.hp='1';r.hpMax='1';r.walkT=0;
+ const step=sec=>S.tick(state,sec,{...ctxOf(x,NOW,rng),config:cfg});
+ step(cfg['combat.hitSec']);assert.equal(r.wave,22,'первый враг пал');assert.equal(r.walkT,0,'новый враг уже у ворот');
+ assert.equal(S.encounterView(state,cfg).walking,false);assert.equal(S.encounterView(state,cfg).canPrepare,false,'«Встретить» и «Прицел» не предлагаются');
+ assert.equal(S.canMeet(state,cfg),false);assert.equal(S.prepare(state,cfg,'aim'),false);
+ const volleys=r.volleys;r.hp='1';step(cfg['combat.hitSec']);assert.equal(r.volleys,volleys+1,'залп по новому врагу через обычный интервал');assert.equal(r.wave,23);
 });
 
 test('разбег в бою: враг, павший в первом залпе, ускоряет подход следующего; выживший сбрасывает',()=>{

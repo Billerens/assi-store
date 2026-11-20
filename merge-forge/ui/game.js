@@ -1036,7 +1036,7 @@
       pop(view.gate, tx('Не успели'), 'bad big', { life: 1400 });
     }
     const runup = r.runup || 0;
-    if (runup > view.lastRunup && runup >= 2) bump(view.waveLabel, 'punch');
+    if (runup > view.lastRunup && runup >= 2 && cfg()['wave.walkSec'] > 0) bump(view.waveLabel, 'punch');
     view.lastRunup = runup;
     view.gate.classList.toggle('cry', sim.cryOn(state, t));
     view.gate.classList.toggle('midas', sim.skillOn(state, 'midas', t));
@@ -1229,7 +1229,8 @@
   function bulk(state, c, id) {
     const n = lvl(state, id);
     const room = Math.max(1, sim.upMax(state, c, id) - n);
-    const base = c['up.' + id + '.base'];
+    // «Бережливость» of «Горн мастера» makes every level cheaper.
+    const base = sim.upBase(state, c, id);
     const growth = c['up.' + id + '.growth'];
     const amount = view.buyAmount || 1;
     let count = amount === 'max' ? Big.maxBuy(state.run.gold, base, growth, n) : amount;
@@ -1272,6 +1273,9 @@
     midasCd: () => tx('Откат приёма короче с каждым уровнем'),
     strikeCd: () => tx('Откат приёма короче с каждым уровнем'),
     furyCd: () => tx('Откат приёма короче с каждым уровнем'),
+    cryDur: (c) => tx('Приём длится дольше на {} — пока не станет длиться весь откат', pct(c['up.cryDur.step'])),
+    midasDur: (c) => tx('Приём длится дольше на {} — пока не станет длиться весь откат', pct(c['up.midasDur.step'])),
+    furyDur: (c) => tx('Приём длится дольше на {} — пока не станет длиться весь откат', pct(c['up.furyDur.step'])),
     banner: (c) => tx('Урон +{} за каждую десятку волн', pct(c['up.banner.step'])),
     hammer: () => tx('Ручной удар сильнее; прирост постепенно уменьшается'),
     ember: (c) => tx('При полном жаре залпы чаще ещё на {}', pct(c['up.ember.step'])),
@@ -1300,6 +1304,8 @@
     if (id === 'runeMason') return tx('гнёзд {}', sim.socketCount(state, c));
     const up = sim.UP.find((u) => u.id === id);
     if (up && up.cd) return tx('откат {}', g.fmt.time(Math.ceil(sim.skillCooldown(state, c, up.skill))));
+    if (up && up.dur) return sim.skillEndless(state, c, up.skill) ? tx('без перерыва: длится весь откат')
+      : tx('{} с из {} отката', g.fmt(sim.skillDuration(state, c, up.skill), { digits: 1 }), g.fmt.time(Math.ceil(sim.skillCooldown(state, c, up.skill))));
     if (id === 'midas' && n) return tx('{} награды за залп', pct(sim.midasShare(state, c)));
     if (id === 'strike' && n) return tx('{} с урона кузни', g.fmt(sim.strikeSeconds(state, c), { digits: 2 }));
     if (id === 'fury' && n) return tx('крит ×{} на {} с', g.fmt(sim.furyBonus(state, c).mult, { digits: 2 }), g.fmt(sim.skillDuration(state, c, 'fury'), { digits: 2 }));
@@ -1321,7 +1327,7 @@
       { id: 'forge', title: 'Ковка', items: ['bellows', 'steel', 'wide', 'twin', 'melt', 'apprentice', 'hammer'] },
       { id: 'battle', title: 'Бой', items: ['sharp', 'eye', 'hand', 'hourglass', 'temper', 'ember', 'pilot', 'runeMason', 'runePower', 'banner'] },
       { id: 'income', title: 'Доход', items: ['purse', 'hunter', 'caravan', 'night', 'stall'] },
-      { id: 'skills', title: 'Приёмы', items: ['cry', 'cryCd', 'midas', 'midasCd', 'strike', 'strikeCd', 'fury', 'furyCd'] }
+      { id: 'skills', title: 'Приёмы', items: ['cry', 'cryCd', 'cryDur', 'midas', 'midasCd', 'midasDur', 'strike', 'strikeCd', 'fury', 'furyCd', 'furyDur'] }
     ];
     view.upTab = view.upTab || 'forge';
     const group = groups.find(item => item.id === view.upTab) || groups[0];
@@ -1362,7 +1368,7 @@
     if (group.id === 'skills') {
       const on = !!state.meta.autoSkills;
       box.append(h('div', { class: 'mf-skills-head' },
-        h('p', { class: 'g-note' }, tx('Приёмы — кнопки на сцене. У каждого прокачиваются сила и откат, без предела.')),
+        h('p', { class: 'g-note' }, tx('Приёмы — кнопки на сцене. У каждого прокачиваются сила и откат, у длящихся — ещё и длительность.')),
         h('button', { class: 'g-btn small mf-auto-meet' + (on ? ' on' : ''), id: 'skills-auto', 'aria-pressed': String(on), title: tx('Кузня сама применяет каждый готовый приём, пока враг у ворот'),
           onclick: () => { g.act((s) => sim.setAutoSkills(s, !s.meta.autoSkills)); g.sfx('tap'); view.panelKey = ''; fillUpgrades(box, true); } }, tx('Авто'))));
     }
@@ -1377,7 +1383,7 @@
       const n = lvl(state, u.id);
       const unlocked = sim.upUnlocked(state, c, u.id);
       const requirement = c['up.' + u.id + '.fromWave'] ? tx('Откроется с волны {}', c['up.' + u.id + '.fromWave'])
-        : u.cd ? tx('Откроется с приёмом «{}»', tx(SKILL_TITLE[u.skill])) : '';
+        : u.cd || u.dur ? tx('Откроется с приёмом «{}»', tx(SKILL_TITLE[u.skill])) : '';
       let side;
       if (open) {
         const b = bulk(state, c, u.id);
@@ -1424,6 +1430,8 @@
     startGold: (c, n) => tx('Забег начинается с {} золота', g.fmt(sim.startGoldAt(c, n + 1))),
     rush: (c, n) => tx('Первые {} волн — золото ×{}', c['mf.rush.waves'] + c['mf.rush.wavesStep'] * n, c['mf.rush.mult']),
     startLevel: () => tx('Горн начинает на уровень выше'),
+    thrift: (c, n) => tx('Улучшения за золото дешевле: цена ÷{}', g.fmt(1 + c['mf.thrift.step'] * (n + 1), { digits: 2 })),
+    kiln: (c, n) => tx('Углей за перековку больше: +{}', pct(c['mf.kiln.step'] * (n + 1))),
     auto: (c, n) => tx('Горн сам стучит: {} тапа в секунду', g.fmt(sim.autoTaps(c, n + 1), { digits: 2 })),
     rune: (c, n) => (c['rune.base'] + n < sim.SOCKETS.length
       ? tx('Ещё одно гнездо руны с начала забега, руны сильнее на {}', pct(c['mf.rune.power']))
@@ -1442,6 +1450,8 @@
     if (!n) return '';
     if (id === 'startGold') return tx('сейчас {}', g.fmt(sim.startGoldAt(c, n)));
     if (id === 'startLevel') return tx('сейчас +{} ур.', n);
+    if (id === 'thrift') return tx('сейчас цена ×{}', g.fmt(sim.upDiscount(g.state, c), { digits: 2 }));
+    if (id === 'kiln') return tx('сейчас +{}', pct(sim.kilnCoals(g.state, c) - 1));
     if (id === 'auto') return tx('сейчас {} в секунду', g.fmt(sim.autoTaps(c, n), { digits: 2 }));
     if (id === 'rune') return tx('сейчас +{}', pct(c['mf.rune.power'] * n));
     if (id === 'trade') return tx('выручка ×{}', g.fmt(sim.saleMult(g.state, c), { digits: 2 }));
@@ -1815,7 +1825,7 @@
     const boss = sim.isBoss(c, r.wave) && !r.farm;
     const m = monsterOf(state, r.wave);
     view.monster = m;
-    view.waveLabel.textContent = tx(r.farm ? 'Фарм · волна {}' : boss ? 'Волна {} · босс' : 'Волна {}', r.wave) + (!boss && r.runup > 0 ? ' · ' + tx('разбег ×{}', r.runup) : '');
+    view.waveLabel.textContent = tx(r.farm ? 'Фарм · волна {}' : boss ? 'Волна {} · босс' : 'Волна {}', r.wave) + (!boss && r.runup > 0 && c['wave.walkSec'] > 0 ? ' · ' + tx('разбег ×{}', r.runup) : '');
     const behavior = { armored: 'Панцирный', regenerator: 'Восстанавливается', channeler: 'Заклинатель' }[encounter.kind];
     view.monsterName.textContent = tx(m.title) + (behavior ? ' · ' + tx(behavior) : '');
     const effect = modEffect(state, m);
@@ -1908,9 +1918,10 @@
         Big.gt(encounter.shield, 0) ? tx('Панцирь {} · «Раскол» снимает защиту', g.fmt(encounter.shield)) :
         tx(sim.freeCells(state, c).length ? 'Тап — действия · дважды — слить' : 'Поле заполнено · горн продаёт излишки');
     }
-    // While the foe walks: «Встретить», «Авто», «Прицел»; in the fight «Авто» stays alone, small.
+    // While the foe walks: «Встретить», «Авто», «Прицел». With no walk (wave.walkSec 0, since 0.8.0) there is
+    // nothing to prepare for: the foe stands at the gate at once and the panel is not shown.
     const prepOpen = r.maxWave >= c['encounter.prepare.fromWave'];
-    const preparationShown = prepOpen && (encounter.walking || !!g.state.meta.autoMeet);
+    const preparationShown = prepOpen && encounter.walking;
     const changedPreparation = view.preparation.hidden === preparationShown;
     view.preparation.hidden = !preparationShown;
     view.preparation.classList.toggle('fighting', !encounter.walking);
@@ -2058,6 +2069,10 @@
     // the monster
     const walkTotal = (view.encounter && view.encounter.total) || c['wave.walkSec'];
     const walk = walkTotal > 0 ? Math.max(0, Math.min(1, r.walkT / walkTotal)) : 0;
+    // With no walk the next foe is at the gate at once: it only fades in and steps up for a moment,
+    // on the screen alone — the blades are already striking it.
+    if (r.encounterSerial !== view.spawnSerial) { view.spawnSerial = r.encounterSerial; view.spawnAt = t; }
+    const enter = walk > 0 || view.still || !view.spawnAt ? 1 : Math.max(0, Math.min(1, (t - view.spawnAt) / 220));
     const m = view.monster || { shape: 'blob', color: '#7a7f86', boss: false };
     // A gate folded to its bars on a short screen shows no monster.
     if (!view.tight && H - 12 - top < 18) {
@@ -2076,14 +2091,14 @@
     // It stops in the middle of the road: the gate and the squad keep the left of the scene.
     const stand = view.tight ? W - 8 - view.monSize * 0.5 : Math.min(Math.max(gx + 38 + size * 0.56, W * 0.58), W - size * 0.56);
     const far = Math.max(stand, W - size * 0.56);
-    const mx = view.tight ? stand : stand + walk * (far - stand);
+    const mx = (view.tight ? stand : stand + walk * (far - stand)) + (1 - enter) * (1 - enter) * Math.min(36, size * 0.3);
     const my = ground - size * 0.5;
     view.floatTop = top + 14;
     const hit = view.hitAt ? Math.max(0, 1 - (t - view.hitAt) / 160) : 0;
     // A crit lights the foe longer and throws it back a little.
     const critK = view.critAt ? Math.max(0, 1 - (t - view.critAt) / 280) : 0;
     const knock = walk > 0 || view.still ? 0 : critK * critK * Math.min(14, size * 0.12);
-    MFMonsters.draw(ctx, m, mx + knock, ground + 2, size, view.still ? 0 : t, { walk: walk > 0 && !view.still, hit: walk > 0 ? 0 : Math.max(hit, critK), alpha: walk > 0 ? Math.min(1, (1 - walk) / 0.12) : 1, accent, room: Math.max(18, room) });
+    MFMonsters.draw(ctx, m, mx + knock, ground + 2, size, view.still ? 0 : t, { walk: walk > 0 && !view.still, hit: walk > 0 ? 0 : Math.max(hit, critK), alpha: walk > 0 ? Math.min(1, (1 - walk) / 0.12) : enter, accent, room: Math.max(18, room) });
     view.monPos = { x: mx, y: my, size };
     if (top !== view.headTop) { view.headTop = top; view.gate.style.setProperty('--mf-under-head', Math.round(top) + 'px'); }
     const outpostBox = { x: 4, y: top, width: Math.max(70, Math.min(W * 0.42, mx - size * 0.5 - 8)), height: Math.max(0, ground - top) };

@@ -12,7 +12,8 @@ var TAPS = 1;
 
 var checks = kit.standard(__dirname, {
   firstBuySec: 10,
-  prestigeTrips: [3, 6],
+  // Since 0.8.0 a foe stands at the gate at once (wave.walkSec 0): the first reforge may come on the second trip.
+  prestigeTrips: [2, 6],
   taps: TAPS,
   play: function (state, ctx, sim, taps) { return sim.botPlay(state, ctx, taps); }
 });
