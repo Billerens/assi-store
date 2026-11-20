@@ -1144,7 +1144,7 @@
   ],
   "id": "merge-forge",
   "kind": "game",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "networkDomains": [
     "www.w3.org"
   ],
@@ -1156,5 +1156,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.7.0"
+  "version": "0.7.1"
 }

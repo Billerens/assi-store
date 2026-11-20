@@ -24,7 +24,7 @@
       },
       "id": "achievements",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Достижения за реальную жизнь: сон, шаги, привычки, места, траты, экран и игры. Формат для агента — AGENT.md",
@@ -70,7 +70,7 @@
       },
       "id": "alchemist",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Смешивайте стихии и открывайте вещества, от пара до метро; пока есть сеть, модель дописывает дерево рецептов вглубь, а в дороге игра берёт открытия из запаса",
@@ -118,7 +118,7 @@
       },
       "id": "asteroid-colony",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Дроны грызут астероид, исследования открывают производственные цепочки, а когда колония готова, она прыгает к новой звезде",
@@ -165,7 +165,7 @@
       },
       "id": "bedtime-series",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Каждый вечер новая серия интерактивной истории голосом: вы — герой, в сюжете — детали вашего дня, выбор на развилках — голосом, засыпать можно посреди серии",
@@ -213,7 +213,7 @@
       },
       "id": "blocks",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Собирайте линии, берегите серии и спасайте поле инструментами",
@@ -259,7 +259,7 @@
       },
       "id": "conveyors",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Буры, ленты, печи и сборщики на клетчатом участке чужой планеты",
@@ -307,7 +307,7 @@
       },
       "id": "deep-mine",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Бур идёт вниз через слои пород: глубже — твёрже, но богаче, а каждая тысяча метров приносит новую напасть",
@@ -353,7 +353,7 @@
       },
       "id": "dragon-hoard",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Дракон копит золото, рыцари приходят за кучей, сон на век делает его древнее",
@@ -398,7 +398,7 @@
       },
       "id": "draw-guess",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Игра в две стороны: вы рисуете — модель угадывает вслух по ходу; модель рисует штрих за штрихом — вы кричите догадки, телефон слышит верную",
@@ -446,7 +446,7 @@
       },
       "id": "dynasty",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Правитель живёт, богатеет и стареет; его смерть — смена поколения, и на древе рода прибавляется имя",
@@ -492,7 +492,7 @@
       },
       "id": "evolution",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "От капли бульона до звёздных колоний: восемь этапов жизни и новые вселенные с другими законами.",
@@ -538,7 +538,7 @@
       },
       "id": "fishing",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Заброс, подсечка, вываживание — и аквариум, который приносит доход, пока телефон в кармане",
@@ -583,7 +583,7 @@
       },
       "id": "focus",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Таймер работы: телефон уходит в «не беспокоить», сообщения копятся во Входящих, отвлекающие приложения не открываются, в конце — сводка пропущенного",
@@ -629,7 +629,7 @@
       },
       "id": "freeboard",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Пройдите из каюты на мостик, сядьте за штурвал и отправляйтесь в рейс за грузом, на перехват дронов или на поиски минералов.",
@@ -676,7 +676,7 @@
       },
       "id": "game-of-the-day",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Агент делает новую мини-игру для Игротеки — каждый день, через день, по выбранным дням или несколько раз в день; вы играете и оцениваете, удачные остаются, а агент учится вашему вкусу",
@@ -722,7 +722,7 @@
       },
       "id": "garden",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Растения растут по настоящим часам; скрещивая их по точным правилам наследования, выводите новые сорта и собирайте альбом из 258 записей",
@@ -769,7 +769,7 @@
       },
       "id": "hat",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Игра для компании: объясняешь слово, не называя его, а телефон сам слышит, когда его угадали",
@@ -816,7 +816,7 @@
       },
       "id": "health",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Сон, шаги, вода, лекарства по расписанию и привычки с цепочками; разбор сна за неделю и сводка дня для Питомца, Ачивок, Жизни-RPG и Гороскопа",
@@ -861,7 +861,7 @@
       },
       "id": "holidays",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Поводы года на экранах Axiko: тихий снег под Новый год, звезда на Рождество, блины на Масленицу; напоминания о днях рождения близких с черновиком поздравления",
@@ -906,7 +906,7 @@
       },
       "id": "horoscope",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Шуточный прогноз на день из ваших же привычек: доставка по четвергам, недосып, шаги, цепочки. Назавтра звёзды сами проверяют, что сбылось, и считают точность.",
@@ -951,7 +951,7 @@
       },
       "id": "imaginarium",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Личная трёхмерная библиотека. Придумывайте книги, читайте новые главы по запросу и создавайте объёмные вещи для своего зала.",
@@ -998,7 +998,7 @@
       },
       "id": "inbox",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Одна лента сообщений из всех мессенджеров: важно, подождёт, шум; выжимки болтливых групп и ответы прямо из ленты",
@@ -1044,7 +1044,7 @@
       },
       "id": "infinity-layers",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Ступени растят ступени. Сожмите предел в новый слой и измените правила роста.",
@@ -1090,7 +1090,7 @@
       },
       "id": "library",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Собирайте книги, читайте их по таймеру и открывайте залы: знания растят ветви, редкие тома отпирают новые двери, к каждой книге — выдуманная аннотация на поездку",
@@ -1136,7 +1136,7 @@
       },
       "id": "menagerie",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Выводите удивительных зверей, растите породу и побеждайте на турнирах.",
@@ -1160,10 +1160,10 @@
     {
       "archive": {
         "fileCount": 228,
-        "sha256": "92b0b27a310453341e317761670c0d43b8309c3715d308b530c97d60d12a34a2",
-        "size": 3684140,
+        "sha256": "46a3f6797e403e921479ea4a71089b3336277091b8945c609b5223d7af4e57ff",
+        "size": 3684135,
         "unpackedSize": 4543834,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.7.0/merge-forge-0.7.0.zip"
+        "url": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.7.1/merge-forge-0.7.1.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1171,8 +1171,8 @@
       },
       "details": {
         "path": "catalog/details/merge-forge.json",
-        "sha256": "38cbd8b0bcd982e8fe3d43df85df78cb9bcd092cb768b30a37146b34d031c00a",
-        "size": 35499
+        "sha256": "27e1e54ae4e1faafe156ded5551aa7fa9d538accb12ea108e1b4778897fe2d3c",
+        "size": 35849
       },
       "icon": {
         "path": "merge-forge/icon.svg",
@@ -1182,7 +1182,7 @@
       },
       "id": "merge-forge",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Горн куёт клинки, два одинаковых сливаются в один сильнее, клинки сами рубят чудищ у ворот",
@@ -1194,7 +1194,7 @@
           "title": "Кузница слияний"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.7.0/merge-forge-0.7.0.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.7.1/merge-forge-0.7.1.package.json",
       "publisher": "billerens",
       "summary": "The forge makes blades, two alike merge into a stronger one, and the blades cut down the monsters at the gate",
       "tags": [
@@ -1204,7 +1204,7 @@
       ],
       "title": "Merge Forge",
       "updated": "2026-11-21",
-      "version": "0.7.0"
+      "version": "0.7.1"
     },
     {
       "archive": {
@@ -1231,7 +1231,7 @@
       },
       "id": "minesweeper-rogue",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Семь полей без угадывания: ищите тайники, собирайте инструменты и открывайте новые глубины",
@@ -1277,7 +1277,7 @@
       },
       "id": "one-cell-dungeon",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Спуск по сетке 3×3: шаг съедает соседнюю карту, за спиной тут же ложится следующая",
@@ -1322,7 +1322,7 @@
       },
       "id": "pet",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Маленькое нарисованное существо: настроение — из сна, шагов, экрана ночью и отметок за сегодня, рост — из Жизни-RPG, вещи — из Ачивок; карточка на главном экране и виджет",
@@ -1367,7 +1367,7 @@
       },
       "id": "phone-night",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Утренний отчёт о том, что телефон делал ночью: кто его будил, кто ходил в сеть, куда ушла батарея — с улыбкой, но каждая цифра настоящая",
@@ -1412,7 +1412,7 @@
       },
       "id": "recorder",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Запись встреч, лекций и мыслей вслух: расшифровка на телефоне по ходу записи, конспект с решениями и задачами, поиск по словам и по смыслу",
@@ -1459,7 +1459,7 @@
       },
       "id": "rpg",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Ролевая игра поверх жизни: опыт и навыки за шаги, сон и привычки, карта открытых мест в тумане, квесты от ваших обычных дней и хроника. Персонаж — существо Питомца.",
@@ -1507,7 +1507,7 @@
       },
       "id": "snake-rogue",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Змейка на полянах: диковины дают способности, а длина змеи — её здоровье",
@@ -1553,7 +1553,7 @@
       },
       "id": "snake-wanderer",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Змейка ползёт по бесконечному трёхмерному архипелагу: вызовы по желанию, реликвии в сборки и вечные улучшения",
@@ -1601,7 +1601,7 @@
       },
       "id": "solitaire-rogue",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Пасьянс-цепочка на полминуты за расклад: оставленные карты гасят свечи, реликвии переписывают правила",
@@ -1646,7 +1646,7 @@
       },
       "id": "spending",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Расходы, которые записываются сами из пушей и SMS банков: категории, бюджет месяца, «на день» и подписки до следующего списания",
@@ -1692,7 +1692,7 @@
       },
       "id": "subway",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Стройте метро: станции дают спрос, поезда его вывозят, построенный город сдаётся ради следующего",
@@ -1738,7 +1738,7 @@
       },
       "id": "tide-runner",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Бегите по портовым путям, уворачивайтесь от встречных поездов и перепрыгивайте с вагона на вагон. Знакомые связки возвращаются на большей скорости.",
@@ -1786,7 +1786,7 @@
       },
       "id": "tower",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Выбирайте двери, читайте намерения врагов и стройте сборку из приёмов и реликвий. Каждый подъём оставляет осколки для новой попытки.",
@@ -1832,7 +1832,7 @@
       },
       "id": "train-switches",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Расставьте стрелки: каждый поезд — к станции своего цвета, без столкновений",
@@ -1877,7 +1877,7 @@
       },
       "id": "voice-adventure",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Голосовой квест для дороги: играется голосом в наушниках, без сети и без экрана. Главы пишет модель заранее, пока есть сеть",
@@ -1924,7 +1924,7 @@
       },
       "id": "wallpapers",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Каждое утро фотография из открытых источников под погоду, сезон и ваш вкус — на внешний и внутренний экраны Fold и на блокировку, с автором и лицензией",
@@ -1970,7 +1970,7 @@
       },
       "id": "wave-survival",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Герой стреляет сам, вы управляете им пальцем или клавиатурой и выбираете улучшения; пять минут хаоса",
@@ -2016,7 +2016,7 @@
       },
       "id": "word-weaver",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Плетите русские слова из колеса букв: слова — кирпичи для своего города",
