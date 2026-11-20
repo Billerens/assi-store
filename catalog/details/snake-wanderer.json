@@ -1,0 +1,47 @@
+{
+  "changes": [
+    {
+      "date": "2026-11-19",
+      "notes": "- The game is in the store: a snake on an endless 3D archipelago, challenges to take or leave, a hundred relics that combine into builds and evolutions, lasting upgrades for shards, an almanac and achievements.\n- It needs no network: three.js 0.160.0 comes with the game.\n- The game speaks English and Russian, following the language of the app.",
+      "version": "0.1.0"
+    }
+  ],
+  "description": "A snake crawls across an endless archipelago in 3D. The joystick on the left steers the head; a swipe turns the camera. The snake bites and spits by itself — your job is to lead it, dash through danger, whip its tail and close a ring of its body around foes.\n\nBeams of light far away are challenges: outposts, rifts, nests, lairs of their masters, ruins, plates and mazes. Take them or pass by — they pay in relics. Three different relics with one mark give a set bonus, and some pairs grow into an evolution. Shards stay after a run and buy upgrades that last.\n\nThe game speaks English and Russian, following the language of the app.",
+  "id": "snake-wanderer",
+  "locales": {
+    "ru": {
+      "changes": {
+        "0.1.0": "- Игра в магазине: змейка на бесконечном трёхмерном архипелаге, вызовы по желанию, сотня реликвий, которые складываются в сборки и эволюции, вечные улучшения за осколки, альманах и достижения.\n- Сеть не нужна: three.js 0.160.0 поставляется вместе с игрой.\n- Игра говорит по-английски и по-русски — на языке приложения."
+      },
+      "description": "Змейка ползёт по бесконечному архипелагу в 3D. Джойстик слева ведёт голову, свайп поворачивает камеру. Кусает и плюётся она сама — ваше дело вести её, проходить рывком сквозь опасность, бить хвостом и замыкать кольцо из тела вокруг врагов.\n\nЛучи света вдали — вызовы: аванпосты, разломы, гнёзда, логова хозяев, руины, плиты и лабиринты. Брать их или нет, решаете вы; за них дают реликвии. Три разные реликвии с одной меткой дают бонус набора, а некоторые пары срастаются в эволюцию. Осколки остаются после забега и покупают вечные улучшения."
+    }
+  },
+  "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 1290,
+      "path": "snake-wanderer/store/shots/1-menu.webp",
+      "sha256": "f148fb76e4a628c5dd4fa1bf73033fe5f22c38311d2cc328395f2f0e06dd8bb6",
+      "size": 36500,
+      "type": "image/webp",
+      "width": 618
+    },
+    {
+      "height": 1290,
+      "path": "snake-wanderer/store/shots/2-run.webp",
+      "sha256": "dc3cd6636e2dc9e66293228b2db23eebfcf7a71e5f002d1a1afc4134a3753897",
+      "size": 37686,
+      "type": "image/webp",
+      "width": 618
+    },
+    {
+      "height": 1290,
+      "path": "snake-wanderer/store/shots/3-journal.webp",
+      "sha256": "5df6dffa78dab58005ebd3ea7a4f7d2917b5018a6260c8e3ba9ec414f25bb72a",
+      "size": 49454,
+      "type": "image/webp",
+      "width": 618
+    }
+  ],
+  "version": "0.1.0"
+}

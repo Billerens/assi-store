@@ -1,11 +1,11 @@
 {
-  "packageCount": 40,
+  "packageCount": 41,
   "pages": [
     {
-      "count": 40,
+      "count": 41,
       "path": "catalog/p-0.json",
-      "sha256": "150d38067cca154edd5a9f39a52a27009c0051494c95a04a73d115a51b4589ba",
-      "size": 70759
+      "sha256": "67f76ed26ab7207be65e6362fbee43d1543a076931f1b6e694214385b65cd864",
+      "size": 72571
     }
   ],
   "repository": {

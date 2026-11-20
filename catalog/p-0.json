@@ -1465,6 +1465,55 @@
     },
     {
       "archive": {
+        "fileCount": 268,
+        "sha256": "c038c47f64bc3eaba7fe1a9e54d722ca20788b67c28e117c66f68eaacbaf0fde",
+        "size": 4293379,
+        "unpackedSize": 5721302,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/snake-wanderer-v0.1.0/snake-wanderer-0.1.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAxikoApi": 1
+      },
+      "details": {
+        "path": "catalog/details/snake-wanderer.json",
+        "sha256": "3ec749c74f45b38ed815bfc752a2d76abd56a1773245d97ef861ae60489fb9ad",
+        "size": 3595
+      },
+      "icon": {
+        "path": "snake-wanderer/icon.svg",
+        "sha256": "5f133223a6f36834183d1394de14fdf318548b138d93e069c86fcacb1519bf09",
+        "size": 286,
+        "type": "image/svg+xml"
+      },
+      "id": "snake-wanderer",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "locales": {
+        "ru": {
+          "summary": "Змейка ползёт по бесконечному трёхмерному архипелагу: вызовы по желанию, реликвии в сборки и вечные улучшения",
+          "tags": [
+            "рогалик",
+            "3d",
+            "аркада"
+          ],
+          "title": "Змейка-странник"
+        }
+      },
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/snake-wanderer-v0.1.0/snake-wanderer-0.1.0.package.json",
+      "publisher": "billerens",
+      "summary": "A snake crawls an endless 3D archipelago: challenges by choice, relics that grow into builds and upgrades that stay",
+      "tags": [
+        "roguelike",
+        "3d",
+        "arcade"
+      ],
+      "title": "Snake Wanderer",
+      "updated": "2026-11-19",
+      "version": "0.1.0"
+    },
+    {
+      "archive": {
         "fileCount": 25,
         "sha256": "2040ccaefad1bb5f31ff8528e099362e31dbbd3950c0dcbe4b6f014fc5a7fdb9",
         "size": 87152,

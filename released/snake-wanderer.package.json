@@ -1,0 +1,1360 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
+    },
+    {
+      "path": "README.md",
+      "sha256": "89d9ec7b57af9a239e68ba37dccf51557272e6babff5e0e9825ca4f3afbb631d",
+      "size": 4597
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "25f0cb43a2b4380f99dc1043bbb9e933526ce07d8b42935353c7ac8565e93704",
+      "size": 2773
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "58eaa548fbeff55c2d1ef5c316ecfe804fc13cf0ac9bd9a74ab4b152cb057fb2",
+      "size": 285
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "ec11ce67d579ba93133ab3fe8c297b23db7ac973536558d3cc274d23fe364fc5",
+      "size": 6514
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "f474d89596dbc8427bd981f05d0445feaac011157b8c66c40ad80c920b1d8ece",
+      "size": 136789
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "5f133223a6f36834183d1394de14fdf318548b138d93e069c86fcacb1519bf09",
+      "size": 286
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "2049d68da006573a970b57536b58cc3bb5a2dfc2edb39681f654ba57f2c7adbd",
+      "size": 2951
+    },
+    {
+      "path": "code/ui/boot.js",
+      "sha256": "4e9cfaeb34e272f7d1e4667b52d6e890ee0358f6b14452573787718f2b8558f0",
+      "size": 734
+    },
+    {
+      "path": "code/ui/img/items/a_bell.webp",
+      "sha256": "8968d4763e8575d0fdad998954b321c842e96a1320089e025e2222e9bfeb7368",
+      "size": 16772
+    },
+    {
+      "path": "code/ui/img/items/a_bomb.webp",
+      "sha256": "a95b83082f38b66aa4984361d761d48a1b7773c78a0582db92d87e3f706e54ef",
+      "size": 13820
+    },
+    {
+      "path": "code/ui/img/items/a_burrow.webp",
+      "sha256": "9ebd53e9797dc9eed28a04d781532834df5dfc1c8b69898d8b209c6ad26bf167",
+      "size": 16240
+    },
+    {
+      "path": "code/ui/img/items/a_flare.webp",
+      "sha256": "737820b2a8bbeaddf4df4cc71bdb9a78e6ec1daf1f9e4dd5be10d9c2baa5a4c0",
+      "size": 12532
+    },
+    {
+      "path": "code/ui/img/items/a_horn.webp",
+      "sha256": "7df27f05c58d0a78ef32070232f8b086e25f917b53ee21a1215f7b55c3e9a056",
+      "size": 12680
+    },
+    {
+      "path": "code/ui/img/items/a_lure.webp",
+      "sha256": "fd597176de23f13e0ed7da992cc928c72936ff9c6d8ae7abd0e9de46c431166b",
+      "size": 15646
+    },
+    {
+      "path": "code/ui/img/items/a_root.webp",
+      "sha256": "07ef104215ca4f45c29018d6506e8016ca8a927808116605293956508524613d",
+      "size": 21232
+    },
+    {
+      "path": "code/ui/img/items/a_sand.webp",
+      "sha256": "b33f51623b85acbfb511c923c74bd212320c6c35342ed389623220f1341ba4cd",
+      "size": 17332
+    },
+    {
+      "path": "code/ui/img/items/a_seed.webp",
+      "sha256": "48887c11238f717483be5b7b7fe6e10b5cbea66ead1705f6135980ff0b9c276c",
+      "size": 19668
+    },
+    {
+      "path": "code/ui/img/items/a_shed.webp",
+      "sha256": "3f227105d13ea21b89e3d2c33e72a1993a8d6d491350f59c0d702221e958d4ce",
+      "size": 17954
+    },
+    {
+      "path": "code/ui/img/items/a_shell.webp",
+      "sha256": "29cb5d9d54f60d3c1c6c28a66c3ba9d33b40ae5f1f74a1c521efedbbac5d29fc",
+      "size": 11878
+    },
+    {
+      "path": "code/ui/img/items/a_stasis.webp",
+      "sha256": "b920058f8097f2df00aececdf9d1abc980b589d4105e99b5f84d36f4b59f7502",
+      "size": 19904
+    },
+    {
+      "path": "code/ui/img/items/acid.webp",
+      "sha256": "f6a01e6384e5afcedbf2c3998243a7eb626cec99ffa2d416148dc044e94b1f94",
+      "size": 20226
+    },
+    {
+      "path": "code/ui/img/items/afterimage.webp",
+      "sha256": "5cb6079c21d41cd4888466da0f5d98c932f88e2800f04c7098f0bbd76290f69c",
+      "size": 11652
+    },
+    {
+      "path": "code/ui/img/items/armor.webp",
+      "sha256": "0fec5c74f4e3932adfd23271886aa4cea09dfbb05e92f1ab57278c6d6df9631a",
+      "size": 16418
+    },
+    {
+      "path": "code/ui/img/items/art_bare.webp",
+      "sha256": "2dc444cce91d894adb2cf465ce03fbd8f63651a42dcc525e49be06224fc15955",
+      "size": 14264
+    },
+    {
+      "path": "code/ui/img/items/art_chaos.webp",
+      "sha256": "854a975a5516ae6b5d80dcf234c9a68d556c7e1ea150353968e842719a0ec031",
+      "size": 21604
+    },
+    {
+      "path": "code/ui/img/items/art_drought.webp",
+      "sha256": "1395cf8bf3edddf0d8841bbd04c81b2332f940ed8c1e4083013fdf32a65c0bf7",
+      "size": 27974
+    },
+    {
+      "path": "code/ui/img/items/art_elites.webp",
+      "sha256": "1123d1b4f7da8d294ca6cbf26300439abf9969dcfec76feed7436d04ede2d33f",
+      "size": 18580
+    },
+    {
+      "path": "code/ui/img/items/art_fog.webp",
+      "sha256": "8b930dd4a84e02a733d567e1ee2b7c41a2d44cdaa8ac17cb769edda8c64dc795",
+      "size": 22310
+    },
+    {
+      "path": "code/ui/img/items/art_giant.webp",
+      "sha256": "2b2b8bfe4fa140d90ae3ae2848873ea65befd7f0cdf4884fa16426d0bbd10fdd",
+      "size": 13772
+    },
+    {
+      "path": "code/ui/img/items/art_glass.webp",
+      "sha256": "bb9d1d55d92fa5b1cc0de830f86bd221881c58a408c1e8b986745826e6709b95",
+      "size": 17526
+    },
+    {
+      "path": "code/ui/img/items/art_heavy.webp",
+      "sha256": "9f6656fe72ccd3273741966a6f494ef1c845a97a481bc40c63e8f12fba83a495",
+      "size": 22808
+    },
+    {
+      "path": "code/ui/img/items/art_hunger.webp",
+      "sha256": "08b5b77bd82f5d6c6568a4f55a88326765b38e4bbd93aadab215bdfabe4b1c1d",
+      "size": 22962
+    },
+    {
+      "path": "code/ui/img/items/art_mutation.webp",
+      "sha256": "4dbb7ce0670470ab429420e4285c32ad379e8f2e3e9e2a2a7300d54ceca11e31",
+      "size": 22662
+    },
+    {
+      "path": "code/ui/img/items/art_night.webp",
+      "sha256": "3555ad1fdf4f20527c53abb068fb756c9a21872735ea555e2ef5e9311fb0e113",
+      "size": 26726
+    },
+    {
+      "path": "code/ui/img/items/art_rush.webp",
+      "sha256": "521134adcece863112c39ff27812baa21f69953f857f6cbf603cddbd574881c0",
+      "size": 20768
+    },
+    {
+      "path": "code/ui/img/items/art_short.webp",
+      "sha256": "4586e0f18ed749b9d4003dc1c289f5ad4afd360acd747fde0c0363380bce3cc8",
+      "size": 21168
+    },
+    {
+      "path": "code/ui/img/items/art_swarm.webp",
+      "sha256": "1af9efe59167f3566146ca98d89fc78b911acb8fe56cc9f300f05d5a2ccba783",
+      "size": 24766
+    },
+    {
+      "path": "code/ui/img/items/art_toothless.webp",
+      "sha256": "9798fa7b1d0d967e8aa871b7f1118a804b42dad23004198d9713dd73626017be",
+      "size": 17610
+    },
+    {
+      "path": "code/ui/img/items/art_volatile.webp",
+      "sha256": "e5324fcd6b7867cebfa4de5f1cab29eafe91b01aa2f92a2ef36e4bc52d55610f",
+      "size": 19786
+    },
+    {
+      "path": "code/ui/img/items/aura.webp",
+      "sha256": "46dd127d5ee15af57f16513d7a2bd9362a19ac1d4d9836489b6e20f591dc9296",
+      "size": 18070
+    },
+    {
+      "path": "code/ui/img/items/basil.webp",
+      "sha256": "c4a19a09cab58de554f5637e0dd92050c505dcbd861dc6a09844cadff85be4e3",
+      "size": 12496
+    },
+    {
+      "path": "code/ui/img/items/beast_bird.webp",
+      "sha256": "bb603572d030d820152a9eb757c37dd4ea9f728a30f6902554cef977ce98240e",
+      "size": 15138
+    },
+    {
+      "path": "code/ui/img/items/beast_deer.webp",
+      "sha256": "4ee08ee18697791846c381f99228572ddcb8bdc2bb722090c56e8166dfe6d826",
+      "size": 15516
+    },
+    {
+      "path": "code/ui/img/items/beast_fox.webp",
+      "sha256": "0581c13362e977ac27f731373e3762ffe3883bfbc1c1483f092b14e6841d1aed",
+      "size": 15844
+    },
+    {
+      "path": "code/ui/img/items/beast_hare.webp",
+      "sha256": "85ec0cb601d6c3f6e3ebc5acce8fa7b627021de594059c8835b8e265e34eb6b8",
+      "size": 12578
+    },
+    {
+      "path": "code/ui/img/items/belly.webp",
+      "sha256": "6e5287415f193ecb1f8bd1bda08b69787a38409f5f6d1424309059760ee16942",
+      "size": 15798
+    },
+    {
+      "path": "code/ui/img/items/berserk.webp",
+      "sha256": "b28f661b4934faf7db3f2cca78a4c9354a17fb981a07f263810eea862292ad5f",
+      "size": 19884
+    },
+    {
+      "path": "code/ui/img/items/black.webp",
+      "sha256": "79d687d5a6a408ebb6e4d449013945e0e10327eedc9bd03c9b64a4fc189476a1",
+      "size": 22630
+    },
+    {
+      "path": "code/ui/img/items/bleed.webp",
+      "sha256": "6d2967170399b877e21c8c759092140a82738ae7d121abc5e41e0a31326ab45a",
+      "size": 17154
+    },
+    {
+      "path": "code/ui/img/items/blink.webp",
+      "sha256": "8eba906fb544184b21cc77597e115fe33a4dc8d234a334111edd8dfd240bbdfd",
+      "size": 13130
+    },
+    {
+      "path": "code/ui/img/items/bloodlust.webp",
+      "sha256": "e81cd2ee52161b2bf158826758c6ca6d3d6bcce732cf916bef58f24fe2eb620c",
+      "size": 10234
+    },
+    {
+      "path": "code/ui/img/items/bogbelly.webp",
+      "sha256": "68496f88fba8c955c8bfcb8c205db8e4c0f2bd3950e40ec87012800dd7fe2216",
+      "size": 25480
+    },
+    {
+      "path": "code/ui/img/items/boom.webp",
+      "sha256": "2066136924fecc82bb0543d0b90b3f31ffecf16d4a1b57de7b4059bbc7f3c8c9",
+      "size": 15846
+    },
+    {
+      "path": "code/ui/img/items/boomerang.webp",
+      "sha256": "cbbf59592351b5db46b802f3fc2b448095668c130018f5fc8a870b3abfd82c01",
+      "size": 16536
+    },
+    {
+      "path": "code/ui/img/items/bounty.webp",
+      "sha256": "8620431cc44f73b44b63a6ab66b17f2e5120adcbdf9db9d02f64ff89d3fb6df8",
+      "size": 19594
+    },
+    {
+      "path": "code/ui/img/items/burst.webp",
+      "sha256": "d0363149993d1214c116cb599ae8180c9665bae2d99a2a0fbac1e9607913eafc",
+      "size": 17658
+    },
+    {
+      "path": "code/ui/img/items/catalyst.webp",
+      "sha256": "599eeab8be4a73263090b65246a698e723f5b083e1215c628ea4021f99a2b6b8",
+      "size": 13398
+    },
+    {
+      "path": "code/ui/img/items/chick.webp",
+      "sha256": "2a755ebcbfead3f7cb0963416926cd0ccb0848ab9c10bb9c19766e0e7f42b160",
+      "size": 12196
+    },
+    {
+      "path": "code/ui/img/items/coil.webp",
+      "sha256": "5ff8b6b1ede111020f5162104a512b21832fa67ed6ff75f3b1388f715726741e",
+      "size": 21450
+    },
+    {
+      "path": "code/ui/img/items/compass.webp",
+      "sha256": "f408fb16c5d054c0f1357758fb638a989ac457a8be3fd29440216ac1436ea9a5",
+      "size": 14832
+    },
+    {
+      "path": "code/ui/img/items/corpse.webp",
+      "sha256": "b9e8b28772ccf98a3de31e22f3f7da35a00a0da1b33a3310d3c6e485da80a2ba",
+      "size": 23728
+    },
+    {
+      "path": "code/ui/img/items/crown.webp",
+      "sha256": "4bf5f1affbc84fe72b38beca29aa22e55920e43b4efcfc90bc057017352e267f",
+      "size": 15382
+    },
+    {
+      "path": "code/ui/img/items/cruel.webp",
+      "sha256": "7c7521bf5e2483a8af6b2069422795f5d772f2fc94e9b8a699c56a9762b06b82",
+      "size": 11100
+    },
+    {
+      "path": "code/ui/img/items/dice.webp",
+      "sha256": "7379c07bb828d7f2290ffaa7ba54f416b50f27d2d77b44aa3fb8bd955c92f849",
+      "size": 12628
+    },
+    {
+      "path": "code/ui/img/items/echo.webp",
+      "sha256": "099d9cecaccfb617f74de4e755d7cee488ddfabd013061aa3456f86735665e81",
+      "size": 12914
+    },
+    {
+      "path": "code/ui/img/items/ember.webp",
+      "sha256": "d899c1955926be1011fe943dd59ab5906968004c75eecee9a4ea496df5b657bd",
+      "size": 16468
+    },
+    {
+      "path": "code/ui/img/items/ev_barrage.webp",
+      "sha256": "09b28f23c4e85594b2a8c853f10a613c41e753ca6a194ea7b5479c2b14e1fc1b",
+      "size": 25220
+    },
+    {
+      "path": "code/ui/img/items/ev_blackhole.webp",
+      "sha256": "5d6da9146651184b760fef4c1e2c882a2445e44c2b5107c5ab520ada7d2e93e5",
+      "size": 18946
+    },
+    {
+      "path": "code/ui/img/items/ev_bladewheel.webp",
+      "sha256": "7841d9c7176d8ce46f3c561c1d6b16591e2a26d58f8e7d7b9d1ea28273a2b07c",
+      "size": 24772
+    },
+    {
+      "path": "code/ui/img/items/ev_executioner.webp",
+      "sha256": "aab95867d2a6f7f84f49849b7b3169797536929f5dfa496fcfc61c19a6cd618e",
+      "size": 15376
+    },
+    {
+      "path": "code/ui/img/items/ev_garden.webp",
+      "sha256": "8773b763e2e3bd6a68a58b50eb9bd4a8b56274e5463f3105038062ea79d04d63",
+      "size": 20702
+    },
+    {
+      "path": "code/ui/img/items/ev_permafrost.webp",
+      "sha256": "bbc2f9590e71bd2272f85df43a1ed6eb1f0ff8d35f1d5074f70fd2b62ff9d9ce",
+      "size": 19314
+    },
+    {
+      "path": "code/ui/img/items/ev_plague.webp",
+      "sha256": "31b337a136940f1055f378c1c6af5241b8f07d8f94159685fc8ab7d7d3fa29fb",
+      "size": 27850
+    },
+    {
+      "path": "code/ui/img/items/ev_ram.webp",
+      "sha256": "27e59828bc7bb496d1241648d7d5d6055125734a27dd05eb6f5428f84c31a06c",
+      "size": 20842
+    },
+    {
+      "path": "code/ui/img/items/ev_tempest.webp",
+      "sha256": "09caa0ace8a64c053f2a9ed06a2c09570d10c3f1a7b151d355c595c7bc7c8f13",
+      "size": 22910
+    },
+    {
+      "path": "code/ui/img/items/ev_wildfire.webp",
+      "sha256": "a9a31e1672896c2306bb4761b287d350ed808cdad4ef06e5413f6fab86221d94",
+      "size": 22876
+    },
+    {
+      "path": "code/ui/img/items/eye.webp",
+      "sha256": "75cc93e29b85b12177b62f345a8595dc6bb635fa27f484f4540f813ce8cc7b32",
+      "size": 16278
+    },
+    {
+      "path": "code/ui/img/items/fang.webp",
+      "sha256": "4d61e267e985786f606245b90751dae91fbe33960d8754831389bba482287548",
+      "size": 7858
+    },
+    {
+      "path": "code/ui/img/items/feast.webp",
+      "sha256": "04145dbda055eaeb98c4c3d6cbbd740b739237e101368968c4a5799a17ec2923",
+      "size": 22156
+    },
+    {
+      "path": "code/ui/img/items/flex.webp",
+      "sha256": "e359a1c5cfadd8f346d27dee5da7c6f796f0076547b1ea43bfc5015a4e6612f8",
+      "size": 13470
+    },
+    {
+      "path": "code/ui/img/items/fork.webp",
+      "sha256": "a550022c8588e166e5ef2df9bd34f77e23e274aaecd9095904cbec0cd5baf51c",
+      "size": 10458
+    },
+    {
+      "path": "code/ui/img/items/frost.webp",
+      "sha256": "2bc1fbf9e7273c70e79ccce5094c05789a6448f926b94bc072c09a75cfa3fdb9",
+      "size": 14220
+    },
+    {
+      "path": "code/ui/img/items/gland.webp",
+      "sha256": "00fec13e837a57775cbceb051790a6ae15a1c722886243eaa58cd51628307c28",
+      "size": 12684
+    },
+    {
+      "path": "code/ui/img/items/growth.webp",
+      "sha256": "0616124941803145e7bf6c062261a5d4bf5d193d411996681fd656833b9babe7",
+      "size": 16272
+    },
+    {
+      "path": "code/ui/img/items/gullet.webp",
+      "sha256": "3c24253ea115fd3d95b8f2a731fc72b96e6437a8b798543f50a8ebe03213a2b5",
+      "size": 18718
+    },
+    {
+      "path": "code/ui/img/items/halo.webp",
+      "sha256": "9469c84338f2dbff5cff57fe2810b7072dcbe5c580743c7acb5a90c1830aa49f",
+      "size": 13276
+    },
+    {
+      "path": "code/ui/img/items/harvest.webp",
+      "sha256": "7f1a8402fcfe77e3d01f673fb3e297cee45e6ce7af4e3ec71ee7fa64530926de",
+      "size": 16912
+    },
+    {
+      "path": "code/ui/img/items/hide.webp",
+      "sha256": "cc11f5c2dd2dd60fd9d58520607f4862e3ffa0fc6a6e310c287ffaf2f2ec0db5",
+      "size": 20456
+    },
+    {
+      "path": "code/ui/img/items/hoard.webp",
+      "sha256": "1857f9adb92b589bb7a37184e77efcc82080295b40fb4d61914624817baf3d23",
+      "size": 13386
+    },
+    {
+      "path": "code/ui/img/items/horns.webp",
+      "sha256": "8cd74ec60301b3a53b704c4ec049344986a3dc0719019cec80062b734b64766d",
+      "size": 15158
+    },
+    {
+      "path": "code/ui/img/items/hour.webp",
+      "sha256": "f86bd5ce99738da1313c44792af2d899279aedbd287b7837874aea00f3755ab0",
+      "size": 18972
+    },
+    {
+      "path": "code/ui/img/items/hydra.webp",
+      "sha256": "c914dfac9078e21361907e54558b0bed8a2ccd7f9c0fd2849b2427003081209d",
+      "size": 18370
+    },
+    {
+      "path": "code/ui/img/items/jam.webp",
+      "sha256": "caacd8082cbb34ef9eef821b1c6f8e843bad4e3e5f6a61050a54728c4d9127ae",
+      "size": 14710
+    },
+    {
+      "path": "code/ui/img/items/jaws.webp",
+      "sha256": "d3ba0d3ef290f17206190e7b9abbd4f72746b8acdeacfc82eec14af017393d02",
+      "size": 15814
+    },
+    {
+      "path": "code/ui/img/items/l_belly.webp",
+      "sha256": "91afe5e5efbea856f1b1e9d3cca23362f92d2032441f50aafe2538e4c884d296",
+      "size": 20130
+    },
+    {
+      "path": "code/ui/img/items/l_clock.webp",
+      "sha256": "89cf19bac742496103dd5ea4c0b2c313cc7ca1580df4a917a0fbe99c8307d63f",
+      "size": 11856
+    },
+    {
+      "path": "code/ui/img/items/l_eclipse.webp",
+      "sha256": "55472ba24ff5b1fbeae8b35b21ef3a29d7feaadf46b47f15f369f9cecf310cda",
+      "size": 19982
+    },
+    {
+      "path": "code/ui/img/items/l_eye.webp",
+      "sha256": "79bd8542f13eee8dcdbd55a0eef1a0492304a01a583b4d875a5c01cd27641a6d",
+      "size": 18324
+    },
+    {
+      "path": "code/ui/img/items/l_fang.webp",
+      "sha256": "268644b049311e0aa1cb8fdded82f2b8277bdb4efd97f3de92446eb9be38f441",
+      "size": 19882
+    },
+    {
+      "path": "code/ui/img/items/l_greed.webp",
+      "sha256": "ca3286b993aba36b01f65d02995e379d946697f221b2f3ae77415ea2e4182d6f",
+      "size": 15532
+    },
+    {
+      "path": "code/ui/img/items/l_heart.webp",
+      "sha256": "e6cfdbca6a57b9a04148908a4e9dd0b5bb83aad4ec4a2850969aa5bf256adc8f",
+      "size": 12262
+    },
+    {
+      "path": "code/ui/img/items/l_pact.webp",
+      "sha256": "ba04a596a7b2e9604f065b7226b4accb3fa76bce1ee817ddc82a2cee1aaa2e45",
+      "size": 13740
+    },
+    {
+      "path": "code/ui/img/items/l_shadow.webp",
+      "sha256": "96a5847a7638321778bfc7763eaee1b937410c12b8529f6770a9c7ed44117fb3",
+      "size": 20600
+    },
+    {
+      "path": "code/ui/img/items/l_tide.webp",
+      "sha256": "c2c2ce1942b58686dd0efeff99de9f5d514d9cb795283181297953cd162be068",
+      "size": 14144
+    },
+    {
+      "path": "code/ui/img/items/lastgasp.webp",
+      "sha256": "a35541d111423b11d8a8c31beca1c3a0eb3254d78a742ef350728789a0bf7867",
+      "size": 12868
+    },
+    {
+      "path": "code/ui/img/items/lu_armor.webp",
+      "sha256": "1bf19419f6187f81f56842f696470d997dfbf5780110f0d0831d418e886bb428",
+      "size": 12896
+    },
+    {
+      "path": "code/ui/img/items/lu_berry.webp",
+      "sha256": "55554253c031a9483bb1547e4e970c01706c7bd330322e1461669f50eea1e185",
+      "size": 14384
+    },
+    {
+      "path": "code/ui/img/items/lu_bite.webp",
+      "sha256": "fa72396e5878b2e419ff476a6ad89cfdda9e3aead1594f95b06e60c1e88bac5b",
+      "size": 15496
+    },
+    {
+      "path": "code/ui/img/items/lu_crit.webp",
+      "sha256": "9ece7848cadfc66c1f233813a4aaadb6167a1b685d7aa852f4e71295fa3c5c10",
+      "size": 13504
+    },
+    {
+      "path": "code/ui/img/items/lu_dash.webp",
+      "sha256": "ae6823d76371729afca272024ebd187c1ec7155c9e33fe9211de454deddcc15e",
+      "size": 13186
+    },
+    {
+      "path": "code/ui/img/items/lu_hp.webp",
+      "sha256": "35ff9fd1e5bf8a2a3361f6509477b75472a9520c2c4c13da0dfdd29559350bf7",
+      "size": 19856
+    },
+    {
+      "path": "code/ui/img/items/lu_len.webp",
+      "sha256": "48559001be01ddc13e4ac43680e2f91cdde88fbe985ed08afcbe24634b7d59a8",
+      "size": 17188
+    },
+    {
+      "path": "code/ui/img/items/lu_loop.webp",
+      "sha256": "ad7428e3062eb9b2a58e4fb34a7ec4be3e8ecd6963bccf5aecfe4783a8d07cd3",
+      "size": 19256
+    },
+    {
+      "path": "code/ui/img/items/lu_luck.webp",
+      "sha256": "ef26b8b615a80e345b98667ff911754c34b682e4647fe49817bcf7d267df42e0",
+      "size": 14916
+    },
+    {
+      "path": "code/ui/img/items/lu_pick.webp",
+      "sha256": "81a6866b1e4b273c47bc8c92074af189c2a2c1db86a9ecfb73670aba49f732a8",
+      "size": 18984
+    },
+    {
+      "path": "code/ui/img/items/lu_regen.webp",
+      "sha256": "68067f84368af22db64a0835f9f4ea43e0cc4d9cac4e89be38df6c02731f6501",
+      "size": 17680
+    },
+    {
+      "path": "code/ui/img/items/lu_speed.webp",
+      "sha256": "4f13a6e4be76cc76813e7fd0154a977b68319ba0d75f4e1cce116f40c2a1a106",
+      "size": 13232
+    },
+    {
+      "path": "code/ui/img/items/lu_spit.webp",
+      "sha256": "b92206f6e17c30645cc540b537a966219806dbfcef990f0e19b9a3cd322473c8",
+      "size": 15430
+    },
+    {
+      "path": "code/ui/img/items/lu_whip.webp",
+      "sha256": "d05a4872841e7c5432c673ea5d8094615eef9f2432b2ad5e8ccb441928c22841",
+      "size": 15178
+    },
+    {
+      "path": "code/ui/img/items/lu_xp.webp",
+      "sha256": "ae6b78aa005588c9ffaa6dd9bd50187d17953f0f9734bd7eb8cffea6fff37c8b",
+      "size": 13576
+    },
+    {
+      "path": "code/ui/img/items/lucky7.webp",
+      "sha256": "7f4bbafa16a97c49df59d3a610d4397860e79d07e2691c92b57517c1beb882b2",
+      "size": 12844
+    },
+    {
+      "path": "code/ui/img/items/magpie.webp",
+      "sha256": "2b62b44667a2d6e91a2326ccf0f1568f3ff5a039eea4cbc0e366e1a3478967f9",
+      "size": 18444
+    },
+    {
+      "path": "code/ui/img/items/mark.webp",
+      "sha256": "ff1eac0c5df7f85757a33d7591eb5a1b172f4732c95678932c705acf105ab8e1",
+      "size": 17558
+    },
+    {
+      "path": "code/ui/img/items/maw.webp",
+      "sha256": "4be25d93fd7fdd195857f5045201d922aa05f1b5636201884f2fece5bdc6d843",
+      "size": 14994
+    },
+    {
+      "path": "code/ui/img/items/mimic.webp",
+      "sha256": "18a5869b598b7a10968a1849b9e7150aee9a0bda786161dbdeb6f3fe52cdca0b",
+      "size": 14560
+    },
+    {
+      "path": "code/ui/img/items/mirror.webp",
+      "sha256": "47a3363a523418f30d4640852fc256c6696a73c081d0f55f11059cadaf783172",
+      "size": 11656
+    },
+    {
+      "path": "code/ui/img/items/mob_boss.webp",
+      "sha256": "638edd6d4a448f96248c8ae9d6e9e56b2e24194e3225f8ecf883c0593036d429",
+      "size": 21874
+    },
+    {
+      "path": "code/ui/img/items/mob_brute.webp",
+      "sha256": "5caf817945bfa56c588377d3b478301d93579bb263e4d7a4d0b4d9aa207a23aa",
+      "size": 18514
+    },
+    {
+      "path": "code/ui/img/items/mob_lord.webp",
+      "sha256": "da6bb256c1c4450824e304f1ad1cb989868ba22729a8e77539a14405b678f5f3",
+      "size": 24704
+    },
+    {
+      "path": "code/ui/img/items/mob_queen.webp",
+      "sha256": "8137ab0a9bcc5b51607ef801b18ffccfc2d1cae22783a997b596a69bb37eb1eb",
+      "size": 20520
+    },
+    {
+      "path": "code/ui/img/items/mob_rival.webp",
+      "sha256": "801d6ad1a81e4fb84e1cb3383f9a74cfc931fe1d89ac7ebf31489660470dbfdb",
+      "size": 20628
+    },
+    {
+      "path": "code/ui/img/items/mob_shade.webp",
+      "sha256": "b45ca9fe256ac5e7d9647ca6a9f1cf547a8ce8266745b04b2adc25947659f054",
+      "size": 17608
+    },
+    {
+      "path": "code/ui/img/items/mob_slime.webp",
+      "sha256": "8dec445fc72f6692c98584e6669924a987cc2cb613748070ec0cd985df2e7451",
+      "size": 11388
+    },
+    {
+      "path": "code/ui/img/items/mob_spiker.webp",
+      "sha256": "71090e646ea6d3619614bcc5efacae606cd34507f9db9b01215d58707c9b1b8a",
+      "size": 19216
+    },
+    {
+      "path": "code/ui/img/items/mob_spitter.webp",
+      "sha256": "a7d65f06b58618335d6cf04c1f67316f0325d43e800a44020fcc24363e8d24bb",
+      "size": 12934
+    },
+    {
+      "path": "code/ui/img/items/mob_swarm.webp",
+      "sha256": "51be34228680ee378d94dd9f6a6be3422ce6dfc233d2258ef884ceff97a2437f",
+      "size": 15696
+    },
+    {
+      "path": "code/ui/img/items/mob_turret.webp",
+      "sha256": "728be6de5627d05caffc190f905e99d1466c4ed1d25e25c01b5a9db8763c8a29",
+      "size": 18510
+    },
+    {
+      "path": "code/ui/img/items/mob_worm.webp",
+      "sha256": "1c64b802986bea598b1d1a3f6d14c53c639defbf614e8b87789c3493a4f4368a",
+      "size": 15690
+    },
+    {
+      "path": "code/ui/img/items/mod_coil.webp",
+      "sha256": "ff47bc5cff4272a0b29304fd4a0fb1a6ccd71b32b7f9d5f24877c95908a3ac60",
+      "size": 20278
+    },
+    {
+      "path": "code/ui/img/items/mod_healer.webp",
+      "sha256": "473a4835722c6d459b9dd329d3c247285143db83bf616694bd4da1fe84357992",
+      "size": 17554
+    },
+    {
+      "path": "code/ui/img/items/mod_lantern.webp",
+      "sha256": "1d84ac0738d735729f3251b70e6680f340e4cab17856aa93d9a092eb1effe649",
+      "size": 18996
+    },
+    {
+      "path": "code/ui/img/items/mod_magnet.webp",
+      "sha256": "123e28177705eae84b54736340178cab188c1fd8a07e3c62478298be070d70c2",
+      "size": 17006
+    },
+    {
+      "path": "code/ui/img/items/mod_sac.webp",
+      "sha256": "96797acb4319e8ea343948df39ce93bcba08d1959ac20d3b1270d43b0124c797",
+      "size": 20310
+    },
+    {
+      "path": "code/ui/img/items/mod_shield.webp",
+      "sha256": "c395e54a7f8efe1b7f06017e492447396c03f593f7acb7393e321b44f50d2870",
+      "size": 14184
+    },
+    {
+      "path": "code/ui/img/items/mod_spike.webp",
+      "sha256": "4237ad25aef5aed4a5a07b579f6d67dfa4cea00a12c51c3ffe05d9c0ada12070",
+      "size": 19366
+    },
+    {
+      "path": "code/ui/img/items/mod_turret.webp",
+      "sha256": "ea3eb91100ea37c732a0da14e985f1f74ee38aacaf8a4a9f3915596eb424d189",
+      "size": 17484
+    },
+    {
+      "path": "code/ui/img/items/molt.webp",
+      "sha256": "e58208401861af68cc7d4e3f7e7715b94832659e0294ae975986d8cb34254e7a",
+      "size": 14994
+    },
+    {
+      "path": "code/ui/img/items/moonstone.webp",
+      "sha256": "9147ebad51139ff145cf18d32035a7216cc43fca1c838bb8433c5d93bdee33d6",
+      "size": 11854
+    },
+    {
+      "path": "code/ui/img/items/needle.webp",
+      "sha256": "73f97ef67afbfa09746b3745289cb14460be0982e50782a26763454194851676",
+      "size": 7672
+    },
+    {
+      "path": "code/ui/img/items/nest.webp",
+      "sha256": "2820deb2b2b801c11165bedf621069264dbad59234a01ccb26160108c48111af",
+      "size": 17350
+    },
+    {
+      "path": "code/ui/img/items/noose.webp",
+      "sha256": "e48f8ba6f03a17b2ec104b803e79874cecfffb369a06e9b4086522965836bd0b",
+      "size": 20156
+    },
+    {
+      "path": "code/ui/img/items/nose.webp",
+      "sha256": "07f0cf7050416138c97800875682518e6e11c1a6778cf1215140ebc45b7ba1bc",
+      "size": 14052
+    },
+    {
+      "path": "code/ui/img/items/obsidian.webp",
+      "sha256": "a0c271d68662521717fe40af15cb72d936bd44a57c3e984f7c94f8b81dd39047",
+      "size": 25502
+    },
+    {
+      "path": "code/ui/img/items/orbit.webp",
+      "sha256": "722d332af92733d0c7a457ad1af6a733a639ef0806c155f6bb5c7b88693e33cc",
+      "size": 19930
+    },
+    {
+      "path": "code/ui/img/items/p_bite.webp",
+      "sha256": "95acf41abbe60b138f9b9384c36fe4b9da0462b97f46221259baaf0886a1fa0e",
+      "size": 13480
+    },
+    {
+      "path": "code/ui/img/items/p_cache.webp",
+      "sha256": "08b70acfec7fa27accf124d439bd968af3e3024354b0cfc54a93e066bb6bbe6f",
+      "size": 20118
+    },
+    {
+      "path": "code/ui/img/items/p_crit.webp",
+      "sha256": "1f78623e410f67529a7ea0b52d5ea6afc68893cb61ca15ccc3db0468d73c6407",
+      "size": 17302
+    },
+    {
+      "path": "code/ui/img/items/p_hp.webp",
+      "sha256": "244a8ab42530ee25682ade93f25d76881dae68fc5df97bb0c5469dc350312107",
+      "size": 18320
+    },
+    {
+      "path": "code/ui/img/items/p_len.webp",
+      "sha256": "21cd42ab805eb86588ff8160535b8e886334b38c1619ab30ff5bd6100cfd6486",
+      "size": 18422
+    },
+    {
+      "path": "code/ui/img/items/p_life.webp",
+      "sha256": "ce1f296ef08e22674553f86677a5892d1d501ba726bbf90111dab4e09fefe321",
+      "size": 9562
+    },
+    {
+      "path": "code/ui/img/items/p_luck.webp",
+      "sha256": "d265318eec6c50fa07829f4e282099323db5879f8f565cc96257efdcf4c763d4",
+      "size": 12866
+    },
+    {
+      "path": "code/ui/img/items/p_map.webp",
+      "sha256": "7dc6fa0e3ac4afa2549c819fee952300810ade3e75ef4b8ca2469332c8a85983",
+      "size": 13166
+    },
+    {
+      "path": "code/ui/img/items/p_pick.webp",
+      "sha256": "9b719e7c91ee312c39bfbcd515b2cda1ab4858b81d887627acf1d755b729adf4",
+      "size": 13332
+    },
+    {
+      "path": "code/ui/img/items/p_regen.webp",
+      "sha256": "7c3dc3332223b99d80c4c7e250ab564fb01a810e550030d3a1a6e8918a40f6bd",
+      "size": 10144
+    },
+    {
+      "path": "code/ui/img/items/p_relic.webp",
+      "sha256": "4c6e0f8c7ecc75d1a3990663e86d6cd166dc101bb9b9515ffdf0d7cc0cefa815",
+      "size": 18526
+    },
+    {
+      "path": "code/ui/img/items/p_reroll.webp",
+      "sha256": "5688ae6fbcfba1de5fd59b09b9c00bcb2fc9a6b83acc8e19899416aa46075664",
+      "size": 19336
+    },
+    {
+      "path": "code/ui/img/items/p_speed.webp",
+      "sha256": "74a9be1887f5fa8b3ff585d2b3ac3f7b7556e4a45be93c24f90373dbb9c62a56",
+      "size": 18890
+    },
+    {
+      "path": "code/ui/img/items/p_spit.webp",
+      "sha256": "68cf39a61668a5ec08e653ce80dc782823aa3febf58bca049b1972cb15e200b6",
+      "size": 17252
+    },
+    {
+      "path": "code/ui/img/items/p_xp.webp",
+      "sha256": "2e6597f9caecd6bc26b148e4dfe6e92e99ff03098cb6faaeda3ff8e1dea9a486",
+      "size": 14486
+    },
+    {
+      "path": "code/ui/img/items/pet_beetle.webp",
+      "sha256": "7640e0566ec2a2527fe42a8834d0336a311f88954d2b9c4ba24a630d2b82bc5a",
+      "size": 20804
+    },
+    {
+      "path": "code/ui/img/items/pet_chick.webp",
+      "sha256": "a0832cda7c4b901cc5a304f2a0de0b36a7f30d84073820c3fbf02ab18bee9f0f",
+      "size": 12428
+    },
+    {
+      "path": "code/ui/img/items/pet_crab.webp",
+      "sha256": "cf1e611419101150acf6cb5b437fe46cecd13eac1f24f0125d94f4910497293b",
+      "size": 15572
+    },
+    {
+      "path": "code/ui/img/items/pet_glow.webp",
+      "sha256": "eea7daf611afd77d842f76008a98cd7c79be2edbe68c0a7f1517eb136dd09ea4",
+      "size": 18002
+    },
+    {
+      "path": "code/ui/img/items/pet_hedgehog.webp",
+      "sha256": "cd9178964870519a56d654b4e2e54fb2d0d31b651f972b93ca18a9fdee978ed6",
+      "size": 17178
+    },
+    {
+      "path": "code/ui/img/items/pet_moth.webp",
+      "sha256": "9e39a4c8c9c81a1f84a4387f80101201f476e593d9c2f7ae6434923881a5d9db",
+      "size": 17570
+    },
+    {
+      "path": "code/ui/img/items/pet_snail.webp",
+      "sha256": "8ddf3eafcc527274d189948bbdb45aef5aedbc1bdd0e7575696d28a701e6c930",
+      "size": 21232
+    },
+    {
+      "path": "code/ui/img/items/pits.webp",
+      "sha256": "86b9bb4831336ac518bf9503a3233c6f8badf1eb095ecbcd058273a3c558f8ba",
+      "size": 14626
+    },
+    {
+      "path": "code/ui/img/items/plague.webp",
+      "sha256": "84bb0e0cb270fb345d8998c898192c5247fe2bc7f310ba9bb924ab7d5c2de7a5",
+      "size": 18994
+    },
+    {
+      "path": "code/ui/img/items/prism.webp",
+      "sha256": "d2c9683135a3d83831fafbbc0080889f56538be523904df02080b331b9a1df12",
+      "size": 8972
+    },
+    {
+      "path": "code/ui/img/items/pyre.webp",
+      "sha256": "3dc4bf143b07cdf527833580c62eb58199cb82577d56ebe4053e43d6b7fff47a",
+      "size": 16636
+    },
+    {
+      "path": "code/ui/img/items/quake.webp",
+      "sha256": "81ce8ca2963c9e906db6ff46f45416fd8dcca8bf1522142a95abe4b125e5ef99",
+      "size": 16598
+    },
+    {
+      "path": "code/ui/img/items/rapid.webp",
+      "sha256": "b6215c7751f8413137c149bd820d9c42d354c502f64298e7f284bbf4a5189e89",
+      "size": 14674
+    },
+    {
+      "path": "code/ui/img/items/revenge.webp",
+      "sha256": "2dc6b62726d565ceffbccfe1f39916560d276023825e351d67f0d49c85176045",
+      "size": 16620
+    },
+    {
+      "path": "code/ui/img/items/ricochet.webp",
+      "sha256": "a3e1788527a0af5f08ad3d0eafd9c574ff05b7e3eded7d8eb672577593c9eb08",
+      "size": 13402
+    },
+    {
+      "path": "code/ui/img/items/rime.webp",
+      "sha256": "8c544ece8fe4fc111d58f14b4b2fa9ea545abd580c872a5ebdd35de6f5e58464",
+      "size": 16542
+    },
+    {
+      "path": "code/ui/img/items/ring.webp",
+      "sha256": "36acedd2f02f22d43b0963ad72d529b9ef6ada81a151b31ab2f18d83b43c3373",
+      "size": 17862
+    },
+    {
+      "path": "code/ui/img/items/roots.webp",
+      "sha256": "b92c715adb1087450f713858b59ca7548d54ac501a6c36deaee21b3e0a146735",
+      "size": 24904
+    },
+    {
+      "path": "code/ui/img/items/sage.webp",
+      "sha256": "b12765ec3928df4ede715aaf8ba06f9214536d8073dd6198725e330c354ce419",
+      "size": 17990
+    },
+    {
+      "path": "code/ui/img/items/scale.webp",
+      "sha256": "4d48815c8934d2a51002729c44883dcd8a0ce6387ec3122559195af2af7c51a6",
+      "size": 12630
+    },
+    {
+      "path": "code/ui/img/items/seeker.webp",
+      "sha256": "4ee938c92817e513b2ba163836cf9a26111da2e2a7bdcffc5112a323c98bc6a6",
+      "size": 16884
+    },
+    {
+      "path": "code/ui/img/items/shatter.webp",
+      "sha256": "6bbee05b5aef262240c606be9c7a28c41fc60b70fe571c670437241a2f6b4af5",
+      "size": 17866
+    },
+    {
+      "path": "code/ui/img/items/skyfire.webp",
+      "sha256": "fdc3fabc3bb69102b5a412894724f2dd95e2ec6af018ba462293f428da6cd950",
+      "size": 15358
+    },
+    {
+      "path": "code/ui/img/items/slime.webp",
+      "sha256": "046a970ca60dc88a38f0f37d2ab1a1027214a9b23ff68f71a84aae86bf798a8d",
+      "size": 17042
+    },
+    {
+      "path": "code/ui/img/items/snare.webp",
+      "sha256": "173174b3e9ca904808618e778aa3aca6af8a193565fc380a71f64aa5389fc02c",
+      "size": 21710
+    },
+    {
+      "path": "code/ui/img/items/sniper.webp",
+      "sha256": "9776a2e5f73ee9a924ce64e0cf1f7789b1c0419941abe2f883334269793725f1",
+      "size": 8236
+    },
+    {
+      "path": "code/ui/img/items/sp_boa.webp",
+      "sha256": "2b34795a1845be6c6555058eea7dc620c8e3b8cff309f254edf48ecc1b8fe203",
+      "size": 22256
+    },
+    {
+      "path": "code/ui/img/items/sp_cobra.webp",
+      "sha256": "1edd7d02eccf1b15bcc0aff82855013aa46dd2e8253facd1fda1cd5d417962b7",
+      "size": 14708
+    },
+    {
+      "path": "code/ui/img/items/sp_meadow.webp",
+      "sha256": "90284317c8a11de800a453d38b156df361cbcd6dd59097960aaf93c38e46760a",
+      "size": 18994
+    },
+    {
+      "path": "code/ui/img/items/sp_viper.webp",
+      "sha256": "85fd741d7902e557166bc32e915d66eddcb72c11bcd7ebc3f60ad66c0e282ac2",
+      "size": 19842
+    },
+    {
+      "path": "code/ui/img/items/spine.webp",
+      "sha256": "b0954970368659cd7e07469a16fd48b1d1b6648f4f3439aab90fe1955d55b0d9",
+      "size": 21582
+    },
+    {
+      "path": "code/ui/img/items/spring.webp",
+      "sha256": "20f9cdea8c47c84ab492bd496b74bffd0e921c071e182095425e7512092d9408",
+      "size": 17040
+    },
+    {
+      "path": "code/ui/img/items/sprout.webp",
+      "sha256": "2775c4d8d41f8c817e79e28d5913578dd5547800304c2abec2a201428d791efa",
+      "size": 19460
+    },
+    {
+      "path": "code/ui/img/items/spyglass.webp",
+      "sha256": "d3db72425ec062a90e7c9b4019f5aa6a726e51340bde46f92cac244452582732",
+      "size": 11722
+    },
+    {
+      "path": "code/ui/img/items/star.webp",
+      "sha256": "c6fe44327eef0adaacafee1943959af0bf437cadeba5359f5f326856089c612b",
+      "size": 17948
+    },
+    {
+      "path": "code/ui/img/items/static.webp",
+      "sha256": "153757c2d59253f2dbdd65852ed0e82ef19577c20a40f77b1338eec31846aa34",
+      "size": 17008
+    },
+    {
+      "path": "code/ui/img/items/storm.webp",
+      "sha256": "a56da9c79fa8a1b9710c920476569863138c6a93376b4d97b3767d578ead80cb",
+      "size": 15348
+    },
+    {
+      "path": "code/ui/img/items/sunstone.webp",
+      "sha256": "98a1cfe9d6bbf5a0d60cfa08ef59fce5d16e3c706d90438c116b4ae527a19853",
+      "size": 15370
+    },
+    {
+      "path": "code/ui/img/items/tailgun.webp",
+      "sha256": "23f1c086b59047ee39ee9966ca4bbff137ffdc62ad1af296a917c2dc9b8f86c4",
+      "size": 12750
+    },
+    {
+      "path": "code/ui/img/items/thorns.webp",
+      "sha256": "2246d6367daa74f030a6d6f1861679165996707b75e92b35af93c8f396507ed9",
+      "size": 13700
+    },
+    {
+      "path": "code/ui/img/items/thunder.webp",
+      "sha256": "4cfed401982916772400f3511636534c936b8106fda256b46ab8b0c95edd8657",
+      "size": 25682
+    },
+    {
+      "path": "code/ui/img/items/titan.webp",
+      "sha256": "482290f8c4737a8220fedee4b6724771bf085b43f97493b0d0e285be4b1bc56c",
+      "size": 20822
+    },
+    {
+      "path": "code/ui/img/items/tongue.webp",
+      "sha256": "69c0ef386146f231de4544e6463850069fbf6ef17b0950e403e2fee2352eb3c6",
+      "size": 9230
+    },
+    {
+      "path": "code/ui/img/items/tr_guard.webp",
+      "sha256": "4d683645e21f9db8832b633d99a2c541151835eed0c5a689652266c9478ea2b1",
+      "size": 18772
+    },
+    {
+      "path": "code/ui/img/items/tr_lord.webp",
+      "sha256": "42e0e1fd75870e1b77ab825393847612033239f12375c6fea5fe26af76100766",
+      "size": 21738
+    },
+    {
+      "path": "code/ui/img/items/tr_queen.webp",
+      "sha256": "5505c68af6814a9833d26afe8bf6a788e3192eaca0ea71b635b08b85aa34b95d",
+      "size": 13064
+    },
+    {
+      "path": "code/ui/img/items/tr_rival.webp",
+      "sha256": "2bd847f5510e02a66e0c3b8c187a46a1e8db69b183abf14e84b55bd86f01ce8c",
+      "size": 19074
+    },
+    {
+      "path": "code/ui/img/items/tr_worm.webp",
+      "sha256": "9050a31e52982a0fb6489f06d746564b20f32c20b4cdb2bda60a5a8938cb641e",
+      "size": 12280
+    },
+    {
+      "path": "code/ui/img/items/twin.webp",
+      "sha256": "064abf11b69aa47d81915004f0f9492519a6d6c39a4f33303b4be48c6d429468",
+      "size": 20648
+    },
+    {
+      "path": "code/ui/img/items/venom.webp",
+      "sha256": "b8af9f06fc6bef1438ab3316ce7bfc2a4b22f5f57450bf0c8d409b6c31fcd5dc",
+      "size": 10874
+    },
+    {
+      "path": "code/ui/img/items/volley.webp",
+      "sha256": "1e32495f8142d75b83c36017377afb3537cf567feb6397c89c4975aed086fb00",
+      "size": 17704
+    },
+    {
+      "path": "code/ui/img/items/vortex.webp",
+      "sha256": "d94d29d53ea2ab6928d83978ba88bae9b9fe880b6f9656a40879a2e216e73bc3",
+      "size": 17512
+    },
+    {
+      "path": "code/ui/img/items/wings.webp",
+      "sha256": "92a4fc6b04caa9f0d0fdf90f535a65a6fec32ce9d9868988f70baae0cce9752e",
+      "size": 11598
+    },
+    {
+      "path": "code/ui/img/items/wisp.webp",
+      "sha256": "344b74e8aa348f8f5a38ccbe859b9f44b24ddd5c3ebdbd88f8c5b6e867eaab52",
+      "size": 16150
+    },
+    {
+      "path": "code/ui/img/items/x_cache.webp",
+      "sha256": "73b411b36599c089e82aa646f90347467cb8d90033c5063df428a195a4e63cd3",
+      "size": 21888
+    },
+    {
+      "path": "code/ui/img/items/x_circle.webp",
+      "sha256": "34d36636bd8d475f471a30780ff8749079292ec227aa6ea21fd6db8ac2aa749b",
+      "size": 22076
+    },
+    {
+      "path": "code/ui/img/items/x_crate.webp",
+      "sha256": "e78f5913fae61fdcc8ac8f19d48c967ad7137228b78ff26e3fba970ab624f3fa",
+      "size": 24772
+    },
+    {
+      "path": "code/ui/img/items/x_egg.webp",
+      "sha256": "6bfe772f8f997583b6e6ef3e9af8595ffa6ce93846b807d58b08b55f3df14c1e",
+      "size": 14472
+    },
+    {
+      "path": "code/ui/img/items/x_grave.webp",
+      "sha256": "cca5c381da2adb9f64f369f8a90d9d2a9b93e01abc7332108e9b5fedd77c9095",
+      "size": 20640
+    },
+    {
+      "path": "code/ui/img/items/x_map.webp",
+      "sha256": "6ef1a4c7b9b4051db3832c004850fdeff1ab9e54f58145147bac8310ed3c7dbf",
+      "size": 14100
+    },
+    {
+      "path": "code/ui/img/items/x_shard.webp",
+      "sha256": "b7ba1f38fc77e9bb80cac6b5447fad7ffb071f06243758a46a33f8c43f5b7c6f",
+      "size": 11734
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "867054a95011104a2816125d0bfa56af286efc23328c26a4a912f30cc88afa84",
+      "size": 1043
+    },
+    {
+      "path": "code/ui/js/audio.js",
+      "sha256": "251b01922401a098ebd7c30b37f545473ca3f621b3d5cfa818fbb33f814ed78c",
+      "size": 8311
+    },
+    {
+      "path": "code/ui/js/data.js",
+      "sha256": "6c5b93aa6766261e562699349d8c0b4e1d485fca452722e3f368402839a0f7cb",
+      "size": 64598
+    },
+    {
+      "path": "code/ui/js/enemies.js",
+      "sha256": "42add22e753518975c9a23a2e008737ae0330fef62e6843ed62840dd07adf25f",
+      "size": 36123
+    },
+    {
+      "path": "code/ui/js/events.js",
+      "sha256": "b97f54aa471c100612d33d74c0d41956056a32d5df0cfbedbec755ea466eab5f",
+      "size": 12452
+    },
+    {
+      "path": "code/ui/js/fx.js",
+      "sha256": "7eb8e24fb31d860f89bfb129b78deb44c8c054976689c78ee51d183838f18a41",
+      "size": 5484
+    },
+    {
+      "path": "code/ui/js/host.js",
+      "sha256": "6a388fedd532a03114836512fd13ff3c0f29ca4be0ff9f1e1d4154c0164c9816",
+      "size": 3916
+    },
+    {
+      "path": "code/ui/js/input.js",
+      "sha256": "9fd12bb5bb9c3dbc9c5b78d94906ff44f777eb8663983a96df599c3f005ce94c",
+      "size": 3762
+    },
+    {
+      "path": "code/ui/js/life.js",
+      "sha256": "c135b8de9bcdb0978e4e133b1378dda3ef440007a969e7309fe2f62da7ebb7e1",
+      "size": 11035
+    },
+    {
+      "path": "code/ui/js/lore.js",
+      "sha256": "fbc4492b1431848ec139e617c066f2ecdf48802fe60a0a035e0cdcb5ff011e0e",
+      "size": 21071
+    },
+    {
+      "path": "code/ui/js/main.js",
+      "sha256": "a0a3376157463c0dea2c8d369acca8be89f0353a96b62e8ebdfc05014d0ddf68",
+      "size": 78687
+    },
+    {
+      "path": "code/ui/js/map.js",
+      "sha256": "f641f8b35b5193f06ba2b9a7b68cd306c5e137fd74c4f938afa2a06c7445e8fa",
+      "size": 8756
+    },
+    {
+      "path": "code/ui/js/mesh.js",
+      "sha256": "753228d89c06a8cf0aec9904b88e1094f8496f9b4bc83f7d8180fb26a26baf72",
+      "size": 2341
+    },
+    {
+      "path": "code/ui/js/pickups.js",
+      "sha256": "3bfd36b302f8e09978d23fd85c2f4f283e8da70786f4d20398fb24224a67759e",
+      "size": 15775
+    },
+    {
+      "path": "code/ui/js/poi.js",
+      "sha256": "fcf109edb07b184bde5677ed19235eefb368de03d9f13a1769284133909d0bfb",
+      "size": 38721
+    },
+    {
+      "path": "code/ui/js/post.js",
+      "sha256": "d3edd19a1bcd8569f26dae31bccf6d58a16c74bf8db4a69c4cdc6b2ac0c4f5d3",
+      "size": 1645
+    },
+    {
+      "path": "code/ui/js/shots.js",
+      "sha256": "1b99e3fd1e193406599e4bb1fdafe73243c44aad263fdd9d9b3188fe9c8d81fd",
+      "size": 5216
+    },
+    {
+      "path": "code/ui/js/sky.js",
+      "sha256": "e7118548f18d8818551c316d1db89085b4e3c761593acf4a1b1f87a99f1db8fd",
+      "size": 8203
+    },
+    {
+      "path": "code/ui/js/snake.js",
+      "sha256": "c043f2b8b201082f6aee4fbcae4697416ce4d66205df11318d9293c39b42dbc3",
+      "size": 14667
+    },
+    {
+      "path": "code/ui/js/terrain.js",
+      "sha256": "18e67da54517f4f94cb85c0284c3be885e045bb12b53520356755006900ac66b",
+      "size": 5115
+    },
+    {
+      "path": "code/ui/js/ui.js",
+      "sha256": "e578f00fbd65620171a0664fedefa6c3e16290a1f3ab747f47407f6f8929378d",
+      "size": 37063
+    },
+    {
+      "path": "code/ui/js/util.js",
+      "sha256": "f6a90a3be871ac5feec35a3ae91ac1914c0b1e6286c4dbf51f1dad8854188c0a",
+      "size": 2855
+    },
+    {
+      "path": "code/ui/js/world.js",
+      "sha256": "4774c42d40eeb91a0f0a5b2b39a3ccbcf4e5f233880b65eb708cbe956d15bd20",
+      "size": 20112
+    },
+    {
+      "path": "code/ui/play.html",
+      "sha256": "9481a1102d1395b12073b76e94c28ad7aca6821530c16370dea34c8985b1c444",
+      "size": 29918
+    },
+    {
+      "path": "code/vendor/three-0.160.0/LICENSE",
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "size": 1081
+    },
+    {
+      "path": "code/vendor/three-0.160.0/addons/postprocessing/EffectComposer.js",
+      "sha256": "d234e578618fa816955ebdc059c049c577e203e650e33cf22bde3f232c29e669",
+      "size": 4651
+    },
+    {
+      "path": "code/vendor/three-0.160.0/addons/postprocessing/MaskPass.js",
+      "sha256": "328cf7db0da5d9be83ffe39d54b01d5ac1fddf108cc98182ddbb056f5c8b537f",
+      "size": 2231
+    },
+    {
+      "path": "code/vendor/three-0.160.0/addons/postprocessing/OutputPass.js",
+      "sha256": "13817fc7a87f662d29d2c5e00f44d3a4588c9afac4a372de0cacb0e44e368ffd",
+      "size": 2398
+    },
+    {
+      "path": "code/vendor/three-0.160.0/addons/postprocessing/Pass.js",
+      "sha256": "98df28f61ad6a227ca3ff6fdc52c995977269512e95b30575c5e4a05eb8c8666",
+      "size": 1698
+    },
+    {
+      "path": "code/vendor/three-0.160.0/addons/postprocessing/RenderPass.js",
+      "sha256": "5da63866ff12a5d6db703bd5c843525ef932c92f3dbef5b83a176a7a6ca2d044",
+      "size": 1907
+    },
+    {
+      "path": "code/vendor/three-0.160.0/addons/postprocessing/ShaderPass.js",
+      "sha256": "12ab1769fd592db83878e348d2e1ac4e429349a93c2e9fa0ef909ed902b22712",
+      "size": 1568
+    },
+    {
+      "path": "code/vendor/three-0.160.0/addons/postprocessing/UnrealBloomPass.js",
+      "sha256": "4a00ccc63e792e21d93585e2cbb0963b0e61a1874d9e3d8350b73bab5f34de07",
+      "size": 12398
+    },
+    {
+      "path": "code/vendor/three-0.160.0/addons/shaders/CopyShader.js",
+      "sha256": "4e3346db194db56a596cd074e9bdb39fb5eb52040c333e0d29dc4eb1324d3b1d",
+      "size": 571
+    },
+    {
+      "path": "code/vendor/three-0.160.0/addons/shaders/LuminosityHighPassShader.js",
+      "sha256": "a511f162aa9fea76c8f99cf4fdc3892237153580a2ea948fb8b27d25d4e81bd1",
+      "size": 1185
+    },
+    {
+      "path": "code/vendor/three-0.160.0/addons/shaders/OutputShader.js",
+      "sha256": "53a52e430c27bc36ceaab8ae90a2b4af7b02672d7ee4b29d6ba3c28e09c92c2a",
+      "size": 1393
+    },
+    {
+      "path": "code/vendor/three-0.160.0/three.module.js",
+      "sha256": "66aac4fdeb64d848cf18d7ec32c3670d49f1dc85380c2bd1ce919840f7929216",
+      "size": 1272499
+    }
+  ],
+  "id": "snake-wanderer",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "axikoApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.0"
+}
