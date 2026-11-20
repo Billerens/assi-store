@@ -190,6 +190,7 @@
     ev: ["caravan", "order", "starfall", "storm", "wanderer"],
     hero: ["bran", "corvin", "eira", "veya"],
     mf: ["auto", "command", "dragonCare", "memory", "rhythm", "rune", "rush", "startGold", "startLevel", "team", "trade"],
+    mw: ["mwBoots", "mwChest", "mwHelmet", "mwLegs", "mwRing", "mwShield", "mwSword"],
     monster: ["alien", "angler", "ashwolf", "bat", "cabbage", "cactus", "cheese", "crab", "crystalbug", "cupcake", "cyberdog", "drake", "drone", "duck", "forkspider", "ghostneon", "gingerbread", "goblin", "gremlin", "gummy", "jackal", "jackbox", "jelly", "kettle", "lavagolem", "lollisnake", "marshmallow", "mech", "mosquito", "mummy", "obsidianbug", "octopus", "puffer", "rat", "salamanderfoe", "saucer", "scorpion", "shroom", "slime", "snail", "soldier", "spacesquid", "stump", "teddy", "toad", "toaster", "trashgolem", "troll", "windup", "worm"],
     pet: ["fox", "raven", "salamander", "turtle"],
     rune: ["fire", "greed", "ice", "resonant"],

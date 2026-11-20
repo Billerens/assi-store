@@ -57,6 +57,17 @@ Idle-игра Игротеки по описанию `docs/games/merge-forge.md`
 сами себя, обгоняли здоровье врагов (проверка «перековки не разгоняют сами себя»). `sim.perk(state,
 cfg, kind)` собирает их по видам.
 
+Шедевры (`masterworks.js`, `meta.masterworks`): `onBossKill` в `kill` у босса (не фарм) — шанс
+`dropChance`, второй — `doubleChance`; слот, редкость и эффекты по `hash01(серийный номер встречи, волна, …)`.
+`modifiers` — сумма выставленных (`stand`: восемь мест, кольца — два), эффекты с потолком (`enemyHp`,
+`waveSkip`, `skillCooldown`) — через `bounded`. В симуляции: `sim.mw(state, cfg)` рядом с теми же
+каналами артефактов. Имя, история, девиз и значок — запас `masterworks` (`prompts/masterworks.md`),
+экран берёт их `g.stock.take('masterworks', {slot})` и кладёт `setFlavor`; без запаса —
+`sim.procedural`, такой шедевр помечен `stub` и ждёт настоящую историю. Уровни, узлы кузницы и
+разбор — за угли (`spend`/`addCoals`, общий бонус углей не меняется). «Ускоренный ранний ход»,
+«Память наковальни» и «Командный строй» больше не разовые: `sim.rushWaves`, `sim.memoryCap`,
+`outpost.slots` (до числа героев) и `commandPower`.
+
 Приёмы (`sim.SKILLS`): `cry`, `midas`, `strike`, `fury`, у каждого — улучшение силы (`<id>`) и отката
 (`<id>Cd`): откат = `<cooldown>` / (1 + `up.<id>Cd.step` × уровень) / (1 + артефакты), не короче
 `skill.minCooldownSec`. Время — `run.cryUntil`/`run.cryReadyAt` у клича, `run.skills.<id>` у остальных;

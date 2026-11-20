@@ -1422,18 +1422,19 @@
   /** What the next level of a node of «Горн мастера» gives. */
   const MF_DESC = {
     startGold: (c, n) => tx('Забег начинается с {} золота', g.fmt(sim.startGoldAt(c, n + 1))),
-    rush: (c) => tx('Первые {} волн — золото ×{}', c['mf.rush.waves'], c['mf.rush.mult']),
+    rush: (c, n) => tx('Первые {} волн — золото ×{}', c['mf.rush.waves'] + c['mf.rush.wavesStep'] * n, c['mf.rush.mult']),
     startLevel: () => tx('Горн начинает на уровень выше'),
     auto: (c, n) => tx('Горн сам стучит: {} тапа в секунду', g.fmt(sim.autoTaps(c, n + 1), { digits: 2 })),
     rune: (c, n) => (c['rune.base'] + n < sim.SOCKETS.length
       ? tx('Ещё одно гнездо руны с начала забега, руны сильнее на {}', pct(c['mf.rune.power']))
       : tx('Руны сильнее на {}', pct(c['mf.rune.power']))),
-    memory: (c) => tx('После перековки остаётся лучший клинок, до {}-го уровня', c['mf.memory.maxLevel']),
+    memory: (c, n) => tx('После перековки остаётся лучший клинок, до {}-го уровня', c['mf.memory.maxLevel'] + c['mf.memory.step'] * n),
     rhythm: () => tx('Питомец быстрее накапливает помощь для кузни'),
     trade: () => tx('Постоянно повышает выручку от продажи клинков'),
     team: () => tx('Два героя одновременно участвуют в бою'),
     dragonCare: () => tx('Дракон быстрее переваривает клинки'),
-    command: () => tx('Три героя одновременно участвуют в бою')
+    command: (c, n) => (n === 0 ? tx('Три героя одновременно участвуют в бою') : n === 1 ? tx('Четыре героя одновременно участвуют в бою')
+      : tx('Все герои сильнее ещё на {}', pct(c['mf.command.power'])))
   };
 
   /** What the levels bought give now ('' when nothing is bought or there is nothing to add). */
@@ -1445,6 +1446,9 @@
     if (id === 'rune') return tx('сейчас +{}', pct(c['mf.rune.power'] * n));
     if (id === 'trade') return tx('выручка ×{}', g.fmt(sim.saleMult(g.state, c), { digits: 2 }));
     if (id === 'rhythm' || id === 'dragonCare') return tx('ур. {} · прирост постепенно уменьшается', n);
+    if (id === 'rush') return tx('сейчас {} волн', sim.rushWaves(g.state, c));
+    if (id === 'memory') return tx('сейчас до {}-го уровня', sim.memoryCap(g.state, c));
+    if (id === 'command') return n > 2 ? tx('герои сильнее на {}', pct(c['mf.command.power'] * (n - 2))) : tx('героев в бою: {}', 2 + n);
     return '';
   }
 
@@ -1455,17 +1459,21 @@
     const c = cfg();
     const l = sim.forgeLayer(state);
     // The coal note follows the run: what a reset gives now and the wave of the next coal.
-    const key = view.masterTab === 'artifacts' ? 'artifacts' : view.masterTab + '|' + l.currency + '|' + JSON.stringify(l.state.mf) + '|' + Object.keys(state.meta.album || {}).length + '|' + sim.ingots(state) + '|' + state.run.maxWave + '|' + l.state.record;
+    const mwm = state.meta.masterworks;
+    const mwKey = view.masterTab === 'masterworks' ? JSON.stringify([mwm.stand, mwm.up, Object.keys(mwm.items).map((id) => [id, mwm.items[id].level, !!mwm.items[id].flavor, !!mwm.items[id].stub]), view.mwFilter || '']) : '';
+    const key = view.masterTab === 'artifacts' ? 'artifacts' : view.masterTab + '|' + l.currency + '|' + JSON.stringify(l.state.mf) + '|' + Object.keys(state.meta.album || {}).length + '|' + sim.ingots(state) + '|' + state.run.maxWave + '|' + l.state.record + '|' + mwKey;
     if (!force && key === view.masterKey) return;
     view.masterKey = key;
     box.textContent = '';
     const tabs = h('div', { class: 'mf-seg mf-tabs' },
       h('button', { class: view.masterTab === 'tree' ? 'on' : '', id: 'tab-tree', title: tx('Угли и дерево'), onclick: () => { view.masterTab = 'tree'; fillMaster(true); } }, tx('Дерево')),
       view.artifacts ? h('button', { class: view.masterTab === 'artifacts' ? 'on' : '', id: 'tab-artifacts', onclick: () => { view.masterTab = 'artifacts'; fillMaster(true); } }, tx('Артефакты')) : null,
+      h('button', { class: view.masterTab === 'masterworks' ? 'on' : '', id: 'tab-masterworks', title: tx('Коллекция шедевров'), onclick: () => { view.masterTab = 'masterworks'; fillMaster(true); } }, tx('Шедевры')),
       h('button', { class: view.masterTab === 'album' ? 'on' : '', id: 'tab-album', title: tx('Альбом металлов'), onclick: () => { view.masterTab = 'album'; fillMaster(true); } }, tx('Металлы')));
     box.append(tabs);
     if (view.masterTab === 'artifacts' && view.artifacts) { view.artifacts.render(state); box.append(view.artifacts.element); return; }
     if (view.masterTab === 'album') return fillAlbum(box, state);
+    if (view.masterTab === 'masterworks') return fillMasterworks(box, state);
     const coals = Big.of(l.currency, 0);
     const rec = Math.max(state.run.maxWave, l.state.record);
     box.append(h('div', { class: 'g-lines' },
@@ -1576,6 +1584,126 @@
     document.body.append(back);
     paint();
     (next.disabled ? close : next).focus({ preventScroll: true });
+  }
+
+  // ---- «Коллекция шедевров»: the stand, the inventory, the forge of masterworks, a piece's card ----
+
+  const MW = () => sim.masterworks;
+  const MW_ICON = { sword: 'mwSword', shield: 'mwShield', helmet: 'mwHelmet', chest: 'mwChest', legs: 'mwLegs', boots: 'mwBoots', ring: 'mwRing' };
+  /** A piece's picture: the model's icon, else the plain one of its slot. `empty` — a place with nothing: grey. */
+  function mwPicture(item, slot, cls, empty) {
+    const svg = item && item.flavor && item.flavor.svg;
+    if (svg && window.GameArt) return h('img', { class: 'mf-mw-ic ' + (cls || ''), alt: '', src: GameArt.url(view.still ? GameArt.still(svg) : svg) });
+    const el = MFArt.el('mw', MW_ICON[slot || (item && item.slot)] || 'mwSword', 'mf-mw-ic ' + (cls || '') + (empty ? ' mf-mw-empty' : ''));
+    return el;
+  }
+  /** The model's name; until the model has written the story, an honest «Меч без истории». */
+  function mwTitle(item) { return item.flavor && item.flavor.title && !item.stub ? item.flavor.title : tx('{} без истории', tx(MW().SLOT_TITLE[item.slot])); }
+  function mwValue(kind, v) {
+    const s = MW().STATS[kind];
+    return tx(s.label, s.pct ? g.fmt(v * 100, { digits: 3 }) : g.fmt(v, { digits: 3 }));
+  }
+  /** The model writes each piece's name, story and icon; until it has, the piece waits with a plain name. */
+  function mwStories(state) {
+    view.mwAsked = view.mwAsked || {};
+    const t = now();
+    MW().waiting(state).forEach((id) => {
+      if (view.mwAsked[id] && t - view.mwAsked[id] < 60000) return;
+      view.mwAsked[id] = t;
+      const item = state.meta.masterworks.items[id];
+      Promise.resolve(g.stock && g.stock.take ? g.stock.take('masterworks', { slot: item.slot }) : null).then((f) => {
+        const flavor = f && (f.slot === undefined || f.slot === item.slot || f.procedural) ? f : sim.procedural('masterworks', g.rng);
+        if (flavor && (!item.flavor || item.stub)) g.act((s) => MW().setFlavor(s, id, flavor));
+      }, () => {});
+    });
+  }
+
+  function fillMasterworks(box, state) {
+    const c = cfg(), m = state.meta.masterworks, mw = MW();
+    const coals = Big.of(sim.forgeLayer(state).currency, 0);
+    box.append(h('p', { class: 'g-note' }, tx('Побеждённый босс иногда оставляет шедевр — единственную в мире вещь. Работают только выставленные на стенд: по одному в каждом слоте, колец два.')));
+    box.append(h('div', { class: 'g-lines' },
+      g.ui.line('Шанс с босса', pct(mw.dropChance(state, c)) + (mw.doubleChance(state, c) > 0 ? ' · ' + tx('второй {}', pct(mw.doubleChance(state, c))) : '')),
+      g.ui.line('Инвентарь', tx('{} из {}', mw.inventory(state).length, mw.capacity(state, c)))));
+    // The stand: eight places.
+    const stand = h('div', { class: 'mf-stand', id: 'mw-stand' });
+    mw.STAND.forEach((place) => {
+      const id = m.stand[place], item = id ? m.items[id] : null, slot = mw.slotOf(place);
+      stand.append(h('button', { class: 'mf-stand-place' + (item ? ' on rarity-' + item.rarity : ''), 'data-place': place, 'aria-label': item ? mwTitle(item) : tx('{}: пусто', tx(mw.SLOT_TITLE[slot])),
+        onclick: () => { if (item) openMasterwork(id); else { view.mwFilter = view.mwFilter === slot ? '' : slot; fillMaster(true); } } },
+        mwPicture(item, slot, '', !item), item ? h('span', { class: 'mf-mw-lvl g-num' }, String(item.level)) : null,
+        h('span', { class: 'mf-stand-name' }, item ? mwTitle(item) : tx(mw.SLOT_TITLE[slot]))));
+    });
+    box.append(stand);
+    // What the stand gives.
+    const mods = mw.modifiers(state, c), lines = mw.KINDS.filter((k) => mods[k] > 0);
+    box.append(h('div', { class: 'mf-sec' }, tx('Стенд даёт')));
+    box.append(lines.length ? h('div', { class: 'mf-mw-bonus' }, lines.map((k) => h('span', {}, mwValue(k, mods[k])))) : h('p', { class: 'g-note' }, tx('Пока ничего: выставьте шедевр.')));
+    // The inventory.
+    const filter = view.mwFilter || '';
+    const ids = mw.inventory(state).filter((id) => !filter || m.items[id].slot === filter);
+    box.append(h('div', { class: 'mf-sec' }, filter ? tx('Инвентарь · {}', tx(mw.SLOT_TITLE[filter])) : tx('Инвентарь')));
+    if (filter) box.append(h('button', { class: 'g-btn small mf-mw-all', id: 'mw-all', onclick: () => { view.mwFilter = ''; fillMaster(true); } }, tx('Показать все')));
+    box.append(ids.length ? h('div', { class: 'mf-mw-grid', id: 'mw-inventory' }, ids.map((id) => {
+      const item = m.items[id];
+      return h('button', { class: 'mf-mw-tile rarity-' + item.rarity, 'data-mw': id, 'aria-label': mwTitle(item), onclick: () => openMasterwork(id) },
+        mwPicture(item), h('span', { class: 'mf-mw-lvl g-num' }, String(item.level)), h('span', { class: 'mf-mw-name' }, mwTitle(item)));
+    })) : h('p', { class: 'g-note' }, tx(m.drops ? 'Всё выставлено на стенд.' : 'Шедевров пока нет: их оставляют боссы.')));
+    // The forge of masterworks.
+    box.append(h('div', { class: 'mf-sec' }, tx('Кузница шедевров')));
+    mw.NODES.forEach((n) => {
+      const lv = mw.nodeLevel(state, n.id), price = mw.nodeCost(state, c, n.id);
+      const now2 = n.id === 'chance' ? pct(mw.dropChance(state, c)) : n.id === 'double' ? pct(mw.doubleChance(state, c)) : n.id === 'capacity' ? tx('{} мест', mw.capacity(state, c)) : n.id === 'quality' ? tx('редкие ×{}', g.fmt(1 + c['mw.quality.step'] * lv, { digits: 2 })) : tx('×{}', g.fmt(mw.slotPower(state, c, n.id), { digits: 2 }));
+      const pic = MW_ICON[n.id] ? ['mw', MW_ICON[n.id]] : n.id === 'quality' ? ['up', 'eye'] : n.id === 'capacity' ? ['ui', 'chest'] : ['ui', 'boss'];
+      box.append(row({ set: pic[0], id: pic[1], attr: 'data-mw-node', level: lv, title: n.title, text: tx(n.text), now: now2,
+        side: buyButton(Big.gte(coals, price), tx('{} углей', g.fmt(price)), lv + 1, () => { const ok = g.act((s) => mw.buyNode(s, cfg(), n.id).ok); g.sfx(ok ? 'buy' : 'deny'); view.masterKey = ''; }, lv + 1) }));
+    });
+  }
+
+  /** A piece's card: the picture, the story, the effects; on the stand, a level more, taken apart. */
+  function openMasterwork(id) {
+    closeLore();
+    const back = h('div', { class: 'mf-lore-back', id: 'mw-card', role: 'dialog', 'aria-modal': 'true', 'aria-label': tx('Шедевр') });
+    const body = h('div', { class: 'mf-lore-body' });
+    const close = h('button', { class: 'icon-btn mf-lore-x', id: 'mw-close', 'aria-label': tx('Закрыть'), onclick: () => closeLore() }, GameIcons.el('close'));
+    const panel = h('div', { class: 'mf-lore mf-mw-card' }, close, body);
+    back.append(panel);
+    let sure = false;
+    function paint() {
+      const state = g.state, c = cfg(), mw = MW(), item = state.meta.masterworks.items[id];
+      body.textContent = '';
+      if (!item) { closeLore(); return; }
+      const f = item.flavor || {}, r = mw.RARITY_BY[item.rarity], place = mw.placeOf(state, id);
+      const price = mw.levelCost(state, c, id), coals = Big.of(sim.forgeLayer(state).currency, 0);
+      body.append(
+        h('div', { class: 'mf-mw-hero rarity-' + item.rarity }, mwPicture(item, item.slot, 'big')),
+        h('div', { class: 'mf-mw-kind rarity-' + item.rarity }, tx('{} · {} · ур. {}', tx(r.title), tx(mw.SLOT_TITLE[item.slot]), item.level)),
+        h('div', { class: 'mf-mw-title', role: 'heading', 'aria-level': '2' }, mwTitle(item)),
+        f.text ? h('p', { class: 'mf-mw-text' }, f.text) : null,
+        h('div', { class: 'mf-mw-stats' }, item.stats.map((k, i) => h('div', { class: i ? '' : 'main' }, mwValue(k, mw.statValue(state, c, item, i))))),
+        f.lore ? h('p', { class: 'mf-mw-lore' }, f.lore) : h('p', { class: 'g-note' }, tx('Летописец ещё пишет историю этого шедевра.')),
+        f.motto ? h('p', { class: 'mf-mw-motto' }, '«' + f.motto + '»') : null,
+        h('p', { class: 'g-note' }, tx('Взят с босса волны {}', item.wave)),
+        h('div', { class: 'g-btns mf-mw-actions' },
+          h('button', { class: 'g-btn primary', id: 'mw-equip', onclick: () => { g.act((s) => (place ? mw.unequip(s, id) : mw.equip(s, id)).ok); g.sfx('tap'); view.masterKey = ''; paint(); } }, tx(place ? 'Снять со стенда' : 'Выставить на стенд')),
+          h('button', { class: 'g-btn', id: 'mw-level', disabled: !Big.gte(coals, price), onclick: () => { const ok = g.act((s) => mw.levelUp(s, cfg(), id).ok); g.sfx(ok ? 'buy' : 'deny'); view.masterKey = ''; paint(); } }, tx('Улучшить · {} углей', g.fmt(price))),
+          h('button', { class: 'g-btn' + (sure ? ' danger' : ''), id: 'mw-salvage', onclick: () => {
+            if (!sure) { sure = true; paint(); return; }
+            const got = mw.salvageValue(g.state, id);
+            g.act((s) => mw.salvage(s, cfg(), id).ok);
+            g.sfx('coin');
+            g.flash('gem', tx('Шедевр разобран'), tx('Угли: +{}', got));
+            view.masterKey = '';
+            closeLore();
+          } }, sure ? tx('Точно разобрать? +{} углей', mw.salvageValue(g.state, id)) : tx('Разобрать'))));
+    }
+    const key = (e) => { if (e.key === 'Escape') { e.preventDefault(); closeLore(); } };
+    back.addEventListener('click', (e) => { if (e.target === back) closeLore(); });
+    document.addEventListener('keydown', key, true);
+    view.lore = { back, key, focus: document.activeElement };
+    document.body.append(back);
+    paint();
+    close.focus({ preventScroll: true });
   }
 
   function closeLore() {
@@ -1757,6 +1885,22 @@
     }
     anvilEffects(state, t);
     runEffects(state, t);
+    const piece = r.lastMasterwork;
+    if (piece && piece.serial !== view.mwSerial) {
+      if (view.mwSerial !== undefined && t - (piece.at || 0) < 4000) {
+        const n = piece.ids.length;
+        if (n) {
+          const item = state.meta.masterworks.items[piece.ids[0]];
+          sound('win');
+          g.buzz('level');
+          pop(view.gate, tx('Шедевр!'), 'gold big', { life: 1800, rise: 20 });
+          burst(view.gate, 14, 'gold', 80);
+          if (item) g.flash('sparkle', tx('Шедевр с босса'), tx('{} · {}', tx(sim.masterworks.RARITY_BY[item.rarity].title), tx(sim.masterworks.SLOT_TITLE[item.slot])) + (n > 1 ? ' · ' + tx('и ещё один') : ''));
+        } else if (piece.salvaged) g.flash('gem', tx('Инвентарь шедевров полон'), tx('Шедевр разобран: +{} углей', piece.salvaged));
+      }
+      view.mwSerial = piece.serial;
+    }
+    if (!view.mwStoriesAt || t - view.mwStoriesAt > 2000) { view.mwStoriesAt = t; mwStories(state); }
     if (!view.infoUntil || t > view.infoUntil) {
       view.infoUntil = 0;
       view.info.textContent = encounter.walking ? tx('До ворот {} с · время подготовить кузню', g.fmt(encounter.remaining, { digits: 1 })) :

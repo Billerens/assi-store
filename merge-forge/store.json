@@ -1,7 +1,7 @@
 {
   "id": "merge-forge",
   "kind": "game",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "title": "Merge Forge",
   "summary": "The forge makes blades, two alike merge into a stronger one, and the blades cut down the monsters at the gate",
   "tags": ["merge", "idle", "fantasy"],

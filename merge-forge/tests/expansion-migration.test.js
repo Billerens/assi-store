@@ -9,7 +9,7 @@ test('Core читает v1 без изменения старого поля, в
  const original=JSON.parse(fs.readFileSync(path.join(GAME,'fixtures/v1.json'),'utf8')),untouched=copy(original);
  const result=x.Core.pick([{state:original,seq:original.seq}],x.game,x.sim);
  assert.ok(result.state,JSON.stringify(result.broken));assert.equal(result.migratedFrom,1);assert.equal(result.state.ver,x.game.saveVersion);
- const normalized=copy(result.state);delete normalized.run.outpost;delete normalized.meta.outpost;delete normalized.run.adventures;delete normalized.meta.adventures;delete normalized.run.artifacts;delete normalized.meta.artifacts;normalized.ver=1;
+ const normalized=copy(result.state);delete normalized.run.outpost;delete normalized.meta.outpost;delete normalized.run.adventures;delete normalized.meta.adventures;delete normalized.run.artifacts;delete normalized.meta.artifacts;delete normalized.meta.masterworks;normalized.ver=1;
  assert.deepStrictEqual(normalized,untouched);assert.deepStrictEqual(original,untouched);
  const again=x.Core.pick([{json:JSON.stringify(result.state),seq:result.state.seq}],x.game,x.sim);
  assert.deepStrictEqual(again.state,result.state);assert.equal(again.migratedFrom,null);

@@ -8,9 +8,9 @@
 // column, then rows 6 and 7. A cell holds 0 (empty) or a blade level.
 (function (root, make) {
   var node = typeof require === 'function' && typeof exports !== 'undefined';
-  var api = node ? make(require('../engine/big.js'), require('../engine/fmt.js'), require('./outpost.js'), require('./adventures.js'), require('./upgrade-progress.js'), require('./artifacts.js')) : make(root.Big, root.Fmt, root.MFOutpost, root.MFAdventures, root.MFUpgradeProgress, root.MFArtifacts);
+  var api = node ? make(require('../engine/big.js'), require('../engine/fmt.js'), require('./outpost.js'), require('./adventures.js'), require('./upgrade-progress.js'), require('./artifacts.js'), require('./masterworks.js')) : make(root.Big, root.Fmt, root.MFOutpost, root.MFAdventures, root.MFUpgradeProgress, root.MFArtifacts, root.MFMasterworks);
   if (typeof exports !== 'undefined') { for (var k in api) exports[k] = api[k]; } else { root.GameSim = api; }
-})(this, function (Big, Fmt, Outpost, Adventures, UpgradeProgress, Artifacts) {
+})(this, function (Big, Fmt, Outpost, Adventures, UpgradeProgress, Artifacts, Masterworks) {
   'use strict';
 
   var L1 = 'forge';
@@ -59,16 +59,16 @@
   // A node without `single` has no last level: its price in coals grows by mf.<id>.growth a level.
   var MF = [
     { id: 'startGold', title: 'Стартовое золото', needs: null },
-    { id: 'rush', title: 'Ускоренный ранний ход', needs: null, single: true },
+    { id: 'rush', title: 'Ускоренный ранний ход', needs: null },
     { id: 'startLevel', title: 'Стартовый уровень клинка', needs: 'startGold' },
     { id: 'auto', title: 'Автоклик горна', needs: 'rush' },
     { id: 'rune', title: 'Руны мастера', needs: 'startLevel' },
-    { id: 'memory', title: 'Память наковальни', needs: 'auto', single: true },
+    { id: 'memory', title: 'Память наковальни', needs: 'auto' },
     { id: 'rhythm', title: 'Ритм мастерской', needs: 'auto', outpost: true },
     { id: 'trade', title: 'Клеймо мастера', needs: 'startLevel', outpost: true },
     { id: 'team', title: 'Плечом к плечу', needs: 'memory', single: true, outpost: true },
     { id: 'dragonCare', title: 'Тёплое логово', needs: 'rune', outpost: true },
-    { id: 'command', title: 'Командный строй', needs: 'team', single: true, outpost: true }
+    { id: 'command', title: 'Командный строй', needs: 'team', outpost: true }
   ];
 
   var EVENTS = ['caravan', 'wanderer', 'starfall', 'storm', 'order'];
@@ -161,6 +161,7 @@
     Outpost.ensure(state);
     Adventures.ensure(state);
     Artifacts.ensure(state);
+    Masterworks.ensure(state);
     return state;
   }
 
@@ -447,6 +448,10 @@
   function criticalStats(state, cfg, options) {
     var chance = Math.min(cfg['crit.maxChance'], cfg['crit.chance'] + lvl(state, 'eye') * cfg['up.eye.step'] + perk(state, cfg, 'critChance'));
     var mult = (cfg['crit.mult'] + upgradeEffective(state, cfg, 'hand') * cfg['up.hand.step']) * perk(state, cfg, 'critMult');
+    // The masterworks: their chance may pass the cap, the rest of it turns into crit strength.
+    var stand = mw(state, cfg);
+    chance += stand.critChance;
+    mult *= 1 + stand.critMult;
     // «Ярость кузни» while it works: past the cap of the chance its share turns into crit strength.
     if (options && options.now > 0 && skillOn(state, 'fury', options.now)) {
       var fury = furyBonus(state, cfg);
@@ -460,6 +465,9 @@
   function critMult(state, cfg, options) { return criticalStats(state, cfg, options).multiplier; }
 
   function cryOn(state, now) { return now > 0 && state.run.cryUntil > now; }
+
+  /** What the masterworks on the stand give, by effect (Masterworks.KINDS). */
+  function mw(state, cfg) { return Masterworks.modifiers(state, cfg); }
 
   // ---- the skills: «Боевой клич», «Золотое касание», «Мощный удар», «Ярость кузни» ----------------
   // Each has two upgrades with no last level: its strength (<id>) and its cooldown (<id>Cd: the base
@@ -491,7 +499,7 @@
     var d = SKILLS[id];
     if (!d) return Infinity;
     var mods = Artifacts.modifiers(state, cfg);
-    var sec = num(cfg[d.cooldown], 60) / (1 + lvl(state, d.cd) * num(cfg['up.' + d.cd + '.step'], 0)) / (1 + mods.skillCooldown);
+    var sec = num(cfg[d.cooldown], 60) / (1 + lvl(state, d.cd) * num(cfg['up.' + d.cd + '.step'], 0)) / (1 + mods.skillCooldown) / (1 + mw(state, cfg).skillCooldown);
     if (id === 'cry') sec /= 1 + mods.cryRecovery;
     return Math.max(num(cfg['skill.minCooldownSec'], 1), sec);
   }
@@ -510,13 +518,13 @@
 
   /** «Золотое касание»: the share of a foe's reward each volley brings while it works. */
   function midasShare(state, cfg) {
-    return num(cfg['up.midas.step'], 0) * upgradeEffective(state, cfg, 'midas') * (1 + Artifacts.modifiers(state, cfg).midasPower);
+    return num(cfg['up.midas.step'], 0) * upgradeEffective(state, cfg, 'midas') * (1 + Artifacts.modifiers(state, cfg).midasPower) * (1 + mw(state, cfg).skillPower);
   }
   /** The reward of a plain foe of the wave now (a Big): what «Золотое касание» takes its share of. */
   function foeReward(state, cfg) { return Big.mul(goldOf(cfg, state.run.wave), goldMult(state, cfg, state.run.wave)); }
   /** «Мощный удар»: seconds of the forge's damage dealt at once. */
   function strikeSeconds(state, cfg) {
-    return num(cfg['skill.strike.sec'], 0) * (1 + num(cfg['up.strike.step'], 0) * upgradeEffective(state, cfg, 'strike')) * (1 + Artifacts.modifiers(state, cfg).strikePower);
+    return num(cfg['skill.strike.sec'], 0) * (1 + num(cfg['up.strike.step'], 0) * upgradeEffective(state, cfg, 'strike')) * (1 + Artifacts.modifiers(state, cfg).strikePower) * (1 + mw(state, cfg).skillPower);
   }
   /** Damage of `sec` seconds of the forge before the global multiplier (a Big): the volley applies that. */
   function rawSeconds(state, cfg, now, sec) {
@@ -524,7 +532,7 @@
   }
   /** «Ярость кузни»: what it adds to the crit chance and multiplies the crit by. */
   function furyBonus(state, cfg) {
-    return { chance: num(cfg['skill.fury.chance'], 0), mult: 1 + num(cfg['up.fury.step'], 0) * upgradeEffective(state, cfg, 'fury') };
+    return { chance: num(cfg['skill.fury.chance'], 0), mult: 1 + num(cfg['up.fury.step'], 0) * upgradeEffective(state, cfg, 'fury') * (1 + mw(state, cfg).skillPower) };
   }
 
   /** Uses a ready skill: true when it went. The strike needs a foe at the gate. */
@@ -560,10 +568,11 @@
    */
   function dmgMult(state, cfg, now) {
     var plain = (1 + cfg['up.sharp.step'] * upgradeEffective(state, cfg, 'sharp')) * coalBonus(state, cfg) * starMult(state, cfg) * (1 + cfg['up.banner.step'] * upgradeEffective(state, cfg, 'banner') * Math.floor(state.run.maxWave / 10));
-    if (cryOn(state, now)) plain *= 1 + cfg['up.cry.step'] * upgradeEffective(state, cfg, 'cry');
+    if (cryOn(state, now)) plain *= 1 + cfg['up.cry.step'] * upgradeEffective(state, cfg, 'cry') * (1 + mw(state, cfg).skillPower);
     if (starfallOn(state, now)) plain *= cfg['event.starfall.mult'];
     plain *= 1 + Artifacts.modifiers(state, cfg, { passiveOnly: now === 0 }).damage;
     plain *= perk(state, cfg, 'dmg');
+    plain *= 1 + mw(state, cfg).damage;
     return Big.of(plain);
   }
 
@@ -688,13 +697,14 @@
   function goldMult(state, cfg, w) {
     var m = (1 + cfg['up.purse.step'] * upgradeEffective(state, cfg, 'purse')) * coalBonus(state, cfg) * starMult(state, cfg);
     m *= 1 + cfg['rune.greed'] * runePower(state, cfg) * activeRunes(state, cfg, 'greed');
-    if (mfLevel(state, 'rush') > 0 && w <= cfg['mf.rush.waves']) m *= cfg['mf.rush.mult'];
+    if (mfLevel(state, 'rush') > 0 && w <= rushWaves(state, cfg)) m *= cfg['mf.rush.mult'];
     m *= 1 + Artifacts.modifiers(state, cfg).gold;
     m *= perk(state, cfg, 'gold');
+    m *= 1 + mw(state, cfg).gold;
     return m;
   }
 
-  function bossTimer(state, cfg) { return cfg['boss.timer'] + upgradeEffective(state, cfg, 'hourglass') * cfg['up.hourglass.step'] + Artifacts.modifiers(state, cfg).bossSeconds + perk(state, cfg, 'bossTime'); }
+  function bossTimer(state, cfg) { return cfg['boss.timer'] + upgradeEffective(state, cfg, 'hourglass') * cfg['up.hourglass.step'] + Artifacts.modifiers(state, cfg).bossSeconds + perk(state, cfg, 'bossTime') + mw(state, cfg).bossTime; }
 
   /** How much slower the boss timer runs with ice runes (≥ 1). */
   /**
@@ -746,7 +756,7 @@
   function autoTaps(cfg, n) { return soft(n, cfg['mf.auto.soft']) * cfg['mf.auto.taps']; }
 
   /** How fast the forge's clock runs: 1 plus the auto-click of «Горн мастера». */
-  function forgeSpeed(state, cfg) { return (1 + autoTaps(cfg, mfLevel(state, 'auto')) * cfg['forge.tapSec']) * (1 + Artifacts.modifiers(state, cfg).forgeSpeed) * perk(state, cfg, 'forgeSpeed'); }
+  function forgeSpeed(state, cfg) { return (1 + autoTaps(cfg, mfLevel(state, 'auto')) * cfg['forge.tapSec']) * (1 + Artifacts.modifiers(state, cfg).forgeSpeed) * perk(state, cfg, 'forgeSpeed') * (1 + mw(state, cfg).forgeSpeed); }
 
   function apprenticeSpeed(state, cfg) { return 1 + Artifacts.modifiers(state, cfg).apprenticeSpeed; }
 
@@ -1021,7 +1031,7 @@
    */
   function tapSeconds(state, cfg, now) {
     var base = cfg['forge.tapSec'];
-    var extra = upgradeEffective(state, cfg, 'hammer') * (cfg['up.hammer.step'] || 0) * perk(state, cfg, 'tap');
+    var extra = upgradeEffective(state, cfg, 'hammer') * (cfg['up.hammer.step'] || 0) * perk(state, cfg, 'tap') * (1 + mw(state, cfg).tapPower);
     if (!extra || !base) return base;
     var interval = forgeInterval(state, cfg, now || 0);
     // A stronger strike approaches one complete cycle; each purchased level remains useful.
@@ -1332,7 +1342,7 @@
     if (route.hpMult && route.hpMult !== 1) r.hp = Big.str(Big.mul(r.hp, route.hpMult));
     if (mod.hp !== 1) r.hp = Big.str(Big.max(Big.of(1), Big.ceil(Big.mul(r.hp, mod.hp))));
     // «Окалина титанов»: every foe comes weaker.
-    var thin = Artifacts.modifiers(state, cfg).enemyHp;
+    var thin = 1 - (1 - Artifacts.modifiers(state, cfg).enemyHp) * (1 - mw(state, cfg).enemyHp);
     if (thin > 0) r.hp = Big.str(Big.max(Big.of(1), Big.ceil(Big.mul(r.hp, 1 - thin))));
     r.hpMax = r.hp;
     r.bossT = boss ? bossTimer(state, cfg) * mod.timer : 0;
@@ -1353,7 +1363,7 @@
     var w = r.wave;
     var boss = isBoss(cfg, w) && !r.farm;
     var gold = Big.mul(goldOf(cfg, w), goldMult(state, cfg, w) * (ctx.mult || 1));
-    if (boss) gold = Big.mul(gold, cfg['boss.goldMult'] * (1 + upgradeEffective(state, cfg, 'hunter') * cfg['up.hunter.step']) * perk(state, cfg, 'bossGold') * (1 + Artifacts.modifiers(state, cfg).bossGold));
+    if (boss) gold = Big.mul(gold, cfg['boss.goldMult'] * (1 + upgradeEffective(state, cfg, 'hunter') * cfg['up.hunter.step']) * perk(state, cfg, 'bossGold') * (1 + Artifacts.modifiers(state, cfg).bossGold) * (1 + mw(state, cfg).bossGold));
     var encounter = encounterOf(state, cfg);
     if (encounter.mark > 0) gold = Big.mul(gold, 1 + Math.min(cfg['campaign.mark.maxShare'], encounter.mark));
     var mod = modOf(cfg, encounter.mod || '', boss);
@@ -1376,13 +1386,16 @@
     if (boss) {
       r.stats.bosses++;
       r.lastBoss = { wave: w, left: Math.round(r.bossT * 100) / 100 };
+      // «Коллекция шедевров»: a piece of gear, now and then.
+      var piece = Masterworks.onBossKill(state, cfg, num(encounter.serial, 0) + 7919 * num(forgeLayer(state).count, 0), w, ctx.now || 0);
+      if (piece.added.length || piece.salvaged) r.lastMasterwork = { at: ctx.now || 0, ids: piece.added, salvaged: piece.salvaged, serial: num(r.lastMasterwork && r.lastMasterwork.serial, 0) + 1 };
       if (r.bossT < cfg['ach.lastSecond']) state.meta.feats.lastSecond = ctx.now || 1;
       r.bossT = 0;
     }
     if (!r.farm) {
       r.wave = w + 1;
       // «Сапоги-скороходы»: after a plain foe the next wave may be stepped over (never a boss), its reward taken.
-      var skip = boss ? 0 : Artifacts.modifiers(state, cfg).waveSkip;
+      var skip = boss ? 0 : Math.min(0.75, Artifacts.modifiers(state, cfg).waveSkip + mw(state, cfg).waveSkip);
       if (skip > 0 && !isBoss(cfg, w + 1) && hash01(num(encounter.serial, 0), w, 97) < skip) {
         var passed = Big.mul(goldOf(cfg, w + 1), goldMult(state, cfg, w + 1) * (ctx.mult || 1));
         r.gold = Big.add(r.gold, passed);
@@ -1510,7 +1523,7 @@
       r.bursts -= 1;
       r.lastBurst = { at: ctx.now || 0, mult: burst, serial: num(r.lastBurst && r.lastBurst.serial, 0) + 1 };
     }
-    if (r.bossT > 0) hit = Big.mul(hit, perk(state, cfg, 'bossDmg') * (1 + Artifacts.modifiers(state, cfg).bossDamage));
+    if (r.bossT > 0) hit = Big.mul(hit, perk(state, cfg, 'bossDmg') * (1 + Artifacts.modifiers(state, cfg).bossDamage) * (1 + mw(state, cfg).bossDamage));
     // «Золотое касание»: while it works, every volley brings a share of a foe's reward.
     if (skillOn(state, 'midas', ctx.now || 0)) {
       var touch = Big.mul(foeReward(state, cfg), midasShare(state, cfg) * (ctx.mult || 1));
@@ -1745,6 +1758,17 @@
     return null;
   }
 
+  /** «Ускоренный ранний ход»: the first waves with more gold, mf.rush.wavesStep more with each level. */
+  function rushWaves(state, cfg) {
+    var n = mfLevel(state, 'rush');
+    return n > 0 ? num(cfg['mf.rush.waves'], 0) + num(cfg['mf.rush.wavesStep'], 0) * (n - 1) : 0;
+  }
+  /** «Память наковальни»: the highest level of the blade it keeps, mf.memory.step more with each level. */
+  function memoryCap(state, cfg) {
+    var n = mfLevel(state, 'memory');
+    return n > 0 ? num(cfg['mf.memory.maxLevel'], 0) + num(cfg['mf.memory.step'], 0) * (n - 1) : 0;
+  }
+
   /** One level for a node that opens a thing once, no last level for the rest. */
   function mfMax(cfg, id) { return mfDecl(id).single ? 1 : Infinity; }
 
@@ -1808,6 +1832,7 @@
     Outpost.ensure(state);
     Adventures.ensure(state);
     Artifacts.ensure(state);
+    Masterworks.ensure(state);
     return state;
   }
 
@@ -1847,7 +1872,7 @@
     r.tapBudget = Math.min(cfg['forge.tapsPerSec'], num(r.tapBudget, 0) + cfg['forge.tapsPerSec'] * dt);
     var eventsDone = workshop(state, dt, cfg, ctx.rng, ctx.now || 0, budget);
     if (ctx.offline) {
-      var gold = Big.mul(r.farmRate, offlineShare(state, cfg) * dt * (ctx.mult || 1) * (1 + Artifacts.modifiers(state, cfg).offlineIncome));
+      var gold = Big.mul(r.farmRate, offlineShare(state, cfg) * dt * (ctx.mult || 1) * (1 + Artifacts.modifiers(state, cfg).offlineIncome) * (1 + mw(state, cfg).offline));
       r.gold = Big.add(r.gold, gold);
       r.earned = Big.add(r.earned, gold);
       return eventsDone;
@@ -1872,7 +1897,7 @@
       Outpost.tick(state, part, cfg, { offline: true });
       r.meetCooldown = Math.max(0, num(r.meetCooldown, 0) - part);
       var eventsDone = workshop(state, part, cfg, step.rng, step.now || 0, budget);
-      var gold = Big.mul(r.farmRate, offlineShare(state, cfg) * part * (ctx.mult || 1) * (1 + Artifacts.modifiers(state, cfg).offlineIncome) * perk(state, cfg, 'offline'));
+      var gold = Big.mul(r.farmRate, offlineShare(state, cfg) * part * (ctx.mult || 1) * (1 + Artifacts.modifiers(state, cfg).offlineIncome) * perk(state, cfg, 'offline') * (1 + mw(state, cfg).offline));
       r.gold = Big.add(r.gold, gold);
       r.earned = Big.add(r.earned, gold);
       return eventsDone;
@@ -1912,7 +1937,7 @@
   /** What a reset of a run that reached wave `wave` would give now. */
   function coalsGain(state, cfg, wave) {
     ensure(state);
-    return Math.floor(coalsPay(cfg, coalsFor(cfg, wave), forgeLayer(state).state.paid) * starCoals(state, cfg) + 1e-9);
+    return Math.floor(coalsPay(cfg, coalsFor(cfg, wave), forgeLayer(state).state.paid) * starCoals(state, cfg) * (1 + mw(state, cfg).coals) + 1e-9);
   }
 
   function prestigeGain(state, layerId, cfg) {
@@ -1949,19 +1974,20 @@
     var l = forgeLayer(state);
     if (layerId === L1) {
       var f = coalsFor(cfg, before.run.maxWave);
-      var gain = Math.floor(coalsPay(cfg, f, before.layers[L1] && before.layers[L1].state && before.layers[L1].state.paid) * starCoals(before, cfg) + 1e-9);
+      var gain = Math.floor(coalsPay(cfg, f, before.layers[L1] && before.layers[L1].state && before.layers[L1].state.paid) * starCoals(before, cfg) * (1 + mw(before, cfg).coals) + 1e-9);
       l.state.paid = Math.max(l.state.paid, f);
       l.state.total += gain;
       l.state.record = Math.max(l.state.record, before.run.maxWave);
       // «Память наковальни»: the strongest blade (not above mf.memory.maxLevel) stays.
       if (mfLevel(state, 'memory') > 0) {
         var keep = 0;
-        (before.run.grid || []).forEach(function (n) { if (n > keep) keep = Math.min(n, cfg['mf.memory.maxLevel']); });
+        var cap = memoryCap(state, cfg);
+        (before.run.grid || []).forEach(function (n) { if (n > keep) keep = Math.min(n, cap); });
         var camp = before.run.outpost;
         if (camp) {
           var gear = (camp.rack || []).slice();
           for (var hero in camp.equipment) if (camp.equipment[hero]) gear.push(camp.equipment[hero]);
-          gear.forEach(function (item) { if (item.level > keep) keep = Math.min(item.level, cfg['mf.memory.maxLevel']); });
+          gear.forEach(function (item) { if (item.level > keep) keep = Math.min(item.level, cap); });
         }
         var free = freeCells(state, cfg);
         if (keep && free.length) state.run.grid[free[0]] = keep;
@@ -1980,6 +2006,7 @@
     // No old blade, currency, seed, artist entry or unknown extension field is rewritten.
     if (fromVer < 3) { Outpost.migrate(state); Adventures.migrate(state); }
     Artifacts.ensure(state);
+    Masterworks.ensure(state);
     return state;
   }
 
@@ -1987,7 +2014,7 @@
     var r = state.run;
     // A save of this very version may predate a field added since (dragon.eaten came on 2026-11-17):
     // the parts fill what is missing before they judge, so a new field never reads as damage.
-    try { Outpost.ensure(state); Adventures.ensure(state); Artifacts.ensure(state); } catch (ignored) { /* judged below */ }
+    try { Outpost.ensure(state); Adventures.ensure(state); Artifacts.ensure(state); Masterworks.ensure(state); } catch (ignored) { /* judged below */ }
     if (!r.grid || r.grid.length !== CELLS) return 'наковальня не 35 клеток';
     for (var i = 0; i < CELLS; i++) {
       var n = r.grid[i];
@@ -1996,7 +2023,7 @@
     if (typeof r.wave !== 'number' || r.wave < 1 || r.wave % 1 !== 0) return 'волна не целое число: ' + r.wave;
     if (!Big.valid(r.gold) || Big.sign(r.gold) < 0) return 'золота меньше нуля';
     if (!Big.valid(r.hp)) return 'здоровье чудища не число';
-    return Outpost.validate(state) || Adventures.validate(state) || Artifacts.validate(state);
+    return Outpost.validate(state) || Adventures.validate(state) || Artifacts.validate(state) || Masterworks.validate(state);
   }
 
   function summary(state, cfg) {
@@ -2046,6 +2073,7 @@
   var SHAPES = ['rat', 'blob', 'bones', 'golem', 'wolf', 'rider', 'serpent', 'ghost', 'dragon'];
 
   function procedural(kind, rng) {
+    if (kind === 'masterworks') return { title: rng.pick(['Безымянный', 'Тихий', 'Старый', 'Забытый']) + ' шедевр', text: 'История этого шедевра ещё не записана', procedural: true };
     if (kind === 'caravan') return { title: 'Караван: ' + rng.pick(WORDS.goods), text: 'Купцы оставили сундук у ворот и ушли дальше', procedural: true };
     var gray = 90 + rng.int(0, 80);
     var color = '#' + [gray + rng.int(0, 30), gray, gray + rng.int(0, 30)].map(function (c) { return ('0' + Math.min(208, c).toString(16)).slice(-2); }).join('');
@@ -2055,6 +2083,7 @@
   function validateStock(kind, item) {
     if (/https?:|www\./.test((item.title || '') + (item.text || '') + (item.theme || ''))) return 'ссылка в тексте';
     if (kind === 'monsters' && !/^#[0-9a-fA-F]{6}$/.test(String(item.color || ''))) return 'цвет не #rrggbb';
+    if (kind === 'masterworks' && Masterworks.SLOTS.indexOf(item.slot) < 0) return 'нет такого слота';
     if (kind === 'blades') {
       var n = item.level;
       if (typeof n !== 'number' || n !== Math.floor(n) || n < 1 || n > 100000) return 'уровень не целое число от 1';
@@ -2102,6 +2131,7 @@
     var guard = 0;
     while (guard++ < 40 && autoMerge(state, cfg, now)) { /* every pair */ }
     if (r.event && (r.event.id === 'caravan' || r.event.id === 'wanderer')) acceptEvent(state, cfg, now);
+    Masterworks.autoEquip(state);
     // The skills: the gold one at any foe, the others at a boss.
     if (r.walkT <= 0 && r.encounter) {
       if (skillReady(state, cfg, 'midas', now)) useSkill(state, cfg, 'midas', now);
@@ -2253,7 +2283,7 @@
   }
 
   return {
-    outpost: Outpost, adventures: Adventures, artifacts: Artifacts, prepare: prepare, useAbility: useAbility, encounterView: encounterView,
+    outpost: Outpost, adventures: Adventures, artifacts: Artifacts, masterworks: Masterworks, mw: mw, prepare: prepare, useAbility: useAbility, encounterView: encounterView,
     buyArtifact: buyArtifact, setArtifactEnabled: setArtifactEnabled, activateArtifact: activateArtifact,
     acceptContract: acceptContract, previewContractDelivery: previewContractDelivery, deliverContract: deliverContract, claimContract: claimContract,
     init: init, tick: tick, offline: offline, prestigeGain: prestigeGain, prestigeHint: prestigeHint, bonus: bonus, onPrestige: onPrestige,
@@ -2281,7 +2311,7 @@
     runupWalk: runupWalk, canMeet: canMeet, setAutoMeet: setAutoMeet,
     overcrit: overcrit, resonance: resonance, resonates: resonates, overheatLevels: overheatLevels, burstMult: burstMult, room: room,
     spawn: spawn, kill: kill, newEncounter: newEncounter,
-    mfLevel: mfLevel, mfMax: mfMax, mfCost: mfCost, mfOpen: mfOpen, buyMf: buyMf, startGold: startGold, startGoldAt: startGoldAt, coalsFor: coalsFor, coalsGain: coalsGain, coalsPay: coalsPay, starCoals: starCoals,
+    mfLevel: mfLevel, mfMax: mfMax, mfCost: mfCost, mfOpen: mfOpen, buyMf: buyMf, startGold: startGold, startGoldAt: startGoldAt, rushWaves: rushWaves, memoryCap: memoryCap, coalsFor: coalsFor, coalsGain: coalsGain, coalsPay: coalsPay, starCoals: starCoals,
     soft: soft, autoTaps: autoTaps, eventSpeed: eventSpeed, runePower: runePower,
     forgeLayer: forgeLayer, starLayer: starLayer, coalsAll: coalsAll,
     cheapest: cheapest, botPlay: botPlay, cry: cry, bellows: bellows, startEvent: startEvent,

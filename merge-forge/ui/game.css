@@ -1724,3 +1724,168 @@ button.mf-alb {
   flex: none;
   width: auto;
 }
+
+/* «Коллекция шедевров» */
+.mf-stand {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 10px 0;
+}
+.mf-stand-place,
+.mf-mw-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-height: 92px;
+  padding: 8px 4px 6px;
+  border-radius: 14px;
+  border: 1px dashed var(--line);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.mf-stand-place.on,
+.mf-mw-tile {
+  border-style: solid;
+}
+.mf-mw-ic {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+.mf-mw-ic.big {
+  width: 128px;
+  height: 128px;
+}
+/* An empty place: the plain piece of its slot, grey and dim, a hollow to fill. */
+.mf-mw-ic.mf-mw-empty {
+  filter: grayscale(1) brightness(1.15) contrast(0.75);
+  opacity: 0.42;
+}
+.mf-stand-name,
+.mf-mw-name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 11px;
+  line-height: 14px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--muted);
+}
+.mf-stand-place.on .mf-stand-name {
+  color: var(--text);
+}
+.mf-mw-lvl {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.mf-mw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 8px;
+  margin: 8px 0;
+}
+.mf-mw-bonus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 10px;
+}
+.mf-mw-bonus span {
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 13px;
+}
+.mf-mw-all {
+  width: auto;
+  margin: 4px 0;
+}
+.rarity-good {
+  border-color: rgba(170, 190, 210, 0.7);
+}
+.rarity-rare {
+  border-color: rgba(90, 160, 255, 0.9);
+}
+.rarity-legend {
+  border-color: rgba(190, 120, 255, 0.95);
+}
+.rarity-myth {
+  border-color: rgba(255, 200, 90, 1);
+}
+.mf-mw-kind.rarity-good {
+  color: #c9d4de;
+}
+.mf-mw-kind.rarity-rare {
+  color: #7fb6ff;
+}
+.mf-mw-kind.rarity-legend {
+  color: #c99bff;
+}
+.mf-mw-kind.rarity-myth {
+  color: #ffd36b;
+}
+.mf-mw-hero {
+  display: grid;
+  place-items: center;
+  margin: 6px auto 8px;
+  width: 160px;
+  height: 160px;
+  border-radius: 20px;
+  border: 2px solid var(--line);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0) 70%);
+}
+.mf-mw-kind {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+.mf-mw-title {
+  margin: 4px 0 6px;
+  text-align: center;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text);
+}
+.mf-mw-text {
+  margin: 0 0 8px;
+  text-align: center;
+  color: var(--muted);
+}
+.mf-mw-stats {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.mf-mw-stats .main {
+  font-weight: 700;
+}
+.mf-mw-lore {
+  margin: 8px 0;
+  line-height: 1.45;
+}
+.mf-mw-motto {
+  margin: 6px 0;
+  font-style: italic;
+  text-align: center;
+  color: #ffd36b;
+}
+.mf-mw-actions {
+  flex-wrap: wrap;
+}
+.g-btn.danger {
+  border-color: rgba(255, 120, 100, 0.8);
+  color: #ff9a88;
+}

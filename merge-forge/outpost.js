@@ -57,6 +57,7 @@
   };
   // Mirrors the shipped configuration: old callers without the new defaults remain safe.
   var DEFAULTS = {
+    'mf.command.power': 0.1,
     'outpost.hero.wave': 11, 'outpost.pet.wave': 20, 'outpost.temper.wave': 20, 'outpost.dragon.wave': 30,
     'outpost.rack.size': 4, 'outpost.hero.xpStep': 12, 'outpost.hero.xpKnee': 120,
     'outpost.hero.masteryMax': 0.25, 'outpost.hero.killXp': 1, 'outpost.hero.bossXp': 3,
@@ -168,7 +169,13 @@
     var w = wave(state);
     return { heroes: w >= setting(cfg, 'outpost.hero.wave'), pets: w >= setting(cfg, 'outpost.pet.wave'), tempers: w >= setting(cfg, 'outpost.temper.wave'), dragon: w >= setting(cfg, 'outpost.dragon.wave') };
   }
-  function slots(state) { return mf(state, 'command') > 0 && mf(state, 'team') > 0 ? 3 : mf(state, 'team') > 0 ? 2 : 1; }
+  // «Плечом к плечу» — a second hero; each level of «Командный строй» one more, up to every hero.
+  function slots(state) { return mf(state, 'team') > 0 ? Math.min(HEROS.length, 2 + mf(state, 'command')) : 1; }
+  /** «Командный строй» past the last place: every hero stronger by outpost.mf.command.power a level. */
+  function commandPower(state, cfg) {
+    var past = Math.max(0, mf(state, 'command') - (HEROS.length - 2));
+    return 1 + setting(cfg, 'mf.command.power') * past;
+  }
   function activeIds(state) {
     var m = state.meta.outpost;
     return (m.squad || []).filter(function (id) { return has(HEROS, id) && m.heroes[id] && m.heroes[id].unlocked; }).slice(0, slots(state));
@@ -398,7 +405,7 @@
     var critical = (finite(cfg['crit.mult'], 1) + UpgradeProgress.effective('hand', finite(upgrades.hand, 0), cfg) * finite(cfg['up.hand.step'], 0)) * perks.critMult;
     var crit = Artifacts.criticalStats(state, cfg, chance, critical, options);
     local *= 1 + crit.chance * (UpgradeProgress.critAverage(crit.multiplier, UpgradeProgress.overcrit(upgrades, cfg)) - 1);
-    return Big.mul(basePower(cfg, gear.level), mastery * local);
+    return Big.mul(basePower(cfg, gear.level), mastery * local * commandPower(state, cfg));
   }
   function noteForged(state, level) {
     ensure(state);

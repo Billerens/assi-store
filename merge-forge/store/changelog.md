@@ -1,5 +1,11 @@
 # Merge Forge: what’s new
 
+## 0.7.0 — 2026-11-21
+
+- **Masterworks collection.** A beaten boss sometimes leaves a masterwork — a sword, a shield, a helmet, a breastplate, greaves, boots or a ring. Each is one of a kind: its name, story, motto and icon are written by the chronicler model, while the game sets its rarity (Fine, Rare, Legendary, Mythic) and effects — the main effect of its slot and up to three more. Only the masterworks on the stand work: one in each slot, two rings. The Masterworks tab in the Master's forge holds the stand, what it gives, the inventory and each masterwork's card with its story.
+- Masterworks grow with coals: each has a level without a limit, and a spare one can be taken apart for coals. The masterworks forge raises the chance from a boss, a second masterwork from the same boss, the quality, the room of the inventory and the strength of each slot, none with a last level. The collection outlives both the reforge and the star metal.
+- The Master's forge nodes once bought a single time now grow without a limit: Quick early run — 15 more waves of triple gold a level, Anvil memory — the kept blade's cap 3 higher a level, Battle line — its second level opens a fourth place in the squad, and every level after makes all heroes 10% stronger.
+
 ## 0.6.0 — 2026-11-20
 
 - Skills — a tab of their own in the upgrades and round buttons on the scene. Each has its strength and its cooldown to upgrade, both without a limit. The battle cry gets a cooldown upgrade. New ones: **Golden touch** (from wave 30) — for 20 s every volley brings a share of a foe's reward, +5% a level; **Heavy strike** (from wave 45) — an instant blow of 8 seconds of the forge's damage, +25% a level; **Forge fury** (from wave 60) — for 15 s crit chance +25 pp and crit strength +20% a level. An “Auto” switch uses the ready skills by itself.
