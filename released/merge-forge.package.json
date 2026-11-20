@@ -13,8 +13,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "157325ea74d2b1aead0d173b395ce3f40ab8e1614b5cbe061e44d65be3145b49",
-      "size": 43301
+      "sha256": "421e6645d7bab42120da08b98107d0d6a49db6475bbcd34798b9d377557af755",
+      "size": 44668
     },
     {
       "path": "code/adventures.js",
@@ -722,6 +722,41 @@
       "size": 24406
     },
     {
+      "path": "code/art/mw/mwBoots.webp",
+      "sha256": "415c4ef4660450e4f5cb45083ddcccec2777368d847f4536a988fa5fe164ee93",
+      "size": 14240
+    },
+    {
+      "path": "code/art/mw/mwChest.webp",
+      "sha256": "95362bb609666873fd2cad64240b605cf26993f46514225b72f954138e1adb5b",
+      "size": 13702
+    },
+    {
+      "path": "code/art/mw/mwHelmet.webp",
+      "sha256": "25b96c4923388a0b1c787231af47e271e2c67d11505ccdfecbd3c3b8f3799a8e",
+      "size": 10778
+    },
+    {
+      "path": "code/art/mw/mwLegs.webp",
+      "sha256": "1413299510ee4a38b36a6f3b94cc8add3ed57f70b476d9355338392bb96edfe0",
+      "size": 11950
+    },
+    {
+      "path": "code/art/mw/mwRing.webp",
+      "sha256": "5119a02fd67d409c332637cd2c67cc9878e5bbefcefa14a869c1151e174eef86",
+      "size": 13334
+    },
+    {
+      "path": "code/art/mw/mwShield.webp",
+      "sha256": "57b6b27dc16fa8069195fe31404b7c72ab7285f2b24757f6014d1e4343761e7a",
+      "size": 9356
+    },
+    {
+      "path": "code/art/mw/mwSword.webp",
+      "sha256": "0e6f262910f2545972c1ce54eac983f6a1b76fd6a232245751e4c6e416561b27",
+      "size": 5756
+    },
+    {
       "path": "code/art/pet/fox.webp",
       "sha256": "0803c0e98673c5b0594a956c506b337618c3109645c12d37328a9efdbdac45fc",
       "size": 27234
@@ -963,8 +998,8 @@
     },
     {
       "path": "code/config.json",
-      "sha256": "61dca7efaf0080465816c2c3b36e42a771bdcb4a0be4e50e842b6b69376d94a4",
-      "size": 105018
+      "sha256": "1acf006a8af1577c937c55bed6b8421e96aa64b3562dc9d694735743b45fabca",
+      "size": 108470
     },
     {
       "path": "code/content/blades.json",
@@ -993,18 +1028,18 @@
     },
     {
       "path": "code/game.json",
-      "sha256": "ece08cbc2ee80221b3e5156d9836dc27440c2d7d11237e08ed246c8c8c0a40bc",
-      "size": 11528
+      "sha256": "28c1963fd0e442edb13082abeee72abf2855b5c26172fd80c33380d4afdae15c",
+      "size": 12129
     },
     {
       "path": "code/guide.md",
-      "sha256": "f857872c783c43cfdb5313625ef765892739fd4f1b252ecffa13d62eafec9c95",
-      "size": 64559
+      "sha256": "287aa0188ada3976f027670ff94f57086a77674094c2afe1a5158206d86bdcf7",
+      "size": 69161
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "579fc437844ca79c9eee73f9665290da45d3dfe85372ac271a73bd9bb4751be8",
-      "size": 215844
+      "sha256": "d785ffb6931513dbf7b2d0e5bc94d5c9e091e1de078b5585d23654c1670f6781",
+      "size": 223530
     },
     {
       "path": "code/icon.svg",
@@ -1012,9 +1047,14 @@
       "size": 324
     },
     {
+      "path": "code/masterworks.js",
+      "sha256": "350fc171cc2bf99ab0b2904cc56f449917a6cd90140e6dce8868c21e47d60aa5",
+      "size": 18677
+    },
+    {
       "path": "code/outpost.js",
-      "sha256": "346a1fc3b0e3bbdc029df4ad89ca9442b8614134149afb2550370b3cc1526b44",
-      "size": 53333
+      "sha256": "e8383f009a806dbfefa710d6d30a62afb532e8121536de992119399640b36bcf",
+      "size": 53807
     },
     {
       "path": "code/prompts/blades.md",
@@ -1027,14 +1067,19 @@
       "size": 907
     },
     {
+      "path": "code/prompts/masterworks.md",
+      "sha256": "96a66b29634ca06b1df8588815d955ed6d758bd9a0cbafef3218579bfef8540d",
+      "size": 5209
+    },
+    {
       "path": "code/prompts/monsters.md",
       "sha256": "d063f6a0037479c56993150aa908cafe1bf7d41b84942bb1eda025ba2f86b91c",
       "size": 2234
     },
     {
       "path": "code/sim.js",
-      "sha256": "319711e9720394d497b492bdf4ed0f8cbd461ffa39f9216821c88bb7d6ce23ee",
-      "size": 111638
+      "sha256": "3e26ec3a3a7fe2e21638897c370b70221b9399b538d85ea9764a01a642301f60",
+      "size": 114260
     },
     {
       "path": "code/ui/adventures.css",
@@ -1048,8 +1093,8 @@
     },
     {
       "path": "code/ui/art.js",
-      "sha256": "b9373a289b62aeecce27932e8d781bde97b5dddb8e2e83f4f5fe150c27cbe85b",
-      "size": 29242
+      "sha256": "e21cb2fd2dca29df1e89e56e243bafa9fd991c772e70c197f58db9a162285fd9",
+      "size": 29329
     },
     {
       "path": "code/ui/artifacts.css",
@@ -1063,18 +1108,18 @@
     },
     {
       "path": "code/ui/game.css",
-      "sha256": "b1d8522d9836bf480ff8f4938430bee08c3e1fcef1a146cb66e205f8873b5423",
-      "size": 32110
+      "sha256": "3288d1435ae7f57598ee0f4b405c0f548b62178b88749e10a98f9c7e55839a39",
+      "size": 35130
     },
     {
       "path": "code/ui/game.js",
-      "sha256": "1d7c673ae253e0866cb2a6472ee24b73dcf69402fd7cee5f86d7fd3a56b74dfa",
-      "size": 124424
+      "sha256": "12d6b9ae9333355d242ec32af702b7cc2b1150a59b0a4a540b661ac211cb5708",
+      "size": 136419
     },
     {
       "path": "code/ui/index.html",
-      "sha256": "b0e02c869200f2b8a5bfd8219652487bbe39cfa6e019037264c3f4fcbfc22398",
-      "size": 1372
+      "sha256": "a8eea6e1ebc74439d25dcc33c7f397ae9e31f49fe6d51eea0771b96a27507b60",
+      "size": 1414
     },
     {
       "path": "code/ui/monsters.js",
@@ -1111,5 +1156,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }
