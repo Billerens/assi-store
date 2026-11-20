@@ -16,7 +16,8 @@
   else root.MFUpgradeProgress = api;
 })(this, function () {
   'use strict';
-  var SUPPORTED = ['sharp', 'purse', 'hand', 'twin', 'temper', 'runePower', 'hunter', 'hourglass', 'cry', 'banner', 'caravan', 'hammer', 'stall'];
+  var SUPPORTED = ['sharp', 'purse', 'hand', 'twin', 'temper', 'runePower', 'hunter', 'hourglass', 'cry', 'banner', 'caravan', 'hammer', 'stall',
+    'midas', 'strike', 'fury'];
   var MECHANIC = ['twin', 'hourglass', 'caravan', 'hammer'];
   var SOFT = { caravan: 20, hammer: 8, stall: 8 };
   // The values the game's settings (milestone.*) have when a setting is missing. `every` is the step

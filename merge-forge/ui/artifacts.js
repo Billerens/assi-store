@@ -133,6 +133,14 @@
             h('div', {}, h('strong', {}, tr(item.title)), note(item.unlock && item.unlock.template ? tr(item.unlock.template, ...(item.unlock.args || [])) : tr(item.unlockText || 'Откроется позже')))));
         });
       }
+      // The sets: every relic of one bought and switched on gives its bonus besides their own.
+      if (filter === 'all' && !ownedOnly && model.sets && model.sets.length) {
+        footer.append(h('div', { class: 'mf-sec' }, tr('Наборы')));
+        model.sets.forEach(set => footer.append(h('div', { class: 'mfa-set' + (set.complete ? ' done' : ''), 'data-artifact-set': set.id },
+          h('div', { class: 'mfa-set-head' }, h('strong', {}, tr(set.title)), h('span', { class: 'mfa-set-bonus' }, tr(set.bonus.template, ...(set.bonus.args || [])))),
+          h('div', { class: 'mfa-set-items' }, set.items.map(it => h('span', { class: 'mfa-set-item' + (it.owned && it.enabled ? ' on' : '') },
+            window.MFArt.has('artifact', it.id) ? window.MFArt.el('artifact', it.id, 'mfa-set-ic') : null, h('span', {}, tr(it.title))))))));
+      }
       if (scroll) scroll.scrollTop = oldScroll;
       if (focusedId) { const target = element.querySelector('#' + CSS.escape(focusedId)); if (target) target.focus({ preventScroll: true }); }
       updateControls();

@@ -8,10 +8,10 @@ function close(a,b){assert.ok(Math.abs(a-b)<1e-9*Math.max(1,Math.abs(b)),`${a} !
 function zeroRng(){return{next:()=>0,chance:p=>p>0};}
 
 test('коллекция работает одновременно и угольные покупки не теряют старый бонус',()=>{
- const {state}=fresh();const layer=S.forgeLayer(state);layer.count=1;layer.currency='1e5';layer.state.record=150;
+ const {state}=fresh();const layer=S.forgeLayer(state);layer.count=1;layer.currency='1e9';layer.state.record=150;
  const before=S.coalsAll(state),upgrades=copy(state.run.up);
  for(const d of A.CATALOG)assert.ok(S.buyArtifact(state,x.cfg,d.id).ok,d.id);
- assert.strictEqual(A.model(state,x.cfg).owned,37);close(S.coalsAll(state),before);assert.deepStrictEqual(state.run.up,upgrades);
+ assert.strictEqual(A.model(state,x.cfg).owned,50);close(S.coalsAll(state),before);assert.deepStrictEqual(state.run.up,upgrades);
  const mods=A.modifiers(state,x.cfg);for(const k of Object.keys(A.LIMITS))assert.ok(mods[k]>=0&&mods[k]<A.LIMITS[k]);
  for(const id of ['whetstone','goldenSeal','forgeHeart'])assert.strictEqual(state.meta.artifacts.items[id].enabled,true);
  const damage=S.dmgMult(state,x.cfg,NOW),gold=S.goldMult(state,x.cfg,1),speed=S.forgeSpeed(state,x.cfg);

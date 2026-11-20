@@ -8,13 +8,18 @@
   var WAVES = [60, 70, 80, 100, 120, 150];
   var LIMITS = { damage: 0.75, gold: 0.5, forgeSpeed: 0.75, sale: 0.6, critChance: 0.12, critMult: 0.35,
     bossSeconds: 14, apprenticeSpeed: 0.5, offlineIncome: 0.15, runePower: 0.5, petXp: 0.75, heroXp: 0.75,
-    dragonDigest: 0.6, dragonCharge: 0.5, cryRecovery: 0.5, walkSpeed: 0.4, bossSlow: 0.6, dragonMeals: 8 };
+    dragonDigest: 0.6, dragonCharge: 0.5, cryRecovery: 0.5, walkSpeed: 0.4, bossSlow: 0.6, dragonMeals: 8,
+    enemyHp: 0.4, bossDamage: 1.5, bossGold: 1.5, waveSkip: 0.25, rareChance: 1.5, midasPower: 1.5, strikePower: 1.5,
+    furyTime: 1, cryDuration: 1, skillCooldown: 0.4, tapChance: 1 };
   var LABELS = { damage: 'Урон всех клинков: +{}%', gold: 'Золото за врагов: +{}%', forgeSpeed: 'Скорость ковки: +{}%',
     sale: 'Выручка продажи: +{}%', critChance: 'Шанс крита: +{} п.п.', critMult: 'Сила критов: +{}%', bossSeconds: 'Время босса: +{} с',
     apprenticeSpeed: 'Скорость подмастерья: +{}%', offlineIncome: 'Офлайн-золото: +{}%', runePower: 'Сила рун: +{}%',
     petXp: 'Опыт питомцев: +{}%', heroXp: 'Опыт героев: +{}%', dragonDigest: 'Скорость кормления: +{}%',
     dragonCharge: 'Заряд дракона: +{}%', cryRecovery: 'Восстановление клича: +{}%', walkSpeed: 'Скорость подхода врага: +{}%', bossSlow: 'Замедление таймера босса: +{}%',
-    dragonMeals: 'Кормлений дракона за забег: +{}' };
+    dragonMeals: 'Кормлений дракона за забег: +{}', enemyHp: 'Здоровье врагов: −{}%', bossDamage: 'Урон по боссам: +{}%',
+    bossGold: 'Золото с боссов: +{}%', waveSkip: 'Шанс перескочить волну: {}%', rareChance: 'Редкие враги чаще на {}%',
+    midasPower: 'Золотое касание: +{}%', strikePower: 'Мощный удар: +{}%', furyTime: 'Ярость кузни дольше на {}%',
+    cryDuration: 'Боевой клич дольше на {}%', skillCooldown: 'Приёмы восстанавливаются быстрее на {}%', tapChance: 'Шанс артефактов ручного удара: +{}%' };
   function relic(id, title, kind, stage, icon, description, effect, maximum, options) {
     var r = { id: id, title: title, kind: kind, stage: stage, wave: WAVES[stage], icon: icon, description: description,
       effect: effect, maximum: maximum, baseCost: [2, 3, 4, 6, 9, 14][stage] };
@@ -58,7 +63,30 @@
     relic('marchingBoot', 'Сапог дозорного', 'passive', 5, 'hunter', 'Сокращает ожидание подходящего врага, оставляя время на подготовку.', 'walkSpeed', 0.25),
     relic('rallyHorn', 'Рог сбора', 'active', 5, 'cry', 'По нажатию сокращает оставшееся восстановление всех приёмов героев. Подготовленный удар не дублируется.', 'heroCooldown', 8, { recharge: 120 }),
     relic('feedingBowl', 'Чаша тёплого пепла', 'active', 5, 'temper', 'По нажатию продвигает переваривание существующей очереди дракона. Новые клинки не расходуются.', 'digestSeconds', 8, { recharge: 90 }),
-    relic('twinLever', 'Рычаг близнецов', 'active', 5, 'apprentice', 'По нажатию выполняет одно обычное слияние подходящей пары. Улучшения сокращают собственный откат.', 'merge', 1, { recharge: 120 })
+    relic('twinLever', 'Рычаг близнецов', 'active', 5, 'apprentice', 'По нажатию выполняет одно обычное слияние подходящей пары. Улучшения сокращают собственный откат.', 'merge', 1, { recharge: 120 }),
+    // 0.6.0: builds — the foes, the bosses, the waves, the skills and the hand.
+    relic('heavyHammer', 'Тяжёлый молот', 'click', 0, 'hammer', 'Ручной удар иногда сам бьёт врага у ворот — на несколько секунд урона кузни.', 'tapStrike', 3),
+    relic('giantFang', 'Клык великана', 'passive', 1, 'sharp', 'Усиливает урон по боссам.', 'bossDamage', 0.8),
+    relic('luckyCup', 'Кубок удачи', 'passive', 1, 'stall', 'Редкие враги — золотые, с сундуком, радужные — встречаются чаще.', 'rareChance', 0.8),
+    relic('echoBell', 'Колокол эха', 'passive', 1, 'cry', 'Боевой клич звучит дольше.', 'cryDuration', 0.6),
+    relic('titanScale', 'Окалина титанов', 'passive', 2, 'temper', 'Каждый враг, и босс тоже, приходит с меньшим здоровьем.', 'enemyHp', 0.3),
+    relic('midasRing', 'Перстень Мидаса', 'passive', 2, 'purse', 'Золотое касание приносит больше.', 'midasPower', 0.8),
+    relic('treasureKey', 'Ключ сокровищницы', 'passive', 2, 'hunter', 'Боссы оставляют больше золота.', 'bossGold', 0.8),
+    relic('swiftBoots', 'Сапоги-скороходы', 'passive', 3, 'hunter', 'После обычного врага иногда перескакивает следующую волну — не босса — и забирает её награду.', 'waveSkip', 0.15),
+    relic('thunderTip', 'Наконечник громовержца', 'passive', 3, 'hammer', 'Мощный удар бьёт сильнее.', 'strikePower', 0.8),
+    relic('preciseSpark', 'Искра точности', 'click', 3, 'eye', 'Ручной удар иногда делает следующий залп целиком критическим.', 'nextCrit', 1, { chanceMax: 0.05 }),
+    relic('berserkMask', 'Маска берсерка', 'passive', 4, 'hand', 'Ярость кузни длится дольше.', 'furyTime', 0.6),
+    relic('masterHourglass', 'Часы мастера приёмов', 'passive', 4, 'hourglass', 'Все приёмы восстанавливаются быстрее.', 'skillCooldown', 0.3),
+    relic('goldenNail', 'Золотой гвоздь', 'click', 4, 'hourglass', 'Ручной удар иногда сокращает откаты всех приёмов.', 'skillSeconds', 4)
+  ];
+  // Sets: all the relics of a set bought and switched on give its bonus besides their own.
+  var SETS = [
+    { id: 'smith', title: 'Молотобоец', items: ['pairHammer', 'emberSpark', 'heavyHammer'], effect: 'tapChance', value: 0.5 },
+    { id: 'merchant', title: 'Торговец', items: ['coinDie', 'tradeScale', 'marketBell', 'luckyCup'], effect: 'gold', value: 0.25 },
+    { id: 'bossHunter', title: 'Охотник на боссов', items: ['giantFang', 'sandPin', 'keeperSand', 'frozenClock'], effect: 'bossSeconds', value: 5 },
+    { id: 'sharpEye', title: 'Зоркий глаз', items: ['keenLens', 'heavyPommel', 'focusCrystal', 'preciseSpark'], effect: 'critMult', value: 0.2 },
+    { id: 'skillMaster', title: 'Мастер приёмов', items: ['masterHourglass', 'midasRing', 'thunderTip', 'berserkMask'], effect: 'skillCooldown', value: 0.15 },
+    { id: 'traveller', title: 'Странник', items: ['swiftBoots', 'marchingBoot', 'treasureKey'], effect: 'waveSkip', value: 0.05 }
   ];
   var BY_ID = {};
   CATALOG.forEach(function (item) { BY_ID[item.id] = item; });
@@ -110,6 +138,11 @@
   function recharge(definition, n) { return definition.recharge / (1 + 0.35 * n / (n + 8)); }
   function blank() { var out = {}; for (var id in LIMITS) out[id] = 0; return out; }
   function bounded(value, cap) { return value > 0 ? cap * value / (cap + value) : 0; }
+  /** Is every relic of the set bought and switched on? */
+  function setComplete(owned, set) {
+    for (var i = 0; i < set.items.length; i++) { var it = owned[set.items[i]]; if (!it || !it.enabled || !validLevel(it.level)) return false; }
+    return true;
+  }
   function rawModifiers(state, options) {
     var owned = items(state), out = blank(), effects = state.run.artifacts.effects;
     for (var id in owned) {
@@ -118,6 +151,7 @@
       if (d.kind === 'passive') out[d.effect] += power(d, it.level);
       else if (!(options && options.passiveOnly) && d.kind === 'active' && d.duration && effects[id] && effects[id].left > 0) out[d.effect] += effects[id].power;
     }
+    SETS.forEach(function (set) { if (setComplete(owned, set)) out[set.effect] += set.value; });
     return out;
   }
   function modifiers(state, cfg, options) { var raw = rawModifiers(state, options); for (var key in raw) raw[key] = bounded(raw[key], LIMITS[key]); return raw; }
@@ -168,11 +202,13 @@
     var out = { commands: [], procs: [] };
     if (!context || context.manual !== true || context.accepted !== true || !rng || typeof rng.next !== 'function') return out;
     var owned = items(state);
+    // «Молотобоец»: the hand's relics wake more often.
+    var boost = 1 + modifiers(state, cfg).tapChance;
     CATALOG.forEach(function (d) {
       var it = owned[d.id];
       if (d.kind !== 'click' || !it || !it.enabled || !validLevel(it.level)) return;
       if (context.can && context.can[d.effect] === false) return;
-      if (rng.next() >= chance(d, it.level)) return;
+      if (rng.next() >= Math.min(1, chance(d, it.level) * boost)) return;
       out.commands.push(command(d, it.level)); out.procs.push(d.id);
     });
     return out;
@@ -213,7 +249,8 @@
   var CLICK_TEXT = { merge: 'Шанс слияния: {}% · не более одной пары', forgeSeconds: 'Шанс: {}% · ковка −{} с', goldSaleShare: 'Шанс: {}% · {}% цены клинка',
     dragonCharge: 'Шанс: {}% · заряд +{}', heroCooldown: 'Шанс: {}% · откаты героев −{} с', bossSeconds: 'Шанс: {}% · боссу +{} с',
     shieldFraction: 'Шанс: {}% · снять {}% панциря', suppressSeconds: 'Шанс: {}% · подавление на {} с', petXp: 'Шанс: {}% · питомцу +{} опыта',
-    apprenticeSeconds: 'Шанс: {}% · подмастерью −{} с', crySeconds: 'Шанс: {}% · откат клича −{} с', digestSeconds: 'Шанс: {}% · кормление +{} с' };
+    apprenticeSeconds: 'Шанс: {}% · подмастерью −{} с', crySeconds: 'Шанс: {}% · откат клича −{} с', digestSeconds: 'Шанс: {}% · кормление +{} с',
+    tapStrike: 'Шанс: {}% · удар на {} с урона кузни', nextCrit: 'Шанс: {}% · следующий залп — крит', skillSeconds: 'Шанс: {}% · откаты приёмов −{} с' };
   function effectText(d, n, raw, oldLevel, enabled) {
     if (!n) return { template: 'Ещё не приобретён', args: [] };
     if (d.kind === 'passive') {
@@ -238,9 +275,13 @@
         current: current, next: after, nextRequiresEnable: !!it && !enabled,
         unlock: { template: p.prestige < 1 ? 'После первой перековки · рекорд {}' : 'Нужен рекорд волны {}', args: [d.wave] } };
     });
-    return { coals: coals, items: list, owned: count, availableCount: found, nextUnlock: next, allOwnedActive: true, modifiers: modifiers(state), limits: LIMITS };
+    var sets = SETS.map(function (set) {
+      return { id: set.id, title: set.title, complete: setComplete(owned, set), bonus: statText(set.effect, set.value),
+        items: set.items.map(function (id) { return { id: id, title: BY_ID[id] ? BY_ID[id].title : id, owned: level(state, id) > 0, enabled: !owned[id] || owned[id].enabled }; }) };
+    });
+    return { coals: coals, items: list, sets: sets, owned: count, availableCount: found, nextUnlock: next, allOwnedActive: true, modifiers: modifiers(state), limits: LIMITS };
   }
-  return { CATALOG: CATALOG, LIMITS: LIMITS, LABELS: LABELS, CLICK_TEXT: CLICK_TEXT, ensure: ensure, validate: validate, available: available,
+  return { CATALOG: CATALOG, SETS: SETS, LIMITS: LIMITS, LABELS: LABELS, CLICK_TEXT: CLICK_TEXT, ensure: ensure, validate: validate, available: available,
     level: level, cost: cost, buy: buy, setEnabled: setEnabled, activate: activate, modifiers: modifiers, onTap: onTap,
     tick: tick, offline: tick, nextExpiry: nextExpiry, model: model, criticalStats: criticalStats };
 });

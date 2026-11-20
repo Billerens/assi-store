@@ -1,5 +1,13 @@
 # Merge Forge: what’s new
 
+## 0.6.0 — 2026-11-20
+
+- Skills — a tab of their own in the upgrades and round buttons on the scene. Each has its strength and its cooldown to upgrade, both without a limit. The battle cry gets a cooldown upgrade. New ones: **Golden touch** (from wave 30) — for 20 s every volley brings a share of a foe's reward, +5% a level; **Heavy strike** (from wave 45) — an instant blow of 8 seconds of the forge's damage, +25% a level; **Forge fury** (from wave 60) — for 15 s crit chance +25 pp and crit strength +20% a level. An “Auto” switch uses the ready skills by itself.
+- 13 new relics for different builds: Titans' scale (weaker foes), Giant's fang and Treasury key (damage and gold from bosses), Seven-league boots (waves stepped over), Cup of luck (rare foes more often), Midas ring, Thunderer's spearhead, Berserker's mask, Echo bell, Skill master's hourglass (the skills), and for the tap — Heavy hammer, Spark of precision, Golden nail. 50 in the collection.
+- Relic sets: six sets of 3–4 pieces give a bonus when every piece is bought and switched on.
+- Taps are no longer lost. The effects of 0.5.0 moved and shrank the anvil's cells themselves, the forge, the chest and the scene with its buttons — a touch at that moment could land beside them. Now only the picture and the number inside move, and what a finger aims at stays put. The forge counts up to 8 taps a second instead of 4.
+- A star ingot now multiplies the coals of every reforge by 5. Before, the star reset only threw the forge back: in the bot's test it never caught up with the path without an ingot in five days. Now the old record comes back in about four days, and the growth after is faster.
+
 ## 0.5.0 — 2026-11-20
 
 - Coals from every run. Waves above the reforge record pay coals in full, waves already passed pay half: a run that stops short of the record is no longer empty. With a record of 106, a run to wave 92 gives 18 coals instead of none. The share is the setting “Coals for waves below the record: share”.

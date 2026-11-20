@@ -43,11 +43,17 @@
     { id: 'wide', title: 'Шире наковальня' }, { id: 'twin', title: 'Двойная поковка' }, { id: 'melt', title: 'Удачная плавка' },
     { id: 'apprentice', title: 'Подмастерье' }, { id: 'hourglass', title: 'Песочные часы' }, { id: 'hunter', title: 'Охотник за головами' },
     { id: 'temper', title: 'Закалка' }, { id: 'runeMason', title: 'Рунная кладка', rune: true }, { id: 'runePower', title: 'Сила руны', rune: true },
-    { id: 'caravan', title: 'Караванщик' }, { id: 'night', title: 'Ночная смена' }, { id: 'cry', title: 'Боевой клич' },
+    { id: 'caravan', title: 'Караванщик' }, { id: 'night', title: 'Ночная смена' }, { id: 'cry', title: 'Боевой клич', skill: 'cry' },
     { id: 'banner', title: 'Знамя' },
     { id: 'hammer', title: 'Удар молота' }, { id: 'stall', title: 'Лавка кузнеца' },
-    { id: 'ember', title: 'Жаркие угли' }, { id: 'pilot', title: 'Негаснущий огонь' }
+    { id: 'ember', title: 'Жаркие угли' }, { id: 'pilot', title: 'Негаснущий огонь' },
+    { id: 'cryCd', title: 'Боевой клич: откат', skill: 'cry', cd: true },
+    { id: 'midas', title: 'Золотое касание', skill: 'midas' }, { id: 'midasCd', title: 'Золотое касание: откат', skill: 'midas', cd: true },
+    { id: 'strike', title: 'Мощный удар', skill: 'strike' }, { id: 'strikeCd', title: 'Мощный удар: откат', skill: 'strike', cd: true },
+    { id: 'fury', title: 'Ярость кузни', skill: 'fury' }, { id: 'furyCd', title: 'Ярость кузни: откат', skill: 'fury', cd: true }
   ];
+  var UP_BY = {};
+  UP.forEach(function (u) { UP_BY[u.id] = u; });
 
   // The tree of «Горн мастера»: bought with coals, kept in layers.forge.state.mf (the star reset clears it).
   // A node without `single` has no last level: its price in coals grows by mf.<id>.growth a level.
@@ -441,6 +447,12 @@
   function criticalStats(state, cfg, options) {
     var chance = Math.min(cfg['crit.maxChance'], cfg['crit.chance'] + lvl(state, 'eye') * cfg['up.eye.step'] + perk(state, cfg, 'critChance'));
     var mult = (cfg['crit.mult'] + upgradeEffective(state, cfg, 'hand') * cfg['up.hand.step']) * perk(state, cfg, 'critMult');
+    // «Ярость кузни» while it works: past the cap of the chance its share turns into crit strength.
+    if (options && options.now > 0 && skillOn(state, 'fury', options.now)) {
+      var fury = furyBonus(state, cfg);
+      chance += fury.chance;
+      mult *= fury.mult;
+    }
     return Artifacts.criticalStats(state, cfg, chance, mult, options);
   }
   function critChance(state, cfg, options) { return criticalStats(state, cfg, options).chance; }
@@ -448,6 +460,97 @@
   function critMult(state, cfg, options) { return criticalStats(state, cfg, options).multiplier; }
 
   function cryOn(state, now) { return now > 0 && state.run.cryUntil > now; }
+
+  // ---- the skills: «Боевой клич», «Золотое касание», «Мощный удар», «Ярость кузни» ----------------
+  // Each has two upgrades with no last level: its strength (<id>) and its cooldown (<id>Cd: the base
+  // cooldown divided by 1 + step × level). They are used by a tap on the scene, or by themselves
+  // with «Авто» (meta.autoSkills) as soon as they are ready and a foe stands at the gate.
+  var SKILLS = {
+    cry: { cd: 'cryCd', sec: 'cry.sec', cooldown: 'cry.cooldownSec' },
+    midas: { cd: 'midasCd', sec: 'skill.midas.sec', cooldown: 'skill.midas.cooldownSec' },
+    strike: { cd: 'strikeCd', sec: '', cooldown: 'skill.strike.cooldownSec' },
+    fury: { cd: 'furyCd', sec: 'skill.fury.sec', cooldown: 'skill.fury.cooldownSec' }
+  };
+  var SKILL_IDS = ['cry', 'midas', 'strike', 'fury'];
+
+  /** {until, readyAt} of a skill, in ms of the game's clock (the cry keeps its old fields). */
+  function skillTimes(state, id) {
+    var r = state.run;
+    if (id === 'cry') return { until: num(r.cryUntil, 0), readyAt: num(r.cryReadyAt, 0) };
+    var s = r.skills && r.skills[id];
+    return { until: num(s && s.until, 0), readyAt: num(s && s.readyAt, 0) };
+  }
+  function setSkillTimes(state, id, until, readyAt) {
+    var r = state.run;
+    if (id === 'cry') { r.cryUntil = until; r.cryReadyAt = readyAt; return; }
+    r.skills = r.skills && typeof r.skills === 'object' ? r.skills : {};
+    r.skills[id] = { until: until, readyAt: readyAt };
+  }
+  /** Seconds between two uses: the base over 1 + step × the cooldown upgrade, the relics' share off. */
+  function skillCooldown(state, cfg, id) {
+    var d = SKILLS[id];
+    if (!d) return Infinity;
+    var mods = Artifacts.modifiers(state, cfg);
+    var sec = num(cfg[d.cooldown], 60) / (1 + lvl(state, d.cd) * num(cfg['up.' + d.cd + '.step'], 0)) / (1 + mods.skillCooldown);
+    if (id === 'cry') sec /= 1 + mods.cryRecovery;
+    return Math.max(num(cfg['skill.minCooldownSec'], 1), sec);
+  }
+  /** Seconds a skill works (0 for the strike, which is one blow). */
+  function skillDuration(state, cfg, id) {
+    var d = SKILLS[id];
+    if (!d || !d.sec) return 0;
+    var mods = Artifacts.modifiers(state, cfg);
+    var sec = num(cfg[d.sec], 0);
+    if (id === 'fury') sec *= 1 + mods.furyTime;
+    if (id === 'cry') sec *= 1 + mods.cryDuration;
+    return sec;
+  }
+  function skillOn(state, id, now) { return now > 0 && skillTimes(state, id).until > now; }
+  function skillReady(state, cfg, id, now) { return !!SKILLS[id] && lvl(state, id) > 0 && now >= skillTimes(state, id).readyAt; }
+
+  /** «Золотое касание»: the share of a foe's reward each volley brings while it works. */
+  function midasShare(state, cfg) {
+    return num(cfg['up.midas.step'], 0) * upgradeEffective(state, cfg, 'midas') * (1 + Artifacts.modifiers(state, cfg).midasPower);
+  }
+  /** The reward of a plain foe of the wave now (a Big): what «Золотое касание» takes its share of. */
+  function foeReward(state, cfg) { return Big.mul(goldOf(cfg, state.run.wave), goldMult(state, cfg, state.run.wave)); }
+  /** «Мощный удар»: seconds of the forge's damage dealt at once. */
+  function strikeSeconds(state, cfg) {
+    return num(cfg['skill.strike.sec'], 0) * (1 + num(cfg['up.strike.step'], 0) * upgradeEffective(state, cfg, 'strike')) * (1 + Artifacts.modifiers(state, cfg).strikePower);
+  }
+  /** Damage of `sec` seconds of the forge before the global multiplier (a Big): the volley applies that. */
+  function rawSeconds(state, cfg, now, sec) {
+    return Big.mul(Big.div(dps(state, cfg, now), dmgMult(state, cfg, now)), sec);
+  }
+  /** «Ярость кузни»: what it adds to the crit chance and multiplies the crit by. */
+  function furyBonus(state, cfg) {
+    return { chance: num(cfg['skill.fury.chance'], 0), mult: 1 + num(cfg['up.fury.step'], 0) * upgradeEffective(state, cfg, 'fury') };
+  }
+
+  /** Uses a ready skill: true when it went. The strike needs a foe at the gate. */
+  function useSkill(state, cfg, id, now) {
+    ensure(state);
+    var r = state.run;
+    if (!skillReady(state, cfg, id, now)) return false;
+    if (id === 'strike') {
+      var e = r.encounter;
+      if (!e || r.walkT > 0) return false;
+      var raw = rawSeconds(state, cfg, now, strikeSeconds(state, cfg));
+      e.pending.push({ id: 'strike', damage: Big.str(raw) });
+      r.lastStrike = { at: now, serial: num(r.lastStrike && r.lastStrike.serial, 0) + 1, damage: Big.str(Big.mul(raw, dmgMult(state, cfg, now))) };
+    }
+    var dur = skillDuration(state, cfg, id);
+    setSkillTimes(state, id, dur > 0 ? now + dur * 1000 : 0, now + skillCooldown(state, cfg, id) * 1000);
+    r.lastSkill = { id: id, at: now, serial: num(r.lastSkill && r.lastSkill.serial, 0) + 1 };
+    return true;
+  }
+  /** «Авто»: every ready skill, while a foe stands at the gate. */
+  function autoSkills(state, cfg, now) {
+    if (!state.meta.autoSkills || state.run.walkT > 0 || !state.run.encounter) return;
+    for (var i = 0; i < SKILL_IDS.length; i++) if (skillReady(state, cfg, SKILL_IDS[i], now)) useSkill(state, cfg, SKILL_IDS[i], now);
+  }
+  function setAutoSkills(state, on) { state.meta.autoSkills = !!on; return true; }
+
 
   function starfallOn(state, now) { return now > 0 && state.run.starfallUntil > now; }
 
@@ -575,7 +678,7 @@
 
   /** Damage a second with crits on average (a Big); `now` 0 leaves out the timed bonuses and the heat of taps. */
   function dps(state, cfg, now) {
-    var options = { passiveOnly: now === 0 };
+    var options = { passiveOnly: now === 0, now: now };
     var crit = 1 + critChance(state, cfg, options) * (UpgradeProgress.critAverage(critMult(state, cfg, options), overcrit(state, cfg)) - 1);
     var power = Big.add(Big.mul(fieldPower(state, cfg), crit), Outpost.passivePower(state, cfg, options));
     return Big.div(Big.mul(dmgMult(state, cfg, now), power), volleySec(state, cfg, now === 0));
@@ -863,7 +966,9 @@
       shieldFraction: !!e && Big.gt(e.shield || 0, 0),
       suppressSeconds: !!e && e.kind === 'regenerator' && Big.gt(e.regenLeft || 0, 0),
       petXp: !!state.meta.outpost.pet, apprenticeSeconds: apprenticeInterval(state, cfg) > 0 && r.appT > 0,
-      crySeconds: lvl(state, 'cry') > 0 && r.cryReadyAt > now, digestSeconds: camp.dragon.queue.length > 0
+      crySeconds: lvl(state, 'cry') > 0 && r.cryReadyAt > now, digestSeconds: camp.dragon.queue.length > 0,
+      tapStrike: !!e && r.walkT <= 0, nextCrit: !r.nextCrit,
+      skillSeconds: SKILL_IDS.some(function (id) { return lvl(state, id) > 0 && skillTimes(state, id).readyAt > now; })
     };
   }
   function applyArtifactCommands(state, cfg, commands, now) {
@@ -885,7 +990,15 @@
       else if (command.kind === 'apprenticeSeconds') r.appT = Math.max(0, r.appT - value);
       else if (command.kind === 'crySeconds') r.cryReadyAt = Math.max(now, r.cryReadyAt - value * 1000);
       else if (command.kind === 'digestSeconds') Outpost.digest(state, value, cfg);
-      else used = false;
+      else if (command.kind === 'tapStrike' && e && r.walkT <= 0) {
+        // «Тяжёлый молот»: the tap itself strikes the foe for some seconds of the forge's damage.
+        var blow = rawSeconds(state, cfg, now, value);
+        e.pending.push({ id: command.id, damage: Big.str(blow) });
+        shown = Big.str(Big.mul(blow, dmgMult(state, cfg, now)));
+      } else if (command.kind === 'nextCrit') r.nextCrit = true;
+      else if (command.kind === 'skillSeconds') {
+        SKILL_IDS.forEach(function (id) { var t = skillTimes(state, id); if (t.readyAt > now) setSkillTimes(state, id, t.until, Math.max(now, t.readyAt - value * 1000)); });
+      } else used = false;
       if (used) { ids.push(command.id); done.push({ id: command.id, kind: command.kind, value: shown }); }
     });
     if (ids.length) r.lastArtifactFx = { serial: num(r.lastArtifactFx && r.lastArtifactFx.serial, 0) + 1, at: now, ids: ids, done: done };
@@ -1176,7 +1289,7 @@
       if (!(wave >= num(cfg['mod.bossFromWave'], Infinity))) return '';
     } else {
       if (!(wave >= num(cfg['mod.fromWave'], Infinity))) return '';
-      if (hash01(serial, wave, salt * 2 + 1) >= num(cfg['mod.chance'], 0)) return '';
+      if (hash01(serial, wave, salt * 2 + 1) >= num(cfg['mod.chance'], 0) * (1 + Artifacts.modifiers(state, cfg).rareChance)) return '';
     }
     var ids = [];
     var total = 0;
@@ -1218,6 +1331,9 @@
     var route = Adventures.modifiers(state, cfg);
     if (route.hpMult && route.hpMult !== 1) r.hp = Big.str(Big.mul(r.hp, route.hpMult));
     if (mod.hp !== 1) r.hp = Big.str(Big.max(Big.of(1), Big.ceil(Big.mul(r.hp, mod.hp))));
+    // «Окалина титанов»: every foe comes weaker.
+    var thin = Artifacts.modifiers(state, cfg).enemyHp;
+    if (thin > 0) r.hp = Big.str(Big.max(Big.of(1), Big.ceil(Big.mul(r.hp, 1 - thin))));
     r.hpMax = r.hp;
     r.bossT = boss ? bossTimer(state, cfg) * mod.timer : 0;
     // The monster walks up to the gate first; the blades strike once it is there.
@@ -1237,7 +1353,7 @@
     var w = r.wave;
     var boss = isBoss(cfg, w) && !r.farm;
     var gold = Big.mul(goldOf(cfg, w), goldMult(state, cfg, w) * (ctx.mult || 1));
-    if (boss) gold = Big.mul(gold, cfg['boss.goldMult'] * (1 + upgradeEffective(state, cfg, 'hunter') * cfg['up.hunter.step']) * perk(state, cfg, 'bossGold'));
+    if (boss) gold = Big.mul(gold, cfg['boss.goldMult'] * (1 + upgradeEffective(state, cfg, 'hunter') * cfg['up.hunter.step']) * perk(state, cfg, 'bossGold') * (1 + Artifacts.modifiers(state, cfg).bossGold));
     var encounter = encounterOf(state, cfg);
     if (encounter.mark > 0) gold = Big.mul(gold, 1 + Math.min(cfg['campaign.mark.maxShare'], encounter.mark));
     var mod = modOf(cfg, encounter.mod || '', boss);
@@ -1265,6 +1381,16 @@
     }
     if (!r.farm) {
       r.wave = w + 1;
+      // «Сапоги-скороходы»: after a plain foe the next wave may be stepped over (never a boss), its reward taken.
+      var skip = boss ? 0 : Artifacts.modifiers(state, cfg).waveSkip;
+      if (skip > 0 && !isBoss(cfg, w + 1) && hash01(num(encounter.serial, 0), w, 97) < skip) {
+        var passed = Big.mul(goldOf(cfg, w + 1), goldMult(state, cfg, w + 1) * (ctx.mult || 1));
+        r.gold = Big.add(r.gold, passed);
+        r.earned = Big.add(r.earned, passed);
+        r.wave = w + 2;
+        r.stats.skipped = num(r.stats.skipped, 0) + 1;
+        r.lastSkip = { at: ctx.now || 0, wave: w + 1, gold: Big.str(passed) };
+      }
       if (r.wave > r.maxWave) r.maxWave = r.wave;
     }
     spawn(state, cfg);
@@ -1296,8 +1422,10 @@
     var cfg = ctx.config;
     var r = state.run;
     var open = openCells(state, cfg);
-    var p = critChance(state, cfg);
-    var m = critMult(state, cfg);
+    var p = critChance(state, cfg, { now: ctx.now || 0 });
+    var m = critMult(state, cfg, { now: ctx.now || 0 });
+    // «Искра точности»: one volley of sure crits.
+    if (r.nextCrit) { p = 1; r.nextCrit = false; }
     var smash = overcrit(state, cfg);
     var smashes = [];
     var sum = 0;
@@ -1382,7 +1510,14 @@
       r.bursts -= 1;
       r.lastBurst = { at: ctx.now || 0, mult: burst, serial: num(r.lastBurst && r.lastBurst.serial, 0) + 1 };
     }
-    if (r.bossT > 0) hit = Big.mul(hit, perk(state, cfg, 'bossDmg'));
+    if (r.bossT > 0) hit = Big.mul(hit, perk(state, cfg, 'bossDmg') * (1 + Artifacts.modifiers(state, cfg).bossDamage));
+    // «Золотое касание»: while it works, every volley brings a share of a foe's reward.
+    if (skillOn(state, 'midas', ctx.now || 0)) {
+      var touch = Big.mul(foeReward(state, cfg), midasShare(state, cfg) * (ctx.mult || 1));
+      r.gold = Big.add(r.gold, touch);
+      r.earned = Big.add(r.earned, touch);
+      r.lastMidas = { at: ctx.now || 0, gold: Big.str(touch), serial: num(r.lastMidas && r.lastMidas.serial, 0) + 1 };
+    }
     if (Big.gt(e.shield, 0)) {
       var absorbed = Big.min(e.shield, hit);
       e.shield = Big.str(Big.sub(e.shield, absorbed));
@@ -1575,6 +1710,13 @@
   /** Can the upgrade be bought at all now (not at its cap, open)? */
   function upUnlocked(state, cfg, id) {
     if (id === 'hammer') return state.run.maxWave >= cfg['up.hammer.fromWave'];
+    // A skill opens at its wave; its cooldown, once the skill is bought.
+    var up = UP_BY[id];
+    if (up && up.skill && up.skill !== 'cry') {
+      if (state.run.maxWave < num(cfg['up.' + up.skill + '.fromWave'], 0)) return false;
+      if (up.cd && !lvl(state, up.skill)) return false;
+    }
+    if (id === 'cryCd' && !lvl(state, 'cry')) return false;
     if (id === 'ember' || id === 'pilot') return state.run.maxWave >= cfg['up.' + id + '.fromWave'];
     return !((id === 'runeMason' || id === 'runePower') && !runesOpen(state, cfg));
   }
@@ -1692,6 +1834,8 @@
     var cfg = ctx.config;
     ensure(state);
     placeSockets(state, cfg);
+    // «Авто» of the skills: on the screen, never offline.
+    if (!ctx.offline) autoSkills(state, cfg, ctx.now || 0);
     var r = state.run;
     Adventures.tick(state, dt, cfg);
     if (!ctx.offline) encounterOf(state, cfg);
@@ -1759,10 +1903,16 @@
     return Math.floor(Math.max(0, f - p) + Math.min(f, p) * share + 1e-9);
   }
 
+  /**
+   * «Звёздный металл»: each ingot multiplies the coals of a reset by star.coalMult — the star reset
+   * throws the forge back, and the next climb pays more, so the plateau after it is passed easier.
+   */
+  function starCoals(state, cfg) { return Math.pow(Math.max(1, num(cfg['star.coalMult'], 1)), ingots(state)); }
+
   /** What a reset of a run that reached wave `wave` would give now. */
   function coalsGain(state, cfg, wave) {
     ensure(state);
-    return coalsPay(cfg, coalsFor(cfg, wave), forgeLayer(state).state.paid);
+    return Math.floor(coalsPay(cfg, coalsFor(cfg, wave), forgeLayer(state).state.paid) * starCoals(state, cfg) + 1e-9);
   }
 
   function prestigeGain(state, layerId, cfg) {
@@ -1799,7 +1949,7 @@
     var l = forgeLayer(state);
     if (layerId === L1) {
       var f = coalsFor(cfg, before.run.maxWave);
-      var gain = coalsPay(cfg, f, before.layers[L1] && before.layers[L1].state && before.layers[L1].state.paid);
+      var gain = Math.floor(coalsPay(cfg, f, before.layers[L1] && before.layers[L1].state && before.layers[L1].state.paid) * starCoals(before, cfg) + 1e-9);
       l.state.paid = Math.max(l.state.paid, f);
       l.state.total += gain;
       l.state.record = Math.max(l.state.record, before.run.maxWave);
@@ -1919,7 +2069,7 @@
   // ---- the bot (checks and tests): one second of play --------------------------------------------------
 
   var USEFUL = ['bellows', 'steel', 'sharp', 'purse', 'eye', 'hand', 'wide', 'twin', 'melt', 'apprentice', 'hourglass', 'hunter',
-    'temper', 'runeMason', 'runePower', 'night', 'cry', 'banner'];
+    'temper', 'runeMason', 'runePower', 'night', 'cry', 'banner', 'cryCd', 'midas', 'midasCd', 'strike', 'strikeCd', 'fury', 'furyCd'];
 
   /** The cheapest useful upgrade to buy now, or null. */
   function cheapest(state, cfg) {
@@ -1952,7 +2102,11 @@
     var guard = 0;
     while (guard++ < 40 && autoMerge(state, cfg, now)) { /* every pair */ }
     if (r.event && (r.event.id === 'caravan' || r.event.id === 'wanderer')) acceptEvent(state, cfg, now);
-    if (r.bossT > 0) cry(state, cfg, now);
+    // The skills: the gold one at any foe, the others at a boss.
+    if (r.walkT <= 0 && r.encounter) {
+      if (skillReady(state, cfg, 'midas', now)) useSkill(state, cfg, 'midas', now);
+      if (r.bossT > 0) ['cry', 'fury', 'strike'].forEach(function (id) { if (skillReady(state, cfg, id, now)) useSkill(state, cfg, id, now); });
+    }
     if (r.farm) {
       r.botFarm = num(r.botFarm, 0) + 1;
       var need = Big.mul(hpOf(cfg, r.wave + 1), cfg['boss.hpMult']);
@@ -1998,13 +2152,9 @@
   }
 
   /** «Боевой клич» when ready: true when cried. */
-  function cry(state, cfg, now) {
-    var r = state.run;
-    if (!lvl(state, 'cry') || now < r.cryReadyAt) return false;
-    r.cryUntil = now + cfg['cry.sec'] * 1000;
-    r.cryReadyAt = now + cfg['cry.cooldownSec'] * 1000 / (1 + Artifacts.modifiers(state, cfg).cryRecovery);
-    return true;
-  }
+  /** «Боевой клич»: one of the skills (useSkill), its cooldown with «Боевой клич: откат». */
+  function cry(state, cfg, now) { return useSkill(state, cfg, 'cry', now); }
+
 
   // ---- blades as pictures: the base of each level, for the screen and for the artist ----------------
 
@@ -2107,6 +2257,9 @@
     buyArtifact: buyArtifact, setArtifactEnabled: setArtifactEnabled, activateArtifact: activateArtifact,
     acceptContract: acceptContract, previewContractDelivery: previewContractDelivery, deliverContract: deliverContract, claimContract: claimContract,
     init: init, tick: tick, offline: offline, prestigeGain: prestigeGain, prestigeHint: prestigeHint, bonus: bonus, onPrestige: onPrestige,
+    SKILLS: SKILLS, SKILL_IDS: SKILL_IDS, skillTimes: skillTimes, skillCooldown: skillCooldown, skillDuration: skillDuration, skillOn: skillOn,
+    skillReady: skillReady, useSkill: useSkill, autoSkills: autoSkills, setAutoSkills: setAutoSkills, midasShare: midasShare, foeReward: foeReward,
+    strikeSeconds: strikeSeconds, furyBonus: furyBonus,
     migrate: migrate, validate: validate, summary: summary, next: next, chest: chest,
     procedural: procedural, validateStock: validateStock,
     // the screen and the checks
@@ -2128,7 +2281,7 @@
     runupWalk: runupWalk, canMeet: canMeet, setAutoMeet: setAutoMeet,
     overcrit: overcrit, resonance: resonance, resonates: resonates, overheatLevels: overheatLevels, burstMult: burstMult, room: room,
     spawn: spawn, kill: kill, newEncounter: newEncounter,
-    mfLevel: mfLevel, mfMax: mfMax, mfCost: mfCost, mfOpen: mfOpen, buyMf: buyMf, startGold: startGold, startGoldAt: startGoldAt, coalsFor: coalsFor, coalsGain: coalsGain, coalsPay: coalsPay,
+    mfLevel: mfLevel, mfMax: mfMax, mfCost: mfCost, mfOpen: mfOpen, buyMf: buyMf, startGold: startGold, startGoldAt: startGoldAt, coalsFor: coalsFor, coalsGain: coalsGain, coalsPay: coalsPay, starCoals: starCoals,
     soft: soft, autoTaps: autoTaps, eventSpeed: eventSpeed, runePower: runePower,
     forgeLayer: forgeLayer, starLayer: starLayer, coalsAll: coalsAll,
     cheapest: cheapest, botPlay: botPlay, cry: cry, bellows: bellows, startEvent: startEvent,

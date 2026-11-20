@@ -285,6 +285,13 @@ exports['перековки не разгоняют сами себя: забе�
   var x = load();
   [100, 1000, 100000].forEach(function (coals) {
     var state = withCoals(x, coals, 14);
+    // These coals came from a record: the one that pays them (coals are paid whole above the record,
+    // a share below it — sim.coalsPay). A forge with coals and no record does not happen.
+    var l = x.sim.forgeLayer(state);
+    var record = x.cfg['coals.fromWave'];
+    while (x.sim.coalsFor(x.cfg, record + 1) <= coals) record++;
+    l.state.record = record;
+    l.state.paid = x.sim.coalsFor(x.cfg, record);
     var rng = Rng.make(4242);
     var now = Date.UTC(2026, 10, 2, 5, 0, 0);
     for (var s = 0; s < 1800; s++) {
@@ -292,10 +299,10 @@ exports['перековки не разгоняют сами себя: забе�
       x.sim.tick(state, 1, ctxOf(x.cfg, rng, now + 1000));
       now += 1000;
     }
-    var back = x.sim.coalsFor(x.cfg, state.run.maxWave);
+    var back = x.sim.coalsGain(state, x.cfg, state.run.maxWave);
     t.equal(x.sim.validate(state), null, coals + ' углей: состояние после получаса');
     t.ok(Big.valid(x.sim.dps(state, x.cfg, 0)) && Big.valid(state.run.gold), coals + ' углей: урон и золото — числа');
-    t.ok(back < coals, coals + ' углей в дереве: за полчаса волна ' + state.run.maxWave + ' — это ' + back + ' углей, забег окупает сам себя');
+    t.ok(back < coals, coals + ' углей в дереве (рекорд ' + record + '): за полчаса волна ' + state.run.maxWave + ' — это ' + back + ' углей, забег окупает сам себя');
     t.ok(x.sim.forgeSpeed(state, x.cfg) <= 4, coals + ' углей: горн ×' + x.sim.forgeSpeed(state, x.cfg));
   });
 };

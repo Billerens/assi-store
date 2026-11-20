@@ -297,7 +297,14 @@
     view.event = h('div', { class: 'mf-event', id: 'event', hidden: true });
     view.retry = h('button', { class: 'g-btn primary mf-gate-pill mf-retry', id: 'retry', hidden: true, onclick: retry });
     view.cryTime = h('span', { class: 'mf-ab-t g-num' });
-    view.cry = h('button', { class: 'mf-ab', id: 'cry', hidden: true, onclick: cry, 'aria-label': tx('Боевой клич'), title: tx('Боевой клич') }, MFArt.el('up', 'cry', 'mf-ab-ic'), view.cryTime);
+    // A round button for each skill on the scene, with the ring of its cooldown.
+    view.skillBtns = {};
+    sim.SKILL_IDS.forEach((id) => {
+      const time = id === 'cry' ? view.cryTime : h('span', { class: 'mf-ab-t g-num' });
+      const btn = h('button', { class: 'mf-ab mf-skill', id: id === 'cry' ? 'cry' : 'skill-' + id, 'data-skill': id, hidden: true, onclick: () => useSkill(id), 'aria-label': tx(SKILL_TITLE[id]), title: tx(SKILL_TITLE[id]) }, MFArt.el('up', id, 'mf-ab-ic'), time);
+      view.skillBtns[id] = { btn, time };
+    });
+    view.cry = view.skillBtns.cry.btn;
     view.sort = h('button', { class: 'g-btn small mf-sort', id: 'sort', 'aria-label': tx('Сортировать'), title: tx('По уровню: сильные первыми. Клинки на рунах остаются на месте.'), onclick: sortAnvil }, 'Порядок');
     view.meet = h('button', { class: 'g-btn small', id: 'meet', onclick: () => prepareFight('meet') }, 'Встретить');
     view.autoMeet = h('button', { class: 'g-btn small mf-auto-meet', id: 'meet-auto', 'aria-pressed': 'false', title: tx('Кузня сама встречает каждого врага, когда «Встретить» готово'),
@@ -308,7 +315,7 @@
     view.artifacts = window.MFArtifactsUI ? MFArtifactsUI.create({ g, sim, onOpen: () => openMaster('artifacts') }) : null;
     view.anvilTools.append(view.sort);
     // On the scene: the event as a banner, the abilities as round buttons, the heroes open the outpost.
-    view.abilities = h('div', { class: 'mf-abilities', role: 'group', 'aria-label': tx('Приёмы') }, view.cry, view.outpost.skillbar);
+    view.abilities = h('div', { class: 'mf-abilities', role: 'group', 'aria-label': tx('Приёмы') }, ...sim.SKILL_IDS.map((id) => view.skillBtns[id].btn), view.outpost.skillbar);
     if (view.artifacts) {
       view.artifacts.quickElement.classList.add('mf-ab', 'mf-ab-relic');
       view.abilities.append(view.artifacts.quickElement);
@@ -812,7 +819,7 @@
       g.sfx(g.state.run.stats.sold > before ? 'sell' : 'forge');
       g.buzz('tap');
       if (view.pressAnimation) view.pressAnimation.cancel();
-      view.pressAnimation = bump(view.forge, 'press');
+      view.pressAnimation = bump(view.forge, 'flash');
       const at = centerOf(view.forge);
       if (at) burst({ x: at.x, y: at.y - at.h * 0.3, w: 0, h: 0 }, 2, 'ember', 24);
     }
@@ -914,11 +921,22 @@
     press: [[{ transform: 'scale(1)' }, { transform: 'scale(0.95)', offset: 0.3 }, { transform: 'scale(1)' }], 150],
     punch: [[{ transform: 'scale(1)' }, { transform: 'scale(1.18)', offset: 0.3 }, { transform: 'scale(1)' }], 380]
   };
-  /** An element jumps: merge — swells and lights; drop — falls in; flash; shake; press; punch. */
+  /**
+   * An element jumps: merge — swells and lights; drop — falls in; flash; shake; press; punch.
+   * Only what no finger aims at may move or change its size: a moving cell or button would let a tap
+   * land beside it (the anvil finds its cell by the cell's box). Cells move their picture and number
+   * (bumpCell), buttons only light up, the scene shakes its canvas, not its buttons.
+   */
   function bump(el, kind) {
     if (!el || !el.animate || !BUMPS[kind]) return null;
     if (view.still && kind !== 'flash') return el.animate(BUMPS.flash[0], { duration: 300 });
     return el.animate(BUMPS[kind][0], { duration: BUMPS[kind][1], easing: 'ease-out' });
+  }
+  /** A cell: its picture and number move, the cell itself only lights up — its box stays for the fingers. */
+  function bumpCell(cell, kind) {
+    if (!cell) return;
+    bump(cell, 'flash');
+    if (kind !== 'flash') cell.querySelectorAll('.mf-art, .mf-lvl').forEach((part) => bump(part, kind));
   }
 
   const RELIC_AT = {
@@ -980,9 +998,9 @@
     fx.list.filter((e) => e.s > view.fxSerial && (!e.at || t - e.at < 2500)).forEach((e) => {
       const cell = view.cells[e.cell];
       if (!cell) return;
-      if (e.kind === 'place') { bump(cell, 'drop'); return; }
+      if (e.kind === 'place') { bumpCell(cell, 'drop'); return; }
       if (e.kind !== 'merge') return;
-      bump(cell, 'merge');
+      bumpCell(cell, 'merge');
       const from = view.cells[e.from] || null;
       if (e.by === 'hand') {
         sound('merge', 60);
@@ -1014,13 +1032,30 @@
       view.lastFails = fails;
       sound('fail');
       g.buzz([30, 40, 30]);
-      bump(view.gate, 'shake');
+      bump(view.canvas, 'shake');
       pop(view.gate, tx('Не успели'), 'bad big', { life: 1400 });
     }
     const runup = r.runup || 0;
     if (runup > view.lastRunup && runup >= 2) bump(view.waveLabel, 'punch');
     view.lastRunup = runup;
     view.gate.classList.toggle('cry', sim.cryOn(state, t));
+    view.gate.classList.toggle('midas', sim.skillOn(state, 'midas', t));
+    view.gate.classList.toggle('fury', sim.skillOn(state, 'fury', t));
+    const touch = r.lastMidas;
+    if (touch && touch.serial !== view.midasSerial) {
+      if (view.midasSerial !== undefined && t - (touch.at || 0) < 1500 && view.monPos) view.floats.push({ x: view.monPos.x - view.monPos.size * 0.35, y: view.monPos.y - view.monPos.size * 0.4, text: '+' + g.fmt(Big.of(touch.gold)), gold: true, at: t });
+      view.midasSerial = touch.serial;
+    }
+    const blow = r.lastStrike;
+    if (blow && blow.serial !== view.strikeSerial) {
+      if (view.strikeSerial !== undefined && t - (blow.at || 0) < 1500 && view.monPos) view.floats.push({ x: view.monPos.x, y: view.monPos.y - view.monPos.size * 0.5, text: '−' + g.fmt(Big.of(blow.damage)), crit: true, huge: true, at: t });
+      view.strikeSerial = blow.serial;
+    }
+    const skip = r.lastSkip;
+    if (skip && skip.at !== view.skipAt) {
+      if (view.skipAt !== undefined && t - (skip.at || 0) < 1500) { pop(view.gate, tx('Волна {} — с ходу', skip.wave), 'gold', { life: 1300, dy: 20 }); sound('coin', 200); }
+      view.skipAt = skip.at;
+    }
   }
 
 
@@ -1028,13 +1063,18 @@
     if (g.act((s) => sim.retry(s, cfg()))) g.sfx('boss');
   }
 
-  function cry() {
-    if (g.act((s) => sim.cry(s, cfg(), now()))) {
-      g.sfx('horn');
-      bump(view.gate, 'flash');
-      g.buzz([40, 30, 40]);
-    } else g.sfx('deny');
+  const SKILL_TITLE = { cry: 'Боевой клич', midas: 'Золотое касание', strike: 'Мощный удар', fury: 'Ярость кузни' };
+  /** A skill from its button: the sound, the light and the word of each. */
+  function useSkill(id) {
+    if (!g.act((s) => sim.useSkill(s, cfg(), id, now()))) { g.sfx('deny'); return; }
+    const btn = view.skillBtns[id] && view.skillBtns[id].btn;
+    bump(btn, 'flash');
+    if (id === 'cry') { g.sfx('horn'); bump(view.canvas, 'flash'); g.buzz([40, 30, 40]); }
+    if (id === 'midas') { sound('coin'); pop(view.gate, tx('Золотое касание'), 'gold big', { life: 1300, rise: 18 }); burst(view.gate, 10, 'gold', 60); }
+    if (id === 'strike') { sound('smash'); bump(view.canvas, 'shake'); g.buzz([30]); pop(view.gate, tx('Мощный удар!'), 'big', { life: 1200, rise: 18 }); }
+    if (id === 'fury') { sound('crit'); g.buzz([20, 30, 20]); pop(view.gate, tx('Ярость кузни'), 'bad big', { life: 1300, rise: 18 }); }
   }
+  function cry() { useSkill('cry'); }
 
   async function blow() {
     const r = await g.links.spend('bellows');
@@ -1224,7 +1264,14 @@
     runePower: (c) => tx('Руны сильнее на {}', pct(c['up.runePower.step'])),
     caravan: (c) => tx('События чаще на {}', pct(c['up.caravan.step'])),
     night: (c) => tx('Офлайн-доход +{}', pct(c['up.night.step'])),
-    cry: (c) => tx('Кнопка: урон +{} на {} с', pct(c['up.cry.step']), c['cry.sec']),
+    cry: (c) => tx('Приём: урон +{} на {} с', pct(c['up.cry.step']), c['cry.sec']),
+    midas: (c) => tx('Приём: {} с каждый залп приносит долю награды за врага, +{} за уровень', c['skill.midas.sec'], pct(c['up.midas.step'])),
+    strike: (c) => tx('Приём: мгновенный удар на {} с урона кузни, сильнее на {} за уровень', c['skill.strike.sec'], pct(c['up.strike.step'])),
+    fury: (c) => tx('Приём: {} с шанс крита +{}, сила крита +{} за уровень', c['skill.fury.sec'], pct(c['skill.fury.chance']), pct(c['up.fury.step'])),
+    cryCd: () => tx('Откат приёма короче с каждым уровнем'),
+    midasCd: () => tx('Откат приёма короче с каждым уровнем'),
+    strikeCd: () => tx('Откат приёма короче с каждым уровнем'),
+    furyCd: () => tx('Откат приёма короче с каждым уровнем'),
     banner: (c) => tx('Урон +{} за каждую десятку волн', pct(c['up.banner.step'])),
     hammer: () => tx('Ручной удар сильнее; прирост постепенно уменьшается'),
     ember: (c) => tx('При полном жаре залпы чаще ещё на {}', pct(c['up.ember.step'])),
@@ -1251,6 +1298,11 @@
     if (id === 'hammer') return tx('один тап: −{} с', g.fmt(sim.tapSeconds(state, c, now()), { digits: 2 }));
     if (id === 'stall') return tx('продажа {} · ×{}', pct(sim.sellShare(state, c)), g.fmt(sim.saleMult(state, c), { digits: 2 }));
     if (id === 'runeMason') return tx('гнёзд {}', sim.socketCount(state, c));
+    const up = sim.UP.find((u) => u.id === id);
+    if (up && up.cd) return tx('откат {}', g.fmt.time(Math.ceil(sim.skillCooldown(state, c, up.skill))));
+    if (id === 'midas' && n) return tx('{} награды за залп', pct(sim.midasShare(state, c)));
+    if (id === 'strike' && n) return tx('{} с урона кузни', g.fmt(sim.strikeSeconds(state, c), { digits: 2 }));
+    if (id === 'fury' && n) return tx('крит ×{} на {} с', g.fmt(sim.furyBonus(state, c).mult, { digits: 2 }), g.fmt(sim.skillDuration(state, c, 'fury'), { digits: 2 }));
     if (!n) return '';
     if (id === 'melt') {
       const p = n * c['up.melt.step'];
@@ -1267,8 +1319,9 @@
     const c = cfg();
     const groups = [
       { id: 'forge', title: 'Ковка', items: ['bellows', 'steel', 'wide', 'twin', 'melt', 'apprentice', 'hammer'] },
-      { id: 'battle', title: 'Бой', items: ['sharp', 'eye', 'hand', 'hourglass', 'temper', 'ember', 'pilot', 'runeMason', 'runePower', 'cry', 'banner'] },
-      { id: 'income', title: 'Доход', items: ['purse', 'hunter', 'caravan', 'night', 'stall'] }
+      { id: 'battle', title: 'Бой', items: ['sharp', 'eye', 'hand', 'hourglass', 'temper', 'ember', 'pilot', 'runeMason', 'runePower', 'banner'] },
+      { id: 'income', title: 'Доход', items: ['purse', 'hunter', 'caravan', 'night', 'stall'] },
+      { id: 'skills', title: 'Приёмы', items: ['cry', 'cryCd', 'midas', 'midasCd', 'strike', 'strikeCd', 'fury', 'furyCd'] }
     ];
     view.upTab = view.upTab || 'forge';
     const group = groups.find(item => item.id === view.upTab) || groups[0];
@@ -1280,7 +1333,7 @@
       const b = sim.upOpen(state, c, u.id) ? bulk(state, c, u.id) : null;
       return lvl(state, u.id) + (sim.upUnlocked(state, c, u.id) ? 'o' : 'l') + (b && Big.gte(state.run.gold, b.price) ? 'y' : 'n') + (b && view.buyAmount === 'max' ? '#' + b.count : '');
     }).join(',') +
-      '|' + sim.socketCount(state, c) + '|' + (state.run.runes || []).join(',') + '|' + (state.run.bellowsUntil > now()) + '|' + Math.floor(state.run.maxWave / 10) + '|' + JSON.stringify(sim.forgeLayer(state).state.mf) + '|' + artifactKey;
+      '|' + sim.socketCount(state, c) + '|' + (state.run.runes || []).join(',') + '|' + (state.run.bellowsUntil > now()) + '|' + Math.floor(state.run.maxWave / 10) + '|' + JSON.stringify(sim.forgeLayer(state).state.mf) + '|' + artifactKey + '|' + !!state.meta.autoSkills;
     if (!force && key === view.panelKey && box.childNodes.length) return;
     view.panelKey = key;
     const focused = box.contains(document.activeElement) ? document.activeElement : null;
@@ -1306,6 +1359,13 @@
     if (group.id === 'forge') box.append(row({ set: 'ui', id: 'blow', cls: 'mf-blow', title: 'Раздуть горн',
       text: blowing ? tx('Горн раздут ещё {}', g.fmt.time(Math.ceil((state.run.bellowsUntil - now()) / 1000))) : tx('{} мин горн вдвое быстрее, за 1 энергию шагов', cfg()['bellows.minutes']),
       side: h('button', { class: 'g-btn small', id: 'blow', onclick: blow }, GameIcons.el('energy'), 'Раздуть') }));
+    if (group.id === 'skills') {
+      const on = !!state.meta.autoSkills;
+      box.append(h('div', { class: 'mf-skills-head' },
+        h('p', { class: 'g-note' }, tx('Приёмы — кнопки на сцене. У каждого прокачиваются сила и откат, без предела.')),
+        h('button', { class: 'g-btn small mf-auto-meet' + (on ? ' on' : ''), id: 'skills-auto', 'aria-pressed': String(on), title: tx('Кузня сама применяет каждый готовый приём, пока враг у ворот'),
+          onclick: () => { g.act((s) => sim.setAutoSkills(s, !s.meta.autoSkills)); g.sfx('tap'); view.panelKey = ''; fillUpgrades(box, true); } }, tx('Авто'))));
+    }
     // The runes are chosen on the anvil, by a tap on their stones.
     if (group.id === 'battle' && sim.sockets(state, c).length) box.append(h('p', { class: 'g-note mf-rune-note' }, tx('Руны меняются на наковальне: тап по камню руны в клетке.')));
     // An upgrade at its last level is mastered: it leaves the list for the line «Освоено» under it.
@@ -1316,7 +1376,8 @@
       const can = open && Big.gte(state.run.gold, price);
       const n = lvl(state, u.id);
       const unlocked = sim.upUnlocked(state, c, u.id);
-      const requirement = c['up.' + u.id + '.fromWave'] ? tx('Откроется с волны {}', c['up.' + u.id + '.fromWave']) : '';
+      const requirement = c['up.' + u.id + '.fromWave'] ? tx('Откроется с волны {}', c['up.' + u.id + '.fromWave'])
+        : u.cd ? tx('Откроется с приёмом «{}»', tx(SKILL_TITLE[u.skill])) : '';
       let side;
       if (open) {
         const b = bulk(state, c, u.id);
@@ -1411,7 +1472,7 @@
       g.ui.line('Углей', g.fmt(coals)),
       g.ui.line('Бонус углей', tx('+{} урона и золота', pct(c['coals.bonus'] * sim.coalsAll(state)))),
       g.ui.line('Рекорд волны', String(rec)),
-      sim.ingots(state) ? g.ui.line('Звёздные слитки', tx('{} · ×{} ко всему', g.fmt(sim.ingots(state)), g.fmt(sim.starMult(state, c)))) : null));
+      sim.ingots(state) ? g.ui.line('Звёздные слитки', tx('{} · ×{} ко всему, угли за перековку ×{}', g.fmt(sim.ingots(state)), g.fmt(sim.starMult(state, c)), g.fmt(sim.starCoals(state, c)))) : null));
     const gain = sim.coalsGain(state, c, state.run.maxWave);
     let nextWave = Math.max(c['coals.fromWave'], state.run.maxWave + 1);
     while (sim.coalsGain(state, c, nextWave) <= gain && nextWave < 100000) nextWave++;
@@ -1721,20 +1782,26 @@
     view.sort.disabled = !!view.drag;
     view.retry.hidden = !r.farm;
     if (r.farm) view.retry.textContent = tx('Ещё раз: босс волны {}', r.wave + 1);
-    const cryLvl = lvl(state, 'cry');
-    view.cry.hidden = !cryLvl;
-    if (cryLvl) {
-      const on = sim.cryOn(state, t);
-      const wait = Math.max(0, Math.ceil((r.cryReadyAt - t) / 1000));
-      view.cry.disabled = on || wait > 0;
-      const full = Math.max(1, c['cry.cooldownSec']);
-      view.cry.style.setProperty('--p', on ? 1 : wait > 0 ? String(Math.max(0, Math.min(1, 1 - wait / full))) : 1);
-      view.cry.classList.toggle('ready', !on && wait <= 0);
-      view.cry.classList.toggle('on', on);
-      view.cryTime.textContent = on ? tx('{} с', Math.max(0, Math.ceil((r.cryUntil - t) / 1000))) : wait > 0 ? g.fmt.time(wait) : '';
-      view.cry.setAttribute('aria-label', on ? tx('Клич звучит') : wait > 0 ? tx('Боевой клич · {}', g.fmt.time(wait)) : tx('Боевой клич'));
-    }
-    view.abilities.hidden = view.cry.hidden && view.outpost.skillbar.hidden && !(view.artifacts && !view.artifacts.quickElement.hidden);
+    let anySkill = false;
+    sim.SKILL_IDS.forEach((id) => {
+      const { btn, time } = view.skillBtns[id];
+      const lv = lvl(state, id);
+      btn.hidden = !lv;
+      if (!lv) return;
+      anySkill = true;
+      const times = sim.skillTimes(state, id);
+      const on = sim.skillOn(state, id, t);
+      const wait = Math.max(0, Math.ceil((times.readyAt - t) / 1000));
+      btn.disabled = on || wait > 0;
+      const full = Math.max(1, sim.skillCooldown(state, c, id));
+      btn.style.setProperty('--p', on ? 1 : wait > 0 ? String(Math.max(0, Math.min(1, 1 - wait / full))) : 1);
+      btn.classList.toggle('ready', !on && wait <= 0);
+      btn.classList.toggle('on', on);
+      const text = on ? tx('{} с', Math.max(0, Math.ceil((times.until - t) / 1000))) : wait > 0 ? g.fmt.time(wait) : '';
+      if (time.textContent !== text) time.textContent = text;
+      btn.setAttribute('aria-label', on ? tx('{} · действует', tx(SKILL_TITLE[id])) : wait > 0 ? tx('{} · {}', tx(SKILL_TITLE[id]), g.fmt.time(wait)) : tx(SKILL_TITLE[id]));
+    });
+    view.abilities.hidden = !anySkill && view.outpost.skillbar.hidden && !(view.artifacts && !view.artifacts.quickElement.hidden);
     renderEvent(state);
     renderOutpostHit();
 
@@ -1761,7 +1828,7 @@
         view.saleReceipt = tx('+{} · {} шт.', g.fmt(sale.gold), sale.count);
         view.saleUntil = t + 1800;
         if (view.saleAnimation) view.saleAnimation.cancel();
-        view.saleAnimation = bump(view.chest, 'punch');
+        view.saleAnimation = bump(view.chest, 'flash');
         pop(view.chest, '+' + g.fmt(sale.gold), 'gold', { dy: -26 });
         burst(view.chest, 4, 'gold', 22);
       }
@@ -1903,7 +1970,7 @@
       (r.crits || []).forEach((cell) => {
         view.critUntil[cell] = t + 220;
         // A crit lights its blade; a resonating one rings with its twin.
-        bump(view.cells[cell], 'flash');
+        bumpCell(view.cells[cell], 'flash');
       });
       if (r.lastHit && walk === 0) view.floats.push({ x: Math.min(W - 40, mx + size * 0.6), y: Math.max(view.floatTop + 22, my), text: '−' + g.fmt(r.lastHit), crit, big: crit, at: t });
       const smashed = (r.smashes || []).length > 0;
@@ -1911,7 +1978,7 @@
       if (blast) view.burstSerial = blast.serial;
       if ((smashed || blast) && walk === 0) {
         view.floats.push({ x: Math.max(60, mx - size * 0.2), y: Math.max(view.floatTop + 4, my - size * 0.35), text: blast ? tx('Вспышка ×{}', g.fmt(blast.mult, { digits: 2 })) : tx('Сокрушительный!'), crit: true, huge: true, at: t });
-        bump(view.gate, 'shake');
+        bump(view.canvas, 'shake');
         sound('smash', 300);
         g.buzz([20]);
         if (blast) bump(view.forge, 'flash');

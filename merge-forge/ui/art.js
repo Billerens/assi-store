@@ -184,7 +184,7 @@
   // ones above stay for what has none (the lock, the check) and for the canvas while one loads.
   const RASTER = {
     ability: ["breath", "mark", "riposte", "seal", "split"],
-    artifact: ["apprenticeGear", "apprenticeSpring", "coinDie", "crySpark", "digestiveCoal", "dragonChime", "dragonCradle", "emberSpark", "emberVein", "feedingBowl", "focusCrystal", "forgeHeart", "frozenClock", "goldenSeal", "heavyPommel", "hotBellows", "hourNeedle", "hungryCrop", "keenLens", "keeperSand", "marchingBoot", "marketBell", "mentorBook", "mossVial", "nightLantern", "pairHammer", "petTalisman", "petTreat", "rallyCrest", "rallyHorn", "runePrism", "sandPin", "shieldAwl", "tradeScale", "twinLever", "warStandard", "whetstone"],
+    artifact: ["apprenticeGear", "apprenticeSpring", "berserkMask", "coinDie", "crySpark", "digestiveCoal", "dragonChime", "dragonCradle", "echoBell", "emberSpark", "emberVein", "feedingBowl", "focusCrystal", "forgeHeart", "frozenClock", "giantFang", "goldenNail", "goldenSeal", "heavyHammer", "heavyPommel", "hotBellows", "hourNeedle", "hungryCrop", "keenLens", "keeperSand", "luckyCup", "marchingBoot", "marketBell", "masterHourglass", "mentorBook", "midasRing", "mossVial", "nightLantern", "pairHammer", "petTalisman", "petTreat", "preciseSpark", "rallyCrest", "rallyHorn", "runePrism", "sandPin", "shieldAwl", "swiftBoots", "thunderTip", "titanScale", "tradeScale", "treasureKey", "twinLever", "warStandard", "whetstone"],
     bg: ["candy", "desert", "kitchen", "neon", "road", "sea", "space", "swamp", "toys", "volcano"],
     dragon: ["ash", "egg", "frost", "storm", "young"],
     ev: ["caravan", "order", "starfall", "storm", "wanderer"],
@@ -194,7 +194,7 @@
     pet: ["fox", "raven", "salamander", "turtle"],
     rune: ["fire", "greed", "ice", "resonant"],
     ui: ["blow", "boss", "chest", "coal", "forge", "master", "upgrades"],
-    up: ["apprentice", "banner", "bellows", "caravan", "cry", "ember", "eye", "hammer", "hand", "hourglass", "hunter", "melt", "night", "pilot", "purse", "remelt", "runeMason", "runePower", "sharp", "stall", "steel", "temper", "twin", "wide"]
+    up: ["apprentice", "banner", "bellows", "caravan", "cry", "cryCd", "ember", "eye", "fury", "furyCd", "hammer", "hand", "hourglass", "hunter", "melt", "midas", "midasCd", "night", "pilot", "purse", "remelt", "runeMason", "runePower", "sharp", "stall", "steel", "strike", "strikeCd", "temper", "twin", "wide"]
   };;
   const BASE = '../art/';
 

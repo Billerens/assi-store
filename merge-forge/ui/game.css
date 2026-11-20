@@ -1684,3 +1684,43 @@ button.mf-alb {
     animation: none;
   }
 }
+
+/* The scene while a skill works: gold for the touch, red for the fury. */
+.mf-gate.midas::before,
+.mf-gate.fury::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  animation: mf-cry 0.8s ease-in-out infinite alternate;
+}
+.mf-gate.midas::before {
+  border: 2px solid rgba(255, 211, 107, 0.9);
+  background: linear-gradient(180deg, rgba(255, 211, 107, 0.12), rgba(255, 211, 107, 0));
+}
+.mf-gate.fury::before {
+  border: 2px solid rgba(255, 90, 60, 0.9);
+  background: linear-gradient(180deg, rgba(255, 90, 60, 0.12), rgba(255, 90, 60, 0));
+}
+@media (prefers-reduced-motion: reduce) {
+  .mf-gate.midas::before,
+  .mf-gate.fury::before {
+    animation: none;
+  }
+}
+.mf-skills-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 0 8px;
+}
+.mf-skills-head .g-note {
+  margin: 0;
+}
+.mf-skills-head .g-btn {
+  flex: none;
+  width: auto;
+}

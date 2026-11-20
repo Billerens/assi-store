@@ -266,3 +266,52 @@
     transition: none;
   }
 }
+
+/* the sets */
+.mfa-set {
+  margin: 8px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.mfa-set.done {
+  border-color: rgba(255, 211, 107, 0.7);
+}
+.mfa-set-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 10px;
+  margin-bottom: 6px;
+}
+.mfa-set-bonus {
+  color: var(--muted);
+  font-size: 13px;
+}
+.mfa-set.done .mfa-set-bonus {
+  color: #ffd36b;
+}
+.mfa-set-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.mfa-set-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px 2px 4px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 12px;
+  opacity: 0.55;
+}
+.mfa-set-item.on {
+  opacity: 1;
+  border-color: rgba(255, 211, 107, 0.6);
+}
+.mfa-set-ic {
+  width: 20px;
+  height: 20px;
+}

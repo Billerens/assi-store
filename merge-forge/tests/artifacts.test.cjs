@@ -11,10 +11,12 @@ function sameBig(a,b){assert.equal(Big.str(a),Big.str(b));}
 function unlockAll(s,n=1){for(const d of A.CATALOG)s.meta.artifacts.items[d.id]={level:n,enabled:true,cooldown:0};}
 function notExtensions(s){const c=copy(s);delete c.meta.artifacts;delete c.run.artifacts;return c;}
 function allZero(mods){assert.ok(Object.values(mods).every(v=>v===0));}
-test('37 distinct relics: 17 simultaneous passives,12 manual procs,8 independent actives',()=>{
- assert.equal(A.CATALOG.length,37);assert.equal(new Set(A.CATALOG.map(d=>d.id)).size,37);
- for(const [kind,n]of [['passive',17],['click',12],['active',8]])assert.equal(A.CATALOG.filter(d=>d.kind===kind).length,n);
- assert.equal(new Set(A.CATALOG.filter(d=>d.kind==='passive').map(d=>d.effect)).size,17);
+test('50 distinct relics: 27 simultaneous passives,15 manual procs,8 independent actives',()=>{
+ assert.equal(A.CATALOG.length,50);assert.equal(new Set(A.CATALOG.map(d=>d.id)).size,50);
+ for(const [kind,n]of [['passive',27],['click',15],['active',8]])assert.equal(A.CATALOG.filter(d=>d.kind===kind).length,n);
+ assert.equal(new Set(A.CATALOG.filter(d=>d.kind==='passive').map(d=>d.effect)).size,27);
+ // Every relic of a set exists; every set's bonus is a known channel.
+ for(const set of A.SETS){assert.ok(set.items.every(id=>A.CATALOG.some(d=>d.id===id)),set.id);assert.ok(set.effect in A.LIMITS,set.id);}
 });
 test('empty collection is exact identity; additive ensure preserves arbitrary legacy data and consumes no RNG',()=>{
  const s=fresh();delete s.meta.artifacts;delete s.run.artifacts;const before=copy(s);A.ensure(s);assert.deepEqual(notExtensions(s),before);const once=JSON.stringify(s);A.ensure(s);assert.equal(JSON.stringify(s),once);
@@ -22,7 +24,7 @@ test('empty collection is exact identity; additive ensure preserves arbitrary le
 });
 test('six progressive groups require first prestige; old owned items remain accessible',()=>{
  const s=fresh(60,0);assert.equal(A.model(s,cfg).availableCount,0);s.layers.forge.count=1;
- for(const[wave,count]of [[60,6],[70,12],[80,19],[100,25],[120,31],[150,37]]){s.run.maxWave=wave;s.layers.forge.state.record=wave;assert.equal(A.model(s,cfg).availableCount,count);}
+ for(const[wave,count]of [[60,7],[70,16],[80,26],[100,35],[120,44],[150,50]]){s.run.maxWave=wave;s.layers.forge.state.record=wave;assert.equal(A.model(s,cfg).availableCount,count);}
  assert.ok(A.buy(s,cfg,'twinLever').ok);s.run.maxWave=1;s.layers.forge.state.record=0;s.layers.forge.count=0;assert.ok(A.available(s,'twinLever'));assert.ok(!A.available(s,'feedingBowl'));
 });
 test('purchase and upgrade spend exactly live price, preserve total-earned coal bonus, never grant ordinary upgrade levels',()=>{
@@ -33,17 +35,19 @@ test('purchase and upgrade spend exactly live price, preserve total-earned coal 
  s.layers.forge.currency='0e0';const poor=JSON.stringify(s);assert.equal(A.buy(s,cfg,'whetstone').ok,false);assert.equal(JSON.stringify(s),poor);
 });
 test('every owned passive contributes simultaneously; toggling one never disables another, each upgrade has positive marginal value',()=>{
- const s=fresh();unlockAll(s);const all=A.modifiers(s);assert.equal(A.model(s,cfg).owned,37);assert.ok(A.model(s,cfg).allOwnedActive);
+ const s=fresh();unlockAll(s);const all=A.modifiers(s);assert.equal(A.model(s,cfg).owned,50);assert.ok(A.model(s,cfg).allOwnedActive);
  for(const d of A.CATALOG.filter(d=>d.kind==='passive')){
-  assert.ok(all[d.effect]>0,d.id);A.setEnabled(s,d.id,false);const without=A.modifiers(s);assert.ok(without[d.effect]<all[d.effect],d.id);for(const k in all)if(k!==d.effect)assert.equal(without[k],all[k]);
+  // A relic switched off also breaks the sets it belongs to: their channels drop too, and nothing else.
+  const broken=new Set(A.SETS.filter(t=>t.items.includes(d.id)).map(t=>t.effect));
+  assert.ok(all[d.effect]>0,d.id);A.setEnabled(s,d.id,false);const without=A.modifiers(s);assert.ok(without[d.effect]<all[d.effect],d.id);for(const k in all)if(k!==d.effect&&!broken.has(k))assert.equal(without[k],all[k]);
   A.setEnabled(s,d.id,true);s.meta.artifacts.items[d.id].level++;assert.ok(A.modifiers(s)[d.effect]>all[d.effect],d.id);s.meta.artifacts.items[d.id].level--;
  }
 });
-test('all12 accepted manual triggers may work together but merge command is at most one; auto/rejected/offline never roll',()=>{
+test('all15 accepted manual triggers may work together but merge command is at most one; auto/rejected/offline never roll',()=>{
  const s=fresh();unlockAll(s);let rolls=0;const rng={next(){rolls++;return 0;}};
  for(const ctx of [{},{manual:false,accepted:true},{manual:true,accepted:false}])assert.equal(A.onTap(s,cfg,rng,ctx).commands.length,0);assert.equal(rolls,0);
- const before=copy(s),hit=A.onTap(s,cfg,rng,{manual:true,accepted:true});assert.equal(hit.commands.length,12);assert.equal(hit.commands.filter(c=>c.kind==='merge').length,1);assert.equal(hit.commands.find(c=>c.kind==='merge').value,1);assert.deepEqual(copy(s),before);assert.equal(rolls,12);
- A.setEnabled(s,'pairHammer',false);const disabled=A.onTap(s,cfg,rng,{manual:true,accepted:true});assert.equal(disabled.commands.length,11);assert.ok(!disabled.commands.some(c=>c.kind==='merge'));
+ const before=copy(s),hit=A.onTap(s,cfg,rng,{manual:true,accepted:true});assert.equal(hit.commands.length,15);assert.equal(hit.commands.filter(c=>c.kind==='merge').length,1);assert.equal(hit.commands.find(c=>c.kind==='merge').value,1);assert.deepEqual(copy(s),before);assert.equal(rolls,15);
+ A.setEnabled(s,'pairHammer',false);const disabled=A.onTap(s,cfg,rng,{manual:true,accepted:true});assert.equal(disabled.commands.length,14);assert.ok(!disabled.commands.some(c=>c.kind==='merge'));
  const beforeNoTarget=rolls;assert.equal(A.onTap(s,cfg,rng,{manual:true,accepted:true,can:Object.fromEntries(A.CATALOG.filter(d=>d.kind==='click').map(d=>[d.effect,false]))}).commands.length,0);assert.equal(rolls,beforeNoTarget);
 });
 test('all8 active relics work at once; their cooldowns are independent and upgrades/toggles/reload cannot reset them',()=>{

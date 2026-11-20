@@ -50,7 +50,7 @@
     "group": "Горн"
   },
   "forge.tapsPerSec": {
-    "value": 4,
+    "value": 8,
     "title": "Тапов по горну в секунду засчитывается",
     "min": 1,
     "max": 20,
@@ -837,6 +837,288 @@
     "max": 3600,
     "group": "Улучшения"
   },
+  "up.cryCd.base": {
+    "value": "30000",
+    "title": "Боевой клич: откат: цена",
+    "big": true,
+    "group": "Приёмы"
+  },
+  "up.cryCd.growth": {
+    "value": 3,
+    "title": "Боевой клич: откат: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Приёмы"
+  },
+  "up.cryCd.step": {
+    "value": 0.1,
+    "title": "Боевой клич: откат: делитель отката за уровень",
+    "min": 0,
+    "max": 10,
+    "step": 0.01,
+    "group": "Приёмы"
+  },
+  "up.cryCd.max": {
+    "value": 10000,
+    "title": "Боевой клич: откат: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Приёмы"
+  },
+  "up.midas.base": {
+    "value": "20000",
+    "title": "Золотое касание: цена",
+    "big": true,
+    "group": "Приёмы"
+  },
+  "up.midas.growth": {
+    "value": 2.3,
+    "title": "Золотое касание: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Приёмы"
+  },
+  "up.midas.step": {
+    "value": 0.05,
+    "title": "Золотое касание: доля награды за врага в каждом залпе за уровень",
+    "min": 0,
+    "max": 10,
+    "step": 0.01,
+    "group": "Приёмы"
+  },
+  "up.midas.max": {
+    "value": 10000,
+    "title": "Золотое касание: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Приёмы"
+  },
+  "up.midas.fromWave": {
+    "value": 30,
+    "title": "Золотое касание: с волны",
+    "min": 1,
+    "max": 10000,
+    "group": "Приёмы"
+  },
+  "up.midasCd.base": {
+    "value": "60000",
+    "title": "Золотое касание: откат: цена",
+    "big": true,
+    "group": "Приёмы"
+  },
+  "up.midasCd.growth": {
+    "value": 3,
+    "title": "Золотое касание: откат: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Приёмы"
+  },
+  "up.midasCd.step": {
+    "value": 0.1,
+    "title": "Золотое касание: откат: делитель отката за уровень",
+    "min": 0,
+    "max": 10,
+    "step": 0.01,
+    "group": "Приёмы"
+  },
+  "up.midasCd.max": {
+    "value": 10000,
+    "title": "Золотое касание: откат: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Приёмы"
+  },
+  "up.strike.base": {
+    "value": "80000",
+    "title": "Мощный удар: цена",
+    "big": true,
+    "group": "Приёмы"
+  },
+  "up.strike.growth": {
+    "value": 2.4,
+    "title": "Мощный удар: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Приёмы"
+  },
+  "up.strike.step": {
+    "value": 0.25,
+    "title": "Мощный удар: плюс к силе удара за уровень",
+    "min": 0,
+    "max": 10,
+    "step": 0.01,
+    "group": "Приёмы"
+  },
+  "up.strike.max": {
+    "value": 10000,
+    "title": "Мощный удар: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Приёмы"
+  },
+  "up.strike.fromWave": {
+    "value": 45,
+    "title": "Мощный удар: с волны",
+    "min": 1,
+    "max": 10000,
+    "group": "Приёмы"
+  },
+  "up.strikeCd.base": {
+    "value": "200000",
+    "title": "Мощный удар: откат: цена",
+    "big": true,
+    "group": "Приёмы"
+  },
+  "up.strikeCd.growth": {
+    "value": 3,
+    "title": "Мощный удар: откат: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Приёмы"
+  },
+  "up.strikeCd.step": {
+    "value": 0.1,
+    "title": "Мощный удар: откат: делитель отката за уровень",
+    "min": 0,
+    "max": 10,
+    "step": 0.01,
+    "group": "Приёмы"
+  },
+  "up.strikeCd.max": {
+    "value": 10000,
+    "title": "Мощный удар: откат: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Приёмы"
+  },
+  "up.fury.base": {
+    "value": "400000",
+    "title": "Ярость кузни: цена",
+    "big": true,
+    "group": "Приёмы"
+  },
+  "up.fury.growth": {
+    "value": 2.5,
+    "title": "Ярость кузни: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Приёмы"
+  },
+  "up.fury.step": {
+    "value": 0.2,
+    "title": "Ярость кузни: плюс к силе крита за уровень",
+    "min": 0,
+    "max": 10,
+    "step": 0.01,
+    "group": "Приёмы"
+  },
+  "up.fury.max": {
+    "value": 10000,
+    "title": "Ярость кузни: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Приёмы"
+  },
+  "up.fury.fromWave": {
+    "value": 60,
+    "title": "Ярость кузни: с волны",
+    "min": 1,
+    "max": 10000,
+    "group": "Приёмы"
+  },
+  "up.furyCd.base": {
+    "value": "1000000",
+    "title": "Ярость кузни: откат: цена",
+    "big": true,
+    "group": "Приёмы"
+  },
+  "up.furyCd.growth": {
+    "value": 3,
+    "title": "Ярость кузни: откат: рост цены",
+    "min": 1.01,
+    "max": 20,
+    "step": 0.1,
+    "group": "Приёмы"
+  },
+  "up.furyCd.step": {
+    "value": 0.1,
+    "title": "Ярость кузни: откат: делитель отката за уровень",
+    "min": 0,
+    "max": 10,
+    "step": 0.01,
+    "group": "Приёмы"
+  },
+  "up.furyCd.max": {
+    "value": 10000,
+    "title": "Ярость кузни: откат: уровней максимум",
+    "min": 0,
+    "max": 100000,
+    "group": "Приёмы"
+  },
+  "skill.midas.sec": {
+    "value": 20,
+    "title": "Золотое касание: действует, секунд",
+    "min": 1,
+    "max": 600,
+    "group": "Приёмы"
+  },
+  "skill.midas.cooldownSec": {
+    "value": 240,
+    "title": "Золотое касание: раз в, секунд",
+    "min": 5,
+    "max": 3600,
+    "group": "Приёмы"
+  },
+  "skill.strike.sec": {
+    "value": 8,
+    "title": "Мощный удар: секунд урона кузни за раз",
+    "min": 1,
+    "max": 600,
+    "group": "Приёмы"
+  },
+  "skill.strike.cooldownSec": {
+    "value": 90,
+    "title": "Мощный удар: раз в, секунд",
+    "min": 5,
+    "max": 3600,
+    "group": "Приёмы"
+  },
+  "skill.fury.sec": {
+    "value": 15,
+    "title": "Ярость кузни: действует, секунд",
+    "min": 1,
+    "max": 600,
+    "group": "Приёмы"
+  },
+  "skill.fury.cooldownSec": {
+    "value": 180,
+    "title": "Ярость кузни: раз в, секунд",
+    "min": 5,
+    "max": 3600,
+    "group": "Приёмы"
+  },
+  "skill.fury.chance": {
+    "value": 0.25,
+    "title": "Ярость кузни: плюс к шансу крита",
+    "min": 0,
+    "max": 1,
+    "step": 0.05,
+    "group": "Приёмы"
+  },
+  "skill.minCooldownSec": {
+    "value": 1,
+    "title": "Приёмы: откат не короче, секунд",
+    "min": 0.1,
+    "max": 600,
+    "step": 0.1,
+    "group": "Приёмы"
+  },
   "up.banner.base": {
     "value": "50000",
     "title": "Знамя: цена",
@@ -1181,6 +1463,14 @@
     "max": 10,
     "step": 0.1,
     "group": "Звёздный металл"
+  },
+  "star.coalMult": {
+    "value": 5,
+    "title": "Каждый слиток: угли за перековку, множитель",
+    "min": 1,
+    "max": 100,
+    "step": 0.5,
+    "group": "Перековка"
   },
   "star.tripleFrom": {
     "value": 1,
