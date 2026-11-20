@@ -15,6 +15,8 @@ function fresh(seed) {
 /** A run saved by a version from before the smaller start: it has no keptStart. */
 function older(state) {
   delete state.run.keptStart;
+  delete state.run.socketsRandom;
+  delete state.run.socketAt;
   S.ensure(state);
   return state;
 }
@@ -50,16 +52,48 @@ test('забег, сохранённый до уменьшения, сохран
   assert.strictEqual(S.openCells(again, cfg).length, 20);
 });
 
-test('гнёзда рун: первое — в нижнем ряду начальной наковальни, у старого забега — прежний порядок', () => {
+test('гнёзда рун: каждое — на случайной открытой клетке, на маленькой наковальне не теряются', () => {
   const state = fresh();
+  state.run.maxWave = cfg['rune.fromWave'] - 1;
+  assert.deepStrictEqual(S.socketCells(state, cfg), [], 'до волны рун гнёзд нет');
   state.run.maxWave = cfg['rune.fromWave'];
-  assert.deepStrictEqual(S.socketCells(state, cfg), [10, 7, 1, 18, 21, 28, 31]);
   assert.strictEqual(S.socketCount(state, cfg), cfg['rune.base']);
-  assert.strictEqual(S.sockets(state, cfg)[0].cell, 10, 'руна доступна с самого начала, без «Шире наковальни»');
+  assert.ok(S.isOpen(state, cfg, S.sockets(state, cfg)[0].cell), 'руна доступна с самого начала, без «Шире наковальни»');
+  // Все семь гнёзд — на 12 открытых клетках начальной наковальни, каждое на своей.
+  state.run.up.runeMason = 7;
+  const cells = S.socketCells(state, cfg);
+  assert.strictEqual(cells.length, 7);
+  assert.strictEqual(new Set(cells).size, 7);
+  assert.ok(cells.every((c) => S.isOpen(state, cfg, c)), 'ни одно не ушло в закрытый ряд: ' + cells);
+  assert.strictEqual(S.socketCount(state, cfg), 7);
+  // Случайно, но одинаково для того же забега; в другой игре — иначе.
+  assert.deepStrictEqual(S.socketCells(JSON.parse(JSON.stringify(state)), cfg), cells);
+  const other = fresh(77);
+  other.meta.seed = (state.meta.seed || 0) + 12345;
+  other.run.maxWave = cfg['rune.fromWave'];
+  other.run.up.runeMason = 7;
+  assert.notDeepStrictEqual(S.socketCells(other, cfg), cells);
+  // Записанное место не меняется, когда наковальня растёт.
+  S.placeSockets(state, cfg);
+  assert.deepStrictEqual(state.run.socketAt, cells);
+  state.run.up.wide = 20;
+  assert.deepStrictEqual(S.socketCells(state, cfg), cells);
+});
+
+test('гнёзда рун старого забега: открытые остаются на местах с рунами, закрытые встают на открытые', () => {
   const old = older(fresh());
   old.run.maxWave = cfg['rune.fromWave'];
-  assert.deepStrictEqual(S.socketCells(old, cfg), [21, 18, 10, 7, 1, 28, 31], 'руны старого забега на своих местах');
-  assert.strictEqual(S.sockets(old, cfg)[0].cell, 21);
+  old.run.up.runeMason = 6;
+  old.run.runes = ['ice', 'greed', 'fire', 'ice', 'greed', 'ice', 'greed'];
+  assert.deepStrictEqual(S.socketCells(old, cfg), [21, 18, 10, 7, 1, 28, 31], 'до первого шага — прежний порядок');
+  assert.strictEqual(S.socketCount(old, cfg), 5, 'два гнезда в закрытых рядах');
+  S.placeSockets(old, cfg);
+  assert.strictEqual(old.run.socketsRandom, true);
+  const cells = S.socketCells(old, cfg);
+  assert.deepStrictEqual(cells.slice(0, 5), [21, 18, 10, 7, 1]);
+  assert.strictEqual(cells.length, 7);
+  assert.ok(cells.every((c) => S.isOpen(old, cfg, c)) && new Set(cells).size === 7);
+  assert.deepStrictEqual(S.sockets(old, cfg).slice(0, 5).map((s) => s.rune), ['ice', 'greed', 'fire', 'ice', 'greed'], 'руны едут со своими гнёздами');
 });
 
 test('перековка начинает новый забег с наковальни из настроек', () => {
@@ -97,8 +131,12 @@ test('гнездо переносится на другую клетку вме�
   const again = JSON.parse(JSON.stringify(state));
   S.ensure(again);
   assert.deepStrictEqual(S.sockets(again, cfg).map((s) => s.cell), S.sockets(state, cfg).map((s) => s.cell));
+  // Испорченное место (два гнезда на одной клетке): второе встаёт на свободную открытую.
   again.run.socketAt = [5, 5];
-  assert.deepStrictEqual(S.socketCells(again, cfg), S.baseSocketCells(again, cfg));
+  const fixed = S.socketCells(again, cfg);
+  assert.strictEqual(fixed[0], 5);
+  assert.notStrictEqual(fixed[1], 5);
+  assert.ok(S.isOpen(again, cfg, fixed[1]));
 });
 
 test('руны: во все гнёзда сразу и «Авто» — лёд на боссе, жадность в остальных', () => {

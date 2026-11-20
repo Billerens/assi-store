@@ -2,7 +2,8 @@
 const assert = require('assert');
 // The numbers of these tests (how many blades a double forging makes) were chosen with these
 // milestone settings; what is tested here is the overflow, not the milestones.
-const MILESTONES = { 'milestone.mechMult': 1, 'milestone.mechBigMult': 1.184, 'perk.twin.50': 1, 'perk.twin.100': 0 };
+// The milestones of Двойная поковка every 25 levels and a big one at 100, as when they were chosen.
+const MILESTONES = { 'milestone.price': Math.pow(2.1, 25), 'milestone.bigEach': 4, 'milestone.mechMult': 1, 'milestone.mechBigMult': 1.184, 'perk.twin.a': 1, 'perk.twin.b': 0 };
 const { open, ctxOf, test, done } = require('./env');
 
 const x = open();

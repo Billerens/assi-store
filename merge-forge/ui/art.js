@@ -255,14 +255,21 @@
     const scale = Math.max(W / im.naturalWidth, H / im.naturalHeight);
     const dw = im.naturalWidth * scale;
     const dh = im.naturalHeight * scale;
-    ctx.drawImage(im, 0, H - dh, dw, dh);
+    const share = FLOOR[id] || FLOOR_ANY;
+    // A wide, low scene scales the picture by its width, far taller than the box. Kept by its bottom,
+    // the road would rise to the middle of the scene over a thick band of floor, and the heroes and the
+    // monster, who stand on it, would shrink to nothing. So the road keeps its place near the bottom
+    // (the band under it as in a picture that fits) and the sky is what gets cut.
+    const band = Math.max(8, H * (1 - share));
+    const y = Math.max(H - dh, Math.min(0, H - band - dh * share));
+    ctx.drawImage(im, 0, y, dw, dh);
     const shade = Math.min(H, Math.max(top + 24, H * 0.45));
     const grad = ctx.createLinearGradient(0, 0, 0, shade);
     grad.addColorStop(0, 'rgba(10, 11, 14, 0.62)');
     grad.addColorStop(1, 'rgba(10, 11, 14, 0)');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, W, shade);
-    return H - dh + dh * (FLOOR[id] || FLOOR_ANY);
+    return y + dh * share;
   }
 
   /**

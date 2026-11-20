@@ -1,9 +1,15 @@
 // Derived upgrade strength shared by the forge, equipped weapons and their UI previews.
 // Milestones never claim rewards or change owned levels, prices or save data: they follow from the level.
 //
-// Every 25th level multiplies what an upgrade gives (×1.5, every 100th ×2; the upgrades that change how
-// the game runs — more blades, a longer boss timer, more events, a stronger tap — ×1.2 and ×1.4), and
-// the 50th and the 100th level of each also open a perk of its own: a small lasting bonus elsewhere.
+// A milestone comes each time the price of an upgrade has grown milestone.price times (×10 000), and at
+// least every milestone.maxSpan (25) levels: every 25 levels for Острота and Кошель, whose price grows
+// slowly, every 12 for Закалка (×2.2 a level), every 7 for Знамя (×4) — the dear ones no longer wait a
+// hundred waves for one. A milestone multiplies what the upgrade gives (×1.4; the upgrades that change
+// how the game runs — more blades, a longer boss timer, more events, a stronger tap — ×1.1); every
+// milestone.bigEach-th (4th) is a big one (×1.8 and ×1.2) and
+// opens a perk: a small lasting bonus elsewhere. The two perks of an upgrade take turns, without end;
+// a perk that comes again adds what it gave once more (×1.3, ×1.6, ×1.9…) — a perk multiplying itself
+// with every big milestone would outgrow the foes, whose health grows by a power of the wave.
 (function (root, make) {
   var api = make();
   if (typeof exports !== 'undefined') { for (var key in api) exports[key] = api[key]; }
@@ -13,27 +19,29 @@
   var SUPPORTED = ['sharp', 'purse', 'hand', 'twin', 'temper', 'runePower', 'hunter', 'hourglass', 'cry', 'banner', 'caravan', 'hammer', 'stall'];
   var MECHANIC = ['twin', 'hourglass', 'caravan', 'hammer'];
   var SOFT = { caravan: 20, hammer: 8, stall: 8 };
-  // The values the game's settings (milestone.*) have when a setting is missing.
-  var MILESTONE = { every: 25, mult: 1.5, bigEvery: 100, bigMult: 2, mechMult: 1.2, mechBigMult: 1.4 };
-  // The perk each upgrade opens at its 50th and its 100th level: what it changes and by how much
-  // (perk.<id>.<level> in the settings). The kinds with a + are added, the others multiply.
+  // The values the game's settings (milestone.*) have when a setting is missing. `every` is the step
+  // of an upgrade whose price does not grow.
+  var MILESTONE = { price: 10000, bigEach: 4, every: 25, maxSpan: 25, mult: 1.4, bigMult: 1.8, mechMult: 1.1, mechBigMult: 1.2 };
+  // The two perks of each upgrade, in turn at its big milestones: what they change and by how much
+  // (perk.<id>.a and perk.<id>.b in the settings). The kinds with a + are added, the others multiply.
   var PERKS = {
-    sharp: [[50, 'critChance', 0.03], [100, 'bossDmg', 1.5]],
-    purse: [[50, 'bossGold', 1.5], [100, 'offline', 1.5]],
-    hand: [[50, 'critChance', 0.02], [100, 'critMult', 1.3]],
-    twin: [[50, 'forgeSpeed', 1.1], [100, 'twin', 0.25]],
-    temper: [[50, 'bossDmg', 1.25], [100, 'dmg', 1.25]],
-    runePower: [[50, 'bossTime', 3], [100, 'dmg', 1.2]],
-    hunter: [[50, 'gold', 1.25], [100, 'bossGold', 2]],
-    hourglass: [[50, 'bossTime', 5], [100, 'bossDmg', 1.3]],
-    cry: [[50, 'dmg', 1.1], [100, 'critMult', 1.2]],
-    banner: [[50, 'gold', 1.2], [100, 'dmg', 1.3]],
-    caravan: [[50, 'events', 1.25], [100, 'gold', 1.25]],
-    hammer: [[50, 'tap', 1.5], [100, 'forgeSpeed', 1.15]],
-    stall: [[50, 'sale', 1.25], [100, 'gold', 1.2]]
+    sharp: [['critChance', 0.03], ['bossDmg', 1.5]],
+    purse: [['bossGold', 1.5], ['offline', 1.5]],
+    hand: [['critChance', 0.02], ['critMult', 1.3]],
+    twin: [['forgeSpeed', 1.1], ['twin', 0.25]],
+    temper: [['bossDmg', 1.25], ['dmg', 1.25]],
+    runePower: [['bossTime', 3], ['dmg', 1.2]],
+    hunter: [['gold', 1.25], ['bossGold', 2]],
+    hourglass: [['bossTime', 5], ['bossDmg', 1.3]],
+    cry: [['dmg', 1.1], ['critMult', 1.2]],
+    banner: [['gold', 1.2], ['dmg', 1.3]],
+    caravan: [['events', 1.25], ['gold', 1.25]],
+    hammer: [['tap', 1.5], ['forgeSpeed', 1.15]],
+    stall: [['sale', 1.25], ['gold', 1.2]]
   };
   var ADDED = { critChance: true, bossTime: true, twin: true };
   var KINDS = ['dmg', 'bossDmg', 'gold', 'bossGold', 'critChance', 'critMult', 'bossTime', 'forgeSpeed', 'sale', 'offline', 'events', 'tap', 'twin'];
+  var BIG = Number.MAX_VALUE;
 
   function level(value) {
     var n = Number(value);
@@ -45,29 +53,34 @@
     var value = Number(cfg && cfg['milestone.' + name]);
     return isFinite(value) && value >= 0 ? value : MILESTONE[name];
   }
-  function every(cfg) { return Math.max(1, Math.floor(setting(cfg, 'every'))); }
-  function bigEvery(cfg) { return Math.max(every(cfg), Math.floor(setting(cfg, 'bigEvery'))); }
+  function finite(value) { return isFinite(value) ? value : BIG; }
+  /** Levels between two milestones of upgrade id: how many it takes for its price to grow milestone.price times. */
+  function span(id, cfg) {
+    var growth = Number(cfg && cfg['up.' + id + '.growth']);
+    var price = setting(cfg, 'price');
+    var most = Math.max(2, Math.floor(setting(cfg, 'maxSpan')));
+    if (!(growth > 1) || !(price > 1)) return Math.min(most, Math.max(1, Math.floor(MILESTONE.every)));
+    return Math.min(most, Math.max(2, Math.round(Math.log(price) / Math.log(growth))));
+  }
+  function bigEach(cfg) { return Math.max(1, Math.floor(setting(cfg, 'bigEach'))); }
   function mults(id, cfg) {
     var mech = mechanic(id);
     return { small: Math.max(1, setting(cfg, mech ? 'mechMult' : 'mult')), big: Math.max(1, setting(cfg, mech ? 'mechBigMult' : 'bigMult')) };
   }
-  /** How many milestones level n has passed: {small, big} (a big one is every bigEvery-th, in place of a small one). */
-  function passed(n, cfg) {
-    var e = every(cfg), b = bigEvery(cfg);
-    var all = Math.floor(n / e);
-    var big = b % e === 0 ? Math.floor(n / b) : 0;
-    return { small: all - big, big: big };
+  /** The milestones level n of upgrade id has passed: {count, small, big} (a big one in place of a small one). */
+  function passed(id, n, cfg) {
+    var count = Math.floor(n / span(id, cfg));
+    var big = Math.floor(count / bigEach(cfg));
+    return { count: count, small: count - big, big: big };
   }
   /** What the milestones of level n multiply the upgrade by. */
   function milestone(id, n, cfg) {
     if (!supported(id)) return 1;
-    var p = passed(n, cfg), m = mults(id, cfg);
-    var value = Math.pow(m.small, p.small) * Math.pow(m.big, p.big);
-    return isFinite(value) ? value : Number.MAX_VALUE;
+    var p = passed(id, n, cfg), m = mults(id, cfg);
+    return finite(Math.pow(m.small, p.small) * Math.pow(m.big, p.big));
   }
   function factor(id, n, cfg) {
-    var value = (1 + (n ? 0.04 / (1 + 100 / n) : 0)) * milestone(id, n, cfg);
-    return isFinite(value) ? value : Number.MAX_VALUE;
+    return finite((1 + (n ? 0.04 / (1 + 100 / n) : 0)) * milestone(id, n, cfg));
   }
   function strength(id, value, cfg) { return supported(id) ? factor(id, level(value), cfg) : 1; }
   function base(id, n, cfg) {
@@ -80,16 +93,39 @@
     var n = level(value);
     if (!supported(id)) return n;
     var raw = base(id, n, cfg), mult = factor(id, n, cfg);
-    return raw > Number.MAX_VALUE / mult ? Number.MAX_VALUE : raw * mult;
+    return raw > BIG / mult ? BIG : raw * mult;
   }
 
-  /** The perks of upgrade id: [{at, kind, value, added, on}] for level `value`. */
+  function perkValue(id, i, cfg) {
+    var v = Number(cfg && cfg['perk.' + id + '.' + (i ? 'b' : 'a')]);
+    return isFinite(v) && v >= 0 ? v : PERKS[id][i][1];
+  }
+  /** The perk of the j-th big milestone of upgrade id (j from 1): {at, index, kind, value, added}. */
+  function perkAt(id, j, cfg) {
+    if (!PERKS[id] || !(j >= 1)) return null;
+    var i = (j - 1) % 2;
+    var kind = PERKS[id][i][0];
+    return { at: j * bigEach(cfg) * span(id, cfg), index: i, kind: kind, value: perkValue(id, i, cfg), added: !!ADDED[kind] };
+  }
+  /** How many times each of the two perks has opened by `big` big milestones: [first, second]. */
+  function perkCounts(big) { return [Math.ceil(big / 2), Math.floor(big / 2)]; }
+  /** What a perk of value v gives when it has opened `count` times: v × count added, or 1 + (v − 1) × count. */
+  function perkTotal(kind, v, count) { return finite(ADDED[kind] ? v * count : 1 + (v - 1) * count); }
+
+  /**
+   * The two perks of upgrade id at level `value`: [{index, kind, value, added, count, on, at}], `count` —
+   * how many times it has opened, `at` — the level where it comes next.
+   */
   function perks(id, value, cfg) {
-    var n = level(value);
-    return (PERKS[id] || []).map(function (p) {
-      var v = Number(cfg && cfg['perk.' + id + '.' + p[0]]);
-      if (!isFinite(v) || v < 0) v = p[2];
-      return { at: p[0], kind: p[1], value: v, added: !!ADDED[p[1]], on: n >= p[0] };
+    if (!PERKS[id]) return [];
+    var n = level(value), big = passed(id, n, cfg).big, counts = perkCounts(big);
+    return [0, 1].map(function (i) {
+      var kind = PERKS[id][i][0];
+      // The next big milestone with this perk: the first one after `big` whose turn it is.
+      var j = big + 1;
+      if ((j - 1) % 2 !== i) j++;
+      var v = perkValue(id, i, cfg);
+      return { index: i, kind: kind, value: v, added: !!ADDED[kind], count: counts[i], on: counts[i] > 0, total: perkTotal(kind, v, counts[i]), at: j * bigEach(cfg) * span(id, cfg) };
     });
   }
 
@@ -99,48 +135,48 @@
     KINDS.forEach(function (k) { out[k] = ADDED[k] ? 0 : 1; });
     for (var id in PERKS) {
       if (!Object.prototype.hasOwnProperty.call(PERKS, id)) continue;
-      perks(id, levels && levels[id], cfg).forEach(function (p) {
-        if (!p.on) return;
-        if (p.added) out[p.kind] += p.value;
-        else out[p.kind] *= p.value;
-      });
+      var counts = perkCounts(passed(id, level(levels && levels[id]), cfg).big);
+      for (var i = 0; i < 2; i++) {
+        if (!counts[i]) continue;
+        var kind = PERKS[id][i][0], total = perkTotal(kind, perkValue(id, i, cfg), counts[i]);
+        out[kind] = finite(ADDED[kind] ? out[kind] + total : out[kind] * total);
+      }
     }
     return out;
   }
 
   function progress(id, value, cfg) {
     var n = level(value), on = supported(id);
-    var e = every(cfg), b = bigEvery(cfg);
+    var s = span(id, cfg), each = bigEach(cfg);
     // Beyond exact integer precision a fictitious "next level" would equal this one.
-    var next = on && n < 9007199254740980 ? (Math.floor(n / e) + 1) * e : null;
+    var count = Math.floor(n / s);
+    var next = on && n < 9007199254740980 ? (count + 1) * s : null;
+    var nextBig = next !== null && (count + 1) % each === 0;
     var m = mults(id, cfg);
-    var list = perks(id, n, cfg);
-    var nextPerk = null;
-    for (var i = 0; i < list.length; i++) if (!list[i].on) { nextPerk = list[i]; break; }
+    var big = passed(id, n, cfg).big;
     return {
       supported: on, level: n,
       effective: effective(id, n, cfg), nextEffective: effective(id, n + 1, cfg),
       factor: on ? factor(id, n, cfg) : 1, previousFactor: on ? factor(id, Math.max(0, n - 1), cfg) : 1, nextFactor: on ? factor(id, n + 1, cfg) : 1,
       milestone: on ? milestone(id, n, cfg) : 1,
-      every: e,
+      every: s,
+      bigEach: each,
       nextAt: next,
-      nextBig: next !== null && b % e === 0 && next % b === 0,
-      nextMult: next === null ? 1 : (b % e === 0 && next % b === 0 ? m.big : m.small),
-      perks: list,
-      nextPerk: nextPerk
+      nextBig: nextBig,
+      nextMult: next === null ? 1 : (nextBig ? m.big : m.small),
+      perks: on ? perks(id, n, cfg) : [],
+      nextPerk: on && next !== null ? perkAt(id, big + 1, cfg) : null
     };
   }
 
-  /** The milestones and perks passed when an upgrade goes from level `from` to level `to`: [{at, mult, perk}]. */
+  /** The milestones and perks passed when an upgrade goes from level `from` to level `to`: [{at, mult, big, perk}]. */
   function crossed(id, from, to, cfg) {
     if (!supported(id)) return [];
-    var a = level(from), z = level(to), e = every(cfg), b = bigEvery(cfg), m = mults(id, cfg);
+    var a = level(from), z = level(to), s = span(id, cfg), each = bigEach(cfg), m = mults(id, cfg);
     var out = [];
-    var list = perks(id, z, cfg);
-    for (var at = (Math.floor(a / e) + 1) * e; at <= z && out.length < 100; at += e) {
-      var perk = null;
-      for (var i = 0; i < list.length; i++) if (list[i].at === at) perk = list[i];
-      out.push({ at: at, mult: b % e === 0 && at % b === 0 ? m.big : m.small, perk: perk });
+    for (var k = Math.floor(a / s) + 1; k * s <= z && out.length < 100; k++) {
+      var big = k % each === 0;
+      out.push({ at: k * s, mult: big ? m.big : m.small, big: big, perk: big ? perkAt(id, k / each, cfg) : null });
     }
     return out;
   }
@@ -173,6 +209,6 @@
   }
 
   return { supported: supported, mechanic: mechanic, strength: strength, effective: effective, progress: progress,
-    perks: perks, perkTotals: perkTotals, crossed: crossed, PERKS: PERKS, KINDS: KINDS,
+    perks: perks, perkAt: perkAt, perkTotals: perkTotals, crossed: crossed, span: span, bigEach: bigEach, PERKS: PERKS, KINDS: KINDS,
     room: room, overcrit: overcrit, critAverage: critAverage };
 });

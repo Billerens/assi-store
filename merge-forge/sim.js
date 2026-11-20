@@ -29,7 +29,8 @@
     return o;
   })();
 
-  // Rune sockets, one in each row; the order they come in is socketCells().
+  // The cells of the rune sockets before 0.5.0, one in each row (a save from then keeps those that are
+  // open); since then a socket takes a random open cell when the run earns it (placeSockets).
   var SOCKETS = [4 * COLS + 1, 3 * COLS + 3, 2 * COLS + 0, 1 * COLS + 2, 0 * COLS + 1, 5 * COLS + 3, 6 * COLS + 1];
 
   // Every run began with these cells before the anvil started smaller: such a run keeps them.
@@ -182,10 +183,10 @@
   }
 
   /**
-   * Where the sockets are: the order of baseSocketCells, each moved where the owner put it
-   * (run.socketAt[index] — a cell; moveSocket keeps every cell for one socket).
+   * Where the sockets of a save from before 0.5.0 are: the order of baseSocketCells, each moved where
+   * the owner put it (run.socketAt[index]).
    */
-  function socketCells(state, cfg) {
+  function legacySocketCells(state, cfg) {
     var cells = baseSocketCells(state, cfg);
     var moved = state.run.socketAt;
     if (!moved || !moved.length) return cells;
@@ -199,9 +200,79 @@
     return out;
   }
 
+  /** How many rune sockets the run has earned: rune.base, «Рунная кладка», «Руны мастера» (0 before the wave of runes). */
+  function socketWant(state, cfg) {
+    if (!runesOpen(state, cfg)) return 0;
+    return Math.min(SOCKETS.length, cfg['rune.base'] + lvl(state, 'runeMason') * cfg['up.runeMason.step'] + mfLevel(state, 'rune'));
+  }
+
+  /**
+   * The cells of the sockets the run has earned (index — the socket, the place of its rune). A socket
+   * that has a cell keeps it; one that has none yet takes a random open cell with no socket — random by
+   * the seed of the game, the number of the run and the socket's own number, so the same run places it
+   * alike. A socket waits while every open cell has one. Nothing is written: placeSockets keeps it.
+   */
+  function socketPlan(state, cfg) {
+    var r = state.run;
+    var want = socketWant(state, cfg);
+    var stored = r.socketAt || [];
+    var at = [];
+    var taken = {};
+    for (var i = 0; i < want; i++) {
+      var c = stored[i];
+      var ok = typeof c === 'number' && c % 1 === 0 && isOpen(state, cfg, c) && !taken[c];
+      at.push(ok ? c : -1);
+      if (ok) taken[c] = true;
+    }
+    var open = openCells(state, cfg);
+    var seed = num(state.meta && state.meta.seed, 0);
+    var run = num(state.layers && state.layers[L1] && state.layers[L1].count, 0) + 1000 * num(state.layers && state.layers[L2] && state.layers[L2].count, 0);
+    for (var k = 0; k < at.length; k++) {
+      if (at[k] >= 0) continue;
+      var free = open.filter(function (cell) { return !taken[cell]; });
+      if (!free.length) { at.length = k; break; }
+      at[k] = free[Math.min(free.length - 1, Math.floor(hash01(seed, run, k + 1) * free.length))];
+      taken[at[k]] = true;
+    }
+    return at;
+  }
+
+  /** Where the sockets are now: a cell for each socket the run has a cell for. */
+  function socketCells(state, cfg) {
+    return state.run.socketsRandom ? socketPlan(state, cfg) : legacySocketCells(state, cfg);
+  }
+
+  /**
+   * Writes the places of the sockets down (before the anvil grows, so a placed socket never moves by
+   * itself). A save from before 0.5.0 keeps the sockets that stood on open cells, each with its rune;
+   * those on cells the anvil has not opened yet take free open cells.
+   */
+  function placeSockets(state, cfg) {
+    var r = state.run;
+    if (!r.socketsRandom) {
+      var old = legacySocketCells(state, cfg);
+      var want = socketWant(state, cfg);
+      var kept = [];
+      var runes = [];
+      for (var i = 0; i < old.length && i < want; i++) {
+        if (!isOpen(state, cfg, old[i])) continue;
+        kept.push(old[i]);
+        runes.push(r.runes[i] || 'fire');
+      }
+      r.socketAt = kept;
+      r.runes = runes;
+      r.socketsRandom = true;
+    }
+    var plan = socketPlan(state, cfg);
+    var same = r.socketAt && r.socketAt.length === plan.length;
+    for (var k = 0; same && k < plan.length; k++) if (r.socketAt[k] !== plan[k]) same = false;
+    if (!same) r.socketAt = plan;
+  }
+
   /** Moves socket `index` (with its rune) to `cell`, an open cell; a socket already there takes its old place. */
   function moveSocket(state, cfg, index, cell) {
     ensure(state);
+    placeSockets(state, cfg);
     var cells = socketCells(state, cfg);
     if (!(index >= 0 && index < cells.length) || index % 1 !== 0) return false;
     if (!(cell >= 0 && cell < CELLS) || cell % 1 !== 0 || !isOpen(state, cfg, cell)) return false;
@@ -246,8 +317,9 @@
     var fixed = {};
     // Socket lookup fills missing forge-layer defaults. Keep that bookkeeping off the live save.
     var layer = state.layers && state.layers[L1];
-    var probe = { run: state.run, layers: {} };
-    probe.layers[L1] = { state: { mf: layer && layer.state && layer.state.mf || {} } };
+    var probe = { run: state.run, meta: state.meta, layers: {} };
+    probe.layers[L1] = { count: layer && layer.count, state: { mf: layer && layer.state && layer.state.mf || {} } };
+    probe.layers[L2] = { count: state.layers && state.layers[L2] && state.layers[L2].count };
     sockets(probe, cfg).forEach(function (s) { fixed[s.cell] = true; });
     var cells = [];
     var levels = [];
@@ -272,8 +344,8 @@
 
   /** How many rune sockets there are now (0 before the wave of runes). */
   function socketCount(state, cfg) {
-    if (!runesOpen(state, cfg)) return 0;
-    var n = Math.min(SOCKETS.length, cfg['rune.base'] + lvl(state, 'runeMason') * cfg['up.runeMason.step'] + mfLevel(state, 'rune'));
+    if (state.run.socketsRandom) return socketPlan(state, cfg).length;
+    var n = socketWant(state, cfg);
     var cells = socketCells(state, cfg);
     var open = 0;
     for (var i = 0; i < cells.length && i < n; i++) if (isOpen(state, cfg, cells[i])) open++;
@@ -596,12 +668,29 @@
     }
   }
 
+  /**
+   * What just happened on the anvil, for the screen to show where it happened: run.fx — the last few
+   * {s: serial, at, kind: 'merge'|'place', cell, from, third, level, by: 'hand'|'apprentice'|<relic id>}.
+   * Nothing is decided by it; the screen shows the entries newer than the last it saw.
+   */
+  function noteFx(state, entry, now) {
+    var r = state.run;
+    var fx = r.fx && typeof r.fx === 'object' && Array.isArray(r.fx.list) ? r.fx : { serial: 0, list: [] };
+    fx.serial = num(fx.serial, 0) + 1;
+    entry.s = fx.serial;
+    entry.at = now || 0;
+    fx.list.push(entry);
+    if (fx.list.length > 12) fx.list.splice(0, fx.list.length - 12);
+    r.fx = fx;
+  }
+
   function place(state, cfg, rng, level, now) {
     var free = freeCells(state, cfg);
     if (!free.length) return -1;
     var cell = free.length === 1 ? free[0] : free[Math.floor(rng.next() * free.length)];
     state.run.grid[cell] = level;
     noteLevel(state, level, now);
+    noteFx(state, { kind: 'place', cell: cell, level: level }, now);
     return cell;
   }
 
@@ -688,6 +777,7 @@
       if (m.third >= 0) g[m.third] = 0;
       state.run.stats.merged++;
       noteLevel(state, m.level, now);
+      noteFx(state, { kind: 'merge', cell: to, from: from, third: m.third, level: m.level, by: state.run.mergeBy || 'hand' }, now);
       state.run.forgeT = Math.max(0, state.run.forgeT - Outpost.onMerge(state, cfg));
       return { kind: 'merge', level: m.level, third: m.third };
     }
@@ -722,8 +812,8 @@
     return other < 0 ? null : move(state, cfg, other, cell, now);
   }
 
-  /** One merge of the lowest pair (Подмастерье, the bot): true when merged. */
-  function autoMerge(state, cfg, now) {
+  /** One merge of the lowest pair (Подмастерье, a relic, the bot): true when merged. `by` — who, for the screen. */
+  function autoMerge(state, cfg, now, by) {
     var open = openCells(state, cfg);
     var seen = {};
     var bestLevel = Infinity;
@@ -739,7 +829,8 @@
       }
     }
     if (!pair) return false;
-    return !!move(state, cfg, pair[1], pair[0], now);
+    state.run.mergeBy = by || 'apprentice';
+    try { return !!move(state, cfg, pair[1], pair[0], now); } finally { delete state.run.mergeBy; }
   }
 
   function creditSale(state, cfg, level) {
@@ -776,14 +867,15 @@
     };
   }
   function applyArtifactCommands(state, cfg, commands, now) {
-    var r = state.run, ids = [], camp = r.outpost, e = r.encounter;
+    var r = state.run, ids = [], done = [], camp = r.outpost, e = r.encounter;
     (commands || []).forEach(function (command) {
-      var value = Math.max(0, num(command.value, 0)), used = true;
-      if (command.kind === 'merge') used = autoMerge(state, cfg, now);
+      var value = Math.max(0, num(command.value, 0)), used = true, shown = value;
+      if (command.kind === 'merge') used = autoMerge(state, cfg, now, command.id);
       else if (command.kind === 'forgeSeconds') r.forgeT = Math.max(0, r.forgeT - value);
       else if (command.kind === 'goldSaleShare') {
         var gold = Big.mul(sellPrice(state, cfg, forgeLevel(state, cfg)), Math.min(1, value));
         r.gold = Big.add(r.gold, gold); r.earned = Big.add(r.earned, gold);
+        shown = Big.str(gold);
       } else if (command.kind === 'dragonCharge') camp.dragon.charge = Math.min(cfg['outpost.dragon.chargeMax'], camp.dragon.charge + value);
       else if (command.kind === 'heroCooldown') Outpost.HEROS.forEach(function (hero) { camp.cooldowns[hero.id] = Math.max(0, camp.cooldowns[hero.id] - value); });
       else if (command.kind === 'bossSeconds') r.bossT = Math.min(bossTimer(state, cfg), r.bossT + value);
@@ -794,9 +886,9 @@
       else if (command.kind === 'crySeconds') r.cryReadyAt = Math.max(now, r.cryReadyAt - value * 1000);
       else if (command.kind === 'digestSeconds') Outpost.digest(state, value, cfg);
       else used = false;
-      if (used) ids.push(command.id);
+      if (used) { ids.push(command.id); done.push({ id: command.id, kind: command.kind, value: shown }); }
     });
-    if (ids.length) r.lastArtifactFx = { serial: num(r.lastArtifactFx && r.lastArtifactFx.serial, 0) + 1, at: now, ids: ids };
+    if (ids.length) r.lastArtifactFx = { serial: num(r.lastArtifactFx && r.lastArtifactFx.serial, 0) + 1, at: now, ids: ids, done: done };
     return ids;
   }
   function activateArtifact(state, cfg, id, now) {
@@ -1496,8 +1588,11 @@
     if (!upOpen(state, cfg, id)) return false;
     var price = upCost(state, cfg, id);
     if (Big.lt(state.run.gold, price)) return false;
+    // The sockets keep the cells they have before the anvil grows; a new one takes its cell now.
+    placeSockets(state, cfg);
     state.run.gold = Big.sub(state.run.gold, price);
     state.run.up[id] = lvl(state, id) + 1;
+    placeSockets(state, cfg);
     return true;
   }
 
@@ -1555,6 +1650,7 @@
       walkT: cfg['wave.walkSec'], lastHit: '0e0', lastGold: '0e0', lastBoss: null, farmRate: '0e0',
       eventT: rng ? rng.range(cfg['event.minSec'], cfg['event.maxSec']) : cfg['event.minSec'], event: null, stormLeft: 0,
       starfallUntil: 0, cryUntil: 0, cryReadyAt: 0, bellowsUntil: 0, orderPaid: null, heat: 0, keptStart: 0, runup: 0,
+      socketAt: [], socketsRandom: true,
       stats: { forged: 0, merged: 0, sold: 0, kills: 0, bosses: 0, fails: 0, events: 0 }
     };
     // The first blades lie on the anvil already (the start of the 4×5 block).
@@ -1595,6 +1691,7 @@
   function tickSegment(state, dt, ctx, budget) {
     var cfg = ctx.config;
     ensure(state);
+    placeSockets(state, cfg);
     var r = state.run;
     Adventures.tick(state, dt, cfg);
     if (!ctx.offline) encounterOf(state, cfg);
@@ -1651,18 +1748,43 @@
     return Math.floor(Math.pow(Math.max(0, (wave - cfg['coals.base']) / cfg['coals.div']), cfg['coals.power']) + 1e-9);
   }
 
+  /**
+   * The coals of a reset whose run reached the coals `f` (coalsFor of its best wave) when `paid` were
+   * paid before (the coals of the record): what lies above the record — whole, what lies below it —
+   * coals.repeatShare of it. So every run past wave coals.fromWave gives something, a new record most.
+   */
+  function coalsPay(cfg, f, paid) {
+    var share = Math.max(0, Math.min(1, num(cfg['coals.repeatShare'], 0)));
+    var p = Math.max(0, num(paid, 0));
+    return Math.floor(Math.max(0, f - p) + Math.min(f, p) * share + 1e-9);
+  }
+
+  /** What a reset of a run that reached wave `wave` would give now. */
+  function coalsGain(state, cfg, wave) {
+    ensure(state);
+    return coalsPay(cfg, coalsFor(cfg, wave), forgeLayer(state).state.paid);
+  }
+
   function prestigeGain(state, layerId, cfg) {
     ensure(state);
-    if (layerId === L1) {
-      var f = coalsFor(cfg, state.run.maxWave);
-      return Big.of(Math.max(0, f - forgeLayer(state).state.paid));
-    }
+    if (layerId === L1) return Big.of(coalsGain(state, cfg, state.run.maxWave));
     if (layerId === L2) {
       var total = forgeLayer(state).state.total;
       if (total < cfg['star.fromCoals']) return Big.ZERO;
       return Big.of(Math.max(0, Math.floor(Math.log(total) / Math.LN10 - cfg['star.offset'] + 1e-9)));
     }
     return Big.ZERO;
+  }
+
+  /**
+   * The engine's «выгодно» on the reset: for coals — when the reset adds at least coals.hintShare of all
+   * the coals there are (the first one — any). Below the record a run pays only a share, so the mark
+   * waits for a run that is worth it rather than lighting up at wave 60 of every run.
+   */
+  function prestigeHint(state, layerId, cfg, info) {
+    if (layerId !== L1) return null;
+    var gain = Big.toNumber(Big.of(info && info.gain, 0));
+    return gain >= Math.max(1, num(cfg['coals.hintShare'], 0) * coalsAll(state));
   }
 
   function bonus(state, layerId, amount, cfg) {
@@ -1677,7 +1799,7 @@
     var l = forgeLayer(state);
     if (layerId === L1) {
       var f = coalsFor(cfg, before.run.maxWave);
-      var gain = Math.max(0, f - num(before.layers[L1] && before.layers[L1].state && before.layers[L1].state.paid, 0));
+      var gain = coalsPay(cfg, f, before.layers[L1] && before.layers[L1].state && before.layers[L1].state.paid);
       l.state.paid = Math.max(l.state.paid, f);
       l.state.total += gain;
       l.state.record = Math.max(l.state.record, before.run.maxWave);
@@ -1713,6 +1835,9 @@
 
   function validate(state) {
     var r = state.run;
+    // A save of this very version may predate a field added since (dragon.eaten came on 2026-11-17):
+    // the parts fill what is missing before they judge, so a new field never reads as damage.
+    try { Outpost.ensure(state); Adventures.ensure(state); Artifacts.ensure(state); } catch (ignored) { /* judged below */ }
     if (!r.grid || r.grid.length !== CELLS) return 'наковальня не 35 клеток';
     for (var i = 0; i < CELLS; i++) {
       var n = r.grid[i];
@@ -1981,13 +2106,13 @@
     outpost: Outpost, adventures: Adventures, artifacts: Artifacts, prepare: prepare, useAbility: useAbility, encounterView: encounterView,
     buyArtifact: buyArtifact, setArtifactEnabled: setArtifactEnabled, activateArtifact: activateArtifact,
     acceptContract: acceptContract, previewContractDelivery: previewContractDelivery, deliverContract: deliverContract, claimContract: claimContract,
-    init: init, tick: tick, offline: offline, prestigeGain: prestigeGain, bonus: bonus, onPrestige: onPrestige,
+    init: init, tick: tick, offline: offline, prestigeGain: prestigeGain, prestigeHint: prestigeHint, bonus: bonus, onPrestige: onPrestige,
     migrate: migrate, validate: validate, summary: summary, next: next, chest: chest,
     procedural: procedural, validateStock: validateStock,
     // the screen and the checks
     L1: L1, L2: L2, COLS: COLS, ROWS: ROWS, CELLS: CELLS, ORDER: ORDER, SOCKETS: SOCKETS, RUNES: RUNES, UP: UP, MF: MF, EVENTS: EVENTS,
     ensure: ensure, openCells: openCells, isOpen: isOpen, freeCells: freeCells, shape: shape, sockets: sockets, runeAt: runeAt,
-    startCells: startCells, socketCells: socketCells, baseSocketCells: baseSocketCells, moveSocket: moveSocket, setRuneAll: setRuneAll, setRuneAuto: setRuneAuto, LEGACY_START: LEGACY_START,
+    startCells: startCells, socketCells: socketCells, baseSocketCells: baseSocketCells, socketWant: socketWant, placeSockets: placeSockets, moveSocket: moveSocket, setRuneAll: setRuneAll, setRuneAuto: setRuneAuto, LEGACY_START: LEGACY_START,
     socketCount: socketCount, runesOpen: runesOpen, setRune: setRune, sortGrid: sortGrid,
     isBoss: isBoss, hpOf: hpOf, goldOf: goldOf, bladeDmg: bladeDmg, bladePrice: bladePrice, sellPrice: sellPrice, sellShare: sellShare,
     cellPower: cellPower, fieldPower: fieldPower, saleMult: saleMult, tapSeconds: tapSeconds, upUnlocked: upUnlocked,
@@ -2003,7 +2128,7 @@
     runupWalk: runupWalk, canMeet: canMeet, setAutoMeet: setAutoMeet,
     overcrit: overcrit, resonance: resonance, resonates: resonates, overheatLevels: overheatLevels, burstMult: burstMult, room: room,
     spawn: spawn, kill: kill, newEncounter: newEncounter,
-    mfLevel: mfLevel, mfMax: mfMax, mfCost: mfCost, mfOpen: mfOpen, buyMf: buyMf, startGold: startGold, startGoldAt: startGoldAt, coalsFor: coalsFor,
+    mfLevel: mfLevel, mfMax: mfMax, mfCost: mfCost, mfOpen: mfOpen, buyMf: buyMf, startGold: startGold, startGoldAt: startGoldAt, coalsFor: coalsFor, coalsGain: coalsGain, coalsPay: coalsPay,
     soft: soft, autoTaps: autoTaps, eventSpeed: eventSpeed, runePower: runePower,
     forgeLayer: forgeLayer, starLayer: starLayer, coalsAll: coalsAll,
     cheapest: cheapest, botPlay: botPlay, cry: cry, bellows: bellows, startEvent: startEvent,

@@ -17,17 +17,38 @@
     sheet: null, sheetKind: '', blades: null, monsters: null, events: null, worldIndex: -1, modSerial: -1, modKill: '',
     caravan: null, caravanFor: 0, asked: {}, panelKey: '', masterKey: '', w: 0, h: 0, dpr: 1, t: 0,
     art: {}, artOn: false, artAnimate: true, artKey: '', artBusy: false, hitAt: 0,
-    still: !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+    still: !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches),
+    // effects: the last serial of run.fx, kills, misses and run-up seen; when each sound last played
+    fxSerial: null, lastKills: null, lastFails: null, lastRunup: 0, soundAt: {}, poof: null, monPos: null, critAt: 0, modFloatAt: 0
   };
   const SNAP = 0.8;
   const DOUBLE_MS = 320;
 
   // ---- sounds (Web Audio, no files) ----
-  Sfx.add('merge', [{ type: 'triangle', f: [520, 780], d: 0.09, v: 0.3 }, { at: 0.06, type: 'sine', f: [1040, 1040], d: 0.12, v: 0.18 }]);
+  Sfx.add('merge', [{ type: 'triangle', f: [520, 780], d: 0.09, v: 0.34 }, { at: 0.06, type: 'sine', f: [1040, 1560], d: 0.16, v: 0.26 }]);
+  // A merge the forge made by itself (Подмастерье, a relic): the same chime, softer.
+  Sfx.add('merge-auto', [{ type: 'sine', f: [660, 990], d: 0.08, v: 0.16 }, { at: 0.05, type: 'sine', f: [1320, 1320], d: 0.1, v: 0.1 }]);
   Sfx.add('clang', [{ type: 'square', f: [900, 600], d: 0.05, v: 0.08 }, { type: 'noise', f: [1, 1], d: 0.06, v: 0.06 }]);
-  Sfx.add('forge', [{ type: 'noise', f: [1, 1], d: 0.08, v: 0.12 }, { type: 'triangle', f: [260, 200], d: 0.08, v: 0.12 }]);
-  Sfx.add('boss', [{ type: 'sawtooth', f: [110, 80], d: 0.4, v: 0.16 }, { at: 0.2, type: 'sine', f: [165, 165], d: 0.5, v: 0.2 }]);
+  // A crit: a ringing blow — the metal, a crack and a high ring that lingers.
+  Sfx.add('crit', [{ type: 'noise', f: [1, 1], d: 0.07, v: 0.32 }, { type: 'square', f: [1250, 820], d: 0.09, v: 0.16 },
+    { at: 0.02, type: 'triangle', f: [1760, 1700], d: 0.28, v: 0.22 }]);
+  // «Сокрушительный удар» and the burst of «Перегрев»: lower and heavier.
+  Sfx.add('smash', [{ type: 'noise', f: [1, 1], d: 0.16, v: 0.4, a: 0.004 }, { type: 'sawtooth', f: [180, 60], d: 0.3, v: 0.24 },
+    { at: 0.05, type: 'triangle', f: [1320, 1240], d: 0.3, v: 0.18 }]);
+  Sfx.add('forge', [{ type: 'noise', f: [1, 1], d: 0.06, v: 0.2 }, { type: 'triangle', f: [300, 190], d: 0.09, v: 0.2 }]);
+  Sfx.add('boss', [{ type: 'sawtooth', f: [110, 80], d: 0.4, v: 0.22 }, { at: 0.2, type: 'sine', f: [165, 165], d: 0.5, v: 0.26 }]);
+  // A boss beaten: a short fanfare.
+  Sfx.add('win', [{ type: 'triangle', f: [523, 523], d: 0.1, v: 0.34 }, { at: 0.1, type: 'triangle', f: [659, 659], d: 0.1, v: 0.34 },
+    { at: 0.2, type: 'triangle', f: [784, 784], d: 0.12, v: 0.34 }, { at: 0.32, type: 'triangle', f: [1047, 1047], d: 0.4, v: 0.36 }]);
+  // The timer ran out.
+  Sfx.add('fail', [{ type: 'square', f: [330, 220], d: 0.18, v: 0.16 }, { at: 0.18, type: 'square', f: [247, 165], d: 0.3, v: 0.16 }]);
+  Sfx.add('horn', [{ type: 'sawtooth', f: [196, 262], d: 0.5, v: 0.2, a: 0.04 }, { type: 'sine', f: [392, 523], d: 0.5, v: 0.14, a: 0.04 }]);
   Sfx.add('sell', [{ type: 'triangle', f: [700, 700], d: 0.06, v: 0.25 }, { at: 0.07, type: 'triangle', f: [940, 940], d: 0.1, v: 0.22 }]);
+  Sfx.add('coin', [{ type: 'sine', f: [1319, 1319], d: 0.07, v: 0.24 }, { at: 0.06, type: 'sine', f: [1760, 1760], d: 0.14, v: 0.22 }]);
+  // A relic that woke on a tap.
+  Sfx.add('relic', [{ type: 'sine', f: [880, 1320], d: 0.12, v: 0.22 }, { at: 0.08, type: 'triangle', f: [1760, 2093], d: 0.16, v: 0.16 }]);
+  // A foe falls.
+  Sfx.add('kill', [{ type: 'noise', f: [1, 1], d: 0.09, v: 0.14 }, { type: 'triangle', f: [420, 210], d: 0.12, v: 0.12 }]);
 
   const cfg = () => g.config;
   const now = () => Date.now();
@@ -295,7 +316,10 @@
     view.outpostBadge = h('span', { class: 'mf-outpost-badge', hidden: true }, '!');
     view.outpostChip = h('span', { class: 'mf-outpost-chip' });
     view.outpostHit = h('button', { class: 'mf-outpost-hit', id: 'outpost', 'aria-label': tx('Форпост'), title: tx('Форпост'), onclick: () => view.outpost.open() }, view.outpostChip, view.outpostBadge);
-    view.gateUi = h('div', { class: 'mf-gate-ui' }, view.outpostHit, view.event, view.retry, view.preparation, view.abilities);
+    // Under the bars, one row that wraps: the retry or the preparation on the left, the folded event on
+    // the right; an unfolded event takes the whole first line and the rest goes under it — nothing overlaps.
+    view.gateRow = h('div', { class: 'mf-gate-row' }, view.retry, view.preparation, view.event);
+    view.gateUi = h('div', { class: 'mf-gate-ui' }, view.outpostHit, view.gateRow, view.abilities);
     view.gate.append(view.gateUi);
 
     view.forgeFill = h('i', { class: 'mf-forge-fill' });
@@ -313,6 +337,8 @@
     // One row along the bottom: the chest, the forge in the middle, the upgrades, the master.
     view.bottom = h('div', { class: 'mf-bottom' }, view.chest, view.forge, view.upBtn, view.masterBtn);
     g.el.actions.append(view.panel, view.bottom);
+    view.fxLayer = h('div', { class: 'mf-fx-layer', 'aria-hidden': 'true' });
+    document.body.append(view.fxLayer);
 
     gestures();
     placePanel();
@@ -722,7 +748,6 @@
   }
 
   function merged(r) {
-    g.sfx('merge');
     g.buzz([12]);
     const b = bladeInfo(r.level);
     view.info.textContent = tx('{} · ур. {}', b.title, r.level);
@@ -786,8 +811,218 @@
     if (ok) {
       g.sfx(g.state.run.stats.sold > before ? 'sell' : 'forge');
       g.buzz('tap');
+      if (view.pressAnimation) view.pressAnimation.cancel();
+      view.pressAnimation = bump(view.forge, 'press');
+      const at = centerOf(view.forge);
+      if (at) burst({ x: at.x, y: at.y - at.h * 0.3, w: 0, h: 0 }, 2, 'ember', 24);
     }
   }
+
+  // ---- effects: what just happened, shown where it happened ----
+  // Numbers and names rise from the place (a layer over the screen), the cells, the forge and the chest
+  // jump (Web Animations: the classes the render sets every frame do not cut them short). With reduced
+  // motion nothing flies: a short light instead.
+
+  /** A sound at most once in `gap` ms: a crit every volley or the apprentice every second would drone. */
+  function sound(name, gap) {
+    const t = now();
+    if (gap && view.soundAt[name] && t - view.soundAt[name] < gap) return;
+    view.soundAt[name] = t;
+    g.sfx(name);
+  }
+
+  function centerOf(el) {
+    if (!el || !el.getBoundingClientRect || el.hidden) return null;
+    const b = el.getBoundingClientRect();
+    if (!b.width && !b.height) return null;
+    return { x: b.left + b.width / 2, y: b.top + b.height / 2, w: b.width, h: b.height };
+  }
+  function placeOf(where) { return where && where.nodeType ? centerOf(where) : where; }
+
+  /** A short text that rises from a place and fades: cls — gold, crit, bad, relic, rare, big. */
+  function pop(where, text, cls, opts) {
+    const at = placeOf(where);
+    if (!at || !view.fxLayer || document.hidden) return null;
+    const o = opts || {};
+    const el = h('span', { class: 'mf-pop' + (cls ? ' ' + cls : '') }, o.icon || null, text ? h('span', {}, text) : null);
+    el.style.left = Math.round(at.x + (o.dx || 0)) + 'px';
+    el.style.top = Math.round(at.y + (o.dy || 0)) + 'px';
+    view.fxLayer.append(el);
+    // A label at the edge of the screen stays whole: its middle moves in by half its width.
+    const half = el.offsetWidth / 2 + 6;
+    const wide = window.innerWidth || document.documentElement.clientWidth;
+    if (half * 2 < wide) el.style.left = Math.round(Math.max(half, Math.min(wide - half, at.x + (o.dx || 0)))) + 'px';
+    while (view.fxLayer.childElementCount > 16) view.fxLayer.firstChild.remove();
+    const rise = view.still ? 0 : (o.rise === undefined ? 34 : o.rise);
+    const life = o.life || 950;
+    const grow = view.still ? 1 : (o.scale || 1.12);
+    const a = el.animate ? el.animate([
+      { transform: 'translate(-50%, -50%) scale(' + (view.still ? 1 : 0.6) + ')', opacity: 0 },
+      { transform: 'translate(-50%, calc(-50% - ' + Math.round(rise * 0.2) + 'px)) scale(' + grow + ')', opacity: 1, offset: 0.16 },
+      { transform: 'translate(-50%, calc(-50% - ' + Math.round(rise * 0.6) + 'px)) scale(1)', opacity: 1, offset: 0.62 },
+      { transform: 'translate(-50%, calc(-50% - ' + rise + 'px)) scale(1)', opacity: 0 }
+    ], { duration: life, easing: 'ease-out' }) : null;
+    if (a) a.onfinish = () => el.remove();
+    else setTimeout(() => el.remove(), life);
+    return el;
+  }
+
+  /** Sparks that fly from one place to another: a merge, from the blade that left to the one that grew. */
+  function sparks(from, to, n, cls) {
+    if (view.still || !view.fxLayer || document.hidden) return;
+    const a = placeOf(from), b = placeOf(to);
+    if (!a || !b) return;
+    for (let i = 0; i < n; i++) {
+      const s = h('i', { class: 'mf-spark' + (cls ? ' ' + cls : '') });
+      s.style.left = Math.round(a.x + (Math.random() - 0.5) * a.w * 0.4) + 'px';
+      s.style.top = Math.round(a.y + (Math.random() - 0.5) * a.h * 0.4) + 'px';
+      view.fxLayer.append(s);
+      const dx = b.x - a.x, dy = b.y - a.y, arc = -18 - Math.random() * 22;
+      const an = s.animate([
+        { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+        { transform: 'translate(calc(-50% + ' + Math.round(dx / 2) + 'px), calc(-50% + ' + Math.round(dy / 2 + arc) + 'px)) scale(1.3)', opacity: 1, offset: 0.5 },
+        { transform: 'translate(calc(-50% + ' + Math.round(dx) + 'px), calc(-50% + ' + Math.round(dy) + 'px)) scale(0.4)', opacity: 0.1 }
+      ], { duration: 360 + i * 35, easing: 'ease-in' });
+      an.onfinish = () => s.remove();
+    }
+  }
+
+  /** Sparks around a place, flying out: a coin pile, the forge's embers. */
+  function burst(where, n, cls, radius) {
+    if (view.still || !view.fxLayer || document.hidden) return;
+    const a = placeOf(where);
+    if (!a) return;
+    for (let i = 0; i < n; i++) {
+      const s = h('i', { class: 'mf-spark' + (cls ? ' ' + cls : '') });
+      s.style.left = Math.round(a.x) + 'px';
+      s.style.top = Math.round(a.y) + 'px';
+      view.fxLayer.append(s);
+      const ang = (i / n) * Math.PI * 2 + Math.random() * 0.6, d = (radius || 30) * (0.6 + Math.random() * 0.6);
+      const an = s.animate([
+        { transform: 'translate(-50%, -50%) scale(1.2)', opacity: 1 },
+        { transform: 'translate(calc(-50% + ' + Math.round(Math.cos(ang) * d) + 'px), calc(-50% + ' + Math.round(Math.sin(ang) * d - 10) + 'px)) scale(0.3)', opacity: 0 }
+      ], { duration: 420 + Math.random() * 160, easing: 'ease-out' });
+      an.onfinish = () => s.remove();
+    }
+  }
+
+  const BUMPS = {
+    merge: [[{ transform: 'scale(1)', filter: 'brightness(1)' }, { transform: 'scale(1.2)', filter: 'brightness(1.8)', offset: 0.35 }, { transform: 'scale(1)', filter: 'brightness(1)' }], 440],
+    drop: [[{ transform: 'translateY(-16px) scale(0.8)', opacity: 0.1 }, { transform: 'translateY(0) scale(1.05)', opacity: 1, offset: 0.7 }, { transform: 'translateY(0) scale(1)', opacity: 1 }], 320],
+    flash: [[{ filter: 'brightness(1.9)' }, { filter: 'brightness(1)' }], 380],
+    shake: [[{ transform: 'translate(0, 0)' }, { transform: 'translate(-5px, 2px)' }, { transform: 'translate(5px, -2px)' }, { transform: 'translate(-3px, 1px)' }, { transform: 'translate(2px, 0)' }, { transform: 'translate(0, 0)' }], 300],
+    press: [[{ transform: 'scale(1)' }, { transform: 'scale(0.95)', offset: 0.3 }, { transform: 'scale(1)' }], 150],
+    punch: [[{ transform: 'scale(1)' }, { transform: 'scale(1.18)', offset: 0.3 }, { transform: 'scale(1)' }], 380]
+  };
+  /** An element jumps: merge — swells and lights; drop — falls in; flash; shake; press; punch. */
+  function bump(el, kind) {
+    if (!el || !el.animate || !BUMPS[kind]) return null;
+    if (view.still && kind !== 'flash') return el.animate(BUMPS.flash[0], { duration: 300 });
+    return el.animate(BUMPS[kind][0], { duration: BUMPS[kind][1], easing: 'ease-out' });
+  }
+
+  const RELIC_AT = {
+    forgeSeconds: () => view.forge, apprenticeSeconds: () => view.forge, goldSaleShare: () => view.chest,
+    dragonCharge: () => view.outpostHit, petXp: () => view.outpostHit, digestSeconds: () => view.outpostHit,
+    heroCooldown: () => view.abilities, crySeconds: () => view.cry, bossSeconds: () => view.timer,
+    shieldFraction: () => view.gate, suppressSeconds: () => view.gate
+  };
+  function relicText(d) {
+    const v = d.value;
+    // Two significant digits: 1,5 s stays 1,5 and 12 stays 12.
+    const s = (x) => g.fmt(x, { digits: 2 });
+    switch (d.kind) {
+      case 'forgeSeconds': return tx('горн −{} с', s(v));
+      case 'apprenticeSeconds': return tx('подмастерье −{} с', s(v));
+      case 'goldSaleShare': return '+' + g.fmt(Big.of(v));
+      case 'dragonCharge': return tx('дыхание +{}', s(v));
+      case 'petXp': return tx('питомцу +{} опыта', s(v));
+      case 'digestSeconds': return tx('дракон −{} с', s(v));
+      case 'heroCooldown': return tx('приёмы −{} с', s(v));
+      case 'crySeconds': return tx('клич −{} с', s(v));
+      case 'bossSeconds': return tx('время босса +{} с', s(v));
+      case 'shieldFraction': return tx('панцирь −{}', pct(Math.min(1, v)));
+      case 'suppressSeconds': return tx('без лечения {} с', s(v));
+      default: return '';
+    }
+  }
+  function relicTitle(id) {
+    const relic = sim.artifacts.CATALOG.find((item) => item.id === id);
+    return relic ? tx(relic.title) : id;
+  }
+  function relicIcon(id) { return MFArt.el('artifact', id, 'mf-pop-ic'); }
+
+  /** The relics that woke: each says what it did where it did it. */
+  function relicEffects(fx) {
+    const done = fx.done || fx.ids.map((id) => ({ id, kind: '' }));
+    let i = 0;
+    done.forEach((d) => {
+      if (d.kind === 'merge') return; // the merge itself shows on the anvil, with the relic's name
+      const target = (RELIC_AT[d.kind] && RELIC_AT[d.kind]()) || view.forge;
+      const at = centerOf(target) || centerOf(view.forge);
+      const text = relicText(d);
+      pop(at, text || relicTitle(d.id), 'relic' + (d.kind === 'goldSaleShare' ? ' gold' : ''), { icon: relicIcon(d.id), dy: -18 - 22 * i, life: 1300 });
+      if (target && target !== view.forge) bump(target, 'flash');
+      if (d.kind === 'goldSaleShare') { burst(view.chest, 6, 'gold', 26); sound('coin', 200); }
+      i++;
+    });
+    bump(view.forge, 'flash');
+    sound('relic', 220);
+  }
+
+  /** The merges and the new blades of run.fx newer than the last seen. */
+  function anvilEffects(state, t) {
+    const fx = state.run.fx && Array.isArray(state.run.fx.list) ? state.run.fx : null;
+    const serial = fx ? fx.serial : 0;
+    // The first frame and a new run only take the count: nothing old replays.
+    if (view.fxSerial === null || serial < view.fxSerial) { view.fxSerial = serial; return; }
+    if (serial === view.fxSerial) return;
+    fx.list.filter((e) => e.s > view.fxSerial && (!e.at || t - e.at < 2500)).forEach((e) => {
+      const cell = view.cells[e.cell];
+      if (!cell) return;
+      if (e.kind === 'place') { bump(cell, 'drop'); return; }
+      if (e.kind !== 'merge') return;
+      bump(cell, 'merge');
+      const from = view.cells[e.from] || null;
+      if (e.by === 'hand') {
+        sound('merge', 60);
+        burst(cell, 6, 'merge', 30);
+        return;
+      }
+      sound('merge-auto', 250);
+      if (e.by === 'apprentice') { sparks(from || cell, cell, 3, 'merge'); return; }
+      sparks(from || cell, cell, 8, 'relic');
+      burst(cell, 6, 'relic', 34);
+      pop(cell, relicTitle(e.by), 'relic', { icon: relicIcon(e.by), dy: -30, life: 1300 });
+    });
+    view.fxSerial = serial;
+  }
+
+  /** Kills, a boss beaten or missed, the run-up, the battle cry: what the run's numbers say happened. */
+  function runEffects(state, t) {
+    const r = state.run;
+    const kills = r.stats.kills || 0, fails = r.stats.fails || 0;
+    if (view.lastKills === null || kills < view.lastKills) view.lastKills = kills;
+    else if (kills > view.lastKills) {
+      view.lastKills = kills;
+      view.poof = { at: t };
+      if (view.modFloatAt !== t && view.monPos && Big.gt(Big.of(r.lastGold || 0), 0)) view.floats.push({ x: view.monPos.x, y: view.monPos.y - view.monPos.size * 0.2, text: '+' + g.fmt(Big.of(r.lastGold)), gold: true, at: t });
+      sound('kill', 220);
+    }
+    if (view.lastFails === null || fails < view.lastFails) view.lastFails = fails;
+    else if (fails > view.lastFails) {
+      view.lastFails = fails;
+      sound('fail');
+      g.buzz([30, 40, 30]);
+      bump(view.gate, 'shake');
+      pop(view.gate, tx('Не успели'), 'bad big', { life: 1400 });
+    }
+    const runup = r.runup || 0;
+    if (runup > view.lastRunup && runup >= 2) bump(view.waveLabel, 'punch');
+    view.lastRunup = runup;
+    view.gate.classList.toggle('cry', sim.cryOn(state, t));
+  }
+
 
   function retry() {
     if (g.act((s) => sim.retry(s, cfg()))) g.sfx('boss');
@@ -795,7 +1030,8 @@
 
   function cry() {
     if (g.act((s) => sim.cry(s, cfg(), now()))) {
-      g.sfx('boss');
+      g.sfx('horn');
+      bump(view.gate, 'flash');
       g.buzz([40, 30, 40]);
     } else g.sfx('deny');
   }
@@ -1105,9 +1341,11 @@
             h('span', {}, tx('эффект ×{}', g.fmt(progression.nextMult, { digits: 2 })) + (perkNow ? ' + ' + perkText(perkNow) : '')),
             progression.milestone > 1 ? h('span', { class: 'mf-milestone-now' }, tx('сейчас ×{}', g.fmt(progression.milestone, { digits: 2 }))) : null),
           h('div', { class: 'mf-milestone-track', role: 'progressbar', 'aria-label': tx('До рубежа {}', progression.nextAt), 'aria-valuemin': 0, 'aria-valuemax': every, 'aria-valuenow': done }, h('i', { style: 'width:' + (done / every * 100) + '%' })),
-          h('div', { class: 'mf-perks' }, progression.perks.map((p) => h('span', { class: 'mf-perk' + (p.on ? ' on' : ''), title: tx('Особое свойство {}-го уровня', p.at) },
-            h('b', { class: 'g-num' }, String(p.at)), perkText(p)))));
-        progress.title = tx('Каждые {} уровней эффект улучшения умножается, на сотых — сильнее. На 50-м и 100-м уровнях открываются особые свойства.', every);
+          // The two perks, in turn at the big milestones without end: the level it comes next at, what
+          // it gives now (opened), what it gives once (not yet).
+          h('div', { class: 'mf-perks' }, progression.perks.map((p) => h('span', { class: 'mf-perk' + (p.on ? ' on' : ''), title: p.on ? tx('Открыто {} раз, следующий раз — на {}-м уровне', p.count, p.at) : tx('Откроется на {}-м уровне', p.at) },
+            h('b', { class: 'g-num' }, String(p.at)), perkText(p.on ? Object.assign({}, p, { value: p.total }) : p)))));
+        progress.title = tx('Каждые {} уровней эффект улучшения умножается; каждый {}-й рубеж крупный: сильнее и с особым свойством. Свойства идут по очереди без конца.', every, progression.bigEach);
       }
       box.append(row({ set: 'up', id: u.id, attr: 'data-up', level: n, title: u.title, locked: !unlocked, cls: unlocked ? '' : 'locked', text: unlocked ? description : requirement, now: unlocked ? nowText(state, u.id) : '', progress, side }));
     });
@@ -1155,7 +1393,8 @@
     const state = g.state;
     const c = cfg();
     const l = sim.forgeLayer(state);
-    const key = view.masterTab === 'artifacts' ? 'artifacts' : view.masterTab + '|' + l.currency + '|' + JSON.stringify(l.state.mf) + '|' + Object.keys(state.meta.album || {}).length + '|' + sim.ingots(state);
+    // The coal note follows the run: what a reset gives now and the wave of the next coal.
+    const key = view.masterTab === 'artifacts' ? 'artifacts' : view.masterTab + '|' + l.currency + '|' + JSON.stringify(l.state.mf) + '|' + Object.keys(state.meta.album || {}).length + '|' + sim.ingots(state) + '|' + state.run.maxWave + '|' + l.state.record;
     if (!force && key === view.masterKey) return;
     view.masterKey = key;
     box.textContent = '';
@@ -1173,12 +1412,15 @@
       g.ui.line('Бонус углей', tx('+{} урона и золота', pct(c['coals.bonus'] * sim.coalsAll(state)))),
       g.ui.line('Рекорд волны', String(rec)),
       sim.ingots(state) ? g.ui.line('Звёздные слитки', tx('{} · ×{} ко всему', g.fmt(sim.ingots(state)), g.fmt(sim.starMult(state, c)))) : null));
-    const gain = sim.coalsFor(c, state.run.maxWave);
-    let nextWave = c['coals.fromWave'];
-    while (sim.coalsFor(c, nextWave) <= l.state.paid && nextWave < 100000) nextWave++;
-    box.append(h('p', { class: 'g-note' }, gain > l.state.paid
-      ? tx('Перековка сейчас даст углей: {}. Угли платятся только за прирост рекорда.', gain - l.state.paid)
-      : tx('Следующий уголь — с волны {} в забеге. Угли платятся только за прирост рекорда.', nextWave)));
+    const gain = sim.coalsGain(state, c, state.run.maxWave);
+    let nextWave = Math.max(c['coals.fromWave'], state.run.maxWave + 1);
+    while (sim.coalsGain(state, c, nextWave) <= gain && nextWave < 100000) nextWave++;
+    box.append(h('p', { class: 'g-note' }, gain > 0
+      ? tx('Перековка сейчас даст углей: {}, следующий — с волны {}.', gain, nextWave)
+      : tx('Первый уголь — с волны {} в забеге.', nextWave)));
+    box.append(h('p', { class: 'g-note' }, l.state.record > 0
+      ? tx('За волны выше рекорда перековок ({}) угли идут целиком, за уже пройденные — {}.', l.state.record, pct(c['coals.repeatShare']))
+      : tx('За волны выше рекорда угли идут целиком, за уже пройденные — {}.', pct(c['coals.repeatShare']))));
     const pb = g.ui.prestigeButton('forge', { label: 'Перековка' });
     pb.id = 'prestige-forge';
     box.append(h('div', { class: 'g-btns' }, pb));
@@ -1402,7 +1644,8 @@
       if (view.modSerial >= 0 && m.mod && m.mod !== 'regal') {
         view.info.textContent = tx('Редкий враг: {}', m.title) + (effect ? ' — ' + effect : '');
         view.infoUntil = t + 3200;
-        g.sfx('clang');
+        sound('relic', 300);
+        pop(view.gate, tx('Редкий враг: {}', m.title), 'rare big', { life: 1700, rise: 18, dy: 10 });
       }
       view.modSerial = serial;
     }
@@ -1410,8 +1653,9 @@
     const modKey = lastMod ? lastMod.serial + ':' + lastMod.id : '';
     if (modKey && modKey !== view.modKill) {
       if (view.modKill && t - (lastMod.at || 0) < 4000) {
-        view.floats.push({ x: view.w * 0.62, y: (view.floatTop || 40) + 30, text: '+' + g.fmt(Big.of(lastMod.gold)) + (lastMod.blades ? ' · ' + tx('+{} клинка', lastMod.blades) : ''), crit: true, at: t });
-        g.sfx('coin');
+        view.floats.push({ x: view.w * 0.62, y: (view.floatTop || 40) + 30, text: '+' + g.fmt(Big.of(lastMod.gold)) + (lastMod.blades ? ' · ' + tx('+{} клинка', lastMod.blades) : ''), gold: true, big: true, at: t });
+        view.modFloatAt = t;
+        sound('coin', 150);
       }
       view.modKill = modKey;
     }
@@ -1447,12 +1691,11 @@
         const relic = sim.artifacts.CATALOG.find(item => item.id === artifactFx.ids[0]);
         view.info.textContent = tx('Артефакт: {}', relic ? tx(relic.title) : artifactFx.ids[0]) + (artifactFx.ids.length > 1 ? ' +' + (artifactFx.ids.length - 1) : '');
         view.infoUntil = t + 1600;
-        if (!view.still && view.forge.animate) {
-          if (view.artifactAnimation) view.artifactAnimation.cancel();
-          view.artifactAnimation = view.forge.animate([{ filter: 'brightness(1.25)' }, { filter: 'brightness(1)' }], { duration: 220 });
-        }
+        relicEffects(artifactFx);
       }
     }
+    anvilEffects(state, t);
+    runEffects(state, t);
     if (!view.infoUntil || t > view.infoUntil) {
       view.infoUntil = 0;
       view.info.textContent = encounter.walking ? tx('До ворот {} с · время подготовить кузню', g.fmt(encounter.remaining, { digits: 1 })) :
@@ -1518,9 +1761,9 @@
         view.saleReceipt = tx('+{} · {} шт.', g.fmt(sale.gold), sale.count);
         view.saleUntil = t + 1800;
         if (view.saleAnimation) view.saleAnimation.cancel();
-        if (!view.still && view.chest.animate) view.saleAnimation = view.chest.animate([
-          { transform: 'scale(1)' }, { transform: 'scale(1.035)' }, { transform: 'scale(1)' }
-        ], { duration: 240 });
+        view.saleAnimation = bump(view.chest, 'punch');
+        pop(view.chest, '+' + g.fmt(sale.gold), 'gold', { dy: -26 });
+        burst(view.chest, 4, 'gold', 22);
       }
     }
     const receipt = view.saleUntil > t ? view.saleReceipt : tx(full ? 'автопродажа' : 'продать');
@@ -1546,8 +1789,10 @@
     }
     if (r.wave !== view.lastWave) {
       if (r.lastBoss && r.lastBoss.wave === view.lastWave && r.wave === view.lastWave + 1) {
-        g.sfx('boss');
+        g.sfx('win');
         g.buzz('level');
+        pop(view.gate, tx('Босс повержен!'), 'gold big', { life: 1600, rise: 22 });
+        burst(view.gate, 12, 'gold', 70);
       }
       view.lastWave = r.wave;
     }
@@ -1624,7 +1869,11 @@
     const my = ground - size * 0.5;
     view.floatTop = top + 14;
     const hit = view.hitAt ? Math.max(0, 1 - (t - view.hitAt) / 160) : 0;
-    MFMonsters.draw(ctx, m, mx, ground + 2, size, view.still ? 0 : t, { walk: walk > 0 && !view.still, hit: walk > 0 ? 0 : hit, alpha: walk > 0 ? Math.min(1, (1 - walk) / 0.12) : 1, accent, room: Math.max(18, room) });
+    // A crit lights the foe longer and throws it back a little.
+    const critK = view.critAt ? Math.max(0, 1 - (t - view.critAt) / 280) : 0;
+    const knock = walk > 0 || view.still ? 0 : critK * critK * Math.min(14, size * 0.12);
+    MFMonsters.draw(ctx, m, mx + knock, ground + 2, size, view.still ? 0 : t, { walk: walk > 0 && !view.still, hit: walk > 0 ? 0 : Math.max(hit, critK), alpha: walk > 0 ? Math.min(1, (1 - walk) / 0.12) : 1, accent, room: Math.max(18, room) });
+    view.monPos = { x: mx, y: my, size };
     if (top !== view.headTop) { view.headTop = top; view.gate.style.setProperty('--mf-under-head', Math.round(top) + 'px'); }
     const outpostBox = { x: 4, y: top, width: Math.max(70, Math.min(W * 0.42, mx - size * 0.5 - 8)), height: Math.max(0, ground - top) };
     if (!view.tight) view.outpost.draw(ctx, outpostBox, t / 1000, view.still);
@@ -1651,14 +1900,23 @@
         const a = Math.random() * Math.PI;
         view.slashes.push({ x: mx + (Math.random() - 0.5) * size * 0.5, y: my + (Math.random() - 0.5) * size * 0.5, a, len: size * (crit && i === 0 ? 0.9 : 0.55), crit: crit && i === 0, at: t });
       }
-      (r.crits || []).forEach((cell) => { view.critUntil[cell] = t + 220; });
-      if (r.lastHit && walk === 0) view.floats.push({ x: Math.min(W - 40, mx + size * 0.6), y: Math.max(view.floatTop + 22, my), text: '−' + g.fmt(r.lastHit), crit, at: t });
+      (r.crits || []).forEach((cell) => {
+        view.critUntil[cell] = t + 220;
+        // A crit lights its blade; a resonating one rings with its twin.
+        bump(view.cells[cell], 'flash');
+      });
+      if (r.lastHit && walk === 0) view.floats.push({ x: Math.min(W - 40, mx + size * 0.6), y: Math.max(view.floatTop + 22, my), text: '−' + g.fmt(r.lastHit), crit, big: crit, at: t });
       const smashed = (r.smashes || []).length > 0;
-      const burst = r.lastBurst && r.lastBurst.serial !== view.burstSerial ? r.lastBurst : null;
-      if (burst) view.burstSerial = burst.serial;
-      if ((smashed || burst) && walk === 0) view.floats.push({ x: Math.max(60, mx - size * 0.2), y: Math.max(view.floatTop + 4, my - size * 0.35), text: burst ? tx('Вспышка ×{}', g.fmt(burst.mult, { digits: 2 })) : tx('Сокрушительный!'), crit: true, at: t });
-      if (burst) g.sfx('clang');
-      if (crit) g.sfx('clang');
+      const blast = r.lastBurst && r.lastBurst.serial !== view.burstSerial ? r.lastBurst : null;
+      if (blast) view.burstSerial = blast.serial;
+      if ((smashed || blast) && walk === 0) {
+        view.floats.push({ x: Math.max(60, mx - size * 0.2), y: Math.max(view.floatTop + 4, my - size * 0.35), text: blast ? tx('Вспышка ×{}', g.fmt(blast.mult, { digits: 2 })) : tx('Сокрушительный!'), crit: true, huge: true, at: t });
+        bump(view.gate, 'shake');
+        sound('smash', 300);
+        g.buzz([20]);
+        if (blast) bump(view.forge, 'flash');
+      } else if (crit && walk === 0) sound('crit', 320);
+      if (crit && walk === 0) view.critAt = t;
       if (walk === 0) view.hitAt = t;
       view.lastVolleys = r.volleys;
     }
@@ -1673,14 +1931,41 @@
       ctx.lineTo(s.x + Math.cos(s.a) * s.len / 2, s.y + Math.sin(s.a) * s.len / 2);
       ctx.stroke();
     });
-    view.floats = view.floats.filter((f) => t - f.at < 700).slice(-4);
-    ctx.font = '600 15px system-ui, sans-serif';
+    // A foe that falls bursts into sparks where it stood.
+    if (view.poof && view.monPos && !view.still) {
+      const k = (t - view.poof.at) / 420;
+      if (k >= 1) view.poof = null;
+      else {
+        ctx.fillStyle = accent;
+        ctx.globalAlpha = 1 - k;
+        for (let i = 0; i < 10; i++) {
+          const a = i / 10 * Math.PI * 2;
+          const d = view.monPos.size * (0.2 + 0.5 * k);
+          ctx.fillRect(view.monPos.x + Math.cos(a) * d - 2, view.monPos.y + Math.sin(a) * d - 2, 4, 4);
+        }
+        ctx.globalAlpha = 1;
+      }
+    }
+    const life = (f) => (f.huge ? 1100 : f.big ? 900 : 700);
+    view.floats = view.floats.filter((f) => t - f.at < life(f)).slice(-5);
     ctx.textAlign = 'center';
     view.floats.forEach((f) => {
-      const k = (t - f.at) / 700;
-      ctx.globalAlpha = 1 - k;
-      ctx.fillStyle = f.crit ? accent : '#e8e8e8';
-      ctx.fillText(f.text, f.x, Math.max(view.floatTop, f.y - k * 22));
+      const k = (t - f.at) / life(f);
+      // A big number swells for a moment, then rises and fades.
+      const swell = view.still || !(f.big || f.huge) ? 1 : 1 + 0.35 * Math.max(0, 1 - k * 5);
+      const px = Math.round((f.huge ? 24 : f.big ? 21 : 15) * swell);
+      ctx.font = (f.big || f.huge ? '800 ' : '600 ') + px + 'px system-ui, sans-serif';
+      ctx.globalAlpha = Math.min(1, (1 - k) * 1.6);
+      const fy = Math.max(view.floatTop, f.y - k * (f.huge ? 30 : 22));
+      // A dark rim keeps a big number readable on any backdrop.
+      if (f.big || f.huge || f.gold) {
+        ctx.lineJoin = 'round';
+        ctx.lineWidth = f.big || f.huge ? 5 : 3.5;
+        ctx.strokeStyle = 'rgba(12, 12, 16, 0.85)';
+        ctx.strokeText(f.text, f.x, fy);
+      }
+      ctx.fillStyle = f.gold ? '#ffd36b' : f.crit ? '#ffa04a' : '#e8e8e8';
+      ctx.fillText(f.text, f.x, fy);
     });
     ctx.globalAlpha = 1;
     if (state.run.starfallUntil > t) {

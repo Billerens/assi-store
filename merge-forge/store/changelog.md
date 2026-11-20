@@ -1,5 +1,18 @@
 # Merge Forge: what’s new
 
+## 0.5.0 — 2026-11-20
+
+- Coals from every run. Waves above the reforge record pay coals in full, waves already passed pay half: a run that stops short of the record is no longer empty. With a record of 106, a run to wave 92 gives 18 coals instead of none. The share is the setting “Coals for waves below the record: share”.
+- Each coal gives +10% damage and gold instead of +5%, the coals already earned too: 63 coals make ×7.3 rather than ×4.15.
+- The “worth it” mark on the reforge lights up when a reforge would add at least half of your coals, not at wave 60 of every run. The Master's forge shows how many coals a reforge gives now and at which wave the next one comes.
+- Every upgrade reaches its milestones. A milestone comes when the price of an upgrade has grown 10,000 times, and at least every 25 levels: Sharpness and Purse as before, every 25; Heavy hand every 17; Temper and Twin forging every 12; Battle cry every 10; Banner every 7. Before, the dear upgrades waited a hundred waves for one. A milestone is ×1.4, every fourth a big one at ×1.8 (×1.1 and ×1.2 for the mechanical ones).
+- Perks never end now: every big milestone opens one of the upgrade's two perks in turn, and a perk that comes again adds as much once more (×1.3, ×1.6, ×1.9…). The card shows the level it comes at next and what it gives now. The strength is set so that reforges do not snowball.
+- Rune sockets take random open cells. Sockets bought on a small anvil no longer vanish in closed rows — in older runs they move to open cells, each rune staying with its socket. Play a small anvil with a rune under almost every blade, or grow it.
+- Effects: a crit is a big orange number, a flash and a knock-back of the foe, a ringing blow; Crushing blow and Burst shake the scene. A merge lights its cell and sparks fly from the other blade; a merge by the Pair hammer or the Twins' lever is signed with the relic's name. Every relic that wakes shows what it did where it did it: “forge −1.5 s” at the forge, gold at the chest, “boss time +2 s” at the timer. A new blade drops onto the anvil, a forge tap strikes sparks, a sale tosses coins, a foe bursts with “+gold”, a boss beaten says “Boss defeated!” with a fanfare, a miss says “Too late”. The battle cry sounds a horn and lights the scene. The crit sound was barely heard — it is loud now; new sounds for a win, a miss, the cry and the relics.
+- The scene no longer shrinks on a wide, low screen: the road stays near the bottom and the sky is cut, so the heroes, the dragon, the pet and the foe stand full size again.
+- “Try again: boss”, “Meet / Auto / Aim” and the event banner share one row and no longer cover each other; the retry button has its margins back.
+- A save written before a new field appeared is no longer taken for damaged. Before, the game could fall back to an old save because of it — two days of progress were lost that way on November 18.
+
 ## 0.4.0 — 2026-11-20
 
 - Blades have stories now. A tap on an unlocked metal in the Master's forge → Metals, or the book button of a blade chosen on the anvil, opens a window: the picture, the theme, a phrase about what makes the blade unusual and a small legend. Arrows, the ← → keys and a swipe go through all the unlocked metals.

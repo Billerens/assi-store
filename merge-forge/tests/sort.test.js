@@ -81,8 +81,8 @@ test('до открытия рун будущие гнёзда сортирую�
   const state = fresh();
   state.run.maxWave = x.cfg['rune.fromWave'] - 1;
   put(state, x.cfg, []);
-  const socket = x.sim.socketCells(state, x.cfg)[0];
-  assert.ok(x.sim.isOpen(state, x.cfg, socket), 'the first socket is on the anvil a run starts with');
+  assert.deepStrictEqual(x.sim.socketCells(state, x.cfg), [], 'before the wave of runes there are no sockets');
+  const socket = x.sim.openCells(state, x.cfg)[5];
   state.run.grid[socket] = 9;
   assert.strictEqual(x.sim.sortGrid(state, x.cfg), true);
   assert.strictEqual(state.run.grid[x.sim.openCells(state, x.cfg)[0]], 9);

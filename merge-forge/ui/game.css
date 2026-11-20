@@ -576,12 +576,31 @@
 .mf-gate-ui [hidden] {
   display: none;
 }
-.mf-event {
+.mf-gate-row {
   position: absolute;
   left: 8px;
   right: 8px;
   top: var(--mf-under-head, 56px);
   z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 6px;
+  pointer-events: none;
+}
+.mf-gate-row > * {
+  pointer-events: auto;
+}
+.mf-gate-row > [hidden] {
+  display: none;
+}
+.mf-gate.tight .mf-gate-row {
+  right: var(--mf-mon, 96px);
+}
+.mf-event {
+  order: -1;
+  flex: 1 1 100%;
+  min-width: 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -595,8 +614,9 @@
   display: none;
 }
 .mf-event.folded {
-  left: auto;
-  right: 8px;
+  order: 2;
+  flex: none;
+  margin-left: auto;
   padding: 0;
   border-radius: 999px;
   gap: 0;
@@ -659,20 +679,15 @@
   line-height: 19px;
 }
 .mf-gate-pill {
-  position: absolute;
-  right: 8px;
-  top: var(--mf-under-head, 56px);
-  z-index: 2;
+  flex: none;
+  width: auto;
   min-height: 40px;
   padding: 4px 12px;
   border-radius: 999px;
   font-size: 14px;
 }
 .mf-gate-ui .mf-preparation {
-  position: absolute;
-  left: 8px;
-  top: var(--mf-under-head, 56px);
-  z-index: 2;
+  flex: none;
   flex-wrap: nowrap;
 }
 .mf-gate-ui .mf-preparation .g-btn {
@@ -1569,4 +1584,103 @@ button.mf-alb {
 }
 .mf-alb.unseen .mf-art {
   filter: brightness(0) invert(0.22);
+}
+
+/* ---- effects ---- */
+.mf-fx-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 80;
+  overflow: hidden;
+}
+.mf-pop {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(18, 18, 22, 0.86);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  will-change: transform, opacity;
+}
+.mf-pop.gold {
+  color: #ffd36b;
+  border-color: rgba(255, 211, 107, 0.55);
+}
+.mf-pop.relic {
+  border-color: rgba(180, 156, 255, 0.7);
+}
+.mf-pop.bad {
+  color: #ff8a78;
+  border-color: rgba(255, 138, 120, 0.6);
+}
+.mf-pop.rare {
+  color: #ffd36b;
+  border-color: rgba(255, 211, 107, 0.7);
+}
+.mf-pop.big {
+  font-size: 19px;
+  padding: 4px 14px;
+}
+.mf-pop-ic {
+  width: 22px;
+  height: 22px;
+  flex: none;
+}
+.mf-pop-ic img,
+.mf-pop-ic svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.mf-spark {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffcf7a;
+  will-change: transform, opacity;
+}
+.mf-spark.merge {
+  background: #fff1c9;
+}
+.mf-spark.relic {
+  background: #c9b6ff;
+}
+.mf-spark.gold {
+  background: #ffd36b;
+}
+.mf-spark.ember {
+  width: 5px;
+  height: 5px;
+  background: #ff9a4a;
+}
+/* The battle cry: the scene's edge glows while it sounds. */
+.mf-gate.cry::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(255, 120, 60, 0.85);
+  border-radius: inherit;
+  pointer-events: none;
+  animation: mf-cry 0.9s ease-in-out infinite alternate;
+}
+@keyframes mf-cry {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mf-gate.cry::after {
+    animation: none;
+  }
 }

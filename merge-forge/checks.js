@@ -77,7 +77,7 @@ exports['слитый клинок сильнее двух исходных'] = 
   t.ok(r && r.kind === 'swap' && g[0] === 3 && g[2] === 5, 'разные уровни меняются местами');
 };
 
-exports['угли: волна 60 → 4, 100 → 51, 200 → 445, платят только за прирост рекорда'] = function (t) {
+exports['угли: волна 60 → 4, 100 → 51, 200 → 445; за волны ниже рекорда — половина'] = function (t) {
   var x = load();
   t.equal(x.sim.coalsFor(x.cfg, 59), 0, 'волна 59');
   t.equal(x.sim.coalsFor(x.cfg, 60), 4, 'волна 60');
@@ -94,10 +94,10 @@ exports['угли: волна 60 → 4, 100 → 51, 200 → 445, платят т
   t.equal(Big.str(state.layers.forge.currency), Big.str(Big.of(4)), 'углей после первой перековки');
   t.equal(state.run.wave, 1, 'волна после перековки');
   state.run.maxWave = 60;
-  t.ok(Big.isZero(x.sim.prestigeGain(state, 'forge', x.cfg)), 'тот же рекорд второй раз не платит');
+  t.equal(Big.str(x.sim.prestigeGain(state, 'forge', x.cfg)), Big.str(Big.of(2)), 'тот же рекорд второй раз — половина: 2 из 4');
   state.run.maxWave = 100;
-  t.equal(Big.str(x.sim.prestigeGain(state, 'forge', x.cfg)), Big.str(Big.of(47)), 'рекорд 100 после 60: 51 − 4');
-  t.ok(Math.abs(x.sim.coalBonus(state, x.cfg) - 1.2) < 1e-9, 'четыре угля: +20 % урона и золота');
+  t.equal(Big.str(x.sim.prestigeGain(state, 'forge', x.cfg)), Big.str(Big.of(49)), 'рекорд 100 после 60: 51 − 4 сверху и половина от 4');
+  t.ok(Math.abs(x.sim.coalBonus(state, x.cfg) - 1.4) < 1e-9, 'четыре угля: +40 % урона и золота');
 };
 
 exports['босс: не успели — откат на волну назад и фарм, «Ещё раз» возвращает'] = function (t) {
@@ -258,13 +258,15 @@ exports['улучшения кузни: потолок только там, гд
   var r = state.run;
   var g = r.grid;
   for (var i = 0; i < g.length; i++) g[i] = 0;
-  r.up.twin = Math.round(3 / cfg['up.twin.step']);
+  // The first level at which Двойная поковка, with its milestones, makes at least four blades.
+  r.up.twin = 1;
+  while (1 + Math.floor(x.sim.upgradeEffective(state, cfg, 'twin', r.up.twin) * cfg['up.twin.step']) < 4) r.up.twin++;
   r.up.melt = Math.round(2 / cfg['up.melt.step']);
   r.forgeT = 0;
   x.sim.workshop(state, 0.001, cfg, Rng.make(3), 1000);
   var made = g.filter(function (n) { return n > 0; });
   var twins = 1 + Math.floor(x.sim.upgradeEffective(state, cfg, 'twin') * cfg['up.twin.step']);
-  t.ok(twins >= 4, 'двойная поковка с рубежом сотого уровня даёт не меньше 4 клинков, получено ' + twins);
+  t.ok(twins >= 4, 'двойная поковка с рубежами даёт не меньше 4 клинков, получено ' + twins);
   t.ok(made.length === twins || made.length === twins + 1, 'двойная поковка с рубежом: ' + twins + ' клинков и шанс ещё одного, получено ' + made.length);
   t.ok(made.every(function (n) { return n === 3; }), 'удачная плавка 200 %: уровни ' + made.join(','));
   // Караванщик retains logarithmic softening between the bounded milestone bonuses.
