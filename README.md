@@ -1,6 +1,6 @@
 # Axiko Store
 
-Модули и игры для Axiko — личного Android-ассистента с редактируемой рабочей средой. Здесь находятся читаемые исходники, каталог `index.json` и инструменты авторов. Само приложение Axiko пока находится в закрытом репозитории; APK здесь не поставляется.
+Модули и игры для Axiko — личного Android-ассистента с редактируемой рабочей средой. Здесь находятся читаемые исходники, каталог `index.json` и инструменты авторов. Исходный код приложения и инструкции по сборке APK доступны в [репозитории Axiko](https://github.com/Billerens/axiko).
 
 В первом каталоге — **40 пакетов: 17 модулей и 23 игры**. Среди них Кузница слияний, Словоплёт, Эволюция, Колония астероидов, Траты, Обои дня и Жизнь-RPG. Описание и проверки каждого проекта лежат в его собственной папке.
 
@@ -103,6 +103,7 @@ python tools/store/build_catalog.py `
   --download-url-template 'https://github.com/Billerens/axiko-store/releases/download/{id}-v{version}' `
   --publisher billerens `
   --licensefile LICENSE `
+  --license-id Apache-2.0 `
   --exclude sparks-ring
 python tools/store/validate_metadata.py --index ../axiko-store-dist/index.json
 ```
@@ -121,6 +122,6 @@ python tools/store/versions.py record --store . --built ../axiko-store-dist
 
 ## Лицензия
 
-Общая открытая лицензия проекта пока **не выбрана**; пакеты помечены `UNLICENSED`. Публичная доступность исходников сама по себе не выдаёт открытую лицензию. См. [LICENSE](LICENSE).
+Собственный код Axiko Store, включая официальные модули и игры, распространяется по [Apache License 2.0](LICENSE). Новые выпуски указывают идентификатор `Apache-2.0` в манифесте и включают текст лицензии в корень ZIP.
 
-У сторонних материалов действуют собственные условия. Лицензии словаря Словоплёта сохранены в [word-weaver/_data/assets/LICENSE.txt](word-weaver/_data/assets/LICENSE.txt) и включены в его ZIP без изменений.
+У сторонних материалов действуют собственные условия. Например, Three.js распространяется по MIT, а словарь «Словоплёта» — по CC BY-SA 4.0. Их лицензии и сведения об авторах входят в соответствующие ZIP. [Лицензия Three.js](freeboard/vendor/three-0.160.0/LICENSE) · [Условия словаря](word-weaver/_data/assets/LICENSE.txt)

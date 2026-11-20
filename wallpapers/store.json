@@ -1,7 +1,7 @@
 {
   "id": "wallpapers",
   "kind": "module",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "title": "Wallpaper of the Day",
   "summary": "Every morning a photo from open sources to match the weather, the season and your taste — for the outer and inner Fold screens and the lock screen, with the author and license",
   "tags": ["appearance", "widget"],

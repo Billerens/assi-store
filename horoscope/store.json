@@ -1,7 +1,7 @@
 {
   "id": "horoscope",
   "kind": "module",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "title": "Data Horoscope",
   "summary": "A joke forecast for the day from your own habits: delivery on Thursdays, lack of sleep, steps, streaks. The next day the stars check what came true and count their accuracy.",
   "tags": ["life", "humor"],

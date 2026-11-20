@@ -1,7 +1,7 @@
 {
   "id": "wave-survival",
   "kind": "game",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "title": "Last Bastion",
   "summary": "The hero fires on their own; you steer with a finger or the keyboard and pick upgrades; five minutes of chaos",
   "tags": ["arcade", "roguelike"],

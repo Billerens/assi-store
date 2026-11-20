@@ -1,7 +1,7 @@
 {
   "id": "tide-runner",
   "kind": "game",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "title": "Crestline",
   "summary": "Dodge oncoming trains, jump between freight cars and slide through harbour tunnels. Learn each pattern as the railway picks up speed.",
   "tags": [

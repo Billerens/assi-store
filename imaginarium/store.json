@@ -1,7 +1,7 @@
 {
   "id": "imaginarium",
   "kind": "module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "title": "Imaginarium",
   "summary": "Walk through your own 3D library, bind original stories one chapter at a time and sculpt furnishings with words.",
   "tags": [

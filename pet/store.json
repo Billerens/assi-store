@@ -1,7 +1,7 @@
 {
   "id": "pet",
   "kind": "module",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "title": "Pet",
   "summary": "A little drawn creature: its mood comes from sleep, steps, screen at night and today’s marks, its growth from Life RPG, its items from Achievements; a card on the home screen and a widget",
   "tags": ["life", "widget"],

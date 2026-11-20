@@ -1,7 +1,7 @@
 {
   "id": "hat",
   "kind": "module",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "title": "Hat",
   "summary": "A party game: you explain a word without saying it, and the phone itself hears when it’s guessed",
   "tags": ["party", "voice", "words"],

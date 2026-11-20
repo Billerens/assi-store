@@ -1,7 +1,7 @@
 {
   "id": "rpg",
   "kind": "module",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "title": "Life RPG",
   "summary": "A role-playing game on top of your life: XP and skills for steps, sleep and habits, a map of discovered places in the fog, quests drawn from your usual days, and a chronicle. The character is the Pet’s creature.",
   "tags": ["life", "achievements", "habits"],

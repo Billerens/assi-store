@@ -1,7 +1,7 @@
 {
   "id": "draw-guess",
   "kind": "module",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "title": "Draw & Guess",
   "summary": "A two-way game: you draw and the model guesses aloud as you go; the model draws stroke by stroke and you shout guesses, the phone hears the right one",
   "tags": ["drawing", "ai", "party"],

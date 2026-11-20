@@ -1,7 +1,7 @@
 {
   "id": "inbox",
   "kind": "module",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "title": "Inbox",
   "summary": "One feed of messages from all messengers: important, later, noise; digests of chatty groups and replies right from the feed",
   "tags": ["messages", "productivity"],

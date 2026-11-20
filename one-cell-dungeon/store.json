@@ -1,7 +1,7 @@
 {
   "id": "one-cell-dungeon",
   "kind": "game",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "title": "One-Cell Dungeon",
   "summary": "A descent on a 3×3 grid: a step eats the neighbouring card, and the next one is laid down behind you",
   "tags": ["roguelike", "cards"],

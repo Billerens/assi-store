@@ -20,6 +20,7 @@ python tools/store/build_catalog.py `
   --download-url-template 'https://github.com/Billerens/axiko-store/releases/download/{id}-v{version}' `
   --publisher billerens `
   --licensefile LICENSE `
+  --license-id Apache-2.0 `
   --exclude sparks-ring
 ```
 
@@ -70,7 +71,7 @@ python tools/store/versions.py check --store . --licensefile LICENSE --exclude s
 python tools/store/versions.py record --store . --built ../axiko-store-dist
 ```
 
-`--license-id` по умолчанию `UNLICENSED`: сборщик не выдаёт лицензию за автора. Файл `--licensefile` копируется в корень каждого ZIP как `LICENSE`; лицензии сторонних ресурсов должны оставаться рядом с ресурсами.
+Официальный магазин передаёт `--license-id Apache-2.0` и свой файл `LICENSE`. Для своего магазина передайте идентификатор выбранной лицензии и соответствующий файл через `--licensefile`. Сборщик копирует этот файл в корень каждого ZIP под именем `LICENSE` и записывает идентификатор в каталог и манифест. Если опустить `--license-id`, в метаданные попадёт `UNLICENSED`. Сохраняйте лицензии сторонних ресурсов рядом с самими ресурсами.
 
 В папке пакета нужны `store.json`, `README.md`, описатель своего вида и файлы реализации. `store.json.id` определяет ID, а не имя папки. Вид пакета (`kind`) — `module` с описателем `module.json` либо вид из `kinds.json` магазина: там для каждого вида названы модуль-хозяин, файл-описатель и, если у хозяина есть версии правил, их имя и версия (`{"game": {"host": "games", "descriptor": "game.json", "engine": "gamesEngine", "version": 1}}`). Сборщик своего списка видов не держит. `target` должен быть `modules/<id>` для модуля либо `modules/<хозяин>/<id>` для пакета другого вида. Сборщик отказывается переименовывать старые ID и пути сохранений. Отсутствующий `module.json.id` добавляется только в упакованную копию с записью преобразования в отчёт.
 
@@ -97,7 +98,7 @@ $env:AXIKO_STORE_CATALOG_DIST = (Resolve-Path ../axiko-store-dist).Path
 ./gradlew.bat :app:testDebugUnitTest --tests app.axiko.StoreCatalogDistributionTest --rerun-tasks --console=plain
 ```
 
-Он создаёт `catalog-validation.json`, привязанный к SHA-256 индекса. Проверяются архивы, которые есть в папке сборки; пакеты без изменений перечислены в `notRebuilt`. Исходники Axiko пока закрыты; этот JVM-тест не входит в публичный магазин. Независимым авторам доступны Python-проверки и проверка плана установки в совместимой сборке приложения.
+Он создаёт `catalog-validation.json`, привязанный к SHA-256 индекса. Проверяются архивы, которые есть в папке сборки; пакеты без изменений перечислены в `notRebuilt`. JVM-тест входит в [исходный код Axiko](https://github.com/Billerens/axiko). Независимым авторам доступны Python-проверки и проверка плана установки в совместимой сборке приложения.
 
 ## Проверка метаданных
 

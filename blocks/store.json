@@ -1,7 +1,7 @@
 {
   "id": "blocks",
   "kind": "game",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "title": "Blocks",
   "summary": "Complete lines, keep your streak and rescue the board with tools",
   "tags": ["puzzle", "arcade"],

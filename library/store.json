@@ -1,7 +1,7 @@
 {
   "id": "library",
   "kind": "game",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "title": "Library",
   "summary": "Collect books, read them on a timer and open halls: knowledge grows the branches, rare tomes unlock new doors, and every book comes with a made-up annotation for the trip",
   "tags": ["idle", "relaxing"],
