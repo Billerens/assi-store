@@ -3,17 +3,17 @@
     {
       "archive": {
         "fileCount": 18,
-        "sha256": "ad479d4333cab2597d29d3fc9cc8079c406f749532f2fe0032eb40531eff80e5",
-        "size": 73637,
-        "unpackedSize": 226440,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/achievements-v0.1.3/achievements-0.1.3.zip"
+        "sha256": "7895ca2e4537aa71b24e17bfe74fbf3e5fc7b55a77a5500eb5d8430f36bf9655",
+        "size": 77299,
+        "unpackedSize": 237302,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/achievements-v0.1.4/achievements-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/achievements.json",
-        "sha256": "372adde22d13ea9ece2e7a12340b56c4dc936b689401a320204cc37d0a48140e",
+        "sha256": "91cedd62871fbcf9e4add03ef1e74b0e3d1397fe243ff55e32d7bc77d3769c3f",
         "size": 1661
       },
       "icon": {
@@ -24,7 +24,7 @@
       },
       "id": "achievements",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Достижения за реальную жизнь: сон, шаги, привычки, места, траты, экран и игры. Формат для агента — AGENT.md",
@@ -35,7 +35,7 @@
           "title": "Ачивки за жизнь"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/achievements-v0.1.3/achievements-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/achievements-v0.1.4/achievements-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Achievements for real life: sleep, steps, habits, places, spending, screen and games. The format for the agent is AGENT.md",
       "tags": [
@@ -43,16 +43,15 @@
         "achievements"
       ],
       "title": "Life Achievements",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 24,
-        "sha256": "832806dfc73584b5a7afa8a9f195500463d55422c120216356bfdc72aa8101a6",
-        "size": 109933,
-        "unpackedSize": 362096,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/alchemist-v0.1.3/alchemist-0.1.3.zip"
+        "sha256": "20fc16ee427f830dcb5b3bdc9de74ce58d8a700a468b207c3bec8d3f7af405d0",
+        "size": 113590,
+        "unpackedSize": 372958,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/alchemist-v0.1.4/alchemist-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -60,7 +59,7 @@
       },
       "details": {
         "path": "catalog/details/alchemist.json",
-        "sha256": "c505ce02f2097582fd8b5815e3101d33243acb60c4628c1bd20d1f32015e4855",
+        "sha256": "eac7389c00d2da0bd281e774c90fc83d2d61ea249fe2c2a97f19d1f4b3e92dd2",
         "size": 1289
       },
       "icon": {
@@ -71,7 +70,7 @@
       },
       "id": "alchemist",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Смешивайте стихии и открывайте вещества, от пара до метро; пока есть сеть, модель дописывает дерево рецептов вглубь, а в дороге игра берёт открытия из запаса",
@@ -83,7 +82,7 @@
           "title": "Алхимик"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/alchemist-v0.1.3/alchemist-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/alchemist-v0.1.4/alchemist-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Mix the elements and discover substances, from steam to the subway; while there is network the model extends the recipe tree, and on the road the game takes discoveries from the stock",
       "tags": [
@@ -92,16 +91,15 @@
         "ai"
       ],
       "title": "Alchemist",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 25,
-        "sha256": "3d44062d8df5d0c43e5343b0d4d77a7157dcb10f2543341f11e7eab3512ce8fa",
-        "size": 116279,
-        "unpackedSize": 390608,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/asteroid-colony-v0.1.3/asteroid-colony-0.1.3.zip"
+        "sha256": "76bdab5f918cd1987779df334abda24feea3a117a9c7e2638fb73b588896aa8b",
+        "size": 119936,
+        "unpackedSize": 401470,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/asteroid-colony-v0.1.4/asteroid-colony-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -109,7 +107,7 @@
       },
       "details": {
         "path": "catalog/details/asteroid-colony.json",
-        "sha256": "f55c6f45a67f2cd0173fb7c7155f89c161e0ffa5a935204512639698719913eb",
+        "sha256": "c35547294d4173815a186f86c03fc3298b7d7779cede5d322c066008cafbaabd",
         "size": 1667
       },
       "icon": {
@@ -120,7 +118,7 @@
       },
       "id": "asteroid-colony",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Дроны грызут астероид, исследования открывают производственные цепочки, а когда колония готова, она прыгает к новой звезде",
@@ -132,7 +130,7 @@
           "title": "Колония на астероиде"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/asteroid-colony-v0.1.3/asteroid-colony-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/asteroid-colony-v0.1.4/asteroid-colony-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Drones mine an asteroid, research opens production chains, and the colony jumps to a new star when ready",
       "tags": [
@@ -141,23 +139,22 @@
         "production"
       ],
       "title": "Asteroid Colony",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 19,
-        "sha256": "fb25a92afdac1944bcf096bce326fd2e59b336e2e9171709fb70cf554c4e2280",
-        "size": 78272,
-        "unpackedSize": 231079,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/bedtime-series-v0.1.3/bedtime-series-0.1.3.zip"
+        "sha256": "8e0bed2a090f5bcd2f0f3931354854c6dde2222157c95e5a2e6e9c2e350497f5",
+        "size": 81932,
+        "unpackedSize": 241941,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/bedtime-series-v0.1.4/bedtime-series-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/bedtime-series.json",
-        "sha256": "6b7df42994af6b44c8ed1c8497738650bb55c859f3166049a41f73a8e7c0150e",
+        "sha256": "1c184b8299c0cff75b318d8805532be41274b66afbf35ee7c8c52029c801114d",
         "size": 1665
       },
       "icon": {
@@ -168,7 +165,7 @@
       },
       "id": "bedtime-series",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Каждый вечер новая серия интерактивной истории голосом: вы — герой, в сюжете — детали вашего дня, выбор на развилках — голосом, засыпать можно посреди серии",
@@ -180,7 +177,7 @@
           "title": "Сериал на ночь"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/bedtime-series-v0.1.3/bedtime-series-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/bedtime-series-v0.1.4/bedtime-series-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Every evening a new episode of an interactive story by voice: you are the hero, the plot has details of your day, you choose at the forks by voice, and you can fall asleep mid-episode",
       "tags": [
@@ -189,16 +186,15 @@
         "ai"
       ],
       "title": "Bedtime Series",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 30,
-        "sha256": "bbec87465735b02e2e2e703fff09843bd4a9221cff2ab35d0d3e9e13164690ce",
-        "size": 94077,
-        "unpackedSize": 331419,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/blocks-v0.1.3/blocks-0.1.3.zip"
+        "sha256": "68513d9d4453ca95f59dfbc97afa0528c76361547ffbdd2a37040dd48583afee",
+        "size": 97732,
+        "unpackedSize": 342281,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/blocks-v0.1.4/blocks-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -206,7 +202,7 @@
       },
       "details": {
         "path": "catalog/details/blocks.json",
-        "sha256": "6b1acbae4f7ac875c8a943ad19487e93b4a5b51baca9ca372a181000d07da8df",
+        "sha256": "c323f8b982531ea17c034bf9a24bf7b0ef104a12857de2fc107868ac369161ba",
         "size": 1649
       },
       "icon": {
@@ -217,7 +213,7 @@
       },
       "id": "blocks",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Собирайте линии, берегите серии и спасайте поле инструментами",
@@ -228,7 +224,7 @@
           "title": "Блоки"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/blocks-v0.1.3/blocks-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/blocks-v0.1.4/blocks-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Complete lines, keep your streak and rescue the board with tools",
       "tags": [
@@ -236,16 +232,15 @@
         "arcade"
       ],
       "title": "Blocks",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 18,
-        "sha256": "7cbeb9a8bcfb728710af685ba046a8d0f12ee9810bbfbd956e67f781d5f3072b",
-        "size": 77239,
-        "unpackedSize": 260392,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/conveyors-v0.1.3/conveyors-0.1.3.zip"
+        "sha256": "0c119d64b21b9c6cb4f6c828a309b7b5e91b4cfd08bb69a92a4856cc9dc9e6d3",
+        "size": 80895,
+        "unpackedSize": 271254,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/conveyors-v0.1.4/conveyors-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -253,7 +248,7 @@
       },
       "details": {
         "path": "catalog/details/conveyors.json",
-        "sha256": "d403f12aa25e50f7439f78b14a9e218698ecda2422b681f3eb92c87afa2aed4a",
+        "sha256": "bad5e2944a63e63fddcaeeb7b0497dfbef7c0b6337ffcfaa8d3d5d635b748aa9",
         "size": 1655
       },
       "icon": {
@@ -264,7 +259,7 @@
       },
       "id": "conveyors",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Буры, ленты, печи и сборщики на клетчатом участке чужой планеты",
@@ -276,7 +271,7 @@
           "title": "Конвейеры"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/conveyors-v0.1.3/conveyors-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/conveyors-v0.1.4/conveyors-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Drills, belts, furnaces and assemblers on a grid plot of an alien planet",
       "tags": [
@@ -285,16 +280,15 @@
         "space"
       ],
       "title": "Conveyors",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 22,
-        "sha256": "3ab2127d6fe8aefff5dd32d388691e677186d5def1b5470b434080d2abc4cf4a",
-        "size": 92326,
-        "unpackedSize": 304556,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/deep-mine-v0.1.3/deep-mine-0.1.3.zip"
+        "sha256": "c53835cf809c5fa85b55b16bc6ed4777debcfcf605ba2d11def88bbe387b9969",
+        "size": 95984,
+        "unpackedSize": 315418,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/deep-mine-v0.1.4/deep-mine-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -302,7 +296,7 @@
       },
       "details": {
         "path": "catalog/details/deep-mine.json",
-        "sha256": "de9dd92320fa2ad67833db91044a8550eda303f9572cec1665affe78f59e60af",
+        "sha256": "5d0b9b0b98c6b1899cad083b3e02b3088746075df59c275c7b59ae3c225a3d9c",
         "size": 1545
       },
       "icon": {
@@ -313,7 +307,7 @@
       },
       "id": "deep-mine",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Бур идёт вниз через слои пород: глубже — твёрже, но богаче, а каждая тысяча метров приносит новую напасть",
@@ -324,7 +318,7 @@
           "title": "Шахта вглубь"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/deep-mine-v0.1.3/deep-mine-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/deep-mine-v0.1.4/deep-mine-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "The drill goes down through layers of rock: deeper means harder but richer, and every thousand metres brings a new plague",
       "tags": [
@@ -332,16 +326,15 @@
         "mining"
       ],
       "title": "Deep Mine",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 19,
-        "sha256": "4702e95c05b4a9857ec3cb8f29170be98b873945e63f3ad99eb3005039d666d8",
-        "size": 98580,
-        "unpackedSize": 317123,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/dragon-hoard-v0.1.3/dragon-hoard-0.1.3.zip"
+        "sha256": "09fec52e52e4019fa6ff195b8b4c9ad675d7bda1336d7e29ca20e1af3e370f3e",
+        "size": 102238,
+        "unpackedSize": 327985,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/dragon-hoard-v0.1.4/dragon-hoard-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -349,7 +342,7 @@
       },
       "details": {
         "path": "catalog/details/dragon-hoard.json",
-        "sha256": "2b28ec9b6b40c9ca138ff4fc2c89b196dba35a70a7b2177bd501f6f0eaeeb0c2",
+        "sha256": "aaff3aef61c263f68f1a3e4d4a22cb4b0fa236cb42d82eb1ae490be9edd40e03",
         "size": 1661
       },
       "icon": {
@@ -360,7 +353,7 @@
       },
       "id": "dragon-hoard",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Дракон копит золото, рыцари приходят за кучей, сон на век делает его древнее",
@@ -371,7 +364,7 @@
           "title": "Сокровищница дракона"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/dragon-hoard-v0.1.3/dragon-hoard-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/dragon-hoard-v0.1.4/dragon-hoard-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "A dragon hoards gold, knights come for the pile, a sleep for an age makes it older",
       "tags": [
@@ -379,23 +372,22 @@
         "fantasy"
       ],
       "title": "Dragon's Hoard",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 20,
-        "sha256": "dcc19f42ce1738b6ba5bcdcd0b2907823858e6c0678e85e26330f6c98269c0a0",
-        "size": 91138,
-        "unpackedSize": 293797,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/draw-guess-v0.1.3/draw-guess-0.1.3.zip"
+        "sha256": "721acea2866c2cafd6423e76725dd0779bc71e7a38a264434d95103734ae764b",
+        "size": 94798,
+        "unpackedSize": 304659,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/draw-guess-v0.1.4/draw-guess-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/draw-guess.json",
-        "sha256": "2df8cdc8c32c95a92d19f8733eca4fa23be7ee8447181087b8d4021fbb04fc52",
+        "sha256": "b417071ff8a9f9a8fa90b96c3d30203c06d9666e1c6c03d10c419d53d6a2c6a3",
         "size": 1657
       },
       "icon": {
@@ -406,7 +398,7 @@
       },
       "id": "draw-guess",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Игра в две стороны: вы рисуете — модель угадывает вслух по ходу; модель рисует штрих за штрихом — вы кричите догадки, телефон слышит верную",
@@ -418,7 +410,7 @@
           "title": "Рисуй — угадаю"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/draw-guess-v0.1.3/draw-guess-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/draw-guess-v0.1.4/draw-guess-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "A two-way game: you draw and the model guesses aloud as you go; the model draws stroke by stroke and you shout guesses, the phone hears the right one",
       "tags": [
@@ -427,16 +419,15 @@
         "party"
       ],
       "title": "Draw & Guess",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 22,
-        "sha256": "536a9a9bd99ab53085af5b4a63029986e26ba83aed098a942cf2816320c76c36",
-        "size": 98967,
-        "unpackedSize": 318445,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/dynasty-v0.1.3/dynasty-0.1.3.zip"
+        "sha256": "ca43af56c0c71e4a3c49f5d8984395b07eb4f3617b3901e8acdd9a7e7ebde770",
+        "size": 102624,
+        "unpackedSize": 329307,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/dynasty-v0.1.4/dynasty-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -444,7 +435,7 @@
       },
       "details": {
         "path": "catalog/details/dynasty.json",
-        "sha256": "56b360240b643ec78e6145e1b67eacc36c5ed8aa4607f3eddbf1fcc4de0ae0a4",
+        "sha256": "141c58aa39451b3936b179ebf1030392533d7db8a20efc7ccf86ef755b5c4caa",
         "size": 1397
       },
       "icon": {
@@ -455,7 +446,7 @@
       },
       "id": "dynasty",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Правитель живёт, богатеет и стареет; его смерть — смена поколения, и на древе рода прибавляется имя",
@@ -466,7 +457,7 @@
           "title": "Династия"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/dynasty-v0.1.3/dynasty-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/dynasty-v0.1.4/dynasty-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "A ruler lives, grows rich and ages; his death is a change of generation, and the family tree gains a name",
       "tags": [
@@ -474,16 +465,15 @@
         "strategy"
       ],
       "title": "Dynasty",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 24,
-        "sha256": "8cb955572843aab9b945ef5c2033a84de5d921aa6a560400b18bd04b1502dda1",
-        "size": 119977,
-        "unpackedSize": 397943,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/evolution-v0.1.3/evolution-0.1.3.zip"
+        "sha256": "5876a0533731f05d6d015840d76360eea58e08fbc94e2bd616110e35b5f319ac",
+        "size": 123637,
+        "unpackedSize": 408805,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/evolution-v0.1.4/evolution-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -491,7 +481,7 @@
       },
       "details": {
         "path": "catalog/details/evolution.json",
-        "sha256": "85c88e32dfc7b13b983efc1f85b2dd346130937c7733cbbe187da7d791b31f30",
+        "sha256": "5cf5a69caf91759cce7525d22f28668d5334605a8ee1593ba27d7f9a7eedcf18",
         "size": 1655
       },
       "icon": {
@@ -502,7 +492,7 @@
       },
       "id": "evolution",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "От капли бульона до звёздных колоний: восемь этапов жизни и новые вселенные с другими законами.",
@@ -513,7 +503,7 @@
           "title": "Эволюция"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/evolution-v0.1.3/evolution-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/evolution-v0.1.4/evolution-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "From a drop of primordial soup to stellar colonies: eight stages of life and new universes with different laws.",
       "tags": [
@@ -521,16 +511,15 @@
         "space"
       ],
       "title": "Evolution",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 23,
-        "sha256": "ceb39b7418a65a71b15b56bf3d4bc6b2912c89d7bbda8d62575085950c09dabd",
-        "size": 104501,
-        "unpackedSize": 350661,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/fishing-v0.1.3/fishing-0.1.3.zip"
+        "sha256": "526b7f5d401938afd6279f2ae1ef29c8c61ded0b638316a0ec9733dc2d3d7515",
+        "size": 108162,
+        "unpackedSize": 361523,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/fishing-v0.1.4/fishing-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -538,7 +527,7 @@
       },
       "details": {
         "path": "catalog/details/fishing.json",
-        "sha256": "f7f1efc02c53c6731b2f88f0dd0a4852f38b23e20f919b0ed37ce94f1965ae97",
+        "sha256": "bb4496556562ef9ffd1b486e785fb9a87470129a4718cb276d3653cdb4eb0d89",
         "size": 1651
       },
       "icon": {
@@ -549,7 +538,7 @@
       },
       "id": "fishing",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Заброс, подсечка, вываживание — и аквариум, который приносит доход, пока телефон в кармане",
@@ -560,7 +549,7 @@
           "title": "Рыбалка"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/fishing-v0.1.3/fishing-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/fishing-v0.1.4/fishing-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Cast, hook, reel in — and an aquarium that earns while the phone is in your pocket",
       "tags": [
@@ -568,23 +557,22 @@
         "relaxing"
       ],
       "title": "Fishing",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 22,
-        "sha256": "a0321e69021718ababe68f1bf7db25fef2b6340b68bdf0ffc6b51a57c5746bfe",
-        "size": 72010,
-        "unpackedSize": 220043,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/focus-v0.1.3/focus-0.1.3.zip"
+        "sha256": "b6a65fe7cc407d6af8d111ed1d2741eba483f3b64cb64a81adbf881c16f11d97",
+        "size": 75667,
+        "unpackedSize": 230905,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/focus-v0.1.4/focus-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/focus.json",
-        "sha256": "58654c60e530dec0c4524050187128514536945e8b14f57f9392ced25b509093",
+        "sha256": "bcef8ee0f81e92c581cbce6b4960db405fddd51390ba3cde8c2f6711eddf7a5b",
         "size": 1647
       },
       "icon": {
@@ -595,7 +583,7 @@
       },
       "id": "focus",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Таймер работы: телефон уходит в «не беспокоить», сообщения копятся во Входящих, отвлекающие приложения не открываются, в конце — сводка пропущенного",
@@ -606,7 +594,7 @@
           "title": "Фокус"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/focus-v0.1.3/focus-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/focus-v0.1.4/focus-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "A work timer: the phone goes into Do Not Disturb, messages pile up in Inbox, distracting apps won’t open, and at the end you get a summary of what you missed",
       "tags": [
@@ -614,16 +602,15 @@
         "timer"
       ],
       "title": "Focus",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 42,
-        "sha256": "ad41e0820aa1fbdd16f704d6808f61a872ae8cc3a3204e484ff9b348f8760078",
-        "size": 1022988,
-        "unpackedSize": 2148845,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/freeboard-v0.2.1/freeboard-0.2.1.zip"
+        "sha256": "a9e32bb88795273641895a483037123d280a63a7c7f103a8f68a058d998a5d81",
+        "size": 1026647,
+        "unpackedSize": 2159707,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/freeboard-v0.2.2/freeboard-0.2.2.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -631,7 +618,7 @@
       },
       "details": {
         "path": "catalog/details/freeboard.json",
-        "sha256": "9a00ede232e582ebecc4f41727d883ee765c66036527239339b4fb0d725d8837",
+        "sha256": "f9902c295339633d1bbb97172beec78d19899f1cf1f167371efdb6bce7051dfb",
         "size": 7020
       },
       "icon": {
@@ -642,7 +629,7 @@
       },
       "id": "freeboard",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Пройдите из каюты на мостик, сядьте за штурвал и отправляйтесь в рейс за грузом, на перехват дронов или на поиски минералов.",
@@ -654,7 +641,7 @@
           "title": "Вольный борт"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/freeboard-v0.2.1/freeboard-0.2.1.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/freeboard-v0.2.2/freeboard-0.2.2.package.json",
       "publisher": "billerens",
       "summary": "Walk from the crew quarters to the bridge, take the helm and fly freight, patrols or surface surveys between three ports.",
       "tags": [
@@ -663,22 +650,22 @@
         "simulation"
       ],
       "title": "Freeboard",
-      "version": "0.2.1"
+      "version": "0.2.2"
     },
     {
       "archive": {
         "fileCount": 21,
-        "sha256": "0a28d598c12028b52f2a1db4544392df1f48b1bb458ca64b21a30f32875575cc",
-        "size": 90078,
-        "unpackedSize": 269638,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/game-of-the-day-v0.1.3/game-of-the-day-0.1.3.zip"
+        "sha256": "293217ada5b0a6cb18c6fd3fe1b1a44f35d2436106372c23ca07fbef01fb1f3d",
+        "size": 93739,
+        "unpackedSize": 280500,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/game-of-the-day-v0.1.4/game-of-the-day-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/game-of-the-day.json",
-        "sha256": "85d5d1e7f5139edd731f8fe24f2d5b09b9c7ae1252c2e2d33923bfdcf8f5f408",
+        "sha256": "814b3407cb7c3d646e2963097c5eb1ec9c8d5c2bb5dfb824c1a7e14dbecba95c",
         "size": 2147
       },
       "icon": {
@@ -689,7 +676,7 @@
       },
       "id": "game-of-the-day",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Агент делает новую мини-игру для Игротеки — каждый день, через день, по выбранным дням или несколько раз в день; вы играете и оцениваете, удачные остаются, а агент учится вашему вкусу",
@@ -700,7 +687,7 @@
           "title": "Игра дня"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/game-of-the-day-v0.1.3/game-of-the-day-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/game-of-the-day-v0.1.4/game-of-the-day-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "An agent makes a new mini-game for Game Room — every day, every other day, on chosen days or several times a day; you play and rate, the good ones stay, and the agent learns your taste",
       "tags": [
@@ -708,16 +695,15 @@
         "ai"
       ],
       "title": "Game of the Day",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 18,
-        "sha256": "df90815151ee84356efdbe5e02782e8bf7af2b9d43fa4068ba500030fe9a06cc",
-        "size": 99867,
-        "unpackedSize": 459190,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/garden-v0.1.3/garden-0.1.3.zip"
+        "sha256": "f288de0886fd5cad64ff3baef56a3f3d75ff74aaae1afcca9b0c80b8350547bd",
+        "size": 103526,
+        "unpackedSize": 470052,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/garden-v0.1.4/garden-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -725,7 +711,7 @@
       },
       "details": {
         "path": "catalog/details/garden.json",
-        "sha256": "0ed3c4e038a62f3f54b789ae985c6fd995250fa7e16b6edfbbae97814813a0b6",
+        "sha256": "6dba83cbdfcfd7ec43ff27aee7f11c782d79ca8c2c7786ac99a3324a2705e9c2",
         "size": 1396
       },
       "icon": {
@@ -736,7 +722,7 @@
       },
       "id": "garden",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Растения растут по настоящим часам; скрещивая их по точным правилам наследования, выводите новые сорта и собирайте альбом из 258 записей",
@@ -748,7 +734,7 @@
           "title": "Сад"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/garden-v0.1.3/garden-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/garden-v0.1.4/garden-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Plants grow by the real clock; cross them by exact rules of inheritance to breed new varieties and fill an album of 258 entries",
       "tags": [
@@ -757,23 +743,22 @@
         "real time"
       ],
       "title": "Garden",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 19,
-        "sha256": "09e680693e160c2ae5d3f1a80f5e92747c7679f3de9b7b1fbacbf1d5f4c44638",
-        "size": 79090,
-        "unpackedSize": 255273,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/hat-v0.1.3/hat-0.1.3.zip"
+        "sha256": "689f09c8c4bdada825034897d960f7936717a3a436a4757826a9c59177523592",
+        "size": 82748,
+        "unpackedSize": 266135,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/hat-v0.1.4/hat-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/hat.json",
-        "sha256": "da317a43e0fe22d14c45e35621930b06876feac4c3c6df42079f15ccec20f5b2",
+        "sha256": "f116dc460ed1c1b327bb9727f851a9642e11aba8325f61d73c095f480227c2be",
         "size": 1643
       },
       "icon": {
@@ -784,7 +769,7 @@
       },
       "id": "hat",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Игра для компании: объясняешь слово, не называя его, а телефон сам слышит, когда его угадали",
@@ -796,7 +781,7 @@
           "title": "Шляпа"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/hat-v0.1.3/hat-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/hat-v0.1.4/hat-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "A party game: you explain a word without saying it, and the phone itself hears when it’s guessed",
       "tags": [
@@ -805,23 +790,22 @@
         "words"
       ],
       "title": "Hat",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 29,
-        "sha256": "4a19d9e104646bbf0e9311ad96fc307273258f52090e0aa14f53d8580e25d4a7",
-        "size": 98369,
-        "unpackedSize": 295401,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/health-v0.1.3/health-0.1.3.zip"
+        "sha256": "929fba853664e3e559d366eb0359d6508eefc101981618eec7be2b6f09976505",
+        "size": 102028,
+        "unpackedSize": 306263,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/health-v0.1.4/health-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/health.json",
-        "sha256": "21bb78ed0b45ed2eb3dbbaf6ad6d26b15244335d5d51853607aa0240364559fa",
+        "sha256": "30cbe264fe8d24d269163b0f7c2b3a12e42668429e552c05731a639ffd0da9bb",
         "size": 1649
       },
       "icon": {
@@ -832,7 +816,7 @@
       },
       "id": "health",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Сон, шаги, вода, лекарства по расписанию и привычки с цепочками; разбор сна за неделю и сводка дня для Питомца, Ачивок, Жизни-RPG и Гороскопа",
@@ -843,7 +827,7 @@
           "title": "Здоровье и привычки"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/health-v0.1.3/health-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/health-v0.1.4/health-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Sleep, steps, water, scheduled medications and habits with streaks; a weekly sleep review and a daily summary for Pet, Achievements, Life RPG and Horoscope",
       "tags": [
@@ -851,23 +835,22 @@
         "habits"
       ],
       "title": "Health and Habits",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 32,
-        "sha256": "52cc1fb89612818990d4af53795bae5778e5c77d95e1856b5d1a3f9fdbbc7b75",
-        "size": 82474,
-        "unpackedSize": 242788,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/holidays-v0.1.3/holidays-0.1.3.zip"
+        "sha256": "a1596cea5c7ec6fa006c2adf24efcea567878f65e4b49ecd27a9c7b85d12f055",
+        "size": 86134,
+        "unpackedSize": 253650,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/holidays-v0.1.4/holidays-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/holidays.json",
-        "sha256": "2dab409ea8cadd0da2552bfdc46bd700f11c18ea3af89e402567e29416926008",
+        "sha256": "13eddeeb9c850e0a6033606eed99036596ec01c98cf3b6dbc4794c41d68c5de6",
         "size": 1653
       },
       "icon": {
@@ -878,7 +861,7 @@
       },
       "id": "holidays",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Поводы года на экранах Axiko: тихий снег под Новый год, звезда на Рождество, блины на Масленицу; напоминания о днях рождения близких с черновиком поздравления",
@@ -889,7 +872,7 @@
           "title": "Праздничные пасхалки"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/holidays-v0.1.3/holidays-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/holidays-v0.1.4/holidays-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Occasions of the year on Axiko’s screens: quiet snow for New Year, a star for Christmas, pancakes for Maslenitsa; reminders about loved ones' birthdays with a greeting draft",
       "tags": [
@@ -897,23 +880,22 @@
         "holidays"
       ],
       "title": "Holiday Easter Eggs",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 18,
-        "sha256": "9809feb955424aa232d64d2162a67844d5f44149ff9cee462ebea59509fcb4c9",
-        "size": 61140,
-        "unpackedSize": 186668,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/horoscope-v0.1.3/horoscope-0.1.3.zip"
+        "sha256": "2e851f6ea39253123414559f1f60cca9b59e521430ed8e38bd94790cf608952b",
+        "size": 64801,
+        "unpackedSize": 197530,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/horoscope-v0.1.4/horoscope-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/horoscope.json",
-        "sha256": "35ae3395c8cdcdb536e7c722e0de41156127b061757d5ac0685818bad108589c",
+        "sha256": "9a965652b8b19bca73649628cbad82d86c474b54dc1956a94e4ffba732637fe7",
         "size": 1655
       },
       "icon": {
@@ -924,7 +906,7 @@
       },
       "id": "horoscope",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Шуточный прогноз на день из ваших же привычек: доставка по четвергам, недосып, шаги, цепочки. Назавтра звёзды сами проверяют, что сбылось, и считают точность.",
@@ -935,7 +917,7 @@
           "title": "Гороскоп по данным"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/horoscope-v0.1.3/horoscope-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/horoscope-v0.1.4/horoscope-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "A joke forecast for the day from your own habits: delivery on Thursdays, lack of sleep, steps, streaks. The next day the stars check what came true and count their accuracy.",
       "tags": [
@@ -943,23 +925,22 @@
         "humor"
       ],
       "title": "Data Horoscope",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 26,
-        "sha256": "b5912fbe2e7b27dca308dfb046fa97f7841e8fb03adba95b09c5cad68194f7fd",
-        "size": 447104,
-        "unpackedSize": 1572699,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/imaginarium-v0.1.1/imaginarium-0.1.1.zip"
+        "sha256": "b3dd76c45bc81e4c92570e22c1581ca1a872849a7aa13a2d548cfda3e875f0f9",
+        "size": 450764,
+        "unpackedSize": 1583561,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/imaginarium-v0.1.2/imaginarium-0.1.2.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/imaginarium.json",
-        "sha256": "dcb541abce5a548bb5ec678e8b4b7b1271a76ec9e98132b6fb1a90717545d1fc",
+        "sha256": "d25d3f84fca3fb33187601eb9b287960a64fb8ba352b960ece1a47bed2b9b3e7",
         "size": 4429
       },
       "icon": {
@@ -970,7 +951,7 @@
       },
       "id": "imaginarium",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Личная трёхмерная библиотека. Придумывайте книги, читайте новые главы по запросу и создавайте объёмные вещи для своего зала.",
@@ -982,7 +963,7 @@
           "title": "Imaginarium"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/imaginarium-v0.1.1/imaginarium-0.1.1.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/imaginarium-v0.1.2/imaginarium-0.1.2.package.json",
       "publisher": "billerens",
       "summary": "Walk through your own 3D library, bind original stories one chapter at a time and sculpt furnishings with words.",
       "tags": [
@@ -991,22 +972,22 @@
         "3d"
       ],
       "title": "Imaginarium",
-      "version": "0.1.1"
+      "version": "0.1.2"
     },
     {
       "archive": {
         "fileCount": 23,
-        "sha256": "940466d87c3780a65f2ced141d00b2147740dacc236b6bf7d81387efee4513f4",
-        "size": 78599,
-        "unpackedSize": 236942,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/inbox-v0.1.3/inbox-0.1.3.zip"
+        "sha256": "7883e1b8cfbedafbb8bdcf60529ef20046e54424d746c1ea81e10ae728ac4c3e",
+        "size": 82259,
+        "unpackedSize": 247804,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/inbox-v0.1.4/inbox-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/inbox.json",
-        "sha256": "5d28b773d9a2cfc536a9b765bb5bc873fb3f7293d70e99eff943cdeb01ff3995",
+        "sha256": "4bccefbb162a42cf3f7a313d0e2c843c901d25cf4697f312b434ac796a24457e",
         "size": 1901
       },
       "icon": {
@@ -1017,7 +998,7 @@
       },
       "id": "inbox",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Одна лента сообщений из всех мессенджеров: важно, подождёт, шум; выжимки болтливых групп и ответы прямо из ленты",
@@ -1028,7 +1009,7 @@
           "title": "Входящие"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/inbox-v0.1.3/inbox-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/inbox-v0.1.4/inbox-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "One feed of messages from all messengers: important, later, noise; digests of chatty groups and replies right from the feed",
       "tags": [
@@ -1036,16 +1017,15 @@
         "productivity"
       ],
       "title": "Inbox",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 22,
-        "sha256": "1552f7ec13c9d19005d6391af0c74b76f977e26f6279cf849119c2c39113d3d8",
-        "size": 67793,
-        "unpackedSize": 222538,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/infinity-layers-v0.1.3/infinity-layers-0.1.3.zip"
+        "sha256": "16654bee36ba29f715064cb3350e4d7483d305d8fd395d6c6adb16852fd8b6af",
+        "size": 71448,
+        "unpackedSize": 233400,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/infinity-layers-v0.1.4/infinity-layers-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1053,7 +1033,7 @@
       },
       "details": {
         "path": "catalog/details/infinity-layers.json",
-        "sha256": "f03f31fdc329294e85b7b807729c5823fa0bd3f1c06404a7c1063307eb49f27c",
+        "sha256": "991cdd962a433e5254b8672eed7873f324094b332fd4798bbc6ceea4b06ad286",
         "size": 1667
       },
       "icon": {
@@ -1064,7 +1044,7 @@
       },
       "id": "infinity-layers",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Ступени растят ступени. Сожмите предел в новый слой и измените правила роста.",
@@ -1075,7 +1055,7 @@
           "title": "Слои бесконечности"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/infinity-layers-v0.1.3/infinity-layers-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/infinity-layers-v0.1.4/infinity-layers-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Stages grow stages. Compress the limit into a new layer and change the rules of growth.",
       "tags": [
@@ -1083,16 +1063,15 @@
         "numbers"
       ],
       "title": "Infinity Layers",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 22,
-        "sha256": "12eb50ce3ed40670402b42877af0284bce6ac3e17d3fadd459bec8fcc5322352",
-        "size": 106277,
-        "unpackedSize": 377867,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/library-v0.1.3/library-0.1.3.zip"
+        "sha256": "5ca985ab3c83c5e24d3d2cf63db6c650b7260273d1505b1f4f8e19d4e35ecb41",
+        "size": 109933,
+        "unpackedSize": 388729,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/library-v0.1.4/library-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1100,7 +1079,7 @@
       },
       "details": {
         "path": "catalog/details/library.json",
-        "sha256": "fdb4e6730bf413894c28c2d175931f7879246cee8b0113f541cb755b384d9ece",
+        "sha256": "dc73d638fdfba5af7cfe86540e1db9acd173200fa62f3f185fff24e4727da0b1",
         "size": 1287
       },
       "icon": {
@@ -1111,7 +1090,7 @@
       },
       "id": "library",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Собирайте книги, читайте их по таймеру и открывайте залы: знания растят ветви, редкие тома отпирают новые двери, к каждой книге — выдуманная аннотация на поездку",
@@ -1122,7 +1101,7 @@
           "title": "Библиотека"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/library-v0.1.3/library-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/library-v0.1.4/library-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Collect books, read them on a timer and open halls: knowledge grows the branches, rare tomes unlock new doors, and every book comes with a made-up annotation for the trip",
       "tags": [
@@ -1130,16 +1109,15 @@
         "relaxing"
       ],
       "title": "Library",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 23,
-        "sha256": "6e525b5a797549ba23d01532d75944848892a902da5937fedef27ca7b36aeb91",
-        "size": 83319,
-        "unpackedSize": 285212,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/menagerie-v0.1.3/menagerie-0.1.3.zip"
+        "sha256": "eee89dc88dc9421632252e452b15f3884f4f7d879e22ff087b5faf28272e9cb3",
+        "size": 86974,
+        "unpackedSize": 296074,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/menagerie-v0.1.4/menagerie-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1147,7 +1125,7 @@
       },
       "details": {
         "path": "catalog/details/menagerie.json",
-        "sha256": "d07dab7bf4f82b5be0184a04dd9fd8d6f69a7654ba966d05b60f32ff75bd8549",
+        "sha256": "7ba363518e3201ed155e4eb08e2738bbcebffbaf161b2235c495b544ef7e63a1",
         "size": 1655
       },
       "icon": {
@@ -1158,7 +1136,7 @@
       },
       "id": "menagerie",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Выводите удивительных зверей, растите породу и побеждайте на турнирах.",
@@ -1169,7 +1147,7 @@
           "title": "Зверинец"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/menagerie-v0.1.3/menagerie-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/menagerie-v0.1.4/menagerie-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Breed remarkable beasts, improve your bloodline and win tournaments.",
       "tags": [
@@ -1177,16 +1155,15 @@
         "breeding"
       ],
       "title": "Menagerie",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 199,
-        "sha256": "242c0611abc9604462baec0033a0eae8ee17f0c4cbc78a3d9d91a0f0346cf870",
-        "size": 3310822,
-        "unpackedSize": 4084499,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.5.0/merge-forge-0.5.0.zip"
+        "sha256": "92311eeda81a9fde1dc228ff2d30ef03752ad041d74a3ab1c9f2d77671849c7b",
+        "size": 3314480,
+        "unpackedSize": 4095361,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.5.1/merge-forge-0.5.1.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1194,7 +1171,7 @@
       },
       "details": {
         "path": "catalog/details/merge-forge.json",
-        "sha256": "e4494ddab18ca4e4585bce5a770f83c1e577e067773e59ecc252a76a58e759db",
+        "sha256": "6ac33fa6093110c9050944b8f5c9aa05400dc94cfd1a38cc32a0a9d19a443934",
         "size": 27561
       },
       "icon": {
@@ -1205,7 +1182,7 @@
       },
       "id": "merge-forge",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Горн куёт клинки, два одинаковых сливаются в один сильнее, клинки сами рубят чудищ у ворот",
@@ -1217,7 +1194,7 @@
           "title": "Кузница слияний"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.5.0/merge-forge-0.5.0.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/merge-forge-v0.5.1/merge-forge-0.5.1.package.json",
       "publisher": "billerens",
       "summary": "The forge makes blades, two alike merge into a stronger one, and the blades cut down the monsters at the gate",
       "tags": [
@@ -1226,16 +1203,15 @@
         "fantasy"
       ],
       "title": "Merge Forge",
-      "updated": "2026-11-20",
-      "version": "0.5.0"
+      "version": "0.5.1"
     },
     {
       "archive": {
         "fileCount": 24,
-        "sha256": "61b2333fc739a66e97199b3307c28c401ea5d50629dff65c279bad46d4bb6756",
-        "size": 82404,
-        "unpackedSize": 269195,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/minesweeper-rogue-v0.1.3/minesweeper-rogue-0.1.3.zip"
+        "sha256": "4119e67e8bbbaebcc461b21bf96353850c0486aa1bf8f41bd864b0478b635ae5",
+        "size": 86064,
+        "unpackedSize": 280057,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/minesweeper-rogue-v0.1.4/minesweeper-rogue-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1243,7 +1219,7 @@
       },
       "details": {
         "path": "catalog/details/minesweeper-rogue.json",
-        "sha256": "ae4c9fbb6cd4854e3b435b329b762a1863391de5b201e779a247c7516ebd8b70",
+        "sha256": "6c4b6d179c96107d1df3fabcfea461e2765067e0885da5df2cf96b45b99cb614",
         "size": 1671
       },
       "icon": {
@@ -1254,7 +1230,7 @@
       },
       "id": "minesweeper-rogue",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Семь полей без угадывания: ищите тайники, собирайте инструменты и открывайте новые глубины",
@@ -1265,7 +1241,7 @@
           "title": "Сапёр-рогалик"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/minesweeper-rogue-v0.1.3/minesweeper-rogue-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/minesweeper-rogue-v0.1.4/minesweeper-rogue-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Seven fields without guessing: find caches, collect tools and unlock new depths",
       "tags": [
@@ -1273,16 +1249,15 @@
         "puzzle"
       ],
       "title": "Minesweeper Rogue",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 24,
-        "sha256": "e52310c7c2644362b9d1677a7ceed71bc2ca55828caa4782f67747c634a9f106",
-        "size": 90309,
-        "unpackedSize": 311798,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/one-cell-dungeon-v0.1.3/one-cell-dungeon-0.1.3.zip"
+        "sha256": "fa5d4eb328b28ecbbd9b4f05be09f684aabd77ffd59cbb9b27049e345a2f5a0b",
+        "size": 93968,
+        "unpackedSize": 322660,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/one-cell-dungeon-v0.1.4/one-cell-dungeon-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1290,7 +1265,7 @@
       },
       "details": {
         "path": "catalog/details/one-cell-dungeon.json",
-        "sha256": "1fe83e65a78d94dc305c13981d48ee2ee93c626868ee623c7d3dc7908a4985ff",
+        "sha256": "5116db56c9419baf6a7b62f70cd5fc7f5390806d5557cd9ae284cf1cce0877df",
         "size": 1669
       },
       "icon": {
@@ -1301,7 +1276,7 @@
       },
       "id": "one-cell-dungeon",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Спуск по сетке 3×3: шаг съедает соседнюю карту, за спиной тут же ложится следующая",
@@ -1312,7 +1287,7 @@
           "title": "Подземелье в одну клетку"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/one-cell-dungeon-v0.1.3/one-cell-dungeon-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/one-cell-dungeon-v0.1.4/one-cell-dungeon-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "A descent on a 3×3 grid: a step eats the neighbouring card, and the next one is laid down behind you",
       "tags": [
@@ -1320,23 +1295,22 @@
         "cards"
       ],
       "title": "One-Cell Dungeon",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 23,
-        "sha256": "644c6d230ffbf8f2f2ecbf616e1cdcfdbee0a77c3f21a747b00a842b628b5255",
-        "size": 85796,
-        "unpackedSize": 249235,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/pet-v0.1.4/pet-0.1.4.zip"
+        "sha256": "7afaf5b8fc3d03b4d0fd33755b86d3f67157a6c6b8d69680d6960c34a56eaa76",
+        "size": 89456,
+        "unpackedSize": 260097,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/pet-v0.1.5/pet-0.1.5.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/pet.json",
-        "sha256": "cc61ca58cb2291023f54fcc73db10460a0a19ce3d4cbba09161bdedbbd47d41e",
+        "sha256": "a4c1397eaea97195f1bc6345e6ebc2bd734e08d01d41f0c784026de2bb03aa67",
         "size": 2491
       },
       "icon": {
@@ -1347,7 +1321,7 @@
       },
       "id": "pet",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Маленькое нарисованное существо: настроение — из сна, шагов, экрана ночью и отметок за сегодня, рост — из Жизни-RPG, вещи — из Ачивок; карточка на главном экране и виджет",
@@ -1358,7 +1332,7 @@
           "title": "Питомец"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/pet-v0.1.4/pet-0.1.4.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/pet-v0.1.5/pet-0.1.5.package.json",
       "publisher": "billerens",
       "summary": "A little drawn creature: its mood comes from sleep, steps, screen at night and today’s marks, its growth from Life RPG, its items from Achievements; a card on the home screen and a widget",
       "tags": [
@@ -1366,23 +1340,22 @@
         "widget"
       ],
       "title": "Pet",
-      "updated": "2026-11-18",
-      "version": "0.1.4"
+      "version": "0.1.5"
     },
     {
       "archive": {
         "fileCount": 22,
-        "sha256": "95c5cb5b4480e364f0308cdc8bffdcb5de9fe1aa180fd600155c807f18b20f43",
-        "size": 99973,
-        "unpackedSize": 322328,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/phone-night-v0.1.3/phone-night-0.1.3.zip"
+        "sha256": "d7d114a053d7acadeb28a7f881b3db679c5896a2320b76314e241c23dafed024",
+        "size": 103635,
+        "unpackedSize": 333190,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/phone-night-v0.1.4/phone-night-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/phone-night.json",
-        "sha256": "fb6960e041864e22a224b7ce72044aae26e1e646efdf344c67926562059b9f58",
+        "sha256": "5441105fd6191b82bf981dd8a4ae4ed4f1e26aa0792b96d312e0d26b06762f64",
         "size": 1659
       },
       "icon": {
@@ -1393,7 +1366,7 @@
       },
       "id": "phone-night",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Утренний отчёт о том, что телефон делал ночью: кто его будил, кто ходил в сеть, куда ушла батарея — с улыбкой, но каждая цифра настоящая",
@@ -1404,7 +1377,7 @@
           "title": "Тайная жизнь телефона"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/phone-night-v0.1.3/phone-night-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/phone-night-v0.1.4/phone-night-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "A morning report on what the phone did at night: who woke it, who used the network, where the battery went — with a smile, but every number is real",
       "tags": [
@@ -1412,23 +1385,22 @@
         "reports"
       ],
       "title": "The Secret Life of the Phone",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 20,
-        "sha256": "bb3f0c188e717a165243207e25ffccaec3846141e92af5e6f1ea349252825c3d",
-        "size": 102698,
-        "unpackedSize": 315742,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/recorder-v0.1.3/recorder-0.1.3.zip"
+        "sha256": "9802ec88c8c449513e303be79e06410826a6a4086a2a712741ce22f5c196a828",
+        "size": 106358,
+        "unpackedSize": 326604,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/recorder-v0.1.4/recorder-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/recorder.json",
-        "sha256": "e7ac7d5c21f900f5287de6831a8ac4e47267a3d5a08763b7581bee541a159cff",
+        "sha256": "9179a9d9b965d5a7b8f843d9f009c6aca7239fc3397191399d293b88005048e0",
         "size": 1653
       },
       "icon": {
@@ -1439,7 +1411,7 @@
       },
       "id": "recorder",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Запись встреч, лекций и мыслей вслух: расшифровка на телефоне по ходу записи, конспект с решениями и задачами, поиск по словам и по смыслу",
@@ -1451,7 +1423,7 @@
           "title": "Диктофон"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/recorder-v0.1.3/recorder-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/recorder-v0.1.4/recorder-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Record meetings, lectures and thoughts out loud: on-phone transcription as you record, a summary with decisions and tasks, search by words and by meaning",
       "tags": [
@@ -1460,23 +1432,22 @@
         "productivity"
       ],
       "title": "Recorder",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 19,
-        "sha256": "4c9f0d0f357c368d6df68d298408a975bf57e550d5b715ba014e82c73ecd7eab",
-        "size": 65485,
-        "unpackedSize": 188062,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/rpg-v0.1.3/rpg-0.1.3.zip"
+        "sha256": "bc73086d1e519644afd3cb1b576aaa04a1f4a6fb454f3e945358473d3046db18",
+        "size": 69144,
+        "unpackedSize": 198924,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/rpg-v0.1.4/rpg-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/rpg.json",
-        "sha256": "1c1e386703a8d5e8271cd86e6f50c8a064ae0eb300ca70460e3fd923667d6711",
+        "sha256": "0b11e4ba6a67bec2c9d57f23698e52a9e6cd6a991a32df1fc26308dcc2cf5b3b",
         "size": 1648
       },
       "icon": {
@@ -1487,7 +1458,7 @@
       },
       "id": "rpg",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Ролевая игра поверх жизни: опыт и навыки за шаги, сон и привычки, карта открытых мест в тумане, квесты от ваших обычных дней и хроника. Персонаж — существо Питомца.",
@@ -1499,7 +1470,7 @@
           "title": "Жизнь-RPG"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/rpg-v0.1.3/rpg-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/rpg-v0.1.4/rpg-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "A role-playing game on top of your life: XP and skills for steps, sleep and habits, a map of discovered places in the fog, quests drawn from your usual days, and a chronicle. The character is the Pet’s creature.",
       "tags": [
@@ -1508,16 +1479,15 @@
         "habits"
       ],
       "title": "Life RPG",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 23,
-        "sha256": "3707e23c86a8a6b4df7343cda92433626fc2e56c5733c5e1b62f6c762cc585f0",
-        "size": 90122,
-        "unpackedSize": 304294,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/snake-rogue-v0.1.3/snake-rogue-0.1.3.zip"
+        "sha256": "6a3d12712db773afd6e7a39c7ec062a013ed501b44c8fbe60bb2bc5cf5346a9e",
+        "size": 93780,
+        "unpackedSize": 315156,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/snake-rogue-v0.1.4/snake-rogue-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1525,7 +1495,7 @@
       },
       "details": {
         "path": "catalog/details/snake-rogue.json",
-        "sha256": "0bd16465ec24e797d710dde88074cf68b3406eed84086355ca05780584c65a3d",
+        "sha256": "485f7c5856ca656bf108651f36901ca52568bbd37540888c1645dde3ebc9bd94",
         "size": 1659
       },
       "icon": {
@@ -1536,7 +1506,7 @@
       },
       "id": "snake-rogue",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Змейка на полянах: диковины дают способности, а длина змеи — её здоровье",
@@ -1547,7 +1517,7 @@
           "title": "Змейка-рогалик"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/snake-rogue-v0.1.3/snake-rogue-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/snake-rogue-v0.1.4/snake-rogue-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "A snake on glades: curios give abilities, and the snake's length is its health",
       "tags": [
@@ -1555,16 +1525,15 @@
         "arcade"
       ],
       "title": "Snake Roguelike",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 268,
-        "sha256": "c038c47f64bc3eaba7fe1a9e54d722ca20788b67c28e117c66f68eaacbaf0fde",
-        "size": 4293379,
-        "unpackedSize": 5721302,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/snake-wanderer-v0.1.0/snake-wanderer-0.1.0.zip"
+        "sha256": "dc1287e898a683f55fbfbb39e8843a3c9768841d0074eb27d0d8171540f20cb7",
+        "size": 4297040,
+        "unpackedSize": 5732164,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/snake-wanderer-v0.1.1/snake-wanderer-0.1.1.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1572,7 +1541,7 @@
       },
       "details": {
         "path": "catalog/details/snake-wanderer.json",
-        "sha256": "3ec749c74f45b38ed815bfc752a2d76abd56a1773245d97ef861ae60489fb9ad",
+        "sha256": "1282a9b6a7115c5cb2dcedd5e8d0132441f4abb4d489e2960daaa4b484f9c51b",
         "size": 3595
       },
       "icon": {
@@ -1583,7 +1552,7 @@
       },
       "id": "snake-wanderer",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Змейка ползёт по бесконечному трёхмерному архипелагу: вызовы по желанию, реликвии в сборки и вечные улучшения",
@@ -1595,7 +1564,7 @@
           "title": "Змейка-странник"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/snake-wanderer-v0.1.0/snake-wanderer-0.1.0.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/snake-wanderer-v0.1.1/snake-wanderer-0.1.1.package.json",
       "publisher": "billerens",
       "summary": "A snake crawls an endless 3D archipelago: challenges by choice, relics that grow into builds and upgrades that stay",
       "tags": [
@@ -1604,16 +1573,15 @@
         "arcade"
       ],
       "title": "Snake Wanderer",
-      "updated": "2026-11-19",
-      "version": "0.1.0"
+      "version": "0.1.1"
     },
     {
       "archive": {
         "fileCount": 25,
-        "sha256": "2040ccaefad1bb5f31ff8528e099362e31dbbd3950c0dcbe4b6f014fc5a7fdb9",
-        "size": 87152,
-        "unpackedSize": 287963,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/solitaire-rogue-v0.1.3/solitaire-rogue-0.1.3.zip"
+        "sha256": "16ac9da76c33ecb9eec0946527f3b8ad84a944ccaab6f790fcbbfe5900f6f486",
+        "size": 90811,
+        "unpackedSize": 298825,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/solitaire-rogue-v0.1.4/solitaire-rogue-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1621,7 +1589,7 @@
       },
       "details": {
         "path": "catalog/details/solitaire-rogue.json",
-        "sha256": "528f9b7002a2405d9724ae4625fb4b2aa200725f257d537dab1039cb1986f08c",
+        "sha256": "cb75456d9c02697ca6c545d3ea445cba8e73809873cc09fbe91b2dee688d76d8",
         "size": 1667
       },
       "icon": {
@@ -1632,7 +1600,7 @@
       },
       "id": "solitaire-rogue",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Пасьянс-цепочка на полминуты за расклад: оставленные карты гасят свечи, реликвии переписывают правила",
@@ -1643,7 +1611,7 @@
           "title": "Пасьянс-рогалик"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/solitaire-rogue-v0.1.3/solitaire-rogue-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/solitaire-rogue-v0.1.4/solitaire-rogue-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Chain solitaire, half a minute a deal: cards left on the table put out candles, relics rewrite the rules",
       "tags": [
@@ -1651,23 +1619,22 @@
         "cards"
       ],
       "title": "Solitaire Rogue",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 24,
-        "sha256": "2d8432a27431f8c5e663c1c9e83f46fc8dede3ca24c9fcc6a747cfb99e89ee55",
-        "size": 112453,
-        "unpackedSize": 349699,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/spending-v0.1.3/spending-0.1.3.zip"
+        "sha256": "a3ccb0ad544da9f312b21667868f82dc0df84c1361d10aa4e1c9234c21791cf8",
+        "size": 116109,
+        "unpackedSize": 360561,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/spending-v0.1.4/spending-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/spending.json",
-        "sha256": "fdaecbde8fe14ad770e35dc07dd427efa90943c4201ff4e0b76f90d29cfc3098",
+        "sha256": "33749b4213ca36c2b63cd44c50a6b476f4aa73d4e96f5851217d1f3323f53bfb",
         "size": 1653
       },
       "icon": {
@@ -1678,7 +1645,7 @@
       },
       "id": "spending",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Расходы, которые записываются сами из пушей и SMS банков: категории, бюджет месяца, «на день» и подписки до следующего списания",
@@ -1689,7 +1656,7 @@
           "title": "Траты"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/spending-v0.1.3/spending-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/spending-v0.1.4/spending-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Expenses recorded automatically from bank pushes and SMS: categories, monthly budget, “per day” and subscriptions up to the next charge",
       "tags": [
@@ -1697,16 +1664,15 @@
         "reports"
       ],
       "title": "Spending",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 24,
-        "sha256": "5ba4128e94c73304d0be36ab9f0e0a80a260789d2f5ddb6c70ca562c2d9976b5",
-        "size": 104476,
-        "unpackedSize": 333495,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/subway-v0.1.3/subway-0.1.3.zip"
+        "sha256": "5cc2f4931212244227ad363781ce949a1099048f69ecb855a5359fc53dda2460",
+        "size": 108137,
+        "unpackedSize": 344357,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/subway-v0.1.4/subway-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1714,7 +1680,7 @@
       },
       "details": {
         "path": "catalog/details/subway.json",
-        "sha256": "b4725e1dc3c83853121a14556bd0ddd65aeeac0557c83f175b770f3c3e31e2f6",
+        "sha256": "692cc60d34585e3dccb6108bdcd3244d73fa17ff05779d90c47462ffb9615a0e",
         "size": 1396
       },
       "icon": {
@@ -1725,7 +1691,7 @@
       },
       "id": "subway",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Стройте метро: станции дают спрос, поезда его вывозят, построенный город сдаётся ради следующего",
@@ -1736,7 +1702,7 @@
           "title": "Подземка"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/subway-v0.1.3/subway-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/subway-v0.1.4/subway-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Build a metro: stations make demand, trains carry it, a finished city is handed over for the next one",
       "tags": [
@@ -1744,16 +1710,15 @@
         "transport"
       ],
       "title": "Underground",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 35,
-        "sha256": "ae171579c1ab9e9cc6c911d5da4ae694a46bf7806925c9305bd615f8734c86b4",
-        "size": 353010,
-        "unpackedSize": 1515569,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/tide-runner-v0.3.0/tide-runner-0.3.0.zip"
+        "sha256": "8e396067ae986aa60640c17380606265885e09b5381ade4394f4aa9a83e3f5f1",
+        "size": 356668,
+        "unpackedSize": 1526431,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/tide-runner-v0.3.1/tide-runner-0.3.1.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1761,7 +1726,7 @@
       },
       "details": {
         "path": "catalog/details/tide-runner.json",
-        "sha256": "94b86d23f497b2e4ce693bdf8d3e76dca4b2eb5c9eff49b2818faf847bcd9783",
+        "sha256": "6550104f1d5e2833727fb31641776f6eb25de95f4059c0dc36ca78bb3f4476d6",
         "size": 5713
       },
       "icon": {
@@ -1772,7 +1737,7 @@
       },
       "id": "tide-runner",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Бегите по портовым путям, уворачивайтесь от встречных поездов и перепрыгивайте с вагона на вагон. Знакомые связки возвращаются на большей скорости.",
@@ -1784,7 +1749,7 @@
           "title": "Гребень"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/tide-runner-v0.3.0/tide-runner-0.3.0.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/tide-runner-v0.3.1/tide-runner-0.3.1.package.json",
       "publisher": "billerens",
       "summary": "Dodge oncoming trains, jump between freight cars and slide through harbour tunnels. Learn each pattern as the railway picks up speed.",
       "tags": [
@@ -1793,15 +1758,15 @@
         "arcade"
       ],
       "title": "Crestline",
-      "version": "0.3.0"
+      "version": "0.3.1"
     },
     {
       "archive": {
         "fileCount": 21,
-        "sha256": "79e6a896fda291b2d6fb3281303e7ee577abccccface17c649457af56b18836e",
-        "size": 100547,
-        "unpackedSize": 354910,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/tower-v0.1.3/tower-0.1.3.zip"
+        "sha256": "99eac824f3f0578b80a308780d6483b59d3e7a2b2acd7c2791947d89a0c0ba9f",
+        "size": 104204,
+        "unpackedSize": 365772,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/tower-v0.1.4/tower-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1809,7 +1774,7 @@
       },
       "details": {
         "path": "catalog/details/tower.json",
-        "sha256": "663efa5d1eec4c8f0dca33637a21c67e2591998d3d949a65f22093ae598dd140",
+        "sha256": "e6286d7d6341e4a2a6fcaf6136b88f6360d36c7451180d635d9b72bd7d2541b8",
         "size": 1395
       },
       "icon": {
@@ -1820,7 +1785,7 @@
       },
       "id": "tower",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Выбирайте двери, читайте намерения врагов и стройте сборку из приёмов и реликвий. Каждый подъём оставляет осколки для новой попытки.",
@@ -1831,7 +1796,7 @@
           "title": "Башня"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/tower-v0.1.3/tower-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/tower-v0.1.4/tower-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Choose doors, read enemy intents, and combine moves with relics. Every climb leaves shards for the next attempt.",
       "tags": [
@@ -1839,16 +1804,15 @@
         "tactics"
       ],
       "title": "Tower",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 34,
-        "sha256": "8cf4eceb4c95d1d8dfaad917f9724422f2f0f4809cb2444ae85e8c5e2d9ac914",
-        "size": 119202,
-        "unpackedSize": 484965,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/train-switches-v0.1.3/train-switches-0.1.3.zip"
+        "sha256": "45164d610b817020c2dcb03699268282d720d5f4ffcda63705c91f431d4a33ce",
+        "size": 122860,
+        "unpackedSize": 495827,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/train-switches-v0.1.4/train-switches-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1856,7 +1820,7 @@
       },
       "details": {
         "path": "catalog/details/train-switches.json",
-        "sha256": "e8db280b29a84b7eb5e1bc785524fc04927c9f84ab220f42c1e3d3d4108d6e81",
+        "sha256": "3f8d5f1834393f79dd6a5b36b92a1a81bcefcaef1af3d3c92e937ebf9a4a948f",
         "size": 1665
       },
       "icon": {
@@ -1867,7 +1831,7 @@
       },
       "id": "train-switches",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Расставьте стрелки: каждый поезд — к станции своего цвета, без столкновений",
@@ -1878,7 +1842,7 @@
           "title": "Ветки поездов"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/train-switches-v0.1.3/train-switches-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/train-switches-v0.1.4/train-switches-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Set the switches: every train to the station of its colour, no crashes",
       "tags": [
@@ -1886,23 +1850,22 @@
         "transport"
       ],
       "title": "Train Switches",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 28,
-        "sha256": "f36220715d52e22647e64a462047503e197891780275cd4fe887d1e994dc9786",
-        "size": 87975,
-        "unpackedSize": 250953,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/voice-adventure-v0.1.3/voice-adventure-0.1.3.zip"
+        "sha256": "fd626f0589316d0ee31be05dc5c8b8ffab7ce292315ea2330152c7d367061aec",
+        "size": 91636,
+        "unpackedSize": 261815,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/voice-adventure-v0.1.4/voice-adventure-0.1.4.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/voice-adventure.json",
-        "sha256": "ab0ac5679be8e571428b868a0fc7772d6f1a70f5a6dc2c37b2720f3f0195bd62",
+        "sha256": "e9d036b511b0fc489261bdde0690f5eacdcc712dc23432d8ba42359a4fe47b77",
         "size": 1667
       },
       "icon": {
@@ -1913,7 +1876,7 @@
       },
       "id": "voice-adventure",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Голосовой квест для дороги: играется голосом в наушниках, без сети и без экрана. Главы пишет модель заранее, пока есть сеть",
@@ -1925,7 +1888,7 @@
           "title": "Текстовое приключение для дороги"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/voice-adventure-v0.1.3/voice-adventure-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/voice-adventure-v0.1.4/voice-adventure-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "A voice quest for the road: played by voice in headphones, with no network and no screen. The model writes the chapters ahead of time while there is a network",
       "tags": [
@@ -1934,23 +1897,22 @@
         "ai"
       ],
       "title": "Text Adventure for the Road",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 28,
-        "sha256": "aaa7a97cb2bed5aed0441f010674b1acc36c09008acc5d045df2b875d45bb035",
-        "size": 104452,
-        "unpackedSize": 326700,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/wallpapers-v0.1.4/wallpapers-0.1.4.zip"
+        "sha256": "3426e30434084a488fdbfa379c9150cbed6c0005a3f4e73ba2d0f510e8924c2f",
+        "size": 108112,
+        "unpackedSize": 337562,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/wallpapers-v0.1.5/wallpapers-0.1.5.zip"
       },
       "compatibility": {
         "minAxikoApi": 1
       },
       "details": {
         "path": "catalog/details/wallpapers.json",
-        "sha256": "929f05f3777e6202abf7a114b6cf00f420e1229f77882fe3b5e3786cbda02fe1",
+        "sha256": "84d9373e2b4d9b3107809b78636511a9a18f8f6634a791d5e25d4625e149eaf0",
         "size": 2207
       },
       "icon": {
@@ -1961,7 +1923,7 @@
       },
       "id": "wallpapers",
       "kind": "module",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Каждое утро фотография из открытых источников под погоду, сезон и ваш вкус — на внешний и внутренний экраны Fold и на блокировку, с автором и лицензией",
@@ -1972,7 +1934,7 @@
           "title": "Обои дня"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/wallpapers-v0.1.4/wallpapers-0.1.4.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/wallpapers-v0.1.5/wallpapers-0.1.5.package.json",
       "publisher": "billerens",
       "summary": "Every morning a photo from open sources to match the weather, the season and your taste — for the outer and inner Fold screens and the lock screen, with the author and license",
       "tags": [
@@ -1980,16 +1942,15 @@
         "widget"
       ],
       "title": "Wallpaper of the Day",
-      "updated": "2026-11-18",
-      "version": "0.1.4"
+      "version": "0.1.5"
     },
     {
       "archive": {
         "fileCount": 22,
-        "sha256": "d156c62fb44a9c9770002cff189bac0ffa45b0bd29fdaf69cd93e25def0ac6a1",
-        "size": 137203,
-        "unpackedSize": 512460,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/wave-survival-v0.1.3/wave-survival-0.1.3.zip"
+        "sha256": "84fcd83e9cf7020602c51263fafc7c6ec5a790f0bc6c67e339fa4a6e0528509b",
+        "size": 140863,
+        "unpackedSize": 523322,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/wave-survival-v0.1.4/wave-survival-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -1997,7 +1958,7 @@
       },
       "details": {
         "path": "catalog/details/wave-survival.json",
-        "sha256": "60589c0bf827a522270a266b2e6b5c97cf3a59cac8a23dec8e07e4d49effe941",
+        "sha256": "4a26e3cb61c81dd2a31c8b8228b772e04966cb852404fc979bc7744e983bd634",
         "size": 1663
       },
       "icon": {
@@ -2008,7 +1969,7 @@
       },
       "id": "wave-survival",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Герой стреляет сам, вы управляете им пальцем или клавиатурой и выбираете улучшения; пять минут хаоса",
@@ -2019,7 +1980,7 @@
           "title": "Последний рубеж"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/wave-survival-v0.1.3/wave-survival-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/wave-survival-v0.1.4/wave-survival-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "The hero fires on their own; you steer with a finger or the keyboard and pick upgrades; five minutes of chaos",
       "tags": [
@@ -2027,16 +1988,15 @@
         "roguelike"
       ],
       "title": "Last Bastion",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "archive": {
         "fileCount": 32,
-        "sha256": "dfdf26e12d9b39202b7d35ba67998d7ae2c143df727c71d68de98322baad88ac",
-        "size": 282074,
-        "unpackedSize": 1002871,
-        "url": "https://github.com/Billerens/axiko-store/releases/download/word-weaver-v0.1.3/word-weaver-0.1.3.zip"
+        "sha256": "c47de13e653e719e922f18fe605babc4f7a49e8c23657579c3a7631b47af34f4",
+        "size": 285732,
+        "unpackedSize": 1013733,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/word-weaver-v0.1.4/word-weaver-0.1.4.zip"
       },
       "compatibility": {
         "gamesEngine": 1,
@@ -2044,7 +2004,7 @@
       },
       "details": {
         "path": "catalog/details/word-weaver.json",
-        "sha256": "7d4dd333637a8d7f98b81f3c21e6bf5e1ef85262ba6d9275f4bc7edf5b67c1d7",
+        "sha256": "5da86669e9e75e097effd01ec9ae8258e729a8e713c94bb2a11c2d180446d160",
         "size": 1659
       },
       "icon": {
@@ -2055,7 +2015,7 @@
       },
       "id": "word-weaver",
       "kind": "game",
-      "license": "UNLICENSED",
+      "license": "Apache-2.0",
       "locales": {
         "ru": {
           "summary": "Плетите русские слова из колеса букв: слова — кирпичи для своего города",
@@ -2066,7 +2026,7 @@
           "title": "Словоплёт"
         }
       },
-      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/word-weaver-v0.1.3/word-weaver-0.1.3.package.json",
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/word-weaver-v0.1.4/word-weaver-0.1.4.package.json",
       "publisher": "billerens",
       "summary": "Weave Russian words from a wheel of letters: words are the bricks of your own town",
       "tags": [
@@ -2074,8 +2034,7 @@
         "puzzle"
       ],
       "title": "Word Weaver",
-      "updated": "2026-11-18",
-      "version": "0.1.3"
+      "version": "0.1.4"
     }
   ],
   "schemaVersion": 1
