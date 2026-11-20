@@ -1,5 +1,9 @@
 # Merge Forge: what’s new
 
+## 0.7.1 — 2026-11-21
+
+- The package carries the Apache-2.0 license, as the whole store does; nothing in the game changed.
+
 ## 0.7.0 — 2026-11-21
 
 - **Masterworks collection.** A beaten boss sometimes leaves a masterwork — a sword, a shield, a helmet, a breastplate, greaves, boots or a ring. Each is one of a kind: its name, story, motto and icon are written by the chronicler model, while the game sets its rarity (Fine, Rare, Legendary, Mythic) and effects — the main effect of its slot and up to three more. Only the masterworks on the stand work: one in each slot, two rings. The Masterworks tab in the Master's forge holds the stand, what it gives, the inventory and each masterwork's card with its story.
