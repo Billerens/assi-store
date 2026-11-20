@@ -168,7 +168,8 @@ function renderDialog(){
   overlay.innerHTML='<div class="dialog" role="dialog">'+body+'</div>';
 }
 let controls;
-const touch = matchMedia('(pointer:coarse)').matches || navigator.maxTouchPoints > 0;
+const touch = matchMedia('(pointer:coarse)').matches ||
+  (!matchMedia('(pointer:fine)').matches && navigator.maxTouchPoints > 0);
 const clip = (value,min,max) => Math.max(min, Math.min(max,value));
 function locationAction() {
   const station = nearStation(bridge.walker);

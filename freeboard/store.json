@@ -1,7 +1,7 @@
 {
   "id": "freeboard",
   "kind": "game",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "title": "Freeboard",
   "summary": "Walk from the crew quarters to the bridge, take the helm and fly freight, patrols or surface surveys between three ports.",
   "tags": [

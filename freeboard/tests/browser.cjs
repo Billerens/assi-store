@@ -6,6 +6,11 @@ const folder=path.resolve(__dirname,'..');
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'};
 const server=http.createServer((req,res)=>{
   const requested=path.resolve(folder,'.'+new URL(req.url,'http://local').pathname);
+  if(req.url==='/embedded'){
+    res.setHeader('Content-Type','text/html; charset=utf-8');
+    res.end('<button autofocus>Host</button><iframe title="Freeboard" style="width:800px;height:450px" src="/ui/play.html"></iframe>');
+    return;
+  }
   if(!requested.startsWith(folder+path.sep)||!fs.existsSync(requested)||!fs.statSync(requested).isFile()){res.writeHead(404);res.end();return;}
   res.setHeader('Content-Type',mime[path.extname(requested)]||'application/octet-stream');fs.createReadStream(requested).pipe(res);
 });
@@ -18,6 +23,19 @@ let browser;
     args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
   const page=await browser.newPage({viewport:{width:860,height:520},locale:'en-US'});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  // A pointer drag in the viewport must transfer keyboard input from the
+  // surrounding web interface into the game, even on the very first click.
+  const preview=await browser.newPage({viewport:{width:860,height:520},locale:'en-US'});
+  await preview.goto(origin+'/embedded');
+  const embedded=preview.frameLocator('iframe');
+  await embedded.locator('#deck[data-view=walk] #station').waitFor();
+  await preview.locator('button').focus();
+  await embedded.locator('#space').click({position:{x:230,y:150}});
+  assert(await embedded.locator('#space').evaluate(canvas=>document.activeElement===canvas&&document.hasFocus()));
+  await preview.keyboard.down('w');
+  try{await embedded.locator('#deck-sign strong').filter({hasText:'Passage'}).waitFor({timeout:30000});}
+  finally{await preview.keyboard.up('w');}
+  await preview.close();
   await page.goto(origin+'/ui/play.html');await page.locator('#deck[data-view=walk] #station').waitFor();
   const click=(key,i)=>page.locator('[data-key="'+key+'"]'+(i===undefined?'':'[data-value="'+i+'"]')).click();
   async function capture(name){if(process.env.FREEBOARD_SHOTS)await page.screenshot({path:path.join(os.tmpdir(),'freeboard-'+name+'.png')});}

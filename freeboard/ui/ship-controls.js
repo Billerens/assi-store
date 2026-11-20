@@ -29,6 +29,9 @@ export class ShipControls {
 
     canvas.addEventListener('pointerdown', event => {
       if (!active() || event.button > 0) return;
+      // Capturing the drag cancels the browser's usual pointer-to-focus
+      // action. Claim keyboard focus inside the embedded game as well.
+      canvas.focus({preventScroll:true});
       if (document.pointerLockElement === canvas) {
         if (piloting()) this.holds.set('fire',event.pointerId);
         return;

@@ -1,3 +1,7 @@
+## 0.2.1
+
+Clicking the cabin or cockpit now gives the embedded game keyboard focus in the Axiko web interface. Devices with a mouse show the keyboard movement hints.
+
 ## 0.2.0
 
 Walk from the aft airlock through the furnished crew quarters and passage to the bridge. Fly from the physical pilot seat with a live attitude display, proximity radar and systems readouts. Leave the seat in flight to hold position and move around, then walk back to the controls. Keyboard, mouse and touch controls are supported, including in the Canvas renderer.
