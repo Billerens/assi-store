@@ -28,7 +28,7 @@ test('встретить: порог, один выбор на встречу, �
  const w=world(21);const r=w.state.run;r.walkT=w.cfg['wave.walkSec'];delete r.encounter;
  r.maxWave=w.cfg['encounter.prepare.fromWave']-1;assert.equal(S.prepare(w.state,w.cfg,'meet'),false);
  r.maxWave=w.cfg['encounter.prepare.fromWave'];assert.equal(S.prepare(w.state,w.cfg,'meet'),true);
- near(r.walkT,w.cfg['wave.walkSec']-w.cfg['encounter.meet.cutSec']);near(r.meetCooldown,w.cfg['encounter.meet.cooldown']);
+ near(r.walkT,Math.max(w.cfg['encounter.meet.minSec'],w.cfg['wave.walkSec']-w.cfg['encounter.meet.cutSec']));near(r.meetCooldown,w.cfg['encounter.meet.cooldown']);
  const before=JSON.stringify(r);assert.equal(S.prepare(w.state,w.cfg,'meet'),false);assert.equal(S.prepare(w.state,w.cfg,'aim'),false);assert.equal(JSON.stringify(r),before);
  const copy=JSON.parse(JSON.stringify(w.state));assert.equal(S.prepare(copy,w.cfg,'aim'),false,'перезагрузка не повторяет подготовку');
  delete r.encounter;r.walkT=w.cfg['wave.walkSec'];assert.equal(S.prepare(w.state,w.cfg,'meet'),false,'новый враг не сбрасывает перезарядку');
@@ -143,6 +143,31 @@ test('повторные криты поддерживают ограничен�
  w.step(1);near(w.state.run.lastHit,B.add(field,hero));near(w.state.run.encounter.echo,B.mul(hero,w.cfg['encounter.resonant.share']));
  w.step(1);const hit=w.state.run.lastHit;near(hit,B.add(field,B.mul(hero,1+w.cfg['encounter.resonant.share'])));
  w.step(1);near(w.state.run.lastHit,hit);near(w.state.run.encounter.echo,B.mul(hero,w.cfg['encounter.resonant.share']));
+});
+
+test('«Авто»: кузня сама встречает врага, когда «Встретить» готово; разбег укорачивает подход после лёгких побед',()=>{
+ const w=world(21);const r=w.state.run,c=w.cfg;
+ r.maxWave=c['encounter.prepare.fromWave'];r.meetCooldown=0;delete r.encounter;r.walkT=c['wave.walkSec'];
+ S.setAutoMeet(w.state,true);w.step(0.05);
+ assert.ok(r.walkT<=c['encounter.meet.minSec']+1e-9,'враг сразу у ворот: '+r.walkT);near(r.meetCooldown,c['encounter.meet.cooldown']-0.05);
+ S.setAutoMeet(w.state,false);
+ // Разбег: подход после n лёгких побед, не короче предела; босс идёт всю дорогу.
+ const full=c['wave.walkSec'];
+ near(S.runupWalk(c,full,0),full);near(S.runupWalk(c,full,1),full*c['runup.factor']);
+ near(S.runupWalk(c,full,50),c['runup.minSec']);
+ near(S.runupWalk({...c,'runup.factor':1},full,Infinity),full,'доля 1 — разбега нет');near(S.runupWalk(c,full,Infinity),c['runup.minSec']);
+});
+
+test('разбег в бою: враг, павший в первом залпе, ускоряет подход следующего; выживший сбрасывает',()=>{
+ const w=world(21);const r=w.state.run,c=w.cfg;
+ r.grid[S.openCells(w.state,c)[0]]=60;r.hp='1';r.hpMax='1';r.walkT=0;r.runup=0;
+ w.step(c['combat.hitSec']);
+ assert.equal(r.runup,1,'первый залп — лёгкая победа');assert.equal(r.wave,22);
+ near(r.walkT,S.runupWalk(c,c['wave.walkSec'],1));
+ // Следующий враг держит первый залп: разбег кончается.
+ r.grid.fill(0);r.grid[S.openCells(w.state,c)[0]]=1;r.walkT=0;r.hp='1e6';r.hpMax='1e6';
+ w.step(c['combat.hitSec']*1.01);r.grid[S.openCells(w.state,c)[0]]=60;r.hp='1';w.step(c['combat.hitSec']);
+ assert.equal(r.runup,0,'выживший сбрасывает разбег');
 });
 
 done('encounter');

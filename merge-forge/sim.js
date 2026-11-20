@@ -43,7 +43,7 @@
     { id: 'apprentice', title: 'Подмастерье' }, { id: 'hourglass', title: 'Песочные часы' }, { id: 'hunter', title: 'Охотник за головами' },
     { id: 'temper', title: 'Закалка' }, { id: 'runeMason', title: 'Рунная кладка', rune: true }, { id: 'runePower', title: 'Сила руны', rune: true },
     { id: 'caravan', title: 'Караванщик' }, { id: 'night', title: 'Ночная смена' }, { id: 'cry', title: 'Боевой клич' },
-    { id: 'remelt', title: 'Переплавка' }, { id: 'banner', title: 'Знамя' },
+    { id: 'banner', title: 'Знамя' },
     { id: 'hammer', title: 'Удар молота' }, { id: 'stall', title: 'Лавка кузнеца' },
     { id: 'ember', title: 'Жаркие угли' }, { id: 'pilot', title: 'Негаснущий огонь' }
   ];
@@ -129,11 +129,19 @@
       r.grid = g;
     }
     r.up = r.up || {};
+    // «Переплавка» is part of «Лавка кузнеца» now: its levels count there.
+    if (r.up.remelt !== undefined) {
+      r.up.stall = Math.max(num(r.up.stall, 0), num(r.up.remelt, 0));
+      delete r.up.remelt;
+    }
+    r.overheat = num(r.overheat, 0);
+    r.bursts = num(r.bursts, 0);
     r.pending = r.pending || [];
     r.runes = r.runes || [];
     r.stats = r.stats || { forged: 0, merged: 0, sold: 0, kills: 0, bosses: 0 };
     r.crits = r.crits || [];
     r.walkT = num(r.walkT, 0);
+    r.runup = num(r.runup, 0);
     // A run saved before runs started with a smaller anvil has its blades on the cells it began with.
     if (r.keptStart === undefined) r.keptStart = LEGACY_START;
     r.heat = Math.max(0, Math.min(1, num(r.heat, 0)));
@@ -339,7 +347,8 @@
 
   function bladePrice(cfg, n) { return Big.mul(cfg['blade.price'], Big.pow(cfg['blade.priceGrowth'], n - 1)); }
 
-  function sellShare(state, cfg) { return Math.min(1, cfg['sell.share'] + lvl(state, 'remelt') * cfg['up.remelt.step']); }
+  /** The share of a blade's price a sale gives: sell.share, and up.stall.share more for each level of «Лавка кузнеца», up to the whole price. */
+  function sellShare(state, cfg) { return Math.min(1, cfg['sell.share'] + lvl(state, 'stall') * num(cfg['up.stall.share'], 0)); }
 
   function saleMult(state, cfg) {
     return (1 + upgradeEffective(state, cfg, 'stall') * (cfg['up.stall.step'] || 0) +
@@ -391,7 +400,30 @@
     if (n >= cfg['temper.fromLevel']) d *= 1 + cfg['up.temper.step'] * upgradeEffective(state, cfg, 'temper');
     var s = runeAt(state, cfg, cell);
     if (s && s.rune === 'fire') d *= 1 + cfg['rune.fire'] * runePower(state, cfg);
+    var res = resonance(state, cfg);
+    if (res > 0 && resonates(state, cfg, cell)) d *= 1 + res;
     return d;
+  }
+
+  /**
+   * «Резонанс»: past the last cell of the anvil every level of «Шире наковальня» makes a blade that has one of
+   * its level next to it (left, right, above, below) stronger by up.wide.res.
+   */
+  function resonance(state, cfg) {
+    var over = lvl(state, 'wide') - room(startCells(state, cfg), CELLS, cfg['up.wide.step']);
+    return over > 0 ? over * num(cfg['up.wide.res'], 0) : 0;
+  }
+
+  /** Whether the blade in `cell` has a blade of its level beside it on the anvil. */
+  function resonates(state, cfg, cell) {
+    var g = state.run.grid;
+    var n = g[cell];
+    if (!n) return false;
+    var row = Math.floor(cell / COLS);
+    var col = cell % COLS;
+    var near = [col > 0 ? cell - 1 : -1, col < COLS - 1 ? cell + 1 : -1, row > 0 ? cell - COLS : -1, cell + COLS < CELLS ? cell + COLS : -1];
+    for (var i = 0; i < near.length; i++) if (near[i] >= 0 && g[near[i]] === n && isOpen(state, cfg, near[i])) return true;
+    return false;
   }
 
   /** The sum of the blades' own damage on the open cells (a Number). */
@@ -412,6 +444,8 @@
     if (level >= cfg['temper.fromLevel']) power = Big.mul(power, 1 + cfg['up.temper.step'] * upgradeEffective(state, cfg, 'temper'));
     var socket = runeAt(state, cfg, cell);
     if (socket && socket.rune === 'fire') power = Big.mul(power, 1 + cfg['rune.fire'] * runePower(state, cfg));
+    var res = resonance(state, cfg);
+    if (res > 0 && resonates(state, cfg, cell)) power = Big.mul(power, 1 + res);
     return power;
   }
 
@@ -426,6 +460,19 @@
   // ---- the heat of the forge --------------------------------------------------------------------------
   // Taps on the forge heat it; a hot forge makes the blades strike more often; left alone it cools.
   // «Жаркие угли» make full heat stronger, «Негаснущий огонь» keeps a part of it for good.
+
+  /** Levels of «Глаз мастера» past the cap of the crit chance turn into «Сокрушительный удар». */
+  function overcrit(state, cfg) { return UpgradeProgress.overcrit(state.run.up, cfg); }
+
+  /**
+   * «Перегрев»: past the most heat it keeps, every level of «Негаснущий огонь» opens and strengthens the
+   * overheat — the heat of taps beyond full fills it, and a full one makes the next volley a burst,
+   * stronger by up.pilot.burst for each such level.
+   */
+  function overheatLevels(state, cfg) {
+    return Math.max(0, lvl(state, 'pilot') - room(0, num(cfg['heat.maxFloor'], 0), num(cfg['up.pilot.step'], 0)));
+  }
+  function burstMult(state, cfg) { return 1 + overheatLevels(state, cfg) * num(cfg['up.pilot.burst'], 0); }
 
   /** The heat the forge never falls below (0…heat.maxFloor): the levels of «Негаснущий огонь». */
   function heatFloor(state, cfg) {
@@ -450,12 +497,14 @@
   function coolHeat(state, cfg, dt) {
     var sec = num(cfg['heat.coolSec'], 0);
     state.run.heat = Math.max(heatFloor(state, cfg), sec > 0 ? heat(state, cfg) - dt / sec : 0);
+    // The overheat cools as the heat does.
+    if (state.run.overheat > 0) state.run.overheat = Math.max(0, sec > 0 ? state.run.overheat - dt / sec : 0);
   }
 
   /** Damage a second with crits on average (a Big); `now` 0 leaves out the timed bonuses and the heat of taps. */
   function dps(state, cfg, now) {
     var options = { passiveOnly: now === 0 };
-    var crit = 1 + critChance(state, cfg, options) * (critMult(state, cfg, options) - 1);
+    var crit = 1 + critChance(state, cfg, options) * (UpgradeProgress.critAverage(critMult(state, cfg, options), overcrit(state, cfg)) - 1);
     var power = Big.add(Big.mul(fieldPower(state, cfg), crit), Outpost.passivePower(state, cfg, options));
     return Big.div(Big.mul(dmgMult(state, cfg, now), power), volleySec(state, cfg, now === 0));
   }
@@ -473,7 +522,17 @@
   function bossTimer(state, cfg) { return cfg['boss.timer'] + upgradeEffective(state, cfg, 'hourglass') * cfg['up.hourglass.step'] + Artifacts.modifiers(state, cfg).bossSeconds + perk(state, cfg, 'bossTime'); }
 
   /** How much slower the boss timer runs with ice runes (≥ 1). */
-  function iceSlow(state, cfg) { return 1 + cfg['rune.ice'] * runePower(state, cfg) * activeRunes(state, cfg, 'ice'); }
+  /**
+   * How much slower the boss timer runs with ice runes (≥ 1). Every rune adds rune.ice × the power of the
+   * runes; the sum gives less and less (a logarithm, rune.iceSoft its scale) but has no ceiling: a first
+   * rune works almost in full, seven strong ones slow the timer some times over, not twenty.
+   */
+  function iceSlow(state, cfg) {
+    var raw = cfg['rune.ice'] * runePower(state, cfg) * activeRunes(state, cfg, 'ice');
+    if (!(raw > 0)) return 1;
+    var k = num(cfg['rune.iceSoft'], 0);
+    return 1 + (k > 0 ? k * Math.log(1 + raw / k) : raw);
+  }
 
   /**
    * Gold a second by farming the last cleared wave (a Big, no links): the rate offline progress
@@ -488,7 +547,9 @@
     var hit = Big.mul(dps(state, cfg, 0), sec);
     if (Big.isZero(hit)) return Big.ZERO;
     var hits = Math.max(1, Big.toNumber(Big.ceil(Big.div(hpOf(cfg, w), hit))));
-    return Big.div(Big.mul(goldOf(cfg, w), goldMult(state, cfg, w)), hits * sec + cfg['wave.walkSec'] / (1 + Artifacts.modifiers(state, cfg).walkSpeed));
+    var walk = cfg['wave.walkSec'] / (1 + Artifacts.modifiers(state, cfg).walkSpeed);
+    if (hits <= 1) walk = runupWalk(cfg, walk, Infinity);
+    return Big.div(Big.mul(goldOf(cfg, w), goldMult(state, cfg, w)), hits * sec + walk);
   }
 
   function offlineShare(state, cfg) { return Math.min(1, cfg['offline.share'] + lvl(state, 'night') * cfg['up.night.step']); }
@@ -769,7 +830,16 @@
     r.forgeT = Math.max(0, r.forgeT - tapSeconds(state, cfg, now) - Outpost.onTap(state, cfg));
     r.taps++;
     // The same strike fans the fire: the blades at the gate strike more often while the forge is hot.
-    r.heat = Math.min(1, heat(state, cfg) + num(cfg['heat.perTap'], 0));
+    var hot = heat(state, cfg) + num(cfg['heat.perTap'], 0);
+    r.heat = Math.min(1, hot);
+    // What goes past full heat fills the overheat; a full one waits as a burst for the next volley.
+    if (hot > 1 && overheatLevels(state, cfg) > 0) {
+      r.overheat = num(r.overheat, 0) + (hot - 1) / Math.max(0.01, num(cfg['heat.overCost'], 1));
+      if (r.overheat >= 1) {
+        r.overheat -= 1;
+        r.bursts = Math.min(3, num(r.bursts, 0) + 1);
+      }
+    }
     var proc = Artifacts.onTap(state, cfg, rng, { manual: true, accepted: true, can: artifactTargets(state, cfg, now || 0) });
     applyArtifactCommands(state, cfg, proc.commands, now || 0);
     if (rng && r.forgeT <= 0) {
@@ -867,6 +937,24 @@
     } else if (kind === 'aim') e.aim = true;
     else return false;
     e.prepared = kind;
+    return true;
+  }
+
+  /** Whether «Встретить» can be used now (the wave, the approach, the cooldown, nothing prepared yet). */
+  function canMeet(state, cfg) {
+    var r = state.run;
+    var e = r.encounter;
+    return r.maxWave >= cfg['encounter.prepare.fromWave'] && r.walkT > cfg['encounter.meet.minSec'] && !(num(r.meetCooldown, 0) > 0) && !(e && e.prepared);
+  }
+
+  /** «Авто»: meets the foe at once whenever «Встретить» is ready. */
+  function autoMeet(state, cfg) {
+    if (canMeet(state, cfg)) prepare(state, cfg, 'meet');
+  }
+
+  /** «Авто» of «Встретить» on or off: the owner's choice, kept between runs. */
+  function setAutoMeet(state, on) {
+    state.meta.autoMeet = !!on;
     return true;
   }
 
@@ -1014,6 +1102,15 @@
     return ids[ids.length - 1][0];
   }
 
+  /** The approach after `streak` easy wins: shorter each time by runup.factor, never under runup.minSec. */
+  function runupWalk(cfg, walk, streak) {
+    var floor = Math.min(walk, num(cfg['runup.minSec'], 0));
+    var factor = Math.max(0, Math.min(1, num(cfg['runup.factor'], 1)));
+    // A factor of 1 is no run-up at all, however long the streak (1^Infinity is NaN, not 1).
+    if (factor >= 1 || !(streak > 0)) return walk;
+    return Math.max(floor, isFinite(streak) ? walk * Math.pow(factor, streak) : 0);
+  }
+
   /** The modifier of the monster at the gate now. */
   function currentMod(state, cfg) {
     var e = state.run.encounter;
@@ -1033,6 +1130,8 @@
     r.bossT = boss ? bossTimer(state, cfg) * mod.timer : 0;
     // The monster walks up to the gate first; the blades strike once it is there.
     r.walkT = cfg['wave.walkSec'] / (1 + Artifacts.modifiers(state, cfg).walkSpeed) * mod.walk;
+    // «Разбег»: after foes that fell in the first volley the next one comes quicker; a boss always walks the whole road.
+    if (!boss && num(r.runup, 0) > 0) r.walkT = runupWalk(cfg, r.walkT, r.runup);
     r.volleyT = cfg['combat.hitSec'];
     newEncounter(state, cfg);
     r.encounter.mod = mod.id;
@@ -1062,6 +1161,7 @@
     r.gold = Big.add(r.gold, gold);
     r.earned = Big.add(r.earned, gold);
     r.stats.kills++;
+    r.runup = num(encounter.volleys, 0) <= 1 ? Math.min(50, num(r.runup, 0) + 1) : 0;
     Outpost.onKill(state, cfg, boss);
     Adventures.onKill(state, cfg, { serial: encounter.serial, wave: w, boss: boss, farm: !!r.farm, gold: Big.str(gold) });
     r.lastGold = Big.str(gold);
@@ -1106,6 +1206,8 @@
     var open = openCells(state, cfg);
     var p = critChance(state, cfg);
     var m = critMult(state, cfg);
+    var smash = overcrit(state, cfg);
+    var smashes = [];
     var sum = 0;
     var bigSum = Big.ZERO;
     var crits = [];
@@ -1117,13 +1219,24 @@
         d *= m;
         power = Big.mul(power, m);
         crits.push(open[i]);
+        // «Сокрушительный удар»: the crit strikes once more, maybe more than once.
+        if (smash > 0) {
+          var extra = Math.floor(smash) + (ctx.rng.chance(smash - Math.floor(smash)) ? 1 : 0);
+          if (extra > 0) {
+            d *= Math.pow(m, extra);
+            power = Big.mul(power, Big.pow(m, extra));
+            smashes.push(open[i]);
+          }
+        }
       }
       sum += d;
       bigSum = Big.add(bigSum, power);
     }
     r.volleys++;
     r.crits = crits;
+    r.smashes = smashes;
     var e = encounterOf(state, cfg);
+    e.volleys = num(e.volleys, 0) + 1;
     var base = Big.add(isFinite(sum) ? Big.of(sum) : bigSum, Outpost.passivePower(state, cfg));
     base = Big.add(base, e.echo || 0);
     if (e.opening > 0) base = Big.mul(base, 1 + Math.min(cfg['campaign.opening.maxShare'], e.opening));
@@ -1171,6 +1284,12 @@
     if (e.aim) { base = Big.mul(base, 1 + cfg['encounter.aim.bonus']); e.aim = false; }
     if (e.weakened) { base = Big.mul(base, 1 - cfg['encounter.cast.penalty']); e.weakened = false; }
     var hit = Big.mul(dmgMult(state, cfg, ctx.now), base);
+    if (num(r.bursts, 0) > 0) {
+      var burst = burstMult(state, cfg);
+      hit = Big.mul(hit, burst);
+      r.bursts -= 1;
+      r.lastBurst = { at: ctx.now || 0, mult: burst, serial: num(r.lastBurst && r.lastBurst.serial, 0) + 1 };
+    }
     if (r.bossT > 0) hit = Big.mul(hit, perk(state, cfg, 'bossDmg'));
     if (Big.gt(e.shield, 0)) {
       var absorbed = Big.min(e.shield, hit);
@@ -1198,6 +1317,7 @@
     var guard = 0;
     while (t < dt - 1e-9 && guard++ < 100000) {
       if (r.walkT > 0) {
+        if (state.meta.autoMeet) autoMeet(state, cfg);
         var w = Math.min(dt - t, r.walkT);
         battleTimers(state, w, cfg);
         r.walkT = Math.max(0, r.walkT - w);
@@ -1352,13 +1472,9 @@
       var left = Math.log(cfg['forge.minInterval'] / cfg['forge.interval']) / Math.log(1 - cfg['up.bellows.step']);
       if (left === left && left >= 0) max = Math.min(max, Math.ceil(left));
     }
-    if (id === 'eye') max = Math.min(max, room(cfg['crit.chance'], cfg['crit.maxChance'], cfg['up.eye.step']));
-    if (id === 'wide') max = Math.min(max, room(startCells(state, cfg), CELLS, cfg['up.wide.step']));
     if (id === 'apprentice') max = Math.min(max, 1 + room(cfg['apprentice.minInterval'], cfg['apprentice.interval'], cfg['up.apprentice.step']));
     if (id === 'night') max = Math.min(max, room(cfg['offline.share'], 1, cfg['up.night.step']));
-    if (id === 'remelt') max = Math.min(max, room(cfg['sell.share'], 1, cfg['up.remelt.step']));
     if (id === 'runeMason') max = Math.min(max, room(cfg['rune.base'] + mfLevel(state, 'rune'), SOCKETS.length, cfg['up.runeMason.step']));
-    if (id === 'pilot') max = Math.min(max, room(0, cfg['heat.maxFloor'], cfg['up.pilot.step']));
     return Math.max(0, max);
   }
 
@@ -1368,7 +1484,6 @@
   function upUnlocked(state, cfg, id) {
     if (id === 'hammer') return state.run.maxWave >= cfg['up.hammer.fromWave'];
     if (id === 'ember' || id === 'pilot') return state.run.maxWave >= cfg['up.' + id + '.fromWave'];
-    if (id === 'stall') return state.run.maxWave >= cfg['up.stall.fromWave'] || state.run.stats.sold >= cfg['up.stall.fromSold'];
     return !((id === 'runeMason' || id === 'runePower') && !runesOpen(state, cfg));
   }
 
@@ -1439,7 +1554,7 @@
       wave: 1, hp: '0e0', hpMax: '0e0', bossT: 0, farm: false, maxWave: 1, volleyT: cfg['combat.hitSec'], volleys: 0, crits: [],
       walkT: cfg['wave.walkSec'], lastHit: '0e0', lastGold: '0e0', lastBoss: null, farmRate: '0e0',
       eventT: rng ? rng.range(cfg['event.minSec'], cfg['event.maxSec']) : cfg['event.minSec'], event: null, stormLeft: 0,
-      starfallUntil: 0, cryUntil: 0, cryReadyAt: 0, bellowsUntil: 0, orderPaid: null, heat: 0, keptStart: 0,
+      starfallUntil: 0, cryUntil: 0, cryReadyAt: 0, bellowsUntil: 0, orderPaid: null, heat: 0, keptStart: 0, runup: 0,
       stats: { forged: 0, merged: 0, sold: 0, kills: 0, bosses: 0, fails: 0, events: 0 }
     };
     // The first blades lie on the anvil already (the start of the 4×5 block).
@@ -1885,6 +2000,8 @@
     workshop: workshop, retry: retry, acceptEvent: acceptEvent, dismissEvent: dismissEvent, maxOnGrid: maxOnGrid, pairLevel: pairLevel,
     upMax: upMax, upCost: upCost, upOpen: upOpen, buyUp: buyUp, lvl: lvl, upgradeEffective: upgradeEffective, upgradeProgress: upgradeProgress, perk: perk,
     MODS: MODS, BOSS_MODS: BOSS_MODS, modOf: modOf, pickMod: pickMod, currentMod: currentMod, hash01: hash01,
+    runupWalk: runupWalk, canMeet: canMeet, setAutoMeet: setAutoMeet,
+    overcrit: overcrit, resonance: resonance, resonates: resonates, overheatLevels: overheatLevels, burstMult: burstMult, room: room,
     spawn: spawn, kill: kill, newEncounter: newEncounter,
     mfLevel: mfLevel, mfMax: mfMax, mfCost: mfCost, mfOpen: mfOpen, buyMf: buyMf, startGold: startGold, startGoldAt: startGoldAt, coalsFor: coalsFor,
     soft: soft, autoTaps: autoTaps, eventSpeed: eventSpeed, runePower: runePower,

@@ -250,9 +250,10 @@ exports['улучшения кузни: потолок только там, гд
   ['steel', 'sharp', 'purse', 'hand', 'twin', 'melt', 'hourglass', 'hunter', 'temper', 'runePower', 'caravan', 'cry', 'banner'].forEach(function (id) {
     t.ok(x.sim.upMax(state, cfg, id) >= 400, id + ': потолок ' + x.sim.upMax(state, cfg, id));
   });
-  t.equal(x.sim.upMax(state, cfg, 'wide'), Math.ceil((x.sim.CELLS - cfg['grid.start']) / cfg['up.wide.step']), '«Шире наковальня» — до 35 клеток');
+  // «Шире наковальня» и «Глаз мастера» без последнего уровня: после 35 клеток — резонанс, после предела крита — сокрушительный удар.
+  t.ok(x.sim.upMax(state, cfg, 'wide') >= 400, '«Шире наковальня» без потолка');
+  t.ok(x.sim.upMax(state, cfg, 'eye') >= 400, '«Глаз мастера» без потолка');
   t.equal(x.sim.upMax(state, cfg, 'night'), Math.round((1 - cfg['offline.share']) / cfg['up.night.step']), '«Ночная смена» — до 100 % офлайна');
-  t.equal(x.sim.upMax(state, cfg, 'eye'), Math.round((cfg['crit.maxChance'] - cfg['crit.chance']) / cfg['up.eye.step']), '«Глаз мастера» — до предела шанса крита');
   // Двойная поковка и Удачная плавка выше 100 %: целые клинки и уровни сверху.
   var r = state.run;
   var g = r.grid;

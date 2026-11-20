@@ -146,6 +146,7 @@
         "key": "level",
         "base": "sim.js#artBase",
         "content": "content/blades.json",
+        "keep": ["title", "text", "theme", "lore", "svg"],
         "noun": "Уровень",
         "nods": true
       }

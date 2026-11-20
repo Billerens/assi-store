@@ -397,7 +397,7 @@
     var chance = Math.min(finite(cfg['crit.maxChance'], 1), finite(cfg['crit.chance'], 0) + finite(upgrades.eye, 0) * finite(cfg['up.eye.step'], 0) + perks.critChance);
     var critical = (finite(cfg['crit.mult'], 1) + UpgradeProgress.effective('hand', finite(upgrades.hand, 0), cfg) * finite(cfg['up.hand.step'], 0)) * perks.critMult;
     var crit = Artifacts.criticalStats(state, cfg, chance, critical, options);
-    local *= 1 + crit.chance * (crit.multiplier - 1);
+    local *= 1 + crit.chance * (UpgradeProgress.critAverage(crit.multiplier, UpgradeProgress.overcrit(upgrades, cfg)) - 1);
     return Big.mul(basePower(cfg, gear.level), mastery * local);
   }
   function noteForged(state, level) {

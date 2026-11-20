@@ -1,5 +1,17 @@
 # Merge Forge: what’s new
 
+## 0.4.0 — 2026-11-20
+
+- Blades have stories now. A tap on an unlocked metal in the Master's forge → Metals, or the book button of a blade chosen on the anvil, opens a window: the picture, the theme, a phrase about what makes the blade unusual and a small legend. Arrows, the ← → keys and a swipe go through all the unlocked metals.
+- The first 40 blades come with stories written in advance, in English and Russian. For every new blade the artist model now invents a story itself — serious, funny or a nod to something, to match the drawing.
+- The ice rune is weaker: each further rune and each level of Rune power gives less and less (a logarithm), with no ceiling. The first rune slows the boss timer by 14% (was 25%), seven strong runes about 3.6 times rather than twenty. How fast the gain falls off is the setting “Ice rune: how softly the gain falls off”.
+- Run-up: when a foe falls in the very first volley, the next one comes 40% quicker, and so on in a row — down to 0.8 seconds. A foe that survives the first volley ends the run-up; a boss always walks the whole road. Easy waves fly by, and farming and offline income count the same way.
+- “Meet” brings the foe to the gate at once (was −1 s), with the same cooldown. Next to it, an “Auto” switch: the forge meets every foe by itself as soon as “Meet” is ready.
+- Upgrades with a limit no longer hit a wall — past the limit they do something new. Once Master's eye brings the crit chance to 40%, its further levels are Crushing blow: +2% a level to the chance that a crit strikes once more; past 100%, a second repeat for sure and a chance of a third. Past 35 cells Wider anvil gives Resonance: a blade with an equal one next to it by a side strikes 5% harder a level, and such cells glow. Past 40% heat Undying fire gives Overheat: the heat of taps beyond full fills a burst (about ten taps), and the next volley is stronger — ×2 at the first such level and +1 for each further one; up to three bursts wait. All of this works in the battle on screen only, not offline.
+- Remelt has joined the Smith's stall: the stall is open from the start of a run, each of its levels adds 20% to the share of the price a sale gives — up to the full price — and, as before, makes blades and forging surplus dearer. Levels of Remelt already bought count for the stall.
+- Upgrades that have nowhere left to grow — Bellows, Rune masonry, Apprentice, Night shift — fold into a “Mastered” row with their level at the bottom of their tab.
+- Spacing: the hint with “Sort” and the row of a chosen blade no longer run into the anvil's plate and line up with its edges; the reforge button has room around it.
+
 ## 0.3.0 — 2026-11-19
 
 - A run starts with a smaller anvil: 12 cells (4×3) instead of 20. “Wider anvil” grows it row by row to 4×5, then to 5×7 as before. The size is the setting “Anvil cells at the start”.

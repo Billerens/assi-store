@@ -83,9 +83,10 @@ test('«Жаркие угли» усиливают полный жар, «Нег
 
   assert.strictEqual(S.heatFloor(state, c), 0);
   const calm = S.dps(state, c, 0), farm = S.farmRateNow(state, c);
-  while (S.buyUp(state, c, 'pilot')) { /* to the last level */ }
-  close(S.heatFloor(state, c), c['heat.maxFloor']); assert.strictEqual(S.upOpen(state, c, 'pilot'), false);
-  assert.strictEqual(S.lvl(state, 'pilot'), Math.ceil(c['heat.maxFloor'] / c['up.pilot.step'] - 1e-9));
+  // Up to the most heat it keeps; past it the levels go on as «Перегрев».
+  state.run.up.pilot = Math.ceil(c['heat.maxFloor'] / c['up.pilot.step'] - 1e-9);
+  close(S.heatFloor(state, c), c['heat.maxFloor']); assert.strictEqual(S.upOpen(state, c, 'pilot'), true);
+  assert.strictEqual(S.overheatLevels(state, c), 0);
   // The heat that stays counts everywhere, taps or no taps: on screen, in the farm rate, offline.
   assert.strictEqual(S.heat(state, c), c['heat.maxFloor']);
   close(x.Big.toNumber(x.Big.div(S.dps(state, c, 0), calm)), 1 + c['heat.maxFloor'] * S.heatPower(state, c));

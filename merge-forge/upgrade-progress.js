@@ -145,6 +145,34 @@
     return out;
   }
 
+  /** Levels that still do something when the limit is `limit`, `step` a level from `from`. */
+  function room(from, limit, step) {
+    if (!(step > 0)) return Infinity;
+    return Math.max(0, Math.ceil((limit - from) / step - 1e-9));
+  }
+
+  /**
+   * «Сокрушительный удар»: past the cap of the crit chance every level of «Глаз мастера» adds up.eye.over to
+   * the chance that a crit strikes once more (a crit of a crit); past 1 — a second layer surely and a chance
+   * of a third, and so on.
+   */
+  function overcrit(levels, cfg) {
+    var n = level(levels && levels.eye);
+    var cap = room(Number(cfg['crit.chance']) || 0, Number(cfg['crit.maxChance']) || 0, Number(cfg['up.eye.step']) || 0);
+    var over = Number(cfg['up.eye.over']);
+    return n > cap && over > 0 ? (n - cap) * over : 0;
+  }
+
+  /** What a crit gives on average with the smashing ones: m × m^⌊o⌋ × (1 − frac + frac × m). */
+  function critAverage(m, o) {
+    if (!(o > 0)) return m;
+    var whole = Math.floor(o);
+    var frac = o - whole;
+    var value = m * Math.pow(m, whole) * (1 - frac + frac * m);
+    return isFinite(value) ? value : Number.MAX_VALUE;
+  }
+
   return { supported: supported, mechanic: mechanic, strength: strength, effective: effective, progress: progress,
-    perks: perks, perkTotals: perkTotals, crossed: crossed, PERKS: PERKS, KINDS: KINDS };
+    perks: perks, perkTotals: perkTotals, crossed: crossed, PERKS: PERKS, KINDS: KINDS,
+    room: room, overcrit: overcrit, critAverage: critAverage };
 });

@@ -28,7 +28,9 @@ test('новый забег: 12 клеток, 4×3, первые клинки в
   const blades = S.openCells(state, cfg).filter(cell => state.run.grid[cell] > 0);
   assert.strictEqual(blades.length, cfg['grid.startBlades']);
   // «Шире наковальня» растит её построчно до 4×5, затем пятый столбец и два ряда: до 35.
-  assert.strictEqual(S.upMax(state, cfg, 'wide'), (S.CELLS - 12) / cfg['up.wide.step']);
+  // Past the 35th cell the levels go on as «Резонанс».
+  assert.strictEqual(S.room(S.startCells(state, cfg), S.CELLS, cfg['up.wide.step']), (S.CELLS - 12) / cfg['up.wide.step']);
+  assert.ok(S.upMax(state, cfg, 'wide') > S.CELLS);
   state.run.up.wide = 8;
   assert.deepStrictEqual(S.shape(state, cfg), { cols: 4, rows: 5 });
 });
@@ -41,7 +43,7 @@ test('забег, сохранённый до уменьшения, сохран
   assert.strictEqual(state.run.keptStart, S.LEGACY_START);
   assert.strictEqual(S.openCells(state, cfg).length, 20);
   assert.ok(S.isOpen(state, cfg, 21) && S.isOpen(state, cfg, 23), 'клинки в рядах 4 и 5 по-прежнему на наковальне');
-  assert.strictEqual(S.upMax(state, cfg, 'wide'), (S.CELLS - 20) / cfg['up.wide.step']);
+  assert.strictEqual(S.room(S.startCells(state, cfg), S.CELLS, cfg['up.wide.step']), (S.CELLS - 20) / cfg['up.wide.step']);
   // Сохранение и чтение не возвращают его к меньшей наковальне.
   const again = JSON.parse(JSON.stringify(state));
   S.ensure(again);

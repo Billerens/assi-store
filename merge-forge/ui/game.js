@@ -49,6 +49,17 @@
     return Object.assign({}, base, { title: drawn && drawn.title ? drawn.title : b ? tx(b.beyond, over) : tx('Клинок {}', n) });
   }
 
+  /**
+   * What is told about a blade of level n: {title, theme, text, lore}. The artist's words when it drew
+   * the blade and wrote them, else those of content/blades.json (the 40 named levels), else none.
+   */
+  function bladeStory(n) {
+    const drawn = view.artOn && view.art[n] ? view.art[n] : null;
+    const b = view.blades && n >= 1 && n <= view.blades.list.length ? view.blades.list[n - 1] : null;
+    const pick = (f) => String((drawn && drawn[f]) || (b && b[f]) || '');
+    return { title: bladeInfo(n).title, theme: pick('theme'), text: pick('text'), lore: pick('lore') };
+  }
+
   function shift(hex, k) {
     const n = parseInt(String(hex).slice(1), 16);
     const c = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
@@ -253,7 +264,10 @@
     view.equipBlade = h('button', { class: 'g-btn small', id: 'blade-equip', onclick: () => bladeAction('equip') }, tx('Герою'));
     view.feedBlade = h('button', { class: 'g-btn small', id: 'blade-feed', onclick: () => bladeAction('feed') }, tx('Дракону'));
     view.sellBlade = h('button', { class: 'g-btn small', id: 'blade-sell', onclick: () => { if (selectionValid()) sell(view.selected.cell); } }, tx('Продать'));
-    view.bladeActions = h('div', { class: 'mf-blade-actions', hidden: true, role: 'group', 'aria-label': tx('Действия с клинком') }, view.selectionBadge, view.equipBlade, view.feedBlade, view.sellBlade);
+    // The story of the chosen blade: the album of metals opens on it.
+    view.loreBlade = h('button', { class: 'g-btn small mf-lore-btn', id: 'blade-lore', 'aria-label': tx('История клинка'), title: tx('История клинка'), html: '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7.5h6M9 11h4"/></svg>',
+      onclick: () => { if (!selectionValid()) return; const n = view.selected.level; clearSelection(); openLore(n); } });
+    view.bladeActions = h('div', { class: 'mf-blade-actions', hidden: true, role: 'group', 'aria-label': tx('Действия с клинком') }, view.selectionBadge, view.equipBlade, view.feedBlade, view.sellBlade, view.loreBlade);
     view.anvilTools = h('div', { class: 'mf-anvil-tools' }, view.info, view.bladeActions);
     view.anvil = h('div', { class: 'mf-anvil', id: 'anvil' });
     view.anvilWrap = h('div', { class: 'mf-anvil-wrap' }, view.anvilTools, view.anvil);
@@ -265,8 +279,10 @@
     view.cry = h('button', { class: 'mf-ab', id: 'cry', hidden: true, onclick: cry, 'aria-label': tx('Боевой клич'), title: tx('Боевой клич') }, MFArt.el('up', 'cry', 'mf-ab-ic'), view.cryTime);
     view.sort = h('button', { class: 'g-btn small mf-sort', id: 'sort', 'aria-label': tx('Сортировать'), title: tx('По уровню: сильные первыми. Клинки на рунах остаются на месте.'), onclick: sortAnvil }, 'Порядок');
     view.meet = h('button', { class: 'g-btn small', id: 'meet', onclick: () => prepareFight('meet') }, 'Встретить');
+    view.autoMeet = h('button', { class: 'g-btn small mf-auto-meet', id: 'meet-auto', 'aria-pressed': 'false', title: tx('Кузня сама встречает каждого врага, когда «Встретить» готово'),
+      onclick: () => { g.act((s) => sim.setAutoMeet(s, !s.meta.autoMeet)); g.sfx('tap'); } }, tx('Авто'));
     view.aim = h('button', { class: 'g-btn small', id: 'aim', onclick: () => prepareFight('aim') }, 'Прицелиться');
-    view.preparation = h('div', { class: 'mf-preparation', hidden: true }, view.meet, view.aim);
+    view.preparation = h('div', { class: 'mf-preparation', hidden: true }, view.meet, view.autoMeet, view.aim);
     view.outpost = MFOutpostUI.create({ g, sim, onLayout: size, putBlade });
     view.artifacts = window.MFArtifactsUI ? MFArtifactsUI.create({ g, sim, onOpen: () => openMaster('artifacts') }) : null;
     view.anvilTools.append(view.sort);
@@ -346,7 +362,8 @@
     const gap = shape.rows > 5 ? 4 : 6;
     const wide = g.layout === 'wide';
     const MIN = 44;
-    const INFO = 46;
+    // The row over the anvil (38) and its gap from the cells (15, the plate's 7 inside it).
+    const INFO = 53;
     const roomW = field.clientWidth - 32;
     const byW = (roomW - gap * (shape.cols - 1)) / shape.cols;
     // The gate gives way first: cells keep 64 px (the spec's cover screen) while the gate can
@@ -439,6 +456,7 @@
       });
     }
     const t = now();
+    const resonance = sim.resonance(state, cfg());
     for (const k in view.cells) {
       const i = Number(k);
       const n = grid[i];
@@ -449,11 +467,12 @@
       const foxHint = hint.indexOf(i) >= 0;
       const selected = !!view.selected && view.selected.cell === i && view.selected.level === n;
       const runeTarget = !!view.runeDrag && view.runeDrag.moving && view.runeDrag.target === i;
-      const key = n + '|' + (s ? s.rune + s.index : '') + '|' + crit + '|' + lifted + '|' + target + '|' + foxHint + '|' + selected + '|' + runeTarget;
+      const res = n && resonance > 0 && sim.resonates(state, cfg(), i);
+      const key = n + '|' + (s ? s.rune + s.index : '') + '|' + crit + '|' + lifted + '|' + target + '|' + foxHint + '|' + selected + '|' + runeTarget + '|' + res;
       if (view.cellKey[i] === key) continue;
       view.cellKey[i] = key;
       const el = view.cells[i];
-      el.className = 'mf-cell' + (n ? ' full tier-' + tier(n) : '') + (s ? ' rune rune-' + s.rune : '') + (crit ? ' crit' : '') + (lifted ? ' lifted' : '') + (target ? ' target' : '') + (foxHint ? ' fox-hint' : '') + (selected ? ' selected' : '') + (runeTarget ? ' rune-target' : '');
+      el.className = 'mf-cell' + (n ? ' full tier-' + tier(n) : '') + (s ? ' rune rune-' + s.rune : '') + (crit ? ' crit' : '') + (lifted ? ' lifted' : '') + (target ? ' target' : '') + (foxHint ? ' fox-hint' : '') + (selected ? ' selected' : '') + (runeTarget ? ' rune-target' : '') + (res ? ' res' : '');
       el.setAttribute('aria-pressed', String(selected));
       el.setAttribute('aria-label', n ? tx('Клинок ур. {} · выбрать действия', n) : tx('Пустая клетка'));
       el.title = foxHint ? tx('Лиса заметила пару для слияния') : '';
@@ -952,9 +971,13 @@
     steel: () => tx('Клинок из горна на уровень выше'),
     sharp: (c) => tx('Весь урон +{}', pct(c['up.sharp.step'])),
     purse: (c) => tx('Золото +{}', pct(c['up.purse.step'])),
-    eye: (c) => tx('Шанс крита +{}', pct(c['up.eye.step'])),
+    eye: (c, s) => s && sim.room(c['crit.chance'], c['crit.maxChance'], c['up.eye.step']) <= lvl(s, 'eye')
+      ? tx('Сокрушительный удар: шанс, что крит ударит ещё раз, +{}', pct(c['up.eye.over']))
+      : tx('Шанс крита +{}', pct(c['up.eye.step'])),
     hand: (c) => tx('Множитель крита +{}', g.fmt(c['up.hand.step'])),
-    wide: () => tx('Ещё одна клетка наковальни'),
+    wide: (c, s) => s && sim.room(sim.startCells(s, c), sim.CELLS, c['up.wide.step']) <= lvl(s, 'wide')
+      ? tx('Резонанс: клинок, рядом с которым такой же, бьёт сильнее ещё на {}', pct(c['up.wide.res']))
+      : tx('Ещё одна клетка наковальни'),
     twin: (c) => tx('Клинков из горна больше на {}', pct(c['up.twin.step'])),
     melt: (c) => tx('Шанс клинка на уровень выше +{}', pct(c['up.melt.step'])),
     apprentice: () => tx('Сам сливает пары, чаще с каждым уровнем'),
@@ -966,12 +989,13 @@
     caravan: (c) => tx('События чаще на {}', pct(c['up.caravan.step'])),
     night: (c) => tx('Офлайн-доход +{}', pct(c['up.night.step'])),
     cry: (c) => tx('Кнопка: урон +{} на {} с', pct(c['up.cry.step']), c['cry.sec']),
-    remelt: (c) => tx('Продажа клинка даёт на {} цены больше', pct(c['up.remelt.step'])),
     banner: (c) => tx('Урон +{} за каждую десятку волн', pct(c['up.banner.step'])),
     hammer: () => tx('Ручной удар сильнее; прирост постепенно уменьшается'),
     ember: (c) => tx('При полном жаре залпы чаще ещё на {}', pct(c['up.ember.step'])),
-    pilot: (c) => tx('Жар горна не опускается ниже ещё на {}', pct(c['up.pilot.step'])),
-    stall: () => tx('Дороже продаёт обычные клинки и излишки ковки')
+    pilot: (c, s) => s && sim.room(0, c['heat.maxFloor'], c['up.pilot.step']) <= lvl(s, 'pilot')
+      ? tx('Перегрев: жар тапов сверх полного копит вспышку — залп сильнее ещё на ×{}', g.fmt(c['up.pilot.burst'], { digits: 2 }))
+      : tx('Жар горна не опускается ниже ещё на {}', pct(c['up.pilot.step'])),
+    stall: (c) => tx('Продажа: доля цены +{} до полной, и клинки и излишки ковки дороже', pct(c['up.stall.share']))
   };
 
   /** What the upgrade gives now, in a few words ('' before the first level where there is nothing to say). */
@@ -980,17 +1004,16 @@
     const n = sim.upgradeEffective(state, c, id);
     if (id === 'bellows') return tx('{} с на клинок', g.fmt(sim.forgeInterval(state, c, 0), { digits: 2 }));
     if (id === 'steel') return tx('горн {}-го уровня', sim.forgeLevel(state, c));
-    if (id === 'eye') return tx('крит {}', pct(sim.critChance(state, c)));
+    if (id === 'eye') return sim.overcrit(state, c) > 0 ? tx('крит {} · сокрушительный {}', pct(sim.critChance(state, c)), pct(sim.overcrit(state, c))) : tx('крит {}', pct(sim.critChance(state, c)));
     if (id === 'hand') return tx('крит ×{}', g.fmt(sim.critMult(state, c), { digits: 2 }));
     if (id === 'apprentice') return sim.apprenticeInterval(state, c) ? tx('раз в {} с', g.fmt(sim.apprenticeInterval(state, c) / sim.apprenticeSpeed(state, c), { digits: 1 })) : tx('нет');
     if (id === 'hourglass') return tx('таймер {} с', g.fmt(sim.bossTimer(state, c), { digits: 1 }));
     if (id === 'ember') return tx('полный жар: залп раз в {} с', g.fmt(c['combat.hitSec'] / (1 + sim.heatPower(state, c)), { digits: 2 }));
-    if (id === 'pilot') return tx('жар не ниже {}', pct(sim.heatFloor(state, c)));
-    if (id === 'wide') return tx('{} клеток', sim.openCells(state, c).length);
+    if (id === 'pilot') return sim.overheatLevels(state, c) > 0 ? tx('жар не ниже {} · вспышка ×{}', pct(sim.heatFloor(state, c)), g.fmt(sim.burstMult(state, c), { digits: 2 })) : tx('жар не ниже {}', pct(sim.heatFloor(state, c)));
+    if (id === 'wide') return sim.resonance(state, c) > 0 ? tx('{} клеток · резонанс +{}', sim.openCells(state, c).length, pct(sim.resonance(state, c))) : tx('{} клеток', sim.openCells(state, c).length);
     if (id === 'night') return tx('офлайн {}', pct(sim.offlineShare(state, c)));
-    if (id === 'remelt') return tx('продажа {}', pct(sim.sellShare(state, c)));
     if (id === 'hammer') return tx('один тап: −{} с', g.fmt(sim.tapSeconds(state, c, now()), { digits: 2 }));
-    if (id === 'stall') return tx('выручка ×{}', g.fmt(sim.saleMult(state, c), { digits: 2 }));
+    if (id === 'stall') return tx('продажа {} · ×{}', pct(sim.sellShare(state, c)), g.fmt(sim.saleMult(state, c), { digits: 2 }));
     if (id === 'runeMason') return tx('гнёзд {}', sim.socketCount(state, c));
     if (!n) return '';
     if (id === 'melt') {
@@ -1009,7 +1032,7 @@
     const groups = [
       { id: 'forge', title: 'Ковка', items: ['bellows', 'steel', 'wide', 'twin', 'melt', 'apprentice', 'hammer'] },
       { id: 'battle', title: 'Бой', items: ['sharp', 'eye', 'hand', 'hourglass', 'temper', 'ember', 'pilot', 'runeMason', 'runePower', 'cry', 'banner'] },
-      { id: 'income', title: 'Доход', items: ['purse', 'hunter', 'caravan', 'night', 'remelt', 'stall'] }
+      { id: 'income', title: 'Доход', items: ['purse', 'hunter', 'caravan', 'night', 'stall'] }
     ];
     view.upTab = view.upTab || 'forge';
     const group = groups.find(item => item.id === view.upTab) || groups[0];
@@ -1049,13 +1072,15 @@
       side: h('button', { class: 'g-btn small', id: 'blow', onclick: blow }, GameIcons.el('energy'), 'Раздуть') }));
     // The runes are chosen on the anvil, by a tap on their stones.
     if (group.id === 'battle' && sim.sockets(state, c).length) box.append(h('p', { class: 'g-note mf-rune-note' }, tx('Руны меняются на наковальне: тап по камню руны в клетке.')));
-    rows.forEach((u) => {
+    // An upgrade at its last level is mastered: it leaves the list for the line «Освоено» under it.
+    const mastered = rows.filter((u) => sim.upUnlocked(state, c, u.id) && lvl(state, u.id) >= sim.upMax(state, c, u.id));
+    rows.filter((u) => mastered.indexOf(u) < 0).forEach((u) => {
       const open = sim.upOpen(state, c, u.id);
       const price = sim.upCost(state, c, u.id);
       const can = open && Big.gte(state.run.gold, price);
       const n = lvl(state, u.id);
       const unlocked = sim.upUnlocked(state, c, u.id);
-      const requirement = ['hammer', 'ember', 'pilot'].includes(u.id) ? tx('Откроется с волны {}', c['up.' + u.id + '.fromWave']) : tx('Откроется с волны {} или после {} продаж', c['up.stall.fromWave'], c['up.stall.fromSold']);
+      const requirement = c['up.' + u.id + '.fromWave'] ? tx('Откроется с волны {}', c['up.' + u.id + '.fromWave']) : '';
       let side;
       if (open) {
         const b = bulk(state, c, u.id);
@@ -1063,7 +1088,7 @@
         side.dataset.buy = u.id;
       } else side = mark(tx(unlocked ? 'предел' : 'закрыто'), false);
       const progression = sim.upgradeProgress(state, c, u.id);
-      let description = DESC[u.id] ? DESC[u.id](c) : '';
+      let description = DESC[u.id] ? DESC[u.id](c, state) : '';
       if (progression.supported && !['caravan', 'hammer', 'stall'].includes(u.id)) {
         const nextConfig = Object.assign({}, c);
         nextConfig['up.' + u.id + '.step'] *= progression.nextEffective - progression.effective;
@@ -1086,6 +1111,11 @@
       }
       box.append(row({ set: 'up', id: u.id, attr: 'data-up', level: n, title: u.title, locked: !unlocked, cls: unlocked ? '' : 'locked', text: unlocked ? description : requirement, now: unlocked ? nowText(state, u.id) : '', progress, side }));
     });
+    if (mastered.length) {
+      box.append(h('div', { class: 'mf-mastered', id: 'mastered' }, h('div', { class: 'mf-sec' }, tx('Освоено')),
+        h('div', { class: 'mf-mastered-list' }, mastered.map((u) => h('span', { class: 'mf-mastered-item', 'data-up': u.id, title: nowText(state, u.id) },
+          MFArt.el('up', u.id, 'mf-mastered-ic'), h('span', {}, tx(u.title)), h('b', { class: 'g-num' }, String(lvl(state, u.id))))))));
+    }
     const restore = focusBuy ? box.querySelector('[data-buy="' + focusBuy + '"]') : focusTab ? box.querySelector('[data-upgrade-tab="' + focusTab + '"]') : null;
     if (restore && !restore.disabled) restore.focus({ preventScroll: true });
   }
@@ -1176,13 +1206,93 @@
     }
   }
 
+  /** The card of a forged metal: its picture, name, theme, phrase and story. */
+  function bladeCard(n) {
+    const s = bladeStory(n);
+    const art = h('span', { class: 'mf-art' });
+    putBlade(art, n);
+    return h('article', { class: 'mf-blade-card', id: 'blade-card', 'data-level': n },
+      h('div', { class: 'mf-bc-pic' }, art),
+      h('div', { class: 'mf-bc-body' },
+        h('div', { class: 'mf-bc-head' }, h('h3', {}, s.title), h('span', { class: 'mf-bc-lvl g-num' }, tx('ур. {}', n))),
+        s.theme ? h('span', { class: 'mf-bc-theme' }, s.theme) : null,
+        s.text ? h('p', { class: 'mf-bc-text' }, s.text) : null,
+        s.lore ? h('p', { class: 'mf-bc-lore' }, s.lore)
+          : h('p', { class: 'g-note' }, tx('Истории пока нет: её расскажет модель-художник, когда нарисует этот клинок.'))));
+  }
+
+  /**
+   * The story of the metal of level n in a window over the screen; the arrows, the keys ← → and a swipe
+   * go through every metal of the album in order.
+   */
+  function openLore(n) {
+    closeLore();
+    const levels = Object.keys(g.state.meta.album || {}).map(Number).filter((x) => x > 0);
+    if (levels.indexOf(n) < 0) levels.push(n);
+    levels.sort((a, b) => a - b);
+    let at = levels.indexOf(n);
+    const back = h('div', { class: 'mf-lore-back', id: 'lore', role: 'dialog', 'aria-modal': 'true', 'aria-label': tx('История клинка') });
+    const body = h('div', { class: 'mf-lore-body' });
+    const count = h('span', { class: 'mf-lore-count g-num' });
+    const prev = h('button', { class: 'g-btn mf-lore-nav', id: 'lore-prev', 'aria-label': tx('Предыдущий металл'), html: '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>', onclick: () => go(-1) });
+    const next = h('button', { class: 'g-btn mf-lore-nav', id: 'lore-next', 'aria-label': tx('Следующий металл'), html: '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>', onclick: () => go(1) });
+    const close = h('button', { class: 'icon-btn mf-lore-x', id: 'lore-close', 'aria-label': tx('Закрыть историю'), onclick: () => closeLore() }, GameIcons.el('close'));
+    const panel = h('div', { class: 'mf-lore' }, close, body, h('div', { class: 'mf-lore-bar' }, prev, count, next));
+    back.append(panel);
+    function paint() {
+      body.textContent = '';
+      body.append(bladeCard(levels[at]));
+      count.textContent = tx('{} из {}', at + 1, levels.length);
+      prev.disabled = at <= 0;
+      next.disabled = at >= levels.length - 1;
+    }
+    function go(d) {
+      const to = Math.max(0, Math.min(levels.length - 1, at + d));
+      if (to === at) return;
+      at = to;
+      paint();
+      g.sfx('tap');
+    }
+    const key = (e) => {
+      if (e.key === 'Escape') { e.preventDefault(); closeLore(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+    };
+    // A swipe across the card: to the left — the next metal, to the right — the one before.
+    let swipe = null;
+    panel.addEventListener('pointerdown', (e) => { swipe = { x: e.clientX, y: e.clientY }; });
+    panel.addEventListener('pointerup', (e) => {
+      if (!swipe) return;
+      const dx = e.clientX - swipe.x, dy = e.clientY - swipe.y;
+      swipe = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(dx < 0 ? 1 : -1);
+    });
+    back.addEventListener('click', (e) => { if (e.target === back) closeLore(); });
+    document.addEventListener('keydown', key, true);
+    view.lore = { back, key, focus: document.activeElement };
+    document.body.append(back);
+    paint();
+    (next.disabled ? close : next).focus({ preventScroll: true });
+  }
+
+  function closeLore() {
+    const l = view.lore;
+    if (!l) return;
+    view.lore = null;
+    document.removeEventListener('keydown', l.key, true);
+    l.back.remove();
+    if (l.focus && l.focus.isConnected && l.focus.focus) l.focus.focus({ preventScroll: true });
+  }
+
   function fillAlbum(box, state) {
     const album = state.meta.album || {};
     const top = Math.max(40, state.meta.bestLevel || 1);
     const grid = h('div', { class: 'mf-album', id: 'album' });
     for (let n = 1; n <= top; n++) {
       const seen = !!album[n];
-      const cell = h('div', { class: 'mf-alb' + (seen ? '' : ' unseen') });
+      // A forged metal is a button: its story opens over the album.
+      const cell = h(seen ? 'button' : 'div', { class: 'mf-alb' + (seen ? '' : ' unseen'), 'data-level': n,
+        'aria-label': seen ? tx('{} · история', bladeInfo(n).title) : null, onclick: seen ? () => openLore(n) : null });
       const art = h('span', { class: 'mf-art' });
       // A level not forged yet shows as the dark outline of its base, never the artist's picture.
       if (seen) putBlade(art, n);
@@ -1190,7 +1300,8 @@
       cell.append(art, h('span', { class: 'mf-alb-t' }, seen ? bladeInfo(n).title : '?'), h('span', { class: 'mf-lvl g-num' }, String(n)));
       grid.append(cell);
     }
-    box.append(h('p', { class: 'g-note' }, tx('Открыто металлов: {}', Object.keys(album).length)), grid);
+    box.append(h('p', { class: 'g-note' }, tx('Открыто металлов: {}', Object.keys(album).length) + ' · ' + tx('нажмите на металл, чтобы прочитать его историю')));
+    box.append(grid);
   }
 
   // ---- render ----
@@ -1273,7 +1384,7 @@
     const boss = sim.isBoss(c, r.wave) && !r.farm;
     const m = monsterOf(state, r.wave);
     view.monster = m;
-    view.waveLabel.textContent = tx(r.farm ? 'Фарм · волна {}' : boss ? 'Волна {} · босс' : 'Волна {}', r.wave);
+    view.waveLabel.textContent = tx(r.farm ? 'Фарм · волна {}' : boss ? 'Волна {} · босс' : 'Волна {}', r.wave) + (!boss && r.runup > 0 ? ' · ' + tx('разбег ×{}', r.runup) : '');
     const behavior = { armored: 'Панцирный', regenerator: 'Восстанавливается', channeler: 'Заклинатель' }[encounter.kind];
     view.monsterName.textContent = tx(m.title) + (behavior ? ' · ' + tx(behavior) : '');
     const effect = modEffect(state, m);
@@ -1349,11 +1460,16 @@
         Big.gt(encounter.shield, 0) ? tx('Панцирь {} · «Раскол» снимает защиту', g.fmt(encounter.shield)) :
         tx(sim.freeCells(state, c).length ? 'Тап — действия · дважды — слить' : 'Поле заполнено · горн продаёт излишки');
     }
-    const preparationShown = encounter.walking && r.maxWave >= c['encounter.prepare.fromWave'];
+    // While the foe walks: «Встретить», «Авто», «Прицел»; in the fight «Авто» stays alone, small.
+    const prepOpen = r.maxWave >= c['encounter.prepare.fromWave'];
+    const preparationShown = prepOpen && (encounter.walking || !!g.state.meta.autoMeet);
     const changedPreparation = view.preparation.hidden === preparationShown;
     view.preparation.hidden = !preparationShown;
+    view.preparation.classList.toggle('fighting', !encounter.walking);
+    view.autoMeet.setAttribute('aria-pressed', String(!!g.state.meta.autoMeet));
+    view.autoMeet.classList.toggle('on', !!g.state.meta.autoMeet);
     view.meet.disabled = !encounter.canPrepare || encounter.meetCooldown > 0 || encounter.remaining <= c['encounter.meet.minSec'];
-    view.meet.textContent = encounter.prepared === 'meet' ? tx('Выходим навстречу') : encounter.meetCooldown > 0 ? tx('Встретить · {} с', Math.ceil(encounter.meetCooldown)) : tx('Встретить · −{} с', c['encounter.meet.cutSec']);
+    view.meet.textContent = encounter.prepared === 'meet' ? tx('Выходим навстречу') : encounter.meetCooldown > 0 ? tx('Встретить · {} с', Math.ceil(encounter.meetCooldown)) : tx('Встретить');
     view.aim.disabled = !encounter.canPrepare;
     view.aim.textContent = encounter.prepared === 'aim' ? tx('Первый залп усилен') : tx('Прицел · +{}', pct(c['encounter.aim.bonus']));
     if (changedPreparation) size();
@@ -1388,6 +1504,10 @@
     view.forge.title = tx('Горн куёт сам. Нажатия ускоряют тот же цикл и раздувают жар: пока горн горяч, клинки бьют чаще. Если места нет, новый клинок продаётся.');
     const hot = sim.heat(state, c);
     view.heatFill.style.width = (hot * 100) + '%';
+    const over = sim.overheatLevels(state, c) > 0;
+    view.forge.classList.toggle('overheat', over && (r.overheat > 0 || r.bursts > 0));
+    view.forge.style.setProperty('--mf-over', String(Math.max(0, Math.min(1, r.overheat || 0))));
+    view.forge.classList.toggle('burst', r.bursts > 0);
     view.forge.setAttribute('aria-label', hot > 0.005 ? tx('Горн, жар {}, залп раз в {} с', pct(hot), g.fmt(sim.volleySec(state, c, false), { digits: 2 })) : tx('Горн'));
     view.forge.classList.toggle('blow', r.bellowsUntil > t);
     const sale = r.lastForgeSale;
@@ -1533,6 +1653,11 @@
       }
       (r.crits || []).forEach((cell) => { view.critUntil[cell] = t + 220; });
       if (r.lastHit && walk === 0) view.floats.push({ x: Math.min(W - 40, mx + size * 0.6), y: Math.max(view.floatTop + 22, my), text: '−' + g.fmt(r.lastHit), crit, at: t });
+      const smashed = (r.smashes || []).length > 0;
+      const burst = r.lastBurst && r.lastBurst.serial !== view.burstSerial ? r.lastBurst : null;
+      if (burst) view.burstSerial = burst.serial;
+      if ((smashed || burst) && walk === 0) view.floats.push({ x: Math.max(60, mx - size * 0.2), y: Math.max(view.floatTop + 4, my - size * 0.35), text: burst ? tx('Вспышка ×{}', g.fmt(burst.mult, { digits: 2 })) : tx('Сокрушительный!'), crit: true, at: t });
+      if (burst) g.sfx('clang');
       if (crit) g.sfx('clang');
       if (walk === 0) view.hitAt = t;
       view.lastVolleys = r.volleys;

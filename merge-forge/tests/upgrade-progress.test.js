@@ -99,12 +99,14 @@ test('просмотр и повторная загрузка не меняют 
 
 test('пределы, слоты и экспоненциальные уровни клинка не усилены вехами', () => {
   const {state}=fresh();state.run.maxWave=100;
-  for(const id of ['steel','melt','wide','runeMason','eye','night','remelt','bellows','apprentice']) {
+  for(const id of ['steel','melt','runeMason','night','bellows','apprentice']) {
     const before=S.upMax(state,x.cfg,id);state.run.up[id]=1000;
     const p=S.upgradeProgress(state,x.cfg,id);
     assert.strictEqual(p.supported,false);assert.strictEqual(p.factor,1);assert.strictEqual(p.effective,1000);assert.strictEqual(p.nextAt,null);
     assert.strictEqual(S.upMax(state,x.cfg,id),before);
   }
+  // The levels of «Шире наковальня», «Глаз мастера» and «Лавка кузнеца» past their old caps do other things now.
+  state.run.up.wide=1000;state.run.up.eye=1000;state.run.up.stall=1000;
   assert.strictEqual(S.openCells(state,x.cfg).length,35);assert.ok(S.socketCount(state,x.cfg)<=7);
   assert.strictEqual(S.critChance(state,x.cfg),x.cfg['crit.maxChance']);assert.strictEqual(S.offlineShare(state,x.cfg),1);assert.strictEqual(S.sellShare(state,x.cfg),1);
   assert.strictEqual(S.forgeInterval(state,x.cfg,NOW),x.cfg['forge.minInterval']);assert.strictEqual(S.apprenticeInterval(state,x.cfg),x.cfg['apprentice.minInterval']);

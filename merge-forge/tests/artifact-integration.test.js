@@ -123,7 +123,8 @@ test('герой и клинок на поле получают одинаков
 });
 
 test('избыток артефактного шанса усиливает крит, сохраняя предел вероятности и паритет героя',()=>{
- const {state}=fresh();state.run.up.eye=1000;state.run.up.hand=10;state.run.grid.fill(0);state.run.grid[0]=20;
+ // «Глаз мастера» right at the cap of the chance: its own levels past it are «Сокрушительный удар» (upgrade-progress).
+ const {state}=fresh();state.run.up.eye=S.room(x.cfg['crit.chance'],x.cfg['crit.maxChance'],x.cfg['up.eye.step']);state.run.up.hand=10;state.run.grid.fill(0);state.run.grid[0]=20;
  const before=S.criticalStats(state,x.cfg);own(state,'keenLens');own(state,'focusCrystal');S.activateArtifact(state,x.cfg,'focusCrystal',NOW);
  const after=S.criticalStats(state,x.cfg),bonus=A.modifiers(state,x.cfg).critChance;
  close(after.chance,x.cfg['crit.maxChance']);assert.ok(after.overflow>0);assert.ok(after.multiplier>before.multiplier);

@@ -40,10 +40,12 @@ test('сломанное новое оружие не заменяет вали�
 
 test('обычные новые покупки открываются постепенно и не ускоряют пассивную ковку',()=>{
  const {state}=fresh();state.run.gold='1e9';state.run.maxWave=9;state.run.stats.sold=9;
- assert.equal(x.sim.upOpen(state,x.cfg,'stall'),false);assert.equal(x.sim.buyUp(state,x.cfg,'stall'),false);
+ // «Лавка кузнеца» вобрала «Переплавку»: она открыта с начала, первые уровни поднимают долю продажи.
+ assert.equal(x.sim.upOpen(state,x.cfg,'stall'),true);
  assert.equal(x.sim.upOpen(state,x.cfg,'hammer'),false);state.run.stats.sold=10;
  const oldPrice=x.sim.sellPrice(state,x.cfg,1),oldSpeed=x.sim.forgeSpeed(state,x.cfg),oldTap=x.sim.tapSeconds(state,x.cfg,NOW);
- assert.equal(x.sim.buyUp(state,x.cfg,'stall'),true);assert.equal(x.Big.toNumber(oldPrice),4);assert.equal(x.Big.toNumber(x.sim.sellPrice(state,x.cfg,1)),5);
+ assert.equal(x.sim.buyUp(state,x.cfg,'stall'),true);assert.equal(x.Big.toNumber(oldPrice),4);
+ assert.equal(x.Big.toNumber(x.sim.sellPrice(state,x.cfg,1)),Math.floor(10*(x.cfg['sell.share']+x.cfg['up.stall.share'])*x.sim.saleMult(state,x.cfg)));
  state.run.maxWave=20;assert.equal(x.sim.buyUp(state,x.cfg,'hammer'),true);
  assert.ok(x.sim.tapSeconds(state,x.cfg,NOW)>oldTap);assert.ok(x.sim.tapSeconds(state,x.cfg,NOW)<x.sim.forgeInterval(state,x.cfg,NOW));assert.equal(x.sim.forgeSpeed(state,x.cfg),oldSpeed);
  const cost=x.sim.upCost(state,x.cfg,'hammer');assert.equal(x.sim.buyUp(state,x.cfg,'hammer'),true);assert.ok(x.Big.gt(x.sim.upCost(state,x.cfg,'hammer'),cost));
