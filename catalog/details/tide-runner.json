@@ -1,6 +1,10 @@
 {
   "changes": [
     {
+      "notes": "The harbour railway adds three tracks, oncoming trains, loading ramps, wagon roofs and tunnels. Six route patterns return at higher speeds. This release adds a steady camera, a forward-facing sprint, five equipment branches with five levels each, three depot jobs and two achievements. Existing purchases, runs and replays carry over.",
+      "version": "0.3.0"
+    },
+    {
       "notes": "The courier now runs on foot, jumps hurdles and slides under sails. Token trails, magnets and boosts lead to four outfits, four boards and six gear upgrades. Surfing and boosted board rides share the course with the footrace. Older saves and replays still work.",
       "version": "0.2.0"
     },
@@ -13,52 +17,53 @@
       "version": "0.1.0"
     }
   ],
-  "description": "You're a courier in a working fishing harbour. Follow the trail of brass tokens, jump mooring ropes and slide under sails. Take a turquoise ramp to unfold your board and ride the face of a wave. Thread the high gates and reach the striped exit to bank your streak.\n\nSpend your haul on a fisherman's raincoat, a harbour pilot's peacoat, a diving suit, boards and longer-lasting pickups. Open Water rolls a fresh course each time. A rematch brings back the same tide and your recorded ghost. Distance and score records, replays and your wardrobe all work offline.",
+  "description": "A pair of headlights is already coming your way at the start. Switch tracks, clear a hurdle, then take a loading ramp onto the freight cars. Jump the gaps between roofs. In the tunnel, watch the light on the rails and slide under low beams. The waterfront branch lets you catch a wave and bank a string of surf gates.\n\nEach fresh run strings familiar sections together. Learn a sequence, take it at speed and race your ghost on the same route. The horizon stays steady. Spend tokens on four outfits and five gear branches with five levels each. Depot jobs pay extra for rooftop routes and close passes.",
   "id": "tide-runner",
   "locales": {
     "ru": {
       "changes": {
         "0.1.0": "Первый выпуск. Бесконечный порт, связки створов, недельные приливы, личные рекорды, повторы и тренировка.",
         "0.1.1": "Гонщик получил новую модель и стойку на доске. На причалах появились работающие люди, торговые ряды и портовый инвентарь, а у берега ходят суда.",
-        "0.2.0": "Теперь курьер бежит по причалу пешком, перепрыгивает препятствия и уходит в подкат. На трассе появились дорожки жетонов, магнит и форсаж. В гардеробе четыре образа, четыре доски и шесть улучшений снаряжения. На волне и во время форсажа курьер раскрывает доску. Результаты и повторы предыдущего выпуска сохранены."
+        "0.2.0": "Теперь курьер бежит по причалу пешком, перепрыгивает препятствия и уходит в подкат. На трассе появились дорожки жетонов, магнит и форсаж. В гардеробе четыре образа, четыре доски и шесть улучшений снаряжения. На волне и во время форсажа курьер раскрывает доску. Результаты и повторы предыдущего выпуска сохранены.",
+        "0.3.0": "Портовая железная дорога. Три пути, встречные составы, грузовые рампы, крыши и тоннели. Быстрый старт, шесть повторяющихся рисунков трассы, ровная камера и новая анимация бега. Пять веток прокачки по пять уровней, три заказа депо и две новые награды. Сохраняются кошелёк, покупки, старые заезды и повторы."
       },
-      "description": "Вы — курьер рыбного порта. Бегите за россыпью латунных жетонов, перепрыгивайте канаты и проскальзывайте под парусами. На бирюзовой рампе справа раскрывается доска. Берите створы выше на волне и успейте к сходу, пока серия ещё в ваших руках.\n\nЖетоны можно потратить на дождевик рыбака, бушлат лоцмана, водолазный костюм, доски и улучшения для магнита и форсажа. В «Большой воде» каждый раз новый маршрут. В реванше вас ждёт тот же прилив с вашим призраком. Личные рекорды по очкам и дистанции, повторы и весь гардероб работают офлайн."
+      "description": "Фары встречного поезда уже видны со старта. Уйдите на соседний путь, перепрыгните барьер, а затем по грузовой рампе забегите на крышу. Между вагонами есть зазоры. В тоннеле свет полосами ложится на рельсы, а низкая балка оставляет место для подката. Вдоль воды можно свернуть на волну и собрать серию створов на доске.\n\nВ каждом новом забеге порт складывается из знакомых участков. Запомните связку, пройдите её быстрее и сравните результат с личным призраком на том же маршруте. Камера держит горизонт ровно. За жетоны доступны четыре образа и пять веток снаряжения, у каждой пять уровней. Заказы депо отдельно награждают за крыши и рискованные обгоны."
     }
   },
   "schemaVersion": 1,
   "screenshots": [
     {
-      "height": 800,
+      "height": 760,
       "path": "tide-runner/store/shots/1.webp",
-      "sha256": "ed96d95abbcf29059d81e2be2479a0d622f49fd9cc0d3d8a0c944d561be189b9",
-      "size": 56388,
+      "sha256": "1ee1ccf57909da326e5dd30917adf5fa149fb98852b0bdb0e5151740c84c721b",
+      "size": 123326,
       "type": "image/webp",
-      "width": 564
+      "width": 900
     },
     {
-      "height": 800,
+      "height": 760,
       "path": "tide-runner/store/shots/2.webp",
-      "sha256": "0a30fe60c774beaaed7ae25ac547dd6f7200169a5a6ef80a3126a3dc9a0cc9d1",
-      "size": 61406,
-      "type": "image/webp",
-      "width": 564
-    },
-    {
-      "height": 820,
-      "path": "tide-runner/store/shots/3.webp",
-      "sha256": "dcea62e3ec79c87dae92e8f04d7d9c2a79dcfa3a39f5e12811d6a75f70bdb068",
-      "size": 40764,
+      "sha256": "e6c70ee8eb475b2decc3a10c45fbad9c91666cce7b56d586c0109334c475a049",
+      "size": 53400,
       "type": "image/webp",
       "width": 390
     },
     {
+      "height": 760,
+      "path": "tide-runner/store/shots/3.webp",
+      "sha256": "04474911c93dc16a7f90d9d88f13606d9cc64c0d5cf5ec6964a883662ef4ebf0",
+      "size": 91430,
+      "type": "image/webp",
+      "width": 900
+    },
+    {
       "height": 700,
       "path": "tide-runner/store/shots/4.webp",
-      "sha256": "c48e4dfaba29d5076477b1f0b72ce95bc81d8b803bb62c489202e9b3ceaae4e0",
-      "size": 36868,
+      "sha256": "63a2fcedcb837db415c1c8e7225e4dcbd7ba1c489746ef24f198510fdbd3cfaf",
+      "size": 45532,
       "type": "image/webp",
       "width": 900
     }
   ],
-  "version": "0.2.0"
+  "version": "0.3.0"
 }

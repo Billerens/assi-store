@@ -13,8 +13,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "91d4a0f33440d809130c5e16625838bc66355a4ff64aed87cb2e36e57c4a8676",
-      "size": 3864
+      "sha256": "84f46bf1ec7c8d896e7e5924ab49c6962bce58fb9712162ba3f1c32511b4e379",
+      "size": 3778
     },
     {
       "path": "code/checks.js",
@@ -28,13 +28,13 @@
     },
     {
       "path": "code/game.json",
-      "sha256": "196d02f6b667da53d6c51cd99135c18247165039f7eb1e83513b3c9b9e2414e7",
-      "size": 1818
+      "sha256": "b8f65180c49ee7c280837aaf534edaf8cb8c659c08cc320c558cfc55f9663b1b",
+      "size": 1915
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "f663fc27d758cd2b09157d7a3621e0ea155cb62ccf19ab5aaa91e96d8ac9bfde",
-      "size": 13933
+      "sha256": "ef4373bef7d343ed86a6a536eeb9fdd6b457bbdd13a5e902898bddb0e64a6c96",
+      "size": 19965
     },
     {
       "path": "code/icon.svg",
@@ -43,8 +43,8 @@
     },
     {
       "path": "code/race.js",
-      "sha256": "61648fb9d0acfdcbfab6800dfccc77e0446a6648f0291bed0355e805421c61de",
-      "size": 10500
+      "sha256": "d600d0a97a39d9d8913303f003fa70c3bb66919a4248773589185028918ffab5",
+      "size": 19361
     },
     {
       "path": "code/sim.js",
@@ -58,23 +58,23 @@
     },
     {
       "path": "code/ui/economy.js",
-      "sha256": "9dce73d704a8d3572d55b6242b40322aa60fb9c10fd19fd2f125d95f16866fa1",
-      "size": 2299
+      "sha256": "48da8e9c1c26f3e66a8425498a9b7ed0e00c567038baaf7ceb6b32e9097632c3",
+      "size": 2969
     },
     {
       "path": "code/ui/game.css",
-      "sha256": "443c9a7538a929e9fd30fd86132b47675af18ae19732bfc99fce6f7677e9e9cc",
-      "size": 7440
+      "sha256": "11349973389623175d49fab191403ec24924b254d0254edfa0d7cf4d6aa57718",
+      "size": 7782
     },
     {
       "path": "code/ui/index.html",
-      "sha256": "df863e7405c80ed1368ae97230c91150f9c07a69dd05ad4ab1f313518251b105",
-      "size": 721
+      "sha256": "e6f040b0aa64d6d58f542ac1bf14fc7d8b18582e5c7c2eb9a84c8bdacd7f0f42",
+      "size": 775
     },
     {
       "path": "code/ui/main.js",
-      "sha256": "6d7d182dfddf7e0f5d6d47eaea67c7bde33dbb109ed6aaf376bb3e99cb664b28",
-      "size": 22953
+      "sha256": "2696cd6a87591f3788e4da5c910aa7ce2ce46119451a24eb65a218142168ecb9",
+      "size": 24917
     },
     {
       "path": "code/ui/model-kit.js",
@@ -83,8 +83,8 @@
     },
     {
       "path": "code/ui/model-pass.js",
-      "sha256": "bd66583b16db76bc804f14013baa1a1a9f023ebac9ed0f93eee2b853ad5054df",
-      "size": 6254
+      "sha256": "fb934a99092623afb1ee945f87e5278f615a13876a64095f608ee724ba438029",
+      "size": 6720
     },
     {
       "path": "code/ui/outfit-models.js",
@@ -103,8 +103,8 @@
     },
     {
       "path": "code/ui/profile.js",
-      "sha256": "06448efe64bc726a420ba851a0081f528b2dc66d5e0494b2c394ec96723cc382",
-      "size": 2472
+      "sha256": "0cbd5a5b6dffe41aa2649f819b2235e76e1f6f4f7d3de4a5d5f490c1b36076b5",
+      "size": 2515
     },
     {
       "path": "code/ui/quay-life.js",
@@ -112,19 +112,44 @@
       "size": 9973
     },
     {
+      "path": "code/ui/rail-audio.js",
+      "sha256": "1d90917b19e00f2c133eb0a6c7cbdda86b0da1024d031dbe29d6d04b7a6e541c",
+      "size": 1516
+    },
+    {
+      "path": "code/ui/rail-camera.js",
+      "sha256": "88a544c3c7655cf464b654d218743d7afd42222318ddf8f910680688cee5f7c5",
+      "size": 654
+    },
+    {
+      "path": "code/ui/rail-gear.js",
+      "sha256": "8bd142712da21366c0b4ef3b81773da32ca3b80b711b62386a0f35d2081bb1db",
+      "size": 2184
+    },
+    {
+      "path": "code/ui/rail-models.js",
+      "sha256": "e11976d7471a14fe2b1b70ab9cce15a5eddcf81fbc7063c63afcdd0e77e0e430",
+      "size": 9085
+    },
+    {
+      "path": "code/ui/rail-world.js",
+      "sha256": "e1c7e1460dcb5baa1dcdde40b798994ba66ae4a003de8fa249d1dfd20ff314dc",
+      "size": 12464
+    },
+    {
       "path": "code/ui/rider-model.js",
-      "sha256": "855fcf986cb896ac1170544fc7cbf69eb6557b8944303578501a65266b0afbff",
-      "size": 16588
+      "sha256": "1882f20b3366b054e81c78dd958e10804ac28ae797fe9fd7b8e085fd796c4243",
+      "size": 18187
     },
     {
       "path": "code/ui/scene.js",
-      "sha256": "75f526d19655e3318aa6f765a60689e957e6e8f01df5261d574b0b2d48b39f5f",
-      "size": 26155
+      "sha256": "3d97dfde6419769f66f1f51769493c6b83fb81fefa684f354bf7922ce3c73684",
+      "size": 29005
     },
     {
       "path": "code/ui/wardrobe-preview.js",
-      "sha256": "4de4bc3349b54d6568c50f4715e9f429b1caeed07908a48f7b274c6b3ae6ea4f",
-      "size": 5274
+      "sha256": "f4bc5a53945d48aad407f0b92b5c3cc53c4cf942d5b7d9fb45be2df9402b8f92",
+      "size": 5503
     },
     {
       "path": "code/ui/wardrobe.css",
@@ -133,13 +158,13 @@
     },
     {
       "path": "code/ui/wardrobe.js",
-      "sha256": "a7aa8afc12ab8eba8c88db4985eff64adcbd48525bd09696773e0bd13ea431d5",
-      "size": 8721
+      "sha256": "3d35c6f4f6aeabbb1444a1ff0f6e47e71a39dfa149503030120dd1ee62ad7831",
+      "size": 9938
     },
     {
       "path": "code/ui/words.json",
-      "sha256": "a32dcacba074ba1e91d10f4d488fbc0cd9626ee5e957dffbaa70ab6056bf41b6",
-      "size": 6945
+      "sha256": "0cb711d11100ce938e68f711fb4884210516ea96ade3655334c0dc9d76fc8141",
+      "size": 8500
     },
     {
       "path": "code/vendor/LICENSE",
@@ -166,5 +191,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.2.0"
+  "version": "0.3.0"
 }
