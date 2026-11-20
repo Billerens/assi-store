@@ -1,0 +1,230 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
+    },
+    {
+      "path": "README.md",
+      "sha256": "1e8c327f68dc43fc666503cb58fc9c671e2471c7019b56f2d4216f4e9b3e2b14",
+      "size": 2147
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "ddf88a4d6bd4ffbb3d3a1794198085e36961b9ee4ce100431144eabe6f0015cc",
+      "size": 660
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "7aa647d8168d8dc8ffcea6de4ced8b4dae225e37c4e58e3b15fd52ca5a1fed84",
+      "size": 47
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "8c84d06646ff4d32f0ccb6334c39eff324c88d4df9aa9c52c4d20165ff410ada",
+      "size": 1585
+    },
+    {
+      "path": "code/i18n-ru.json",
+      "sha256": "b890f449a85a0d8f2ecd97ea085a56d5fd56606dfcceeee18bf15acb7317cd25",
+      "size": 12824
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "bc6de1221dc27f2a85023c8cbcf22452311465ce53603f633b16cd1b46b69267",
+      "size": 370
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "3a5acd5827edecab65d46f66128222b1cf14529865c8d9d67267f7ed961b43b3",
+      "size": 7964
+    },
+    {
+      "path": "code/ui/art.js",
+      "sha256": "441a2cab88d604b3ad8a70b9ed62e1cbd64c05dee860e3289efdfa3735cb5c86",
+      "size": 5986
+    },
+    {
+      "path": "code/ui/boot.js",
+      "sha256": "d081e1ae26e29cdda4d44d8abaacb6144566c3a082c0114b484097be61abd889",
+      "size": 240
+    },
+    {
+      "path": "code/ui/bridge-model.js",
+      "sha256": "40d7ab161aac23847a0956384bb8473539b2a4fa089c4ce0f96c52003a8dedcf",
+      "size": 10393
+    },
+    {
+      "path": "code/ui/canvas-interior.js",
+      "sha256": "2ba7c13d0c48aa0ade8a16b795a49d36b8784cfb382452e27aa6961cf7a0eb58",
+      "size": 6832
+    },
+    {
+      "path": "code/ui/craft-models.js",
+      "sha256": "38bab494f1ffe06dba14b399cda82a810b2c252e25f32fe9890023f2755a7a00",
+      "size": 14611
+    },
+    {
+      "path": "code/ui/fallback/dock-0.webp",
+      "sha256": "09eccfb4338c27426dbf0f7e33b14a5e190a1a883737ac0deded95b48f7d4267",
+      "size": 10054
+    },
+    {
+      "path": "code/ui/fallback/dock-1.webp",
+      "sha256": "7075d3f053a2cec43af210f2897a7b0613b0698601a4f17a8310e9b281c881a7",
+      "size": 12692
+    },
+    {
+      "path": "code/ui/fallback/dock-2.webp",
+      "sha256": "a314024cb6056797080b4c21e2729496bb08bb0973f6efaa6bfde07dc6de275f",
+      "size": 9662
+    },
+    {
+      "path": "code/ui/fallback/drone.webp",
+      "sha256": "45c2438730f1615edf5a8cb8d2c854a7290cda186fda521b518e9db31fa39574",
+      "size": 8482
+    },
+    {
+      "path": "code/ui/fallback/flight-0.webp",
+      "sha256": "e9c4d6851f1075069576e40bac6f5c4570ef207c2520478b8ac6e02c60f10881",
+      "size": 8794
+    },
+    {
+      "path": "code/ui/fallback/flight-1.webp",
+      "sha256": "8b1ce44ee17ccb100b5be09869ce6da15ce5194efb60bc89771d7b64abba8c62",
+      "size": 10554
+    },
+    {
+      "path": "code/ui/fallback/flight-2.webp",
+      "sha256": "f0b625bfd9cf5df097362d148999cc415151354f5b58681885ea40318450d418",
+      "size": 8822
+    },
+    {
+      "path": "code/ui/fallback/shuttle.webp",
+      "sha256": "11da50d07433e21ec7ed42e48757c3fb9002d653fd062b1dc5431fc1954bb4a8",
+      "size": 6156
+    },
+    {
+      "path": "code/ui/fallback/station.webp",
+      "sha256": "15ad668f83fd777e87a3d67f8be1fa450af8cf393e884aa8a763d76ce382745f",
+      "size": 16760
+    },
+    {
+      "path": "code/ui/flight.js",
+      "sha256": "8910d62f04f35f0b08321e538a12b0fcf4e4e0ba2dc0d3096e887413bfc93a54",
+      "size": 6226
+    },
+    {
+      "path": "code/ui/habitat-models.js",
+      "sha256": "ada46ec53c0cd115fbe3a3f2447d0e2148d8fdcab8b73e07b10d3900db102551",
+      "size": 13421
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "73faa544304801b9faeaf95c7c3784c3fca129b8c6a9b781a736b819be9f86f3",
+      "size": 948
+    },
+    {
+      "path": "code/ui/main.js",
+      "sha256": "591f8e5a8293276dadab02d121c84e7a848f80edbbb4df82297e09c1e2c11d3d",
+      "size": 23900
+    },
+    {
+      "path": "code/ui/model-kit.js",
+      "sha256": "d0b557d2014efe33582cf4df7c9836a01055ef060a95abcfac06744cbe01c948",
+      "size": 7023
+    },
+    {
+      "path": "code/ui/orbital-models.js",
+      "sha256": "a66cb5a290c6a6609dde53ea597a903e698dd114b0c9dc80d5f95afb10c07421",
+      "size": 7754
+    },
+    {
+      "path": "code/ui/orbits/cloud-bands.webp",
+      "sha256": "6490b41a472f5937ccad10b95afca9c993f6091ceb4192c9c78768435daa9ce8",
+      "size": 115960
+    },
+    {
+      "path": "code/ui/orbits/oriole.webp",
+      "sha256": "369b4b5f829aeee5f3edd622bcb37440cbc1285b3766a5d8fde1d8255a67655b",
+      "size": 218654
+    },
+    {
+      "path": "code/ui/orbits/pelagos.webp",
+      "sha256": "5175a27de968eadf86100ab803289c7dfd0e968f70e9b539c75b7b64255ab8e7",
+      "size": 147438
+    },
+    {
+      "path": "code/ui/orbits/vesper.webp",
+      "sha256": "b030a932b79266dea121ead69595a502df2310dbb07bfb2b0a7c121241093752",
+      "size": 119840
+    },
+    {
+      "path": "code/ui/planets.js",
+      "sha256": "0f8abe6e6c37e4d22967879a869cc4bb03786c39682bf964373305a8f5873a1b",
+      "size": 6881
+    },
+    {
+      "path": "code/ui/play.html",
+      "sha256": "e80ff3c980227469c3d2dce01fabc1e136002de675b606050bcd25c54739f4da",
+      "size": 1801
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "621eba9ae50fcd4d5f38e5350c01f6eafda0d6a21586d558a0937c809985f436",
+      "size": 12423
+    },
+    {
+      "path": "code/ui/ship-controls.js",
+      "sha256": "159906d88b21dd95fd2e128e5d15e630e05701cd26616202afffbe602b8290c1",
+      "size": 5032
+    },
+    {
+      "path": "code/ui/ship-interior.js",
+      "sha256": "a80c326715918413a5a9a801fcd104ae41015e4c57dab494cb12f08ffd91f044",
+      "size": 2929
+    },
+    {
+      "path": "code/ui/simple-scene.js",
+      "sha256": "0fd55a76ed69f24690069161ae2c798aa9507c92b3917b0b68e946e7d242fc55",
+      "size": 10916
+    },
+    {
+      "path": "code/ui/style.css",
+      "sha256": "3a3d04dd7219340fd6dec39a95bac8141ba76e9565e66e789deffd6f4de1f74a",
+      "size": 11127
+    },
+    {
+      "path": "code/vendor/three-0.160.0/LICENSE",
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "size": 1081
+    },
+    {
+      "path": "code/vendor/three-0.160.0/three.module.js",
+      "sha256": "66aac4fdeb64d848cf18d7ec32c3670d49f1dc85380c2bd1ce919840f7929216",
+      "size": 1272499
+    }
+  ],
+  "id": "freeboard",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "axikoApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.2.1"
+}

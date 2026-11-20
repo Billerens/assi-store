@@ -1,0 +1,64 @@
+{
+  "changes": [
+    {
+      "notes": "The courier now runs on foot, jumps hurdles and slides under sails. Token trails, magnets and boosts lead to four outfits, four boards and six gear upgrades. Surfing and boosted board rides share the course with the footrace. Older saves and replays still work.",
+      "version": "0.2.0"
+    },
+    {
+      "notes": "A new rider model balances on the board through turns, jumps and slides. The quays are lined with market stalls, harbour crews and cargo gear, with boats moving offshore.",
+      "version": "0.1.1"
+    },
+    {
+      "notes": "First release. Endless harbour, wave gate streaks, weekly tides, local records, replays and practice.",
+      "version": "0.1.0"
+    }
+  ],
+  "description": "You're a courier in a working fishing harbour. Follow the trail of brass tokens, jump mooring ropes and slide under sails. Take a turquoise ramp to unfold your board and ride the face of a wave. Thread the high gates and reach the striped exit to bank your streak.\n\nSpend your haul on a fisherman's raincoat, a harbour pilot's peacoat, a diving suit, boards and longer-lasting pickups. Open Water rolls a fresh course each time. A rematch brings back the same tide and your recorded ghost. Distance and score records, replays and your wardrobe all work offline.",
+  "id": "tide-runner",
+  "locales": {
+    "ru": {
+      "changes": {
+        "0.1.0": "Первый выпуск. Бесконечный порт, связки створов, недельные приливы, личные рекорды, повторы и тренировка.",
+        "0.1.1": "Гонщик получил новую модель и стойку на доске. На причалах появились работающие люди, торговые ряды и портовый инвентарь, а у берега ходят суда.",
+        "0.2.0": "Теперь курьер бежит по причалу пешком, перепрыгивает препятствия и уходит в подкат. На трассе появились дорожки жетонов, магнит и форсаж. В гардеробе четыре образа, четыре доски и шесть улучшений снаряжения. На волне и во время форсажа курьер раскрывает доску. Результаты и повторы предыдущего выпуска сохранены."
+      },
+      "description": "Вы — курьер рыбного порта. Бегите за россыпью латунных жетонов, перепрыгивайте канаты и проскальзывайте под парусами. На бирюзовой рампе справа раскрывается доска. Берите створы выше на волне и успейте к сходу, пока серия ещё в ваших руках.\n\nЖетоны можно потратить на дождевик рыбака, бушлат лоцмана, водолазный костюм, доски и улучшения для магнита и форсажа. В «Большой воде» каждый раз новый маршрут. В реванше вас ждёт тот же прилив с вашим призраком. Личные рекорды по очкам и дистанции, повторы и весь гардероб работают офлайн."
+    }
+  },
+  "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 800,
+      "path": "tide-runner/store/shots/1.webp",
+      "sha256": "ed96d95abbcf29059d81e2be2479a0d622f49fd9cc0d3d8a0c944d561be189b9",
+      "size": 56388,
+      "type": "image/webp",
+      "width": 564
+    },
+    {
+      "height": 800,
+      "path": "tide-runner/store/shots/2.webp",
+      "sha256": "0a30fe60c774beaaed7ae25ac547dd6f7200169a5a6ef80a3126a3dc9a0cc9d1",
+      "size": 61406,
+      "type": "image/webp",
+      "width": 564
+    },
+    {
+      "height": 820,
+      "path": "tide-runner/store/shots/3.webp",
+      "sha256": "dcea62e3ec79c87dae92e8f04d7d9c2a79dcfa3a39f5e12811d6a75f70bdb068",
+      "size": 40764,
+      "type": "image/webp",
+      "width": 390
+    },
+    {
+      "height": 700,
+      "path": "tide-runner/store/shots/4.webp",
+      "sha256": "c48e4dfaba29d5076477b1f0b72ce95bc81d8b803bb62c489202e9b3ceaae4e0",
+      "size": 36868,
+      "type": "image/webp",
+      "width": 900
+    }
+  ],
+  "version": "0.2.0"
+}

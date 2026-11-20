@@ -619,6 +619,54 @@
     },
     {
       "archive": {
+        "fileCount": 42,
+        "sha256": "ad41e0820aa1fbdd16f704d6808f61a872ae8cc3a3204e484ff9b348f8760078",
+        "size": 1022988,
+        "unpackedSize": 2148845,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/freeboard-v0.2.1/freeboard-0.2.1.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAxikoApi": 1
+      },
+      "details": {
+        "path": "catalog/details/freeboard.json",
+        "sha256": "9a00ede232e582ebecc4f41727d883ee765c66036527239339b4fb0d725d8837",
+        "size": 7020
+      },
+      "icon": {
+        "path": "freeboard/icon.svg",
+        "sha256": "bc6de1221dc27f2a85023c8cbcf22452311465ce53603f633b16cd1b46b69267",
+        "size": 370,
+        "type": "image/svg+xml"
+      },
+      "id": "freeboard",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "locales": {
+        "ru": {
+          "summary": "Пройдите из каюты на мостик, сядьте за штурвал и отправляйтесь в рейс за грузом, на перехват дронов или на поиски минералов.",
+          "tags": [
+            "космос",
+            "3d",
+            "симулятор"
+          ],
+          "title": "Вольный борт"
+        }
+      },
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/freeboard-v0.2.1/freeboard-0.2.1.package.json",
+      "publisher": "billerens",
+      "summary": "Walk from the crew quarters to the bridge, take the helm and fly freight, patrols or surface surveys between three ports.",
+      "tags": [
+        "space",
+        "3d",
+        "simulation"
+      ],
+      "title": "Freeboard",
+      "version": "0.2.1"
+    },
+    {
+      "archive": {
         "fileCount": 21,
         "sha256": "0a28d598c12028b52f2a1db4544392df1f48b1bb458ca64b21a30f32875575cc",
         "size": 90078,
@@ -897,6 +945,53 @@
       "title": "Data Horoscope",
       "updated": "2026-11-18",
       "version": "0.1.3"
+    },
+    {
+      "archive": {
+        "fileCount": 26,
+        "sha256": "b5912fbe2e7b27dca308dfb046fa97f7841e8fb03adba95b09c5cad68194f7fd",
+        "size": 447104,
+        "unpackedSize": 1572699,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/imaginarium-v0.1.1/imaginarium-0.1.1.zip"
+      },
+      "compatibility": {
+        "minAxikoApi": 1
+      },
+      "details": {
+        "path": "catalog/details/imaginarium.json",
+        "sha256": "dcb541abce5a548bb5ec678e8b4b7b1271a76ec9e98132b6fb1a90717545d1fc",
+        "size": 4429
+      },
+      "icon": {
+        "path": "imaginarium/icon.svg",
+        "sha256": "0a39b052979c89b5f7689bd39b6612c074ac0c08c5bed1f108e786f6118983d2",
+        "size": 368,
+        "type": "image/svg+xml"
+      },
+      "id": "imaginarium",
+      "kind": "module",
+      "license": "UNLICENSED",
+      "locales": {
+        "ru": {
+          "summary": "Личная трёхмерная библиотека. Придумывайте книги, читайте новые главы по запросу и создавайте объёмные вещи для своего зала.",
+          "tags": [
+            "книги",
+            "творчество",
+            "3d"
+          ],
+          "title": "Imaginarium"
+        }
+      },
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/imaginarium-v0.1.1/imaginarium-0.1.1.package.json",
+      "publisher": "billerens",
+      "summary": "Walk through your own 3D library, bind original stories one chapter at a time and sculpt furnishings with words.",
+      "tags": [
+        "books",
+        "creative",
+        "3d"
+      ],
+      "title": "Imaginarium",
+      "version": "0.1.1"
     },
     {
       "archive": {
@@ -1651,6 +1746,54 @@
       "title": "Underground",
       "updated": "2026-11-18",
       "version": "0.1.3"
+    },
+    {
+      "archive": {
+        "fileCount": 30,
+        "sha256": "54aaa62fccbf0f117745548d407f9fa1d8c503b23e5f6920aafb9a56209ca732",
+        "size": 333549,
+        "unpackedSize": 1462997,
+        "url": "https://github.com/Billerens/axiko-store/releases/download/tide-runner-v0.2.0/tide-runner-0.2.0.zip"
+      },
+      "compatibility": {
+        "gamesEngine": 1,
+        "minAxikoApi": 1
+      },
+      "details": {
+        "path": "catalog/details/tide-runner.json",
+        "sha256": "4e78c1b8865ff917a3f4dc6be281cb0a6ec1a1411d50dea0429dad702bc536d6",
+        "size": 4485
+      },
+      "icon": {
+        "path": "tide-runner/icon.svg",
+        "sha256": "21304f1842d0c6c66bdaa9bae449b4e7607846da7d2929f112ab05219cc63b2f",
+        "size": 329,
+        "type": "image/svg+xml"
+      },
+      "id": "tide-runner",
+      "kind": "game",
+      "license": "UNLICENSED",
+      "locales": {
+        "ru": {
+          "summary": "Бегите по причалам, ловите волну на доске и собирайте жетоны на одежду и снаряжение. Рекордсмен на соседней полосе — ваш призрак.",
+          "tags": [
+            "раннер",
+            "3d",
+            "аркада"
+          ],
+          "title": "Гребень"
+        }
+      },
+      "manifestUrl": "https://github.com/Billerens/axiko-store/releases/download/tide-runner-v0.2.0/tide-runner-0.2.0.package.json",
+      "publisher": "billerens",
+      "summary": "Sprint through a working harbour, surf the waves and spend your haul on outfits and gear. Chase your ghost on the same tide.",
+      "tags": [
+        "runner",
+        "3d",
+        "arcade"
+      ],
+      "title": "Crestline",
+      "version": "0.2.0"
     },
     {
       "archive": {

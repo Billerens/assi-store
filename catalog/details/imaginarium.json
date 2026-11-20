@@ -1,0 +1,59 @@
+{
+  "changes": [
+    {
+      "notes": "New models for armchairs, tables, bindings and lamps. Each chair has four feet, an upholstered reverse and a carved frame. The hall now holds an engraved celestial globe.",
+      "version": "0.1.1"
+    },
+    {
+      "notes": "Explore the stacks, veranda and bindery. Read three original short stories, commission new books and make three-dimensional objects from descriptions.",
+      "version": "0.1.0"
+    }
+  ],
+  "description": "Walk into a library of your own. Two books are waiting on the display shelf, with a third on the reading table. Take one to the glass veranda, slip a bookmark between its pages and return later to the same paragraph. Favourite passages can become a small exhibition.\n\nAt the bindery, describe the tone of a story, choose a premise and title, then commission its opening chapter. Ask for another scene, a different version or a finale whenever you want. Each book keeps its own history and notes.\n\nThe workshop turns written descriptions into three-dimensional objects. Turn a model on the workbench, change its details with words and give the finished piece a place in the room. Assign the writing and modelling roles in Axiko to make new work. The three included stories, saved chapters and accepted furnishings are available offline.",
+  "id": "imaginarium",
+  "locales": {
+    "ru": {
+      "changes": {
+        "0.1.0": "В первом выпуске доступны зал, веранда и переплётная. Три рассказа уже стоят на полке. Можно создать свою книгу, попросить продолжение и изготовить объёмный предмет по описанию.",
+        "0.1.1": "Кресла, столы, книги и светильники получили новые объёмные модели. У кресел четыре опоры, отделанная спинка и резная рама. В зале появился небесный глобус с гравированной картой."
+      },
+      "description": "Два тома ждут на выставочной полке, третий — на читательском столе. Возьмите книгу, перенесите на застеклённую веранду и заложите лентой любимую фразу. Из выписанных отрывков можно собрать личную выставку.\n\nВ переплётной задайте тон истории, выберите завязку и название, затем закажите первую главу. Продолжение, другую редакцию или финал можно попросить, когда захочется. У каждой книги свои события и личные заметки читателя.\n\nВ мастерской можно описать вещь словами, осмотреть трёхмерный эскиз со всех сторон, изменить детали и поставить выбранный вариант в комнате. Для новых книг и вещей назначьте модели двум ролям Imaginarium в Axiko. Три готовых рассказа, написанные главы и принятые предметы доступны без сети."
+    }
+  },
+  "schemaVersion": 1,
+  "screenshots": [
+    {
+      "height": 800,
+      "path": "imaginarium/store/shots/1.webp",
+      "sha256": "fe70384e4a5d12a16d6cf5b665cf314828308709307d436503ee7ed17c57470e",
+      "size": 90364,
+      "type": "image/webp",
+      "width": 1100
+    },
+    {
+      "height": 650,
+      "path": "imaginarium/store/shots/2.webp",
+      "sha256": "3ab2741f96b91d463c189ede22b96477daadd6c6526e576364166fb4c722526d",
+      "size": 38472,
+      "type": "image/webp",
+      "width": 900
+    },
+    {
+      "height": 800,
+      "path": "imaginarium/store/shots/3.webp",
+      "sha256": "64cc832d76d9bff733da93d7f810b59502de520be3df755c8588c1bac51965c9",
+      "size": 72596,
+      "type": "image/webp",
+      "width": 1100
+    },
+    {
+      "height": 650,
+      "path": "imaginarium/store/shots/4.webp",
+      "sha256": "dd4d3df3e35d5bfd03d4d8c696ca7a89ee46ec078a63d5ae416c49c28c5f1d02",
+      "size": 30072,
+      "type": "image/webp",
+      "width": 900
+    }
+  ],
+  "version": "0.1.1"
+}

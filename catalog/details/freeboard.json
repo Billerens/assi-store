@@ -1,0 +1,79 @@
+{
+  "changes": [
+    {
+      "notes": "Clicking the cabin or cockpit now gives the embedded game keyboard focus in the Axiko web interface. Devices with a mouse show the keyboard movement hints.",
+      "version": "0.2.1"
+    },
+    {
+      "notes": "Walk from the aft airlock through the furnished crew quarters and passage to the bridge. Fly from the physical pilot seat with a live attitude display, proximity radar and systems readouts. Leave the seat in flight to hold position and move around, then walk back to the controls. Keyboard, mouse and touch controls are supported, including in the Canvas renderer.",
+      "version": "0.2.0"
+    },
+    {
+      "notes": "Three new hull models, a rebuilt orbital port and furnished cabins. Step up to the viewport to watch the local planet and passing ships or look around the crew berths and workstations.",
+      "version": "0.1.1"
+    },
+    {
+      "notes": "First release with three ports, flight, patrols, surface expeditions, trade, ship fitting, crew, pilot skills and local saves.",
+      "version": "0.1.0"
+    }
+  ],
+  "description": "Your ship is parked above Vesper. From the aft airlock you can turn into the crew quarters or walk straight down the passage to the bridge. Settle into the pilot seat and watch the harbor traffic cross the windscreen while you choose a contract.\n\nFly the route yourself. Add thrust, line up a cargo run through the orbital rings or follow a drone on the proximity scope. A survey flight ends on the surface, where you can walk away from the landed ship and collect mineral samples. You can also leave the pilot seat in flight. The ship holds position until you return.\n\nVesper, Pelagos and Oriole have different markets. The terminal shows the expected return before departure. Spend your earnings on three distinct hulls, interchangeable modules, specialist crew and their berths. Your first mineral sample gets a place aboard. Insurance covers your cargo and equipment.",
+  "id": "freeboard",
+  "locales": {
+    "ru": {
+      "captions": [
+        "Рейс над Пелагосом из пилотского кресла.",
+        "Жилой отсек с тремя койками и нанятыми специалистами.",
+        "Грузовая «Манта» в гавани перед следующим рейсом.",
+        "Пешая экспедиция за образцами у места посадки."
+      ],
+      "changes": {
+        "0.1.0": "Первый выпуск. Три порта, пилотирование, патрули, планетарные экспедиции, торговля, оснащение корабля, экипаж, навыки пилота и сохранения.",
+        "0.1.1": "Обновлены три корпуса, орбитальная гавань и жилые каюты. Из каюты можно подойти к иллюминатору, наблюдать за местной планетой и движением судов или осмотреть койки и рабочие места экипажа.",
+        "0.2.0": "От кормового шлюза до мостика теперь можно пройти пешком через жилой отсек и коридор. С пилотского кресла видны гавань, орбитальные кольца и приборы с показаниями тяги, радара и авиагоризонта. В полёте можно встать, пройтись по кораблю и вернуться к штурвалу. Во время прогулки корабль удерживает позицию. Ходьба и пилотирование доступны с мышью и клавиатурой и на сенсорном экране, в том числе в режиме Canvas.",
+        "0.2.1": "Щелчок по каюте или кабине передаёт управление клавиатурой игре внутри веб-интерфейса Axiko. На устройствах с мышью видны подсказки для клавиатуры."
+      },
+      "description": "Ваш корабль стоит в гавани Веспера. У кормового шлюза можно свернуть в кают-компанию или пройти по освещённому коридору на мостик. Садитесь в пилотское кресло. Пока вы выбираете контракт, за лобовым стеклом проходят портовые шаттлы.\n\nРейс вы ведёте сами. Добавляйте тягу, проходите грузовые кольца или следите по радару за вражескими дронами. В экспедиции предстоит высадиться, отойти от корабля и собрать образцы минералов. В пути тоже можно встать из кресла и пройтись по отсекам. Корабль будет удерживать позицию до вашего возвращения.\n\nУ Веспера, Пелагоса и Ориоля свои рынки. Ещё до вылета терминал показывает, сколько принесёт рейс. На выручку можно сменить корпус, поставить модули, нанять специалистов и добавить койки. Первый найденный минерал займёт место у вас на борту. Груз и оборудование застрахованы."
+    }
+  },
+  "schemaVersion": 1,
+  "screenshots": [
+    {
+      "caption": "Fly a freight route from the pilot seat above Pelagos.",
+      "height": 680,
+      "path": "freeboard/store/shots/1.webp",
+      "sha256": "13a18092d849c6dc20a329e4e9207afe1cdb0ec5277bdda2a016d7bbebb44b3d",
+      "size": 58134,
+      "type": "image/webp",
+      "width": 1100
+    },
+    {
+      "caption": "Walk through the furnished crew quarters. Each hired specialist has a place aboard.",
+      "height": 720,
+      "path": "freeboard/store/shots/2.webp",
+      "sha256": "6d9f58cbb3139781394cfbe4894ae9a51e07cef5b5d115694ac5ad2da63e011f",
+      "size": 57074,
+      "type": "image/webp",
+      "width": 1120
+    },
+    {
+      "caption": "The Manta freighter in port, ready for its next contract.",
+      "height": 720,
+      "path": "freeboard/store/shots/3.webp",
+      "sha256": "38bc03bb14243780e3d2a983a235cc4506585bc2b4b9ccfae66492944b33a405",
+      "size": 40264,
+      "type": "image/webp",
+      "width": 1120
+    },
+    {
+      "caption": "Leave the landed ship and collect samples on foot.",
+      "height": 720,
+      "path": "freeboard/store/shots/4.webp",
+      "sha256": "3772c385dab8d46abbf819f563fe9eb163cdb3ce99b5a6065ff960ea6e6e2a24",
+      "size": 28656,
+      "type": "image/webp",
+      "width": 1120
+    }
+  ],
+  "version": "0.2.1"
+}

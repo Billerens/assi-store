@@ -1,0 +1,170 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
+    },
+    {
+      "path": "README.md",
+      "sha256": "91d4a0f33440d809130c5e16625838bc66355a4ff64aed87cb2e36e57c4a8676",
+      "size": 3864
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "b2abf1a5fcdac286dde975712d758e57a100c1be4d61548201c26e1323e13de6",
+      "size": 399
+    },
+    {
+      "path": "code/config.json",
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "size": 3
+    },
+    {
+      "path": "code/game.json",
+      "sha256": "196d02f6b667da53d6c51cd99135c18247165039f7eb1e83513b3c9b9e2414e7",
+      "size": 1818
+    },
+    {
+      "path": "code/i18n-en.json",
+      "sha256": "f663fc27d758cd2b09157d7a3621e0ea155cb62ccf19ab5aaa91e96d8ac9bfde",
+      "size": 13933
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "21304f1842d0c6c66bdaa9bae449b4e7607846da7d2929f112ab05219cc63b2f",
+      "size": 329
+    },
+    {
+      "path": "code/race.js",
+      "sha256": "61648fb9d0acfdcbfab6800dfccc77e0446a6648f0291bed0355e805421c61de",
+      "size": 10500
+    },
+    {
+      "path": "code/sim.js",
+      "sha256": "8c83c681e680f85d0eaa542d85658f89e4b595491c1061255305f183eaee3b93",
+      "size": 812
+    },
+    {
+      "path": "code/ui/deck-art.js",
+      "sha256": "cec0b94d66b42044b341cf90e511040bbfcf51fba1ff2089cb0fbb6ecc5537e1",
+      "size": 3198
+    },
+    {
+      "path": "code/ui/economy.js",
+      "sha256": "9dce73d704a8d3572d55b6242b40322aa60fb9c10fd19fd2f125d95f16866fa1",
+      "size": 2299
+    },
+    {
+      "path": "code/ui/game.css",
+      "sha256": "443c9a7538a929e9fd30fd86132b47675af18ae19732bfc99fce6f7677e9e9cc",
+      "size": 7440
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "df863e7405c80ed1368ae97230c91150f9c07a69dd05ad4ab1f313518251b105",
+      "size": 721
+    },
+    {
+      "path": "code/ui/main.js",
+      "sha256": "6d7d182dfddf7e0f5d6d47eaea67c7bde33dbb109ed6aaf376bb3e99cb664b28",
+      "size": 22953
+    },
+    {
+      "path": "code/ui/model-kit.js",
+      "sha256": "a431ad28323a4d98df2ba0bbcbdfbdc9b504e9bf12cd421ac99d69a952ad51a1",
+      "size": 4280
+    },
+    {
+      "path": "code/ui/model-pass.js",
+      "sha256": "bd66583b16db76bc804f14013baa1a1a9f023ebac9ed0f93eee2b853ad5054df",
+      "size": 6254
+    },
+    {
+      "path": "code/ui/outfit-models.js",
+      "sha256": "1a863ad57fcdde57d8b6af95cbdd8391d382f0978a1f8b9cbde61b79c96aeaa1",
+      "size": 7201
+    },
+    {
+      "path": "code/ui/pickup-models.js",
+      "sha256": "86e4e6e9de4d58b59a4f7c61c9e8a79cc5dda24f69bb993b0d21e89f0a81be1e",
+      "size": 2085
+    },
+    {
+      "path": "code/ui/port-models.js",
+      "sha256": "8ccf5b8588eead7d762b3ed24c2182c9cacf0af2bdcf8377ef3e7e87980e0777",
+      "size": 14382
+    },
+    {
+      "path": "code/ui/profile.js",
+      "sha256": "06448efe64bc726a420ba851a0081f528b2dc66d5e0494b2c394ec96723cc382",
+      "size": 2472
+    },
+    {
+      "path": "code/ui/quay-life.js",
+      "sha256": "dcc2b2ef96cab47cd1b5c6338fdada68adaf02d5664ed7f6e5b3816e3ce97ef7",
+      "size": 9973
+    },
+    {
+      "path": "code/ui/rider-model.js",
+      "sha256": "855fcf986cb896ac1170544fc7cbf69eb6557b8944303578501a65266b0afbff",
+      "size": 16588
+    },
+    {
+      "path": "code/ui/scene.js",
+      "sha256": "75f526d19655e3318aa6f765a60689e957e6e8f01df5261d574b0b2d48b39f5f",
+      "size": 26155
+    },
+    {
+      "path": "code/ui/wardrobe-preview.js",
+      "sha256": "4de4bc3349b54d6568c50f4715e9f429b1caeed07908a48f7b274c6b3ae6ea4f",
+      "size": 5274
+    },
+    {
+      "path": "code/ui/wardrobe.css",
+      "sha256": "bc26e5ac96a099c64510f8088f719b47ff6e4b6b6be73046685128c9a5318782",
+      "size": 5470
+    },
+    {
+      "path": "code/ui/wardrobe.js",
+      "sha256": "a7aa8afc12ab8eba8c88db4985eff64adcbd48525bd09696773e0bd13ea431d5",
+      "size": 8721
+    },
+    {
+      "path": "code/ui/words.json",
+      "sha256": "a32dcacba074ba1e91d10f4d488fbc0cd9626ee5e957dffbaa70ab6056bf41b6",
+      "size": 6945
+    },
+    {
+      "path": "code/vendor/LICENSE",
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "size": 1081
+    },
+    {
+      "path": "code/vendor/three.module.js",
+      "sha256": "66aac4fdeb64d848cf18d7ec32c3670d49f1dc85380c2bd1ce919840f7929216",
+      "size": 1272499
+    }
+  ],
+  "id": "tide-runner",
+  "kind": "game",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "axikoApi": 1,
+    "gamesEngine": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.2.0"
+}

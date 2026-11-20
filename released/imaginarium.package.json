@@ -1,0 +1,149 @@
+{
+  "capabilities": [
+    "storage.own",
+    "legacy.full-trust"
+  ],
+  "dependencies": [],
+  "entry": "code/ui/index.html",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "38abe1d275786450463672c14f49c82e5e8f74c95c326c7a945fd909f75434b7",
+      "size": 498
+    },
+    {
+      "path": "README.md",
+      "sha256": "8d4d94e1d0970719b77060bdc8f9e7f813563555efc01517ed770fe2e8d4f680",
+      "size": 1543
+    },
+    {
+      "path": "code/checks.js",
+      "sha256": "2192e41047a9029b0051a1aa96cdc3f84440f1ce119593aa376c608458aa9e8c",
+      "size": 1683
+    },
+    {
+      "path": "code/icon.svg",
+      "sha256": "0a39b052979c89b5f7689bd39b6612c074ac0c08c5bed1f108e786f6118983d2",
+      "size": 368
+    },
+    {
+      "path": "code/main.js",
+      "sha256": "45377c633c2d1e85b0fc89178acfe741cff7aa2a852764dcf3d3d60ba205af55",
+      "size": 7244
+    },
+    {
+      "path": "code/module.json",
+      "sha256": "fafab090746de37d2e0e8e51deadb261259d65d1d6f6d87cdb9a143b334752c5",
+      "size": 441
+    },
+    {
+      "path": "code/ui/app.js",
+      "sha256": "ce1ae3a74f4dda15f22f7a5a692d4b316e7f8a82a25cc1ee4a40ec407b049c71",
+      "size": 13892
+    },
+    {
+      "path": "code/ui/art/celestial-atlas.webp",
+      "sha256": "3eaa40ab18e1e187fbdcf92d4916acc803ca581aabd8e48c34f00c8eb70029a3",
+      "size": 127742
+    },
+    {
+      "path": "code/ui/artisan.js",
+      "sha256": "14ba6bd9a061fc33d4de3eb2f337c85c06f0023e38e886ba39b772d3727b63aa",
+      "size": 9782
+    },
+    {
+      "path": "code/ui/book-art.js",
+      "sha256": "fc5790f87f085f28a780604f40d35ae5d8e7fd77ce3d623db8011caa8022dd46",
+      "size": 6129
+    },
+    {
+      "path": "code/ui/books.js",
+      "sha256": "e3c9efde95e3ed0234c85873aa7e1c9bff2b7a4280f23198a7228f46a6a493ee",
+      "size": 18158
+    },
+    {
+      "path": "code/ui/celestial-globe.js",
+      "sha256": "e980f1f0b6b1df64078769f1ff89c3203fb0c4db77f7bcf98f5584288129a334",
+      "size": 4815
+    },
+    {
+      "path": "code/ui/data.js",
+      "sha256": "ad1566da78418a2912fde9648b12aee2cf4dca5ddeb7da7e5a70f3bd109ef45b",
+      "size": 7122
+    },
+    {
+      "path": "code/ui/index.html",
+      "sha256": "b36668ecc3e8e57648f2c7d2d30aab5c3c5d0edcbe510a233429717c26d36d93",
+      "size": 1750
+    },
+    {
+      "path": "code/ui/interior.js",
+      "sha256": "3f97dba04a52486ae0a6c8122254c468fba63886d48b7afdb22a637e3844d281",
+      "size": 22931
+    },
+    {
+      "path": "code/ui/joinery.js",
+      "sha256": "b21e5b4c1d7e6fe315f9f25906673527ad028e352b0441af49054413a9090cf5",
+      "size": 15668
+    },
+    {
+      "path": "code/ui/paper.js",
+      "sha256": "e71c25e5f54c4e31109167b5b22f910d964036a44bae38684edc4ccbb1419501",
+      "size": 2300
+    },
+    {
+      "path": "code/ui/room-objects.js",
+      "sha256": "3678a48716cbbe6f21af3386ac04593b9f855d72fd217d6bbf09e962d411ce19",
+      "size": 7651
+    },
+    {
+      "path": "code/ui/schema.js",
+      "sha256": "b2761779fb664620a3e185518f3867a8867f171abd83f318fa9035a0fc51bfa5",
+      "size": 6997
+    },
+    {
+      "path": "code/ui/stage.js",
+      "sha256": "0f2d08ec9ea3f1b4958f5ac8837d2a5cd04632707d6ff7aef3bcb7526aef915e",
+      "size": 14969
+    },
+    {
+      "path": "code/ui/state.js",
+      "sha256": "1729d44eccfbe43700c18e20523c0d0c465cb72008739a020aef20aeeca8afb6",
+      "size": 3755
+    },
+    {
+      "path": "code/ui/style.css",
+      "sha256": "4bd43c70ac43d01821372f11b3d80f262245743af0263e9503f44f1555b43cf7",
+      "size": 7539
+    },
+    {
+      "path": "code/ui/vendor/LICENSE",
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "size": 1081
+    },
+    {
+      "path": "code/ui/vendor/three.module.js",
+      "sha256": "66aac4fdeb64d848cf18d7ec32c3670d49f1dc85380c2bd1ce919840f7929216",
+      "size": 1272499
+    },
+    {
+      "path": "code/ui/workshop.js",
+      "sha256": "3fee70375f7791cc30ff45b0bee4f2491255f869931d52170d6aab68095f7f1c",
+      "size": 11915
+    }
+  ],
+  "id": "imaginarium",
+  "kind": "module",
+  "license": "UNLICENSED",
+  "networkDomains": [
+    "www.w3.org"
+  ],
+  "optionalDependencies": [],
+  "publisher": "billerens",
+  "runtime": {
+    "axikoApi": 1
+  },
+  "schemaVersion": 1,
+  "sourceFormat": "readable",
+  "version": "0.1.1"
+}
