@@ -1,0 +1,28 @@
+{
+  "id": "tide-runner",
+  "kind": "game",
+  "version": "0.2.0",
+  "title": "Crestline",
+  "summary": "Sprint through a working harbour, surf the waves and spend your haul on outfits and gear. Chase your ghost on the same tide.",
+  "tags": [
+    "runner",
+    "3d",
+    "arcade"
+  ],
+  "locales": {
+    "ru": {
+      "title": "Гребень",
+      "summary": "Бегите по причалам, ловите волну на доске и собирайте жетоны на одежду и снаряжение. Рекордсмен на соседней полосе — ваш призрак.",
+      "tags": [
+        "раннер",
+        "3d",
+        "аркада"
+      ]
+    }
+  },
+  "target": "modules/games/tide-runner",
+  "requires": [],
+  "shell": [
+    "app.visible"
+  ]
+}

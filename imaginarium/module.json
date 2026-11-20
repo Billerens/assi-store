@@ -1,0 +1,17 @@
+{
+  "title": "Imaginarium",
+  "description": "Личная 3D-библиотека и переплётная мастерская",
+  "icon": "book",
+  "entry": "ui/index.html",
+  "autostart": false,
+  "models": [
+    {
+      "id": "imaginarium.write",
+      "title": "Imaginarium · автор книг"
+    },
+    {
+      "id": "imaginarium.form",
+      "title": "Imaginarium · мастер формы"
+    }
+  ]
+}

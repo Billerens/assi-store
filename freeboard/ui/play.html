@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"><meta name="theme-color" content="#101c29"><title>Freeboard</title><link rel="stylesheet" href="style.css"></head><body>
+<main id="deck"><canvas id="space" aria-label="Space flight"></canvas><div id="shade"></div>
+<header id="bar"><div class="identity"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 18 18 4l2 15-8-4-4 3 1-5z"/></svg><div><strong id="brand">FREEBOARD</strong><small id="place"></small></div></div><div class="account"><span id="balance"></span><button id="menu" aria-label="Menu">☰</button></div></header>
+<section id="dock"></section><section id="overlay" hidden></section>
+<section id="aboard" hidden><div id="deck-sign"><small></small><strong></strong></div>
+<div id="walk-help"></div><button id="station" data-key="interact" hidden></button></section>
+<section id="helm" hidden><button id="leave-seat" data-key="stand"></button>
+<div id="port-orders" hidden><button id="contract" data-key="orders"></button><button id="undock" data-key="depart" class="primary"></button></div></section>
+<section id="flight" hidden><div id="objective"><span id="phase"></span><b id="mission"></b></div>
+<div id="marker"><i></i><small></small></div><div id="reticle"></div><div id="readings"></div>
+<div id="actions"><button id="brake"></button><button id="fire"></button><button id="boost"></button><button id="throttleUp"></button></div></section>
+<div id="joystick" hidden><i></i><span aria-hidden="true">✥</span></div>
+<div id="toast" role="status"></div></main>
+<script src="../sim.js"></script><script src="flight.js"></script><script type="module" src="main.js"></script></body></html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#233c34" />
+    <title>Imaginarium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main id="library">
+      <canvas
+        id="room"
+        tabindex="0"
+        aria-label="Трёхмерная библиотека. Для движения используйте стрелки или касание пола."
+      ></canvas>
+      <header>
+        <div class="brand">
+          <span class="seal" aria-hidden="true">✧</span>
+          <h1>Imaginarium</h1>
+        </div>
+        <button id="navigate" class="nav">Большой зал <span aria-hidden="true">⌄</span></button>
+      </header>
+      <div class="scene-bottom">
+        <div id="focus" class="focus"></div>
+        <nav aria-label="Библиотека">
+          <button id="catalog"><b aria-hidden="true">▤</b>Каталог</button
+          ><button id="bind"><b aria-hidden="true">✎</b>Переплётная</button
+          ><button id="workshop"><b aria-hidden="true">◇</b>Мастерская</button>
+        </nav>
+      </div>
+      <div role="status" aria-live="polite" id="notice"></div>
+      <dialog id="sheet">
+        <div class="paper-head">
+          <small id="section"></small><button class="x" aria-label="Закрыть">×</button>
+        </div>
+        <article id="paper"></article>
+      </dialog>
+      <noscript>Для чтения библиотеки нужен JavaScript.</noscript>
+    </main>
+    <script src="schema.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "id": "freeboard",
+  "title": "Freeboard",
+  "about": "Walk your ship, take the helm and make a living trading, patrolling or surveying three worlds.",
+  "genre": "simulation",
+  "engine": 1,
+  "saveVersion": 1,
+  "entry": "ui/index.html",
+  "currencies": [
+    {
+      "id": "credits",
+      "title": "Credits",
+      "path": "meta.credits",
+      "icon": "coin",
+      "whole": true
+    }
+  ],
+  "prestige": [],
+  "achievements": [
+    {
+      "id": "voyage",
+      "title": "First crossing",
+      "text": "Complete a route."
+    },
+    {
+      "id": "patrol",
+      "title": "Clear skies",
+      "text": "Disable three drones."
+    },
+    {
+      "id": "survey",
+      "title": "Field team",
+      "text": "Collect three surface samples."
+    },
+    {
+      "id": "ports",
+      "title": "Three horizons",
+      "text": "Visit all three ports."
+    }
+  ],
+  "links": {},
+  "stock": [],
+  "notify": [],
+  "help": "Walk forward from the airlock to the bridge with WASD or the left stick. Drag the view or use the arrow keys to look around. Use F or the nearby prompt at the pilot seat. Choose a contract and undock. Aim with the mouse, arrows or stick. W adds thrust, S brakes, Shift boosts and Space fires. Use F or Leave the seat to hold position and walk through the ship. Back at the airlock while docked, use the port terminal to trade or refit. On a survey, hold Sample or Space near each of three crystals, then return to the ship.",
+  "origin": {
+    "from": "owner",
+    "date": "2026-11-20"
+  },
+  "status": "active"
+}

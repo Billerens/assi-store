@@ -1,0 +1,26 @@
+{
+  "id": "imaginarium",
+  "kind": "module",
+  "version": "0.1.1",
+  "title": "Imaginarium",
+  "summary": "Walk through your own 3D library, bind original stories one chapter at a time and sculpt furnishings with words.",
+  "tags": [
+    "books",
+    "creative",
+    "3d"
+  ],
+  "locales": {
+    "ru": {
+      "title": "Imaginarium",
+      "summary": "Личная трёхмерная библиотека. Придумывайте книги, читайте новые главы по запросу и создавайте объёмные вещи для своего зала.",
+      "tags": [
+        "книги",
+        "творчество",
+        "3d"
+      ]
+    }
+  },
+  "target": "modules/imaginarium",
+  "requires": [],
+  "shell": []
+}

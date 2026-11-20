@@ -1,0 +1,64 @@
+{
+  "id": "freeboard",
+  "kind": "game",
+  "version": "0.2.0",
+  "title": "Freeboard",
+  "summary": "Walk from the crew quarters to the bridge, take the helm and fly freight, patrols or surface surveys between three ports.",
+  "tags": [
+    "space",
+    "3d",
+    "simulation"
+  ],
+  "locales": {
+    "ru": {
+      "title": "Вольный борт",
+      "summary": "Пройдите из каюты на мостик, сядьте за штурвал и отправляйтесь в рейс за грузом, на перехват дронов или на поиски минералов.",
+      "tags": [
+        "космос",
+        "3d",
+        "симулятор"
+      ]
+    }
+  },
+  "target": "modules/games/freeboard",
+  "requires": [],
+  "shell": [],
+  "screenshots": [
+    {
+      "file": "store/shots/1.webp",
+      "caption": "Fly a freight route from the pilot seat above Pelagos.",
+      "locales": {
+        "ru": {
+          "caption": "Рейс над Пелагосом из пилотского кресла."
+        }
+      }
+    },
+    {
+      "file": "store/shots/2.webp",
+      "caption": "Walk through the furnished crew quarters. Each hired specialist has a place aboard.",
+      "locales": {
+        "ru": {
+          "caption": "Жилой отсек с тремя койками и нанятыми специалистами."
+        }
+      }
+    },
+    {
+      "file": "store/shots/3.webp",
+      "caption": "The Manta freighter in port, ready for its next contract.",
+      "locales": {
+        "ru": {
+          "caption": "Грузовая «Манта» в гавани перед следующим рейсом."
+        }
+      }
+    },
+    {
+      "file": "store/shots/4.webp",
+      "caption": "Leave the landed ship and collect samples on foot.",
+      "locales": {
+        "ru": {
+          "caption": "Пешая экспедиция за образцами у места посадки."
+        }
+      }
+    }
+  ]
+}
