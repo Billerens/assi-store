@@ -13,8 +13,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "8ea381e90a1ded00683afe89c66e076c5b1513e30308c78b784d4a7c42188fb6",
-      "size": 42254
+      "sha256": "157325ea74d2b1aead0d173b395ce3f40ab8e1614b5cbe061e44d65be3145b49",
+      "size": 43301
     },
     {
       "path": "code/adventures.js",
@@ -57,6 +57,11 @@
       "size": 11100
     },
     {
+      "path": "code/art/artifact/berserkMask.webp",
+      "sha256": "4e838380278664e879ac71712911fb801fcafb3d2c5f9db97c165ddb21c8d9f6",
+      "size": 10802
+    },
+    {
       "path": "code/art/artifact/coinDie.webp",
       "sha256": "03a2f523253cbc80399df40df69cfc951fcbaf592be340998ad45aeaba191655",
       "size": 11724
@@ -80,6 +85,11 @@
       "path": "code/art/artifact/dragonCradle.webp",
       "sha256": "bed5b7eea56d66e98fa99546825ae7e81d1ce5c52afd6529a277fe6e3fed45a9",
       "size": 12142
+    },
+    {
+      "path": "code/art/artifact/echoBell.webp",
+      "sha256": "0a6c58b5459b125e1af0251557f4137d1cdc2e1b2670698ddaa7e4b87c4706f3",
+      "size": 17452
     },
     {
       "path": "code/art/artifact/emberSpark.webp",
@@ -112,9 +122,24 @@
       "size": 10996
     },
     {
+      "path": "code/art/artifact/giantFang.webp",
+      "sha256": "748a59a055ab89db428f2b0cbc7a8c4925c98f71d95b34078c25fd7ffcd4a8fc",
+      "size": 8216
+    },
+    {
+      "path": "code/art/artifact/goldenNail.webp",
+      "sha256": "1e61eb4ada780468c39122a8cf328eda00ad6ae59077d1009586d9977b0ae292",
+      "size": 9178
+    },
+    {
       "path": "code/art/artifact/goldenSeal.webp",
       "sha256": "e6600a2bcd557763b080846017fd0e6155c3c2bd70fe99ee9f898f45ee437816",
       "size": 9512
+    },
+    {
+      "path": "code/art/artifact/heavyHammer.webp",
+      "sha256": "82aca1216bec9681c689122dab3049de7c73add9170d079ab1bc34675943fa3c",
+      "size": 9564
     },
     {
       "path": "code/art/artifact/heavyPommel.webp",
@@ -147,6 +172,11 @@
       "size": 13108
     },
     {
+      "path": "code/art/artifact/luckyCup.webp",
+      "sha256": "bae4db1aa76776b9ff5c46a796992402599de065ae60e599f4d31df0ad6c743e",
+      "size": 14086
+    },
+    {
       "path": "code/art/artifact/marchingBoot.webp",
       "sha256": "85398ef24fb8219b8b015d1fdf2db1af34833164d8d4b00f25e9cd0124d73170",
       "size": 8914
@@ -157,9 +187,19 @@
       "size": 7236
     },
     {
+      "path": "code/art/artifact/masterHourglass.webp",
+      "sha256": "8ebb94f1d225e4644e1c3101f99f099cec21732324e3df1e9f1bde17ec1a8b97",
+      "size": 14396
+    },
+    {
       "path": "code/art/artifact/mentorBook.webp",
       "sha256": "0e47aa11f51b1bd69fe2ebba384cafffc86f52bcc68fb7a7c5eef4c079ef88c8",
       "size": 9800
+    },
+    {
+      "path": "code/art/artifact/midasRing.webp",
+      "sha256": "aa0aa1ba45eb08470311b79d55390811e96bd97c9d17857734b77710dbc498c9",
+      "size": 12168
     },
     {
       "path": "code/art/artifact/mossVial.webp",
@@ -187,6 +227,11 @@
       "size": 10978
     },
     {
+      "path": "code/art/artifact/preciseSpark.webp",
+      "sha256": "33602433fc25e625156ecd0c7a70ac11eb58f7ce189389e2cd1142c4cd2259ba",
+      "size": 7734
+    },
+    {
       "path": "code/art/artifact/rallyCrest.webp",
       "sha256": "9106a8df8dbffa94191ef74054ddb1641ec86d7dc1becae06776ffaa7882b861",
       "size": 11024
@@ -212,9 +257,29 @@
       "size": 5524
     },
     {
+      "path": "code/art/artifact/swiftBoots.webp",
+      "sha256": "c327c7cb416acad28bdf190db1af8fb93f2d3f57dc0dfac97fa6fd8f0df314fa",
+      "size": 11930
+    },
+    {
+      "path": "code/art/artifact/thunderTip.webp",
+      "sha256": "62e03c03f92ffc6713a5cad31dff36bfd2fa91daa318e03749c7a4564da1e4a9",
+      "size": 11620
+    },
+    {
+      "path": "code/art/artifact/titanScale.webp",
+      "sha256": "c8d843377ded0f5a8ea61cd192962b5de093df1351bce862f1db4be88ca2aacf",
+      "size": 13980
+    },
+    {
       "path": "code/art/artifact/tradeScale.webp",
       "sha256": "0490f235ac1bcccf9ed0e534f28c54ba7a0f28218cdd3b79c112dffe7932f260",
       "size": 13298
+    },
+    {
+      "path": "code/art/artifact/treasureKey.webp",
+      "sha256": "d7745054290306a7d2cf00cb999880fa4ba40d764438e5fbf7138f194052a0ff",
+      "size": 10492
     },
     {
       "path": "code/art/artifact/twinLever.webp",
@@ -757,6 +822,11 @@
       "size": 10006
     },
     {
+      "path": "code/art/up/cryCd.webp",
+      "sha256": "3c34a1511527af2e809296555a708b1e55ea6974fef74724531799d3adc3c240",
+      "size": 14302
+    },
+    {
       "path": "code/art/up/ember.webp",
       "sha256": "4fc8186103aee344f60d8a0f9a8d124407c4c433694c41d956c682e7c3ade93a",
       "size": 9494
@@ -765,6 +835,16 @@
       "path": "code/art/up/eye.webp",
       "sha256": "2b6929292402188bf29b5e24164c4c976191b9a8ccabf6da011e0b6b72aed9b4",
       "size": 16344
+    },
+    {
+      "path": "code/art/up/fury.webp",
+      "sha256": "4260f103256afee5e19285aa65454f338b4c3121a4d63f58b8a64bb2f8007458",
+      "size": 15394
+    },
+    {
+      "path": "code/art/up/furyCd.webp",
+      "sha256": "1eec4a93823b96707cdbae9c35bdf6e9782e649eb62ffbad8cf16943453e2790",
+      "size": 16874
     },
     {
       "path": "code/art/up/hammer.webp",
@@ -790,6 +870,16 @@
       "path": "code/art/up/melt.webp",
       "sha256": "df6dbc843cc0d0bed104249050d6e6510514b8bf4f88854cee1b642a70637138",
       "size": 10024
+    },
+    {
+      "path": "code/art/up/midas.webp",
+      "sha256": "905abb67e2c09cf1468cdc51de0b50257fc457cf17b3c1f3563868e0dd8baa1f",
+      "size": 13428
+    },
+    {
+      "path": "code/art/up/midasCd.webp",
+      "sha256": "fb9397ecc28bdca7e487f4f4e6faafc146fb06da1a1cf357455f92e85799d187",
+      "size": 14502
     },
     {
       "path": "code/art/up/night.webp",
@@ -837,6 +927,16 @@
       "size": 10558
     },
     {
+      "path": "code/art/up/strike.webp",
+      "sha256": "bbd82c8db5e70f395534a980aa3501319e8c4621f10e03586c92f64bf00bdbb0",
+      "size": 17726
+    },
+    {
+      "path": "code/art/up/strikeCd.webp",
+      "sha256": "b2c3ebd41bdc07fde1825bc91c48a84a0c788a322e4aa2d9478ad762795c4b12",
+      "size": 12782
+    },
+    {
       "path": "code/art/up/temper.webp",
       "sha256": "c83c2e5b8a6640215838537852de5274214293357fc7ebe7f2254aa04e962ed0",
       "size": 10914
@@ -853,18 +953,18 @@
     },
     {
       "path": "code/artifacts.js",
-      "sha256": "129a666d7ee49603af2458db0c7c207a9559dc89aaf0471d18f7c1b33c2c2af5",
-      "size": 25640
+      "sha256": "1a6464c4c7e098cd93f048736493994d82e97d28943b37574d10643682d45bcb",
+      "size": 31156
     },
     {
       "path": "code/checks.js",
-      "sha256": "dc2683e5f0fa7e030a048d52f8b8da2950148dabe95f9c4b6d4974d8eb38d610",
-      "size": 22823
+      "sha256": "4c3de070acacff0d3f0238b5b974933d7730a37da39e8e2d05bc5e7363481054",
+      "size": 23279
     },
     {
       "path": "code/config.json",
-      "sha256": "c2b5b82c39223d0b4fbae955b9c89b03bb0b3e1ee65797ab846ae63e193d1271",
-      "size": 97260
+      "sha256": "61dca7efaf0080465816c2c3b36e42a771bdcb4a0be4e50e842b6b69376d94a4",
+      "size": 105018
     },
     {
       "path": "code/content/blades.json",
@@ -893,18 +993,18 @@
     },
     {
       "path": "code/game.json",
-      "sha256": "63d87f0f79e66d10eebd9c447585f0b85782a6861a8982e1cf9e00e8f9ed278b",
-      "size": 11128
+      "sha256": "ece08cbc2ee80221b3e5156d9836dc27440c2d7d11237e08ed246c8c8c0a40bc",
+      "size": 11528
     },
     {
       "path": "code/guide.md",
-      "sha256": "76a1c988260b74c16d7f5994d75efee2cc5f46a573e62f50f2104edea1677242",
-      "size": 60909
+      "sha256": "f857872c783c43cfdb5313625ef765892739fd4f1b252ecffa13d62eafec9c95",
+      "size": 64559
     },
     {
       "path": "code/i18n-en.json",
-      "sha256": "c04149bd0dc95efd058ac0d62914a1925462140507a4eb5f34b9e66a0b642c42",
-      "size": 205598
+      "sha256": "579fc437844ca79c9eee73f9665290da45d3dfe85372ac271a73bd9bb4751be8",
+      "size": 215844
     },
     {
       "path": "code/icon.svg",
@@ -933,8 +1033,8 @@
     },
     {
       "path": "code/sim.js",
-      "sha256": "15b81c6e0723296c5aeef19c27416d0304a8b3e32a97caf30b1afb0adc039e00",
-      "size": 101417
+      "sha256": "319711e9720394d497b492bdf4ed0f8cbd461ffa39f9216821c88bb7d6ce23ee",
+      "size": 111638
     },
     {
       "path": "code/ui/adventures.css",
@@ -948,28 +1048,28 @@
     },
     {
       "path": "code/ui/art.js",
-      "sha256": "31c8e058f6d01ffc9e9731995b3c0ccb5727cf46f3e0c00c0b4df566af736613",
-      "size": 28987
+      "sha256": "b9373a289b62aeecce27932e8d781bde97b5dddb8e2e83f4f5fe150c27cbe85b",
+      "size": 29242
     },
     {
       "path": "code/ui/artifacts.css",
-      "sha256": "241508eafaa7a1340c1a4aafa79ac50f4b6aebc132fe1627a5df2ac31a4c0857",
-      "size": 4940
+      "sha256": "50fbd861cd37c97e245513e3e2d04e509a31c6ec02820da39cec83a53cdbaf0f",
+      "size": 5833
     },
     {
       "path": "code/ui/artifacts.js",
-      "sha256": "8f16e97b25589a879f69164fa49b36aefdc5259a29cb5e608c67a0a6642953bd",
-      "size": 16906
+      "sha256": "cc780a726f3dfed30704011ac25be985fdacf8776d69b462133e68882c0fecbf",
+      "size": 17766
     },
     {
       "path": "code/ui/game.css",
-      "sha256": "e4f87540e3c50f651f6d0365b486a11a167af3f7f75471e8e108b20558965d0d",
-      "size": 31151
+      "sha256": "b1d8522d9836bf480ff8f4938430bee08c3e1fcef1a146cb66e205f8873b5423",
+      "size": 32110
     },
     {
       "path": "code/ui/game.js",
-      "sha256": "8cbe1c6069c317105899b13ea7033f9faf04cf3853726aec14db6bb00952d2ae",
-      "size": 118535
+      "sha256": "1d7c673ae253e0866cb2a6472ee24b73dcf69402fd7cee5f86d7fd3a56b74dfa",
+      "size": 124424
     },
     {
       "path": "code/ui/index.html",
@@ -993,13 +1093,13 @@
     },
     {
       "path": "code/upgrade-progress.js",
-      "sha256": "948c16a41158200ffc936ab30fb5b6c4e86a8d5bbc91dedb4d972dee606b11f9",
-      "size": 11055
+      "sha256": "3b76a6c143c5a70ded0d4caf164a0564e7cc84c8d84e9caf69a671a0df229c3e",
+      "size": 11086
     }
   ],
   "id": "merge-forge",
   "kind": "game",
-  "license": "Apache-2.0",
+  "license": "UNLICENSED",
   "networkDomains": [
     "www.w3.org"
   ],
@@ -1011,5 +1111,5 @@
   },
   "schemaVersion": 1,
   "sourceFormat": "readable",
-  "version": "0.5.1"
+  "version": "0.6.0"
 }
