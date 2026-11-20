@@ -1,6 +1,12 @@
 export const OUTFIT_COST = [0, 24, 65, 135];
-export const GEARS = ['magnet', 'boost'];
-export const UPGRADE_COST = [16, 46, 95];
+export const GEARS = ['magnet', 'boost', 'boots', 'pads', 'pass'];
+export const UPGRADE_COST = [16, 46, 95, 145, 215];
+export const MAX_GEAR = UPGRADE_COST.length;
+export const CONTRACTS = [
+  {id:'roof',reward:20,complete:r=>r.roofTally>=1},
+  {id:'express',reward:45,complete:r=>r.nearTally>=3},
+  {id:'line',reward:90,complete:r=>r.meters>=1000 && r.roofTally>=3}
+];
 const integer = n => Number.isSafeInteger(n) && n > 0 ? n : 0;
 const index = n => Number.isInteger(n) && n >= 0 && n < 4;
 
@@ -14,7 +20,8 @@ export function updateBoards(p) {
 
 export function restoreEconomy(p) {
   p.wallet = integer(p.wallet);
-  p.gear = Object.fromEntries(GEARS.map(id => [id, Math.min(3, integer(p.gear?.[id]))]));
+  p.gear = Object.fromEntries(GEARS.map(id => [id, Math.min(MAX_GEAR, integer(p.gear?.[id]))]));
+  p.contracts = CONTRACTS.map(c=>c.id).filter(id=>Array.isArray(p.contracts)&&p.contracts.includes(id));
   p.skin = index(p.skin) ? p.skin : 0;
   p.outfit = index(p.outfit) ? p.outfit : 0;
   const owned = (values, equipped) => [...new Set([0, equipped, ...(Array.isArray(values) ? values.filter(index) : [])])].sort();
@@ -30,6 +37,13 @@ export function award(p, run) {
   if (!run?.id || !['open','fixed'].includes(run.mode) || p.settled.includes(run.id)) return false;
   p.settled.push(run.id);
   p.wallet += integer(run.tokens);
+  const fulfilled=CONTRACTS.filter(c=>run.rules>=3 && !p.contracts.includes(c.id) && c.complete(run));
+  run.contractBonus=0;
+  for(const contract of fulfilled){
+    p.contracts.push(contract.id);
+    p.wallet+=contract.reward;
+    run.contractBonus+=contract.reward;
+  }
   return true;
 }
 

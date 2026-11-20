@@ -1,11 +1,11 @@
-import {restoreEconomy,award,updateBoards} from './economy.js';
+import {GEARS,restoreEconomy,award,updateBoards} from './economy.js';
 
 const KEY = 'tide-runner:profile:1';
 const RULES = window.TideRace.RULES;
 export function blank() {
   return {v:RULES, runs:0, bestDistance:0, bestScore:0, bestBank:0, fullWave:false,
     rows:[], fixed:[], live:null, ghost:true, sound:true, skin:0, outfit:0, wallet:0,
-    ownedBoards:[0], ownedOutfits:[0], gear:{magnet:0,boost:0}, settled:[]};
+    ownedBoards:[0], ownedOutfits:[0], gear:Object.fromEntries(GEARS.map(id=>[id,0])), contracts:[], settled:[]};
 }
 export function loadProfile(hub) {
   let raw=hub?.state?.meta?.profile;

@@ -43,14 +43,23 @@ function torso(){
     m.tube([[s*.06,.5,.148],[s*.19,.405,.155],[s*.244,.32,.122]],.019,cream);
     m.tube([[s*.193,.075,.099],[s*.22,.14,.096],[s*.24,.26,.061]],.008,coral);
   }
-  m.tube([[-.246,.44,.115],[-.15,.349,.19],[-.035,.254,.195],[.083,.141,.179],[.18,.036,.133]],.039,ink);
-  m.loft([[-.105,.09,.038],[-.075,.136,.056],[.046,.145,.060],[.087,.122,.052]],deep,12,[.098,.169,.173],[.08,0,.26]);
-  m.rod([-.025,.234,.221],[.214,.194,.198],.035,.035,teal);
-  m.box([.108,.163,.242],[.032,.075,.013],cream,[0,0,.20]);
-  m.ring([.208,.146,.199],.035,.008,honey,[0,.34,.20]);
-  m.face([[-.167,.312,.155],[-.075,.378,.183],[-.114,.356,.198],[-.051,.355,.199],[-.11,.296,.212],[-.093,.333,.204]],cream);
-  m.face([[-.172,.349,.183],[-.084,.374,.198],[-.111,.341,.203],[-.074,.337,.207],[-.138,.301,.205],[-.119,.331,.203]],cream);
-  m.box([-.076,.288,.215],[.064,.051,.018],honey,[0,0,-.59]);
+  // The courier's waterproof pack has a rolled top and twin shoulder straps.
+  // Its handle and reflector sit on the same centre line as the helmet stripe.
+  for(const s of [-1,1]){
+    m.tube([[s*.117,.492,.110],[s*.159,.446,.150],[s*.177,.337,.176],[s*.154,.153,.180],[s*.112,.085,.157]],.027,ink);
+    m.tube([[s*.15,.45,.144],[s*.166,.421,.158],[s*.173,.386,.164]],.010,cream);
+  }
+  m.loft([[.062,.094,.051],[.089,.145,.075],[.19,.157,.086],[.307,.149,.077],[.351,.128,.062]],deep,16,[0,0,.153]);
+  m.loft([[.105,.109,.021],[.126,.130,.036],[.217,.134,.041],[.242,.112,.029]],teal,14,[0,0,.2]);
+  m.rod([-.119,.342,.200],[.119,.342,.200],.047,.047,'#5cc8b4',12);
+  m.oval([-.119,.342,.200],[.022,.046,.045],teal);
+  m.oval([.119,.342,.200],[.022,.046,.045],teal);
+  m.tube([[-.066,.35,.175],[-.049,.401,.169],[.046,.401,.169],[.066,.35,.175]],.013,ink);
+  for(const s of [-1,1]){
+    m.face([[0,.142,.244],[s*.090,.180,.235],[s*.088,.203,.235],[0,.162,.246]],cream);
+    m.tube([[s*.077,.362,.226],[s*.075,.325,.242],[s*.074,.291,.232]],.012,ink);
+    m.box([s*.073,.285,.233],[.032,.032,.012],honey);
+  }
   m.tube([[0,.04,-.174],[.013,.24,-.163],[0,.40,-.181],[0,.52,-.13]],.008,ink);
   m.face([[-.162,.357,-.148],[-.085,.399,-.163],[-.111,.365,-.168],[-.066,.365,-.171],[-.133,.316,-.171],[-.115,.351,-.17]],cream);
   return m.finish();
@@ -72,7 +81,10 @@ function head(){
   m.loft([[.126,.194,.182],[.155,.204,.185],[.205,.201,.18],[.293,.170,.153],[.344,.102,.096],[.362,.02,.025]],'#8ed0c1',20);
   m.loft([[.117,.18,.165],[.137,.205,.185],[.153,.206,.187]],ink,20);
   m.tube([[0,.15,.185],[0,.25,.171],[0,.327,.117],[0,.36,.02],[0,.34,-.09],[0,.276,-.155]],.024,safety);
-  m.tube([[.056,.16,.174],[.055,.244,.159],[.045,.326,.102],[.016,.35,.031]],.011,cream);
+  for(const s of [-1,1]){
+    m.tube([[s*.055,.16,.174],[s*.055,.244,.159],[s*.042,.326,.102],[s*.016,.35,.031]],.008,cream);
+    m.oval([s*.119,.232,.123],[.017,.032,.009],deep,[.40,s*.60,s*.22]);
+  }
   m.oval([0,.154,-.159],[.166,.024,.064],'#619f98',[-.16,0,0]);
   for(const s of [-1,1]){
     m.oval([s*.19,.215,.025],[.014,.040,.047],cream);
@@ -88,7 +100,8 @@ function leg(upper){
   if(upper) {
     m.loft([[0,.109,.115],[.13,.128,.122],[.38,.122,.119],[.67,.103,.107],[.9,.087,.09],[1,.083,.081]],denim,14);
     m.loft([[.69,.102,.106],[.76,.101,.103],[.81,.097,.099]],'#608990',14);
-    m.box([.088,.48,.050],[.037,.22,.085],teal,[0,.12,.05]);
+    for(const s of [-1,1])
+      m.box([s*.109,.48,.015],[.020,.212,.053],teal,[0,s*.12,s*.035]);
   }else{
     m.loft([[0,.082,.082],[.13,.090,.094],[.38,.092,.098],[.73,.061,.068],[.95,.053,.059],[1,.055,.062]],ink,14);
     m.loft([[.58,.073,.084],[.67,.072,.08],[.79,.063,.07]],teal,14);
@@ -100,8 +113,14 @@ function shoe(){
   m.loft([[.01,.09,.159,0,-.037],[.033,.102,.179,0,-.039],[.055,.108,.181,0,-.039],[.074,.102,.173,0,-.04]],'#ffe4ac',14);
   m.loft([[.064,.103,.172,0,-.038],[.094,.096,.149,0,-.034],[.126,.081,.115,0,-.011],[.166,.066,.071,0,.021]],'#d1643d',14);
   m.oval([0,.084,-.15],[.083,.042,.061],cream);
+  m.loft([[.007,.081,.149,0,-.037],[.019,.094,.163,0,-.037]],deep,14);
+  for(const z of [-.145,-.085,.065])
+    for(const s of [-1,1])
+      m.box([s*.032,.007,z],[.057,.010,.023],z>.03?'#ffaf57':'#81bbb1',[0,s*.25,0]);
   for(const z of [-.095,-.055,-.018])m.box([0,.122+(.1+z)*.18,z],[.124,.013,.017],cream,[0,.12,.04]);
-  m.oval([0,.13,.079],[.04,.032,.024],ink);return m.finish();
+  m.oval([0,.102,.094],[.059,.032,.025],ink);
+  m.box([0,.108,.116],[.068,.016,.009],cream);
+  return m.finish();
 }
 function arm(upper){
   const m=new Model();
@@ -152,11 +171,12 @@ function joint(a,b,upper,lower,pole){
 function poseBoard(place,r,skin,ghost=false,home=false) {
   const a=r.tick/60,turn=Math.max(-1,Math.min(1,r.lane-r.pos)),swell=r.blend;
   const crouch=Math.min(1,r.slide/5),air=r.air?Math.sin(PI*(46-r.air)/46):0;
-  const carve=home?0:Math.sin(a*3.62)*(swell+(r.surge>0?.55:0));
-  const pump=home?0:(.5+.5*Math.cos(a*7.24))*swell;
+  const boost=r.surge>0?1:0;
+  const carve=home?0:Math.sin(a*3.62)*(swell+.14*boost);
+  const pump=home?0:(.5+.5*Math.cos(a*7.24))*(swell+.52*boost);
   const bend=.012*Math.sin(a*(swell?3.4:4.2))+.052*swell+.11*pump+.335*crouch+.090*air;
-  const rideYaw=.36+.20*swell+turn*.13+.105*carve,left=-1,right=1;
-  const boardQ=new T.Quaternion().setFromEuler(new T.Euler(-.105*air-.052*pump,rideYaw,.035+turn*.19+swell*.12+.135*carve));
+  const rideYaw=home?.36:.25*swell-turn*.20+.12*carve,left=-1,right=1;
+  const boardQ=new T.Quaternion().setFromEuler(new T.Euler(-.105*air-.052*pump,rideYaw,-turn*.19+swell*.12+.135*carve));
   function component(name,p,size=[1,1,1],rotation=[0,0,0]){
     const v=new T.Vector3(...p).applyQuaternion(boardQ);
     const q=rotation.isQuaternion?rotation.clone():new T.Quaternion().setFromEuler(new T.Euler(...rotation));
@@ -179,12 +199,12 @@ function poseBoard(place,r,skin,ghost=false,home=false) {
     limb('rideThigh',pelvis,knee);limb('rideShin',knee,ankle);
     component('rideShoe',foot,[1,1,1],[0,footYaw,0]);
   }
-  const bodyYaw=home?1.28:.70+.06*Math.sin(a*.73)-.11*swell-.21*carve;
+  const bodyYaw=home?1.28:.46+.075*swell-.17*carve;
   const bodyQ=new T.Quaternion().setFromEuler(new T.Euler(-.22-crouch*.49-.105*pump,bodyYaw,-turn*.13-.06*swell-.19*carve,'YXZ'));
   const bodyPoint=p=>new T.Vector3(...p).applyQuaternion(bodyQ).add(new T.Vector3(...hip)).toArray();
   component('rideTorso',hip,[1,1,1],bodyQ);
   const neck=bodyPoint([0,.582,-.015]);
-  component('rideHead',neck,[1,1,1],[-.08-crouch*.11,home?2.23:.55+.09*swell+turn*.18,.025*Math.sin(a*2.3)]);
+  component('rideHead',neck,[1,1,1],[-.08-crouch*.11,home?2.23:.075*swell-.21*carve,.025*Math.sin(a*2.3)]);
   component('rideScarf',bodyPoint([-.078,.505,.12]),[1,1,1],[.11*Math.sin(a*8),.40+.26*Math.sin(a*5.3),.21*Math.cos(a*5.3)]);
   for(const s of [left,right]){
     const shoulder=bodyPoint([s*.24,.437,0]),forward=s===right;
@@ -208,26 +228,37 @@ function runningFoot(cycle,side){
   return {z:.39-.78*ease+.14*Math.sin(t*2*PI),y:.13*(1-t)+.045*t+.39*s*(1.28-.50*t),
     pitch:-.74*(1-t)+.23*t-.68*Math.sin(PI*t)};
 }
-function poseFeet(place,r,ghost,home){
-  const turn=Math.max(-1,Math.min(1,r.lane-r.pos));
-  const cycle=(r.d/(5.95+Math.min(1.7,r.d/1350)))%1,angle=cycle*PI*2;
-  const slide=r.slide?Math.min(1,(44-r.slide)/5,r.slide/6):0;
-  const jump=r.air?Math.sin(PI*(46-r.air)/46):0;
+// Two contacts per cycle. Higher rail speed lengthens each step as well as
+// raising cadence; fast routes never turn the runner's legs into a blur.
+export function runCycle(r) { return (r.tick*(1.48/60) + r.d*.027) % 1; }
+function poseFeet(place,r,ghost,home,cycle){
+  const turn=home?0:Math.max(-1,Math.min(1,r.lane-r.pos));
+  const angle=cycle*PI*2;
+  const slideTicks=43+(r.rules>=3?6*(r.gear?.pads||0):0);
+  const slide=r.slide?Math.max(0,Math.min(1,(slideTicks+1-r.slide)/5,r.slide/6)):0;
+  const jump=r.air?Math.sin(PI*(46-r.air)/46):r.surface==='air'?Math.min(.85,(r.fallSpeed||0)*.16):0;
   const running=home?0:(1-slide)*(1-jump);
-  const bob=home?0:(.047*Math.cos(angle*2-.55)+.014)*running;
-  const hip=[Math.sin(angle)*.039*running-turn*.096,.795+bob-.425*slide+.037*jump,.012+.10*slide];
-  const lean=(home?-.03:-.275)-running*.037*Math.sin(angle*2)-.09*jump+.87*slide;
-  const worldQ=new T.Quaternion().setFromEuler(new T.Euler(0,home?2.35:.12+turn*.21,turn*.13,'YXZ'));
-  const bodyQ=new T.Quaternion().setFromEuler(new T.Euler(lean,.22*Math.sin(angle)*running+(home?.24:0),.075*Math.cos(angle)*running,'YXZ'));
-  const pelvisYaw=-.16*Math.sin(angle)*running;
+  const bob=(.036*Math.cos(angle*2-.55)+.010)*running;
+  const hip=[Math.sin(angle)*.021*running,.800+bob-.425*slide+.035*jump,.012+.10*slide];
+  const lean=(home?-.03:-.215)-running*.028*Math.sin(angle*2)-.10*jump+.85*slide;
+  // The athlete looks down the rails (-Z). A rightward step banks towards +X;
+  // neither heading nor bank carries a resting bias between lane changes.
+  const worldQ=new T.Quaternion().setFromEuler(new T.Euler(0,home?2.35:-turn*.19,-turn*.15,'YXZ'));
+  const bodyQ=new T.Quaternion().setFromEuler(new T.Euler(lean,home?.24:.074*Math.cos(angle)*running,.026*Math.sin(angle)*running,'YXZ'));
+  const pelvisYaw=-.072*Math.cos(angle)*running;
   function emit(name,at,size=[1,1,1],rot=[0,0,0]){
     const point=new T.Vector3(...at).applyQuaternion(worldQ);
     const q=rot.isQuaternion?rot:new T.Quaternion().setFromEuler(new T.Euler(...rot));
     place(name,point.toArray(),size,worldQ.clone().multiply(q),ghost);
   }
   function segment(name,a,b){
-    const dir=new T.Vector3(...b).sub(new T.Vector3(...a)),length=dir.length();
-    emit(name,a,[1,length,1],new T.Quaternion().setFromUnitVectors(up,dir.normalize()));
+    const axis=new T.Vector3(...b).sub(new T.Vector3(...a)),length=axis.length();
+    axis.normalize();
+    // Keep the seam on the trouser leg facing out, also when the leg passes
+    // directly below the hip and its long axis points straight down.
+    const depth=new T.Vector3(1,0,0).cross(axis).normalize();
+    const right=new T.Vector3().crossVectors(axis,depth);
+    emit(name,a,[1,length,1],new T.Quaternion().setFromRotationMatrix(new T.Matrix4().makeBasis(right,axis,depth)));
   }
   const bodyPoint=p=>new T.Vector3(...p).applyQuaternion(bodyQ).add(new T.Vector3(...hip)).toArray();
   emit('rideHips',hip,[1,1,1],[0,pelvisYaw,0]);
@@ -236,23 +267,23 @@ function poseFeet(place,r,ghost,home){
     let z=home?side*.16:foot.z,y=home?.019:foot.y,pitch=home?0:foot.pitch;
     if(jump){z+=(side>0?-.40-z:.32-z)*jump;y+=(side>0?.34-y:.47-y)*jump;pitch+=(side>0?.15-pitch:-.85-pitch)*jump;}
     if(slide){z+=(side>0?-.52-z:.27-z)*slide;y+=(side>0?.097-y:.063-y)*slide;pitch+=(side>0?.49-pitch:-.26-pitch)*slide;}
-    const footX=side*(.148+.072*slide)+turn*.035,heading=-side*(home?.20:.065);
-    const rot=new T.Quaternion().setFromEuler(new T.Euler(pitch,heading,side*.02,'YXZ'));
+    const footX=side*(.142+.072*slide)+turn*.028,heading=-side*(home?.20:.020);
+    const rot=new T.Quaternion().setFromEuler(new T.Euler(pitch,heading,0,'YXZ'));
     const shoe=[footX,y,z],ankle=new T.Vector3(0,.13,.022).applyQuaternion(rot).add(new T.Vector3(...shoe)).toArray();
     const origin=[hip[0]+side*.131*Math.cos(pelvisYaw),hip[1]-.016,hip[2]-side*.131*Math.sin(pelvisYaw)];
-    const knee=joint(origin,ankle,.393,.375,[side*(.11+.38*slide),.04,-1]);
+    const knee=joint(origin,ankle,.393,.375,[side*(.026+.32*slide),.04,-1]);
     segment('rideThigh',origin,knee);segment('rideShin',knee,ankle);
     emit('rideShoe',shoe,[1,1,1],rot);
   }
   emit('rideTorso',hip,[1,1,1],bodyQ);
-  emit('rideHead',bodyPoint([0,.574,-.015]),[1,1,1],[-.09+.19*slide,home?.04:-.025*Math.sin(angle)+turn*.12,.035*Math.cos(angle)*running]);
-  emit('rideScarf',bodyPoint([-.078,.51,.112]),[1,1,1],[.39+.13*Math.sin(angle*2),.31+.22*Math.sin(angle),.20*Math.cos(angle)]);
+  emit('rideHead',bodyPoint([0,.574,-.015]),[1,1,1],[-.055+.19*slide,home?.04:0,.014*Math.cos(angle)*running]);
+  emit('rideScarf',bodyPoint([-.099,.51,.112]),[1,1,1],[.33+.12*Math.sin(angle*2),-.18+.17*Math.sin(angle),.18*Math.cos(angle)]);
   for(const side of [-1,1]){
     // Right arm forwards as the left foot reaches forwards. A bent elbow leads the backward swing.
     const swing=-side*Math.cos(angle-.35)*running;
     const shoulder=bodyPoint([side*.24,.44,0]);
-    let upper=[side*(.071+.042*jump),-.207+.11*Math.max(0,-swing),swing*.235-.048];
-    let lower=[-side*.035,.115-.083*Math.max(0,swing),-.202+.062*swing];
+    let upper=[side*(.061+.042*jump),-.238+.090*Math.max(0,swing),swing*.257+.032];
+    let lower=[-side*.042,.112-.120*Math.max(0,swing),-.205+.081*swing];
     if(slide){upper=[side*(.08+.13*slide),-.20,.14*slide];lower=[side*.10,-.07+.098*(side>0),side>0?-.15:.15];}
     if(jump){upper[0]+=side*.12*jump;upper[1]+=.19*jump;lower[1]+=.09*jump;}
     if(home){upper=[side*.098,-.235,side*.072];lower=[-side*.06,.008,-.23];}
@@ -262,8 +293,8 @@ function poseFeet(place,r,ghost,home){
     emit('rideHand',wrist,[1,1,1],[.49,-side*.24,-side*.28]);
   }
 }
-export function poseRider(place,r,skin=0,ghost=false,home=false,outfit=0){
+export function poseRider(place,r,skin=0,ghost=false,home=false,outfit=0,cycle=runCycle(r)){
   const wearing=outfit>=1&&outfit<=3 ? (name,...args)=>place(/^ride(?:Board|Surf)/.test(name)?name:name+outfit,...args):place;
   if(r.blend>.24||r.surge>0||r.rules===1)poseBoard(wearing,r,skin,ghost,home);
-  else poseFeet(wearing,r,ghost,home);
+  else poseFeet(wearing,r,ghost,home,cycle);
 }

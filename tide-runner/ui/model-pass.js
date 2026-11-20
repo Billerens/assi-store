@@ -1,14 +1,20 @@
 import * as T from '../vendor/three.module.js';
 import {Model} from './model-kit.js';
 import {portModels} from './port-models.js';
-import {riderModels,poseRider} from './rider-model.js';
+import {riderModels,poseRider,runCycle} from './rider-model.js';
 import {deckTexture} from './deck-art.js';
 import {quayModels} from './quay-life.js';
 import {pickupModels} from './pickup-models.js';
+import {railModels} from './rail-models.js';
+import {ballastGeometry,ballastMaterial,vaultGeometry,vaultMaterial} from './rail-world.js';
 
 export class ModelPass {
   constructor(renderer){
-    this.view=renderer;this.models=Object.assign(portModels(),riderModels(),quayModels(),pickupModels());this.batches=new Map();this.cache=new Map();
+    this.view=renderer;this.models=Object.assign(portModels(),riderModels(),quayModels(),pickupModels(),railModels());this.batches=new Map();this.cache=new Map();
+    this.models.railBed=ballastGeometry();
+    this.models.railVault=vaultGeometry();
+    this.ballast=renderer.renderer?ballastMaterial():null;
+    this.vault=renderer.renderer?vaultMaterial():null;
     this.opaque=new T.MeshLambertMaterial({vertexColors:true,side:T.DoubleSide});
     this.timber=renderer.renderer?new T.MeshLambertMaterial({map:deckTexture(),vertexColors:true,side:T.DoubleSide}):null;
     this.ghost=new T.MeshBasicMaterial({color:0x8ee8ec,transparent:true,opacity:.42,depthWrite:false});
@@ -32,7 +38,7 @@ export class ModelPass {
     const key=name+(ghost?'*':'');let mesh=this.batches.get(key);
     if(!mesh){
       const limit=name.startsWith('ride')?4:64;
-      const material=ghost?this.ghost:name==='pierDeck'?this.timber:this.opaque;
+      const material=ghost?this.ghost:name==='pierDeck'?this.timber:name==='railBed'?this.ballast:name==='railVault'?this.vault:this.opaque;
       mesh=new T.InstancedMesh(this.models[name],material,limit);
       mesh.count=0;mesh.frustumCulled=false;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);
       this.view.scene.add(mesh);this.batches.set(key,mesh);
@@ -44,17 +50,18 @@ export class ModelPass {
   }
   addCanvasRider(x,y,z,r,skin,ghost,home=false,outfit=0){
     const surf=r.blend>.24||r.surge>0||r.rules===1;
-    const pose=home?'home':surf?(r.blend>.24?'surf':'board'):r.slide?'duck':r.air?'air':'run';
-    const phase=pose==='run'?Math.floor(window.TideRace.stride(r)%1*8):
+    const pose=home?'home':surf?(r.blend>.24?'surf':'board'):r.slide?'duck':r.air||r.surface==='air'?'air':'run';
+    const phase=pose==='run'?Math.floor(runCycle(r)*12):
       pose==='surf'||pose==='board'?Math.floor((r.tick/60*3.62/(2*Math.PI))%1*4):0;
     const name=['fallback',pose,skin,outfit,phase].join('-');
     if(!this.models[name]){
       const m=new Model();
       poseRider((part,at,size,rotation)=>m.add(this.models[part],0xffffff,at,size,rotation),
-        {...r,d:phase*5.95/8,tick:phase*60*2*Math.PI/(4*3.62),slide:pose==='duck'?20:0,air:pose==='air'?23:0,blend:pose==='surf'?1:0},skin,false,home,outfit);
+        {...r,lane:1,pos:1,tick:phase*60*2*Math.PI/(4*3.62),slide:pose==='duck'?20:0,air:pose==='air'?23:0,blend:pose==='surf'?1:0},skin,false,home,outfit,phase/12);
       this.models[name]=m.finish();
     }
-    this.add(name,x,y,z,[1,1,1],[0,(r.lane-r.pos)*.19,0],ghost);
+    const turn=home?0:r.lane-r.pos;
+    this.add(name,x,y,z,[1,1,1],[0,-turn*.19,-turn*.15],ghost);
   }
   sprite(name,yaw,pitch){
     const key=name+'|'+yaw+'|'+pitch;

@@ -1,5 +1,7 @@
 import {Harbour} from './scene.js';
 import {loadProfile,saveProfile,record,ranked,courseRecords,weekStart,weekSeed} from './profile.js';
+import {CONTRACTS} from './economy.js';
+import {passBy} from './rail-audio.js';
 
 const R=window.TideRace, $=id=>document.getElementById(id);
 const root=$('game'), screen=$('screen'), hud=$('hud'), cue=$('cue');
@@ -47,7 +49,7 @@ function snapshot(){
 function playTone(notice){
   if(!profile.sound||!soundCtx||soundCtx.state!=='running')return;
   const notes={bank:[638,880],gate:[420+run.gates*65],miss:[158],washed:[146],wave:[320,455],crash:[112,72],record:[690,960],
-    token:[568+(run.collected||0)%5*72],magnet:[395,641],boost:[385,776],rescued:[305,420]};
+    token:[568+(run.collected||0)%5*72],magnet:[395,641],boost:[385,776],rescued:[305,420],near:[700,935],roof:[260,385]};
   if(!notes[notice])return;
   notes[notice].forEach((hz,i)=>{const o=soundCtx.createOscillator(),g=soundCtx.createGain(),at=soundCtx.currentTime+i*.075;
     o.type=notice==='crash'?'triangle':'sine';o.frequency.setValueAtTime(hz,at);g.gain.setValueAtTime(0,at);g.gain.linearRampToValueAtTime(notice==='token'?.026:.047,at+.008);g.gain.exponentialRampToValueAtTime(.001,at+.14);
@@ -71,7 +73,7 @@ function home(){
 function help(from){
   arrange('help',true);const close=()=>from==='paused'?pausePanel():home(),p=sheet('guide','guide',close);
   p.append(el('p','',t('helpLead')));
-  for(const [a,b] of [['helpLeft','helpLeftText'],['helpUp','helpUpText'],['helpDown','helpDownText'],['helpLoot','helpLootText'],['helpBank','helpBankText']]){
+  for(const [a,b] of [['helpLeft','helpLeftText'],['helpRoof','helpRoofText'],['helpUp','helpUpText'],['helpDown','helpDownText'],['helpLoot','helpLootText'],['helpBank','helpBankText']]){
     p.append(el('h3','',t(a)),el('p','',t(b)));
   }
   p.append(btn('back',close));
@@ -109,6 +111,11 @@ function resumeSaved(){
 function bankLine(){
   if(run.gates)return t('streak')+' ×'+(run.gates>=5?3:run.gates>=3?2:1)+' · '+number(R.value(run.raw,run.gates));
   if(run.wave<0&&run.roofUntil>run.d)return t('linked');
+  if(track.rules>=3){
+    const surface=run.surface==='air'?(run.deckY>1?'roof':'rail'):(run.surface||'rail');
+    const speed=Math.round(R.speed(run.d,track.rules)*(run.surge?1.15:1)*3.6);
+    return t('surface_'+surface)+' · '+speed+' '+t('kmh');
+  }
   return t(districts[R.district(run.d)]);
 }
 function buildHUD(){
@@ -131,17 +138,19 @@ function updateHUD(){
   const effect=$('hudEffect');effect.hidden=!active.length;effect.textContent=active.join(' · ');
   $('hudDetail').textContent=bankLine()+(previousBest>m&&previousBest-m<100?' · '+t('toBest')+' '+unit(previousBest-m):'');
   let msg='',type='';
-  if(run.tick-run.noticeTick<86&&run.notice){
+  if(run.tick-run.noticeTick<65&&run.notice){
     type=run.notice;
     if(type==='gate')msg=t('gate')+' '+run.gates+' · '+number(run.amount);
     else if(type==='bank')msg=t('banked')+' +'+number(run.amount);
     else if(type==='record')msg=t('distanceCue');
+    else if(type==='near')msg=t('near')+(run.gear.pass?' +'+run.gear.pass:'');
     else if(type!=='crash')msg=t(type);
   }else if(run.wave>=0&&run.gates>=2)msg=t('exitHint');
+  else if(track.rules>=3&&run.wave<0&&run.lane===2&&R.block(track,Math.floor(run.d/R.SPAN)).waves.some(w=>w.start-run.d>0&&w.start-run.d<24))msg=t('waveHelp');
   else if(run.tick<135)msg=t(matchMedia('(pointer:coarse)').matches?'hintTouch':'hintStart');
-  else if(run.d>49&&run.d<69)msg=t('entryHint');
+  else if(track.rules<3&&run.d>49&&run.d<69)msg=t('entryHint');
   if(msg!==cue.textContent)cue.textContent=msg;cue.dataset.kind=type;cue.hidden=!msg;
-  root.dataset.distance=String(m);root.dataset.lane=String(run.lane);root.dataset.surface=run.wave>=0?'wave':'quay';root.dataset.streak=String(run.gates);
+  root.dataset.distance=String(m);root.dataset.lane=String(run.lane);root.dataset.surface=run.surface||(run.wave>=0?'wave':'quay');root.dataset.streak=String(run.gates);
   root.dataset.posture=run.air?'jump':run.slide?'duck':'ride';
   root.dataset.motion=run.wave>=0?'surf':run.surge?'boost':run.slide?'slide':run.air?'jump':'run';
   root.dataset.tokens=String(run.tokens||0);root.dataset.pickups=String(run.pickups||0);
@@ -155,7 +164,14 @@ function tick(){
     if(ghost.tick>=ghost.limit)ghost=null;
     else {ghostIndex=replayInput(ghost,ghostEvents,ghostIndex);R.step(ghost,track);}
   }
-  const before=Math.floor(run.d);R.step(run,track);
+  const from=run.d,before=Math.floor(from);R.step(run,track);
+  if(track.rules>=3&&profile.sound&&soundCtx?.state==='running'&&run.wave<0&&before!==Math.floor(run.d)){
+    const block=R.block(track,Math.floor(run.d/R.SPAN));
+    for(const train of block.trains){
+      if(train.moving&&train.z>before&&train.z<=run.d)
+        passBy(soundCtx,train.lane-run.pos,run.surface==='tunnel');
+    }
+  }
   if(run.tokenTick===run.tick)playTone('token');
   if(previousBest&&before<=previousBest&&Math.floor(run.d)>previousBest&&run.tick-run.noticeTick>65){
     run.notice='record';run.noticeTick=run.tick;
@@ -199,12 +215,13 @@ function finish(retired=false){
   const checkpoint=tail.filter(s=>s.tick<=Math.max(0,run.tick-360)).at(-1)||tail[0]||R.fresh(track.seed);
   const rec={id:attemptId,seed:track.seed,mode:kind,rules:track.rules,ticks:run.tick,meters:Math.floor(run.d),
     gear:{...run.gear},tokens:run.tokens||0,pickups:run.pickups||0,skin:run.skin??profile.skin,outfit:run.outfit??profile.outfit,
-    score:R.score(run),bestBank:run.bestBank,bestChain:run.bestChain,tape:R.encode(events),checkpoint:{...checkpoint},
+    score:R.score(run),bestBank:run.bestBank,bestChain:run.bestChain,nearTally:run.nearTally||0,roofTally:run.roofTally||0,tape:R.encode(events),checkpoint:{...checkpoint},
     cause:retired?'retired':run.dead,at:Date.now()};
   if(!training){
     record(profile,rec);persist();
     if(hub&&!hub.readonly){
       if(run.banks)hub.achieve('first-bank');if(run.d>=1000)hub.achieve('kilometre');if(run.bestChain>=5)hub.achieve('full-wave');
+      if(run.roofTally)hub.achieve('roofline');if(run.nearTally>=3)hub.achieve('express');
     }
   }
   endPanel(rec,false,!training&&kind==='open'&&rec.meters>old);
@@ -217,20 +234,23 @@ function endPanel(rec,watched=false,newRecord=false){
   p.append(numbers([['distance',unit(rec.meters)],['score',number(rec.score)]]));
   p.append(el('p','',rec.cause==='retired'?t('retired'):t('crash'+rec.cause)));
   if(rec.mode==='practice'){p.append(mainButton('again',()=>doPractice(practicePoint)),btn('back',home));return;}
-  p.append(el('p','earnings',t('tokens')+' +'+number(rec.tokens)+' · '+t('wallet')+' '+number(profile.wallet)));
+  if(rec.rules>=3)p.append(numbers([['roofCount',number(rec.roofTally)],['nearCount',number(rec.nearTally)]]));
+  p.append(el('p','earnings',t('tokens')+' +'+number(rec.tokens)+(rec.contractBonus?' · '+t('orderPay')+' +'+number(rec.contractBonus):'')+' · '+t('wallet')+' '+number(profile.wallet)));
   p.append(mainButton('newRun',()=>start('open',genSeed())),row(btn('revenge',()=>start('fixed',rec.seed,null,rec)),btn('practice',()=>doPractice(rec))),
-    row(btn('watch',()=>watch(rec),'flat'),btn('wardrobe',()=>wardrobe(()=>endPanel(rec)),'flat'),btn('hangar',()=>hangar('stats'),'flat')));
+    row(btn('watch',()=>watch(rec),'flat'),btn('gearShop',()=>wardrobe(()=>endPanel(rec),'gear'),'flat'),btn('hangar',()=>hangar('stats'),'flat')));
 }
 function doPractice(rec){
   if(!rec)return;practicePoint=rec;
   start('practice',rec.seed,rec.checkpoint||R.fresh(rec.seed,rec.gear,rec.rules));
 }
 function practiseWave(){
-  const seed=selectedCourse,r=R.fresh(seed,profile.gear);r.d=52;r.tick=340;r.lane=2;r.pos=2;
+  const seed=selectedCourse,r=R.fresh(seed,profile.gear);
+  const wave=R.block(R.course(seed),0).waves[0];
+  r.d=wave.start-20;r.lane=2;r.pos=2;
   doPractice({seed,checkpoint:r});
 }
 function watch(rec){
-  if(!rec||![1,R.RULES].includes(rec.rules))return;
+  if(!rec||!Number.isInteger(rec.rules)||rec.rules<1||rec.rules>R.RULES)return;
   audioStart();watchRow=rec;ghost=null;track=R.course(rec.seed,rec.rules);run=R.fresh(rec.seed,rec.gear,rec.rules);
   run.skin=rec.skin||0;run.outfit=rec.outfit||0;previousBest=0;
   replayEvents=R.decode(rec.tape);replayIndex=0;heard=-1;arrange('replay');buildHUD();updateHUD();scene();schedule();
@@ -256,6 +276,11 @@ function hangar(tab){
     });
     if(profile.last)p.append(btn('previous',()=>endPanel(profile.last),'flat'));
   }else if(tab==='challenges'){
+    p.append(el('h3','',t('contracts')));
+    for(const c of CONTRACTS){
+      const done=profile.contracts.includes(c.id),line=el('div','orderLine');
+      line.append(el('span','',t('contract_'+c.id)),el('strong','',done?'✓':'+'+c.reward+' '+t('tokenUnit')));p.append(line);
+    }
     p.append(el('h3','',t('week')));
     const week=weekStart(weekOffset),seed=weekSeed(week);
     const date=el('span','',trDate(week));date.style.textAlign='center';
@@ -265,7 +290,11 @@ function hangar(tab){
     const f=el('form','controlField'),input=el('input');input.inputMode='numeric';input.setAttribute('aria-label',t('code'));input.placeholder=t('code');input.maxLength=10;
     const launch=btn('go',()=>{},'secondary');launch.type='submit';launch.onclick=null;
     f.onsubmit=e=>{e.preventDefault();const s=Number(input.value);if(!Number.isInteger(s)||s<=0||s>4294967295){input.setCustomValidity(t('invalidCode'));input.reportValidity();return;}selectedCourse=s;start('fixed',s);};
-    input.oninput=()=>input.setCustomValidity('');f.append(input,launch);p.append(f,btn('wavePractice',practiseWave,'flat'));
+    input.oninput=()=>input.setCustomValidity('');f.append(input,launch);p.append(f);
+    p.append(btn('railPractice',()=>{
+      const r=R.fresh(selectedCourse,profile.gear);r.d=40;r.lane=2;r.pos=2;
+      doPractice({seed:selectedCourse,checkpoint:r});
+    },'secondary'),btn('wavePractice',practiseWave,'flat'));
   }else{
     p.append(numbers([['runs',number(profile.runs)],['comboBest',number(profile.bestBank)]]),mainButton('wardrobe',()=>wardrobe(()=>hangar('room'))));
     for(const pref of ['ghost','sound']){
@@ -274,11 +303,11 @@ function hangar(tab){
   }
   p.append(btn('back',home,'flat'));
 }
-async function wardrobe(close){
+async function wardrobe(close,initialTab='outfit'){
   arrange('wardrobe');wardrobeClose=close;
   const {openWardrobe}=await import('./wardrobe.js');
   if(mode!=='wardrobe')return;
-  const dispose=openWardrobe({mount:screen,profile,lang,translations:en,commit:next=>{
+  const dispose=openWardrobe({mount:screen,profile,lang,translations:en,initialTab,commit:next=>{
     if(hub?.readonly)return false;
     const old=profile;profile=next;persist();
     if(saveIssue)profile=old;
@@ -295,7 +324,7 @@ function bindInput(){
   let touch=null;
   for(const canvas of [$('world'),$('fallback')]){
     canvas.addEventListener('pointerdown',e=>{if(!['run','practice'].includes(mode)||touch)return;
-      touch={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture?.(e.pointerId);e.preventDefault();});
+      canvas.focus({preventScroll:true});touch={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture?.(e.pointerId);e.preventDefault();});
     const swipe=e=>{
       if(!touch||e.pointerId!==touch.id)return;
       const dx=e.clientX-touch.x,dy=e.clientY-touch.y;

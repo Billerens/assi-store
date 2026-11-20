@@ -7,6 +7,13 @@ let wardrobeModels, pickupGeometry;
 const packed=new Map();
 async function figure(tab, choice, outfit, skin) {
   if(tab==='gear'){
+    if(choice!=='magnet' && choice!=='boost'){
+      if(!packed.has(choice)){
+        const {railGear}=await import('./rail-gear.js');
+        packed.set(choice,railGear[choice]());
+      }
+      return packed.get(choice);
+    }
     if(!pickupGeometry)pickupGeometry=(await import('./pickup-models.js')).pickupModels();
     return pickupGeometry[choice==='magnet'?'magnetPickup':'boostPickup'];
   }

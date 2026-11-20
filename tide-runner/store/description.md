@@ -1,3 +1,3 @@
-You're a courier in a working fishing harbour. Follow the trail of brass tokens, jump mooring ropes and slide under sails. Take a turquoise ramp to unfold your board and ride the face of a wave. Thread the high gates and reach the striped exit to bank your streak.
+A pair of headlights is already coming your way at the start. Switch tracks, clear a hurdle, then take a loading ramp onto the freight cars. Jump the gaps between roofs. In the tunnel, watch the light on the rails and slide under low beams. The waterfront branch lets you catch a wave and bank a string of surf gates.
 
-Spend your haul on a fisherman's raincoat, a harbour pilot's peacoat, a diving suit, boards and longer-lasting pickups. Open Water rolls a fresh course each time. A rematch brings back the same tide and your recorded ghost. Distance and score records, replays and your wardrobe all work offline.
+Each fresh run strings familiar sections together. Learn a sequence, take it at speed and race your ghost on the same route. The horizon stays steady. Spend tokens on four outfits and five gear branches with five levels each. Depot jobs pay extra for rooftop routes and close passes.

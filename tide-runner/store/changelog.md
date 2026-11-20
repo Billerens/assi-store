@@ -1,3 +1,7 @@
+## 0.3.0
+
+The harbour railway adds three tracks, oncoming trains, loading ramps, wagon roofs and tunnels. Six route patterns return at higher speeds. This release adds a steady camera, a forward-facing sprint, five equipment branches with five levels each, three depot jobs and two achievements. Existing purchases, runs and replays carry over.
+
 ## 0.2.0
 
 The courier now runs on foot, jumps hurdles and slides under sails. Token trails, magnets and boosts lead to four outfits, four boards and six gear upgrades. Surfing and boosted board rides share the course with the footrace. Older saves and replays still work.

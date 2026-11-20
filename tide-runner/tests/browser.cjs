@@ -29,6 +29,7 @@ async function run(){
   try{
     const chrome=process.env.AXIKO_CHROMIUM_EXECUTABLE||['C:/Program Files/Google/Chrome/Application/chrome.exe','C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'].find(fs.existsSync);
     browser=await chromium.launch({headless:true,executablePath:chrome,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required']});
+    await checkSteadyCamera(browser,root);
     const page=await browser.newPage({viewport:{width:390,height:820},deviceScaleFactor:1});const faults=[];
     page.on('pageerror',e=>faults.push(String(e)));
     await page.addInitScript(()=>{
@@ -37,7 +38,10 @@ async function run(){
         return request(function(stamp){
           const data=document.querySelector('#game')?.dataset;
           if(fn.name==='frame'&&window.stopOnApron&&data?.mode==='run'&&Number(data.distance)>=4)return;
-          if(fn.name==='frame'&&window.holdWave&&data?.surface==='wave'&&Number(data.distance)>83){
+          if(fn.name==='frame'&&window.holdWaveRamp&&data?.mode==='practice'&&Number(data.distance)>=window.takeoff){
+            window.rampFrame=fn;return;
+          }
+          if(fn.name==='frame'&&window.holdWave&&data?.surface==='wave'){
             window.deferredFrame=fn;return;
           }
           fn(stamp);
@@ -59,7 +63,12 @@ async function run(){
     await page.keyboard.press('p');await action('leaveRun');await mode('over');
     await action('revenge');await mode('run');await page.keyboard.press('p');await action('leaveRun');await mode('over');
     await action('watch');await mode('over');await action('hangar');await action('challenges');
-    await page.evaluate(()=>{window.holdWave=true;});await action('wavePractice');await mode('practice');
+    await page.evaluate(()=>{
+      window.holdWave=true;window.holdWaveRamp=true;
+      window.takeoff=TideRace.block(TideRace.course(43117),0).waves[0].start-10;
+    });await action('wavePractice');await mode('practice');
+    await page.waitForFunction(()=>Boolean(window.rampFrame));await page.keyboard.press('ArrowUp');
+    await page.evaluate(()=>{window.holdWaveRamp=false;window.rampFrame(performance.now());});
     await page.waitForFunction(()=>document.querySelector('#game').dataset.surface==='wave',null,{polling:40});
     await page.keyboard.press('ArrowRight');await page.waitForFunction(()=>Boolean(window.deferredFrame),null,{polling:40});
     await page.screenshot({path:path.join(shots,'wave.png')});
@@ -104,5 +113,34 @@ async function run(){
     await mobile.close();assert.deepEqual(faults,[]);
     console.log('Standalone, keyboard, four touch swipes, Canvas fallback, resume, fixed/replay, wave, English and live hub persistence passed. Screenshots: '+shots);
   } finally {await browser?.close();await new Promise(ok=>server.close(ok));env.close();}
+}
+async function checkSteadyCamera(browser,base){
+  const p=await browser.newPage({viewport:{width:640,height:720}});
+  try{
+    await p.goto(base+'/demo/ui/index.html');await p.locator('[data-action=start]').waitFor();
+    await p.evaluate(async()=>{
+      const {PerspectiveCamera}=await import('../vendor/three.module.js');
+      const update=PerspectiveCamera.prototype.updateMatrixWorld;
+      window.cameraSamples=[];
+      PerspectiveCamera.prototype.updateMatrixWorld=function(...args){
+        const result=update.apply(this,args),game=document.querySelector('#game');
+        if(game.dataset.mode==='run')cameraSamples.push({
+          pose:game.dataset.posture,d:Number(game.dataset.distance),fov:this.fov,matrix:this.matrixWorld.elements.slice()
+        });
+        return result;
+      };
+    });
+    await p.locator('[data-action=start]').click();
+    await p.waitForFunction(()=>cameraSamples.some(s=>s.d>=2));
+    await p.keyboard.press('ArrowUp');await p.waitForFunction(()=>cameraSamples.some(s=>s.pose==='jump'));
+    await p.waitForFunction(()=>cameraSamples.some(s=>s.pose==='ride'&&s.d>=20));
+    await p.keyboard.press('ArrowDown');await p.waitForFunction(()=>cameraSamples.some(s=>s.pose==='duck'));
+    const samples=await p.evaluate(()=>cameraSamples);
+    assert(samples.length>10);
+    for(const sample of samples){
+      assert.deepEqual(sample.matrix,samples[0].matrix,'flat-track camera must stay fixed through stride, jump, landing and slide');
+      assert.equal(sample.fov,samples[0].fov);
+    }
+  }finally{await p.close();}
 }
 run().catch(err=>{console.error(err);process.exitCode=1;});

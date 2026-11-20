@@ -1,9 +1,9 @@
 {
   "id": "tide-runner",
   "kind": "game",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "title": "Crestline",
-  "summary": "Sprint through a working harbour, surf the waves and spend your haul on outfits and gear. Chase your ghost on the same tide.",
+  "summary": "Dodge oncoming trains, jump between freight cars and slide through harbour tunnels. Learn each pattern as the railway picks up speed.",
   "tags": [
     "runner",
     "3d",
@@ -12,7 +12,7 @@
   "locales": {
     "ru": {
       "title": "Гребень",
-      "summary": "Бегите по причалам, ловите волну на доске и собирайте жетоны на одежду и снаряжение. Рекордсмен на соседней полосе — ваш призрак.",
+      "summary": "Бегите по портовым путям, уворачивайтесь от встречных поездов и перепрыгивайте с вагона на вагон. Знакомые связки возвращаются на большей скорости.",
       "tags": [
         "раннер",
         "3d",

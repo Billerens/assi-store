@@ -1,4 +1,4 @@
-import {GEARS, OUTFIT_COST, UPGRADE_COST, trade} from './economy.js';
+import {GEARS, MAX_GEAR, OUTFIT_COST, UPGRADE_COST, trade} from './economy.js';
 import {mountPreview} from './wardrobe-preview.js';
 
 const russian={
@@ -8,34 +8,41 @@ const russian={
     bought:'Образ куплен и надет',changed:'Комплект сохранён',improved:'Улучшение установлено',walletName:'Жетонов в кошельке',
     failed:'Не удалось сохранить покупку. Попробуйте ещё раз.',
     outfits:[
-      ['Курьер','Оранжевая ветровка, шлем с визором и поясная сумка для первых рейсов.'],
+      ['Курьер','Оранжевая ветровка, шлем с визором и рюкзак с закручивающимся верхом.'],
       ['Рыбак','Южный ветер приносит брызги. Широкая зюйдвестка и штормовая пелерина держат ворот сухим.'],
       ['Ночной лоцман','Двубортный бушлат с медными пуговицами, вязаная шапка и сумка для портовых карт.'],
       ['Водолаз','Медный шлем с решётчатым иллюминатором, парные баллоны и манометр на груди.']
     ],
     boards:[['Мандарин','Первая доска портового курьера.'],['Янтарь','Зафиксируй серию на сходе с волны.'],['Лагуна','Пройди 1 000 м за один заезд.'],['Сирень','Пройди пять створов волны одной серией.']],
-    gearItems:[['Магнит','Притягивает жетоны с соседних полос, пока действует подобранный магнит.'],['Форсаж','Каждый жетон приносит вдвое больше, пока действует подобранный форсаж.']],
+    jumpHeight:'Высота прыжка',slideTime:'Время подката',closePay:'Жетоны за риск',
+    gearItems:[
+      ['Магнит','Притягивает жетоны с соседних полос, пока действует подобранный магнит.'],
+      ['Форсаж','Каждый жетон приносит вдвое больше, пока действует подобранный форсаж.'],
+      ['Пружинные кроссовки','Каждый уровень увеличивает высоту прыжка на 8%. Можно раньше оттолкнуться перед барьером.'],
+      ['Наколенники','Каждый уровень продлевает подкат на десятую долю секунды. Под низкой балкой можно пригнуться раньше.'],
+      ['Экспресс-пропуск','Приносит дополнительные жетоны, когда в последний момент уходишь с пути встречного состава.']
+    ],
   };
 function translate(copy, dictionary){
   if(typeof copy==='string')return dictionary[copy]??copy;
   if(Array.isArray(copy))return copy.map(item=>translate(item,dictionary));
   return Object.fromEntries(Object.entries(copy).map(([key,value])=>[key,translate(value,dictionary)]));
 }
-const swatches={outfit:['#ef7941','#eab83c','#626583','#b87450'],board:['#ef7941','#dda31a','#50aaa0','#a783c0'],gear:['#b6564b','#ed914a']};
+const swatches={outfit:['#ef7941','#eab83c','#626583','#b87450'],board:['#ef7941','#dda31a','#50aaa0','#a783c0'],gear:['#b6564b','#ed914a','#65bca0','#769bc1','#e9bd57']};
 const node=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 function button(cls,text,action){
   const b=node('button',cls,text);b.type='button';b.dataset.wardrobe=action;return b;
 }
 function coin(){const b=node('span','locker-coin');b.setAttribute('aria-hidden','true');return b;}
 
-export function openWardrobe({profile,commit,close,lang='ru',translations={},mount=document.getElementById('screen')}) {
+export function openWardrobe({profile,commit,close,initialTab='outfit',lang='ru',translations={},mount=document.getElementById('screen')}) {
   const t=lang==='en'?translate(russian,translations):russian;
   if(!document.getElementById('locker-style')){
     const link=node('link');link.id='locker-style';link.rel='stylesheet';link.href=new URL('./wardrobe.css',import.meta.url).href;document.head.append(link);
   }
-  let tab='outfit',id=profile.outfit;
   let current=profile;
   const selected={outfit:profile.outfit,board:profile.skin,gear:0};
+  let tab=initialTab,id=selected[initialTab];
   const shell=node('section','locker'),top=node('header','locker-top'),back=button('locker-back','←','back'),
     title=node('h2','',t.title),wallet=node('div','locker-wallet'),balance=node('strong');
   title.id='locker-title';shell.setAttribute('aria-labelledby',title.id);
@@ -56,7 +63,13 @@ export function openWardrobe({profile,commit,close,lang='ru',translations={},mou
   const observer=new MutationObserver(()=>{if(!shell.isConnected)dispose();});observer.observe(mount,{childList:true});
   function dispose(){observer.disconnect();preview.dispose();}
   back.onclick=()=>{dispose();close();};
-  const duration=level=>(4.5+level*1.5).toLocaleString(lang==='en'?'en-US':'ru-RU')+' '+t.sec;
+  const localNumber=n=>n.toLocaleString(lang==='en'?'en-US':'ru-RU',{maximumFractionDigits:2});
+  function effect(id,level){
+    if(id==='boots')return (100+8*level)+'%';
+    if(id==='pads')return localNumber((43+6*level)/60)+' '+t.sec;
+    if(id==='pass')return '+'+level;
+    return localNumber(4.5+level*1.5)+' '+t.sec;
+  }
   const label=(text,value)=>{const item=node('div','locker-line');item.append(node('span','',text),node('strong','',value));return item;};
   const tabButtons={};
   for(const key of ['outfit','board','gear']){
@@ -82,8 +95,9 @@ export function openWardrobe({profile,commit,close,lang='ru',translations={},mou
     const price=tab==='outfit'&&!owned?OUTFIT_COST[id]:tab==='gear'?UPGRADE_COST[level]:undefined;
     let caption='',enabled=false;
     if(tab==='gear'){
-      info.append(label(t.level,level+' / 3'),label(t.duration,duration(level)+(level<3?' → '+duration(level+1):'')));
-      caption=level===3?t.max:t.upgrade;enabled=level<3&&current.wallet>=price;
+      const stat={boots:t.jumpHeight,pads:t.slideTime,pass:t.closePay}[gearId]||t.duration;
+      info.append(label(t.level,level+' / '+MAX_GEAR),label(stat,effect(gearId,level)+(level<MAX_GEAR?' → '+effect(gearId,level+1):'')));
+      caption=level===MAX_GEAR?t.max:t.upgrade;enabled=level<MAX_GEAR&&current.wallet>=price;
     } else if(owned){
       info.append(label(t.owned,'✓'));caption=tab==='board'?(worn?t.boardUsed:t.boardUse):(worn?t.worn:t.use);enabled=!worn;
     } else if(tab==='outfit'){caption=t.buy;enabled=current.wallet>=price;}

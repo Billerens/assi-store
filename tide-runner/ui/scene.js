@@ -2,6 +2,8 @@ import * as THREE from '../vendor/three.module.js';
 import {ModelPass} from './model-pass.js';
 import {poseRider} from './rider-model.js';
 import {paintSky} from './deck-art.js';
+import {drawRailway,railwayImpact} from './rail-world.js';
+import {railCamera,followDeck} from './rail-camera.js';
 
 const R = window.TideRace;
 const LANE = 2.06;
@@ -27,14 +29,19 @@ class GeometryPass {
     this.tint = new THREE.Color();
     this.v = new THREE.Vector3();
     this.mats = {};
+    this.reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.glows=[];
+    this.glowCount=0;
+    this.rollingShadows=[];
     try {
       this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
     } catch (error) {
       canvas.hidden = true; fallback.hidden = false;
       this.flat = fallback.getContext('2d'); this.shapes = [];
     }
-    this.scene.add(new THREE.HemisphereLight('#fff3d5','#9bb3bd', 1.46));
-    const sun = new THREE.DirectionalLight('#ffe6bd', 1.66); sun.position.set(-12,16,8); this.scene.add(sun);
+    this.fill=new THREE.HemisphereLight('#fff3d5','#9bb3bd',1.46);
+    this.sun=new THREE.DirectionalLight('#ffe6bd',1.66);this.sun.position.set(-12,16,8);
+    this.scene.add(this.fill,this.sun);
     this.models=new ModelPass(this);
     if (!this.renderer) return;
     this.renderer.setClearColor(0x000000, 0);
@@ -46,6 +53,10 @@ class GeometryPass {
       map:new THREE.CanvasTexture(stamp),transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2
     }));
     this.shadow.rotation.x=-Math.PI/2;this.scene.add(this.shadow);
+    const halo=document.createElement('canvas');halo.width=halo.height=48;
+    const hg=halo.getContext('2d'),radial=hg.createRadialGradient(24,24,0,24,24,24);
+    for(const [offset,alpha] of [[0,1],[.21,.86],[.48,.29],[1,0]])radial.addColorStop(offset,'rgba(255,255,255,'+alpha+')');
+    hg.fillStyle=radial;hg.fillRect(0,0,48,48);this.halo=new THREE.CanvasTexture(halo);
     const meshTypes = {box:new THREE.BoxGeometry(1,1,1), round:new THREE.CylinderGeometry(.5,.5,1,10),
       ball:new THREE.SphereGeometry(.5,9,6), roof:new THREE.ConeGeometry(.66,1,4)};
     for (const [kind,geometry] of Object.entries(meshTypes)) {
@@ -60,14 +71,17 @@ class GeometryPass {
     const buffer = new THREE.BufferGeometry();
     this.wavePos = new Float32Array(12500*3);
     this.waveCol = new Float32Array(12500*3);
+    this.wet=new Float32Array(12500);
     buffer.setAttribute('position',new THREE.BufferAttribute(this.wavePos,3).setUsage(THREE.DynamicDrawUsage));
     buffer.setAttribute('color',new THREE.BufferAttribute(this.waveCol,3).setUsage(THREE.DynamicDrawUsage));
+    buffer.setAttribute('wet',new THREE.BufferAttribute(this.wet,1).setUsage(THREE.DynamicDrawUsage));
     const surface=new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide});
     this.ripple={clock:{value:0},station:{value:0}};
     surface.onBeforeCompile=shader=>{
       shader.uniforms.tideClock=this.ripple.clock;shader.uniforms.tideStation=this.ripple.station;
-      shader.vertexShader='varying vec3 vSea;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvSea=position;');
-      shader.fragmentShader='varying vec3 vSea;uniform float tideClock;uniform float tideStation;\n'+shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
+      shader.vertexShader='varying vec3 vSea;attribute float wet;varying float spray;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvSea=position;spray=wet;');
+      shader.fragmentShader='varying vec3 vSea;varying float spray;uniform float tideClock;uniform float tideStation;\n'+shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
+        if(spray>.5){
         vec2 w=vec2(vSea.x,vSea.z-tideStation);
         float a=sin(w.y*2.1+w.x*.63+tideClock*1.52+1.3*sin(w.x*1.16+w.y*.32));
         float crossWave=sin(w.x*3.7-w.y*.41-tideClock*.96);
@@ -76,6 +90,7 @@ class GeometryPass {
         float haze=1.-smoothstep(18.,98.,-vSea.z);
         diffuseColor.rgb+=vec3(.012,.028,.026)*a*haze;
         diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.72,.90,.74),lace*(.10+.12*smoothstep(.1,3.,vSea.y))*haze);
+        }
       `);
     };
     this.water = new THREE.Mesh(buffer,surface);
@@ -89,23 +104,18 @@ class GeometryPass {
     if(this.renderer) { this.renderer.setPixelRatio(dpr); this.renderer.setSize(w,h,false); }
     else {this.fallback.width=Math.round(w*dpr);this.fallback.height=Math.round(h*dpr);this.flat.setTransform(dpr,0,0,dpr,0,0);}
   }
-  begin(px,py,wide,blend,view,d,time,r) {
+  begin(px,py,wide,blend,view,d,time,r,tunnelLight=0) {
     const camera=this.camera;
-    // Centre the three riding lines on the wave as well as on the pier.
-    const centre=6.95*blend;
-    if(view==='home'){
-      camera.position.set(wide?-3.05:-2.43,2.12,wide?4.18:4.52);camera.lookAt(.12,1.04,-.46);
-    }else{
-      const turn=r.lane-r.pos,step=R.stride(r)*Math.PI*2;
-      const reduced=this.reduced??(this.reduced=matchMedia('(prefers-reduced-motion: reduce)').matches);
-      const motion=reduced?0:1;
-      const follow=(1-r.blend)*motion, pulse=r.surge>0?.25:0;
-      camera.position.set(centre+(px-centre)*.54-.12*turn*motion+.026*Math.sin(step)*follow,
-        4.03+py*.55+.025*Math.cos(step*2)*follow + R.height(r)*.085, (wide?7.52:7.79)+pulse);
-      camera.lookAt(centre+(px-centre)*.28+.23*turn*motion, .98+py*.37, -14.8);
-      camera.rotateZ(turn*.012*motion);
-    }
+    this.deck=followDeck(view===this.lastView?this.deck:undefined,py,d-this.lastD);
+    this.chaseX=followDeck(view===this.lastView?this.chaseX:undefined,px,d-this.lastD);
+    this.lastD=d;this.lastView=view;
+    const rig=railCamera(this.chaseX,this.deck,wide,blend,view);
+    camera.position.fromArray(rig.eye);camera.lookAt(...rig.target);
     camera.updateMatrixWorld();
+    this.sun.intensity=mix(1.56,.34,tunnelLight);
+    this.fill.intensity=mix(1.32,1.12,tunnelLight);
+    this.glows.forEach(s=>{s.visible=false;});this.glowCount=0;
+    this.rollingShadows.forEach(s=>{s.visible=false;});this.rollingCount=0;
     if(this.renderer) {
       for(const mesh of Object.values(this.mats)) mesh.count=0;
       this.shadow.visible=false;
@@ -113,6 +123,25 @@ class GeometryPass {
       this.ripple.clock.value=time;this.ripple.station.value=d;
     } else {this.shapes.length=0;this.flat.clearRect(0,0,this.w,this.h);}
     this.models.begin();
+  }
+  glow(x,y,z,w,h,color,alpha){
+    if(!this.renderer){this.shapes.push({glow:true,x,y,z,w,h,color,alpha});return;}
+    let sprite=this.glows[this.glowCount++];
+    if(!sprite){
+      sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:this.halo,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));
+      this.glows.push(sprite);this.scene.add(sprite);
+    }
+    sprite.visible=true;sprite.material.color.set(color);sprite.material.opacity=alpha;
+    sprite.position.set(x,y,z);sprite.scale.set(w,h,1);
+  }
+  trainShadow(x,distance,length,width){
+    if(!this.renderer)return;
+    let mesh=this.rollingShadows[this.rollingCount++];
+    if(!mesh){
+      mesh=new THREE.Mesh(this.shadow.geometry,this.shadow.material.clone());
+      mesh.material.opacity=.79;mesh.rotation.x=-Math.PI/2;this.scene.add(mesh);this.rollingShadows.push(mesh);
+    }
+    mesh.visible=true;mesh.position.set(x+.08,.066,-distance);mesh.scale.set(width*1.28,length*1.15,1);
   }
   piece(kind,x,y,z,w,h,d,color,rx=0,ry=0,rz=0,ghost=false) {
     if(this.renderer) {
@@ -130,6 +159,7 @@ class GeometryPass {
     if(!gradient)this.tint.set(color);
     for(const index of [0,1,2,0,2,3]) {
       const p=points[index],col=gradient?this.tint.set(color[index]):this.tint;
+      this.wet[this.vertex]=this.dry?0:1;
       const i=this.vertex++*3;
       this.wavePos.set(p,i);this.waveCol[i]=col.r;this.waveCol[i+1]=col.g;this.waveCol[i+2]=col.b;
     }
@@ -151,12 +181,23 @@ class GeometryPass {
         mesh.instanceMatrix.needsUpdate=true; if(mesh.instanceColor) mesh.instanceColor.needsUpdate=true;
       }
       this.water.geometry.attributes.position.needsUpdate=true;this.water.geometry.attributes.color.needsUpdate=true;
+      this.water.geometry.attributes.wet.needsUpdate=true;
       this.water.geometry.setDrawRange(0,this.vertex);this.renderer.render(this.scene,this.camera);
       return;
     }
     this.shapes.sort((a,b)=>a.z-b.z);
     for(const s of this.shapes) {
       if(s.name){this.models.drawCanvas(s);continue;}
+      if(s.glow){
+        const dep=this.camera.position.z-s.z;if(dep<.55)continue;
+        const pt=this.v.set(s.x,s.y,s.z).project(this.camera),unit=this.h/(2*Math.tan(this.camera.fov*Math.PI/360)*dep);
+        if(pt.z< -1||pt.z>1)continue;
+        const x=(1+pt.x)*this.w/2,y=(1-pt.y)*this.h/2,r=s.w*unit/2;
+        const ramp=this.flat.createRadialGradient(x,y,0,x,y,r);
+        ramp.addColorStop(0,s.color);ramp.addColorStop(1,s.color+'00');
+        this.flat.globalAlpha=s.alpha;this.flat.fillStyle=ramp;this.flat.fillRect(x-r,y-r,r*2,r*2);this.flat.globalAlpha=1;
+        continue;
+      }
       if(s.points){this.polygon(s.points,s.color);continue;}
       const p=[];
       for(const z of [-.5,.5])for(const y of [-.5,.5])for(const x of [-.5,.5]) {
@@ -180,10 +221,16 @@ export class Harbour {
     this.r=r;this.c=course;this.d=r.d;this.far=117;this.seed=course.seed;this.preview=options.view==='home';
     this.palette=districts[R.district(r.d)];
     const pos=this.position(r);
-    this.g.begin(pos.x,pos.y,innerWidth/innerHeight>.9,r.blend,options.view,r.d,r.tick/60,r);
-    this.ocean();this.pier();this.harbour();
-    for(let i=Math.max(0,Math.floor((this.d-15)/R.SPAN));i<=Math.floor((this.d+this.far)/R.SPAN);i++) {
-      const block=R.block(course,i);
+    const blocks=[];
+    for(let i=Math.max(0,Math.floor((this.d-15)/R.SPAN));i<=Math.floor((this.d+this.far)/R.SPAN);i++)blocks.push(R.block(course,i));
+    const rail=course.rules>=3;
+    let shade=0;
+    if(rail)for(const b of blocks)for(const t of b.tunnels)shade=Math.max(shade,clamp((this.d-t.z-1)/9,0,1)*clamp((t.end-this.d+6)/9,0,1));
+    this.g.begin(pos.x,pos.y,innerWidth/innerHeight>.9,r.blend,options.view,r.d,r.tick/60,r,shade);
+    this.ocean();
+    if(rail){this.g.dry=true;drawRailway(this,blocks);this.g.dry=false;}else this.pier();
+    this.harbour();
+    for(const block of blocks){
       for(const w of block.waves){
         if(w.end>this.d-12&&w.start<this.d+this.far)this.wave(w);
         if(w.linked&&w.start>this.d-7&&w.start-39<this.d+this.far)this.roofPath(w.start);
@@ -200,7 +247,7 @@ export class Harbour {
     this.rider(r,false,options.skin||0,options.outfit||0);
     this.g.end();
   }
-  curve(at) {return 2.4*(Math.sin(at/83+(this.seed%7))-Math.sin(this.d/83+(this.seed%7)));}
+  curve(at) {return this.c.rules>=3?0:2.4*(Math.sin(at/83+(this.seed%7))-Math.sin(this.d/83+(this.seed%7)));}
   p(kind,x,y,at,w,h,d,col,rx=0,ry=0,rz=0,g=false) {
     this.g.piece(kind,x+this.curve(at),y,this.d-at,w,h,d,col,rx,ry,rz,g);
   }
@@ -420,17 +467,17 @@ export class Harbour {
       const pull=coin&&this.r.magnet&&this.r.wave<0&&Math.abs(this.r.pos-e.lane)<=1.12?clamp(1-(z-this.d)/8,0,1)**2:0;
       const sway=Math.sin(z*.21+this.r.tick*.08),y=e.y+(coin?.045:.13)*sway;
       const rotation=coin?.39+.70*Math.sin(this.r.tick*.037+z*.19):.30*Math.sin(this.r.tick*.05+z);
-      this.asset(coin?(z-this.d>14?'portTokenFar':'portToken'):e.type+'Pickup',mix(x,(this.r.pos-1)*LANE,pull),mix(y,R.height(this.r)+1.1,pull),z,[1,1,1],[coin?0:.07*sway,rotation,coin?.09:.12*sway]);
+      this.asset(coin?(z-this.d>14?'portTokenFar':'portToken'):e.type+'Pickup',mix(x,(this.r.pos-1)*LANE,pull),mix(y,(this.r.deckY||0)+R.height(this.r)+1.1,pull),z,[1,1,1],[coin?0:.07*sway,rotation,coin?.09:.12*sway]);
       if(!coin){this.p('round',x,.032,z,.68,.024,.68,'#5d7769');}
     }else if(e.type==='row'){
       for(let i=0;i<3;i++){
-        const t=e.pattern[i],x=(i-1)*LANE;
+        const t=e.pattern[i],x=(i-1)*LANE,base=e.base||0;
         if(t==='C'){
-          this.asset('cargo',x,0,z,[1,1,1],(i-1)*.054);
+          this.asset('cargo',x,base,z,[1,1,1],(i-1)*.054);
         }else if(t==='J'){
-          this.asset('hurdle',x,0,z);
+          this.asset(this.c.rules>=3?'railHurdle':'hurdle',x,base,z);
         }else if(t==='D'){
-          this.asset('underSail',x,0,z);
+          this.asset(this.c.rules>=3?'lowSignal':'underSail',x,base,z);
         }else if(t==='G'){
           this.box(x,.033,z,1.92,.04,1.44,'#25485b');
           this.box(x,.06,z-.76,1.96,.055,.12,C.yellow);
@@ -462,10 +509,11 @@ export class Harbour {
       Math.sin(Math.PI*clamp((r.d-r.roofStart)/39,0,1)):0;
     const dry=(r.wave>=0?LANE:(r.pos-1)*LANE)+roof*2;
     const slot=r.wave>=0?r.pos:(r.exitSurf||0);
-    return {x:mix(dry,5.27+slot*1.87,r.blend), y:mix(roof*1.55,.39+.73*slot+.28*slot*slot,r.blend)};
+    return {x:mix(dry,5.27+slot*1.87,r.blend), y:mix((r.deckY||0)+roof*1.55,.39+.73*slot+.28*slot*slot,r.blend)};
   }
   rider(r,ghost,skin,outfit){
     const pt=this.position(r),base=pt.y+R.height(r),x=pt.x+this.curve(r.d),z=this.d-r.d;
+    if(!ghost)railwayImpact(this,r,x,base,z);
     if(!ghost&&r.blend<.35){
       const stretch=R.height(r)*.17;
       if(this.g.shadow){
